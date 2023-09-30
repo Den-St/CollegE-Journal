@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './styles.scss';
-import {collegeLogoSvg} from '../../assets/images/college_logo';
+import {collegeLogoSvg} from '../../assets/svgs/college_logo';
 
 export const Header = () => {
     return <header className="header">

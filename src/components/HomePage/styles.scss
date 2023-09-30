@@ -16,20 +16,6 @@
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
-html,body{
-    scroll-behavior: smooth;
-    /* background-image:; */
-    background: #0B1D26;
-	height: 2000px;
-	width: 100%;
-	font-size: 100%;
-	line-height: 1;
-    font-family: 'Jost';
-	font-size: 14px;
-	-ms-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
 input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}
 button{cursor: pointer;}
@@ -61,7 +47,7 @@ img{vertical-align: top;}
 }
 
 .first_screen {
-    background: url('../img/first_screen.png');
+    background: url('../../assets/images/first_screen.png');
     background-repeat: no-repeat;
     background-size: 100% 835px;
     background-position: center;
@@ -197,7 +183,7 @@ svg {
 }
 
 .main__phrase {
-    width: 85%;
+    width: 110%;
     height: 205px;
 }
 
