@@ -1,0 +1,350 @@
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+*,*:before,*:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{
+    scroll-behavior: smooth;
+    /* background-image:; */
+    background: #0B1D26;
+	height: 2000px;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+    font-family: 'Jost';
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a, a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+
+.container {
+    max-width: 90.3%;
+    margin: 0 auto;
+}
+
+.header{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.header__wrapper{
+    height: 141px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.first_screen {
+    background: url('../img/first_screen.png');
+    background-repeat: no-repeat;
+    background-size: 100% 835px;
+    background-position: center;
+    position: relative;
+}
+
+.fs__content {
+    display: flex;
+    height: 835px;
+}
+
+.nav {
+    display: flex;
+    margin-left: 9.8%;
+}
+
+.menu__button {
+    margin-right: 30px;
+    padding-top: 5px;               
+    height: 34px;
+    width: 81px;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0px 1px 10px rgba(11, 29, 38, 0.50);
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: all 0.3s linear;
+}
+
+svg {
+    margin-top: 5px;
+    stroke: var(--primary-yellow, transparent);
+    transition: all 0.3s linear;
+}
+
+.menu__button:hover {
+    color: #EFB42D;
+}
+
+.menu__button:hover svg {
+    stroke: var(--primary-yellow, #EFB42D);
+}
+
+.underline_mButton {
+    display: flex;
+    margin-bottom: 0;
+    margin-left: 15.5px;
+}
+
+.signIn {
+    display: flex;
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+.signBtn {
+    text-align: center;
+    padding: 8px 0px;
+    width: 81px;
+    height: 40px;   
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 3px;
+    background: var(--primary-yellow, #EFB42D);
+    color: #FFF;
+}
+
+.socials {
+    margin-top: 210px;
+    height: 315px;
+    width: 15.4%;
+}
+
+.rotate {
+    height: 24px;
+    width: 230px;
+    transform: rotate(90deg);
+    transform-origin: 0px 24px;
+}
+
+.rotate__text {
+    color: var(--theme-white, #FFF);
+    font-family: 'Montserrat';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-align: right;
+}
+
+.inst__container {
+    margin-top: 247px;
+}
+
+.tg__container {
+    margin-top: 20px;
+}
+
+.main__paragraph {
+    margin-top: 240px;
+    height: 315px;
+    width: 53.8%;
+}
+
+.gurnal {
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    width: 81px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--primary-yellow, #EFB42D);
+    margin-right: 30px;
+}
+
+.eGurnal {
+    color: var(--primary-yellow, #EFB42D);
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.8px;
+}
+
+.main__phrase {
+    width: 85%;
+    height: 205px;
+}
+
+.mPhrase {
+    color: var(--theme-white, #FFF);
+    font-family: 'Montserrat';
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100px;
+}
+
+.pageNav {
+    display: block;
+    margin-top: 240px;
+    margin-left: auto; 
+    margin-right: 0;
+    width: 135px;
+    height: 313px;
+}
+
+.pNav__container {
+    display: flex;
+    padding-right: 25px;
+    padding-top: 27px;
+    height: 78px;
+    border-right: 4px solid;
+    border-color: #797979;
+    transition: all 0.3s linear;
+}
+
+.pNav__btn {
+    margin-left: auto;
+    margin-right: 0;
+    color: var(--secondary-gray, #D0D0D0);
+    font-family: 'Montserrat';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2px;
+    transition: all 0.3s linear;
+}
+
+.pNav__container:hover {
+    border-color: #FFF;
+}
+
+.pNav__container:hover .pNav__btn {
+    color: #FFF;
+}
+
+.news__page {
+    display: flex;
+    height: 630px;
+}
+
+.pageNum {
+    position: absolute;
+    fill: rgba(255, 255, 255, 0.10);
+    width: 91.387px;
+    height: 72px;
+    margin-top: 90px;
+    margin-left: 150px;
+}
+
+.numCircle {
+    width: 111px;
+    height: 111px;
+    margin-top: 70px;
+    margin-left: 140px;
+}
+
+.newsPage__title {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    margin-left: 180px;
+}
+
+.news {
+    color: var(--primary-yellow, #EFB42D);
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.8px;
+}
+
+.slider__container {
+    margin-top: 230px;
+}
+
+.news__title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.news__name {
+    color: var(--primary-yellow, #EFB42D);
+    font-family: 'Montserrat';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2px;
+}
+
+.news__date {
+    color: var(--theme-white, #FFF);
+    text-align: right;
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.news__text  {
+    width: 302px;
+    color: var(--secondary-gray, #D0D0D0);
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 10px;
+}
+
+.slider__wrapper .news__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+
+}
+
+.news__list:first-child {
+    margin-left: 80px;
+}
+
+.slider__wrapper .news__list .slider__element {
+    width: 362px;
+    height: 200px;
+    padding: 15px 30px 15px 30px;
+    border-radius: 10px;
+    background: var(--theme-dark, #0B1D26);
+    box-shadow: 0px 1px 10px 0px rgba(255, 255, 255, 0.10);
+    object-fit: cover;
+}

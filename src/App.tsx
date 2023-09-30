@@ -1,7 +1,8 @@
-import React from 'react';
+import { Header } from './components/Header';
+import './globalStyles.scss';
 
 function App() {
-  return <></>
+  return <Header/>
 }
 
 export default App;

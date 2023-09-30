@@ -1,0 +1,95 @@
+.container {
+    max-width: 90.3%;
+    margin: 0 auto;
+}
+header{
+    display: block;
+}
+.header{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.header__wrapper{
+    height: 141px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.underline_mButton {
+    display: flex;
+    margin-bottom: 0;
+}
+
+.signIn {
+    display: flex;
+    margin-left: auto;
+}
+
+.signBtn {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 8px 0px;
+    width: 81px;
+    height: 40px;   
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 3px;
+    background: var(--primary-yellow, #EFB42D);
+    color: #FFF;
+    text-decoration: none;
+}
+.nav{
+    display: flex;
+    gap:55px;
+    margin-left: 9.8%;
+}
+
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+
+.menu__button {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5px;
+    padding-top: 5px;               
+    height: 40px;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0px 1px 10px rgba(11, 29, 38, 0.50);
+    font-family: 'Alegreya Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: all 0.3s linear;
+    text-decoration: none;
+}
+.menu__button:hover{
+    color:#EFB42D;
+    svg{
+        stroke: var(--primary-yellow, #EFB42D);
+    }
+}
+
+svg {
+    stroke: var(--primary-yellow, transparent);
+    transition: all 0.3s linear;
+}
+svg:hover{
+    stroke: var(--primary-yellow, #EFB42D);
+}
+.header__logo{
+    svg:hover{
+        stroke: transparent;
+    }
+}
