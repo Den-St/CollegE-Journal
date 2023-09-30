@@ -1,9 +1,12 @@
 import { GoogleIconSvg } from '../../assets/svgs/googleIconSvg';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import './loginStyles.scss';
+import {Input} from 'antd';
+import {signInBackgroundCorner} from '../../assets/svgs/signInBackgroundCorner';
 
 export const SignIn = () => {
-    return <div className='signIn__container'>
+    return <>
+    <div className='signIn__container'>
         <div className='signIn__wrapper'>
             <h1 className="signIn__header">Вхід</h1>
             <form className="signIn__form" autoComplete={'off'}>
@@ -16,7 +19,7 @@ export const SignIn = () => {
                 </div>
                 <div className="signInSettings__container">
                     <div className="rememberMe__container">
-                        <input type='checkbox' className="rememberMe__checkbox"/>
+                        <Input type='checkbox' className="rememberMe__checkbox"/>
                         <p className="rememberMe__title">Запам'ятати мене</p>
                     </div>
                     <p className="forgotPassword">Забули пароль?</p>
@@ -28,9 +31,13 @@ export const SignIn = () => {
                     <GoogleIconSvg/>
                 </span>
                 <span className='signInWithGoogle__title'>
-                    Увійті через Google
+                    Увійти через Google
                 </span>
             </button>
+            <div className='noAccount__container'>
+                <span className='noAccount__text'>Досі немає облікового запису?</span>
+                <span className='noAccount__text'>Будь ласка, отримайте дані входу у куратора, для підтвердження облікового запису.</span>
+            </div>
         </div>
-    </div>
+    </div></>
 }

@@ -30,7 +30,7 @@ export const Header = () => {
                         </Link>
                     </nav>
                     <div className="signIn">
-                        <Link to="#" className="signBtn">Вхід</Link>
+                        <Link to="/sign-in" className="signBtn">Вхід</Link>
                     </div>
                 </div>
             </div>
