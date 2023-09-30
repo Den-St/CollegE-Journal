@@ -49,7 +49,7 @@ header{
 }
 .nav{
     display: flex;
-    gap:55px;
+    gap:35px;
     margin-left: 9.8%;
 }
 
@@ -73,23 +73,24 @@ a:focus,a:active{outline: none;}
     line-height: normal;
     transition: all 0.3s linear;
     text-decoration: none;
+    margin:0;
 }
 .menu__button:hover{
     color:#EFB42D;
-    svg{
+    .headerSvg{
         stroke: var(--primary-yellow, #EFB42D);
     }
 }
 
-svg {
+.headerSvg {
     stroke: var(--primary-yellow, transparent);
     transition: all 0.3s linear;
 }
-svg:hover{
+.headerSvg:hover{
     stroke: var(--primary-yellow, #EFB42D);
 }
 .header__logo{
-    svg:hover{
+    .headerSvg:hover{
         stroke: transparent;
     }
 }

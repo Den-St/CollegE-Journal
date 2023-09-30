@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
-import './styles.scss';
+import './homePageStyles.scss';
 
 export const HomePage = () => {
     return <div>
             <section className="first_screen" id="start">
-            <div className="container">
+            <div className="homePage__container">
                 <div className="fs__content">
                     <div className="socials">
                         <div className="rotate">

@@ -3,7 +3,7 @@ export { TeacherProfile } from './components/TeacherProfile';
 export { Students } from './components/Students/index';
 export { StudentProfile } from './components/StudentProfile';
 export { HomePage } from './components/HomePage';
-export { Login } from './components/Login';
+export { SignIn } from './components/SignIn';
 export { Registration } from './components/Registration';
 export { HomeTasks } from "./components/HomeTasks";
 export { HomeTask } from "./components/HomeTask";

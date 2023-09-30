@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Schedule } from "../components/Schedule";
-import { HomePage, HomeTask, HomeTasks, Login, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating } from "../pages";
 
 export const navRoutes = {
 
@@ -8,7 +8,7 @@ export const navRoutes = {
 
 export const routes = {
     registration:"/registration",
-    login:"/login",
+    signIn:"/sign-in",
     homePage:'/',
     studentProfile:'/student-profile/:id',
     homeTasks:'/home-tasks',
@@ -22,7 +22,7 @@ export const routes = {
 
 export const PublicRoutes = [
     <Route key={routes.registration} element={<Registration/>} path={routes.registration}/>,
-    <Route key={routes.login} element={<Login/>} path={routes.login}/>,
+    <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,
     <Route key={routes.studentProfile} element={<StudentProfile/>} path={routes.studentProfile}/>,
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,

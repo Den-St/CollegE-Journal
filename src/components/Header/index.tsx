@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './styles.scss';
+import './headerStyles.scss';
 import {collegeLogoSvg} from '../../assets/svgs/college_logo';
 
 export const Header = () => {
@@ -14,17 +14,17 @@ export const Header = () => {
                     <nav className="nav">
                         <Link to="#" className="menu__button">
                             Головна
-                            <svg className="underline_mButton" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
                         <Link to="#" className="menu__button">Новини
-                            <svg className="underline_mButton" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
                         <Link to="#" className="menu__button">Про нас
-                            <svg className="underline_mButton" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
