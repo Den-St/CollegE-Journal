@@ -24,7 +24,6 @@
 }
 html,body{
     scroll-behavior: smooth;
-    background: #0B1D26;
 	width: 100%;
 	font-size: 100%;
 	line-height: 1;
@@ -51,4 +50,13 @@ html,body{
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.layout__container{
+	&.dark{
+		background: #0B1D26;
+	}
+	&.light{
+		background: #FFF;
+	}
 }

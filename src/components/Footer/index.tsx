@@ -1,9 +1,10 @@
+import { useThemeStore } from '../../store/themeStore'
 import './footerStyles.scss'
 
 export const Footer = () => {
-    return <>
-    <footer>
-        <div className="footer__content">
+    const theme = useThemeStore().theme;
+    return <><footer>
+        <div className={`footer__content ${theme}`}>
             <div className="footer__logo">
                 <img src="../../assets/images/laptop.png" alt=""/>
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>

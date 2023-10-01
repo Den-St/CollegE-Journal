@@ -1,3 +1,4 @@
+import { useThemeStore } from "../../store/themeStore";
 import { Footer } from "../Footer";
 import { Header } from "../Header"
 import "./layoutStyles.scss";
@@ -6,7 +7,8 @@ type Props = {
 }
 
 export const Layout:React.FC<Props> = ({children}) => {
-    return <div className="layout__container">
+    const theme = useThemeStore().theme;
+    return <div className={`layout__container ${theme}`}>
         <Header/>
         {children}
         <Footer/>
