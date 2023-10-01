@@ -125,13 +125,26 @@ a:focus,a:active{outline: none;}
 .header {
     //theme
     &.dark {
-        .prikol {
-            color: rgb(255, 0, 0);
+       .menu__button{
+            color:#FFF
+       }
+       .menu__button:hover{
+            .headerSvg{
+                stroke: var(--primary-yellow, #EFB42D);
+            }
         }
     }
     &.light {
-        .prikol {
-            background: rgb(0, 255, 89);
+        .menu__button{
+            color:#FFF;
+        }
+        .menu__button:hover{
+            color:var(--primary-black)
+        }
+        .menu__button:hover{
+            .headerSvg{
+                stroke: var(--primary-black,#0B1D26);
+            }
         }
     }
 }
