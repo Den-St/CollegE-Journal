@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 import './headerStyles.scss';
 import {collegeLogoSvg} from '../../assets/svgs/college_logo';
+import { Switch } from 'antd';
+import { themes } from '../../consts/themes';
+import { useThemeController } from '../hooks/themeController';
 
 export const Header = () => {
-    return <header className="header">
+    const {theme,onToggleThemeSwitch} = useThemeController();
+    console.log(theme);
+    
+    return <header className={`header ${theme}`}>
             <div className="container">
                 <div className="header__wrapper">
                     <div className="logo__block">
@@ -29,8 +35,11 @@ export const Header = () => {
                             </svg>
                         </Link>
                     </nav>
-                    <div className="signIn">
-                        <Link to="/sign-in" className="signBtn">Вхід</Link>
+                    <div className='headerRightButtons__container'>
+                        <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/>
+                        <div className="signIn">
+                            <Link to="/sign-in" className="signBtn">Вхід</Link>
+                        </div>
                     </div>
                 </div>
             </div>

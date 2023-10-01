@@ -27,7 +27,6 @@ header{
 
 .signIn {
     display: flex;
-    margin-left: auto;
 }
 
 .signBtn {
@@ -92,5 +91,47 @@ a:focus,a:active{outline: none;}
 .header__logo{
     .headerSvg:hover{
         stroke: transparent;
+    }
+}
+
+.headerRightButtons__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:192px;
+    margin-left: auto;
+}
+.ant-switch .ant-switch-handle{
+    background-color: white;
+    background-color:#EFB42D;
+    border-radius: 50%;
+    z-index: 20;
+    content:unset !important;
+}
+.ant-switch:not(.ant-switch-disabled) {
+    background: rgba(255, 255, 255);
+}
+.ant-switch .ant-switch-handle::before{
+    content:unset !important;
+}
+.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+    background-color:#0B1D26;   
+}
+
+.headerRightButtons__container .ant-switch-checked{
+    background-color: #0B1D26;
+}
+
+.header {
+    //theme
+    &.dark {
+        .prikol {
+            color: rgb(255, 0, 0);
+        }
+    }
+    &.light {
+        .prikol {
+            background: rgb(0, 255, 89);
+        }
     }
 }
