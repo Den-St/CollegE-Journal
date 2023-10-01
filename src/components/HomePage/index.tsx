@@ -1,9 +1,73 @@
+import { Carousel } from 'antd';
 import { Link } from 'react-router-dom';
 import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
 import './homePageStyles.scss';
 
 export const HomePage = () => {
+    const news:{id:number,title:string,date:string,text:string}[] = [
+        {
+            id:1,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:2,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:3,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:4,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:5,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:6,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:7,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:8,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:9,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+        {
+            id:10,
+            title:'Рабські збори',
+            date:'07.05.2023',
+            text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        },
+    ];
+
     return <div>
             <section className="first_screen" id="start">
             <div className="homePage__container">
@@ -75,31 +139,28 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="slider__container">
-                <div className="slider__wrapper">
-                    <div className="news__list">
-                        <div className="slider__element">
+                <Carousel slidesToShow={4} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
+                    {news.map(newsItem => 
+                        <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
-                                <h1 className="news__name">Рабські збори</h1>
-                                <h1 className="news__date">07.05.2023</h1>
+                                <h1 className="news__name">{newsItem.title}</h1>
+                                <h1 className="news__date">{newsItem.date}</h1>
                             </div>
-                            <h1 className="news__text">На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...</h1>
+                            <h1 className="news__text">{newsItem.text}</h1>
                         </div>
-                        <div className="slider__element">
+                    )}
+                </Carousel>
+                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true}>
+                    {news.map(newsItem => 
+                        <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
-                                <h1 className="news__name">Сдача Формул</h1>
-                                <h1 className="news__date">10.14.2023</h1>
+                                <h1 className="news__name">{newsItem.title}</h1>
+                                <h1 className="news__date">{newsItem.date}</h1>
                             </div>
-                            <h1 className="news__text">На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...</h1>
+                            <h1 className="news__text">{newsItem.text}</h1>
                         </div>
-                        <div className="slider__element">
-                            <div className="news__title">
-                                <h1 className="news__name">Сорока працює</h1>
-                                <h1 className="news__date">06.04.2023</h1>
-                            </div>
-                            <h1 className="news__text">На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...</h1>
-                        </div>
-                    </div>
-                </div>
+                    )}
+                </Carousel>
             </div>
         </section>
         <section className="gournal__info" id="info">
@@ -150,7 +211,7 @@ export const HomePage = () => {
             </div>
             <div className="about__img">
                 <div className="sup__back"></div>
-                <img className="sup__img" src='./sup.png' alt="sup"/>
+                <img className="sup__img" src={require('../../assets/images/laptop.svg')} alt="sup"/>
             </div>
             <div className="sup__circle"></div>
         </div>
