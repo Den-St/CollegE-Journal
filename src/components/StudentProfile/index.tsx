@@ -9,13 +9,16 @@ export const StudentProfile = () => {
     const [tabIndex,setTabIndex] = useState(0);
     const tabs = [
         {
-            component:<LessonsSchedule/>
+            component:<LessonsSchedule/>,
+            title:'Розклад пар'
         },
         {
-            component:<LessonsSchedule/>
+            component:<LessonsSchedule/>,
+            title:'Розклад пар'
         },
         {
-            component:<LessonsSchedule/>
+            component:<LessonsSchedule/>,
+            title:'Розклад пар'
         }
     ];
 
@@ -51,5 +54,7 @@ export const StudentProfile = () => {
                     <p className='studentProfileStatistic__value medium'>143/316</p>
                 </div>
         </section>
+        <h1 className='studentProfileTab__title'>{tabs[tabIndex].title}</h1>
+        {tabs[tabIndex].component}
     </div>
 }

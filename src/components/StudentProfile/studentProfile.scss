@@ -2,6 +2,8 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding-top: 229px;
     justify-content: center;
     gap:120px;
@@ -114,6 +116,14 @@
     }
 }
 
+.studentProfileTab__title{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    width: 980px;
+    text-align: start;
+}
+
 .studentProfile__container{
     &.dark{
         .studentProfile__name{
@@ -141,6 +151,9 @@
         }
         .studentProfileStatistic__container{
             background-color: rgb(27,40,48);
+        }
+        .studentProfileTab__title{
+            color:white;
         }
     }
     &.light{

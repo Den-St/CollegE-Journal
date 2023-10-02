@@ -1,0 +1,67 @@
+.lessonsSchedule__container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1035px;
+    column-gap:150px;
+    row-gap: 80px;
+    padding: 0 20px;
+}
+
+.lessonsScheduleDay__container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.lessonsScheduleDay__header{
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    padding-left: 15px;
+}
+
+.lessonsScheduleDayLessons__container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.lessonsScheduleDayLessonItem__container{
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+.lessonsScheduleLessonNumber{
+    font-weight: 400;
+    font-size: 20px;
+}
+.lessonsScheduleLessonName{
+    font-weight: 400;
+    font-size: 20px;
+}
+.lessonsScheduleLessonGroup{
+    font-weight: 400;
+    font-size: 20px;
+    color:#797979;
+}
+
+.lessonsSchedule__container{
+    &.dark{
+        .lessonsScheduleDay__header{
+            color:#D0D0D0;
+        }
+        .lessonsScheduleLessonNumber{
+            color:white;
+        }
+        .lessonsScheduleLessonName{
+            color:white;
+        }
+        .lessonsScheduleLessonGroup{
+            font-weight: 400;
+            font-size: 20px;
+            color:#797979;
+        }
+    }
+    &.light{
+
+    }
+}
