@@ -134,6 +134,11 @@ footer {
             background: #2c84e9b0;
             filter: blur(60px); 
         }
+        &.sign-in{
+            .fList__title{
+                color:#EFB42D;
+            }
+        }
     }
     &.sign-in{
         .footer__circle{

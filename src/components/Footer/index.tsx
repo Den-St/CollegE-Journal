@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { collegeLogoSvg } from '../../assets/svgs/college_logo';
 import { useThemeStore } from '../../store/themeStore'
 import './footerStyles.scss'
 
@@ -8,7 +9,7 @@ export const Footer = () => {
     return <><footer>
         <div className={`footer__content ${theme} ${route}`}>
             <div className="footer__logo">
-                <img src="../../assets/images/laptop.png" alt=""/>
+                {collegeLogoSvg()}
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>
             </div>
             <div className="footer__circle"></div>
