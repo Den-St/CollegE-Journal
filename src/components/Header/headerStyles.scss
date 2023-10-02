@@ -129,6 +129,7 @@ a:focus,a:active{outline: none;}
             color:#FFF
        }
        .menu__button:hover{
+            color:var(--primary-yellow, #EFB42D);
             .headerSvg{
                 stroke: var(--primary-yellow, #EFB42D);
             }

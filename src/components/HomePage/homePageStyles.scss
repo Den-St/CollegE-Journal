@@ -294,6 +294,24 @@ img{vertical-align: top;}
     display: flex;
     height: 667px;
     padding-top: 200px;
+    background-repeat: no-repeat;
+    background-size: 100% 443px;
+    position: relative;
+    margin-bottom: 200px;
+}
+@media screen and (max-width:'1920px'){
+    .gournal__info {
+        background-position-x:center;
+        background-position-y:153px;
+
+    }
+}
+
+@media screen and (max-width:'1440px'){
+    .gournal__info {
+        background-position-x:center;
+        background-position-y:213px;
+    }
 }
 
 .info__header {
@@ -502,6 +520,15 @@ img{vertical-align: top;}
         .newsLine{
             background-color: #EFB42D;
         }
+        .line{
+            background-color: #EFB42D;
+        }
+        .eGurnal{
+            color:var(--primary-yellow,#EFB42D);
+        }
+        .gournal__info{
+            background-image: url('../../assets/images/infoJournalBackDark.png');
+        }
     }
     &.light{
         .rotate__text{
@@ -589,6 +616,9 @@ img{vertical-align: top;}
         }
         .slick-prev::before{
             color:black !important;
+        }
+        .gournal__info{
+            background-image: url('../../assets/images/infoJournalBackLight.png');
         }
     }
 }

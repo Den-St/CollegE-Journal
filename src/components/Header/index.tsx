@@ -7,7 +7,6 @@ import { useThemeController } from '../hooks/themeController';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
-    console.log(theme);
     
     return <header className={`header ${theme}`}>
             <div className="container">
