@@ -2,11 +2,12 @@ import { GoogleIconSvg } from '../../assets/svgs/googleIconSvg';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import './loginStyles.scss';
 import {Input} from 'antd';
-import {signInBackgroundCorner} from '../../assets/svgs/signInBackgroundCorner';
+import { useThemeStore } from '../../store/themeStore';
 
 export const SignIn = () => {
+    const theme = useThemeStore().theme;
     return <>
-    <div className='signIn__container'>
+    <div className={`signIn__container ${theme}`}>
         <div className='signIn__wrapper'>
             <h1 className="signIn__header">Вхід</h1>
             <form className="signIn__form" autoComplete={'off'}>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './headerStyles.scss';
 import {collegeLogoSvg} from '../../assets/svgs/college_logo';
 import { Switch } from 'antd';
@@ -7,8 +7,9 @@ import { useThemeController } from '../hooks/themeController';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
+    const route = useLocation().pathname.replace('/','');
     
-    return <header className={`header ${theme}`}>
+    return <header className={`header ${theme} ${route}`}>
             <div className="container">
                 <div className="header__wrapper">
                     <div className="logo__block">

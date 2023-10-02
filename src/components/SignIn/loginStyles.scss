@@ -122,6 +122,8 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     position: relative;
+    background-color: white;
+    box-shadow: 0px 1px 15px #0b1d26a7;
 }
 .signInWithGoogle__icon{
     position: absolute;
@@ -146,4 +148,33 @@
 .cornerSvg{
     position: absolute;
     top:20px;
+}
+
+.signIn__container{
+    &.dark{
+       
+    }
+    &.light{
+        .signIn__container{
+            background: url('../../assets/images/signInBackgroundLight.png');
+        }
+        .email__input{
+            ::placeholder{
+                color:var(--primary-black,#0B1D26);
+            }
+            color:var(--primary-black,#0B1D26);
+        }
+        .password__input{
+            ::placeholder{
+                color:var(--primary-black,#0B1D26);
+            }
+            color:var(--primary-black,#0B1D26);
+        }
+        .signInInput__container{
+            border-bottom: 2px solid rgb(0, 0, 0);
+        }
+        .signIn__header{
+            color:black;
+        }
+    }
 }
