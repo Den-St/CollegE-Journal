@@ -7,7 +7,7 @@ export const Footer = () => {
     const theme = useThemeStore().theme;
     const route = useLocation().pathname.replace('/','');
     return <><footer>
-        <div className={`footer__content ${theme} ${route}`}>
+        <div className={`footer__content ${theme} ${route+'home'}`}>
             <div className="footer__logo">
                 {collegeLogoSvg()}
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>

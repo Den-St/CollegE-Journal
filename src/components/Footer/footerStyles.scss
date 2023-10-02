@@ -109,7 +109,9 @@ footer {
         .fList__btn{
             color:#FFF;
         }
-       
+        .footer__circle{
+            display: none;
+        }
     }
     &.light{
         footer{
@@ -121,29 +123,31 @@ footer {
         .footer__title{
             color:var(--primary-black,#0B1D26);
         }
-        .fList__title{
-            color:var(--primary-black,#0B1D26);
-        }
+
         .fList__btn{
             color:var(--primary-black,#0B1D26);
         }
         .bottom__text{
             color:#0B1D26;
         }
-        .footer__circle{
-            background: #2c84e9b0;
-            filter: blur(60px); 
+      
+        .fList__title{
+            color:#EFB42D;
         }
-        &.sign-in{
-            .fList__title{
-                color:#EFB42D;
-            }
-        }
-    }
-    &.sign-in{
         .footer__circle{
             display: none;
         }
+        &.home{
+            .footer__title{
+                color:var(--primary-black,#0B1D26);
+            }
+        }
+    }
+    &.home{
+        .footer__circle{
+            background: #2c84e9b0;
+            filter: blur(60px); 
+        } 
     }
 }
 

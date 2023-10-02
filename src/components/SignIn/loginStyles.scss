@@ -151,9 +151,9 @@
 }
 
 .signIn__container{
-    &.dark{
+    // &.dark{
        
-    }
+    // }
     &.light{
         .signIn__container{
             background: url('../../assets/images/signInBackgroundLight.png');

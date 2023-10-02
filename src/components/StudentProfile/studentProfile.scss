@@ -1,0 +1,161 @@
+.studentProfile__container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 229px;
+    justify-content: center;
+    gap:120px;
+    font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
+}
+
+.studentProfileMain__container{
+    display: flex;
+    align-items: flex-start;
+    gap:130px;
+}
+
+.studentProfileLeft__container{
+    display: flex;
+    flex-direction: column;
+    gap:90px;
+}
+
+.studentProfileInfo__container{
+    display: flex;
+    gap:30px;
+    align-items: flex-start;
+}
+
+.studentProfile_img{
+    width: 81px;
+    height: 81px;
+    object-fit: contain;
+    border-radius:50%;
+}
+
+.studentProfileTextInfo__container{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.studentProfile__name{
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+}
+
+.studentProfile__email{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.studentProfile__group{
+    font-weight: 400;
+    font-size: 20px;
+    padding-top: 15px;
+    line-height: 24px;
+}
+
+.studentProfileTabs__container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 111px;
+    gap:60px;
+    align-items: flex-start;
+}
+
+.studentProfileTab__button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+
+
+.studentProfileStatistic__container{
+    padding: 25px 97px 40px 81px;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    border-radius: 10px;
+}
+
+.studentProfileStatistic__header{
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+}
+.studentProfileStatistic__value{
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 34px;
+}
+.na{
+    color:#ED3434;
+}
+.good{
+    color:#2DEF40;
+}
+.medium{
+    color:#EFB42D;
+}
+
+@media screen and (min-width:'1440px'){
+    .studentProfileMain__container{
+        width: 1189px;
+    }
+}
+
+.studentProfile__container{
+    &.dark{
+        .studentProfile__name{
+            color:white;
+        }
+        .studentProfile__email{
+            color:#D0D0D0;
+        }
+        .studentProfile__group{
+            color:white;
+        }
+        .studentProfileTab__button{
+            color:white;
+            .diagonalArrowSvg {
+                fill:white;
+            }
+        }
+        .studentProfileTab__button.picked{
+            .diagonalArrowSvg{
+                fill:orange;
+            }
+        }
+        .studentProfileStatistic__header{
+            color:white;
+        }
+        .studentProfileStatistic__container{
+            background-color: rgb(27,40,48);
+        }
+    }
+    &.light{
+        .studentProfileTab__button{
+            color:black;
+            .diagonalArrowSvg{
+                fill:black;
+            }
+        }
+        .studentProfileTab__button.picked{
+            .diagonalArrowSvg{
+                fill:orange;
+            }
+        }
+    }
+
+}
+

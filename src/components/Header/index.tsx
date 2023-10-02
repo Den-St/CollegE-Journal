@@ -9,7 +9,7 @@ export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     
-    return <header className={`header ${theme} ${route}`}>
+    return <header className={`header ${theme} ${route+'home'}`}>
             <div className="container">
                 <div className="header__wrapper">
                     <div className="logo__block">
