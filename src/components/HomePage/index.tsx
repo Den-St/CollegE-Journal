@@ -4,6 +4,9 @@ import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
 import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
+import laptopPng from '../../assets/images/laptop.png';
+import supPng from '../../assets/images/sup.png';
+
 const sectionIds = {
     start:'#start',
     news:'#news',
@@ -107,7 +110,7 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="pageNav">
-                        <button onClick={() => goToSection(sectionIds.start)} className="pNav__container">
+                        <button onClick={() => goToSection(sectionIds.start)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Старт</h1>
                         </button>
                         <button onClick={() => goToSection(sectionIds.news)} className="pNav__container pNav__btn">
@@ -186,7 +189,7 @@ export const HomePage = () => {
         </div>
         <div className="info__content">
             <div className="laptop__container">
-                <img src="" alt="laptop" className="laptop"/>
+                <img src={laptopPng} alt="laptop" className="laptop"/>
             </div>
             <div className="info__block">
                 <h1 className="info__h1">
@@ -221,7 +224,7 @@ export const HomePage = () => {
             </div>
             <div className="about__img">
                 <div className="sup__back"></div>
-                <img className="sup__img" src='' alt="sup"/>
+                <img className="sup__img" src={supPng} alt="sup"/>
             </div>
             <div className="sup__circle"></div>
         </div>
