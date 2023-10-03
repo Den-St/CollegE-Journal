@@ -129,6 +129,8 @@ img{vertical-align: top;}
     border-right: 4px solid;
     border-color: #797979;
     transition: all 0.3s linear;
+    background-color: transparent;
+
 }
 
 .pNav__btn {
@@ -155,7 +157,6 @@ img{vertical-align: top;}
 .news__page {
     display: flex;
     flex-direction: column;
-    // height: 630px;
 }
 
 .pageNum {

@@ -4,7 +4,12 @@ import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
 import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
-
+const sectionIds = {
+    start:'#start',
+    news:'#news',
+    info:'#info',
+    about:'#about',
+}
 export const HomePage = () => {
     const news:{id:number,title:string,date:string,text:string}[] = [
         {
@@ -69,7 +74,10 @@ export const HomePage = () => {
         },
     ];
     const theme = useThemeStore().theme;
-
+    const goToSection = (sectionId:string) => {
+        window.location.href = sectionId;
+    }
+   
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
             <div className="homePage__container">
@@ -99,18 +107,18 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="pageNav">
-                        <Link to="#start" className="pNav__container">
+                        <button onClick={() => goToSection(sectionIds.start)} className="pNav__container">
                             <h1 className="pNav__btn">Старт</h1>
-                        </Link>
-                        <Link to="#news" className="pNav__container pNav__btn">
+                        </button>
+                        <button onClick={() => goToSection(sectionIds.news)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Новини</h1>
-                        </Link>
-                        <Link to="#start" className="pNav__container pNav__btn" >
+                        </button>
+                        <button onClick={() => goToSection(sectionIds.info)} className="pNav__container pNav__btn" >
                             <h1 className="pNav__btn">Журнал</h1>
-                        </Link>
-                        <Link to="#start" className="pNav__container pNav__btn">
+                        </button>
+                        <button onClick={() => goToSection(sectionIds.about)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Про Нас</h1>
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

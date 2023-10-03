@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Schedule } from "../components/Schedule";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups } from "../pages";
 
 export const navRoutes = {
 
@@ -18,6 +18,7 @@ export const routes = {
     schedule:'/schedule',
     missedClasses:'/missed-classes/:studentId',
     rating:'/rating',
+    groups:'/groups',
 };
 
 export const PublicRoutes = [
@@ -32,6 +33,7 @@ export const PublicRoutes = [
     <Route key={routes.schedule} element={<Schedule/>} path={routes.schedule}/>,
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
+    <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,
 ]
 
 export const RoutesSwitch = () => {
