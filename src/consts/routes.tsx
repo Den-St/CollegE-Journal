@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Schedule } from "../components/Schedule";
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups } from "../pages";
 
@@ -20,6 +20,7 @@ export const routes = {
     rating:'/rating',
     groups:'/groups',
 };
+const gitHubHomePageRoute = '/CollegE-Journal/';
 
 export const PublicRoutes = [
     <Route key={routes.registration} element={<Registration/>} path={routes.registration}/>,
@@ -34,6 +35,7 @@ export const PublicRoutes = [
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
     <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,
+    <Route key={gitHubHomePageRoute} element={<Navigate to='/'/>} path={gitHubHomePageRoute}/>
 ]
 
 export const RoutesSwitch = () => {
