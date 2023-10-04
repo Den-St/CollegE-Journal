@@ -1,0 +1,232 @@
+.homeTaskMain__container{
+    display: flex;
+    flex-direction: column;
+    gap:60px;
+    align-items: center;
+    padding-top: 229px;
+    font-family: Montserrat;
+}
+
+.homeTaskTop__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    padding-left: 10%;
+    width: 100%;
+}
+
+.homeTaskTitle{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+}
+
+.homeTaskFilters__container{
+    display: flex;
+    gap:30px;
+}
+
+.homeTaskFilter{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.homeTaskTasks__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 100%;
+    padding: 0 70px;
+}
+@media screen and (min-width:'1920px') {
+    .homeTaskTasks__container{
+        padding: 0 150px;
+    }
+}
+
+.homeTaskItem__container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.homeTaskItem{
+    padding: 9px 19px 9px 36px;
+    display: flex;
+    gap:30px;
+    align-items: center;
+    border-radius: 7px;
+    .anticon{
+        color:white;
+        font-size: 25px;
+    }
+}
+
+.homeTaskItem__avatar{
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.homeTaskItemText__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: fit-content;
+    max-width: 630px;
+}
+
+.homeTaskItem__text{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    overflow: hidden;
+    white-space: break;
+    max-width: 350px;
+}
+@media screen and (min-width:'1440px') {
+    .homeTaskItem__text{
+        max-width: 300px;
+    }
+}
+
+.homeTaskItem__date{
+    font-size:16px;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+.homeTaskDeadline__container{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.homeTaskDeadline__title{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.homeTaskDeadline__date{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.homeTaskCommentsItem__container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    gap:15px;
+    border-radius: 7px;
+}
+
+.homeTaskCommentsItemNoComment{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.homeTaskCommentsItemComment__container{
+    display: flex;
+    gap:36px;
+}
+
+.homeTaskCommentItem__avatar{
+    width: 45px;
+    height: 45px;
+}
+
+.homeTaskCommentItem__text{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    overflow: hidden;
+    white-space: break;
+}
+
+@media screen and (min-width:'1440px') {
+    .homeTaskCommentItem__text{
+        max-width: 420px;
+    }
+}
+
+.homeTaskMain__container{
+    &.dark{
+        .homeTaskMain__container{
+            background-image: url('../../assets/images/signInBackground.png');
+        }
+        .homeTaskTitle{
+            color:white;
+        }
+        .homeTaskFilter{
+            color:white;
+        }
+        .homeTaskItem__text{
+            color:white;
+        }
+        .homeTaskItem__date{
+            color:white;
+        }
+        .homeTaskDeadline__title{
+            color:#d0d0d0;
+        }
+        .homeTaskDeadline__date{
+            color:white;
+        }
+        .homeTaskCommentsItemNoComment{
+            color:#d0d0d0;
+        }
+        .homeTaskCommentItem__text{
+            color:white;
+        }
+        .homeTaskItem{
+            background-color: #102936;
+        }
+        .homeTaskCommentsItem__container{
+            background-color: #102936;
+        }
+        
+    }
+    &.light{
+        .homeTaskMain__container{
+            background-image: url('../../assets/images/signInBackgroundLight.png');
+        }
+        .homeTaskTitle{
+            color:black;
+        }
+        .homeTaskFilter{
+            color:black;
+        }
+        .homeTaskItem__text{
+            color:black;
+        }
+        .homeTaskItem__date{
+            color:black;
+        }
+        .homeTaskDeadline__title{
+            color:black;
+        }
+        .homeTaskDeadline__date{
+            color:black;
+        }
+        .homeTaskCommentsItemNoComment{
+            color:black;
+        }
+        .homeTaskCommentItem__text{
+            color:black;
+        }
+        .homeTaskItem{
+            background-color: transparent;
+        }
+        .homeTaskCommentsItem__container{
+            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
+        }
+        .homeTaskItem{
+            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
+        }
+    }
+}

@@ -6,13 +6,9 @@ import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
 import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
+import { sectionIds } from '../../consts/sectionIds';
 
-const sectionIds = {
-    start:'#start',
-    news:'#news',
-    info:'#info',
-    about:'#about',
-}
+
 export const HomePage = () => {
     const news:{id:number,title:string,date:string,text:string}[] = [
         {
