@@ -21,6 +21,9 @@ export const routes = {
     groups:'/groups',
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
+const Hg = () => {
+    return <Navigate to='/'/>
+}
 
 export const PublicRoutes = [
     <Route key={routes.registration} element={<Registration/>} path={routes.registration}/>,
@@ -35,7 +38,7 @@ export const PublicRoutes = [
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
     <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,
-    <Route key={gitHubHomePageRoute} element={<Navigate to='/'/>} path={gitHubHomePageRoute}/>
+    <Route key={gitHubHomePageRoute} element={<Hg/>} path={gitHubHomePageRoute}/>
 ]
 
 export const RoutesSwitch = () => {
