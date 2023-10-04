@@ -1,3 +1,4 @@
+export { Journal } from './components/Journal/index';
 export { Groups } from './components/Groups/index';
 export { MissedClasses } from './components/MissedClasses/index';
 export { TeacherProfile } from './components/TeacherProfile';

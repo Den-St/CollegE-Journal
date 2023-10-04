@@ -1,0 +1,298 @@
+.journalMain__container{
+    display: flex;
+    flex-direction: column;
+    gap:100px;
+    padding: 229px 70px 0 70px;
+    font-family: Montserrat;
+}
+
+.journalTop__container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10%;
+    gap:20px;
+}
+
+.journal__title{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+}
+
+.journalFillters__container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:50px;
+}
+
+.journalFilterItem{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.journal__container{
+    display: flex;
+    flex-direction: column;
+    gap:45px;
+    overflow-x: scroll;
+}
+
+.journalColumns__container{
+    display: flex;
+    padding: 0 37px;
+
+}
+
+@media screen and (max-width:'1440px') {
+    .journalColumns__container{
+        width: 1048px;
+    }
+}
+
+.journalColumnsLeft__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 16px;
+    width: 332px;
+    border-radius: 7px;
+    height: 123px;
+    gap:10px;
+}
+
+.journalColumnsLeft__title{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.journalColumnsLeft__text{
+    font-size: 18px;
+    font-weight: 400;
+    color:#d0d0d0;
+}
+
+.journalColumnsCenter__container{
+    display: flex;
+    gap:10px;
+    padding-left:4.3%;
+}
+
+.journalColumnsCenterItem__container{
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+}
+.journalColumnsCenterItemType{
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.journalColumnsCenterItemDate__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 7px;
+    text-align: center;
+    gap:5px;
+    border-radius: 7px;
+    height: 70px;
+}
+
+.journalColumnsRight__container{
+    display: flex;
+    gap:10px;
+    padding-left: 4.3%;
+}
+
+.journalColumnsRightItem__container{
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+}
+
+.journalColumnsRightItemType{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;    
+    padding: 3px;
+    border-radius: 7px;
+}
+
+.journalColumnsRightItemMonth{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 7px;
+    text-align: center;
+    height: 70px;
+}
+
+.journalRows__container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 37px;
+}
+.journalRowItem__container{
+    display: flex;
+    align-items: center;
+    padding: 5px 37px;
+    border-radius: 7px;
+    width: 1013px;
+
+}
+
+.journalRowItemLeft__container{
+    display: flex;
+    gap:15px;
+    min-width: 293px;
+}
+
+.journalRowItemLeft__number{
+    font-size: 20px;
+    font-weight:500;
+}
+
+.journalRowItemLeft__name{
+    font-size: 20px;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: break;
+    text-overflow: ellipsis;
+}
+
+.journalRowItemCenter__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 4.3%;
+    gap:10px;
+}
+
+.journalRowItemRight__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 4.3%;
+    gap:10px;
+    // width: 215px;
+}
+.journalRowItemCenterValue__container{
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.journalRowItemCenterValue__text{
+    border-radius: 10px 5px 10px 5px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
+}
+.journalRowItemRightValue__container{
+    width: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.journalRowItemRightValue__text{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 5px 10px 5px;
+    box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
+}
+.journalMain__container{
+    &.dark{
+        .journalRowItemCenterValue__text{
+            background-color: #102936;
+        }
+        .journalRowItemRightValue__text{
+            background-color: #102936;
+        }
+        .journalRowItem__container{
+            &.even{
+                background-color: #102936;
+                .journalRowItemCenterValue__text{
+                    background-color: #0B1D26;
+                }
+                .journalRowItemRightValue__text{
+                    background-color: #0B1D26;
+                }
+            }
+        }
+        .journal__title{
+            color:white;
+        }
+        .journalFilterItem{
+            color:white;
+        }
+        .journalRowItemLeft__number{
+            color:white;
+        }
+        .journalRowItemLeft__name{
+            color:white;
+        }
+        .journalRowItemCenterValue__text{
+            color:white;
+        }
+        .journalRowItemRightValue__container{
+            color:white;
+        }
+        .journalColumnsLeft__title{
+            color:#d0d0d0
+        }
+        .journalColumnsLeft__text{
+            color:white;
+        }
+        .journalColumnsCenterItemType{
+            color:white;
+        }
+        .journalColumnsCenterItemDateDay{
+            color:white;
+        }
+        .journalColumnsCenterItemDate{
+            color:white;
+        }
+        .journalColumnsRightItemType{
+            color:white;
+        }
+        .journalColumnsRightItemMonth{
+            color:white;
+        }
+        .journalColumnsLeft__container{
+            background-color: #102936;
+        }
+        .journalColumnsCenterItemType{
+            background-color: #102936;
+        }
+        .journalColumnsCenterItemDate__container{
+            background-color: #102936;
+        }
+        .journalColumnsRightItemType{
+            background-color: #102936;
+        }
+        .journalColumnsRightItemMonth{
+            background-color: #102936;
+        }
+    }
+    &.light{
+
+    }
+}
+
+.journalRowItemLeft__container{
+}

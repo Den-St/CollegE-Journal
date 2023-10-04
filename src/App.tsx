@@ -3,7 +3,6 @@ import { RoutesSwitch } from './consts/routes';
 import './globalStyles.scss';
 
 function App() {
-  
   return <Layout>
     <RoutesSwitch/>
   </Layout>
