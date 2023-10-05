@@ -19,7 +19,7 @@ export const routes = {
     missedClasses:'/missed-classes/:studentId',
     rating:'/rating',
     groups:'/groups',
-    journal:'/journal'
+    journal:'/journal',
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -38,7 +38,7 @@ export const PublicRoutes = [
     <Route key={routes.schedule} element={<Schedule/>} path={routes.schedule}/>,
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
-    <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,                          //layout done
+    <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,                           //layout done
     <Route key={routes.journal} element={<Journal/>} path={routes.journal}/>,                       //layout done
 
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages

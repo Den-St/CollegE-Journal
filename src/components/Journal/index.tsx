@@ -65,7 +65,7 @@ export const Journal = () => {
                         </div>
                     </div>
                     <div className='journalColumnsRightItem__container'>
-                        <div className='journalColumnsRightItemType'>Коригуюч</div>
+                        <div className='journalColumnsRightItemType'>Коригуюча</div>
                         <div className='journalColumnsRightItemMonth'>
                             Травень
                         </div>
