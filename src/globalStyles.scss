@@ -60,3 +60,16 @@ html,body{
 		background: #FFF;
 	}
 }
+
+body{
+	&.dark{
+		.ant-picker-dropdown .ant-picker-panel-container{
+			background-color: #123547 ;
+		}
+	}
+	&.light{
+		.ant-picker-dropdown .ant-picker-panel-container{
+			background-color: #ffffff ;
+		}
+	}
+}

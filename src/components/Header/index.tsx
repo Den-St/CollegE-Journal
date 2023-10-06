@@ -3,7 +3,7 @@ import './headerStyles.scss';
 import {collegeLogoSvg} from '../../assets/svgs/college_logo';
 import { Switch } from 'antd';
 import { themes } from '../../consts/themes';
-import { useThemeController } from '../hooks/themeController';
+import { useThemeController } from '../../hooks/themeController';
 import { sectionIds } from '../../consts/sectionIds';
 import { routes } from '../../consts/routes';
 
