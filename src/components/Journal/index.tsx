@@ -194,5 +194,45 @@ export const Journal = () => {
                 </div>
             </div>
         </section>
+        <section className='journalLessonsThemes__section'>
+            <h1 className='journalLessonsThemes__title'>Теми заннять</h1>
+            <div className='journalLessonsThemes__container'>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+            </div>
+        </section>
     </div>
 }

@@ -22,12 +22,12 @@ export const Header = () => {
                         </Link>
                     </div>
                     <nav className="nav">
-                        <button onClick={() => goToSection(sectionIds.start)} className="menu__button">
+                        <Link to={'/'} className="menu__button">
                             Головна
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
-                        </button>
+                        </Link>
                         <button onClick={() => goToSection(sectionIds.news)} className="menu__button">Новини
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
@@ -38,7 +38,7 @@ export const Header = () => {
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </button>
-                        <Link to={routes.schedule} className="menu__button">Schedule
+                        <Link to={routes.journal.replace(':id','1')} className="menu__button">Journal
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>

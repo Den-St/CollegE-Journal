@@ -235,6 +235,58 @@
     border-radius: 10px 5px 10px 5px;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
 }
+
+.journalLessonsThemes__section{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    width: 100%;
+}
+
+.journalLessonsThemes__title{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    margin-left: 9%;
+}
+.journalLessonsThemes__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 100%;
+}
+
+.journalLessonThemeItem__container{
+    display: flex;
+    gap:20px;
+    align-items: center;
+    width: 100%;
+    padding: 20px 30px;
+    border-radius: 7px;
+}
+.journalLessonThemeItemDate__container{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+}
+.journalLessonThemeItemDate__day{
+    font-size: 18px;
+    font-weight: 400;
+}
+.journalLessonThemeItemDate__date{
+    font-size: 20px;
+    font-weight: 500;
+}
+.journalLessonThemeItem__text{
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: break;
+    text-overflow: ellipsis;
+}
+
 .journalMain__container{
     &.dark{
         .journalRowItemCenterValue__text{
@@ -307,6 +359,21 @@
         }
         .journalColumnsRightItemMonth{
             background-color: #102936;
+        }
+        .journalLessonThemeItem__container{
+            background-color: #102936;
+        }
+        .journalLessonThemeItemDate__day{
+            color:white;
+        }
+        .journalLessonThemeItemDate__date{
+            color:white;
+        }
+        .journalLessonThemeItem__text{
+            color:#d0d0d0;
+        }
+        .journalLessonsThemes__title{
+            color:white;
         }
     }
     &.light{
