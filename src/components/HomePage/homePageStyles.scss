@@ -61,7 +61,15 @@ img{vertical-align: top;}
 .tg__container {
     margin-top: 20px;
 }
-
+.homePageNextSection__button{
+    position: fixed;
+    left: 58px;
+    top:600px;
+    background: transparent;
+    cursor: pointer;
+    width: 50px;
+    z-index: 4;
+}
 .main__paragraph {
     margin-top: 240px;
     height: 315px;

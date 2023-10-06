@@ -1,6 +1,18 @@
 export const sectionIds = {
-    start:'#start',
-    news:'#news',
-    info:'#info',
-    about:'#about',
+    start:{
+        id:'#start',
+        distance:0
+    },
+    news:{
+        id:'#news',
+        distance:635
+    },
+    info:{
+        id:'#info',
+        distance:1270
+    },
+    about:{
+        id:'#about',
+        distance:2000
+    }
 }
