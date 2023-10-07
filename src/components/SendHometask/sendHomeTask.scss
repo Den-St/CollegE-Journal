@@ -1,0 +1,272 @@
+.sendHomeTaskMain__container{
+    display: flex;
+    flex-direction: column;
+    padding: 229px 70px 0 181px;
+    gap:60px;
+    font-family: Montserrat;
+}
+
+.sendHomeTaskMain__title{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.sendHomeTaskHomeTask__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.sendHomeTaskHomeTaskTopInfo__container{
+    display: flex;
+    gap:50%;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    row-gap: 15px;
+}
+
+.sendHomeTaskHomeTaskTitle{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.sendHomeTaskHomeTaskDate{
+    font-size: 20px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskText__container{
+    width: 90%;
+    padding: 20px 27px;
+    line-height: 22px;
+    border-radius: 7px;
+
+}
+.sendHomeTaskHomeTaskText{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskAttachedInfo__container{
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+};
+.sendHomeTaskHomeTaskAttachedFiles__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.sendHomeTaskHomeTaskAttachedFileItem{
+    display: flex;
+    padding: 16px 30px;
+    gap:23px;
+    border-radius: 7px;
+}
+
+.sendHomeTaskHomeTaskAttachedFileItemInfo__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.sendHomeTaskHomeTaskAttachedFileItemName{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskAttachedFileItemFormat{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskAttachedLinks__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.sendHomeTaskHomeTaskAttachedLinkItem{
+    display: flex;
+    padding: 16px 30px;
+    gap:23px;
+}
+.sendHomeTaskHomeTaskAttachedLinkItemInfo__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.sendHomeTaskHomeTaskAttachedLinkItemName{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskAttachedLinkItemUrl{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskHomeTaskAttachFileInput__container{
+    width: 300px;
+    height: 40px;
+    position: relative;
+}
+.sendHomeTaskHomeTaskAttachFile__input{
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    opacity: 0;
+}
+.sendHomeTaskHomeTaskAttachFileInput__styled{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sendHomeTaskBottom__container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.sendHomeTaskComments__section{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.sendHomeTaskCommentsTitle{
+    font-size: 20px;
+    font-weight: 400;
+}
+.sendHomeTaskComments__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.sendHomeTaskCommentItem__container{
+    display: flex;
+    gap:30px;
+    max-width: 500px;
+}
+.sendHomeTaskComment__avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+.sendHomeTaskComment__text{
+    font-size: 18px;
+    font-weight: 400;
+    white-space: break;
+    padding: 20px 35px;
+    border-radius: 7px;
+}
+.sendHomeTaskOther__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.sendHomeTaskOther__title{
+    font-size: 20px;
+    font-weight: 400;
+}
+.sendHomeTaskOtherTasks__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.sendHomeTaskOtherTaskItem__container{
+    display: flex;
+    gap:36px;
+    padding: 9px 30px;
+}
+.sendHomeTaskOtherTaskItem__avatar{
+    width: 45px;
+    height: 45px;
+    border-radius: 7px;
+    object-fit: contain;
+}
+.sendHomeTaskOtherTaskItemText__container{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.sendHomeTaskOtherTaskItemText{
+    font-size: 18px;
+    font-weight: 400;
+}
+.sendHomeTaskOtherTaskItemDate{
+    font-size: 16px;
+    font-weight: 400;
+}
+.sendHomeTaskCommentInput__container{
+    height: 60px !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0 5px;
+    border-radius: 7px;
+}
+.ant-input{
+    background-color: transparent;
+    
+}
+
+.sendHomeTaskMain__container{
+    &.dark{
+        color:white;    
+        .sendHomeTaskHomeTaskText__container{
+            background-color: #102936;
+        }
+        .sendHomeTaskHomeTaskText{
+            color:white;
+        }
+        .sendHomeTaskHomeTaskAttachFileInput__styled{
+            background-color: #102936;
+            color:white;
+        }
+        .sendHomeTaskMain__title{
+            color:white;
+        }
+        .sendHomeTaskHomeTaskDate{
+            color:white;
+        }
+        .sendHomeTaskHomeTaskText{
+            color:white;
+        }
+        .sendHomeTaskHomeTaskAttachedFileItem{
+            background-color: #102936;
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItem{
+            background-color: #102936;
+        }
+        .sendHomeTaskHomeTaskAttachFileInput__styled{
+            background-color:#102936 ;
+        }
+        .sendHomeTaskComment__text{
+            background-color:#102936 ;
+        }
+        .sendHomeTaskOtherTaskItem__container{
+            background-color:#102936 ;
+        }
+        .sendHomeTaskCommentInput__container{
+            background-color:#102936 ;
+            
+        }
+        .ant-input{
+            color:white;
+            border-width: 0;
+        }
+        .ant-input::placeholder{
+            color:white;
+        }
+    }
+    &.light{
+
+    }
+}
