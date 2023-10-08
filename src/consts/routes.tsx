@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
 import { Schedule } from "../components/Schedule";
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask } from "../pages";
@@ -23,6 +24,7 @@ export const routes = {
     journal:'/journal',
     createHomeTask:'/create-home-task',
     sendHomeTask:'/send-home-task',
+    createStudyMaterials:'/create-study-materials',
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -45,7 +47,8 @@ export const PublicRoutes = [
     <Route key={routes.journal} element={<Journal/>} path={routes.journal}/>,                       //layout done
     <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,                       //layout done
     <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,                       //layout done
-
+    <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
+    
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]
 

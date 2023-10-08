@@ -1,0 +1,175 @@
+.createStudyMaterialsMain__container{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    padding: 229px 180px 0 180px;
+    width: 100%;
+    font-family: Montserrat;
+}
+.createStudyMaterialsTitle{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.createStudyMaterialsInputs__container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:40px;
+}
+.createStudyMaterialsInput__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.createStudyMaterialsInput__title{
+    font-size: 20px;
+    font-weight: 400;
+}
+.createStudyMaterialsHeader__input{
+    width: 100%;
+    height: 63px;
+    padding-left:28px;
+    border-radius: 7px;
+}
+.createStudyMaterialsSelect__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 48%;
+}
+.createStudyMaterialsSelects__container{
+    display: flex;
+    gap:30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.createStudyMaterialsSelect__wrapper{
+    width: 100%;
+    height: 63px;
+    padding:0 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ant-select{
+    width: 100%;
+}
+.quill{
+    border-radius: 7px;
+}
+.createStudyMaterialsMain__container{
+    &.dark{
+        .createStudyMaterialsHeader__input{
+            background-color: #102936;
+            color:white;
+        }
+        .createStudyMaterialsSelect__wrapper{
+            background-color: #102936;
+            color:white;
+        }
+        .createStudyMaterialsTitle{
+            color:white;
+        }
+        .createStudyMaterialsInput__title{
+            color:white;
+        }
+        .sendHomeTaskHomeTaskAttachedFileItem{
+            background-color: #102936;
+            color: white;
+
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItem{
+            background-color: #102936;
+            color: white;
+        }
+        .sendHomeTaskHomeTaskAttachFileInput__styled{
+            background-color: #102936;
+            color:white;
+        }
+        .quill{
+            background-color: #102936;
+            border:none;
+            max-width: 1120px;
+        }
+        .ql-editor{
+            height: 214px !important;
+        }
+        .ql-snow .ql-picker{
+            color:white !important;
+        }
+        .ql-picker-item{
+            color:black !important;
+        }
+        .ql-stroke{
+            stroke:white !important; 
+        }
+        
+        .ql-snow{
+            border: none !important;
+        }
+        .ql-editor{
+            color:white;    
+            font-size: 16px;
+        }
+        .ql-blank::before{
+            color:white !important;
+            font-style:normal !important;
+        }
+        .ql-editor::placeholder{
+            color:white;
+        }
+        .ant-select-selector{
+            background-color: #102936 !important;
+            border: none;
+        }
+    }
+    &.light{
+        .createStudyMaterialsHeader__input{
+            background-color: white;
+            color:black;
+        }
+        .createStudyMaterialsSelect__wrapper{
+            background-color: white;
+            color:black;
+        }
+        .quill{
+            background-color: white;
+            border:none;
+            max-width: 1120px;
+        }
+        .ql-editor{
+            height: 414px !important;
+        }
+        .ql-snow .ql-picker{
+            color:black !important;
+        }
+        .ql-picker-item{
+            color:black !important;
+        }
+        .ql-stroke{
+            stroke:black !important; 
+        }
+        
+        .ql-snow{
+            border: none !important;
+        }
+        .ql-editor{
+            color:black;    
+            font-size: 16px;
+        }
+        .ql-blank::before{
+            color:black !important;
+            font-style:normal !important;
+        }
+        .ql-editor::placeholder{
+            color:black;
+        }
+        .quill{
+            border-radius: 10px;
+            box-shadow: 0 0 15px 0 rgb(152, 152, 152);
+        }
+    }
+}
