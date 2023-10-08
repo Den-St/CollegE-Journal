@@ -11,3 +11,4 @@ export { HomeTasks } from "./components/HomeTasks";
 export { HomeTask } from "./components/HomeTask";
 export {Rating} from "./components/Rating";
 export { SendHomeTask } from './components/SendHometask';
+export { AdminPanel } from './components/AdminPanel';

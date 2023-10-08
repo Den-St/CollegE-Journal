@@ -1,0 +1,151 @@
+.adminPanelMain__container{
+    display: flex;
+    flex-direction: column;
+    padding:229px 70px 0 70px;
+    gap:40px;
+    align-items: center;
+    font-family: Montserrat;
+}
+
+.adminPanelMain__title{
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.adminPanel__container{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.adminPanel__title{
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 81px;
+}
+
+.adminPanelControllers__container{
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.adminPanelControllerItem__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+    justify-content: center;
+    box-shadow: 0 0 15px 0 #D4D4D41A;
+    padding: 46px 50px;
+    width: 413px;
+}
+.adminPanelControllers__title{
+    font-size: 18px;
+    font-weight: 400;
+}
+.adminPanelStats__container{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+
+.adminPanelStatsBlocks__container{
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+}
+
+.adminPanelStatBlock__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:40px;
+    box-shadow: 0 0 15px 0 #D4D4D41A;
+    padding: 20px 80px;
+    width: 635px;
+}
+.adminPanelStatName{
+    font-size: 20;
+    font-weight: 400;
+}
+
+.adminPanelStatsItems__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.adminPanelStatItem__container{
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+.adminPanelStatItemDay__container{
+    font-size: 56px;
+    font-weight: 400;
+    text-align: center;
+}
+.adminPanelStatsItems__container{
+    display: flex;
+    gap:30px;
+}
+.adminPanelStatItemName{
+    color:#D0D0D0;
+    font-size: 18px;
+    font-weight: 400;
+}
+.adminPanelStatItemWeek{
+    font-size: 20px;
+    font-weight: 400;
+}
+.adminPanelStatItemMonth{
+    font-size: 18px;
+    font-weight: 400;
+}
+.adminPanelStatBlocs__container{
+    display: flex;
+    gap:30px;
+}
+.adminPanelStatsItem__container{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+.adminPanelMain__container{
+    &.dark{
+        .adminPanelMain__title{
+            color:white;
+        }
+        .adminPanel__title{
+            color:#797979;
+        }
+        .adminPanelControllers__title{
+            color:#797979;
+        }
+        .adminPanelStatName{
+            color:white;
+        }
+        .adminPanelStatItemDay__container{
+            color:white;
+        }
+        .adminPanelStatItem__container{
+            color:white;
+        }
+        .adminPanelStatName{
+            color:white;
+        }
+        .adminPanelStatItemName{
+            color:#D0D0D0;
+        }
+        .adminPanelStatItemWeek{
+            color:white;
+        }
+        .adminPanelStatItemMonth{
+            color:#797979;
+        }
+    }
+    &.light{
+        
+    }
+}

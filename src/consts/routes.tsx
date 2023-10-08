@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
 import { Schedule } from "../components/Schedule";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel } from "../pages";
 
 export const navRoutes = {
 
@@ -25,6 +25,7 @@ export const routes = {
     createHomeTask:'/create-home-task',
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
+    adminPanel:'/admin-panel',
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -48,6 +49,7 @@ export const PublicRoutes = [
     <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,                       //layout done
     <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,                       //layout done
     <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
+    <Route key={routes.adminPanel} element={<AdminPanel/>} path={routes.adminPanel}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]
