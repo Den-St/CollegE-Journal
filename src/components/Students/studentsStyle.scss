@@ -1,0 +1,164 @@
+.main__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+    gap:40px;
+    font-family: Montserrat;
+}
+
+.studentTitle__container{
+    width: 100%;
+    padding: 0 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+}
+
+
+.studentTitle{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2.8px;
+}
+
+.studentFillters__container{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+
+.groupFillter {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 2.8px;
+}
+
+.studentList__container {
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    width: 100%;
+    padding: 0 70px;
+}
+
+.studentItems__container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 30px;
+    padding: 0 70px;
+}
+
+.student__container {
+    width: 520px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 10px 5px;
+}
+
+.student__info {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    gap: 23px;
+    font-family: Montserrat;
+}
+
+.studentName {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2px;
+}
+
+.studentButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 172px;
+    height: 40px;
+    border-radius: 10px 5px;
+    text-align: center;
+    font-family: Alegreya Sans;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    transition: all 0.3s linear;
+}
+.studentList__avatar{
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.main__container {
+    &.dark{
+        .studentTitle{
+            color: white;
+        }
+        .groupFillter{
+            color: white;
+        }
+        .fillterImg {
+            stroke: #D0D0D0;
+        }
+        .student__container{
+            background:#102936;
+        }
+        .student__info{
+            color: white;
+        }
+        .studentButton{
+            background:#102936;
+            box-shadow: 0px 1px 10px 0px rgba(212, 212, 212, 0.10);
+            color:#FFF;
+        }
+        .studentButton:hover{
+            background: #0B1D26;
+        }
+        .main__container{
+            background-color: #0B1D26;
+            background-image: url('./../../assets/images/signInBackground.png');
+        }
+    }
+    &.light{
+        .studentTitle{
+            color: black;
+        }
+        .groupFillter{
+            color: #797979;
+        }
+        .fillterImg {
+            stroke: #797979;
+        }
+        .student__container{
+            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+            background:white;
+        }
+        .student__info{
+            color: #0B1D26;
+        }
+        .studentButton{
+            background:white;
+            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+            color:#0B1D26;
+        }
+        .studentButton:hover{
+            background: #EFB42D;
+        }
+        .main__container{
+            background-color: white;
+            background-image: url('./../../assets/images/signInBackgroundLight.png');
+        }
+    }
+}
