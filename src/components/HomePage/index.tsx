@@ -73,8 +73,8 @@ const news:{id:number,title:string,date:string,text:string}[] = [
 ];
 export const HomePage = () => {
     const theme = useThemeStore().theme;
-    const goToSection = (sectionId:string) => {
-        window.location.href = sectionId;
+    const goToSection = (sectionLocation:number) => {
+        window.scrollTo({top:sectionLocation});
     }
     
     const goToNextSection = () => {
@@ -82,7 +82,7 @@ export const HomePage = () => {
         const sections = Object.values(sectionIds);
         for(let i = 0;i < sections.length;i++){
             if(sections[i].distance > distanceFromTop){
-                window.location.href = sections[i].id;
+                goToSection(sections[i].distance);
                 return;
             }
         }
@@ -117,16 +117,16 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="pageNav">
-                        <button onClick={() => goToSection(sectionIds.start.id)} className="pNav__container pNav__btn">
+                        <button onClick={() => goToSection(sectionIds.start.distance)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Старт</h1>
                         </button>
-                        <button onClick={() => goToSection(sectionIds.news.id)} className="pNav__container pNav__btn">
+                        <button onClick={() => goToSection(sectionIds.news.distance)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Новини</h1>
                         </button>
-                        <button onClick={() => goToSection(sectionIds.info.id)} className="pNav__container pNav__btn" >
+                        <button onClick={() => goToSection(sectionIds.info.distance)} className="pNav__container pNav__btn" >
                             <h1 className="pNav__btn">Журнал</h1>
                         </button>
-                        <button onClick={() => goToSection(sectionIds.about.id)} className="pNav__container pNav__btn">
+                        <button onClick={() => goToSection(sectionIds.about.distance)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Про Нас</h1>
                         </button>
                     </div>

@@ -27,6 +27,22 @@ export const routes = {
     createStudyMaterials:'/create-study-materials',
     adminPanel:'/admin-panel',
 };
+export const headerRoutes = {
+    studentProfile:'/student-profile/:id',
+    homeTasks:'/home-tasks',
+    homeTask:'/home-task/:id',
+    students:'/students',
+    teacherProfile:'/teacher-profile/:id',
+    schedule:'/schedule',
+    missedClasses:'/missed-classes/:studentId',
+    rating:'/rating',
+    groups:'/groups',
+    journal:'/journal',
+    createHomeTask:'/create-home-task',
+    sendHomeTask:'/send-home-task',
+    createStudyMaterials:'/create-study-materials',
+    adminPanel:'/admin-panel',
+};
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
     return <Navigate to='/'/>

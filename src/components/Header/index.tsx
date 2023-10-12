@@ -10,8 +10,8 @@ import { routes } from '../../consts/routes';
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
-    const goToSection = (sectionId:string) => {
-        window.location.href = sectionId;
+    const goToSection = (sectionLocation:number) => {
+        window.scrollTo({top:sectionLocation});
     }
     return <header className={`header ${theme} ${route+'home'}`}>
             <div className="container">
@@ -28,12 +28,12 @@ export const Header = () => {
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
-                        <button onClick={() => goToSection(sectionIds.news.id)} className="menu__button">Новини
+                        <button onClick={() => goToSection(sectionIds.news.distance)} className="menu__button">Новини
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </button>
-                        <button onClick={() => goToSection(sectionIds.about.id)} className="menu__button">Про нас
+                        <button onClick={() => goToSection(sectionIds.about.distance)} className="menu__button">Про нас
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
@@ -74,6 +74,11 @@ export const Header = () => {
                             </svg>
                         </Link>
                         <Link to={routes.adminPanel} className="menu__button">AdminPanel
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link>
+                        <Link to={routes.students} className="menu__button">Students
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
