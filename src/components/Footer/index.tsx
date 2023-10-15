@@ -1,11 +1,15 @@
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { collegeLogoSvg } from '../../assets/svgs/college_logo';
+import { sectionIds } from '../../consts/sectionIds';
+import { goToSection } from '../../helpers/goToSection';
 import { useThemeStore } from '../../store/themeStore'
 import './footerStyles.scss'
 
 export const Footer = () => {
     const theme = useThemeStore().theme;
     const route = useLocation().pathname.replace('/','');
+    
     return <><footer>
         <div className={`footer__content ${theme} ${route+'home'}`}>
             <div className="footer__logo">
@@ -16,10 +20,10 @@ export const Footer = () => {
             <div className="btn__lists">
                 <ul className="footer__list">
                     <h1 className="fList__title">Більше Про Журнал</h1>
-                    <li><a className="fList__btn" href="#start">Головна</a></li>
-                    <li><a className="fList__btn" href="#news">Новини</a></li>
-                    <li><a className="fList__btn" href="#about">Про нас</a></li>
-                    <li><a className="fList__btn" href="#">Вхід</a></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.start.distance)}>Головна</button></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.distance)}>Новини</button></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.distance)}>Про нас</button></li>
+                    <li><Link className="fList__btn" to="/sign-in">Вхід</Link></li>
                 </ul>
                 <ul className="footer__list">
                     <h1 className="fList__title">Ми У Соц. Мережах</h1>

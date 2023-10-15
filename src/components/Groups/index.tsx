@@ -1,3 +1,4 @@
+import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
 import { useThemeStore } from "../../store/themeStore"
 import './groupsStyles.scss';
 
@@ -8,8 +9,14 @@ export const Groups = () => {
         <section className="groupsTop__container">
             <h1 className="groupTitle">Список груп</h1>
             <div className="groupsFillters__container">
-                <p className="groupYearSelectFilter">Рік</p>
-                <p className="groupSpecializationFilter">Спеціальність</p>
+                <div className="groupsFillterItem__container">
+                    <p className="groupYearSelectFilter">Рік </p>
+                    <FilterIconSvg/>
+                </div>
+                <div className="groupsFillterItem__container">
+                    <p className="groupYearSelectFilter">Спеціальність </p>
+                    <FilterIconSvg/>
+                </div>
             </div>
         </section>
 

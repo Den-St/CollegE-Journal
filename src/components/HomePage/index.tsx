@@ -8,6 +8,7 @@ import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
 import { sectionIds } from '../../consts/sectionIds';
 import { downArrow } from '../../assets/svgs/downArrow';
+import { goToSection } from '../../helpers/goToSection';
 
 const news:{id:number,title:string,date:string,text:string}[] = [
     {
@@ -73,9 +74,6 @@ const news:{id:number,title:string,date:string,text:string}[] = [
 ];
 export const HomePage = () => {
     const theme = useThemeStore().theme;
-    const goToSection = (sectionLocation:number) => {
-        window.scrollTo({top:sectionLocation});
-    }
     
     const goToNextSection = () => {
         const distanceFromTop = window.scrollY;

@@ -25,12 +25,15 @@
     display: flex;
     gap:30px;
 }
-
-.homeTaskFilter{
+.homeTaskFilter__container{
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+.homeTaskFilter__name{
     font-size: 28px;
     font-weight: 500;
 }
-
 .homeTaskTasks__container{
     display: flex;
     flex-direction: column;
@@ -38,12 +41,17 @@
     width: 100%;
     padding: 0 70px;
 }
-@media screen and (min-width:'1920px') {
+
+@media screen and (min-width:'1440px') {
     .homeTaskTasks__container{
-        padding: 0 150px;
+        padding: 0 5%;
     }
 }
-
+@media screen and (min-width:'1920px') {
+    .homeTaskTasks__container{
+        padding: 0 200px;
+    }
+}
 .homeTaskItem__container{
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +65,7 @@
     display: flex;
     gap:30px;
     align-items: center;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
     .anticon{
         color:white;
         font-size: 25px;
@@ -121,7 +129,7 @@
     flex-direction: column;
     padding: 20px 30px;
     gap:15px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 
 .homeTaskCommentsItemNoComment{
@@ -162,8 +170,11 @@
         .homeTaskTitle{
             color:white;
         }
-        .homeTaskFilter{
+        .homeTaskFilter__name{
             color:white;
+        }
+        .fillterImg{
+            stroke: white;
         }
         .homeTaskItem__text{
             color:white;
@@ -195,11 +206,14 @@
         .homeTaskMain__container{
             background-image: url('../../assets/images/signInBackgroundLight.png');
         }
-        .homeTaskTitle{
+        .homeTaskTitle{ 
             color:black;
         }
-        .homeTaskFilter{
+        .homeTaskFilter__name{
             color:black;
+        }
+        .fillterImg{
+            stroke: black;
         }
         .homeTaskItem__text{
             color:black;

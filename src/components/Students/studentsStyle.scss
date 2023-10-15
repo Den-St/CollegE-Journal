@@ -9,8 +9,8 @@
 }
 
 .studentTitle__container{
-    width: 100%;
-    padding: 0 140px;
+    width: 56%;
+    // padding: 0 140px;
     display: flex;
     flex-direction: column;
     gap: 41px;
@@ -42,8 +42,7 @@
     display: flex;
     flex-direction: column;
     gap:40px;
-    width: 100%;
-    padding: 0 70px;
+    width: 56%;
 }
 
 .studentItems__container {
@@ -51,7 +50,7 @@
     flex-wrap: wrap;
     row-gap: 20px;
     column-gap: 30px;
-    padding: 0 70px;
+    justify-content: center;
 }
 
 .student__container {
@@ -62,7 +61,7 @@
     justify-content: space-between;
     font-size: 20px;
     font-weight: 400;
-    border-radius: 10px 5px;
+    border-radius: 10px 5px 10px 5px;
 }
 
 .student__info {
@@ -87,7 +86,7 @@
     margin-right: 10px;
     width: 172px;
     height: 40px;
-    border-radius: 10px 5px;
+    border-radius: 10px 5px 10px 5px;
     text-align: center;
     font-family: Alegreya Sans;
     font-size: 20px;

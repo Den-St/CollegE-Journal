@@ -4,7 +4,7 @@
     max-width: 1035px;
     column-gap:150px;
     row-gap: 80px;
-    padding: 0 20px;
+    // padding: 0 20px;
 }
 
 .lessonsScheduleDay__container{
@@ -44,6 +44,7 @@
     color:#797979;
 }
 
+
 .lessonsSchedule__container{
     &.dark{
         .lessonsScheduleDay__header{
@@ -59,6 +60,9 @@
             font-weight: 400;
             font-size: 20px;
             color:#797979;
+        }
+        .lessonsScheduleDay__header.currentDay{
+            color:#EFB42D;
         }
     }
     &.light{

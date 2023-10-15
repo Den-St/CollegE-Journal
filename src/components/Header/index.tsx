@@ -6,13 +6,12 @@ import { themes } from '../../consts/themes';
 import { useThemeController } from '../../hooks/themeController';
 import { sectionIds } from '../../consts/sectionIds';
 import { routes } from '../../consts/routes';
+import { goToSection } from '../../helpers/goToSection';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
-    const goToSection = (sectionLocation:number) => {
-        window.scrollTo({top:sectionLocation});
-    }
+
     return <header className={`header ${theme} ${route+'home'}`}>
             <div className="container">
                 <div className="header__wrapper">

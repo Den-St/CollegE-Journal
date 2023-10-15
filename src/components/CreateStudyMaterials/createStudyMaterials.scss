@@ -30,7 +30,7 @@
     width: 100%;
     height: 63px;
     padding-left:28px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .createStudyMaterialsSelect__container{
     display: flex;
@@ -49,7 +49,7 @@
     width: 100%;
     height: 63px;
     padding:0 28px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +58,7 @@
     width: 100%;
 }
 .quill{
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .createStudyMaterialsMain__container{
     &.dark{

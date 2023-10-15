@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { diagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
+import { defaultAvatar } from '../../consts/defaultAvatar';
 import { useThemeStore } from '../../store/themeStore';
 import { LessonsSchedule } from './LessonsSchedule';
 import './studentProfile.scss';
@@ -21,12 +22,13 @@ export const StudentProfile = () => {
             title:'Розклад пар'
         }
     ];
+ 
 
     return <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
             <div className='studentProfileLeft__container'>
                 <div className='studentProfileInfo__container'>
-                    <img className='studentProfile_img'/>
+                    <img className='studentProfile_img' src={defaultAvatar}/>
                     <div className='studentProfileTextInfo__container'>
                         <p className='studentProfile__name'>Прізвище Ім`я Побатькові</p>
                         <p className='studentProfile__email'>sdalformuli@gmail.com</p>

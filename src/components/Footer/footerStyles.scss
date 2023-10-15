@@ -33,7 +33,7 @@ footer {
     margin-left: 25.7%;
     width: 240px;
     height: 240px;
-    border-radius: 999px;
+    border-radius: 50%;
     background: #052142;
     filter: blur(60px);
 }
@@ -74,6 +74,7 @@ footer {
     font-weight: 400;
     line-height: normal;
     transition: all 0.3s linear;
+    background-color: transparent;
 }
 
 .fList__btn:hover {
@@ -104,7 +105,10 @@ footer {
             color:#FFF;
         }
         .fList__title{
-            color:#FFF;
+            color:#EFB42D;
+        }
+        .fList__btn:hover{
+            color:#EFB42D;
         }
         .fList__btn{
             color:#FFF;
@@ -126,6 +130,9 @@ footer {
 
         .fList__btn{
             color:var(--primary-black,#0B1D26);
+        }
+        .fList__btn:hover{
+            color:#EFB42D;
         }
         .bottom__text{
             color:#0B1D26;

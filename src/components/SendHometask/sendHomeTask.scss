@@ -1,7 +1,7 @@
 .sendHomeTaskMain__container{
     display: flex;
     flex-direction: column;
-    padding: 229px 70px 0 181px;
+    padding: 229px 10% 0 10%;
     gap:60px;
     font-family: Montserrat;
 }
@@ -36,10 +36,10 @@
     font-weight: 400;
 }
 .sendHomeTaskHomeTaskText__container{
-    width: 90%;
+    width: 100%;
     padding: 20px 27px;
     line-height: 22px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 
 }
 .sendHomeTaskHomeTaskText{
@@ -60,7 +60,7 @@
     display: flex;
     padding: 16px 30px;
     gap:23px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 
 .sendHomeTaskHomeTaskAttachedFileItemInfo__container{
@@ -162,7 +162,7 @@
     font-weight: 400;
     white-space: break;
     padding: 20px 35px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .sendHomeTaskOther__container{
     display: flex;
@@ -187,7 +187,7 @@
 .sendHomeTaskOtherTaskItem__avatar{
     width: 45px;
     height: 45px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
     object-fit: contain;
 }
 .sendHomeTaskOtherTaskItemText__container{
@@ -210,7 +210,7 @@
     align-items: center;
     justify-content: center;
     padding:0 5px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .ant-input{
     background-color: transparent;

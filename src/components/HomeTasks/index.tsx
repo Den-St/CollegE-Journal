@@ -2,6 +2,7 @@ import { useThemeStore } from "../../store/themeStore";
 import './homeTaskStyles.scss';
 import {MoreOutlined} from "@ant-design/icons";
 import { defaultAvatar } from "../../consts/defaultAvatar";
+import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
 
 export const HomeTasks = () => {
   const theme = useThemeStore().theme;
@@ -10,11 +11,26 @@ export const HomeTasks = () => {
     <div className="homeTaskTop__container">
       <h1 className="homeTaskTitle">Домашнє завдання</h1>
       <div className="homeTaskFilters__container">
-        <p className="homeTaskFilter">Группа</p>
-        <p className="homeTaskFilter">Предмет</p>
-        <p className="homeTaskFilter">Завдання</p>
-        <p className="homeTaskFilter">Місяць</p>
-        <p className="homeTaskFilter">Сдача</p>
+        <div className="homeTaskFilter__container">
+          <p className="homeTaskFilter__name">Группа</p>
+          <FilterIconSvg/>
+        </div>
+        <div className="homeTaskFilter__container">
+          <p className="homeTaskFilter__name">Предмет</p>
+          <FilterIconSvg/>
+        </div>
+        <div className="homeTaskFilter__container">
+          <p className="homeTaskFilter__name">Завдання</p>
+          <FilterIconSvg/>
+        </div>
+        <div className="homeTaskFilter__container">
+          <p className="homeTaskFilter__name">Місяць</p>
+          <FilterIconSvg/>
+        </div>
+        <div className="homeTaskFilter__container">
+          <p className="homeTaskFilter__name">Сдача</p>
+          <FilterIconSvg/>
+        </div>
       </div>
     </div>
     <div className="homeTaskTasks__container">

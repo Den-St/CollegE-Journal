@@ -29,8 +29,8 @@ export const CreateHomeTask = () => {
                         {CalendarSvg()}
                     </button>
                 </div>
+                <DatePicker onChange={(e) => e && onChangeDate(e?.toDate())} placement='bottomRight' open={datePickerOpen}/>
             </div>
-            <DatePicker onChange={(e) => e && onChangeDate(e?.toDate())} placement='bottomRight' open={datePickerOpen}/>
         </div>
         <div className="createHomeTaskInputItemEditor__container">
             <h2 className="createHomeTaskInputItem__title">Опис</h2>

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap:40px;
-    padding: 229px 70px 70px 70px;
+    padding: 229px 0 0 10%;
     font-family: Montserrat;
 }
 .createHomeTask__title{
@@ -28,6 +28,7 @@
     flex-direction: column;
     gap:20px;
     width: 40%;
+    position: relative;
 }
 .createHomeTaskInputItem__title{
     font-size: 20px;
@@ -37,13 +38,13 @@
     width: 100%;
     height: 63px;
     padding-left:28px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .createHomeTaskDate{
     width: 100%;
     height: 63px;
     padding: 0 28px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -72,8 +73,19 @@
     z-index: 100;
 }
 .ant-picker-dropdown{
-    inset: 406px auto auto 750px !important;
+    inset: 406px auto auto 46% !important;
 }
+@media screen and (min-width:'1440px') {
+    .ant-picker-dropdown{
+        inset: 406px auto auto 58% !important;
+    }
+}
+@media screen and (min-width:'1920px') {
+    .ant-picker-dropdown{
+        inset: 406px auto auto 46% !important;
+    }
+}
+.ant-picker-dropdown
 .quill{
     background-color: #102936;
     border:none;
@@ -115,7 +127,7 @@
     font-size: 18px;
     font-weight: 400;
     padding: 10px 15px;
-    border-radius: 7px;
+    border-radius: 10px 5px 10px 5px;
 }
 .ant-picker-dropdown .ant-picker-panel-container{
     background-color: #123547 ;
@@ -247,7 +259,7 @@
             color:black;
         }
         .quill{
-            border-radius: 10px;
+            border-radius: 10px 5px 10px 5px;
             box-shadow: 0 0 15px 0 rgb(152, 152, 152);
         }
         .ant-picker-dropdown .ant-picker-panel-container{

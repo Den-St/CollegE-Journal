@@ -293,7 +293,7 @@ img{vertical-align: top;}
     width: 362px !important; 
     height: 200px;
     padding: 15px 30px 15px 30px;
-    border-radius: 10px;
+    border-radius: 10px 5px 10px 5px;
     background: var(--theme-dark, #0B1D26);
     box-shadow: 0px 1px 10px 0px rgba(255, 255, 255, 0.10);
     object-fit: cover;
@@ -479,6 +479,7 @@ img{vertical-align: top;}
 .sup__img {
     position: absolute;
     z-index: 2;
+    top:2238px;
 }
 
 .sup__back {
