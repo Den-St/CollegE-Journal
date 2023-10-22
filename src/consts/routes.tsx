@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
 import { Schedule } from "../components/Schedule";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials } from "../pages";
 
 export const navRoutes = {
 
@@ -26,6 +26,7 @@ export const routes = {
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
     adminPanel:'/admin-panel',
+    studyMaterials:'/studyMaterials'
 };
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -42,6 +43,8 @@ export const headerRoutes = {
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
     adminPanel:'/admin-panel',
+    studyMaterials:'/studyMaterials'
+
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -66,6 +69,7 @@ export const PublicRoutes = [
     <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,                       //layout done
     <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
     <Route key={routes.adminPanel} element={<AdminPanel/>} path={routes.adminPanel}/>,                       //layout done
+    <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]

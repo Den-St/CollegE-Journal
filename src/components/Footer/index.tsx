@@ -16,7 +16,7 @@ export const Footer = () => {
                 {collegeLogoSvg()}
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>
             </div>
-            <div className="footer__circle"></div>
+            <div className="footer__circle"/>
             <div className="btn__lists">
                 <ul className="footer__list">
                     <h1 className="fList__title">Більше Про Журнал</h1>

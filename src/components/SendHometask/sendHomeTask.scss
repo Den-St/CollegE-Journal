@@ -264,8 +264,26 @@
         .ant-input::placeholder{
             color:white;
         }
+        .sendHomeTaskHomeTaskAttachFileInput__container:hover{
+            .sendHomeTaskHomeTaskAttachFileInput__styled{
+                color:#EFB42D;
+                transition: 0.2s;
+
+            }
+            input{
+                cursor: pointer;
+            }
+        }
     }
     &.light{
-
+        .sendHomeTaskHomeTaskAttachFileInput__container:hover{
+            .sendHomeTaskHomeTaskAttachFileInput__styled{
+                color:#EFB42D;
+                transition: 0.2s;
+            }
+            input{
+                cursor: pointer;
+            }
+        }
     }
 }

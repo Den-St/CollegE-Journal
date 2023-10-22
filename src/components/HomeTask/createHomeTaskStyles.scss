@@ -200,6 +200,10 @@
         .ant-picker-dropdown .ant-picker-panel-container{
             background-color: #123547 !important;
         }
+        .createHomeTaskButtons__button:hover{
+            color:#EFB42D;
+            transition: 0.2s;
+        }
     }
     &.light{
         .createHomeTask__title{
@@ -265,6 +269,10 @@
         .ant-picker-dropdown .ant-picker-panel-container{
             background-color: #ffffff !important;
         }
-        
+        .createHomeTaskButtons__button:hover{
+            color:#EFB42D;
+            transition: 0.2s;
+        }
     }
 }
+

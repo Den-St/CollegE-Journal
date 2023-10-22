@@ -44,7 +44,14 @@
     gap:40px;
     width: 56%;
 }
-
+@media screen and (max-width:1440px) {
+    .studentList__container{
+        width: 75%;
+    }
+    .studentTitle__container{
+        width: 75%;
+    }
+}
 .studentItems__container {
     display: flex;
     flex-wrap: wrap;
@@ -129,6 +136,13 @@
             background-color: #0B1D26;
             background-image: url('./../../assets/images/signInBackground.png');
         }
+        .studentFillters__container:hover{
+            cursor: pointer;
+            transition: 0.2s;
+            .fillterImg{
+                stroke:#EFB42D;
+            }
+        }
     }
     &.light{
         .studentTitle{
@@ -158,6 +172,13 @@
         .main__container{
             background-color: white;
             background-image: url('./../../assets/images/signInBackgroundLight.png');
+        }
+        .studentFillters__container:hover{
+            cursor: pointer;
+            transition: 0.2s;
+            .fillterImg{
+                stroke:#EFB42D;
+            }
         }
     }
 }

@@ -152,6 +152,7 @@ footer {
     }
     &.home{
         .footer__circle{
+            display: block;
             background: #2c84e9b0;
             filter: blur(60px); 
         } 

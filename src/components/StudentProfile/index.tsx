@@ -1,27 +1,34 @@
 import { useState } from 'react';
-import { diagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
+import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { useThemeStore } from '../../store/themeStore';
 import { LessonsSchedule } from './LessonsSchedule';
 import './studentProfile.scss';
 
+enum tabsNames  {
+    lessonsSchedule = 'lessonsSchedule',
+    lessonsSchedule2 = 'lessonsSchedule2',
+    lessonsSchedule3 = 'lessonsSchedule3',
+};
+type tabsNamesType = keyof typeof tabsNames;
+
 export const StudentProfile = () => {
     const theme = useThemeStore().theme;
-    const [tabIndex,setTabIndex] = useState(0);
-    const tabs = [
-        {
+    const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
+    const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
+        lessonsSchedule:{
             component:<LessonsSchedule/>,
             title:'Розклад пар'
         },
-        {
+        lessonsSchedule2:{
             component:<LessonsSchedule/>,
-            title:'Розклад пар'
+            title:'Розклад пар2'
         },
-        {
+        lessonsSchedule3:{
             component:<LessonsSchedule/>,
-            title:'Розклад пар'
+            title:'Розклад пар3'
         }
-    ];
+    };
  
 
     return <div className={`studentProfile__container ${theme}`}>
@@ -36,9 +43,11 @@ export const StudentProfile = () => {
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>
-                    <button className={`studentProfileTab__button ${tabIndex === 0 ? 'picked' : ''}`} onClick={() => setTabIndex(0)}>Розклад пар {diagonalArrowSvg()}</button>
-                    <button className={`studentProfileTab__button ${tabIndex === 1 ? 'picked' : ''}`} onClick={() => setTabIndex(1)}>Перегляд оцінок {diagonalArrowSvg()}</button>
-                    <button className={`studentProfileTab__button ${tabIndex === 2 ? 'picked' : ''}`} onClick={() => setTabIndex(2)}>Домашнє завдання {diagonalArrowSvg()}</button>
+                    {Object.keys(tabs).map((key) =>
+                     <button className={`studentProfileTab__button ${tabIndex === key ? 'picked' : ''}`}
+                             onClick={() => setTabIndex(key as tabsNamesType)}>
+                            {tabs[key as tabsNamesType].title} {DiagonalArrowSvg()}
+                    </button>)}
                 </div>
             </div>
             <div className='studentProfileStatistic__container'>

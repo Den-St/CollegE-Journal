@@ -43,10 +43,18 @@
     box-shadow: 0 0 15px 0 #D4D4D41A;
     padding: 46px 50px;
     width: 413px;
+    transition: 0.2s;
+    cursor: pointer;
 }
+.adminPanelControllerIcon{
+    transition: 0.2s;
+}
+
+
 .adminPanelControllers__title{
     font-size: 18px;
     font-weight: 400;
+    transition: 0.2s;
 }
 .adminPanelStats__container{
     display: flex;
@@ -127,6 +135,11 @@
         .adminPanelControllers__title{
             color:#797979;
         }
+        
+        .adminPanelControllerIcon{
+            fill:#D0D0D0;
+        }
+        
         .adminPanelStatName{
             color:white;
         }
@@ -150,6 +163,20 @@
         }
     }
     &.light{
-        
+        .adminPanelControllerIcon{
+            fill:#797979;
+        }
+        .adminPanelStatItemName{
+            color:#797979;
+        }
+    }
+}
+.adminPanelControllerItem__container:hover{
+    box-shadow: 0 0 15px 0 #EFB42D;
+    .adminPanelControllerIcon{
+        fill:#EFB42D;
+    }
+    .adminPanelControllers__title{
+        color:#EFB42D;
     }
 }

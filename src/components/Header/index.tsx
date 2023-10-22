@@ -82,6 +82,11 @@ export const Header = () => {
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
+                        <Link to={routes.studyMaterials} className="menu__button">StudyMaterials
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link>
                     </nav>
                     <div className='headerRightButtons__container'>
                         <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/>

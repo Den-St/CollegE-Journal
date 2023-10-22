@@ -244,3 +244,10 @@
         }
     }
 }
+.homeTaskFilter__container:hover{
+    cursor:pointer;
+    .fillterImg{
+        transition: 0.2s;
+        stroke: #EFB42D;
+    }
+}

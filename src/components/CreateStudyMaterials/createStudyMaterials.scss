@@ -125,6 +125,16 @@
             background-color: #102936 !important;
             border: none;
         }
+        .sendHomeTaskHomeTaskAttachFileInput__container:hover{
+            .sendHomeTaskHomeTaskAttachFileInput__styled{
+                color:#EFB42D;
+                transition: 0.2s;
+
+            }
+            input{
+                cursor: pointer;
+            }
+        }
     }
     &.light{
         .createStudyMaterialsHeader__input{
@@ -170,6 +180,38 @@
         .quill{
             border-radius: 10px;
             box-shadow: 0 0 15px 0 rgb(152, 152, 152);
+        }
+        .sendHomeTaskHomeTaskAttachFileInput__container:hover{
+            .sendHomeTaskHomeTaskAttachFileInput__styled{
+                color:#EFB42D;
+                transition: 0.2s;
+
+            }
+            input{
+                cursor: pointer;
+            }
+        }
+        .createStudyMaterialsHeader__input{
+            box-shadow: 0px 1px 15px 0px #0000001A;
+        }
+        .createStudyMaterialsSelect__wrapper{
+            box-shadow: 0px 1px 15px 0px #0000001A;
+
+        }
+        .sendHomeTaskHomeTaskAttachedFiles__container{
+            border-radius: 10px 5px;
+            box-shadow: 0px 1px 15px 0px #0000001A;
+        }
+        .sendHomeTaskHomeTaskAttachedLinks__container{
+            border-radius: 10px 5px;
+            box-shadow: 0px 1px 15px 0px #0000001A;
+        }
+        .sendHomeTaskHomeTaskAttachFileInput__container{
+            border-radius: 10px 5px;
+            box-shadow: 0px 1px 15px 0px #0000001A;
+        }
+        .quill{
+            box-shadow: 0px 1px 15px 0px #9898984f !important;
         }
     }
 }

@@ -294,6 +294,7 @@ export const Journal = () => {
                     <div className='journalLessonThemeItemDate__container'>
                         <p className='journalLessonThemeItemDate__day'>ВТ</p>
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
                     <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
                 </div>
@@ -301,6 +302,7 @@ export const Journal = () => {
                     <div className='journalLessonThemeItemDate__container'>
                         <p className='journalLessonThemeItemDate__day'>ВТ</p>
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
                     <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
                 </div>
@@ -308,6 +310,7 @@ export const Journal = () => {
                     <div className='journalLessonThemeItemDate__container'>
                         <p className='journalLessonThemeItemDate__day'>ВТ</p>
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
                     <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
                 </div>
@@ -315,6 +318,7 @@ export const Journal = () => {
                     <div className='journalLessonThemeItemDate__container'>
                         <p className='journalLessonThemeItemDate__day'>ВТ</p>
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
                     <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
                 </div>
@@ -322,6 +326,15 @@ export const Journal = () => {
                     <div className='journalLessonThemeItemDate__container'>
                         <p className='journalLessonThemeItemDate__day'>ВТ</p>
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
+                    </div>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                </div>
+                <div className='journalLessonThemeItem__container'>
+                    <div className='journalLessonThemeItemDate__container'>
+                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
+                        <p className='journalLessonThemeItemDate__date'>02.05</p>
+                        <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
                     <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
                 </div>
