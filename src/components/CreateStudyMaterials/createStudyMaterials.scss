@@ -85,6 +85,12 @@
             background-color: #102936;
             color: white;
         }
+        .sendHomeTaskHomeTaskAttachedFileItemFormat{
+            color:#D0D0D0;
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItemUrl{
+            color:#D0D0D0;
+        }
         .sendHomeTaskHomeTaskAttachFileInput__styled{
             background-color: #102936;
             color:white;
@@ -137,6 +143,12 @@
         }
     }
     &.light{
+        .sendHomeTaskHomeTaskAttachedFileItemFormat{
+            color:#797979;
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItemUrl{
+            color:#797979;
+        }
         .createStudyMaterialsHeader__input{
             background-color: white;
             color:black;

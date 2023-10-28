@@ -79,12 +79,11 @@
     display: flex;
     align-items: center;
     gap:30px;
+    transition: 0.2s;
 }
 .diagonalArrowSvg{
     transition: 0.2s;
-
 }
-
 
 .studentProfileStatistic__container{
     padding: 25px 97px 40px 81px;
@@ -146,8 +145,9 @@
             }
         }
         .studentProfileTab__button.picked{
+            color:#EFB42D;
             .diagonalArrowSvg{
-                fill:orange;
+                fill:#EFB42D;
             }
         }
         .studentProfileStatistic__header{
@@ -160,6 +160,7 @@
             color:white;
         }
         .studentProfileTab__button:hover{
+            color:#EFB42D;
             .diagonalArrowSvg{
                 fill:orange;
             }
@@ -173,13 +174,15 @@
             }
         }
         .studentProfileTab__button.picked{
+            color:#EFB42D;
             .diagonalArrowSvg{
-                fill:orange;
+                fill:#EFB42D;
             }
         }
         .studentProfileTab__button:hover{
+            color:#EFB42D;
             .diagonalArrowSvg{
-                fill:orange;
+                fill:#EFB42D;
             }
         }
     }

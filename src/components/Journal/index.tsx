@@ -24,12 +24,43 @@ export const Journal = () => {
             </div>
         </section>
         <section className='journal__container'>
-            <div className='journalColumns__container'>
+            <div className='journalLeft__container'>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
-                <div className='journalColumnsCenter__container'>
+                <div className='journalRowItemLeft__container'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container even'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container even'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container even'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+                <div className='journalRowItemLeft__container'>
+                    <p className='journalRowItemLeft__number'>1.</p>
+                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                </div>
+            </div>
+            <div className='journalRight__container'>
+                <div className='journalRightColumns__container'>
+                    <div className='journalColumnsCenter__container'>
                     <div className='journalColumnsCenterItem__container'>
                         <div className='journalColumnsCenterItemType'>Лекція</div>
                         <div className='journalColumnsCenterItemDate__container'>
@@ -122,13 +153,9 @@ export const Journal = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='journalRows__container'>
+                </div>
                 <div className='journalRowItem__container'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
+
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -148,10 +175,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container even'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -171,10 +194,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -194,10 +213,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container even'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -217,10 +232,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -240,10 +251,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container even'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -263,10 +270,6 @@ export const Journal = () => {
                     </div>
                 </div>
                 <div className='journalRowItem__container'>
-                    <div className='journalRowItemLeft__container'>
-                        <p className='journalRowItemLeft__number'>1.</p>
-                        <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                    </div>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>

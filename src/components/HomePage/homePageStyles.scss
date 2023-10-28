@@ -62,7 +62,7 @@ img{vertical-align: top;}
     margin-top: 20px;
 }
 .homePageNextSection__button{
-    position: fixed;
+    position: absolute;
     left: 58px;
     top:600px;
     background: transparent;
@@ -127,9 +127,9 @@ img{vertical-align: top;}
     margin-right: 0;
     width: 135px;
     height: 313px;
-    // position: fixed;
-    // right: 110px;
-    // z-index: 3;
+    position: fixed;
+    right: 100px;
+    z-index: 3;
 }
 
 .pNav__container {
@@ -247,11 +247,11 @@ img{vertical-align: top;}
 }
 .ant-carousel .slick-slider{
     display: none;
-    width: 95%; 
 }
 @media screen and (max-width:'1920px'){
     .ant-carousel .slider_xxxl{
         display: block;
+        width: 75%; 
     }
 }
 @media screen and (max-width:'1440px'){
@@ -260,6 +260,7 @@ img{vertical-align: top;}
     }
     .ant-carousel .slider_xxl{
         display: block;
+        width: 65%; 
     }
 }
 .slick-arrow::before{

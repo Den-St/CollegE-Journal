@@ -40,7 +40,7 @@
     padding: 20px 27px;
     line-height: 22px;
     border-radius: 10px 5px 10px 5px;
-
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 .sendHomeTaskHomeTaskText{
     font-size: 18px;
@@ -61,6 +61,7 @@
     padding: 16px 30px;
     gap:23px;
     border-radius: 10px 5px 10px 5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 
 .sendHomeTaskHomeTaskAttachedFileItemInfo__container{
@@ -80,6 +81,7 @@
     display: flex;
     flex-direction: column;
     gap:5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 .sendHomeTaskHomeTaskAttachedLinkItem{
     display: flex;
@@ -103,6 +105,7 @@
     width: 300px;
     height: 40px;
     position: relative;
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 .sendHomeTaskHomeTaskAttachFile__input{
     width: 300px;
@@ -163,6 +166,7 @@
     white-space: break;
     padding: 20px 35px;
     border-radius: 10px 5px 10px 5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 .sendHomeTaskOther__container{
     display: flex;
@@ -183,6 +187,8 @@
     display: flex;
     gap:36px;
     padding: 9px 30px;
+    border-radius: 10px 5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
 }
 .sendHomeTaskOtherTaskItem__avatar{
     width: 45px;
@@ -194,6 +200,7 @@
     display: flex;
     flex-direction: column;
     gap:5px;
+
 }
 .sendHomeTaskOtherTaskItemText{
     font-size: 18px;
@@ -211,10 +218,12 @@
     justify-content: center;
     padding:0 5px;
     border-radius: 10px 5px 10px 5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
+
 }
 .ant-input{
     background-color: transparent;
-    
+    border:none;
 }
 
 .sendHomeTaskMain__container{
@@ -239,6 +248,12 @@
         .sendHomeTaskHomeTaskText{
             color:white;
         }
+        .sendHomeTaskHomeTaskAttachedFileItemFormat{
+            color:#D0D0D0;
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItemUrl{
+            color:#D0D0D0;
+        }
         .sendHomeTaskHomeTaskAttachedFileItem{
             background-color: #102936;
         }
@@ -256,6 +271,18 @@
         }
         .sendHomeTaskCommentInput__container{
             background-color:#102936 ;
+        }
+        .ant-select-selection-search{
+            color:white !important;
+        }
+        .ant-select-selector {
+            color:white !important;
+            * {
+                color:white !important;
+            }
+        }
+        .ant-select:not(.ant-select-customize-input) .ant-select-selector input {
+            color:white !important;
         }
         .ant-input{
             color:white;
@@ -284,6 +311,12 @@
             input{
                 cursor: pointer;
             }
+        }
+        .sendHomeTaskHomeTaskAttachedFileItemFormat{
+            color:#797979;
+        }
+        .sendHomeTaskHomeTaskAttachedLinkItemUrl{
+            color:#797979;
         }
     }
 }

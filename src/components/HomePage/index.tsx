@@ -75,16 +75,16 @@ const news:{id:number,title:string,date:string,text:string}[] = [
 export const HomePage = () => {
     const theme = useThemeStore().theme;
     
-    const goToNextSection = () => {
-        const distanceFromTop = window.scrollY;
-        const sections = Object.values(sectionIds);
-        for(let i = 0;i < sections.length;i++){
-            if(sections[i].distance > distanceFromTop){
-                goToSection(sections[i].distance);
-                return;
-            }
-        }
-    }
+    // const goToNextSection = () => {
+    //     const distanceFromTop = window.scrollY;
+    //     const sections = Object.values(sectionIds);
+    //     for(let i = 0;i < sections.length;i++){
+    //         if(sections[i].distance > distanceFromTop){
+    //             goToSection(sections[i].distance);
+    //             return;
+    //         }
+    //     }
+    // }
    
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
@@ -130,9 +130,11 @@ export const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <button className='homePageNextSection__button' onClick={goToNextSection}>
+            <div className='homePageNextSection__button' 
+            // onClick={goToNextSection}
+            >
                 {downArrow()}
-            </button>
+            </div>
         </section>
         <section className="news__page" id="news">
             <div className="news__header">
@@ -160,7 +162,7 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="slider__container">
-                <Carousel slidesToShow={4} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
+                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
                     {news.map(newsItem => 
                         <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
@@ -171,7 +173,7 @@ export const HomePage = () => {
                         </div>
                     )}
                 </Carousel>
-                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true}>
+                <Carousel slidesToShow={2} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true}>
                     {news.map(newsItem => 
                         <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
