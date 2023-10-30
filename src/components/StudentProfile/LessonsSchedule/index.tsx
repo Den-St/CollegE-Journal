@@ -92,7 +92,6 @@ export const LessonsSchedule = () => {
                 },]
         }];
 
-    console.log(dayNumber)
     return <section className={`lessonsSchedule__container ${theme}`}>
         {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">

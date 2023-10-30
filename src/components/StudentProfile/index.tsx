@@ -44,7 +44,7 @@ export const StudentProfile = () => {
                 </div>
                 <div className='studentProfileTabs__container'>
                     {Object.keys(tabs).map((key) =>
-                     <button className={`studentProfileTab__button ${tabIndex === key ? 'picked' : ''}`}
+                     <button key={key} className={`studentProfileTab__button ${tabIndex === key ? 'picked' : ''}`}
                              onClick={() => setTabIndex(key as tabsNamesType)}>
                             {tabs[key as tabsNamesType].title} {DiagonalArrowSvg()}
                     </button>)}
