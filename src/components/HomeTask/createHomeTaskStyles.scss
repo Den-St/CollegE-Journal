@@ -85,7 +85,7 @@
         inset: 406px auto auto 46% !important;
     }
 }
-.ant-picker-dropdown
+
 .quill{
     background-color: #102936;
     border:none;
@@ -197,9 +197,7 @@
         .ql-editor::placeholder{
             color:white;
         }
-        .ant-picker-dropdown .ant-picker-panel-container{
-            background-color: #123547 !important;
-        }
+      
         .createHomeTaskButtons__button:hover{
             color:#EFB42D;
             transition: 0.2s;

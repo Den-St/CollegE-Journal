@@ -96,6 +96,50 @@ body{
 				color:black;
 			}
 		}
+		.ant-picker-dropdown .ant-picker-panel-container{
+            background-color: #123547 !important;
+        }
+        .ant-picker-dropdown .ant-picker-header{
+            color:white !important;
+        }
+        .ant-picker-super-prev-icon::before{
+            color:white !important;
+        }
+        .ant-picker-header-super-prev-btn{
+            color:white !important;
+        }
+        .ant-picker-header-prev-btn{
+            color:white !important;
+        }
+        .ant-picker-super-prev-icon::after{
+            color:white !important;
+        }
+		.ant-picker-next-icon::after{
+            color:white !important;
+        }
+		.ant-picker-next-icon::before{
+            color:white !important;
+        }
+		.ant-picker-super-next-icon::before{
+            color:white !important;
+        }
+		.ant-picker-super-next-icon::after{
+            color:white !important;
+        }
+		.ant-select-selection-search-mirror{
+			color:white !important; 
+		}
+		.ant-select-selection-search-input{
+			color:white !important; 
+		}
+		.ant-picker-body{
+			th{
+				color:white !important;
+			}
+			td{
+				color:white !important;
+			}
+		}
 	}
 	&.light{
 		.ant-picker-dropdown .ant-picker-panel-container{

@@ -251,18 +251,97 @@ img{vertical-align: top;}
 @media screen and (max-width:'1920px'){
     .ant-carousel .slider_xxxl{
         display: block;
-        width: 75%; 
+        width: 85%; 
     }
 }
-@media screen and (max-width:'1440px'){
+@media screen and (max-width:'1820px'){
     .ant-carousel .slider_xxxl{
         display: none;
     }
     .ant-carousel .slider_xxl{
         display: block;
+        width: 75%;
+    }
+}
+
+@media screen and (max-width:'1570px'){
+    .ant-carousel .slider_xxxl{
+        display: none;
+    }
+    .ant-carousel .slider_xxl{
+        display: none;
+    }
+    .ant-carousel .slider_xl{
+        display: block;
         width: 65%; 
     }
 }
+
+@media screen and (max-width:'1440px'){
+    .ant-carousel .slider_xxxl{
+        display: none;
+    }
+    .ant-carousel .slider_xxl{
+        display: none;
+    }
+    .ant-carousel .slider_xl{
+        display: block;
+        width: 65%; 
+    }
+    // .ant-carousel .slider_l{
+    //     display: block;
+    //     width: 95%; 
+    // }
+}
+@media screen and (max-width:'1320px'){
+    .ant-carousel .slider_xxxl{
+        display: none;
+    }
+    .ant-carousel .slider_xxl{
+        display: none;
+    }
+    .ant-carousel .slider_xl{
+        display: block;
+        width: 70%; 
+    }
+    // .ant-carousel .slider_l{
+    //     display: block;
+    //     width: 95%; 
+    // }
+}
+@media screen and (max-width:'1200px'){
+    .ant-carousel .slider_xxxl{
+        display: none;
+    }
+    .ant-carousel .slider_xxl{
+        display: none;
+    }
+    .ant-carousel .slider_xl{
+        display: block;
+        width: 75%; 
+    }
+    // .ant-carousel .slider_l{
+    //     display: block;
+    //     width: 95%; 
+    // }
+}
+@media screen and (max-width:'1040px'){
+    .ant-carousel .slider_xxxl{
+        display: none;
+    }
+    .ant-carousel .slider_xxl{
+        display: none;
+    }
+    .ant-carousel .slider_xl{
+        display: none;
+    }
+    .ant-carousel .slider_l{
+        display: block;
+        width: 45%; 
+    }
+}
+
+
 .slick-arrow::before{
     content:'>' !important;
     color:white !important;
@@ -542,6 +621,18 @@ img{vertical-align: top;}
         .gournal__info{
             background-image: url('../../assets/images/infoJournalBackDark.png');
         }
+        .pNav__container.active{
+            border-color:white;
+        }
+        .pNav__btn .active{
+            color:white;
+        }
+        .pNav__container:hover{
+            border-color:white;
+            .pNav__btn{
+                color: white;
+            }
+        }
     }
     &.light{
         .rotate__text{
@@ -571,8 +662,14 @@ img{vertical-align: top;}
         .pNav__container{
             border-color:#FFF;
         }
+        .pNav__container.active{
+            border-color:black;
+        }
         .pNav__btn{
-            color:#FFF;
+            color:#797979;
+        }
+        .pNav__btn .active{
+            color:#000000;
         }
         .pNav__container:hover{
             border-color:#0B1D26;

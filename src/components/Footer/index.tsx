@@ -20,9 +20,9 @@ export const Footer = () => {
             <div className="btn__lists">
                 <ul className="footer__list">
                     <h1 className="fList__title">Більше Про Журнал</h1>
-                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.start.distance)}>Головна</button></li>
-                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.distance)}>Новини</button></li>
-                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.distance)}>Про нас</button></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.start.distanceTop)}>Головна</button></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.distanceTop)}>Новини</button></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.distanceTop)}>Про нас</button></li>
                     <li><Link className="fList__btn" to="/sign-in">Вхід</Link></li>
                 </ul>
                 <ul className="footer__list">

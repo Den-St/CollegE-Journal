@@ -1,18 +1,29 @@
-export const sectionIds = {
+export type sectionType = {id:string,distanceBottom:number,title:string,distanceTop:number};
+export type sectionsKeys = keyof typeof sectionIds;
+
+export const sectionIds:Record<'start' | 'news' | 'info' | 'about',sectionType> = {
     start:{
         id:'#start',
-        distance:0
+        distanceTop:0,
+        distanceBottom:400,
+        title:"Старт"
     },
     news:{
         id:'#news',
-        distance:635
+        distanceTop:400,
+        distanceBottom:1005,
+        title:"Новини"
     },
     info:{
         id:'#info',
-        distance:1270
+        distanceTop:1005,
+        distanceBottom:1720,
+        title:"Журнал"
     },
     about:{
         id:'#about',
-        distance:2000
+        distanceTop:1720,
+        distanceBottom:2550,
+        title:"Про Нас"
     }
 }

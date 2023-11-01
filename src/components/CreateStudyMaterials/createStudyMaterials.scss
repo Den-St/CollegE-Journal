@@ -22,6 +22,7 @@
     flex-direction: column;
     gap:20px;
 }
+
 .createStudyMaterialsInput__title{
     font-size: 20px;
     font-weight: 400;
@@ -95,6 +96,9 @@
             background-color: #102936;
             color:white;
         }
+        .createStudyMaterialsMain__container.dark .createStudyMaterialsHeader__input{
+            caret-color: white;
+        }
         .quill{
             background-color: #102936;
             border:none;
@@ -156,6 +160,9 @@
         .createStudyMaterialsSelect__wrapper{
             background-color: white;
             color:black;
+        }
+        .createStudyMaterialsMain__container.dark .createStudyMaterialsHeader__input{
+            caret-color: black;
         }
         .quill{
             background-color: white;

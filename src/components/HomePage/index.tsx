@@ -6,9 +6,10 @@ import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
 import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
-import { sectionIds } from '../../consts/sectionIds';
+import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
 import { downArrow } from '../../assets/svgs/downArrow';
-import { goToSection } from '../../helpers/goToSection';
+import _debounce from 'lodash/debounce';
+import { useHomePageSections } from '../../hooks/homePageSections';
 
 const news:{id:number,title:string,date:string,text:string}[] = [
     {
@@ -72,19 +73,10 @@ const news:{id:number,title:string,date:string,text:string}[] = [
         text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
 ];
+
 export const HomePage = () => {
     const theme = useThemeStore().theme;
-    
-    // const goToNextSection = () => {
-    //     const distanceFromTop = window.scrollY;
-    //     const sections = Object.values(sectionIds);
-    //     for(let i = 0;i < sections.length;i++){
-    //         if(sections[i].distance > distanceFromTop){
-    //             goToSection(sections[i].distance);
-    //             return;
-    //         }
-    //     }
-    // }
+    const {onChangeSection,currentSection} = useHomePageSections();
    
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
@@ -115,10 +107,13 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="pageNav">
-                        <button onClick={() => goToSection(sectionIds.start.distance)} className="pNav__container pNav__btn">
-                            <h1 className="pNav__btn">Старт</h1>
-                        </button>
-                        <button onClick={() => goToSection(sectionIds.news.distance)} className="pNav__container pNav__btn">
+                        {Object.keys(sectionIds).map((secId) => 
+                            <button onClick={() => onChangeSection(sectionIds[secId as sectionsKeys])} className={`pNav__container pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>
+                                <h1 className={`pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>{sectionIds[secId as sectionsKeys].title}</h1>
+                            </button>
+                        )}
+                        
+                        {/* <button onClick={() => goToSection(sectionIds.news.distance)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Новини</h1>
                         </button>
                         <button onClick={() => goToSection(sectionIds.info.distance)} className="pNav__container pNav__btn" >
@@ -126,7 +121,7 @@ export const HomePage = () => {
                         </button>
                         <button onClick={() => goToSection(sectionIds.about.distance)} className="pNav__container pNav__btn">
                             <h1 className="pNav__btn">Про Нас</h1>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
@@ -162,7 +157,7 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="slider__container">
-                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
+                <Carousel slidesToShow={4} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
                     {news.map(newsItem => 
                         <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
@@ -173,7 +168,29 @@ export const HomePage = () => {
                         </div>
                     )}
                 </Carousel>
-                <Carousel slidesToShow={2} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true}>
+                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true} >
+                    {news.map(newsItem => 
+                        <div className="slider__element" key={newsItem.id}>
+                            <div className="news__title">
+                                <h1 className="news__name">{newsItem.title}</h1>
+                                <h1 className="news__date">{newsItem.date}</h1>
+                            </div>
+                            <h1 className="news__text">{newsItem.text}</h1>
+                        </div>
+                    )}
+                </Carousel>
+                <Carousel slidesToShow={2} slidesToScroll={1} className='slider_xl' arrows={true} dots={false} infinite={true}>
+                    {news.map(newsItem => 
+                        <div className="slider__element" key={newsItem.id}>
+                            <div className="news__title">
+                                <h1 className="news__name">{newsItem.title}</h1>
+                                <h1 className="news__date">{newsItem.date}</h1>
+                            </div>
+                            <h1 className="news__text">{newsItem.text}</h1>
+                        </div>
+                    )}
+                </Carousel>
+                <Carousel slidesToShow={1} slidesToScroll={1} className='slider_l' arrows={true} dots={false} infinite={true}>
                     {news.map(newsItem => 
                         <div className="slider__element" key={newsItem.id}>
                             <div className="news__title">
