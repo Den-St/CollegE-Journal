@@ -7,7 +7,7 @@ export const useHomePageSections = () => {
     const [currentSection,setCurrentSection] = useState<sectionType>(sectionIds.start);
     const onChangeSection = (section:sectionType) => {
         setCurrentSection(section);
-        goToSection(section.distanceTop);
+        goToSection(section.scrollTo);
     };
 
     const handleScroll = () => {

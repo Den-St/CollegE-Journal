@@ -89,17 +89,6 @@
     // padding-left:4.3%;
 }
 
-@media screen and (max-width:'1920px') {
-    .journalColumnsCenter__container{
-        // padding-left:2.1%;
-    }
-}
-@media screen and (max-width:'1440px') {
-    .journalColumnsCenter__container{
-        // padding-left:4.3%;
-    }
-}
-
 .journalColumnsCenterItem__container{
     display: flex;
     flex-direction: column;
@@ -132,16 +121,7 @@
     margin-left: 40px;
     // padding-left: 4.3%;
 }
-@media screen and (max-width:'1920px') {
-    .journalColumnsRight__container{
-        // padding-left:2.1%;
-    }
-}
-@media screen and (max-width:'1440px') {
-    .journalColumnsRight__container{
-        // padding-left:4.3%;
-    }
-}
+
 .journalColumnsRightItem__container{
     display: flex;
     flex-direction: column;
@@ -192,7 +172,6 @@
     align-items: center;
     gap:15px;
     min-width: 293px;
-    background-color: green;
     padding: 5px 37px;
     height: 50px;
     border-radius: 10px 0 0 5px;
@@ -428,6 +407,11 @@
         .journalRowItemRightValue__text{
             background-color: white;
         }
+        .journalRowItemLeft__container{
+            &.even{
+                background-color: #F2F2F2;
+            }
+        }
         .journalRowItem__container{
             &.even{
                 background-color: #F2F2F2;
@@ -472,10 +456,7 @@
     }
 }
 
-.journalRowItemLeft__container{
-}
 .groupFillterItem__container:hover{
-
     cursor:pointer;
     .fillterImg{
         stroke: #EFB42D;

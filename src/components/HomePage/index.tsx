@@ -7,7 +7,7 @@ import './homePageStyles.scss';
 import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
 import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
-import { downArrow } from '../../assets/svgs/downArrow';
+import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
 import { useHomePageSections } from '../../hooks/homePageSections';
 
@@ -112,23 +112,12 @@ export const HomePage = () => {
                                 <h1 className={`pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>{sectionIds[secId as sectionsKeys].title}</h1>
                             </button>
                         )}
-                        
-                        {/* <button onClick={() => goToSection(sectionIds.news.distance)} className="pNav__container pNav__btn">
-                            <h1 className="pNav__btn">Новини</h1>
-                        </button>
-                        <button onClick={() => goToSection(sectionIds.info.distance)} className="pNav__container pNav__btn" >
-                            <h1 className="pNav__btn">Журнал</h1>
-                        </button>
-                        <button onClick={() => goToSection(sectionIds.about.distance)} className="pNav__container pNav__btn">
-                            <h1 className="pNav__btn">Про Нас</h1>
-                        </button> */}
                     </div>
                 </div>
             </div>
             <div className='homePageNextSection__button' 
-            // onClick={goToNextSection}
             >
-                {downArrow()}
+                <DownArrow/>
             </div>
         </section>
         <section className="news__page" id="news">
