@@ -5,7 +5,7 @@ import { Switch } from 'antd';
 import { themes } from '../../consts/themes';
 import { useThemeController } from '../../hooks/themeController';
 import { sectionIds } from '../../consts/sectionIds';
-import { routes } from '../../consts/routes';
+import { headerRoutes, routes } from '../../consts/routes';
 import { goToSection } from '../../helpers/goToSection';
 
 export const Header = () => {
@@ -83,6 +83,11 @@ export const Header = () => {
                             </svg>
                         </Link>
                         <Link to={routes.studyMaterials} className="menu__button">StudyMaterials
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link>
+                        <Link to={headerRoutes.studyMaterialsCheckTeacher} className="menu__button">StudyMaterialsCheckTeacher
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>

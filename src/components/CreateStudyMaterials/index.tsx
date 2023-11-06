@@ -67,28 +67,28 @@ export const CreateStudyMaterials = () => {
             </div>
         </div>
         <div className="sendHomeTaskHomeTaskAttachedInfo__container">
-                <div className="sendHomeTaskHomeTaskAttachedFiles__container">
-                    <div className="sendHomeTaskHomeTaskAttachedFileItem">
-                        <PaperClip/>
-                        <div className="sendHomeTaskHomeTaskAttachedFileItemInfo__container">
-                            <span className="sendHomeTaskHomeTaskAttachedFileItemName">Назва файлу</span>
-                            <span className="sendHomeTaskHomeTaskAttachedFileItemFormat">PDF</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="sendHomeTaskHomeTaskAttachedLinks__container">
-                    <div className="sendHomeTaskHomeTaskAttachedLinkItem">
-                        <PaperClip/>
-                        <div className="sendHomeTaskHomeTaskAttachedLinkItemInfo__container">
-                            <span className="sendHomeTaskHomeTaskAttachedLinkItemName">Назва сторінки</span>
-                            <span className="sendHomeTaskHomeTaskAttachedLinkItemUrl">google.com</span>
-                        </div>
+            <div className="sendHomeTaskHomeTaskAttachedFiles__container">
+                <div className="sendHomeTaskHomeTaskAttachedFileItem">
+                    <PaperClip/>
+                    <div className="sendHomeTaskHomeTaskAttachedFileItemInfo__container">
+                        <span className="sendHomeTaskHomeTaskAttachedFileItemName">Назва файлу</span>
+                        <span className="sendHomeTaskHomeTaskAttachedFileItemFormat">PDF</span>
                     </div>
                 </div>
             </div>
-            <div className="sendHomeTaskHomeTaskAttachFileInput__container">
-                <div className="sendHomeTaskHomeTaskAttachFileInput__styled">Завантажити файл</div>
-                <input className="sendHomeTaskHomeTaskAttachFile__input"/>
+            <div className="sendHomeTaskHomeTaskAttachedLinks__container">
+                <div className="sendHomeTaskHomeTaskAttachedLinkItem">
+                    <PaperClip/>
+                    <div className="sendHomeTaskHomeTaskAttachedLinkItemInfo__container">
+                        <span className="sendHomeTaskHomeTaskAttachedLinkItemName">Назва сторінки</span>
+                        <span className="sendHomeTaskHomeTaskAttachedLinkItemUrl">google.com</span>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div className="sendHomeTaskHomeTaskAttachFileInput__container">
+            <div className="sendHomeTaskHomeTaskAttachFileInput__styled">Завантажити файл</div>
+            <input className="sendHomeTaskHomeTaskAttachFile__input"/>
+        </div>
     </div>
 }

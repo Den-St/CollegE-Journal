@@ -96,6 +96,10 @@ export const HomePage = () => {
                                 {TelegramSvg()}
                             </Link>
                         </div>
+                        <div className='homePageNextSection__button' 
+                        >
+                            <DownArrow/>
+                        </div>
                     </div>
                     <div className="main__paragraph">
                         <div className="gurnal">
@@ -115,10 +119,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <div className='homePageNextSection__button' 
-            >
-                <DownArrow/>
-            </div>
+            
         </section>
         <section className="news__page" id="news">
             <div className="news__header">

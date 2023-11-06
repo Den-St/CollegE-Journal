@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
 import { Schedule } from "../components/Schedule";
+import { StudyMaterialsCheckTeacher } from "../components/StudyMaterialsCheckTeacher";
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials } from "../pages";
 
 export const navRoutes = {
@@ -26,7 +27,8 @@ export const routes = {
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
     adminPanel:'/admin-panel',
-    studyMaterials:'/studyMaterials'
+    studyMaterials:'/study-materials',
+    studyMaterialsCheckTeacher:'/study-materials-check-teacher',
 };
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -43,8 +45,8 @@ export const headerRoutes = {
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
     adminPanel:'/admin-panel',
-    studyMaterials:'/studyMaterials'
-
+    studyMaterials:'/study-materials',
+    studyMaterialsCheckTeacher:'/study-materials-check-teacher',
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -70,6 +72,7 @@ export const PublicRoutes = [
     <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
     <Route key={routes.adminPanel} element={<AdminPanel/>} path={routes.adminPanel}/>,                       //layout done
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
+    <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]

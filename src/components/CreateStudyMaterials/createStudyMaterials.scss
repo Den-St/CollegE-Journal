@@ -61,6 +61,16 @@
 .quill{
     border-radius: 10px 5px 10px 5px;
 }
+
+.sendHomeTaskHomeTaskAttachFileInput__container{
+    border-radius: 10px 5px;
+}
+.sendHomeTaskHomeTaskAttachedLinks__container{
+    border-radius: 10px 5px;
+}
+.sendHomeTaskHomeTaskAttachedFiles__container{
+    border-radius: 10px 5px;
+}
 .createStudyMaterialsMain__container{
     &.dark{
         .createStudyMaterialsHeader__input{
@@ -218,15 +228,12 @@
 
         }
         .sendHomeTaskHomeTaskAttachedFiles__container{
-            border-radius: 10px 5px;
             box-shadow: 0px 1px 15px 0px #0000001A;
         }
         .sendHomeTaskHomeTaskAttachedLinks__container{
-            border-radius: 10px 5px;
             box-shadow: 0px 1px 15px 0px #0000001A;
         }
         .sendHomeTaskHomeTaskAttachFileInput__container{
-            border-radius: 10px 5px;
             box-shadow: 0px 1px 15px 0px #0000001A;
         }
         .quill{

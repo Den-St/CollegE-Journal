@@ -48,6 +48,12 @@
     letter-spacing: 2px;
     color:white;
     width:100%;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active{
+        -webkit-background-clip: black !important;
+    }
     ::placeholder{
         color:white;
     }
@@ -61,6 +67,7 @@
     width:90%;
     letter-spacing: 2px;
     color:white;
+   
 }
 
 .passwordEye__button{

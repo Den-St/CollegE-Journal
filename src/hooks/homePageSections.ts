@@ -14,7 +14,6 @@ export const useHomePageSections = () => {
         const distanceFromTop = window.scrollY;
         const sections = Object.values(sectionIds);
         for(let i = 0;i < sections.length;i++){
-            console.log(sections[i].distanceTop , distanceFromTop ,sections[i].distanceBottom)
             if(sections[i].distanceTop <= distanceFromTop && sections[i].distanceBottom >= distanceFromTop){
                 // window.location.href = sections[i].id;
                 setCurrentSection(sections[i]);
