@@ -91,6 +91,38 @@ export const LessonsSchedule = () => {
                     name:'Математика',group:'3-41'
                 },]
         }];
+    const scheduleTimings = [
+        {
+            id:1,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:2,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:3,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:4,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:5,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:6,
+            start:'8:00',
+            end:'9:20'
+        },
+    ]
 
     return <section className={`lessonsSchedule__container ${theme}`}>
         {days.map((day,i) => 
@@ -106,5 +138,16 @@ export const LessonsSchedule = () => {
                     )}
                 </div>
             </div>)}
+            <div className="lessonsScheduleDay__container">
+                <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>   
+                <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>
+                {scheduleTimings.map((timing,i) => 
+                    <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
+                        <p className="lessonsScheduleLessonNumber">{i + 1}</p>
+                        <p className="lessonsScheduleLessonName" style={{marginRight:'50px'}}>{timing.start}</p>
+                        <p className="lessonsScheduleLessonGroup">{timing.end}</p>
+                    </div>
+                )}
+            </div> 
     </section>
 }

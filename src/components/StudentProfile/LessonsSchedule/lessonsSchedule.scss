@@ -2,7 +2,8 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 1035px;
-    column-gap:150px;
+    // column-gap:150px;
+    justify-content: space-between;
     row-gap: 80px;
     // padding: 0 20px;
 }
@@ -11,6 +12,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 32%;
 }
 
 .lessonsScheduleDay__header{
@@ -43,9 +45,44 @@
     font-weight: 400;
     font-size: 20px;
     color:#797979;
+    path{
+        transition: 0.3s;
+        stroke:#797979;
+    }
+
 }
 
-
+.lessonsScheduleLessonGroup:hover{
+    path{
+        stroke:#EFB42D;
+    }
+}
+.scheduleTimingsTitle{
+    font-size: 20px;
+}
+.studentProfielScheduleGoToTasks_container{
+    cursor:pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    border-radius: 10px 5px;
+    width: 355px;
+    height: 290px;
+    margin-top: 70px;
+    transition: 0.3s;
+}
+path{
+    transition: 0.3s;
+}
+.studentProfielScheduleGoToTasks_title{
+    transition: 0.3s;
+}
+.studentProfielScheduleGoToTasks_text{
+    text-align: center;
+    width: 60%;
+}
 .lessonsSchedule__container{
     &.dark{
         .lessonsScheduleDay__header{
@@ -64,6 +101,49 @@
         }
         .lessonsScheduleDay__header.currentDay{
             color:#EFB42D;
+        }
+        .scheduleTimingsTitle{
+            color:white;
+        }
+        .studentProfielScheduleGoToTasks_container{
+            background-color: #102936;
+        }
+        .studentProfielScheduleGoToTasks_title{
+            color:white;
+        }
+        .studentProfielScheduleGoToTasks_text{
+            color:white;
+        }
+        svg{
+            fill: transparent;
+        }
+        path{
+            stroke:white;
+        }   
+        .magnifierSvg{
+            fill:#ffffff;
+            path{
+                fill:#ffffff;
+            }
+        }
+        .lessonsScheduleLessonGroup:hover{
+            path{
+                stroke:#EFB42D;
+            }
+        }
+        .studentProfielScheduleGoToTasks_container:hover{
+            .magnifierSvg{
+                fill:#EFB42D;
+                path{
+                    fill:#EFB42D;
+                }
+            }
+            path{
+                stroke:#EFB42D;
+            }
+            .studentProfielScheduleGoToTasks_title{
+                color:#EFB42D;
+            }
         }
     }
     &.light{

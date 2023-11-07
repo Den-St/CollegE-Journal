@@ -3,6 +3,7 @@ import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { useThemeStore } from '../../store/themeStore';
 import { LessonsSchedule } from './LessonsSchedule';
+import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
 
 enum tabsNames  {
@@ -18,11 +19,11 @@ export const StudentProfile = () => {
     const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
         lessonsSchedule:{
             component:<LessonsSchedule/>,
-            title:'Розклад пар'
+            title:'Розклад вчитель'
         },
         lessonsSchedule2:{
-            component:<LessonsSchedule/>,
-            title:'Розклад пар2'
+            component:<LessonsScheduleStudents/>,
+            title:'Розклад студент'
         },
         lessonsSchedule3:{
             component:<LessonsSchedule/>,
