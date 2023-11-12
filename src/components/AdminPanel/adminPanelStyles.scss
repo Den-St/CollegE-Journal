@@ -5,6 +5,7 @@
     gap:40px;
     align-items: center;
     font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
 }
 .fillterImg{
     fill:white;
@@ -127,8 +128,24 @@
     flex-direction: row;
     gap:30px;
 }
+
+.adminStudentListContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:40px;
+    font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
+}
 .adminPanelMain__container{
     &.dark{
+        .adminPanelControllerItem__container{
+            background-color: #0a1d26;
+        }
+        .adminPanelStatBlock__container{
+            background-color: #0a1d26;
+        }
         .adminPanelMain__title{
             color:white;
         }
@@ -164,8 +181,82 @@
         .adminPanelStatItemMonth{
             color:#797979;
         }
+        .robotSvg_path{
+            stroke: white;
+        }
+        .noSchedule_title{
+            color:white;
+        }
+        .noSchedule_text{
+            color:white;
+        }
+        .adminPanelScheduleSettingsInput__cover{
+            background-color: #102936;
+            color:white;
+            path{
+                stroke: white;
+                fill:transparent;
+            }
+        }
+        .adminPanelControllerItem__container.activeSection{
+            .adminPanelControllerIcon{
+                fill:#EFB42D;
+            }
+            .adminPanelControllers__title{
+                color:#EFB42D;
+            }
+        }
+        .lessonsScheduleDay__header{
+            color:#D0D0D0;
+        }
+        .lessonsScheduleLessonNumber{
+            color:white;
+        }
+        .lessonsScheduleLessonName{
+            color:white;
+        }
+        .lessonsScheduleLessonGroup{
+            font-weight: 400;
+            font-size: 20px;
+            color:#797979;
+        }
+        .lessonsScheduleDay__header.currentDay{
+            color:#EFB42D;
+        }
+        .scheduleTimingsTitle{
+            color:white;
+        }
+        .studentProfielScheduleGoToTasks_container{
+            background-color: #102936;
+        }
+        .studentProfielScheduleGoToTasks_title{
+            color:white;
+        }
+        .studentProfielScheduleGoToTasks_text{
+            color:white;
+        }
+        svg{
+            fill: transparent;
+        }
+        .magnifierSvg{
+            fill:#ffffff;
+            path{
+                fill:#ffffff;
+            }
+        }
+        .lessonsScheduleLessonGroup:hover{
+            path{
+                stroke:#EFB42D;
+            }
+        }
     }
     &.light{
+        .adminPanelControllerItem__container{
+            background-color: white;
+        }
+        .adminPanelStatBlock__container{
+            background-color: white;
+        }
         .adminPanelControllerIcon{
             fill:#797979;
         }
@@ -180,5 +271,119 @@
     }
     .adminPanelControllers__title{
         color:#EFB42D;
+    }
+}
+.studentFilltersAdminPanel__container{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+}
+.adminPanelStudentList_conrollersContainer{
+    display: flex;
+    gap:15px;
+}
+
+.adminPanelStudentList_add {
+    width: 190px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 5px;
+}
+.adminPanelStudentList_save{
+    width: 190px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 5px;
+}
+.adminPanelStudentList_fillterContainer{
+    display: flex;
+    gap:30px;
+}
+.adminStudentListContainer {
+    &.dark{
+        .adminPanelStudentList_add{
+            color:white;
+            background-color: #102936;
+        }
+        .adminPanelStudentList_save{
+            color: white;
+            background-color: #15834C;
+        }
+        .studentTitle{
+            color: white;
+        }
+        .groupFillter{
+            color: white;
+        }
+        .fillterImg {
+            stroke: #D0D0D0;
+        }
+        .student__container{
+            background:#102936;
+        }
+        .student__info{
+            color: white;
+        }
+        .studentButton{
+            background:#102936;
+            box-shadow: 0px 1px 10px 0px rgba(212, 212, 212, 0.10);
+            color:#FFF;
+        }
+        .studentButton:hover{
+            background: #0B1D26;
+        }
+        .main__container{
+            background-color: #0B1D26;
+            background-image: url('./../../assets/images/signInBackground.png');
+        }
+        .studentFillters__container:hover{
+            cursor: pointer;
+            transition: 0.2s;
+            .fillterImg{
+                stroke:#EFB42D;
+            }
+        }
+    }
+    &.light{
+        .studentTitle{
+            color: black;
+        }
+        .groupFillter{
+            color: #797979;
+        }
+        .fillterImg {
+            stroke: #797979;
+        }
+        .student__container{
+            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+            background:white;
+        }
+        .student__info{
+            color: #0B1D26;
+        }
+        .studentButton{
+            background:white;
+            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+            color:#0B1D26;
+        }
+        .studentButton:hover{
+            background: #EFB42D;
+        }
+        .main__container{
+            background-color: white;
+            background-image: url('./../../assets/images/signInBackgroundLight.png');
+        }
+        .studentFillters__container:hover{
+            cursor: pointer;
+            transition: 0.2s;
+            .fillterImg{
+                stroke:#EFB42D;
+            }
+        }
     }
 }

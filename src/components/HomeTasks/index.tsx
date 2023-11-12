@@ -3,16 +3,32 @@ import './homeTaskStyles.scss';
 import {MoreOutlined} from "@ant-design/icons";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
+import { Select } from "antd";
+const {Option} = Select;
 
 export const HomeTasks = () => {
   const theme = useThemeStore().theme;
+  const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
 
   return <div className={`homeTaskMain__container ${theme}`}>
+    <section className="homeTaskSubjects_main">
+      <h2 className="homeTaskSubjects_title">Предмети</h2>
+      <div className="homeTaskSubjects_container">
+        {subjects.map((subject,i) => <p className={`homeTasks_subject ${!subject.isActive && 'inactive'}`}>{subject.name}{i === 2 && <div className="newTask"/>}</p>)}
+      </div>
+    </section>
     <div className="homeTaskTop__container">
       <h1 className="homeTaskTitle">Домашнє завдання</h1>
       <div className="homeTaskFilters__container">
         <div className="homeTaskFilter__container">
-          <p className="homeTaskFilter__name">Группа</p>
+          <Select className="homeTaskFilter__select" placeholder={'Группа'}>
+            <Option value={'3-11'} label={'3-11'}>3-11</Option>
+            <Option value={'3-21'} label={'3-21'}>3-21</Option>
+            <Option value={'3-31'} label={'3-31'}>3-31</Option>
+            <Option value={'3-13'} label={'3-41'}>3-41</Option>
+            <Option value={'3-42'} label={'3-42'}>3-42</Option>
+          </Select>
+          {/* <p className="homeTaskFilter__name">Группа</p> */}
           <FilterIconSvg/>
         </div>
         <div className="homeTaskFilter__container">

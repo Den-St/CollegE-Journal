@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 40px;
     width: 32%;
+    min-width: 288px;
 }
 
 .lessonsScheduleDay__header{
@@ -31,6 +32,7 @@
     display: flex;
     align-items: center;
     gap:30px;
+    height: 32px;;
 }
 .lessonsScheduleLessonNumber{
     font-weight: 400;
@@ -48,6 +50,7 @@
     path{
         transition: 0.3s;
         stroke:#797979;
+        fill:transparent;
     }
 
 }
@@ -72,6 +75,7 @@
     height: 290px;
     margin-top: 70px;
     transition: 0.3s;
+    margin-right: 10px;
 }
 path{
     transition: 0.3s;

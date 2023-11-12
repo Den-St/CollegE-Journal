@@ -5,8 +5,54 @@
     align-items: center;
     padding-top: 229px;
     font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
+
+}
+.homeTaskSubjects_main{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.homeTaskSubjects_title{
+    margin-left: 5%;
 }
 
+.homeTaskSubjects_container{
+    width: 100%;
+    display: flex;
+    gap:30px;
+    padding: 0 5%;
+    flex-wrap: wrap;
+}
+.homeTasks_subject{
+    width: 300px;
+    height: 100px;
+    border-radius: 10px 5px;
+    //styleName: H/H3;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+.newTask{
+    position: absolute;
+    right: -5px;
+    top:calc(50% - 15px);
+    width: 10px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #EFB42D;
+}
+.homeTasks_subject.inactive{
+    cursor:not-allowed;
+}
 .homeTaskTop__container{
     display: flex;
     flex-direction: column;
@@ -24,6 +70,18 @@
 .homeTaskFilters__container{
     display: flex;
     gap:30px;
+}
+.homeTaskFilter__select{
+    border:none;
+    .ant-select-selector{
+        background-color: transparent !important;
+        border:none !important;
+        font-size: 28px;
+        font-weight: 500;
+    }
+    .ant-select-selection-item{
+        color:white !important;
+    }
 }
 .homeTaskFilter__container{
     display: flex;
@@ -147,6 +205,7 @@
 .homeTaskCommentItem__avatar{
     width: 45px;
     height: 45px;
+    border:10px 5px;
 }
 
 .homeTaskCommentItem__text{
@@ -201,7 +260,30 @@
         .homeTaskCommentsItem__container{
             background-color: #102936;
         }
-        
+        .homeTaskFilter__select{
+            .ant-select-selection-item{
+                color:white !important;
+            }
+        }
+        .homeTasks_subject{
+            background-color: #0b1d26;
+            box-shadow: 0px 1px 15px 0px #D4D4D41A;
+            color:white;
+        }
+        .homeTasks_subject:hover{
+            color:#EFB42D;
+        }
+        .homeTaskSubjects_title{
+            color:white;
+        }
+        .homeTasks_subject.inactive{
+            color:#797979;
+            background-color: #102936;
+            box-shadow: none;
+        }
+        .homeTasks_subject.inactive:hover{
+            color:#797979;
+        }
     }
     &.light{
         .homeTaskMain__container{
@@ -243,6 +325,12 @@
         .homeTaskItem{
             box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
         }
+        .homeTaskFilter__select{
+            .ant-select-selection-item{
+                color:black !important;
+            }
+        }
+       
     }
 }
 .homeTaskFilter__container:hover{

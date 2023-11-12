@@ -6,6 +6,7 @@
     padding-top: 200px;
     gap:40px;
     font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
 }
 
 .studentTitle__container{
@@ -46,7 +47,7 @@
 }
 @media screen and (max-width:1440px) {
     .studentList__container{
-        width: 75%;
+        width: 85%;
     }
     .studentTitle__container{
         width: 75%;

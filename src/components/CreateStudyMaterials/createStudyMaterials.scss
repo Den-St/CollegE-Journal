@@ -5,6 +5,7 @@
     padding: 229px 180px 0 180px;
     width: 100%;
     font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
 }
 .createStudyMaterialsTitle{
     font-size: 28px;
@@ -69,6 +70,12 @@
     border-radius: 10px 5px;
 }
 .sendHomeTaskHomeTaskAttachedFiles__container{
+    border-radius: 10px 5px;
+}
+.sendHomeTaskHomeTaskAttachFileInput__styled{
+    border-radius: 10px 5px;
+}
+.sendHomeTaskHomeTaskAttachedLinkItem{
     border-radius: 10px 5px;
 }
 .createStudyMaterialsMain__container{

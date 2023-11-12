@@ -1,7 +1,7 @@
 import { useThemeStore } from '../../../store/themeStore';
 import './lessonsSchedule.scss';
 
-export const LessonsSchedule = () => {
+export const TeacherSchedule = () => {
     const theme = useThemeStore().theme;
     const now = new Date();
     const dayNumber = now.getDay();
@@ -125,7 +125,7 @@ export const LessonsSchedule = () => {
     ]
 
     return <section className={`lessonsSchedule__container ${theme}`}>
-        {days.map((day,i) => 
+            {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">
                 <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    
                 <div className='lessonsScheduleDayLessons__container'>
@@ -138,16 +138,18 @@ export const LessonsSchedule = () => {
                     )}
                 </div>
             </div>)}
-            <div className="lessonsScheduleDay__container">
+            <div className="lessonsScheduleDay__container" style={{width:'unset'}}>
                 <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>   
                 <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>
-                {scheduleTimings.map((timing,i) => 
-                    <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
-                        <p className="lessonsScheduleLessonNumber">{i + 1}</p>
-                        <p className="lessonsScheduleLessonName" style={{marginRight:'50px'}}>{timing.start}</p>
-                        <p className="lessonsScheduleLessonGroup">{timing.end}</p>
-                    </div>
-                )}
-            </div> 
+                <div className='lessonsScheduleDayLessons__container'>
+                    {scheduleTimings.map((timing,i) => 
+                        <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
+                            <p className="lessonsScheduleLessonNumber">{i + 1}</p>
+                            <p className="lessonsScheduleLessonName" style={{width:'100px'}}>{timing.start}</p>
+                            <p className="lessonsScheduleLessonGroup">{timing.end}</p>
+                        </div>
+                    )}
+                </div>
+            </div>
     </section>
 }

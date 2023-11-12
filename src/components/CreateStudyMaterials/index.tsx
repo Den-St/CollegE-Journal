@@ -62,7 +62,7 @@ export const CreateStudyMaterials = () => {
             </div>
 
             <div className='createStudyMaterialsInput__container'>
-                <h2 className='createStudyMaterialsInput__title'>Налаштування доступу</h2>
+                <h2 className='createStudyMaterialsInput__title'>Опис</h2>
                 <ReactQuill placeholder='Введіть опис завдання'/>
             </div>
         </div>

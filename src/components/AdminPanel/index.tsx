@@ -1,37 +1,49 @@
+import { useState } from "react";
 import { ExclamationMarkMessage } from "../../assets/svgs/exclamationMarkMessage";
 import { ScheduleSvg } from "../../assets/svgs/scheduleSvg";
 import { TwoPeopleSvg } from "../../assets/svgs/twoPeopleSvg";
 import { useThemeStore } from "../../store/themeStore";
 import "./adminPanelStyles.scss";
+import { ScheduleSettings } from "./ScheduleSettings";
+import { StudentsListAdmin } from "./StudentsListAdmin";
+
+const adminPanelSections = [{
+        title:'Налаштування розкладу',
+        icon:<ScheduleSvg/>,
+        component:<ScheduleSettings/>
+    },
+    {
+        title:'Налаштування групп',
+        icon:<TwoPeopleSvg/>,
+        component:<StudentsListAdmin/>
+    },
+    {
+        title:'Новини та оголошення',
+        icon:<ExclamationMarkMessage/>,
+        component:<ScheduleSettings/>
+    }
+]
 
 export const AdminPanel = () => {
     const theme = useThemeStore().theme;
+    const [activeSection,setSection] = useState(0);
 
     return <div className={`adminPanelMain__container ${theme}`}>
         <h1 className={"adminPanelMain__title"}>Кабінет Адміністратора</h1>
         <section className={"adminPanel__container"}>
             <h2 className={"adminPanel__title"}>Панель адміністратора</h2>
             <div className={"adminPanelControllers__container"}>
-                <div className={"adminPanelControllerItem__container"}>
-                    <p className={"adminPanelControllers__title"}>
-                        Налаштування розклада
-                    </p>
-                    <ScheduleSvg/>
-                </div>
-                <div className={"adminPanelControllerItem__container"}>
-                    <p className={"adminPanelControllers__title"}>
-                        Налаштування групп
-                    </p>
-                    <TwoPeopleSvg/>
-                </div>
-                <div className={"adminPanelControllerItem__container"}>
-                    <p className={"adminPanelControllers__title"}>
-                        Новини та оголошення
-                    </p>
-                    <ExclamationMarkMessage/>
-                </div>
+                {adminPanelSections.map((section,i) => 
+                    <div className={`adminPanelControllerItem__container ${i === activeSection && 'activeSection'}`} key={section.title} onClick={() => setSection(i)}>
+                        <p className={"adminPanelControllers__title"}>
+                            {section.title}
+                        </p>
+                        {section.icon}
+                    </div>
+                )}
             </div>
         </section>
+        {adminPanelSections[activeSection].component}
         <section className="adminPanelStats__container">
             <h2 className={"adminPanel__title"}>Статистика</h2>
             <div className="adminPanelStatsBlocks__container">
