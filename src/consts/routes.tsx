@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
+import { FAQ } from "../components/FAQ";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
 import { Schedule } from "../components/Schedule";
 import { ScheduleCreate } from "../components/ScheduleCreate";
@@ -31,6 +32,7 @@ export const routes = {
     studyMaterials:'/study-materials',
     studyMaterialsCheckTeacher:'/study-materials-check-teacher',
     scheduleCreate:'/schedule-create',
+    faq:'/FAQ',
 };
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -50,6 +52,8 @@ export const headerRoutes = {
     studyMaterials:'/study-materials',
     studyMaterialsCheckTeacher:'/study-materials-check-teacher',
     scheduleCreate:'/schedule-create',
+    faq:'/FAQ',
+
 };
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
@@ -77,6 +81,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
     <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
+    <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]
