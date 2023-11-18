@@ -70,10 +70,10 @@ export const FAQ = () => {
                 items={getItems(panelStyle)}
             />
         </section>
-        <form className="faqForm">
+        <div className="faqForm">
             <h1 className="faqTitle">Не має вашого питання?</h1>
             <TextArea autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>
-            <input type={'submit'} value={'Надіслати'} className={'faqSubmit'}/>
-        </form>
+            <button type={'submit'} value={'Надіслати'} className={'faqSubmit'}>Надіслати</button>
+        </div>
     </main>
 }

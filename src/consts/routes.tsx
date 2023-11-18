@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
 import { FAQ } from "../components/FAQ";
 import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
+import { NoMatch } from "../components/NoMatch";
 import { Schedule } from "../components/Schedule";
 import { ScheduleCreate } from "../components/ScheduleCreate";
 import { StudyMaterialsCheckTeacher } from "../components/StudyMaterialsCheckTeacher";
@@ -82,6 +83,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
     <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,                       //layout done
+    <Route key={'*'} element={<NoMatch/>} path={'*'}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
 ]
