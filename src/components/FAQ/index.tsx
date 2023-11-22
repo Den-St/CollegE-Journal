@@ -72,7 +72,7 @@ export const FAQ = () => {
         </section>
         <div className="faqForm">
             <h1 className="faqTitle">Не має вашого питання?</h1>
-            <TextArea autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>
+            <TextArea className="faqQuestionTextArea" autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>
             <button type={'submit'} value={'Надіслати'} className={'faqSubmit'}>Надіслати</button>
         </div>
     </main>

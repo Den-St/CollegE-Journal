@@ -161,12 +161,14 @@
     object-fit: contain;
 }
 .sendHomeTaskComment__text{
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: 400;
     white-space: break;
     padding: 20px 35px;
     border-radius: 10px 5px 10px 5px;
     box-shadow: 0px 1px 15px 0px #0000001A;
+    line-height: 22px !important;
+    letter-spacing: 0.1em;
 }
 .sendHomeTaskOther__container{
     display: flex;
@@ -219,13 +221,112 @@
     padding:0 5px;
     border-radius: 10px 5px 10px 5px;
     box-shadow: 0px 1px 15px 0px #0000001A;
-
 }
 .ant-input{
-    background-color: transparent;
     border:none;
 }
-
+.sendHomeTaskPeopleDone__section{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    p{
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.1em;
+    }
+}
+.sendHomeTaskPeopleDone__container{
+    display: flex;
+    column-gap: 80px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+}
+.sendHomeTaskPeople__container{
+    // width:40%;
+    display: flex;
+    gap:5%;
+    align-items: center;
+    height: 80px;
+}
+.sendHomeTaskPeopleFirst__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width:240px;
+    height: 100%;
+}
+.sendHomeTaskPeopleSecond__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height:100%;
+}
+.sendHomeTaskPeopleFiles{
+    display: flex;
+    gap:10px;
+}
+.sendHomeTaskPeopleComments{
+    display: flex;
+    gap:10px;
+}
+.sendHomeTaskPeopleDone{
+    display: flex;
+    gap:10px;
+}
+.sendHomeTaskPeopleTitle_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sendHomeTaskPeople__avatar{
+    width: 81px;
+    height: 81px;
+    border-radius: 50%;
+}
+.sendHomeTaskPickedPeople__container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.sendHomeTaskPickedPickedPeopleLeft__container{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.sendHomeTaskPeoplePickedStudentFiles_container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.sendHomeTaskPeopleMarkSection_container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.sendHomeTaskPickedPeopleMark_container{
+    display: flex;
+    gap:10px;
+    align-items: center;
+}
+.sendHomeTaskPickedPeopleMark{
+    padding: 5px;
+    border-radius: 10px 5px;
+}
+.commentTextArea{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0 5px;
+    border-radius: 10px 5px 10px 5px;
+    box-shadow: 0px 1px 15px 0px #0000001A;
+    min-height: 60px !important;
+}
+.commentTextArea::placeholder{
+    height: 100%;
+}
 .sendHomeTaskMain__container{
     &.dark{
         color:white;    
@@ -300,6 +401,42 @@
             input{
                 cursor: pointer;
             }
+        }
+        .sendHomeTaskPeopleFilesNumber{
+            color:#EFB42D;
+        }
+        .sendHomeTaskPeopleComments{
+            color:#D0D0D0;
+        }
+        .sendHomeTaskPeopleDoneDate{
+            color:white;
+        }
+        .studyMaterialsSearch__input{
+            color:white;
+        }
+        .studyMaterialsSearch__input::placeholder{
+            color:#D0D0D0;
+        }
+        .studyMaterialsSearchInput__container{
+            background-color: #102936;
+            .magnifierSvg{
+                fill:white;
+            }
+        }
+        .sendHomeTaskPickedPeopleMark{
+            background-color: #102936;
+        }
+        .commentTextArea{
+            // height: 60px !important;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding:0 5px;
+            border-radius: 10px 5px 10px 5px;
+            box-shadow: 0px 1px 15px 0px #0000001A;
+            // min-height: 60px !important;
+            background-color:#102936;
         }
     }
     &.light{

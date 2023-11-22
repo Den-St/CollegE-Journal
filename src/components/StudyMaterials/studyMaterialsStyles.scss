@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: center;
     gap:30px;
+    
 }
 .studyMaterialsSearchInput__container{
     max-width: 450px;
@@ -38,6 +39,10 @@
     border-radius: 10px 5px;
     display: flex;
     align-items: center;
+    .magnifierSvg{
+        fill: white;
+        width: 25px;
+    }
 }
 .studyMaterialsSearch__input{
     height: 40px;
@@ -239,6 +244,7 @@
             transition: 0.2s;
             color:#EFB42D;
         }
+        
     }
     &.light{
         .studyMaterialsSearchInput__container{
