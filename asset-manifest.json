@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/CollegE-Journal/static/css/main.8a8a8b6d.css",
-    "main.js": "/CollegE-Journal/static/js/main.44625769.js",
+    "main.css": "/CollegE-Journal/static/css/main.e824f2d1.css",
+    "main.js": "/CollegE-Journal/static/js/main.0ae0950d.js",
     "static/media/firstScreenLight.png": "/CollegE-Journal/static/media/firstScreenLight.c322d4f38a5d5766c8a0.png",
     "static/media/first_screen.png": "/CollegE-Journal/static/media/first_screen.b228208db902c209a635.png",
     "static/media/infoJournalBackLight.png": "/CollegE-Journal/static/media/infoJournalBackLight.977732319736e85cd22e.png",
@@ -11,11 +11,11 @@
     "static/media/laptop.png": "/CollegE-Journal/static/media/laptop.e5ae2dd6ef52c34b7c56.png",
     "static/media/signInBackgroundLight.png": "/CollegE-Journal/static/media/signInBackgroundLight.1d82a5ed38765a0acaf5.png",
     "index.html": "/CollegE-Journal/index.html",
-    "main.8a8a8b6d.css.map": "/CollegE-Journal/static/css/main.8a8a8b6d.css.map",
-    "main.44625769.js.map": "/CollegE-Journal/static/js/main.44625769.js.map"
+    "main.e824f2d1.css.map": "/CollegE-Journal/static/css/main.e824f2d1.css.map",
+    "main.0ae0950d.js.map": "/CollegE-Journal/static/js/main.0ae0950d.js.map"
   },
   "entrypoints": [
-    "static/css/main.8a8a8b6d.css",
-    "static/js/main.44625769.js"
+    "static/css/main.e824f2d1.css",
+    "static/js/main.0ae0950d.js"
   ]
 }
