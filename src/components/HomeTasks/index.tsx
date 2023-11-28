@@ -20,33 +20,58 @@ export const HomeTasks = () => {
     <div className="homeTaskTop__container">
       <h1 className="homeTaskTitle">Домашнє завдання</h1>
       <div className="homeTaskFilters__container">
-        <div className="homeTaskFilter__container">
-          <Select className="homeTaskFilter__select" placeholder={'Группа'}>
-            <Option value={'3-11'} label={'3-11'}>3-11</Option>
-            <Option value={'3-21'} label={'3-21'}>3-21</Option>
-            <Option value={'3-31'} label={'3-31'}>3-31</Option>
-            <Option value={'3-13'} label={'3-41'}>3-41</Option>
-            <Option value={'3-42'} label={'3-42'}>3-42</Option>
-          </Select>
-          {/* <p className="homeTaskFilter__name">Группа</p> */}
-          <FilterIconSvg/>
-        </div>
-        <div className="homeTaskFilter__container">
-          <p className="homeTaskFilter__name">Предмет</p>
-          <FilterIconSvg/>
-        </div>
-        <div className="homeTaskFilter__container">
-          <p className="homeTaskFilter__name">Завдання</p>
-          <FilterIconSvg/>
-        </div>
-        <div className="homeTaskFilter__container">
-          <p className="homeTaskFilter__name">Місяць</p>
-          <FilterIconSvg/>
-        </div>
-        <div className="homeTaskFilter__container">
-          <p className="homeTaskFilter__name">Сдача</p>
-          <FilterIconSvg/>
-        </div>
+        <div className="adminPanelStudentList_fillterContainer fillter_container">
+            <Select 
+            placeholder={<div className="fillterPlaceholder_container">
+                <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
+            </div>} 
+            className="fillter_select"
+            >
+                <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
+                <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
+                <Option value={'2022'} label={'2022'}>2022 <FilterIconSvg/></Option>
+                <Option value={'2023'} label={'2023'}>2023 <FilterIconSvg/></Option>
+            </Select>
+          </div>
+          <div className="adminPanelStudentList_fillterContainer fillter_container">
+              <Select 
+              placeholder={<div className="fillterPlaceholder_container">
+                  <p className="fillter_placeholder">Завдання</p><FilterIconSvg/>
+              </div>} 
+              className="fillter_select"
+              >
+                  <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
+                  <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
+                  <Option value={'2022'} label={'2022'}>2022 <FilterIconSvg/></Option>
+                  <Option value={'2023'} label={'2023'}>2023 <FilterIconSvg/></Option>
+              </Select>
+          </div>
+          <div className="adminPanelStudentList_fillterContainer fillter_container">
+              <Select 
+              placeholder={<div className="fillterPlaceholder_container">
+                  <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
+              </div>} 
+              className="fillter_select"
+              >
+                  <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
+                  <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
+                  <Option value={'2022'} label={'2022'}>2022 <FilterIconSvg/></Option>
+                  <Option value={'2023'} label={'2023'}>2023 <FilterIconSvg/></Option>
+              </Select>
+          </div>
+          <div className="adminPanelStudentList_fillterContainer fillter_container">
+              <Select 
+              placeholder={<div className="fillterPlaceholder_container">
+                  <p className="fillter_placeholder">Сдача</p><FilterIconSvg/>
+              </div>} 
+              className="fillter_select"
+              >
+                  <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
+                  <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
+                  <Option value={'2022'} label={'2022'}>2022 <FilterIconSvg/></Option>
+                  <Option value={'2023'} label={'2023'}>2023 <FilterIconSvg/></Option>
+              </Select>
+          </div>
       </div>
     </div>
     <div className="homeTaskTasks__container">

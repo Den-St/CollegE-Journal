@@ -10,6 +10,8 @@ import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
 import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
 import { useHomePageSections } from '../../hooks/homePageSections';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const news:{id:number,title:string,date:string,text:string}[] = [
     {
@@ -77,7 +79,17 @@ const news:{id:number,title:string,date:string,text:string}[] = [
 export const HomePage = () => {
     const theme = useThemeStore().theme;
     const {onChangeSection,currentSection} = useHomePageSections();
-   
+    useEffect(() => {
+        // fetch('http://54.37.74.248:5000/api/main-page',{mode:'no-cors',method:"GET",}).then(res => console.log(res));
+        fetch('https://54.37.74.248:5000/api/main-page', {
+            // mode: "cors", // no-cors, *cors, same-origin
+            mode: "no-cors", // no-cors, *cors, same-origin
+            // headers: {
+            //   "Content-Type": "application/json",
+            // },
+          }).then(res => console.log(res));
+    },[]);  
+    
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
             <div className="homePage__container">

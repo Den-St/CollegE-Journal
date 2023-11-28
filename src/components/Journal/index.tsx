@@ -1,25 +1,69 @@
+import { DatePicker, Select } from 'antd';
+import { useState } from 'react';
+import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { useThemeStore } from '../../store/themeStore';
 import './journalStyles.scss';
+const {Option} = Select;
 
 export const Journal = () => {
     const theme = useThemeStore().theme;
-
+    const [datePickerOpen,setDatePickerOpen] = useState(false);
+    const [pickedDate,setPickedDate] = useState<Date>();
+    const onChangeDate = (e:Date) => {
+        setPickedDate(e);
+        setDatePickerOpen(false);
+    }
+    
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <h1 className='journal__title'>Журнал</h1>
             <div className='journalFillters__container'>
-                <div className="groupFillterItem__container">
+                {/* <div className="groupFillterItem__container">
                     <p className="journalFilterItem">Група</p>
                     <FilterIconSvg/>
+                </div> */}
+                 <div className="adminPanelStudentList_fillterContainer fillter_container">
+                    <Select 
+                    placeholder={<div className="fillterPlaceholder_container">
+                        <p className="fillter_placeholder">Група</p><FilterIconSvg/>
+                    </div>} 
+                    className="fillter_select"
+                    >
+                        <Option value={'3-11'} label={'3-11'}>3-11 <FilterIconSvg/></Option>
+                        <Option value={'3-21'} label={'3-21'}>3-21 <FilterIconSvg/></Option>
+                        <Option value={'3-31'} label={'3-31'}>3-31 <FilterIconSvg/></Option>
+                        <Option value={'3-41'} label={'3-41'}>3-41 <FilterIconSvg/></Option>
+                    </Select>
                 </div>
-                <div className="groupFillterItem__container">
+                {/* <div className="groupFillterItem__container">
                     <p className='journalFilterItem'>Місяць </p>
                     <FilterIconSvg/>
+                </div> */}
+                <div className="adminPanelStudentList_fillterContainer fillter_container">
+                    <Select 
+                    placeholder={<div className="fillterPlaceholder_container">
+                        <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
+                    </div>}
+                    className="fillter_select"
+                    >
+                        <Option value={'Жовтень'} label={'Жовтень'}>Жовтень <FilterIconSvg/></Option>
+                        <Option value={'Грудень'} label={'Грудень'}>Грудень <FilterIconSvg/></Option>
+                        <Option value={'Серпень'} label={'Серпень'}>Серпень <FilterIconSvg/></Option>
+                    </Select>
                 </div>
-                <div className="groupFillterItem__container">
-                    <p className='journalFilterItem'>Предмет</p>
-                    <FilterIconSvg/>
+                <div className="adminPanelStudentList_fillterContainer fillter_container">
+                    <Select 
+                    placeholder={<div className="fillterPlaceholder_container">
+                        <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
+                    </div>} 
+                    className="fillter_select"
+                    >
+                        <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
+                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
+                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
+                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
+                    </Select>
                 </div>
             </div>
         </section>

@@ -46,7 +46,6 @@
     width: 413px;
     transition: 0.2s;
     cursor: pointer;
-    box-shadow: 0px 1px 10px 0px #0000001A;
     border-radius: 10px 5px;
 }
 .adminPanelControllerIcon{
@@ -138,10 +137,38 @@
     font-family: Montserrat;
     background-image: url('../../assets/images/signInBackground.png');
 }
+.createGroup_form{
+    width: 82.5%;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.createGroupFormSelects__container{
+    width: 100%;
+}
+.createGroupFormSelects__container{
+    gap:30px;
+}
+.createGroupSelect__container{
+    width:40%;
+}
+.createGroupCuratorSelect__container{
+    width: 55%;
+}
+@media screen and (max-width:900px) {
+    .createGroupSelect__container{
+        width:100%;
+    }
+    .createGroupCuratorSelect__container{
+        width: 100%;
+    }
+}
 .adminPanelMain__container{
     &.dark{
         .adminPanelControllerItem__container{
             background-color: #0a1d26;
+    box-shadow: 0 0 15px 0 #D4D4D41A;
+
         }
         .adminPanelStatBlock__container{
             background-color: #0a1d26;
@@ -150,7 +177,7 @@
             color:white;
         }
         .adminPanel__title{
-            color:#797979;
+            color:#D0D0D0;
         }
         .adminPanelControllers__title{
             color:#797979;
@@ -249,10 +276,28 @@
                 stroke:#EFB42D;
             }
         }
+        .createUser__button{
+            color:white;
+        }
+        .createStudyMaterialsSelect__wrapper{
+            background-color: #102936;
+        }
+        .ant-select-selector{
+            background-color: #102936 !important;
+            border:none !important;
+            font-weight: 500;
+        }
+        .createUserInput__label{
+            color:white;
+        }
+        .createUser__button{
+            background-color: #102936;
+        }
     }
     &.light{
         .adminPanelControllerItem__container{
             background-color: white;
+            box-shadow: 0 0 15px 0 rgb(184, 184, 184);
         }
         .adminPanelStatBlock__container{
             background-color: white;

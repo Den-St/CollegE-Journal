@@ -1,8 +1,10 @@
+import { Select } from 'antd';
 import { Link } from 'react-router-dom';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { useThemeStore } from '../../store/themeStore';
 import './studentsStyle.scss';
+const {Option} = Select;
 
 export const Students = () => {
     const theme = useThemeStore().theme;
@@ -10,9 +12,18 @@ export const Students = () => {
     return <div className={`main__container ${theme}`}>
             <section className="studentTitle__container">
                 <h1 className="studentTitle">Список студентів</h1>
-                <div className="studentFillters__container">
-                    <p className="groupFillter">Група</p>
-                    <FilterIconSvg/>
+                <div className="adminPanelStudentList_fillterContainer fillter_container">
+                    <Select 
+                    placeholder={<div className="fillterPlaceholder_container">
+                        <p className="fillter_placeholder">Група</p><FilterIconSvg/>
+                    </div>} 
+                    className="fillter_select"
+                    >
+                        <Option value={'3-11'} label={'3-11'}>3-11 <FilterIconSvg/></Option>
+                        <Option value={'3-21'} label={'3-21'}>3-21 <FilterIconSvg/></Option>
+                        <Option value={'3-31'} label={'3-31'}>3-31 <FilterIconSvg/></Option>
+                        <Option value={'3-41'} label={'3-41'}>3-41 <FilterIconSvg/></Option>
+                    </Select>
                 </div>
             </section>
             <section className="studentList__container">

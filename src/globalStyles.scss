@@ -81,6 +81,50 @@ input:-webkit-autofill:active{
 ::-webkit-scrollbar-corner{
     background-color: gray;
 }
+.fillter_container{
+	align-items: center;
+	width: fit-content;
+	
+	.ant-select-selection-search-input{
+		font-size: 28px !important;
+		font-weight: 500 !important;
+		line-height: 34px !important;
+		letter-spacing: 0.1em !important;
+	}
+	.ant-select-arrow{
+		display: none;
+	}
+	svg{
+		width: 20px;
+	}
+	.fillter_select{
+		width: fit-content !important;
+	}
+}
+.fillterPlaceholder_container{
+	display:flex;
+	gap:30px;
+	align-items:center;
+}
+.fillterItem_container{
+	display: flex;
+	gap:30px;
+}
+.fillter_placeholder,
+.fillter_container .ant-select-selection-item {
+	font-family: Montserrat;
+	font-size: 28px;
+	font-weight: 500;
+	line-height: 34px;
+	letter-spacing: 0.1em;
+	display: flex;
+	gap:30px;
+	align-items: center;
+
+}
+.ant-select-selector{
+	border: none !important;
+}
 
 body{
 	&.dark{
@@ -93,9 +137,7 @@ body{
 				color:white;
 			}
 		}
-		.ant-select-selection-placeholder{
-			color:white;
-		}
+		.ant-select-selection-placeholder,
 		.ant-select-selection-item-content{
 			color:white;
 		}
@@ -110,46 +152,81 @@ body{
 		.ant-picker-dropdown .ant-picker-panel-container{
             background-color: #123547 !important;
         }
-        .ant-picker-dropdown .ant-picker-header{
+        .ant-picker-dropdown .ant-picker-header,
+		.ant-picker-super-prev-icon::before,
+		.ant-picker-header-super-prev-btn,
+		.ant-picker-header-prev-btn,
+		.ant-picker-super-prev-icon::after,
+		.ant-picker-next-icon::after,
+		.ant-picker-next-icon::before,
+		.ant-picker-super-next-icon::before,
+		.ant-picker-super-next-icon::after,
+		.ant-picker-today-btn,
+		.ant-picker-body th,
+		.ant-picker-body td{
             color:white !important;
         }
-        .ant-picker-super-prev-icon::before{
-            color:white !important;
+		.ant-picker-dropdown .ant-picker-month-btn:hover,
+		.ant-picker-dropdown .ant-picker-year-btn:hover,
+		.ant-picker-super-prev-icon:hover::before,
+		.ant-picker-header-prev-btn:hover,
+		.ant-picker-super-prev-icon:hover::after,
+		.ant-picker-super-prev-icon:hover::before,
+		.ant-picker-next-icon:hover::after,
+		.ant-picker-next-icon:hover::before,
+		.ant-picker-decade-btn:hover,
+		.ant-picker-cell:hover,
+		.ant-picker-header-super-next-btn:hover .ant-picker-next-icon::after,
+		.ant-picker-header-super-next-btn:hover .ant-picker-next-icon::before,
+		.ant-picker-today-btn:hover{
+            color:#EFB42D !important;
         }
-        .ant-picker-header-super-prev-btn{
-            color:white !important;
-        }
-        .ant-picker-header-prev-btn{
-            color:white !important;
-        }
-        .ant-picker-super-prev-icon::after{
-            color:white !important;
-        }
-		.ant-picker-next-icon::after{
-            color:white !important;
-        }
-		.ant-picker-next-icon::before{
-            color:white !important;
-        }
-		.ant-picker-super-next-icon::before{
-            color:white !important;
-        }
-		.ant-picker-super-next-icon::after{
-            color:white !important;
-        }
-		.ant-select-selection-search-mirror{
-			color:white !important; 
+
+		.ant-picker-cell{
+			transition: 0.3s;
+			border-radius: 5px;
 		}
+		.ant-picker-cell:hover{
+			background-color: black;
+		}
+		
+		.ant-picker-cell-today .ant-picker-cell-inner::before{
+			border: 1px solid#EFB42D !important;
+		}
+		
+		.ant-picker-cell-selected{
+			.ant-picker-cell-inner{
+				color:#EFB42D !important;
+				background-color: #0B1D26 !important;
+			}
+		}
+		
+		.ant-select-selection-search-mirror,
 		.ant-select-selection-search-input{
 			color:white !important; 
 		}
-		.ant-picker-body{
-			th{
-				color:white !important;
+		
+		.ant-select-selection-item{
+			color:white;
+			padding: 0px 5px !important;
+			border-radius: 5px;
+		}
+		.fillter_container{
+			display: flex;
+			align-items: center;
+			.ant-select-selector{
+				background-color: transparent !important;
 			}
-			td{
-				color:white !important;
-			}
+		}
+		.ant-select-selection-item{
+			color:white !important;
+			border-radius: 10px 5px;
+		}
+		.ant-select-selection-item-remove{
+			color:white;
+		}
+		.createHomeTaskDate{
+			color:white;
 		}
 	}
 	&.light{
