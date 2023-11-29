@@ -1,4 +1,5 @@
 import { useThemeStore } from "../../store/themeStore";
+import { CookiesNotification } from "../CookiesNotification";
 import { Footer } from "../Footer";
 import { Header } from "../Header"
 import "./layoutStyles.scss";
@@ -9,8 +10,9 @@ type Props = {
 export const Layout:React.FC<Props> = ({children}) => {
     const theme = useThemeStore().theme;
     return <div className={`layout__container ${theme}`}>
-        <Header/>
-        {children}
-        <Footer/>
-    </div>
+            <Header/>
+            {children}
+            <Footer/>
+            <CookiesNotification/>
+        </div>
 }

@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import './headerStyles.scss';
-import {collegeLogoSvg} from '../../assets/svgs/college_logo';
+import {CollegeLogoSvg} from '../../assets/svgs/college_logo';
 import { Switch } from 'antd';
 import { themes } from '../../consts/themes';
 import { useThemeController } from '../../hooks/themeController';
@@ -17,7 +17,7 @@ export const Header = () => {
                 <div className="header__wrapper">
                     <div className="logo__block">
                         <Link to="/" className="header__logo">
-                            {collegeLogoSvg()}
+                            <CollegeLogoSvg/>
                         </Link>
                     </div>
                     <nav className="nav">

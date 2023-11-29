@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { collegeLogoSvg } from '../../assets/svgs/college_logo';
+import { CollegeLogoSvg } from '../../assets/svgs/college_logo';
 import { sectionIds } from '../../consts/sectionIds';
 import { goToSection } from '../../helpers/goToSection';
 import { useThemeStore } from '../../store/themeStore'
@@ -13,7 +13,7 @@ export const Footer = () => {
     return <><footer>
         <div className={`footer__content ${theme} ${route+'home'}`}>
             <div className="footer__logo">
-                {collegeLogoSvg()}
+                <CollegeLogoSvg/>
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>
             </div>
             <div className="footer__circle"/>
