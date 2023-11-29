@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CollegE-Journal/static/css/main.31c54120.css",
-    "main.js": "/CollegE-Journal/static/js/main.4a8b3e26.js",
+    "main.js": "/CollegE-Journal/static/js/main.a5af92b3.js",
     "static/media/firstScreenLight.png": "/CollegE-Journal/static/media/firstScreenLight.c322d4f38a5d5766c8a0.png",
     "static/media/first_screen.png": "/CollegE-Journal/static/media/first_screen.b228208db902c209a635.png",
     "static/media/infoJournalBackLight.png": "/CollegE-Journal/static/media/infoJournalBackLight.977732319736e85cd22e.png",
@@ -12,10 +12,10 @@
     "static/media/signInBackgroundLight.png": "/CollegE-Journal/static/media/signInBackgroundLight.1d82a5ed38765a0acaf5.png",
     "index.html": "/CollegE-Journal/index.html",
     "main.31c54120.css.map": "/CollegE-Journal/static/css/main.31c54120.css.map",
-    "main.4a8b3e26.js.map": "/CollegE-Journal/static/js/main.4a8b3e26.js.map"
+    "main.a5af92b3.js.map": "/CollegE-Journal/static/js/main.a5af92b3.js.map"
   },
   "entrypoints": [
     "static/css/main.31c54120.css",
-    "static/js/main.4a8b3e26.js"
+    "static/js/main.a5af92b3.js"
   ]
 }
