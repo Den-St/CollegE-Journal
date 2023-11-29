@@ -8,12 +8,15 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    gap:30px;
     z-index: 1001;
+    justify-content: space-between;
 }
-
+.cookiesNotificationLeft_container{
+    display: flex;
+    gap:30px;
+    align-items: center;
+}
 .cookiesInfo{
-    width: 55%;
     margin-right: 20%;
     font-size: 18px;
     font-weight: 400;
@@ -27,7 +30,7 @@
     line-height: 22px;
     letter-spacing: 0.1em;
     padding: 16px 0;
-    width: 191px;
+    width: 210px;
     transition: 0.3s;
 }
 

@@ -10,85 +10,95 @@ import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
 import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
 import { useHomePageSections } from '../../hooks/homePageSections';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { HomePageDataT, NewsT } from '../../types/homePageData';
+import { useHomePage } from '../../hooks/homePage';
 
-const news:{id:number,title:string,date:string,text:string}[] = [
+const localNews:NewsT[] = [
     {
         id:1,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:2,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:3,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:4,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:5,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:6,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:7,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:8,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:9,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
     {
         id:10,
-        title:'Рабські збори',
-        date:'07.05.2023',
-        text:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
+        topic:'Рабські збори',
+        data:'07.05.2023',
+        body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
 ];
-
+const carousels = [
+    {
+        slidesToShow:4,
+        className:'slider_xxxl'
+    },
+    {
+        slidesToShow:3,
+        className:'slider_xxl'
+    },
+    {
+        slidesToShow:2,
+        className:'slider_xl'
+    },
+    {
+        slidesToShow:1,
+        className:'slider_l'
+    },
+]
 export const HomePage = () => {
     const theme = useThemeStore().theme;
     const {onChangeSection,currentSection} = useHomePageSections();
-    useEffect(() => {
-        // fetch('http://54.37.74.248:5000/api/main-page',{mode:'no-cors',method:"GET",}).then(res => console.log(res));
-        fetch('https://54.37.74.248:5000/api/main-page', {
-            // mode: "cors", // no-cors, *cors, same-origin
-            mode: "no-cors", // no-cors, *cors, same-origin
-            // headers: {
-            //   "Content-Type": "application/json",
-            // },
-          }).then(res => console.log(res));
-    },[]);  
+    const {homePageData,loading} = useHomePage(); 
     
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
@@ -159,50 +169,27 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="slider__container">
-                <Carousel slidesToShow={4} slidesToScroll={1} className='slider_xxxl' arrows={true} dots={false} infinite={true} >
-                    {news.map(newsItem => 
-                        <div className="slider__element" key={newsItem.id}>
-                            <div className="news__title">
-                                <h1 className="news__name">{newsItem.title}</h1>
-                                <h1 className="news__date">{newsItem.date}</h1>
+                {carousels.map(carousel => 
+                    <Carousel slidesToShow={carousel.slidesToShow} slidesToScroll={1} className={carousel.className} arrows={true} dots={false} infinite={true} >
+                        {!loading ? homePageData?.news.map(newsItem => 
+                            <div className="slider__element" key={newsItem.id}>
+                                <div className="news__title">
+                                    <h1 className="news__name">{newsItem.topic}</h1>
+                                    <h1 className="news__date">{newsItem.data}</h1>
+                                </div>
+                                <p className="news__text">{newsItem.body}</p>
                             </div>
-                            <h1 className="news__text">{newsItem.text}</h1>
-                        </div>
-                    )}
-                </Carousel>
-                <Carousel slidesToShow={3} slidesToScroll={1} className='slider_xxl' arrows={true} dots={false} infinite={true} >
-                    {news.map(newsItem => 
-                        <div className="slider__element" key={newsItem.id}>
-                            <div className="news__title">
-                                <h1 className="news__name">{newsItem.title}</h1>
-                                <h1 className="news__date">{newsItem.date}</h1>
+                        ) : localNews.map(newsItem =>
+                            <div className="slider__element" key={newsItem.id}>
+                                <div className="news__title">
+                                    <h1 className="news__name">{newsItem.topic}</h1>
+                                    <h1 className="news__date">{newsItem.data}</h1>
+                                </div>
+                                <p className="news__text">{newsItem.body}</p>
                             </div>
-                            <h1 className="news__text">{newsItem.text}</h1>
-                        </div>
-                    )}
-                </Carousel>
-                <Carousel slidesToShow={2} slidesToScroll={1} className='slider_xl' arrows={true} dots={false} infinite={true}>
-                    {news.map(newsItem => 
-                        <div className="slider__element" key={newsItem.id}>
-                            <div className="news__title">
-                                <h1 className="news__name">{newsItem.title}</h1>
-                                <h1 className="news__date">{newsItem.date}</h1>
-                            </div>
-                            <h1 className="news__text">{newsItem.text}</h1>
-                        </div>
-                    )}
-                </Carousel>
-                <Carousel slidesToShow={1} slidesToScroll={1} className='slider_l' arrows={true} dots={false} infinite={true}>
-                    {news.map(newsItem => 
-                        <div className="slider__element" key={newsItem.id}>
-                            <div className="news__title">
-                                <h1 className="news__name">{newsItem.title}</h1>
-                                <h1 className="news__date">{newsItem.date}</h1>
-                            </div>
-                            <h1 className="news__text">{newsItem.text}</h1>
-                        </div>
-                    )}
-                </Carousel>
+                        )}
+                    </Carousel>
+                )}
             </div>
         </section>
         <section className="gournal__info" id="info">
@@ -225,8 +212,11 @@ export const HomePage = () => {
                     Інформація у журналі
                 </h1>
                 <h4 className="info__paragraph">
-                    На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
-                    Електронний щоденник дозволяє вчителям швидко та зручно вносити інформацію про оцінки, пропущені заняття та інші важливі події в житті коледжу, а  учням - дізнаватися про ці події негайно.
+                    {!loading ?
+                    homePageData?.about_journal
+                    : `На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
+                    Електронний щоденник дозволяє вчителям швидко та зручно вносити інформацію про оцінки, пропущені заняття та інші важливі події в житті коледжу, а  учням - дізнаватися про ці події негайно.`}
+                    
                 </h4>
                 <a href="#" className="info__btn">Увійти</a>
             </div>
@@ -248,8 +238,15 @@ export const HomePage = () => {
         </div>
         <div className="about__content">
             <div className="about__block">
-                <h1 className="about__h1">Ми Кулак Вейдера</h1>
-                <h4 className="about__paragraph">Ми, студенти коледжу зв’язку,  зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді.  Ми сподіваємось, що наш проект вам буде корисним.</h4>
+                <h1 className="about__h1">
+                    {!loading 
+                    ? homePageData?.about_us.topic 
+                    : `Ми Сучасні Митці`}</h1>
+                <p className="about__paragraph">
+                    {!loading 
+                    ? homePageData?.about_us.body
+                    : `Ми, студенти коледжу зв’язку,  зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді.  Ми сподіваємось, що наш проект вам буде корисним.`}
+                </p>
             </div>
             <div className="about__img">
                 <div className="sup__back"></div>

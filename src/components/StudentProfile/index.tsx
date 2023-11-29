@@ -66,7 +66,6 @@ export const StudentProfile = () => {
                     <p className='studentProfileStatistic__value medium'>143/316</p>
                 </div>
         </section>
-        <h1 className='studentProfileTab__title'>{tabs[tabIndex].title}</h1>
         {tabs[tabIndex].component}
     </div>
 }

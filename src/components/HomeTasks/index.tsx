@@ -26,6 +26,8 @@ export const HomeTasks = () => {
                 <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
             </div>} 
             className="fillter_select"
+            allowClear
+
             >
                 <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                 <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
@@ -39,6 +41,8 @@ export const HomeTasks = () => {
                   <p className="fillter_placeholder">Завдання</p><FilterIconSvg/>
               </div>} 
               className="fillter_select"
+              allowClear
+
               >
                   <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                   <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
@@ -52,6 +56,8 @@ export const HomeTasks = () => {
                   <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
               </div>} 
               className="fillter_select"
+              allowClear
+
               >
                   <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                   <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
@@ -65,6 +71,8 @@ export const HomeTasks = () => {
                   <p className="fillter_placeholder">Сдача</p><FilterIconSvg/>
               </div>} 
               className="fillter_select"
+              allowClear
+
               >
                   <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                   <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>

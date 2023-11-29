@@ -130,6 +130,7 @@ export const LessonsScheduleStudents = () => {
     ]
 
     return <section className={`lessonsSchedule__container ${theme}`}>
+        <h1 className='studentProfileTab__title'>Розклад студент</h1>
         {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">
                 <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    

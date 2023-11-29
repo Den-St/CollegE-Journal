@@ -29,6 +29,8 @@ export const Journal = () => {
                         <p className="fillter_placeholder">Група</p><FilterIconSvg/>
                     </div>} 
                     className="fillter_select"
+                    allowClear
+
                     >
                         <Option value={'3-11'} label={'3-11'}>3-11 <FilterIconSvg/></Option>
                         <Option value={'3-21'} label={'3-21'}>3-21 <FilterIconSvg/></Option>
@@ -46,6 +48,8 @@ export const Journal = () => {
                         <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
                     </div>}
                     className="fillter_select"
+                    allowClear
+
                     >
                         <Option value={'Жовтень'} label={'Жовтень'}>Жовтень <FilterIconSvg/></Option>
                         <Option value={'Грудень'} label={'Грудень'}>Грудень <FilterIconSvg/></Option>
@@ -58,6 +62,8 @@ export const Journal = () => {
                         <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
                     </div>} 
                     className="fillter_select"
+                    allowClear
+
                     >
                         <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
                         <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>

@@ -14,8 +14,9 @@ export const Groups = () => {
                     <Select 
                     placeholder={<div className="fillterPlaceholder_container">
                         <p className="fillter_placeholder">Рік</p> <FilterIconSvg/>
-                    </div>} 
+                    </div>}
                     className="fillter_select"
+                    allowClear
                     >
                         <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                         <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>
@@ -29,6 +30,8 @@ export const Groups = () => {
                         <p className="fillter_placeholder">Спеціальність</p><FilterIconSvg/>
                     </div>} 
                     className="fillter_select"
+                    allowClear
+
                     >
                         <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
                         <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>

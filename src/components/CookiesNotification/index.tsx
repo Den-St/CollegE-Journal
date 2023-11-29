@@ -18,8 +18,10 @@ export const CookiesNotification = () => {
     if(isCookiesAccepted) return <></>;
 
     return <div className={`cookies__container ${theme}`}>
-        <CollegeLogoSvg/>
-        <p className="cookiesInfo">Ми використовуємо Cookies, для покращення вашого опиту користування сайтом та повного функціонування сайту</p>
+        <div className="cookiesNotificationLeft_container">
+            <div style={{'marginTop':'-10px'}}><CollegeLogoSvg/></div>
+            <p className="cookiesInfo">Ми використовуємо Cookies, для покращення вашого опиту користування сайтом та повного функціонування сайту</p>
+        </div>
         <button className="cookiesAccept_button" onClick={onAccept}>Прийняти усе</button>
     </div>
 }

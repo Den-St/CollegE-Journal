@@ -18,6 +18,7 @@ export const Students = () => {
                         <p className="fillter_placeholder">Група</p><FilterIconSvg/>
                     </div>} 
                     className="fillter_select"
+                    allowClear
                     >
                         <Option value={'3-11'} label={'3-11'}>3-11 <FilterIconSvg/></Option>
                         <Option value={'3-21'} label={'3-21'}>3-21 <FilterIconSvg/></Option>
