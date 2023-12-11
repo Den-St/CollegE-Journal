@@ -175,3 +175,8 @@ a:focus,a:active{outline: none;}
     }
    
 }
+@media screen and (min-width:1920px) {
+    .container{
+        max-width: 77.3%;
+    }
+}

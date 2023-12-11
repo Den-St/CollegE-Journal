@@ -76,16 +76,7 @@
 .ant-picker-dropdown{
     inset: 406px auto auto 46% !important;
 }
-@media screen and (min-width:'1440px') {
-    .ant-picker-dropdown{
-        inset: 406px auto auto 58% !important;
-    }
-}
-@media screen and (min-width:'1920px') {
-    .ant-picker-dropdown{
-        inset: 406px auto auto 46% !important;
-    }
-}
+
 
 .quill{
     background-color: #102936;
@@ -169,7 +160,6 @@
         .quill{
             background-color: #102936;
             border:none;
-            max-width: 1120px;
         }
         .ql-editor{
             height: 414px !important;
@@ -275,3 +265,16 @@
     }
 }
 
+@media screen and (min-width:'1440px') {
+    .ant-picker-dropdown{
+        inset: 406px auto auto 58% !important;
+    }
+}
+@media screen and (min-width:'1920px') {
+    .ant-picker-dropdown{
+        inset: 406px auto auto 46% !important;
+    }
+    .quill{
+        max-width: unset;
+    }
+}

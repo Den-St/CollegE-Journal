@@ -3,9 +3,18 @@ import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import './loginStyles.scss';
 import {Input} from 'antd';
 import { useThemeStore } from '../../store/themeStore';
+import { useEffect, useState } from 'react';
 
 export const SignIn = () => {
     const theme = useThemeStore().theme;
+    useEffect(() => {
+        document.title = "Вхід до акаунту";
+    },[]);
+    const [passwordInputType,setPasswordInputType] = useState<"password" | "text">("password");
+    const onTogglePassword = () => {
+        setPasswordInputType(prev => prev === "password" ? "text" : "password");
+    }
+    
     return <>
     <div className={`signIn__container ${theme}`}>
         <div className='signIn__wrapper'>
@@ -15,8 +24,8 @@ export const SignIn = () => {
                     <input type={'email'} autoComplete={'false'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input type={'password'} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
-                    <span className='passwordEye__button'><ToggleHidePasswordEye/></span>
+                    <input type={passwordInputType} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
+                    <span onClick={onTogglePassword} className='passwordEye__button'><ToggleHidePasswordEye/></span>
                 </div>
                 <div className="signInSettings__container">
                     <div className="rememberMe__container">

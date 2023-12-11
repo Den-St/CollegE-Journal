@@ -10,6 +10,7 @@
     background: url('../../assets/images/signInBackground.png');
 }
 
+
 .signIn__wrapper{
     width: 474px;
     display: flex;
@@ -17,7 +18,17 @@
     align-items: center;
     gap:40px;
 }
-
+@media screen and (min-width:1920px) {
+    .signIn__wrapper{
+        width: 574px;
+    }
+    .signIn__form {
+        gap:80px;
+    }
+    .signInWithGoogle__button{
+        margin-bottom: 40px;
+    }
+}
 .signIn__header{
     font-weight: 500;
     font-size: 28px;
@@ -75,6 +86,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .signInSettings__container{
@@ -132,6 +144,7 @@
     background-color: white;
     box-shadow: 0px 1px 15px #0b1d26a7;
 }
+
 .signInWithGoogle__icon{
     position: absolute;
     top:18px;

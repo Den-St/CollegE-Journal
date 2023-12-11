@@ -75,7 +75,6 @@
     flex-direction: column;
     align-items: center;
     gap:40px;
-    box-shadow: 0px 1px 10px 0px #0000001A;
     border-radius: 10px 5px;
     padding: 20px 80px;
     width: 635px;
@@ -167,11 +166,11 @@
     &.dark{
         .adminPanelControllerItem__container{
             background-color: #0a1d26;
-    box-shadow: 0 0 15px 0 #D4D4D41A;
-
+            box-shadow: 0 0 15px 0 #D4D4D41A;
         }
         .adminPanelStatBlock__container{
             background-color: #0a1d26;
+            box-shadow: 0 0 15px 0 #D4D4D41A;
         }
         .adminPanelMain__title{
             color:white;
@@ -432,3 +431,4 @@
         }
     }
 }
+

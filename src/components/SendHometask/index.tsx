@@ -180,9 +180,7 @@ export const SendHomeTask = () => {
                             <h2 className="sendHomeTaskCommentsTitle">Коментарі</h2>
                             <div className="sendHomeTaskComments__container">
                                 <div className="sendHomeTaskCommentItem__container">
-                                    <div className="sendHomeTaskCommentInput__container">
-                                        <TextArea className="commentTextArea"  autoSize placeholder="Коментар для викладача"/>
-                                    </div>
+                                    <TextArea className="commentTextArea"  autoSize placeholder="Коментар для викладача"/>
                                     <img className="sendHomeTaskComment__avatar" src={defaultAvatar}/>
                                 </div>
                                 <div className="sendHomeTaskCommentItem__container">
@@ -207,9 +205,7 @@ export const SendHomeTask = () => {
                 <h2 className="sendHomeTaskCommentsTitle">Коментарі</h2>
                 <div className="sendHomeTaskComments__container">
                     <div className="sendHomeTaskCommentItem__container">
-                        {/* <div className="sendHomeTaskCommentInput__container"> */}
-                            <TextArea className="commentTextArea"  autoSize placeholder="Коментар для викладача"/>
-                        {/* </div> */}
+                        <TextArea className="commentTextArea"  autoSize placeholder="Коментар для викладача"/>
                         <img className="sendHomeTaskComment__avatar" src={defaultAvatar}/>
                     </div>
                     <div className="sendHomeTaskCommentItem__container">

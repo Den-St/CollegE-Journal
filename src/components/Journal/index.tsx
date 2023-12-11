@@ -71,6 +71,21 @@ export const Journal = () => {
                         <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
                     </Select>
                 </div>
+                <div className="adminPanelStudentList_fillterContainer fillter_container">
+                    <Select 
+                    placeholder={<div className="fillterPlaceholder_container">
+                        <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
+                    </div>} 
+                    className="fillter_select"
+                    allowClear
+
+                    >
+                        <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
+                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
+                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
+                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
+                    </Select>
+                </div>
             </div>
         </section>
         <section className='journal__container'>

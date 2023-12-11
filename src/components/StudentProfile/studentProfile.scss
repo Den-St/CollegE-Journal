@@ -154,7 +154,7 @@
             color:white;
         }
         .studentProfileStatistic__container{
-            background-color: rgb(27,40,48);
+            background-color: rgb(27,40,48,0.85);
         }
         .studentProfileTab__title{
             color:white;
@@ -164,6 +164,9 @@
             .diagonalArrowSvg{
                 fill:orange;
             }
+        }
+        .medium{
+            color:#EFB42D;
         }
     }
     &.light{
@@ -189,3 +192,12 @@
 
 }
 
+@media screen and (min-width:1920px) {
+    .studentProfile_img{
+        width: 120px;
+        height: 120px;
+    }
+    .studentProfileStatistic__container{
+        padding: 25px 105px 25px 151px;
+    }
+}

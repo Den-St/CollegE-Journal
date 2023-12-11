@@ -18,7 +18,7 @@ import { useHomePage } from '../../hooks/homePage';
 const localNews:NewsT[] = [
     {
         id:1,
-        topic:'Рабські збори',
+        topic:'Рабські збори123',
         data:'07.05.2023',
         body:'На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі...'
     },
@@ -129,12 +129,12 @@ export const HomePage = () => {
                             <h4 className="eGurnal">ЕЛЕКТРОНИЙ ЖУРНАЛ</h4>
                         </div>
                         <div className="main__phrase">
-                            <h1 className="mPhrase">Хто володіє інформацією – той володіє світом</h1>
+                            <h1 className="mPhrase">{homePageData?.topic || `Хто володіє інформацією – той володіє світом`}</h1>
                         </div>
                     </div>
                     <div className="pageNav">
                         {Object.keys(sectionIds).map((secId) => 
-                            <button onClick={() => onChangeSection(sectionIds[secId as sectionsKeys])} className={`pNav__container pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>
+                            <button onClick={() => onChangeSection(sectionIds[secId as sectionsKeys])} className={`pNav__container pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`} key={secId}>
                                 <h1 className={`pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>{sectionIds[secId as sectionsKeys].title}</h1>
                             </button>
                         )}
@@ -170,8 +170,8 @@ export const HomePage = () => {
             </div>
             <div className="slider__container">
                 {carousels.map(carousel => 
-                    <Carousel slidesToShow={carousel.slidesToShow} slidesToScroll={1} className={carousel.className} arrows={true} dots={false} infinite={true} >
-                        {!loading ? homePageData?.news.map(newsItem => 
+                    <Carousel key={carousel.className} slidesToShow={carousel.slidesToShow > Number(homePageData?.news?.length) ? homePageData?.news.length : carousel.slidesToShow} slidesToScroll={1} className={carousel.className} arrows={true} dots={false} infinite={true} >
+                        {!!homePageData?.news.length ? homePageData?.news.map(newsItem => 
                             <div className="slider__element" key={newsItem.id}>
                                 <div className="news__title">
                                     <h1 className="news__name">{newsItem.topic}</h1>
@@ -212,11 +212,9 @@ export const HomePage = () => {
                     Інформація у журналі
                 </h1>
                 <h4 className="info__paragraph">
-                    {!loading ?
-                    homePageData?.about_journal
-                    : `На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
+                    {homePageData?.about_journal
+                    || `На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
                     Електронний щоденник дозволяє вчителям швидко та зручно вносити інформацію про оцінки, пропущені заняття та інші важливі події в житті коледжу, а  учням - дізнаватися про ці події негайно.`}
-                    
                 </h4>
                 <a href="#" className="info__btn">Увійти</a>
             </div>
@@ -239,13 +237,11 @@ export const HomePage = () => {
         <div className="about__content">
             <div className="about__block">
                 <h1 className="about__h1">
-                    {!loading 
-                    ? homePageData?.about_us.topic 
-                    : `Ми Сучасні Митці`}</h1>
+                    {homePageData?.about_us.topic 
+                    || `Ми Сучасні Митці`}</h1>
                 <p className="about__paragraph">
-                    {!loading 
-                    ? homePageData?.about_us.body
-                    : `Ми, студенти коледжу зв’язку,  зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді.  Ми сподіваємось, що наш проект вам буде корисним.`}
+                    { homePageData?.about_us.body
+                    || `Ми, студенти коледжу зв’язку,  зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді.  Ми сподіваємось, що наш проект вам буде корисним.`}
                 </p>
             </div>
             <div className="about__img">

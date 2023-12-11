@@ -40,14 +40,7 @@
     gap:40px;
     width: 56%;
 }
-@media screen and (max-width:1440px) {
-    .studentList__container{
-        width: 85%;
-    }
-    .studentTitle__container{
-        width: 75%;
-    }
-}
+
 .studentItems__container {
     display: flex;
     flex-wrap: wrap;
@@ -177,5 +170,28 @@
                 stroke:#EFB42D;
             }
         }
+    }
+}
+
+@media screen and (min-width:1920px) {
+    .studentTitle__container{
+        width: 76.5%;
+    }
+    .studentList__container{
+        width: 83%;
+    }
+    .student__container{
+        width: 720px;
+    }
+    // .fillter_container{
+    //     margin-left: -11px;
+    // }
+}
+@media screen and (max-width:1440px) {
+    .studentList__container{
+        width: 85%;
+    }
+    .studentTitle__container{
+        width: 75%;
     }
 }

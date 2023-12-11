@@ -319,13 +319,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding:0 5px;
+    padding:16px 5px 16px 30px;
     border-radius: 10px 5px 10px 5px;
-    box-shadow: 0px 1px 15px 0px #0000001A;
     min-height: 60px !important;
+    border-color:transparent !important;
+
 }
 .commentTextArea::placeholder{
     height: 100%;
+}
+.sendHomeTaskCommentInput__container{
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    border-radius: 10px 5px 10px 5px;
+    box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.1019607843);
+    background-color: #102936;
 }
 .sendHomeTaskMain__container{
     &.dark{
@@ -427,16 +436,11 @@
             background-color: #102936;
         }
         .commentTextArea{
-            // height: 60px !important;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding:0 5px;
-            border-radius: 10px 5px 10px 5px;
-            box-shadow: 0px 1px 15px 0px #0000001A;
-            // min-height: 60px !important;
+   
             background-color:#102936;
+        }
+        .sendHomeTaskCommentInput__container{
+            background-color: #102936;
         }
     }
     &.light{
@@ -457,3 +461,20 @@
         }
     }
 }
+
+@media screen and (min-width:1920px) {
+    .sendHomeTaskPeopleFirst__container{
+        margin-right: 100px;
+    }
+    .sendHomeTaskPeopleDone__container{
+        justify-content: space-between;
+    }
+    .sendHomeTaskCommentItem__container{
+        max-width: 663px;
+    }
+    .sendHomeTaskOtherTaskItem__container{
+        width: 573px;
+        align-items: center;
+    }
+}
+
