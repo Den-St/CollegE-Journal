@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import axiosConfig from "../axiosConfig";
 import { HomePageDataT } from "../types/homePageData";
 
 const fetchHomePageData = async () =>{
-    return await fetch('https://54.37.74.248:5000/api/main-page').then(res => res.json());
+    return await axiosConfig.get('main-page').then(res => res.data);
 }
 
 export const useHomePage = () => {

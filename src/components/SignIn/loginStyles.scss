@@ -169,11 +169,24 @@
     position: absolute;
     top:20px;
 }
+.signIn_errorMessage{
+    font-family: Alegreya Sans;
+    font-size: 16px;
+    line-height: 19px;
 
+    width: 100%;
+    padding: 6px 30px;
+    border-radius: 10px 5px;
+    margin-top: -30px;
+    margin-bottom: -20px;
+}
 .signIn__container{
-    // &.dark{
-       
-    // }
+    &.dark{
+       .signIn_errorMessage{
+            background-color: #ED343466;
+            color: white;
+       }
+    }
     &.light{
         .signIn__container{
             background: url('../../assets/images/signInBackgroundLight.png');

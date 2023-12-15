@@ -11,9 +11,9 @@ import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
 import { useHomePageSections } from '../../hooks/homePageSections';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { HomePageDataT, NewsT } from '../../types/homePageData';
 import { useHomePage } from '../../hooks/homePage';
+import { useUserStore } from '../../store/userStore';
 
 const localNews:NewsT[] = [
     {
@@ -99,6 +99,8 @@ export const HomePage = () => {
     const theme = useThemeStore().theme;
     const {onChangeSection,currentSection} = useHomePageSections();
     const {homePageData,loading} = useHomePage(); 
+    const user = useUserStore().user;
+    console.log(user);
     
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">

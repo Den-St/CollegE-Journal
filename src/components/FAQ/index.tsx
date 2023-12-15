@@ -1,12 +1,23 @@
-import { Collapse, CollapseProps } from "antd";
+import { Collapse, CollapseProps, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { CSSProperties } from "react";
+import { useFaq } from "../../hooks/faq";
 import { useThemeStore } from "../../store/themeStore"
 import "./faqStyles.scss";
 
 export const FAQ = () => {
     const theme = useThemeStore().theme;
-    const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
+    const {faqItems,loading} = useFaq();
+
+    const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => 
+    faqItems.length ?
+      faqItems.map(faq => ({
+        key:faq.question,
+        label:faq.question,
+        children:<p>{faq.answer}</p>,
+        style: panelStyle
+      }))
+    : [
         {
           key: '1',
           label: 'Питання від тестувальника номер 1',
@@ -62,14 +73,13 @@ export const FAQ = () => {
         border: 'none',
         color:'black'
       };
-
     return <main className={`faqMain__container ${theme}`}>
         <h1 className="faqTitle">Питання до сайту які можуть виникнути</h1>
-        <section className="faqQuestions__container">
+        {!loading ? <section className="faqQuestions__container">
             <Collapse 
                 items={getItems(panelStyle)}
-            />
-        </section>
+            /> 
+        </section>: <Spin/>}
         <div className="faqForm">
             <h1 className="faqTitle">Не має вашого питання?</h1>
             <TextArea className="faqQuestionTextArea" autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>

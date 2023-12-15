@@ -4,6 +4,14 @@ import './loginStyles.scss';
 import {Input} from 'antd';
 import { useThemeStore } from '../../store/themeStore';
 import { useEffect, useState } from 'react';
+import { useSignIn } from '../../hooks/signIn';
+import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
+import { routes } from '../../consts/routes';
+
+const statusCodes:Record<number,string> = {
+    0:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!',
+}
 
 export const SignIn = () => {
     const theme = useThemeStore().theme;
@@ -14,17 +22,26 @@ export const SignIn = () => {
     const onTogglePassword = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");
     }
-    
+    const {onLogin,status,loading} = useSignIn();
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch
+    } = useForm<{mailbox_address:string,user_password:string}>();
+
+    if(status === 1) return <Navigate to={routes.homePage}/>
+
     return <>
     <div className={`signIn__container ${theme}`}>
         <div className='signIn__wrapper'>
             <h1 className="signIn__header">Вхід</h1>
-            <form className="signIn__form" autoComplete={'off'}>
+            <form onSubmit={handleSubmit(onLogin)} className="signIn__form" autoComplete={'off'}>
                 <div className="signInInput__container">
-                    <input type={'email'} autoComplete={'false'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input {...register('mailbox_address',)} type={'email'} autoComplete={'false'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input type={passwordInputType} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
+                    <input {...register('user_password')} type={passwordInputType} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
                     <span onClick={onTogglePassword} className='passwordEye__button'><ToggleHidePasswordEye/></span>
                 </div>
                 <div className="signInSettings__container">
@@ -34,7 +51,8 @@ export const SignIn = () => {
                     </div>
                     <p className="forgotPassword">Забули пароль?</p>
                 </div>
-                <button className="signIn__button">Увійти</button>
+                {status !== undefined && <p className='signIn_errorMessage'>{statusCodes[status]}</p>}
+                <input disabled={loading} type={'submit'} className="signIn__button" value={'Увійти'}/>
             </form>
             <button className='signInWithGoogle__button'>
                 <span className='signInWithGoogle__icon'>

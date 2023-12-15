@@ -78,6 +78,9 @@
 .sendHomeTaskHomeTaskAttachedLinkItem{
     border-radius: 10px 5px;
 }
+.quill{
+    max-width: 1120px;
+}
 .createStudyMaterialsMain__container{
     &.dark{
         .createStudyMaterialsHeader__input{
@@ -246,5 +249,11 @@
         .quill{
             box-shadow: 0px 1px 15px 0px #9898984f !important;
         }
+    }
+}
+
+@media screen and (min-width:1920px) {
+    .quill{
+        max-width: unset !important;
     }
 }
