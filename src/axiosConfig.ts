@@ -1,16 +1,17 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import {getToken} from "./helpers/auth";
 
 export const getConfig = () => {
     const token = getToken();
     return {
-        headers: {Authorization: `Bearer ${token || ''}`}
+        headers: {Authorization: token}
     }
 };
 
 const instance = axios.create({
-    baseURL:"https://54.37.74.248:5000/api/",
-    ...getConfig()
+    baseURL:"https://collegejournal.ovh/api/",
+    ...getConfig(),
 });
 
 

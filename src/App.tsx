@@ -1,9 +1,11 @@
+import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import axiosConfig from './axiosConfig';
 import { Layout } from './components/Layout';
 import { RoutesSwitch } from './consts/routes';
 import { themes } from './consts/themes';
 import './globalStyles.scss';
+import { getToken } from './helpers/auth';
 import { useThemeStore } from './store/themeStore';
 
 function App() {
@@ -17,13 +19,13 @@ function App() {
       document.body.classList.add(theme);
     }
   },[theme]);
-  // useEffect(() => {
-  //   try{
-  //     axiosConfig.get('users/testcookies',).then(res => console.log(res.data));
-  //   }catch(err){
-  //     console.error(err);
-  //   }
-  // },[])
+  useEffect(() => {
+    try{
+      axiosConfig.post('users/testcookies',).then(res => console.log(res.data));
+    }catch(err){
+      console.error(err);
+    }
+  },[])
   return <Layout>
     <RoutesSwitch/>
   </Layout>

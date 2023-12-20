@@ -34,25 +34,52 @@ export const StudyMaterialsCheckTeacher = () => {
         </section>
         <section className='smCheckDescription__section'> 
             <h3 className='smCheckSection__title'>Опис:</h3>
-            <p className='smCheckdescription__text'>
-                На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, на сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів,
-            </p>
-            <div className="sendHomeTaskHomeTaskAttachedInfo__container">
-                <div className="sendHomeTaskHomeTaskAttachedFiles__container">
-                    <div className="sendHomeTaskHomeTaskAttachedFileItem">
-                        <PaperClip/>
-                        <div className="sendHomeTaskHomeTaskAttachedFileItemInfo__container">
-                            <span className="sendHomeTaskHomeTaskAttachedFileItemName">Назва файлу</span>
-                            <span className="sendHomeTaskHomeTaskAttachedFileItemFormat">PDF</span>
+            <div className='smCheckxxxl_container'>
+                <p className='smCheckdescription__text'>
+                    На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, на сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів,
+                </p>
+                <div className="smCheckAttachFileInput__container">
+                    <div className="sendHomeTaskHomeTaskAttachedFiles__container">
+                        <div className="sendHomeTaskHomeTaskAttachedFileItem">
+                            <PaperClip/>
+                            <div className="sendHomeTaskHomeTaskAttachedFileItemInfo__container">
+                                <span className="sendHomeTaskHomeTaskAttachedFileItemName">Назва файлу</span>
+                                <span className="sendHomeTaskHomeTaskAttachedFileItemFormat">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sendHomeTaskHomeTaskAttachedLinks__container">
+                        <div className="sendHomeTaskHomeTaskAttachedLinkItem">
+                            <PaperClip/>
+                            <div className="sendHomeTaskHomeTaskAttachedLinkItemInfo__container">
+                                <span className="sendHomeTaskHomeTaskAttachedLinkItemName">Назва сторінки</span>
+                                <span className="sendHomeTaskHomeTaskAttachedLinkItemUrl">google.com</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="sendHomeTaskHomeTaskAttachedLinks__container">
-                    <div className="sendHomeTaskHomeTaskAttachedLinkItem">
-                        <PaperClip/>
-                        <div className="sendHomeTaskHomeTaskAttachedLinkItemInfo__container">
-                            <span className="sendHomeTaskHomeTaskAttachedLinkItemName">Назва сторінки</span>
-                            <span className="sendHomeTaskHomeTaskAttachedLinkItemUrl">google.com</span>
+            </div>
+            <div className='smCheckxxl_container'>
+                <p className='smCheckdescription__text'>
+                    На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, на сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів,
+                </p>
+                <div className="smCheckAttachFileInput__container">
+                    <div className="sendHomeTaskHomeTaskAttachedFiles__container">
+                        <div className="sendHomeTaskHomeTaskAttachedFileItem">
+                            <PaperClip/>
+                            <div className="sendHomeTaskHomeTaskAttachedFileItemInfo__container">
+                                <span className="sendHomeTaskHomeTaskAttachedFileItemName">Назва файлу</span>
+                                <span className="sendHomeTaskHomeTaskAttachedFileItemFormat">PDF</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sendHomeTaskHomeTaskAttachedLinks__container">
+                        <div className="sendHomeTaskHomeTaskAttachedLinkItem">
+                            <PaperClip/>
+                            <div className="sendHomeTaskHomeTaskAttachedLinkItemInfo__container">
+                                <span className="sendHomeTaskHomeTaskAttachedLinkItemName">Назва сторінки</span>
+                                <span className="sendHomeTaskHomeTaskAttachedLinkItemUrl">google.com</span>
+                            </div>
                         </div>
                     </div>
                 </div>

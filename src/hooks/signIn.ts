@@ -1,6 +1,8 @@
+import { setToken } from './../helpers/auth';
 import { useUserStore } from '../store/userStore';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
+import Cookies from 'js-cookie';
 
 export const useSignIn = () => {
     const [status,setStatus] = useState<number>();
@@ -13,8 +15,9 @@ export const useSignIn = () => {
             const res = (await axiosConfig.post('users/login',
                 data
             ));
+
             if(res?.data.status === 1){
-                console.log('1');
+                setToken(res.data.token);
                 signIn({
                     mailbox_adress:data.mailbox_address,
                     name:'user_name'

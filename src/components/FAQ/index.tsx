@@ -2,7 +2,7 @@ import { Collapse, CollapseProps, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { CSSProperties } from "react";
 import { useFaq } from "../../hooks/faq";
-import { useThemeStore } from "../../store/themeStore"
+import { useThemeStore } from "../../store/themeStore";
 import "./faqStyles.scss";
 
 export const FAQ = () => {
