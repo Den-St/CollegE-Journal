@@ -19,13 +19,13 @@ function App() {
       document.body.classList.add(theme);
     }
   },[theme]);
-  useEffect(() => {
-    try{
-      axiosConfig.post('users/testcookies',).then(res => console.log(res.data));
-    }catch(err){
-      console.error(err);
-    }
-  },[])
+  // useEffect(() => {
+  //   try{
+  //     axiosConfig.post('users/testcookies',).then(res => console.log(res.data));
+  //   }catch(err){
+  //     console.error(err);
+  //   }
+  // },[])
   return <Layout>
     <RoutesSwitch/>
   </Layout>
