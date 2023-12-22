@@ -21,6 +21,7 @@
     width: 100%;
     display: flex;
     gap:30px;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .homeTasks_subject{
@@ -336,12 +337,13 @@
         padding: 0 5%;
     }
 }
-@media screen and (min-width:'1920px') {
+@media screen and (min-width:'1600px') {
     .homeTaskTasks__container{
         padding: 0 200px;
     }
     .homeTasks_subject {
-        width: 344px;
+        max-width: 344px;
+        width: 23%;
     }
     .homeTaskSubjects_title{
         margin: 0;
@@ -350,7 +352,9 @@
         padding: 0 10.7%;
     }
     .homeTaskItem{
-        width: 573px;
+        // width: 573px;
+        width: 40%;
+
     }
     .homeTaskCommentsItem__container{
         width: 573px;

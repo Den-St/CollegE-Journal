@@ -258,17 +258,14 @@ img{vertical-align: top;}
         width: 75%; 
     }
 }
-@media screen and (min-width:'1820px'){
-    // .ant-carousel .slider_xxxl{
-    //     display: none;
-    // }
-    .ant-carousel .slider_xxl{
+@media screen and (max-width:'1570px'){
+    .ant-carousel .slider_xxxl{
         display: block;
-        width: 75%;
     }
 }
 
-@media screen and (max-width:'1570px'){
+
+@media screen and (max-width:'1820px'){
     .ant-carousel .slider_xxxl{
         display: none;
     }
@@ -280,7 +277,19 @@ img{vertical-align: top;}
         width: 65%; 
     }
 }
-
+@media screen and (min-width:'1820px'){
+    // .ant-carousel .slider_xxxl{
+    //     display: none;
+    // }
+    .ant-carousel .slider_xl{
+        display: none;
+        width: 65%; 
+    }
+    .ant-carousel .slider_xxl{
+        display: block;
+        width: 75%;
+    }
+}   
 @media screen and (max-width:'1440px'){
     .ant-carousel .slider_xxxl{
         display: none;

@@ -31,14 +31,11 @@
     gap: 30px;
 }
 
-
-
-
 .studentList__container {
     display: flex;
     flex-direction: column;
     gap:40px;
-    width: 56%;
+    width: 100%;
 }
 
 .studentItems__container {
@@ -173,15 +170,16 @@
     }
 }
 
-@media screen and (min-width:1920px) {
+@media screen and (min-width:1600px) {
     .studentTitle__container{
         width: 76.5%;
     }
     .studentList__container{
-        width: 83%;
+        width: 90%;
     }
     .student__container{
-        width: 720px;
+        width: 48%;
+        max-width: 720px;
     }
     // .fillter_container{
     //     margin-left: -11px;

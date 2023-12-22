@@ -74,51 +74,47 @@
     flex-wrap: wrap;
     width:100%;
 }
-@media screen and (max-width:2900px) {
-    .studyMaterialsItems__container{
-        width:84%;
-    }
-}
-@media screen and (max-width:2200px) {
-    .studyMaterialsItems__container{
-        width:90%;
-    }
-}
-@media screen and (max-width:1920px) {
-    .studyMaterialsItems__container{
-        width:74.55%;
-    }
-}
-@media screen and (max-width:1800px) {
-    .studyMaterialsItems__container{
-        width:82.55%;
-    }
-}
+// @media screen and (max-width:2900px) {
+//     .studyMaterialsItems__container{
+//         width:84%;
+//     }
+// }
+// @media screen and (max-width:2200px) {
+//     .studyMaterialsItems__container{
+//         width:90%;
+//     }
+// }
+// @media screen and (max-width:1920px) {
+//     .studyMaterialsItems__container{
+//         width:74.55%;
+//     }
+// }
+// @media screen and (max-width:1800px) {
+//     .studyMaterialsItems__container{
+//         width:84.55%;
+//     }
+// }
 // @media screen and (max-width:1794px) {
 //     .studyMaterialsItems__container{
 //         width:82.55%;
 //     }
 // }
-@media screen and (max-width:1600px) {
-    .studyMaterialsItems__container{
-        width:90.5%;
-    }
-}
-@media screen and (max-width:1440px) {
-    .studyMaterialsItems__container{
-        width:100%;
-    }
-}
-@media screen and (max-width:1310px) {
-    .studyMaterialsItems__container{
-        width:100%;
-    }
-}
-@media screen and (max-width:945px) {
-    .studyMaterialsItems__container{
-        justify-content: center;
-    }
-}
+// @media screen and (max-width:1600px) {
+//     .studyMaterialsItems__container{
+//         width:90.5%;
+//     }
+// }
+
+// @media screen and (max-width:1310px) {
+//     .studyMaterialsItems__container{
+//         width:100%;
+//     }
+// }
+// @media screen and (max-width:945px) {
+//     .studyMaterialsItems__container{
+//         justify-content: center;
+//     }
+// }
 .studyMaterialsItem__container{
     display: flex;
     flex-direction: column;
@@ -149,6 +145,7 @@
     font-size: 20px;    
     font-family: Alegreya sans;
     line-height: 24px;
+    transition: 0.2s;
 }
 .studyMaterialsContentHashTags__container{
     display: flex;
@@ -227,7 +224,6 @@
         .studyMaterialsContent__container:hover{
             .studyMaterialsContent__text{
                 color:white;
-                transition: 0.2s;
                 cursor: pointer;
             }
         }
@@ -298,5 +294,26 @@
         .studyMaterialSeeMore__button:hover{
             color:#EFB42D;
         }
+    }
+}
+
+@media screen and (min-width:1600px) {
+    .studyMaterialsItems__container{
+        justify-content: center;
+        width:90.5%;
+    }
+}
+
+@media screen and (max-width:1600px) and (min-width:1441px)  {
+    .studyMaterialsItems__container{
+        justify-content: center;
+        width:100%;
+    }    
+}
+
+@media screen and (max-width:1440px) {
+    .studyMaterialsItems__container{
+        width:100%;
+        justify-content: center;
     }
 }

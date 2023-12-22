@@ -1,11 +1,10 @@
-import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import axiosConfig from './axiosConfig';
 import { Layout } from './components/Layout';
 import { RoutesSwitch } from './consts/routes';
 import { themes } from './consts/themes';
 import './globalStyles.scss';
-import { getToken } from './helpers/auth';
+import { AuthProdiver } from './providers/authProvider';
 import { useThemeStore } from './store/themeStore';
 
 function App() {
@@ -21,13 +20,15 @@ function App() {
   },[theme]);
   // useEffect(() => {
   //   try{
-  //     axiosConfig.post('users/testcookies',).then(res => console.log(res.data));
+  //     axiosConfig.post(,).then(res => console.log(res.data));
   //   }catch(err){
   //     console.error(err);
   //   }
   // },[])
   return <Layout>
-    <RoutesSwitch/>
+    <AuthProdiver>
+      <RoutesSwitch/>
+    </AuthProdiver>
   </Layout>
 }
 

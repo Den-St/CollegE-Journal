@@ -15,7 +15,6 @@ export const useHomePageSections = () => {
         const sections = Object.values(sectionIds);
         for(let i = 0;i < sections.length;i++){
             if(sections[i].distanceTop <= distanceFromTop && sections[i].distanceBottom >= distanceFromTop){
-                // window.location.href = sections[i].id;
                 setCurrentSection(sections[i]);
                 return;
             }

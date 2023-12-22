@@ -85,7 +85,7 @@ export const PublicRoutes = [
     <Route key={routes.adminPanel} element={<AdminPanel/>} path={routes.adminPanel}/>,                       //layout done
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
-    <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
+    // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,                       //layout done
     <Route key={routes.createUser} element={<CreateUser/>} path={routes.createUser}/>,                       //layout done
     <Route key={'*'} element={<NoMatch/>} path={'*'}/>,                       //layout done

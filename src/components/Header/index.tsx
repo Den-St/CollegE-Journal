@@ -7,12 +7,30 @@ import { useThemeController } from '../../hooks/themeController';
 import { sectionIds } from '../../consts/sectionIds';
 import { headerRoutes, routes } from '../../consts/routes';
 import { goToSection } from '../../helpers/goToSection';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import _debounce from 'lodash/debounce';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
 
-    return <header className={`header ${theme} ${route+'home'}`}>
+    const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden'>('visible');
+    const lastScrollPos = useRef(window.scrollY);
+    const handleScroll = () => {
+        const distanceFromTop = window.scrollY;
+
+        console.log(distanceFromTop >= lastScrollPos.current ? 'hidden' : 'visible',distanceFromTop,lastScrollPos.current);
+        
+        setHeaderVisibilityClass(distanceFromTop > lastScrollPos.current ? 'hidden' : 'visible');
+        lastScrollPos.current = window.scrollY;
+    }
+    const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[lastScrollPos.current]);
+    
+    useEffect(() => {
+        window.addEventListener('scroll',debounceHandleScroll);
+    },[lastScrollPos]);
+
+    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass}`}>
             <div className="container">
                 <div className="header__wrapper">
                     <div className="logo__block">
@@ -92,11 +110,11 @@ export const Header = () => {
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
-                        <Link to={headerRoutes.scheduleCreate} className="menu__button">ScheduleCreate
+                        {/* <Link to={headerRoutes.scheduleCreate} className="menu__button">ScheduleCreate
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
-                        </Link>
+                        </Link> */}
                         <Link to={headerRoutes.faq} className="menu__button">FAQ
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>

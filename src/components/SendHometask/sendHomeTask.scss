@@ -132,6 +132,7 @@
 .sendHomeTaskBottom__container{
     width: 100%;
     display: flex;
+    row-gap: 30px;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -462,8 +463,9 @@
     }
 }
 
-@media screen and (min-width:1920px) {
+@media screen and (min-width:1440px) {
     .sendHomeTaskPeopleFirst__container{
+        // margin-right: 10%;
         margin-right: 100px;
     }
     .sendHomeTaskPeopleDone__container{
@@ -473,8 +475,29 @@
         max-width: 663px;
     }
     .sendHomeTaskOtherTaskItem__container{
-        width: 573px;
+       width: 573px;
+        background-color: green;
         align-items: center;
     }
 }
+@media screen and (max-width:1440px) {
+    .sendHomeTaskPeopleFirst__container{
+        // margin-right: 10%;
+        margin-right: 0;
+    }
 
+}
+@media screen and (max-width:1660px) {
+    .sendHomeTaskPeopleFirst__container{
+        margin-right: 10%;
+    }
+}
+
+@media screen and (max-width:1600px) {
+    .sendHomeTaskComments__section{
+        width: 45%;
+    }
+    .sendHomeTaskOther__container{
+        width: 45%;
+    }
+}

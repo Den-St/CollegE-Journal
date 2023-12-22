@@ -156,7 +156,7 @@
         padding: 0 15%;
     }
 }
-@media screen and (min-width:'1920px') {
+@media screen and (min-width:'1440px'){
     // .groupsFillters__container{
     //     margin-left: -11px;
     // }
@@ -165,7 +165,8 @@
         gap:20px;
     }
     .groupItem__container{
-        width: 358px;
+        width: 25%;
+        max-width: 350px;
     }
     .groupCourseItemGroups__container{
         column-gap: 36px;

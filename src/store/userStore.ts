@@ -15,6 +15,7 @@ export const useUserStore = create<StoreType>((set) => ({
     user:{
         name:'',
         mailbox_adress:'',
+        token:''
     },
     signIn: (userData) => set((state) => ({ ...state,...userData })),
 }));

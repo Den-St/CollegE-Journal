@@ -1,4 +1,5 @@
 export type UserT = {
     name:string,
-    mailbox_adress:string
+    mailbox_adress:string,
+    token:string
 }

@@ -1,5 +1,6 @@
 import { GoogleIconSvg } from '../../assets/svgs/googleIconSvg';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
+import {EyeOutlined} from "@ant-design/icons";
 import './loginStyles.scss';
 import {Input} from 'antd';
 import { useThemeStore } from '../../store/themeStore';
@@ -22,7 +23,7 @@ export const SignIn = () => {
     const onTogglePassword = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");
     }
-    const {onLogin,status,loading} = useSignIn();
+    const {onLogin,status,loading,setRemember} = useSignIn();
     const {
         register,
         handleSubmit,
@@ -42,11 +43,11 @@ export const SignIn = () => {
                 </div>
                 <div className="signInInput__container">
                     <input {...register('user_password')} type={passwordInputType} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
-                    <span onClick={onTogglePassword} className='passwordEye__button'><ToggleHidePasswordEye/></span>
+                    <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                 </div>
                 <div className="signInSettings__container">
                     <div className="rememberMe__container">
-                        <Input type='checkbox' className="rememberMe__checkbox"/>
+                        <Input type='checkbox' onChange={(e) => setRemember(e.target.checked)} className="rememberMe__checkbox"/>
                         <p className="rememberMe__title">Запам'ятати мене</p>
                     </div>
                     <p className="forgotPassword">Забули пароль?</p>

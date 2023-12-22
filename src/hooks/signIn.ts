@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 export const useSignIn = () => {
     const [status,setStatus] = useState<number>();
     const [loading,setLoading] = useState(false);
+    const [remember,setRemember] = useState(false);
     const signIn = useUserStore().signIn;
 
     const onLogin = async (data:{mailbox_address:string,user_password:string}) => {
@@ -17,19 +18,21 @@ export const useSignIn = () => {
             ));
 
             if(res?.data.status === 1){
-                setToken(res.data.token);
+                if(remember) setToken(res.data.token);
                 signIn({
                     mailbox_adress:data.mailbox_address,
-                    name:'user_name'
+                    name:'user_name',
+                    token:res.data.token
                 });
             }
             setStatus(res?.data.status);
         }catch(err){
+            setStatus(0);
             console.error(err);
         }finally{
             setLoading(false);
         }
     }
 
-    return {onLogin,status,loading};
+    return {onLogin,status,loading,setRemember};
 }
