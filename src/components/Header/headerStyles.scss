@@ -22,6 +22,9 @@ header{
 .header.hidden{
     transform: translateY(-141px);
 }
+.header_toggleMenu{
+    display: none;
+}
 .header__wrapper{
     height: 141px;
     display: flex;
@@ -184,5 +187,41 @@ a:focus,a:active{outline: none;}
 @media screen and (min-width:1920px) {
     .container{
         max-width: 77.3%;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .nav{
+        display: none;
+    }
+    .headerRightButtons__container{
+        margin-left: 0;
+    }
+    .header__wrapper{
+        justify-content: unset;
+    }
+    .header_toggleMenu{
+        display: block;
+        background-color: transparent;
+        width: 50px;
+        svg{
+            width: 50px !important;
+            stroke: white;
+        }
+    }
+    .headerLeft_mobile{
+        display: flex;
+        
+    }
+    .header__wrapper{
+        justify-content: space-between;
+        height: 70px;
+    }
+    .header.hidden{
+        transform: translateY(-71px);
+    }
+    .collegeLogo{
+        height: 58px;
+        width: 50px;
     }
 }

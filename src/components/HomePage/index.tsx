@@ -6,6 +6,7 @@ import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
 import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
+import supPngMobile from '../../assets/images/sup_mobile.png';
 import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
 import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
@@ -80,25 +81,33 @@ const localNews:NewsT[] = [
 const carousels = [
     {
         slidesToShow:4,
-        className:'slider_xxxl'
+        className:'slider_xxxl',
+        dots:false,
+        arrows:true
     },
     {
         slidesToShow:3,
-        className:'slider_xxl'
+        className:'slider_xxl',
+        dots:false,
+        arrows:true
     },
     {
         slidesToShow:2,
-        className:'slider_xl'
+        className:'slider_xl',
+        dots:false,
+        arrows:true
     },
     {
         slidesToShow:1,
-        className:'slider_l'
+        className:'slider_l',
+        dots:true,
+        arrows:false
     },
 ]
 export const HomePage = () => {
     const theme = useThemeStore().theme;
-    const {onChangeSection,currentSection} = useHomePageSections();
-    const {homePageData,loading} = useHomePage(); 
+    const {onChangeSection,currentSection,sideNavShown} = useHomePageSections();
+    const {homePageData,loading,} = useHomePage(); 
     const user = useUserStore().user;
     console.log(user);
     
@@ -134,7 +143,7 @@ export const HomePage = () => {
                             <h1 className="mPhrase">{homePageData?.topic || `Хто володіє інформацією – той володіє світом`}</h1>
                         </div>
                     </div>
-                    <div className="pageNav">
+                    <div className={`pageNav ${sideNavShown}`}>
                         {Object.keys(sectionIds).map((secId) => 
                             <button onClick={() => onChangeSection(sectionIds[secId as sectionsKeys])} className={`pNav__container pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`} key={secId}>
                                 <h1 className={`pNav__btn ${currentSection.id === sectionIds[secId as sectionsKeys].id ? `active` : ''}`}>{sectionIds[secId as sectionsKeys].title}</h1>
@@ -142,8 +151,7 @@ export const HomePage = () => {
                         )}
                     </div>
                 </div>
-            </div>
-            
+            </div>  
         </section>
         <section className="news__page" id="news">
             <div className="news__header">
@@ -172,7 +180,7 @@ export const HomePage = () => {
             </div>
             <div className="slider__container">
                 {carousels.map(carousel => 
-                    <Carousel key={carousel.className} slidesToShow={carousel.slidesToShow > Number(homePageData?.news?.length) ? homePageData?.news.length : carousel.slidesToShow} slidesToScroll={1} className={carousel.className} arrows={true} dots={false} infinite={true} >
+                    <Carousel key={carousel.className} slidesToShow={carousel.slidesToShow > Number(homePageData?.news?.length) ? homePageData?.news.length : carousel.slidesToShow} slidesToScroll={1} className={carousel.className} arrows={carousel.arrows} dots={carousel.dots} infinite={true} >
                         {!!homePageData?.news.length ? homePageData?.news.map(newsItem => 
                             <div className="slider__element" key={newsItem.id}>
                                 <div className="news__title">
@@ -213,11 +221,11 @@ export const HomePage = () => {
                 <h1 className="info__h1">
                     Інформація у журналі
                 </h1>
-                <h4 className="info__paragraph">
+                <p className="info__paragraph">
                     {homePageData?.about_journal
                     || `На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
                     Електронний щоденник дозволяє вчителям швидко та зручно вносити інформацію про оцінки, пропущені заняття та інші важливі події в житті коледжу, а  учням - дізнаватися про ці події негайно.`}
-                </h4>
+                </p>
                 <a href="#" className="info__btn">Увійти</a>
             </div>
         </div>
@@ -237,13 +245,17 @@ export const HomePage = () => {
             </div>
         </div>
         <div className="about__content">
+            <div className="about__img__mobile">
+                <div className="sup__back"></div>
+                <img className="sup__img" src={supPngMobile} alt="sup"/>
+            </div>
             <div className="about__block">
                 <h1 className="about__h1">
                     {homePageData?.about_us.topic 
                     || `Ми Сучасні Митці`}</h1>
                 <p className="about__paragraph">
                     { homePageData?.about_us.body
-                    || `Ми, студенти коледжу зв’язку,  зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді.  Ми сподіваємось, що наш проект вам буде корисним.`}
+                    || `Ми, студенти коледжу зв’язку, зібрались з метою створення нового та зручного інструменту для коледжу в якому ми навчаємось. Об’єднавши зусилля, ми зробили цей проект для полегшення навчального процесу в нашому коледжі. Нас об’єднав під своїм керівництвом Ігор Сергійович Сорока, та навчив нас ефективно працювати у команді. Ми сподіваємось, що наш проект вам буде корисним.`}
                 </p>
             </div>
             <div className="about__img">

@@ -9,6 +9,7 @@ import { headerRoutes, routes } from '../../consts/routes';
 import { goToSection } from '../../helpers/goToSection';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import _debounce from 'lodash/debounce';
+import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
@@ -19,8 +20,6 @@ export const Header = () => {
     const handleScroll = () => {
         const distanceFromTop = window.scrollY;
 
-        console.log(distanceFromTop >= lastScrollPos.current ? 'hidden' : 'visible',distanceFromTop,lastScrollPos.current);
-        
         setHeaderVisibilityClass(distanceFromTop > lastScrollPos.current ? 'hidden' : 'visible');
         lastScrollPos.current = window.scrollY;
     }
@@ -28,15 +27,20 @@ export const Header = () => {
     
     useEffect(() => {
         window.addEventListener('scroll',debounceHandleScroll);
-    },[lastScrollPos]);
+    },[]);
 
     return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass}`}>
             <div className="container">
                 <div className="header__wrapper">
-                    <div className="logo__block">
-                        <Link to="/" className="header__logo">
-                            <CollegeLogoSvg/>
-                        </Link>
+                    <div className='headerLeft_mobile'>
+                        <button className='header_toggleMenu'>
+                            <FilterIconSvg/>
+                        </button>
+                        <div className="logo__block">
+                            <Link to="/" className="header__logo">
+                                <CollegeLogoSvg/>
+                            </Link>
+                        </div>
                     </div>
                     <nav className="nav">
                         <Link to={'/'} className="menu__button">
