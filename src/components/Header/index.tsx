@@ -25,11 +25,8 @@ const securityLevelToLinks:Record<number,JSX.Element> = {
         </Link>
     </>
 }
-export const Header = () => {
-    const {theme,onToggleThemeSwitch} = useThemeController();
-    const route = useLocation().pathname.replace('/','');
-    const user = useUserStore().user;
-    // console.log('user',user);
+
+const useHeaderVisibility = () => {
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden'>('visible');
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
@@ -39,11 +36,20 @@ export const Header = () => {
         lastScrollPos.current = window.scrollY;
     }
     const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[lastScrollPos.current]);
-    const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
 
     useEffect(() => {
         window.addEventListener('scroll',debounceHandleScroll);
     },[]);
+
+    return {headerVisibilityClass}
+}
+export const Header = () => {
+    const {theme,onToggleThemeSwitch} = useThemeController();
+    const route = useLocation().pathname.replace('/','');
+    const user = useUserStore().user;
+    const {headerVisibilityClass} = useHeaderVisibility();
+
+    const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
 
     return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>

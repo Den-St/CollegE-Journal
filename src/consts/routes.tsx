@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { SecurityLevelGuard } from "../components/SecurityLevelGuard";
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
+import { securityLevels } from "./securityLevels";
 
 export const navRoutes = {
 
@@ -52,6 +54,16 @@ export const headerRoutes = {
     createUser:'/create-user',
 
 };
+
+const securityLevelToRoutes:Record<number,{link:string,title:string}[]> = {
+    0:[],
+    5:[
+        {
+            link:headerRoutes.adminPanel,
+            title:'Адмін-панель'
+        }
+    ]
+}
 const gitHubHomePageRoute = '/CollegE-Journal/';
 const GitHubHomePage = () => {
     return <Navigate to='/'/>
@@ -74,7 +86,7 @@ export const PublicRoutes = [
     <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,                       //layout done
     <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,                       //layout done
     <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
-    <Route key={routes.adminPanel} element={<AdminPanel/>} path={routes.adminPanel}/>,                       //layout done
+    <Route key={routes.adminPanel} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,                       //layout done
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done

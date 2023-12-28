@@ -26,7 +26,7 @@ export const useUserStore = create<StoreType>((set) => ({
         visit_per_day:null,
         visit_per_month:null,
         visit_per_week:null,
-        security_level:null
+        security_level:0
     },
     signIn: (userData) => set((state) => ({ ...state,...userData,user:{...state.user,...userData} })),
 }));
