@@ -15,11 +15,21 @@ import { SideMenu } from '../SideMenu';
 import { useUserStore } from '../../store/userStore';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 
+const securityLevelToLinks:Record<number,JSX.Element> = {
+    0:<></>,
+    5:<>
+        <Link to={routes.adminPanel} className="menu__button">Адмін-панель
+            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                <path d="M1 1H51" strokeLinecap="round"/>
+            </svg>
+        </Link>
+    </>
+}
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
-    console.log('user',user);
+    // console.log('user',user);
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden'>('visible');
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
@@ -50,23 +60,28 @@ export const Header = () => {
                         </div>
                     </div>
                     <nav className="nav">
-                        <Link to={'/'} className="menu__button">
-                            Головна
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </Link>
-                        <button onClick={() => goToSection(sectionIds.news.scrollTo)} className="menu__button">Новини
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </button>
-                        <button onClick={() => goToSection(sectionIds.about.scrollTo)} className="menu__button">Про нас
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </button>
-                        <Link to={routes.journal.replace(':id','1')} className="menu__button">Journal
+                        {!route
+                            && <>
+                            <Link to={'/'} className="menu__button">
+                                Головна
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </Link>
+                            <button onClick={() => goToSection(sectionIds.news.scrollTo)} className="menu__button">Новини
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </button>
+                            <button onClick={() => goToSection(sectionIds.about.scrollTo)} className="menu__button">Про нас
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </button>
+                            </>
+                        }
+                        {securityLevelToLinks[user.security_level || 0]}
+                        {/* <Link to={routes.journal.replace(':id','1')} className="menu__button">Journal
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
@@ -121,16 +136,16 @@ export const Header = () => {
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
-                        {/* <Link to={headerRoutes.scheduleCreate} className="menu__button">ScheduleCreate
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </Link> */}
-                        <Link to={headerRoutes.faq} className="menu__button">FAQ
+                        <Link to={headerRoutes.scheduleCreate} className="menu__button">ScheduleCreate
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
                         </Link>
+                        <Link to={headerRoutes.faq} className="menu__button">FAQ
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link> */}
                     </nav>
                     <div className='headerRightButtons__container'>
                         <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/>

@@ -9,16 +9,17 @@ import { endpoints } from '../consts/endpoints';
 export const useAuth = () => {
     const [loading,setLoading] = useState(false);
     const signIn = useUserStore().signIn;
+    const localToken = getToken();
+    const cookieToken = useUserStore().user.token;
 
     const auth = async () => {
-        if(!getToken()) return;
+        if(!localToken && !cookieToken) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth);
-            console.log(res.data);
+            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
             signIn(res.data.data);
         }catch(err){
-            console.log(err);
+            console.error(err);
         }finally{
             setLoading(false);
         }

@@ -104,12 +104,13 @@ const carousels = [
         arrows:false
     },
 ]
+
+
 export const HomePage = () => {
     const theme = useThemeStore().theme;
     const {onChangeSection,currentSection,sideNavShown} = useHomePageSections();
     const {homePageData,loading,} = useHomePage(); 
     const user = useUserStore().user;
-    console.log(user);
     
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">

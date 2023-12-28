@@ -11,7 +11,8 @@ export type UserT = {
     news_per_week:number | null
     visit_per_day:number | null
     visit_per_month:number | null
-    visit_per_week:number | null
+    visit_per_week:number | null,
+    security_level:number | null
 }
 
 export type CreateUserT = {

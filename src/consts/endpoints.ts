@@ -3,5 +3,6 @@ export const endpoints = {
     getGroups:'groups/grouplist',
     addUser:'users/adduser',
     createGroup:'groups/addgroup',
-    changeGroup:''
+    changeGroup:'',
+    faq:'faq'
 }

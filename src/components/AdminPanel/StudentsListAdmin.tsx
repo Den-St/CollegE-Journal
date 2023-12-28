@@ -7,8 +7,10 @@ import axiosConfig from "../../axiosConfig";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
+import { getToken } from "../../helpers/auth";
 import { useGetGroups } from "../../hooks/getGroups";
 import { useThemeController } from "../../hooks/themeController"
+import { useUserStore } from "../../store/userStore";
 import { CreateGroupT, GroupT } from "../../types/group";
 const {Option,} = Select;
 
@@ -25,9 +27,12 @@ const useCreateGroupForm = (refetchGroups:() => void) => {
         register,
         handleSubmit,
     } = useForm<CreateGroupT>();
+    const localToken = getToken();
+    const cookieToken = useUserStore().user.token;
+
     const onCreateGroup = async (data:CreateGroupT) => {
         try{
-            const res = await axiosConfig.post(endpoints.createGroup,data);
+            const res = await axiosConfig.post(endpoints.createGroup,data,{headers:{'Authorization':localToken || cookieToken}});
             onCloseCreateGroupModal();
             refetchGroups();
             if(res.status === 201) {
