@@ -22,8 +22,22 @@ header{
 .header.hidden{
     transform: translateY(-141px);
 }
+.header.sideMenushown{
+    transform: translateY(0px) !important;
+    background-color: #0a1d26;
+}
 .header_toggleMenu{
     display: none;
+}
+.header_toggleMenu.shown{
+    svg{
+        stroke: #EFB42D;
+    }
+}
+.header_toggleMenu.hidden{
+    svg{
+        stroke: white;
+    }
 }
 .header__wrapper{
     height: 141px;
@@ -132,7 +146,12 @@ a:focus,a:active{outline: none;}
 .headerRightButtons__container .ant-switch-checked{
     background-color: #0B1D26;
 }
-
+.header_avatar{
+    border-radius: 50%;
+    width: 66px;
+    height: 66px;
+    object-fit: contain;
+}
 .header {
     //theme
     &.dark {
@@ -215,7 +234,7 @@ a:focus,a:active{outline: none;}
     }
     .header__wrapper{
         justify-content: space-between;
-        height: 70px;
+        height: 71px;
     }
     .header.hidden{
         transform: translateY(-71px);
@@ -223,5 +242,13 @@ a:focus,a:active{outline: none;}
     .collegeLogo{
         height: 58px;
         width: 50px;
+    }
+    .headerRightButtons__container{
+        width: 40%;
+        max-width: 190px;
+    }
+    .header_avatar{
+        width: 50px;
+        height: 50px;
     }
 }

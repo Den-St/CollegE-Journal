@@ -1,3 +1,7 @@
 export const endpoints = {
-    testcookies:'users/testcookies'
+    auth:'users/generaldata',
+    getGroups:'groups/grouplist',
+    addUser:'users/adduser',
+    createGroup:'groups/addgroup',
+    changeGroup:''
 }

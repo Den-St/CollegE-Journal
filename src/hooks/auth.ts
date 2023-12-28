@@ -14,9 +14,9 @@ export const useAuth = () => {
         if(!getToken()) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.testcookies);
+            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth);
             console.log(res.data);
-            // signIn(...res.data as UserT);
+            signIn(res.data.data);
         }catch(err){
             console.log(err);
         }finally{

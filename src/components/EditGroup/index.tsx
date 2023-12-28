@@ -1,21 +1,40 @@
+import "./editGroupStyles.scss";
 import { Select } from "antd";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import axiosConfig from "../../axiosConfig";
-import { endpoints } from "../../consts/endpoints";
-import { useCreateUser } from "../../hooks/createUser";
-import { useThemeStore } from "../../store/themeStore"
-import { GroupT } from "../../types/group";
-import { CreateUserT } from "../../types/user";
-import './createUser.scss';
+import { useCreateUser } from "../../hooks/createUser"
+import { useThemeStore } from "../../store/themeStore";
+import { useChangeGroupInfo } from "../../hooks/changeGroupInfo";
 const {Option} = Select;
 
-
-export const CreateUser = () => {
+export const EditGroup = () => {
     const theme = useThemeStore().theme;
-    const {groups,onCreateUser,handleSubmit,register,setValue} = useCreateUser();
-
-    return <div className={`createUser__main ${theme}`}>
+    const {handleSubmit,register,onCreateUser,setValue,groups} = useCreateUser();
+    const {} = useChangeGroupInfo();
+    
+    return <div className={`editGroupMain_container ${theme}`}>
+        <h1>Змінення групи</h1>
+        <form className="createGroup_form" 
+        // onSubmit={handleSubmit(onCreateGroup)}
+        >
+            <div className="createUserFormSelects__container createGroupFormSelects__container">
+                <div className="createUserSelect__container createGroupSelect__container">
+                    <label className="createUserInput__label">Спеціальність та курс</label>
+                    {/* <input {...register('group_full_name',{required:true})}/> */}
+                </div>
+                {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
+                    <label className="createUserInput__label">Куратор</label>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть куратора'}
+                            optionLabelProp="label"
+                            >   
+                            <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
+                        </Select>
+                    </div>
+                </div> */}
+            </div>
+            <input type={'submit'} className="createUser__button" value={'Зареєструвати'}/>
+        </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
@@ -30,19 +49,6 @@ export const CreateUser = () => {
             </div>
             <div className="createUserFormSelects__container">
                 <div className="createUserSelect__container">
-                    <label className="createUserInput__label">Група студента</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
-                        {/* <Select
-                            className="createUserSelect"
-                            placeholder={'Оберіть групу'}
-                            optionLabelProp="label"
-                            onChange={(e) => setValue('group_id',e)}
-                            >   
-                            {groups.map(group => <Option value={group.group_id} label={group.group_full_name}>{group.group_full_name}</Option>)}
-                        </Select> */}
-                    </div>
-                </div>
-                <div className="createUserSelect__container">
                     <label className="createUserInput__label">Форма навчання</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
@@ -54,7 +60,6 @@ export const CreateUser = () => {
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
                         </Select>
-                        
                     </div>
                 </div>
                 <div className="createUserSelect__container">
@@ -74,7 +79,6 @@ export const CreateUser = () => {
             </div>
             <div className="createUserButtons__container">
                 <input type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
-                <button className="createUser__button">Наступний</button>
             </div>
         </form>
     </div>

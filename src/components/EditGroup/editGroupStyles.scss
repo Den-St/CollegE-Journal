@@ -1,0 +1,15 @@
+.editGroupMain_container{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    padding: 200px 5% 100px 5%;
+}
+
+.editGroupMain_container.dark{
+    .createUserInput__label{
+        color:white;
+    }
+    .createUserTitle{
+        color:white;
+    }
+}

@@ -36,6 +36,14 @@ html,body{
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 }
+body.scrollOff{
+	// position: fixed !important;
+	overflow: hidden;
+}
+body.scrollOn{
+	// position: unset !important;
+	overflow: scroll;
+}
 *{
 	box-sizing: border-box;
 }
@@ -247,6 +255,13 @@ body{
 		.createHomeTaskDate{
 			color:white;
 		}
+		.ant-modal-content{
+			background-color: #0B1D26;
+			color:white;
+		}
+		.ant-modal-close-icon{
+			color:white;
+		}
 	}
 	&.light{
 		.ant-picker-dropdown .ant-picker-panel-container{
@@ -263,6 +278,7 @@ body{
 		}
 	}
 }
+
 @media screen and (min-width:1440px) {
 	.fillter_container{
 		margin-left: -11px;

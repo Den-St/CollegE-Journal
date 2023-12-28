@@ -1,13 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CreateStudyMaterials } from "../components/CreateStudyMaterials";
-import { CreateUser } from "../components/CreateUser";
-import { FAQ } from "../components/FAQ";
-import { CreateHomeTask } from "../components/HomeTask/createHomeTask";
-import { NoMatch } from "../components/NoMatch";
-import { Schedule } from "../components/Schedule";
-import { ScheduleCreate } from "../components/ScheduleCreate";
-import { StudyMaterialsCheckTeacher } from "../components/StudyMaterialsCheckTeacher";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
 
 export const navRoutes = {
 
@@ -36,7 +28,7 @@ export const routes = {
     scheduleCreate:'/schedule-create',
     faq:'/faq',
     createUser:'/create-user',
-
+    editGroup:`/edit-group/:id`
 };
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -88,6 +80,7 @@ export const PublicRoutes = [
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,                       //layout done
     <Route key={routes.createUser} element={<CreateUser/>} path={routes.createUser}/>,                       //layout done
+    <Route key={routes.editGroup} element={<EditGroup/>} path={routes.editGroup}/>,                       //layout done
     <Route key={'*'} element={<NoMatch/>} path={'*'}/>,                       //layout done
     
     <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages

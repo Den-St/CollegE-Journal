@@ -155,3 +155,28 @@ path{
 
     // }
 }
+.lessonsScheduleDayCarousel{
+    display: none;
+}
+@media screen and (max-width:480px) {
+    .lessonsScheduleDay__container:not(.shedule){
+        display: none;
+    }
+    .lessonsScheduleDayCarousel{
+        display: block;
+    }
+    .ant-carousel .slick-slider{
+        // display: block !important;
+        // width: 100vw !important;
+    }
+    .slick-slide.slick-active.slick-current{
+        width: unset !important;
+    }
+    .studentProfileTab__title{
+        text-align: center;
+    }
+    .lessonsSchedule__container{
+        flex-direction: column;
+        align-items: center;
+    }
+}

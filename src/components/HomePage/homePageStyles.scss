@@ -829,6 +829,9 @@ img{vertical-align: top;}
         justify-content: center;
         margin:150px 0 0 0;
     }
+    .laptop{
+        width: 90%;
+    }
     .main__paragraph{
         width: 400px !important;
         margin-top: 200px;
@@ -902,6 +905,7 @@ img{vertical-align: top;}
     .sup__img{
         top:13.25px;
         left:38px;
+        width: 90%;
     }
     .sup__back{
         width: 90%;
@@ -918,5 +922,8 @@ img{vertical-align: top;}
     }
     .slider_l{
         display: block;
+    }
+    .main__phrase{
+        width: 100%;
     }
 }

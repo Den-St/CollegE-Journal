@@ -16,13 +16,12 @@ export const useSignIn = () => {
             const res = (await axiosConfig.post('users/login',
                 data
             ));
-
+            console.log('data',res.data)
             if(res?.data.status === 1){
                 if(remember) setToken(res.data.token);
                 signIn({
-                    mailbox_adress:data.mailbox_address,
-                    name:'user_name',
-                    token:res.data.token
+                    token:res.data.token,
+                    ...res.data.data
                 });
             }
             setStatus(res?.data.status);

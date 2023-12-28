@@ -11,7 +11,7 @@ export const Layout:React.FC<Props> = ({children}) => {
     const theme = useThemeStore().theme;
     return <div className={`layout__container ${theme}`}>
             <Header/>
-            {children}
+            <main>{children}</main>
             <Footer/>
             <CookiesNotification/>
         </div>

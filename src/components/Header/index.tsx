@@ -10,11 +10,16 @@ import { goToSection } from '../../helpers/goToSection';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import _debounce from 'lodash/debounce';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
+import { useSideMenu } from '../../hooks/sideMenu';
+import { SideMenu } from '../SideMenu';
+import { useUserStore } from '../../store/userStore';
+import { defaultAvatar } from '../../consts/defaultAvatar';
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
-
+    const user = useUserStore().user;
+    console.log('user',user);
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden'>('visible');
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
@@ -24,16 +29,18 @@ export const Header = () => {
         lastScrollPos.current = window.scrollY;
     }
     const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[lastScrollPos.current]);
-    
+    const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
+
     useEffect(() => {
         window.addEventListener('scroll',debounceHandleScroll);
     },[]);
 
-    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass}`}>
+    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
+            <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
             <div className="container">
                 <div className="header__wrapper">
                     <div className='headerLeft_mobile'>
-                        <button className='header_toggleMenu'>
+                        <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
                             <FilterIconSvg/>
                         </button>
                         <div className="logo__block">
@@ -127,9 +134,11 @@ export const Header = () => {
                     </nav>
                     <div className='headerRightButtons__container'>
                         <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/>
-                        <div className="signIn">
+                        {!user.full_name 
+                        ? <div className="signIn">
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
-                        </div>
+                        </div> 
+                        : <img className='header_avatar' src={defaultAvatar}/>}
                     </div>
                 </div>
             </div>

@@ -201,3 +201,22 @@
         padding: 25px 105px 25px 151px;
     }
 }
+
+@media screen and (max-width:480px) {
+    .studentProfileMain__container{
+        flex-direction: column;
+    }
+    .studentProfileTabs__container{
+        margin-left: 0;
+    }
+    .studentProfileInfo__container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .studentProfileTextInfo__container{
+        align-items: center;
+    }
+    .studentProfile__container{
+        padding-top: 80px;
+    }
+}
