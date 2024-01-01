@@ -8,10 +8,9 @@ export const navRoutes = {
 }
 
 export const routes = {
-    registration:"/registration",
     signIn:"/sign-in",
     homePage:'/',
-    studentProfile:'/student-profile/:id',
+    profile:'/profile/:id',
     homeTasks:'/home-tasks',
     homeTask:'/home-task/:id',
     students:'/students',
@@ -35,7 +34,6 @@ export const routes = {
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
     homeTasks:'/home-tasks',
-    homeTask:'/home-task/:id',
     students:'/students',
     teacherProfile:'/teacher-profile/:id',
     schedule:'/schedule',
@@ -51,51 +49,77 @@ export const headerRoutes = {
     studyMaterialsCheckTeacher:'/study-materials-check-teacher',
     scheduleCreate:'/schedule-create',
     faq:'/faq',
-    createUser:'/create-user',
-
+    signIn:''
 };
 
-const securityLevelToRoutes:Record<number,{link:string,title:string}[]> = {
-    0:[],
-    5:[
+const securityLevelToRoutes:Record<number,{link:string,title:string,page:JSX.Element}[]> = {
+    [securityLevels.unauthorized]:[
+        {
+            link:routes.homePage,
+            title:'Головна',
+            page:<HomePage/>
+        },
+        {
+            link:headerRoutes.faq,
+            title:'FAQ',
+            page:<FAQ/>
+        },
+        {
+            link:routes.signIn,
+            title:'Вхід',
+            page:<SignIn/>
+        },
+      
+    ],
+    [securityLevels.student]:[
+        {
+            link:routes.homeTask,
+            title:'Домашнє завдання',
+            page:<HomeTask/>
+        },
+        {
+            link:routes.homeTask,
+            title:'Домашні завдання',
+            page:<HomeTasks/>
+        },
+    ],
+    [securityLevels.admin]:[
         {
             link:headerRoutes.adminPanel,
-            title:'Адмін-панель'
-        }
+            title:'Адмін-панель',
+            page:<AdminPanel/>
+        },
+        {
+            link:routes.editGroup,
+            title:'Редагування группи',
+            page:<EditGroup/>
+        },
     ]
-}
-const gitHubHomePageRoute = '/CollegE-Journal/';
-const GitHubHomePage = () => {
-    return <Navigate to='/'/>
 }
 
 export const PublicRoutes = [
-    <Route key={routes.registration} element={<Registration/>} path={routes.registration}/>,
-    <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,                          //layout done
-    <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,                    //layout done
-    <Route key={routes.studentProfile} element={<StudentProfile/>} path={routes.studentProfile}/>,  //layout done
-    <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,                 //layout done
-    <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,          
+    <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
+    <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
+    <Route key={routes.profile} element={<StudentProfile/>} path={routes.profile}/>,  
+    <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
+    <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
     <Route key={routes.students} element={<Students/>} path={routes.students}/>,
     <Route key={routes.teacherProfile} element={<TeacherProfile/>} path={routes.teacherProfile}/>,
     <Route key={routes.schedule} element={<Schedule/>} path={routes.schedule}/>,
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
-    <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,                           //layout done
-    <Route key={routes.journal} element={<Journal/>} path={routes.journal}/>,                       //layout done
-    <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,                       //layout done
-    <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,                       //layout done
-    <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,                       //layout done
-    <Route key={routes.adminPanel} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,                       //layout done
-    <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,                       //layout done
-    <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,                       //layout done
-    // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,                       //layout done
-    <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,                       //layout done
-    <Route key={routes.createUser} element={<CreateUser/>} path={routes.createUser}/>,                       //layout done
-    <Route key={routes.editGroup} element={<EditGroup/>} path={routes.editGroup}/>,                       //layout done
-    <Route key={'*'} element={<NoMatch/>} path={'*'}/>,                       //layout done
-    
-    <Route key={gitHubHomePageRoute} element={<GitHubHomePage/>} path={gitHubHomePageRoute}/>//reroute to home page from gitHub-pages
+    <Route key={routes.groups} element={<Groups/>} path={routes.groups}/>,    
+    <Route key={routes.journal} element={<Journal/>} path={routes.journal}/>,
+    <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,
+    <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,
+    <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,
+    <Route key={routes.adminPanel} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,
+    <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
+    <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
+    // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
+    <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
+    <Route key={routes.editGroup} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,
+    <Route key={'*'} element={<NoMatch/>} path={'*'}/>,
 ]
 
 export const RoutesSwitch = () => {

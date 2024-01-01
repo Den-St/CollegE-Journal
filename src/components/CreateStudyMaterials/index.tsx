@@ -13,12 +13,12 @@ export const CreateStudyMaterials = () => {
         <div className='createStudyMaterialsInputs__container'>
             <div className='createStudyMaterialsInput__container'>
                 <h2 className='createStudyMaterialsInput__title'>Заголовок</h2>
-                <input className="createStudyMaterialsHeader__input" placeholder='Введіть заголовок завдання'/>
+                <input autoComplete="off"  className="createStudyMaterialsHeader__input" placeholder='Введіть заголовок завдання'/>
             </div>
             <div className='createStudyMaterialsSelects__container'>
                 <div className='createStudyMaterialsSelect__container'>
                     <h2 className='createStudyMaterialsInput__title'>Фільтри</h2>
-                    {/* <input className="createStudyMaterialsFilters__input" placeholder='Введіть теги, за допомогою “Enter”'/> */}
+                    {/* <input autoComplete="off"  className="createStudyMaterialsFilters__input" placeholder='Введіть теги, за допомогою “Enter”'/> */}
                     <div className='createStudyMaterialsSelect__wrapper'>
                         <Select
                         placeholder={'Оберіть хеш-теги'}
@@ -88,7 +88,7 @@ export const CreateStudyMaterials = () => {
         </div>
         <div className="sendHomeTaskHomeTaskAttachFileInput__container">
             <div className="sendHomeTaskHomeTaskAttachFileInput__styled">Завантажити файл</div>
-            <input className="sendHomeTaskHomeTaskAttachFile__input"/>
+            <input autoComplete="off"  className="sendHomeTaskHomeTaskAttachFile__input"/>
         </div>
     </div>
 }

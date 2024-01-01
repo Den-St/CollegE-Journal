@@ -112,14 +112,14 @@ export const SendHomeTask = () => {
             </div>
             <div className="sendHomeTaskHomeTaskAttachFileInput__container">
                 <div className="sendHomeTaskHomeTaskAttachFileInput__styled">Завантажити файл</div>
-                <input className="sendHomeTaskHomeTaskAttachFile__input"/>
+                <input autoComplete="off"  className="sendHomeTaskHomeTaskAttachFile__input"/>
             </div>
         </section>
         <section className="sendHomeTaskPeopleDone__section">
             <div className="sendHomeTaskPeopleTitle_container">
                 <h1 className="sendHomeTaskPeopleDone__title">Список викованших</h1>
                 <div className="studyMaterialsSearchInput__container">
-                    <input placeholder="Пошук" className="studyMaterialsSearch__input"/>
+                    <input autoComplete="off"  placeholder="Пошук" className="studyMaterialsSearch__input"/>
                     <MagnifierSvg/>
                 </div>
             </div>

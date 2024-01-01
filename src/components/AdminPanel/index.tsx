@@ -5,7 +5,7 @@ import { TwoPeopleSvg } from "../../assets/svgs/twoPeopleSvg";
 import { useThemeStore } from "../../store/themeStore";
 import "./adminPanelStyles.scss";
 import { ScheduleSettings } from "./ScheduleSettings";
-import { StudentsListAdmin } from "./StudentsListAdmin";
+import { StudentsListAdmin } from "./Groups";
 
 const adminPanelSections = [{
         title:'Налаштування розкладу',

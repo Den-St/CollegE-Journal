@@ -21,11 +21,11 @@ export const CreateUser = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
-                    <input {...register('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off"  {...register('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
@@ -73,7 +73,7 @@ export const CreateUser = () => {
                 </div>
             </div>
             <div className="createUserButtons__container">
-                <input type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
+                <input autoComplete="off"  type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
                 <button className="createUser__button">Наступний</button>
             </div>
         </form>

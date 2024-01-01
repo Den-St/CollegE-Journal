@@ -86,7 +86,7 @@ export const StudyMaterialsCheckTeacher = () => {
             </div>
             <div className="sendHomeTaskHomeTaskAttachFileInput__container">
                 <div className="sendHomeTaskHomeTaskAttachFileInput__styled">Завантажити файл</div>
-                <input className="sendHomeTaskHomeTaskAttachFile__input"/>
+                <input autoComplete="off"  className="sendHomeTaskHomeTaskAttachFile__input"/>
             </div>
         </section>
     </main>

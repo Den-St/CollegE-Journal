@@ -18,7 +18,7 @@ export const EditGroup = () => {
             <div className="createUserFormSelects__container createGroupFormSelects__container">
                 <div className="createUserSelect__container createGroupSelect__container">
                     <label className="createUserInput__label">Спеціальність та курс</label>
-                    {/* <input {...register('group_full_name',{required:true})}/> */}
+                    {/* <input autoComplete="off"  {...register('group_full_name',{required:true})}/> */}
                 </div>
                 {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
                     <label className="createUserInput__label">Куратор</label>
@@ -33,18 +33,18 @@ export const EditGroup = () => {
                     </div>
                 </div> */}
             </div>
-            <input type={'submit'} className="createUser__button" value={'Зареєструвати'}/>
+            <input autoComplete="off"  type={'submit'} className="createUser__button" value={'Зареєструвати'}/>
         </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
-                    <input {...register('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off"  {...register('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
@@ -78,7 +78,7 @@ export const EditGroup = () => {
                 </div>
             </div>
             <div className="createUserButtons__container">
-                <input type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
+                <input autoComplete="off"  type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
             </div>
         </form>
     </div>

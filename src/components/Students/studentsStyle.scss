@@ -94,78 +94,76 @@
     border-radius: 10px 5px;
 }
 
-.main__container {
-    &.dark{
-        .studentTitle{
-            color: white;
-        }
-        .fillter_select{
-            color: white;
-        }
-        .fillterImg {
-            stroke: #D0D0D0;
-        }
-        .student__container{
-            background:#102936;
-        }
-        .student__info{
-            color: white;
-        }
-        .studentButton{
-            background:#102936;
-            box-shadow: 0px 1px 10px 0px rgba(212, 212, 212, 0.10);
-            color:#FFF;
-        }
-        .studentButton:hover{
-            background: #0B1D26;
-        }
-        .main__container{
-            background-color: #0B1D26;
-            background-image: url('./../../assets/images/signInBackground.png');
-        }
-        .studentFillters__container:hover{
-            cursor: pointer;
-            transition: 0.2s;
-            .fillterImg{
-                stroke:#EFB42D;
-            }
+.dark{
+    .studentTitle{
+        color: white;
+    }
+    .fillter_select{
+        color: white;
+    }
+    .fillterImg {
+        stroke: #D0D0D0;
+    }
+    .student__container{
+        background:#102936;
+    }
+    .student__info{
+        color: white;
+    }
+    .studentButton{
+        background:#102936;
+        box-shadow: 0px 1px 10px 0px rgba(212, 212, 212, 0.10);
+        color:#FFF;
+    }
+    .studentButton:hover{
+        background: #0B1D26;
+    }
+    .main__container{
+        background-color: #0B1D26;
+        background-image: url('./../../assets/images/signInBackground.png');
+    }
+    .studentFillters__container:hover{
+        cursor: pointer;
+        transition: 0.2s;
+        .fillterImg{
+            stroke:#EFB42D;
         }
     }
-    &.light{
-        .studentTitle{
-            color: black;
-        }
-        .fillter_select{
-            color: #797979;
-        }
-        .fillterImg {
-            stroke: #797979;
-        }
-        .student__container{
-            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
-            background:white;
-        }
-        .student__info{
-            color: #0B1D26;
-        }
-        .studentButton{
-            background:white;
-            box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
-            color:#0B1D26;
-        }
-        .studentButton:hover{
-            background: #EFB42D;
-        }
-        .main__container{
-            background-color: white;
-            background-image: url('./../../assets/images/signInBackgroundLight.png');
-        }
-        .studentFillters__container:hover{
-            cursor: pointer;
-            transition: 0.2s;
-            .fillterImg{
-                stroke:#EFB42D;
-            }
+}
+.light{
+    .studentTitle{
+        color: black;
+    }
+    .fillter_select{
+        color: #797979;
+    }
+    .fillterImg {
+        stroke: #797979;
+    }
+    .student__container{
+        box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+        background:white;
+    }
+    .student__info{
+        color: #0B1D26;
+    }
+    .studentButton{
+        background:white;
+        box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
+        color:#0B1D26;
+    }
+    .studentButton:hover{
+        background: #EFB42D;
+    }
+    .main__container{
+        background-color: white;
+        background-image: url('./../../assets/images/signInBackgroundLight.png');
+    }
+    .studentFillters__container:hover{
+        cursor: pointer;
+        transition: 0.2s;
+        .fillterImg{
+            stroke:#EFB42D;
         }
     }
 }

@@ -96,7 +96,7 @@ export const ScheduleSettings = () => {
     return <div className="adminPanelScheduleSettings__container">
         <NoSheduleComponent/>
         <div className="adminPanelScheduleSettingsInput__container">
-            <input className="adminPanelScheduleSettingsInput" type={'file'}/>
+            <input autoComplete="off"  className="adminPanelScheduleSettingsInput" type={'file'}/>
             <div className="adminPanelScheduleSettingsInput__cover">
                 <UploadSvg/>
                 <div className="adminPanelScheduleSettingsInputCoverText_container">

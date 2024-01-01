@@ -94,39 +94,37 @@
     gap:20px;
 }
 
-.createUser__main{
-    &.dark{
-        .createUserTitle{
-            color:white;
-        }
-        .createUserInput__label{
-            color:white;
-        }
-        .createUser__input::placeholder{
-            color:#D0D0D0;
-        }
-        .ant-select-selector{
-            background-color: #102936 !important;
-            border:none !important;
-            font-weight: 500;
-        }
-        .ant-select-selection-item{
-            color:white !important;
-        }
-        .createStudyMaterialsSelect__wrapper{
-            background-color: #102936;
-        }
-        .createUser__input{
-            background-color: #102936;
-        }
-        input{
-            color:white;
-        }
-        .createUser__button{
-            background-color: #102936;
-        }
-        .createUser__button{
-            color:white;
-        }
+.dark{
+    .createUserTitle{
+        color:white;
+    }
+    .createUserInput__label{
+        color:white;
+    }
+    .createUser__input::placeholder{
+        color:#D0D0D0;
+    }
+    .ant-select-selector{
+        background-color: #102936 !important;
+        border:none !important;
+        font-weight: 500;
+    }
+    .ant-select-selection-item{
+        color:white !important;
+    }
+    .createStudyMaterialsSelect__wrapper{
+        background-color: #102936;
+    }
+    .createUser__input{
+        background-color: #102936;
+    }
+    input{
+        color:white;
+    }
+    .createUser__button{
+        background-color: #102936;
+    }
+    .createUser__button{
+        color:white;
     }
 }

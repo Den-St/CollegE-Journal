@@ -282,7 +282,7 @@ export const StudyMaterials = () => {
     return <div className={`studyMaterialsMain__container ${theme}`}>
         <section className="studyMaterialsSearch__container">
             <div className="studyMaterialsSearchInput__container">
-                <input placeholder="Пошук" className="studyMaterialsSearch__input"/>
+                <input autoComplete="off"  placeholder="Пошук" className="studyMaterialsSearch__input"/>
                 <MagnifierSvg/>
             </div>
             <button className="studyMaterialsSearch__button">

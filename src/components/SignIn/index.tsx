@@ -39,21 +39,21 @@ export const SignIn = () => {
             <h1 className="signIn__header">Вхід</h1>
             <form onSubmit={handleSubmit(onLogin)} className="signIn__form" autoComplete={'off'}>
                 <div className="signInInput__container">
-                    <input {...register('mailbox_address',)} type={'email'} autoComplete={'false'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input autoComplete="off"  {...register('mailbox_address',)} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input {...register('user_password')} type={passwordInputType} autoComplete={'false'} placeholder={"Password"} className={'password__input'}/>
+                    <input autoComplete="off"  {...register('user_password')} type={passwordInputType} placeholder={"Password"} className={'password__input'}/>
                     <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                 </div>
                 <div className="signInSettings__container">
                     <div className="rememberMe__container">
-                        <Input type='checkbox' onChange={(e) => setRemember(e.target.checked)} className="rememberMe__checkbox"/>
+                        <input autoComplete="off"  type='checkbox' onChange={(e) => setRemember(e.target.checked)} className="rememberMe__checkbox"/>
                         <p className="rememberMe__title">Запам'ятати мене</p>
                     </div>
                     <p className="forgotPassword">Забули пароль?</p>
                 </div>
                 {status !== undefined && <p className='signIn_errorMessage'>{statusCodes[status]}</p>}
-                <input disabled={loading} type={'submit'} className="signIn__button" value={'Увійти'}/>
+                <input autoComplete="off"  disabled={loading} type={'submit'} className="signIn__button" value={'Увійти'}/>
             </form>
             <button className='signInWithGoogle__button'>
                 <span className='signInWithGoogle__icon'>

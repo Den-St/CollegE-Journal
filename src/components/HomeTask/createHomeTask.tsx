@@ -20,7 +20,7 @@ export const CreateHomeTask = () => {
         <div className="createHomeTaskInputs__container">
             <div className="createHomeTaskInputItemHeader__container">
                 <h2 className="createHomeTaskInputItem__title">Заголовок</h2>
-                <input className="createHomeTaskInputItem" placeholder='Введіть заголовок завдання'/>
+                <input autoComplete="off"  className="createHomeTaskInputItem" placeholder='Введіть заголовок завдання'/>
             </div>
             <div className="createHomeTaskInputItemDate__container">
                 <h2 className="createHomeTaskInputItem__title">Срок здачі</h2>
