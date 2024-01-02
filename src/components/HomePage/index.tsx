@@ -4,6 +4,7 @@ import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
 import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
+import directorAndBack from '../../assets/images/directorAndBack.png';
 import laptopPng from '../../assets/images/laptop.png';
 import supPng from '../../assets/images/sup.png';
 import supPngMobile from '../../assets/images/sup_mobile.png';
@@ -247,8 +248,8 @@ export const HomePage = () => {
         </div>
         <div className="about__content">
             <div className="about__img__mobile">
-                <div className="sup__back"></div>
-                <img className="sup__img" src={supPngMobile} alt="sup"/>
+                {/* <div className="sup__back"></div> */}
+                <img className="sup__img" src={directorAndBack} alt="sup"/>
             </div>
             <div className="about__block">
                 <h1 className="about__h1">

@@ -180,42 +180,40 @@
     margin-top: -30px;
     margin-bottom: -20px;
 }
-.signIn__container{
-    &.dark{
-       .signIn_errorMessage{
-            background-color: #ED343466;
-            color: white;
-       }
+.dark{
+    .signIn_errorMessage{
+        background-color: #ED343466;
+        color: white;
     }
-    &.light{
-        .signIn__container{
-            background: url('../../assets/images/signInBackgroundLight.png');
-        }
-        .email__input{
-            ::placeholder{
-                color:var(--primary-black,#0B1D26);
-            }
+}
+.light{
+    .signIn__container{
+        background: url('../../assets/images/signInBackgroundLight.png');
+    }
+    .email__input{
+        ::placeholder{
             color:var(--primary-black,#0B1D26);
         }
-        .password__input{
-            ::placeholder{
-                color:var(--primary-black,#0B1D26);
-            }
+        color:var(--primary-black,#0B1D26);
+    }
+    .password__input{
+        ::placeholder{
             color:var(--primary-black,#0B1D26);
         }
-        .signInInput__container{
-            border-bottom: 2px solid rgb(0, 0, 0);
-        }
-        .signIn__header{
-            color:black;
-        }
-        .noAccount__text{
-            color:#0B1D26;
-        }
+        color:var(--primary-black,#0B1D26);
+    }
+    .signInInput__container{
+        border-bottom: 2px solid rgb(0, 0, 0);
+    }
+    .signIn__header{
+        color:black;
+    }
+    .noAccount__text{
+        color:#0B1D26;
     }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width:780px) {
     .signIn__container{
         padding-top: 150px;
     }

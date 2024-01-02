@@ -158,7 +158,7 @@ path{
 .lessonsScheduleDayCarousel{
     display: none;
 }
-@media screen and (max-width:480px) {
+@media screen and (max-width:780px) {
     .lessonsScheduleDay__container:not(.shedule){
         display: none;
     }
@@ -170,7 +170,11 @@ path{
         // width: 100vw !important;
     }
     .slick-slide.slick-active.slick-current{
-        width: unset !important;
+        // width: unset !important;
+        width: 98vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .studentProfileTab__title{
         text-align: center;
