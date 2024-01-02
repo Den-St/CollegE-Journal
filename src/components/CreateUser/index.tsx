@@ -10,10 +10,9 @@ import { CreateUserT } from "../../types/user";
 import './createUser.scss';
 const {Option} = Select;
 
-
 export const CreateUser = () => {
     const theme = useThemeStore().theme;
-    const {groups,onCreateUser,handleSubmit,register,setValue} = useCreateUser();
+    const {onCreateUser,handleSubmit,createUserRegister,createUserSetValue} = useCreateUser();
 
     return <div className={`createUser__main ${theme}`}>
         <h1 className="createUserTitle">Створення аккаунту</h1>
@@ -21,11 +20,11 @@ export const CreateUser = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
-                    <input autoComplete="off"  {...register('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off"  {...createUserRegister('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
@@ -36,7 +35,7 @@ export const CreateUser = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть групу'}
                             optionLabelProp="label"
-                            onChange={(e) => setValue('group_id',e)}
+                            onChange={(e) => createUserSetValue('group_id',e)}
                             >   
                             {groups.map(group => <Option value={group.group_id} label={group.group_full_name}>{group.group_full_name}</Option>)}
                         </Select> */}
@@ -49,7 +48,7 @@ export const CreateUser = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
-                            onChange={(e) => setValue('education_form',e)}
+                            onChange={(e) => createUserSetValue('education_form',e)}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
@@ -64,7 +63,7 @@ export const CreateUser = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
-                            onChange={(e) => setValue('education_type',e)}
+                            onChange={(e) => createUserSetValue('education_type',e)}
                             >   
                             <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
                             <Option value={"Контракт"} label={"Контракт"}>Контракт</Option>

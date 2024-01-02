@@ -4,5 +4,6 @@ export const endpoints = {
     addUser:'users/adduser',
     createGroup:'groups/addgroup',
     changeGroup:'',
-    faq:'faq'
+    faq:'faq',
+    getGroup:'groups/group'
 }

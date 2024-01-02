@@ -24,5 +24,5 @@ export const useChangeGroupInfo = () => {
         }
     }
 
-    return {onChangeGroupInfo,register,handleSubmit,setValue};
+    return {onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue};
 }

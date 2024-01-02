@@ -173,7 +173,14 @@ input::placeholder{
 .ant-select-selector{
 	border: none !important;
 }
-
+.ant-carousel .slick-dots-bottom{
+	bottom: -20px !important;
+}
+li.slick-active{
+	button{
+		background-color: #EFB42D !important;
+	}
+}
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{

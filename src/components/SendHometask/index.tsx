@@ -117,7 +117,7 @@ export const SendHomeTask = () => {
         </section>
         <section className="sendHomeTaskPeopleDone__section">
             <div className="sendHomeTaskPeopleTitle_container">
-                <h1 className="sendHomeTaskPeopleDone__title">Список викованших</h1>
+                <h1 className="sendHomeTaskPeopleDone__title">Список виконавших</h1>
                 <div className="studyMaterialsSearchInput__container">
                     <input autoComplete="off"  placeholder="Пошук" className="studyMaterialsSearch__input"/>
                     <MagnifierSvg/>
@@ -130,11 +130,11 @@ export const SendHomeTask = () => {
                             <img className="sendHomeTaskPeople__avatar" src={defaultAvatar}/>
                             <div className="sendHomeTaskPeopleFirst__container">
                                 <p className="sendHomeTaskPeopleName">{item.name}</p>
-                                <p className="sendHomeTaskPeopleFiles">Сдано <p className="sendHomeTaskPeopleFilesNumber">{item.filesNumber}</p> файлів</p>
+                                <p className="sendHomeTaskPeopleFiles">Здано <p className="sendHomeTaskPeopleFilesNumber">{item.filesNumber}</p> файлів</p>
                             </div>
                             <div className="sendHomeTaskPeopleSecond__container">
                                 <p className="sendHomeTaskPeopleComments">Коментарі: <p className="sendHomeTaskPeopleCommentsNumber">{item.commentsNumber}</p></p>
-                                <p className="sendHomeTaskPeopleDone">Сдано: <p className="sendHomeTaskPeopleDoneDate">{item.date}</p></p>
+                                <p className="sendHomeTaskPeopleDone">Здано: <p className="sendHomeTaskPeopleDoneDate">{item.date}</p></p>
                             </div>
                         </div>
                     )}
@@ -147,7 +147,7 @@ export const SendHomeTask = () => {
                                 <img className="sendHomeTaskPeople__avatar" src={defaultAvatar}/>
                                 <div className="sendHomeTaskPeopleFirst__container">
                                     <p className="sendHomeTaskPeopleName">{pickedPeople.name}</p>
-                                    <p className="sendHomeTaskPeopleFiles">Сдано <p className="sendHomeTaskPeopleFilesNumber">{pickedPeople.filesNumber}</p> файлів</p>
+                                    <p className="sendHomeTaskPeopleFiles">Здано <p className="sendHomeTaskPeopleFilesNumber">{pickedPeople.filesNumber}</p> файлів</p>
                                 </div>
                             </div>
                             <div className="sendHomeTaskPeoplePickedStudentFiles_container">

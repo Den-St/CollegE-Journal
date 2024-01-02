@@ -1,100 +1,43 @@
+import { Select, Spin } from "antd";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
 import { LinkSvg } from "../../assets/svgs/linkSvg";
 import { RobotSvg } from "../../assets/svgs/robotSvg";
 import { UploadSvg } from "../../assets/svgs/uploadSvg"
+import { dayNamesToNumbers } from "../../consts/dayNamesToNumbers";
+import { useGetGroup } from "../../hooks/getGroup";
+import { useGetGroups } from "../../hooks/getGroups";
+import { DaysNumbersT } from "../../types/daysNames";
+import { GroupT } from "../../types/group";
 import "./scheduleSettings.scss";
+const {Option} = Select;
+
+
 
 export const ScheduleSettings = () => {
-    const days = [
-        {
-            name:'Понеділок',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        },{
-            name:'Вівторок',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        },{
-            name:'Середа',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        },{
-            name:'Четвер',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        },{
-            name:'П\`ятниця',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        },{
-            name:'Суббота',
-            lessons:[
-                {
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },{
-                    name:'Математика',link:'#'
-                },]
-        }];
     const dayNumber = new Date().getDay();
+    const [pickedGroupId,setPickedGroupId] = useState<string>();
+    const {group,groupLoading,fetchGroup} = useGetGroup(pickedGroupId);
+    const {groups,groupsLoading} = useGetGroups();
+    useEffect(() => {
+        fetchGroup(pickedGroupId);
+    },[pickedGroupId]);
 
     return <div className="adminPanelScheduleSettings__container">
-        <NoSheduleComponent/>
+        <div className="fillter_container" style={{width:'100%',marginLeft:'12%'}}>
+            <Select 
+                placeholder={<div className="fillterPlaceholder_container">
+                    <p className="fillter_placeholder">Група</p> <FilterIconSvg/>
+                </div>}
+                onChange={setPickedGroupId}
+                value={pickedGroupId}
+                className="fillter_select"
+                allowClear
+            >
+                {groups.map(group => <Option value={group.group_id} label={group.group_full_name}>{group.group_full_name}</Option>)}
+            </Select>
+        </div>
         <div className="adminPanelScheduleSettingsInput__container">
             <input autoComplete="off"  className="adminPanelScheduleSettingsInput" type={'file'}/>
             <div className="adminPanelScheduleSettingsInput__cover">
@@ -109,17 +52,17 @@ export const ScheduleSettings = () => {
                 </div>
             </div>
         </div>
-        <section className={`lessonsSchedule__container`}>
-            {days.map((day,i) => 
-                <div key={day.name} className="lessonsScheduleDay__container">
-                    <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    
+        {!groupLoading ? group?.timetable ? <section className={`lessonsSchedule__container`}>
+            {Object.keys(group?.timetable).map((dayKey,i) => 
+                <div key={dayKey} className="lessonsScheduleDay__container">
+                    <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
-                        {day.lessons.map((lesson,i) => 
-                            <div key={day.name + lesson.name + i} className="lessonsScheduleDayLessonItem__container">
+                        {group?.timetable?.[dayKey as DaysNumbersT].map((lesson,i) =>
+                            <div key={dayKey + lesson.subject_name + i} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{i + 1}</p>
-                                <p className="lessonsScheduleLessonName">{lesson.name}</p>
+                                <p className="lessonsScheduleLessonName">{lesson.subject_name || '-'}</p>
                                 <p className="lessonsScheduleLessonGroup">
-                                    <Link to={lesson.link} className='lessonsScheduleLink__button'>
+                                    <Link to={lesson.link} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                 </p>
@@ -128,6 +71,8 @@ export const ScheduleSettings = () => {
                     </div>
                 </div>)}
         </section>
+        : <NoSheduleComponent/>
+        : <Spin/>}
     </div>
 }
 

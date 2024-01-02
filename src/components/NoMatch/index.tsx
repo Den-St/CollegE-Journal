@@ -2,15 +2,21 @@ import { NoMatchRobot } from "../../assets/svgs/noMatchRobot"
 import { useThemeStore } from "../../store/themeStore";
 import './noMatchStyles.scss';
 
-export const NoMatch = () => {
+type Props = {
+    title?:string;
+    description?:string
+    is404:boolean
+}
+
+export const NoMatch:React.FC<Props> = ({title,description,is404}) => {
     const theme = useThemeStore().theme;
 
     return <main className={`noMatch__container ${theme}`}>
         <div className="noMatchImages__container">
             <NoMatchRobot/>
-            <span className="noMatch__404">404</span>
+            {is404 && <span className="noMatch__404">404</span>}
         </div>
-        <h1 className="noMatchImages__title">Не вдалося знайти сторінку</h1>
-        <p className="noMatchImages__description">Спробуйте перезайти на сайт або повторіть спробу пізніше.</p>
+        <h1 className="noMatchImages__title">{title}</h1>
+        <p className="noMatchImages__description">{description}</p>
     </main>
 }

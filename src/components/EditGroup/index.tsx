@@ -3,6 +3,10 @@ import { Select } from "antd";
 import { useCreateUser } from "../../hooks/createUser"
 import { useThemeStore } from "../../store/themeStore";
 import { useChangeGroupInfo } from "../../hooks/changeGroupInfo";
+import { NoMatch } from "../NoMatch";
+import { Link, } from "react-router-dom";
+import { defaultAvatar } from "../../consts/defaultAvatar";
+import { useGetGroup } from "../../hooks/getGroup";
 const {Option} = Select;
 
 const errorCodesToMessages:Record<number,string> = {
@@ -11,20 +15,23 @@ const errorCodesToMessages:Record<number,string> = {
 
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
-    const {handleSubmit,register,onCreateUser,setValue,groups,createUserErrorCode} = useCreateUser();
-    const {} = useChangeGroupInfo();
+    const {group,groupLoading} = useGetGroup();
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode} = useCreateUser();
+    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue} = useChangeGroupInfo();
     
+    if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
+
     return <div className={`editGroupMain_container ${theme}`}>
         <h1 className="editGroupHeader">Змінення групи</h1>
         <form className="createGroup_form" 
-        // onSubmit={handleSubmit(onCreateGroup)}
+        onSubmit={changeGroupHangeSubmit(onChangeGroupInfo)}
         >
             <div className="createUserFormSelects__container createGroupFormSelects__container">
                 <div className="createUserSelect__container createGroupSelect__container">
                     <label className="createUserInput__label">Спеціальність та курс</label>
-                    {/* <input autoComplete="off"  {...register('group_full_name',{required:true})}/> */}
+                    <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="createUser__input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:true})}/>
                 </div>
-                {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
+                <div className="createUserSelect__container createGroupCuratorSelect__container">
                     <label className="createUserInput__label">Куратор</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
@@ -35,7 +42,7 @@ export const EditGroup = () => {
                             <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
                         </Select>
                     </div>
-                </div> */}
+                </div>
             </div>
             <input autoComplete="off"  type={'submit'} className="createUser__button" value={'Змінити'}/>
         </form>
@@ -44,11 +51,11 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...register('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
-                    <input autoComplete="off" {...register('mailbox_address',{required:true})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
@@ -59,8 +66,8 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
-                            {...register('education_form',{required:true,onChange:(e) => e})}
-                            onChange={(e) => setValue('education_form',e)}
+                            {...createUserRegister('education_form',{required:true,onChange:(e) => e})}
+                            onChange={(e) => createUserSetValue('education_form',e)}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
@@ -74,7 +81,7 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
-                            {...register('education_type',{required:true})}
+                            {...createUserRegister('education_type',{required:true})}
                             // onChange={(e) => setValue('education_type',e)}
                             >   
                             <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
@@ -88,5 +95,18 @@ export const EditGroup = () => {
                 <input autoComplete="off" type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
             </div>
         </form>
+        <section className="studentList__container">
+            <div className="studentItems__container">
+                {group?.group_students?.map(student => 
+                    <div id={student.user_id || ''} className="student__container">
+                        <div className="student__info">
+                            <img className="studentList__avatar" src={student?.avatar || defaultAvatar} alt=""/>
+                            <p className="studentName">{student?.full_name}</p>
+                        </div>
+                        <Link className="studentButton" to="#">Перейти</Link>
+                    </div>
+                )}
+            </div>
+        </section>
     </div>
 }

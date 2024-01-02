@@ -68,7 +68,7 @@ export const HomeTasks = () => {
           <div className="adminPanelStudentList_fillterContainer fillter_container">
               <Select 
               placeholder={<div className="fillterPlaceholder_container">
-                  <p className="fillter_placeholder">Сдача</p><FilterIconSvg/>
+                  <p className="fillter_placeholder">Здача</p><FilterIconSvg/>
               </div>} 
               className="fillter_select"
               allowClear

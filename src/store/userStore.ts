@@ -13,6 +13,7 @@ type StoreType = State & Actions;
 
 export const useUserStore = create<StoreType>((set) => ({
     user:{
+        user_id:'',
         full_name:'',
         mailbox_adress:'',
         token:'',

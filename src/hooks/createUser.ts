@@ -10,7 +10,7 @@ import { CreateUserT } from "../types/user";
 import { useGetGroups } from "./getGroups";
 
 export const useCreateUser = () => {
-    const {groups} = useGetGroups();
+    // const {groups} = useGetGroups();
     const groupId = useParams().id;
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
@@ -43,5 +43,5 @@ export const useCreateUser = () => {
         }
     }   
 
-    return {onCreateUser,groups,register,handleSubmit,setValue,createUserErrorCode};
+    return {onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode};
 }

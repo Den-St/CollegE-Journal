@@ -1,6 +1,11 @@
+import { TimetableT } from './timetable';
+import { UserT } from './user';
 export type GroupT = {
     group_id:string
-    group_full_name:string
+    group_full_name:string,
+    group_students?:UserT[]
+    group_supervisor?:null,
+    timetable:TimetableT
 }
 
 export type CreateGroupT = {

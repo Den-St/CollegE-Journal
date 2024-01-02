@@ -1,4 +1,5 @@
 export type UserT = {
+    user_id:string | null;
     full_name:string,
     mailbox_adress:string,
     token:string,

@@ -13,10 +13,10 @@ export const Students = () => {
             <section className="studentTitle__container">
                 <h1 className="studentTitle">Список студентів</h1>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
+                    <Select
                     placeholder={<div className="fillterPlaceholder_container">
                         <p className="fillter_placeholder">Група</p><FilterIconSvg/>
-                    </div>} 
+                    </div>}
                     className="fillter_select"
                     allowClear
                     >

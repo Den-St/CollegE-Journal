@@ -122,12 +122,12 @@ export const HomePage = () => {
                             <h3 className="rotate__text">Ми у соц. мережах</h3>
                         </div>
                         <div className="inst__container">
-                            <Link to="#" className="inst">
+                            <Link to="https://www.instagram.com/college_suitt/" className="inst" target={'_blank'}>
                                 {InstagramSvg()}
                             </Link>
                         </div>
                         <div className="tg__container">
-                            <Link to="#" className="tg">
+                            <Link to="https://t.me/kzinews" className="tg" target={'_blank'}>
                                 {TelegramSvg()}
                             </Link>
                         </div>
