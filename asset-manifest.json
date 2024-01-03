@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/CollegE-Journal/static/css/main.fdf2821f.css",
-    "main.js": "/CollegE-Journal/static/js/main.0e8434d9.js",
+    "main.css": "/CollegE-Journal/static/css/main.db855bd3.css",
+    "main.js": "/CollegE-Journal/static/js/main.0c269e18.js",
     "static/media/firstScreenLight.png": "/CollegE-Journal/static/media/firstScreenLight.c322d4f38a5d5766c8a0.png",
     "static/media/first_screen.png": "/CollegE-Journal/static/media/first_screen.b228208db902c209a635.png",
     "static/media/infoJournalBackLight.png": "/CollegE-Journal/static/media/infoJournalBackLight.977732319736e85cd22e.png",
     "static/media/infoJournalBackDark.png": "/CollegE-Journal/static/media/infoJournalBackDark.e2d498f41209155e937d.png",
-    "static/media/sup_mobile.png": "/CollegE-Journal/static/media/sup_mobile.b67e183b772e7c79aaf7.png",
+    "static/media/directorAndBack.png": "/CollegE-Journal/static/media/directorAndBack.6a6f96c33583c9dd058f.png",
     "static/media/infoJournalBackgroundMobile.png": "/CollegE-Journal/static/media/infoJournalBackgroundMobile.deec0fc04fe09435db45.png",
     "static/media/sup.png": "/CollegE-Journal/static/media/sup.a263b4970605f7d13820.png",
     "static/media/signInBackground.png": "/CollegE-Journal/static/media/signInBackground.5c3e8e736a9e17fccde5.png",
     "static/media/laptop.png": "/CollegE-Journal/static/media/laptop.e5ae2dd6ef52c34b7c56.png",
     "static/media/signInBackgroundLight.png": "/CollegE-Journal/static/media/signInBackgroundLight.1d82a5ed38765a0acaf5.png",
     "index.html": "/CollegE-Journal/index.html",
-    "main.fdf2821f.css.map": "/CollegE-Journal/static/css/main.fdf2821f.css.map",
-    "main.0e8434d9.js.map": "/CollegE-Journal/static/js/main.0e8434d9.js.map"
+    "main.db855bd3.css.map": "/CollegE-Journal/static/css/main.db855bd3.css.map",
+    "main.0c269e18.js.map": "/CollegE-Journal/static/js/main.0c269e18.js.map"
   },
   "entrypoints": [
-    "static/css/main.fdf2821f.css",
-    "static/js/main.0e8434d9.js"
+    "static/css/main.db855bd3.css",
+    "static/js/main.0c269e18.js"
   ]
 }
