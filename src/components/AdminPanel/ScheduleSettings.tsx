@@ -23,6 +23,8 @@ export const ScheduleSettings = () => {
     const [pickedGroupId,setPickedGroupId] = useState<string>();
     const {group,groupLoading,fetchGroup} = useGetGroup(pickedGroupId);
     const {groups,groupsLoading} = useGetGroups();
+    const lessonNumbers = Array(1,2,3,4,5);
+    console.log(lessonNumbers)
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);
@@ -60,12 +62,12 @@ export const ScheduleSettings = () => {
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
-                        {group?.timetable?.[dayKey as DaysNumbersT].map((lesson,i) =>
-                            <div key={dayKey + lesson.subject_name + i} className="lessonsScheduleDayLessonItem__container">
-                                <p className="lessonsScheduleLessonNumber">{i + 1}</p>
-                                <p className="lessonsScheduleLessonName">{lesson.subject_name || '-'}</p>
+                        {lessonNumbers.map(lessonNumber =>
+                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name + i} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
+                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
                                 <p className="lessonsScheduleLessonGroup">
-                                    <Link to={lesson.link} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                 </p>
