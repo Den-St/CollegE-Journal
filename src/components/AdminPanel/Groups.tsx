@@ -1,4 +1,5 @@
 import { Modal, Select, Spin } from "antd";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../consts/routes";
 import { useCreateGroupForm } from "../../hooks/createGroupForm";
@@ -19,6 +20,9 @@ const groupCoursesNumbers:Record<number,string> = {
     4:'Четвертий курс',
 }
 export const StudentsListAdmin = () => {
+    useEffect(() => {
+        document.title = 'Налаштування груп';
+    },[])
     const theme = useThemeController().theme;
     const {groups,refetchGroups,groupsLoading,groupesByGrade} = useGetGroups();
     const {createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode} = useCreateGroupForm(refetchGroups);

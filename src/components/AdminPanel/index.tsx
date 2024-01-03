@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ExclamationMarkMessage } from "../../assets/svgs/exclamationMarkMessage";
 import { ScheduleSvg } from "../../assets/svgs/scheduleSvg";
 import { TwoPeopleSvg } from "../../assets/svgs/twoPeopleSvg";

@@ -111,6 +111,9 @@ input:-webkit-autofill:active{
 	line-height: 22px !important;
 	letter-spacing: 0.1em !important;
 }
+input[type=submit]{
+	cursor: pointer;
+}
 input::placeholder{
 	font-family: Montserrat !important;
 	font-size: 18px !important;

@@ -5,7 +5,7 @@ export type GroupT = {
     group_full_name:string,
     group_students?:UserT[]
     group_supervisor?:null,
-    timetable:TimetableT
+    timetable?:TimetableT
 }
 
 export type CreateGroupT = {

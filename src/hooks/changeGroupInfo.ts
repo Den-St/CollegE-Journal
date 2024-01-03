@@ -18,7 +18,7 @@ export const useChangeGroupInfo = () => {
 
     const onChangeGroupInfo = async (data:ChangeGroupT) => {
         try{
-            const res = await axiosConfig.put(endpoints.changeGroup,data,{headers:{Authorization:localToken || cookieToken}});
+            // const res = await axiosConfig.put(endpoints.changeGroup,data,{headers:{Authorization:localToken || cookieToken}});
         }catch(err){
             console.error(err);
         }

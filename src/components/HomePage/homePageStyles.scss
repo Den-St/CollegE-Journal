@@ -251,6 +251,9 @@ img{vertical-align: top;}
     font-weight: 400;
     line-height: normal;
     margin-top: 10px;
+    height: 79%;
+    width: 100%;
+
 }
 .ant-carousel .slick-slider{
     display: none;
@@ -391,6 +394,7 @@ img{vertical-align: top;}
     background: var(--theme-dark, #0B1D26);
     box-shadow: 0px 1px 10px 0px rgba(255, 255, 255, 0.10);
     object-fit: cover;
+    overflow: scroll;
 }
 @media screen and (max-width:'2200px') {
     .slider__element{

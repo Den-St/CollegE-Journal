@@ -5,7 +5,11 @@
     padding: 200px 5% 100px 5%;
     font-family: Montserrat;
 }
-
+.editGroupSelect__container{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
 .editGroupMain_container.dark{
     .createUserInput__label{
         color:white;

@@ -37,7 +37,6 @@ export const useCreateUser = () => {
         }catch(err){
             //@ts-ignore
             const errorStatus = (err as AxiosError).response?.data?.status;
-            console.log('ff',errorStatus)
             setCreateUserErrorCode(errorStatus);
             console.error(err as AxiosError);
         }

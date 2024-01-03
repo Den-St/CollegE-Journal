@@ -16,6 +16,9 @@ const {Option} = Select;
 
 
 export const ScheduleSettings = () => {
+    useEffect(() => {
+        document.title = 'Налаштування розкладу';
+    },[])
     const dayNumber = new Date().getDay();
     const [pickedGroupId,setPickedGroupId] = useState<string>();
     const {group,groupLoading,fetchGroup} = useGetGroup(pickedGroupId);

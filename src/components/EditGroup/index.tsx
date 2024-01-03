@@ -27,7 +27,7 @@ export const EditGroup = () => {
         onSubmit={changeGroupHangeSubmit(onChangeGroupInfo)}
         >
             <div className="createUserFormSelects__container createGroupFormSelects__container">
-                <div className="createUserSelect__container createGroupSelect__container">
+                <div className="editGroupSelect__container">
                     <label className="createUserInput__label">Спеціальність та курс</label>
                     <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="createUser__input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:true})}/>
                 </div>
@@ -66,7 +66,6 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
-                            {...createUserRegister('education_form',{required:true,onChange:(e) => e})}
                             onChange={(e) => createUserSetValue('education_form',e)}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
@@ -81,8 +80,8 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
-                            {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => setValue('education_type',e)}
+                            // {...createUserRegister('education_type',{required:true})}
+                            onChange={(e) => createUserSetValue('education_type',e)}
                             >   
                             <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
                             <Option value={"Контракт"} label={"Контракт"}>Контракт</Option>
@@ -96,7 +95,7 @@ export const EditGroup = () => {
             </div>
         </form>
         <section className="studentList__container">
-            <div className="studentItems__container">
+            <div className="studentItems__container" style={{'justifyContent':'space-between'}}>
                 {group?.group_students?.map(student => 
                     <div id={student.user_id || ''} className="student__container">
                         <div className="student__info">
