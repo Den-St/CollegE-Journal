@@ -1,9 +1,9 @@
 import { TimetableT } from './timetable';
-import { UserT } from './user';
+import { UserT, GroupUserT } from './user';
 export type GroupT = {
     group_id:string
     group_full_name:string,
-    group_students?:UserT[]
+    group_students?:GroupUserT[]
     group_supervisor?:null,
     timetable?:TimetableT
 }

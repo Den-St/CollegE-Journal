@@ -16,7 +16,7 @@ const errorCodesToMessages:Record<number,string> = {
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
-    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode} = useCreateUser();
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue} = useChangeGroupInfo();
     
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
@@ -67,6 +67,7 @@ export const EditGroup = () => {
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
                             onChange={(e) => createUserSetValue('education_form',e)}
+                            value={createUserWatch('education_form')}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
@@ -82,6 +83,7 @@ export const EditGroup = () => {
                             optionLabelProp="label"
                             // {...createUserRegister('education_type',{required:true})}
                             onChange={(e) => createUserSetValue('education_type',e)}
+                            value={createUserWatch('education_type')}
                             >   
                             <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
                             <Option value={"Контракт"} label={"Контракт"}>Контракт</Option>

@@ -67,9 +67,12 @@ export const ScheduleSettings = () => {
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
                                 <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
                                 <p className="lessonsScheduleLessonGroup">
-                                    <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
+                                    :<p>
+                                        <LinkSvg/>
+                                    </p>}
                                 </p>
                             </div>
                         )}

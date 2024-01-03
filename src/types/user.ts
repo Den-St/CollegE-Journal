@@ -16,9 +16,15 @@ export type UserT = {
     security_level:number | null
 }
 
+export type GroupUserT = {
+    user_id:string | null;
+    full_name:string,
+    mailbox_adress:string,
+    avatar: string,
+}
 export type CreateUserT = {
     mailbox_address:string,
     full_name:string
-    education_form:string
-    education_type:string
+    education_form:string | null 
+    education_type:string | null
 }

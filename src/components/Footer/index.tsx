@@ -29,8 +29,8 @@ export const Footer = () => {
                 <div>
                     <h1 className="fList__title">Ми У Соц. Мережах</h1>
                     <ul className="footer__list footer__list_socials">
-                        <li><a className="fList__btn" href="#">Instagram</a></li>
-                        <li><a className="fList__btn" href="#">Telegram</a></li>
+                        <li><a className="fList__btn" href="https://www.instagram.com/college_suitt/" target={'_blank'}>Instagram</a></li>
+                        <li><a className="fList__btn" href="https://t.me/kzinews" target={'_blank'}>Telegram</a></li>
                     </ul>
                 </div>
             </div>
