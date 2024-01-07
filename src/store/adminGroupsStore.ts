@@ -11,7 +11,7 @@ type Actions = {
 }
 type StoreType = State & Actions;
 
-export const useGroupsStore = create<StoreType>((set) => ({
+export const useAdminGroupsStore = create<StoreType>((set) => ({
     groups:[],
     setGroups:(groups)  => set((state) => ({...state,groups:groups})),
     addGroup:(group)  => set((state) => ({...state,groups:[...state.groups,group]})),

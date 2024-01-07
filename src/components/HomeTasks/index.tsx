@@ -72,7 +72,6 @@ export const HomeTasks = () => {
               </div>} 
               className="fillter_select"
               allowClear
-
               >
                   <Option value={'2020'} label={'2020'}>2020 <FilterIconSvg/></Option>
                   <Option value={'2021'} label={'2021'}>2021 <FilterIconSvg/></Option>

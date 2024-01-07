@@ -395,6 +395,7 @@ img{vertical-align: top;}
     box-shadow: 0px 1px 10px 0px rgba(255, 255, 255, 0.10);
     object-fit: cover;
     overflow: scroll;
+    
 }
 @media screen and (max-width:'2200px') {
     .slider__element{
@@ -773,6 +774,16 @@ img{vertical-align: top;}
 }
 
 @media screen and (max-width:780px) {
+    // .slider_xxxl{
+    //     display: none;
+    // }
+    // .slider_xxl{
+    //     display: none;
+    // }
+    // .slider_xl{
+    //     display: none;
+    // }
+
     .pageNav{
         display: none;
     }
@@ -929,4 +940,13 @@ img{vertical-align: top;}
     .main__phrase{
         width: 100%;
     }
+}
+
+.slider__element::-webkit-scrollbar-corner{
+    background-color: transparent;
+    display: none !important;
+}
+.slider__element::-webkit-scrollbar{
+    background-color: transparent;
+    display: none !important;
 }

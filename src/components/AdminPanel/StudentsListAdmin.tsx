@@ -1,9 +1,10 @@
 import { Modal, Select, Spin } from "antd";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { groupCoursesNumbers } from "../../consts/groupsCoursesNumbers";
 import { routes } from "../../consts/routes";
 import { useCreateGroupForm } from "../../hooks/createGroupForm";
-import { useGetGroups } from "../../hooks/getGroups";
+import { useGetAdminGroups } from "../../hooks/getGroups";
 import { useThemeController } from "../../hooks/themeController"
 import { CreateGroupT, GroupT } from "../../types/group";
 const {Option,} = Select;
@@ -13,18 +14,13 @@ const errorCodes:Record<number,string> = {
     [-1]:'Некоректна назва групи',
     0:'Група з такою назвою вже існує'
 }
-const groupCoursesNumbers:Record<number,string> = {
-    1:'Перший курс',
-    2:'Другий курс',
-    3:'Третій курс',
-    4:'Четвертий курс',
-}
+
 export const StudentsListAdmin = () => {
     useEffect(() => {
         document.title = 'Налаштування груп';
     },[])
     const theme = useThemeController().theme;
-    const {groups,refetchGroups,groupsLoading,groupesByGrade} = useGetGroups();
+    const {groups,refetchGroups,groupsLoading,groupesByGrade} = useGetAdminGroups();
     const {createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode} = useCreateGroupForm(refetchGroups);
 
     return <div className={`adminStudentListContainer ${theme}`}>

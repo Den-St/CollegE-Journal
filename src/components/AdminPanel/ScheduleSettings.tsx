@@ -7,7 +7,7 @@ import { RobotSvg } from "../../assets/svgs/robotSvg";
 import { UploadSvg } from "../../assets/svgs/uploadSvg"
 import { dayNamesToNumbers } from "../../consts/dayNamesToNumbers";
 import { useGetGroup } from "../../hooks/getGroup";
-import { useGetGroups } from "../../hooks/getGroups";
+import { useGetAdminGroups } from "../../hooks/getGroups";
 import { DaysNumbersT } from "../../types/daysNames";
 import { GroupT } from "../../types/group";
 import "./scheduleSettings.scss";
@@ -22,7 +22,7 @@ export const ScheduleSettings = () => {
     const dayNumber = new Date().getDay();
     const [pickedGroupId,setPickedGroupId] = useState<string>();
     const {group,groupLoading,fetchGroup} = useGetGroup(pickedGroupId);
-    const {groups,groupsLoading} = useGetGroups();
+    const {groups,groupsLoading} = useGetAdminGroups();
     const lessonNumbers = Array(1,2,3,4,5);
     console.log(lessonNumbers)
     useEffect(() => {

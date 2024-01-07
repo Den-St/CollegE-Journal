@@ -4,7 +4,6 @@ import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, Stu
 import { securityLevels } from "./securityLevels";
 
 export const navRoutes = {
-
 }
 
 export const routes = {
@@ -29,8 +28,9 @@ export const routes = {
     scheduleCreate:'/schedule-create',
     faq:'/faq',
     createUser:'/create-user',
-    editGroup:`/edit-group/:id`
-};
+    editGroup:`/edit-group/:id`,
+    pickJournalSubject:'/pick-journal-subject'
+} as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
     homeTasks:'/home-tasks',
@@ -50,53 +50,69 @@ export const headerRoutes = {
     scheduleCreate:'/schedule-create',
     faq:'/faq',
     signIn:''
-};
+} as const;
 
-const securityLevelToRoutes:Record<number,{link:string,title:string,page:JSX.Element}[]> = {
-    [securityLevels.unauthorized]:[
-        {
-            link:routes.homePage,
-            title:'Головна',
-            page:<HomePage/>
-        },
-        {
-            link:headerRoutes.faq,
-            title:'FAQ',
-            page:<FAQ/>
-        },
-        {
-            link:routes.signIn,
-            title:'Вхід',
-            page:<SignIn/>
-        },
+// const securityLevelToRoutes:Record<number,{link:string,title:string,page:JSX.Element}[]> = {
+//     [securityLevels.unauthorized]:[
+//         {
+//             link:routes.homePage,
+//             title:'Головна',
+//             page:<HomePage/>
+//         },
+//         {
+//             link:headerRoutes.faq,
+//             title:'FAQ',
+//             page:<FAQ/>
+//         },
+//         {
+//             link:routes.signIn,
+//             title:'Вхід',
+//             page:<SignIn/>
+//         },
       
+//     ],
+//     [securityLevels.student]:[
+//         {
+//             link:routes.homeTask,
+//             title:'Домашнє завдання',
+//             page:<HomeTask/>
+//         },
+//         {
+//             link:routes.homeTask,
+//             title:'Домашні завдання',
+//             page:<HomeTasks/>
+//         },
+//     ],
+//     [securityLevels.admin]:[
+//         {
+//             link:headerRoutes.adminPanel,
+//             title:'Адмін-панель',
+//             page:<AdminPanel/>
+//         },
+//         {
+//             link:routes.editGroup,
+//             title:'Редагування группи',
+//             page:<EditGroup/>
+//         },
+//     ]
+// };
+
+const securityLevelToRoutes:Record<number,string[]> = {
+    [securityLevels.unauthorized]:[
+        routes.homePage,
+        headerRoutes.faq,
+        routes.signIn,
+        
     ],
     [securityLevels.student]:[
-        {
-            link:routes.homeTask,
-            title:'Домашнє завдання',
-            page:<HomeTask/>
-        },
-        {
-            link:routes.homeTask,
-            title:'Домашні завдання',
-            page:<HomeTasks/>
-        },
+        routes.homeTask,
+        routes.homeTask,
     ],
     [securityLevels.admin]:[
-        {
-            link:headerRoutes.adminPanel,
-            title:'Адмін-панель',
-            page:<AdminPanel/>
-        },
-        {
-            link:routes.editGroup,
-            title:'Редагування группи',
-            page:<EditGroup/>
-        },
+        headerRoutes.adminPanel,
+        routes.editGroup,
     ]
-}
-
+};
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   

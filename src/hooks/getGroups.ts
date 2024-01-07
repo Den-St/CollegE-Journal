@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { endpoints } from "../consts/endpoints";
 import { getToken } from "../helpers/auth";
-import { useGroupsStore } from "../store/groupsStore";
+import { useAdminGroupsStore } from "../store/adminGroupsStore";
 import { useUserStore } from "../store/userStore";
 import { GroupT } from "../types/group";
 
-export const useGetGroups = () => {
+export const useGetAdminGroups = () => {
     // const [groups,setGroups] = useState<GroupT[]>([]);
-    const setGroups = useGroupsStore().setGroups;
-    const groups = useGroupsStore().groups;
+    const setGroups = useAdminGroupsStore().setGroups;
+    const groups = useAdminGroupsStore().groups;
     const [groupesByGrade,setGroupsByGrage] = useState<Record<string,GroupT[]>>();
     const [loading,setLoading] = useState(false);
     const localToken = getToken();

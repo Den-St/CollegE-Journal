@@ -11,7 +11,7 @@ type Props = {
 export const NoMatch:React.FC<Props> = ({title,description,is404}) => {
     const theme = useThemeStore().theme;
 
-    return <main className={`noMatch__container ${theme}`}>
+    return <main className={`noMatch__container ${theme} ${is404 && `no_match`}`}>
         <div className="noMatchImages__container">
             <NoMatchRobot/>
             {is404 && <span className="noMatch__404">404</span>}

@@ -1,13 +1,20 @@
-import { Select } from "antd";
+import { Select, Spin } from "antd";
+import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
+import { groupCoursesNumbers } from "../../consts/groupsCoursesNumbers";
+import { routes } from "../../consts/routes";
+import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useThemeStore } from "../../store/themeStore"
+import { NoMatch } from "../NoMatch";
 import './groupsStyles.scss';
 const {Option} = Select;
+
 export const Groups = () => {
     const theme = useThemeStore().theme;
+    const {loading,groups,groupesByGrade} = useGroupsByTeacher();
 
     return <div className={`groupsMain__container ${theme}`}>
-        <section className="groupsTop__container">
+        {/* <section className="groupsTop__container">
             <h1 className="groupTitle">Список груп</h1>
             <div className="groupsFillters__container">
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
@@ -40,154 +47,22 @@ export const Groups = () => {
                     </Select>
                 </div>
             </div>
-        </section>
-
+        </section> */}
         <section className="groupsCourses__container">
-            <div className="groupsCourseItem__container">
-                <h2 className="groupsCourseItem__title">Перший курс</h2>
-                <div className="groupCourseItemGroups__container">
-                    <div className="groupItem__container">
-                        3-11
-                    </div>
-                     <div className="groupItem__container">
-                        3-12
-                    </div>
-                     <div className="groupItem__container">
-                        КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                </div>
-            </div>
-            <div className="groupsCourseItem__container">
-                <h2 className="groupsCourseItem__title">Перший курс</h2>
-                <div className="groupCourseItemGroups__container">
-                    <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                </div>
-            </div>
-            <div className="groupsCourseItem__container">
-                <h2 className="groupsCourseItem__title">Перший курс</h2>
-                <div className="groupCourseItemGroups__container">
-                    <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                </div>
-            </div>
-            <div className="groupsCourseItem__container">
-                <h2 className="groupsCourseItem__title">Перший курс</h2>
-                <div className="groupCourseItemGroups__container">
-                    <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                </div>
-            </div>
-            <div className="groupsCourseItem__container">
-                <h2 className="groupsCourseItem__title">Перший курс</h2>
-                <div className="groupCourseItemGroups__container">
-                    <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                     <div className="groupItem__container">
-                     КН-11
-                    </div>
-                </div>
-            </div>
+            {
+                !loading ? !!groupesByGrade ? Object.keys(groupesByGrade).map(key => 
+                    <div className="groupsCourseItem__container">
+                        <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
+                        <div className="groupCourseItemGroups__container">
+                            {groupesByGrade[key].map(group => 
+                                <Link to={routes.pickJournalSubject + `?group_id=${group.group_id}`} className="groupItem__container">
+                                    {group.group_full_name}
+                                </Link>
+                            )}
+                        </div>
+                    </div>   
+                ) : <NoMatch is404={false} title={'У вас немає груп'}/> : <Spin/>
+            }
         </section>
     </div>
 }

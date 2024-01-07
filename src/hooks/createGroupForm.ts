@@ -6,7 +6,7 @@ import axiosConfig from "../axiosConfig";
 import { endpoints } from "../consts/endpoints";
 import { routes } from "../consts/routes";
 import { getToken } from "../helpers/auth";
-import { useGroupsStore } from "../store/groupsStore";
+import { useAdminGroupsStore } from "../store/adminGroupsStore";
 import { useUserStore } from "../store/userStore";
 import { CreateGroupT } from "../types/group";
 
@@ -14,7 +14,7 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
     const navigate = useNavigate();
     const [createGroupModalOpened,setCreateGroupModalOpened] = useState(false);
     const [errorCode,setErrorCode] = useState<number>();
-    const addGroup = useGroupsStore().addGroup;
+    const addGroup = useAdminGroupsStore().addGroup;
 
     const onOpenCreateGroupModal = () => {
         setCreateGroupModalOpened(true);

@@ -164,157 +164,156 @@
         width: 100%;
     }
 }
-.adminPanelMain__container{
-    &.dark{
-        .adminPanelControllerItem__container{
-            background-color: #0a1d26;
-            box-shadow: 0 0 15px 0 #D4D4D41A;
-        }
-        .adminPanelStatBlock__container{
-            background-color: #0a1d26;
-            box-shadow: 0 0 15px 0 #D4D4D41A;
-        }
-        .adminPanelMain__title{
-            color:white;
-        }
-        .adminPanel__title{
-            color:#D0D0D0;
-        }
-        .adminPanelControllers__title{
-            color:#797979;
-        }
-        
-        .adminPanelControllerIcon{
-            fill:#D0D0D0;
-        }
-        
-        .adminPanelStatName{
-            color:white;
-        }
-        .adminPanelStatItemDay__container{
-            color:white;
-        }
-        .adminPanelStatItem__container{
-            color:white;
-        }
-        .adminPanelStatName{
-            color:white;
-        }
-        .adminPanelStatItemName{
-            color:#D0D0D0;
-        }
-        .adminPanelStatItemWeek{
-            color:white;
-        }
-        .adminPanelStatItemMonth{
-            color:#797979;
-        }
-        .robotSvg_path{
+.dark{
+    .adminPanelControllerItem__container{
+        background-color: #0a1d26;
+        box-shadow: 0 0 15px 0 #D4D4D41A;
+    }
+    .adminPanelStatBlock__container{
+        background-color: #0a1d26;
+        box-shadow: 0 0 15px 0 #D4D4D41A;
+    }
+    .adminPanelMain__title{
+        color:white;
+    }
+    .adminPanel__title{
+        color:#D0D0D0;
+    }
+    .adminPanelControllers__title{
+        color:#797979;
+    }
+    
+    .adminPanelControllerIcon{
+        fill:#D0D0D0;
+    }
+    
+    .adminPanelStatName{
+        color:white;
+    }
+    .adminPanelStatItemDay__container{
+        color:white;
+    }
+    .adminPanelStatItem__container{
+        color:white;
+    }
+    .adminPanelStatName{
+        color:white;
+    }
+    .adminPanelStatItemName{
+        color:#D0D0D0;
+    }
+    .adminPanelStatItemWeek{
+        color:white;
+    }
+    .adminPanelStatItemMonth{
+        color:#797979;
+    }
+    .robotSvg_path{
+        stroke: white;
+    }
+    .noSchedule_title{
+        color:white;
+    }
+    .noSchedule_text{
+        color:white;
+    }
+    .adminPanelScheduleSettingsInput__cover{
+        background-color: #102936;
+        color:white;
+        path{
             stroke: white;
-        }
-        .noSchedule_title{
-            color:white;
-        }
-        .noSchedule_text{
-            color:white;
-        }
-        .adminPanelScheduleSettingsInput__cover{
-            background-color: #102936;
-            color:white;
-            path{
-                stroke: white;
-                fill:transparent;
-            }
-        }
-        .adminPanelControllerItem__container.activeSection{
-            .adminPanelControllerIcon{
-                fill:#EFB42D;
-            }
-            .adminPanelControllers__title{
-                color:#EFB42D;
-            }
-        }
-        .lessonsScheduleDay__header{
-            color:#D0D0D0;
-        }
-        .lessonsScheduleLessonNumber{
-            color:white;
-        }
-        .lessonsScheduleLessonName{
-            color:white;
-        }
-        .lessonsScheduleLessonGroup{
-            font-weight: 400;
-            font-size: 20px;
-            color:#797979;
-        }
-        .lessonsScheduleDay__header.currentDay{
-            color:#EFB42D;
-        }
-        .scheduleTimingsTitle{
-            color:white;
-        }
-        .studentProfielScheduleGoToTasks_container{
-            background-color: #102936;
-        }
-        .studentProfielScheduleGoToTasks_title{
-            color:white;
-        }
-        .studentProfielScheduleGoToTasks_text{
-            color:white;
-        }
-        svg{
-            fill: transparent;
-        }
-        .magnifierSvg{
-            fill:#ffffff;
-            path{
-                fill:#ffffff;
-            }
-        }
-        .lessonsScheduleLessonGroup:hover{
-            path{
-                stroke:#EFB42D;
-            }
-        }
-        .createUser__button{
-            color:white;
-        }
-        .createStudyMaterialsSelect__wrapper{
-            background-color: #102936;
-        }
-        .ant-select-selector{
-            background-color: #102936 !important;
-            border:none !important;
-            font-weight: 500;
-        }
-        .createUserInput__label{
-            color:white;
-        }
-        .createUser__button{
-            background-color: #102936;
-        }
-        .groupsCourseItem__title{
-            color:white;
-        }
-        .groupItem__container{
-            color:white;
+            fill:transparent;
         }
     }
-    &.light{
-        .adminPanelControllerItem__container{
-            background-color: white;
-            box-shadow: 0 0 15px 0 rgb(184, 184, 184);
-        }
-        .adminPanelStatBlock__container{
-            background-color: white;
-        }
+    .adminPanelControllerItem__container.activeSection{
         .adminPanelControllerIcon{
-            fill:#797979;
+            fill:#EFB42D;
         }
-        .adminPanelStatItemName{
-            color:#797979;
+        .adminPanelControllers__title{
+            color:#EFB42D;
         }
+    }
+    .lessonsScheduleDay__header{
+        color:#D0D0D0;
+    }
+    .lessonsScheduleLessonNumber{
+        color:white;
+    }
+    .lessonsScheduleLessonName{
+        color:white;
+    }
+    .lessonsScheduleLessonGroup{
+        font-weight: 400;
+        font-size: 20px;
+        color:#797979;
+    }
+    .lessonsScheduleDay__header.currentDay{
+        color:#EFB42D;
+    }
+    .scheduleTimingsTitle{
+        color:white;
+    }
+    .studentProfielScheduleGoToTasks_container{
+        background-color: #102936;
+    }
+    .studentProfielScheduleGoToTasks_title{
+        color:white;
+    }
+    .studentProfielScheduleGoToTasks_text{
+        color:white;
+    }
+    svg{
+        fill: transparent;
+    }
+    .magnifierSvg{
+        fill:#ffffff;
+        path{
+            fill:#ffffff;
+        }
+    }
+    .lessonsScheduleLessonGroup:hover{
+        path{
+            stroke:#EFB42D;
+        }
+    }
+    .createUser__button{
+        color:white;
+    }
+    .createStudyMaterialsSelect__wrapper{
+        background-color: #102936;
+    }
+    .ant-select-selector{
+        background-color: #102936 !important;
+        border:none !important;
+        font-weight: 500;
+    }
+    .createUserInput__label{
+        color:white;
+    }
+    .createUser__button{
+        background-color: #102936;
+    }
+    .groupsCourseItem__title{
+        color:white;
+    }
+    .groupItem__container{
+        background-color: #0a1d26;
+        color:white;
+    }
+}
+.light{
+    .adminPanelControllerItem__container{
+        background-color: white;
+        box-shadow: 0 0 15px 0 rgb(184, 184, 184);
+    }
+    .adminPanelStatBlock__container{
+        background-color: white;
+    }
+    .adminPanelControllerIcon{
+        fill:#797979;
+    }
+    .adminPanelStatItemName{
+        color:#797979;
     }
 }
 .adminPanelControllerItem__container:hover{

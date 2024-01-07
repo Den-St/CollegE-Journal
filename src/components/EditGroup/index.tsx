@@ -105,7 +105,7 @@ export const EditGroup = () => {
                             <p className="studentName">{student?.full_name}</p>
                         </div>
                         <Link className="studentButton" to="#">Перейти</Link>
-                    </div>
+                    </div> 
                 )}
             </div>
         </section>

@@ -5,5 +5,7 @@ export const endpoints = {
     createGroup:'groups/addgroup',
     changeGroup:'',
     faq:'faq',
-    getGroup:'groups/group'
+    getGroup:'groups/group',
+    getTeacherGroups:'groups/getTeacherGroups',
+    journal:'journal/journal'
 }

@@ -8,7 +8,7 @@ import { endpoints } from "../consts/endpoints";
 import { getToken } from "../helpers/auth";
 import { useUserStore } from "../store/userStore";
 import { CreateUserT, UserT } from "../types/user";
-import { useGetGroups } from "./getGroups";
+import { useGetAdminGroups } from "./getGroups";
 
 export const useCreateUser = (group?:GroupT) => {
     // const {groups} = useGetGroups();
