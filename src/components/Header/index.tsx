@@ -67,6 +67,8 @@ export const Header = () => {
                         <div className="logo__block">
                             <Link to="/" className="header__logo">
                                 <CollegeLogoSvg/>
+                                {/* <FilterIconSvg/> */}
+                                {/* sdfsd */}
                             </Link>
                         </div>
                     </div>

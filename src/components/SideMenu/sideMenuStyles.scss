@@ -47,3 +47,15 @@
         display: block;
     }
 }
+@media screen and (min-width:780px) {
+    .sideMenu_container{
+        // display: none;
+        // transform: translateX(0px); fix!
+    }
+    body{
+        overflow: scroll !important;
+    }
+    .header.sideMenushown{
+        background-color: transparent;
+    }
+}

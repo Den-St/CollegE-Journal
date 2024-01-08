@@ -1,11 +1,11 @@
 export const endpoints = {
     auth:'users/generaldata',
-    getGroups:'groups/grouplist',
-    addUser:'users/adduser',
-    createGroup:'groups/addgroup',
-    changeGroup:'',
+    getGroups:'admin/groups/grouplist',
+    addUser:'admin/users/adduser',
+    createGroup:'admin/groups/addgroup',
+    changeGroup:'admin/groups/updategroup',
     faq:'faq',
-    getGroup:'groups/group',
-    getTeacherGroups:'groups/getTeacherGroups',
-    journal:'journal/journal'
+    getGroup:'admin/groups/group',
+    journal:'journal/journal',
+    userGroups:'groups/usergroups'
 }

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { useGetJournal } from '../../hooks/getJournal';
+import { useTeachersGroupsStore } from '../../store/teachersGroupsStore';
 import { useThemeStore } from '../../store/themeStore';
 import './journalStyles.scss';
 const {Option} = Select;
@@ -22,8 +23,9 @@ const months = [
 
 export const Journal = () => {
     const {fillters,loading,journal,onChangeFillters} = useGetJournal();
+    const groupJournal = useTeachersGroupsStore().groups.find(group => group._id === fillters.group_id);
     const theme = useThemeStore().theme;
-    
+
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <h1 className='journal__title'>Журнал</h1>
@@ -34,9 +36,9 @@ export const Journal = () => {
                         <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
                     </div>}
                     className="fillter_select"
-                    allowClear
-                    value={fillters.month}
-                    onChange={(value) => onChangeFillters('month',value)}
+                    // allowClear
+                    // value={fillters.month}
+                    // onChange={(value) => onChangeFillters('month',value)}
                     >
                         {months.map((month,i) => i + 1 <= fillters.month && <Option value={i + 1} label={month}>{month}<FilterIconSvg/></Option> )}
                     </Select>
@@ -49,14 +51,20 @@ export const Journal = () => {
                             </div>
                         } 
                         className="fillter_select"
-                        allowClear
+                        // allowClear
                         value={fillters.subject_id}
                         onChange={(value) => onChangeFillters('subject_id',value)}
                     >
-                        <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
+                        {groupJournal?.can_view.map(subject => 
+                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}<FilterIconSvg/></Option>
+                        )}
+                        {groupJournal?.can_edit.map(subject => 
+                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}<FilterIconSvg/></Option>
+                        )}
+                        {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
                         <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
                         <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
-                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
+                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option> */}
                     </Select>
                 </div>
                 {/* <div className="adminPanelStudentList_fillterContainer fillter_container">

@@ -1,12 +1,13 @@
 import { create } from 'zustand'
 import { GroupT } from '../types/group';
+import { JournalGroupT } from '../types/journalGroup';
 
 type State = {
-    groups:GroupT[];
+    groups:JournalGroupT[];
 }
 
 type Actions = {
-    setGroups:(group:GroupT[]) => void,
+    setGroups:(group:JournalGroupT[]) => void,
 }
 type StoreType = State & Actions;
 

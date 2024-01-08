@@ -38,7 +38,7 @@ export const ScheduleSettings = () => {
                 onChange={setPickedGroupId}
                 value={pickedGroupId}
                 className="fillter_select"
-                allowClear
+                // allowClear
             >
                 {groups.map(group => <Option value={group.group_id} label={group.group_full_name}>{group.group_full_name}</Option>)}
             </Select>

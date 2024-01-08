@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -9,9 +10,9 @@ export const useGetJournal = () => {
     const [journal,setJournal] = useState();
     const [loading,setLoading] = useState(false);
     const [fillters,setFillters] = useState<{group_id:string,subject_id:string,month:number}>({
-        group_id:useParams().group_id || '',
-        subject_id:useParams().subject_id || '',
-        month: +(useParams().month || new Date().getMonth)
+        group_id:useSearchParams()[0].get('group_id') || '',
+        subject_id:useSearchParams()[0].get('subject_id') || '',
+        month: +(useSearchParams()[0].get('month') || new Date().getMonth)
     });
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;

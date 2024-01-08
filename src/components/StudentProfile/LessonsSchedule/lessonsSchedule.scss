@@ -94,7 +94,13 @@ path{
     text-align: center;
     width: 60%;
 }
-
+.lessonsScheduleLessonEnd,
+.lessonsScheduleLessonStart{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+}
 .lessonsSchedule__container{
     &.dark{
         .lessonsScheduleDay__header{
@@ -157,6 +163,10 @@ path{
                 color:#EFB42D;
             }
         }
+        .lessonsScheduleLessonEnd,
+        .lessonsScheduleLessonStart{
+            color:#D0D0D0;
+        }
     }
     // &.light{
 
@@ -182,8 +192,7 @@ path{
     .lessonsScheduleLessonName{
         width: 55%;
     }
-    .ant-carousel .lessonsScheduleDayCarousel,
-    .slick-initialized{
+    .ant-carousel .lessonsScheduleDayCarousel{
         display: block !important;
         width: 98vw !important;
     }
@@ -203,6 +212,21 @@ path{
     }
     .lessonsScheduleDay__container{
         display: unset ;
+    }
+    .shedule{
+        margin-top: 40px;
+        .scheduleTimingsTitle{
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 34px;
+            letter-spacing: 0.1em;
+        }
+    }
+    .lessonsScheduleDay__container{
+        width: unset;
+    }
+    .lessonsScheduleDay__header{
+        display: none;
     }
 }
 .shedule{
