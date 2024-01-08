@@ -40,7 +40,7 @@ export const Journal = () => {
                     // value={fillters.month}
                     // onChange={(value) => onChangeFillters('month',value)}
                     >
-                        {months.map((month,i) => i + 1 <= fillters.month && <Option value={i + 1} label={month}>{month}<FilterIconSvg/></Option> )}
+                        {months.map((month,i) => i + 1 <= fillters.month && <Option value={i + 1} label={month}>{month}</Option> )}
                     </Select>
                 </div>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
@@ -56,10 +56,10 @@ export const Journal = () => {
                         onChange={(value) => onChangeFillters('subject_id',value)}
                     >
                         {groupJournal?.can_view.map(subject => 
-                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}<FilterIconSvg/></Option>
+                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
                         {groupJournal?.can_edit.map(subject => 
-                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}<FilterIconSvg/></Option>
+                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
                         {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
                         <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
