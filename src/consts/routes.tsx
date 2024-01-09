@@ -133,7 +133,7 @@ export const PublicRoutes = [
     <Route key={routes.adminPanel} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
-    <Route key={routes.pickJournalSubject} element={<Subjects/>} path={routes.pickJournalSubject}/>,
+    <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><Subjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,

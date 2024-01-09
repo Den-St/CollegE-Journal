@@ -2,27 +2,60 @@ import { DatePicker, Select } from 'antd';
 import { useState } from 'react';
 import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
+import { setFromSubjects } from '../../helpers/setFromObjects';
 import { useGetJournal } from '../../hooks/getJournal';
+import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
 import { useTeachersGroupsStore } from '../../store/teachersGroupsStore';
 import { useThemeStore } from '../../store/themeStore';
 import './journalStyles.scss';
 const {Option} = Select;
 
 const months = [
-    'Вересень',
-    'Жовтень',
-    'Листопад',
-    'Грудень',
-    'Січень',
-    'Лютий',
-    'Березень',
-    'Квітень',
-    'Травень',
-    'Червень',
+    {
+        name:'Вересень',
+        number:9
+    },
+    {
+        name:'Жовтень',
+        number:10
+    },
+    {
+        name:'Листопад',
+        number:11
+    },
+    {
+        name:'Грудень',
+        number:12
+    },
+    {
+        name:'Січень',
+        number:1
+    },
+    {
+        name:'Лютий',
+        number:2
+    },
+    {
+        name:'Березень',
+        number:3
+    },
+    {
+        name:'Квітень',
+        number:4
+    },
+    {
+        name:'Травень',
+        number:5
+    },
+    {
+        name:'Червень',
+        number:6
+    },
 ];
 
 export const Journal = () => {
     const {fillters,loading,journal,onChangeFillters} = useGetJournal();
+    const {} = useGroupsByTeacher();
     const groupJournal = useTeachersGroupsStore().groups.find(group => group._id === fillters.group_id);
     const theme = useThemeStore().theme;
 
@@ -40,7 +73,10 @@ export const Journal = () => {
                     // value={fillters.month}
                     // onChange={(value) => onChangeFillters('month',value)}
                     >
-                        {months.map((month,i) => i + 1 <= fillters.month && <Option value={i + 1} label={month}>{month}</Option> )}
+                        {months.map((month,i) => {
+                            if(i >= months.findIndex(_month => _month.number === fillters.month)) return null;
+                            return <Option value={month.number} label={month.name}>{month.name}</Option>
+                        })}
                     </Select>
                 </div>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
@@ -55,10 +91,9 @@ export const Journal = () => {
                         value={fillters.subject_id}
                         onChange={(value) => onChangeFillters('subject_id',value)}
                     >
-                        {groupJournal?.can_view.map(subject => 
-                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
-                        )}
-                        {groupJournal?.can_edit.map(subject => 
+                        {!!groupJournal && 
+                        setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
+                        .map(subject => 
                             <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
                         {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
@@ -363,7 +398,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
                 <div className='journalLessonThemeItem__container'>
                     <div className='journalLessonThemeItemDate__container'>
@@ -371,7 +406,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
                 <div className='journalLessonThemeItem__container'>
                     <div className='journalLessonThemeItemDate__container'>
@@ -379,7 +414,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
                 <div className='journalLessonThemeItem__container'>
                     <div className='journalLessonThemeItemDate__container'>
@@ -387,7 +422,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
                 <div className='journalLessonThemeItem__container'>
                     <div className='journalLessonThemeItemDate__container'>
@@ -395,7 +430,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
                 <div className='journalLessonThemeItem__container'>
                     <div className='journalLessonThemeItemDate__container'>
@@ -403,7 +438,7 @@ export const Journal = () => {
                         <p className='journalLessonThemeItemDate__date'>02.05</p>
                         <p className='journalLessonThemeItemType'>Лекція</p>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заннятя</p>
+                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
                 </div>
             </div>
         </section>

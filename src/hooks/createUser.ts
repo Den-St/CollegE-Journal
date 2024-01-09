@@ -16,6 +16,7 @@ export const useCreateUser = (group?:GroupT) => {
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
+    const [crateUserFormErrorMessage,setErrorMessage] = useState('');
     console.log(createUserErrorCode);
 
     const {
@@ -23,12 +24,25 @@ export const useCreateUser = (group?:GroupT) => {
         handleSubmit,
         setValue,
         watch,
-        reset
+        reset,
+        formState:{errors}
     } = useForm<CreateUserT>();
 
     const onCreateUser = async (data:CreateUserT) => {
         console.log(data);
-        if(!data.education_form || !data.education_type) return;
+        if(!data.education_form) {
+            setErrorMessage('Оберіть форму навчання!')
+            return;
+        }
+        if(!data.education_type){
+            setErrorMessage('Оберіть тип навчання!')
+            return;
+        }
+        if(!data.full_name.includes(' ')){
+            setErrorMessage('Некорректно введене ПІБ!')
+            return;
+        }
+
         try{
             const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId},{headers:{Authorization:localToken || cookieToken}});
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_adress:data.mailbox_address,user_id:res.data.user_password});
@@ -36,6 +50,7 @@ export const useCreateUser = (group?:GroupT) => {
             reset();
             setValue('education_form',null);
             setValue('education_type',null);
+            setErrorMessage('');
         }catch(err){
             //@ts-ignore
             const errorStatus = (err as AxiosError).response?.data?.status;
@@ -44,5 +59,5 @@ export const useCreateUser = (group?:GroupT) => {
         }
     }   
 
-    return {onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch};
+    return {onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,crateUserFormErrorMessage};
 }

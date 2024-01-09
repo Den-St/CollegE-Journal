@@ -7,6 +7,7 @@ import { NoMatch } from "../NoMatch";
 import { Link, } from "react-router-dom";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { useGetGroup } from "../../hooks/getGroup";
+import { emailPattern } from "../../consts/emailPattern";
 const {Option} = Select;
 
 const errorCodesToMessages:Record<number,string> = {
@@ -16,9 +17,10 @@ const errorCodesToMessages:Record<number,string> = {
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
-    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch} = useCreateUser(group);
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,crateUserFormErrorMessage} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue} = useChangeGroupInfo();
-    
+    // const createUserDisabled = !createUserWatch('education_form') || !createUserWatch('education_type') || !!createUserFormErrors.full_name?.message || !!createUserFormErrors.mailbox_address?.message;
+
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
@@ -51,11 +53,11 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...createUserRegister('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї]*$/,message:'Некорректне ПІБ!'}})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
-                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
@@ -91,9 +93,14 @@ export const EditGroup = () => {
                     </div>
                 </div>
             </div>
+            {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
+            {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
+            {!!crateUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{crateUserFormErrorMessage}</p>}
             {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errorCodesToMessages[createUserErrorCode]}</p>}
             <div className="createUserButtons__container">
-                <input autoComplete="off" type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
+                <input 
+                // disabled={createUserDisabled} 
+                autoComplete="off" type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
             </div>
         </form>
         <section className="studentList__container">

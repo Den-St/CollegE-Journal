@@ -176,6 +176,10 @@ input::placeholder{
 }
 .ant-select-selector{
 	border: none !important;
+	box-shadow: none !important;
+}
+.ant-select-focused{
+	border: none;
 }
 .ant-carousel .slick-dots-bottom{
 	bottom: -20px !important;
@@ -201,7 +205,8 @@ body{
 			color:#D0D0D0;
 		}
 		.ant-select-selection-item{
-			background-color: #0B1D26;
+			// background-color: #0B1D26;
+			background-color: transparent;
 		}
 		.ant-select-item-option-selected{
 			.ant-select-item-option-content{

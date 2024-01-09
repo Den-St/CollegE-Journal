@@ -24,7 +24,7 @@ export const Subjects = () => {
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
         {group.can_edit.map((subject,i) => 
-            <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.subject_full_name}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>{subject.subject_full_name}
+            <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>{subject.subject_full_name}
             {/* {i === 2 && <div className="newTask"/>} */}
             </Link>
         )}

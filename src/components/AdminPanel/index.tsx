@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { ExclamationMarkMessage } from "../../assets/svgs/exclamationMarkMessage";
 import { ScheduleSvg } from "../../assets/svgs/scheduleSvg";
 import { TwoPeopleSvg } from "../../assets/svgs/twoPeopleSvg";
+import { routes } from "../../consts/routes";
 import { useThemeStore } from "../../store/themeStore";
 import "./adminPanelStyles.scss";
 import { ScheduleSettings } from "./ScheduleSettings";
@@ -10,23 +13,27 @@ import { StudentsListAdmin } from "./StudentsListAdmin";
 const adminPanelSections = [{
         title:'Налаштування розкладу',
         icon:<ScheduleSvg/>,
-        component:<ScheduleSettings/>
+        component:<ScheduleSettings/>,
+        key:'schedule'
     },
     {
         title:'Налаштування групп',
         icon:<TwoPeopleSvg/>,
-        component:<StudentsListAdmin/>
+        component:<StudentsListAdmin/>,
+        key:'groups'
     },
     {
         title:'Новини та оголошення',
         icon:<ExclamationMarkMessage/>,
-        component:<ScheduleSettings/>
+        component:<ScheduleSettings/>,
+        key:'news'
     }
 ]
-
+type AdminPanelSectionsT = 'shedule' | 'groups' | 'news';
 export const AdminPanel = () => {
     const theme = useThemeStore().theme;
-    const [activeSection,setSection] = useState(0);
+    const [searchParams,setSearchParams] = useSearchParams();
+    // const [activeSection,setSection] = useState<AdminPanelSectionsT>(searchParams.get('section') as AdminPanelSectionsT);
 
     return <div className={`adminPanelMain__container ${theme}`}>
         <h1 className={"adminPanelMain__title"}>Кабінет Адміністратора</h1>
@@ -34,16 +41,16 @@ export const AdminPanel = () => {
             <h2 className={"adminPanel__title"}>Панель адміністратора</h2>
             <div className={"adminPanelControllers__container"}>
                 {adminPanelSections.map((section,i) => 
-                    <div className={`adminPanelControllerItem__container ${i === activeSection && 'activeSection'}`} key={section.title} onClick={() => setSection(i)}>
+                    <Link to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
                         <p className={"adminPanelControllers__title"}>
                             {section.title}
                         </p>
                         {section.icon}
-                    </div>
+                    </Link>
                 )}
             </div>
         </section>
-        {adminPanelSections[activeSection].component}
+        {adminPanelSections.find(sec => sec.key === searchParams.get('section'))?.component}
         <section className="adminPanelStats__container">
             <h2 className={"adminPanel__title"}>Статистика</h2>
             <div className="adminPanelStatsBlocks__container">

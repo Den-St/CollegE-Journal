@@ -18,7 +18,12 @@ import { defaultAvatar } from '../../consts/defaultAvatar';
 const securityLevelToLinks:Record<number,JSX.Element> = {
     0:<></>,
     5:<>
-        <Link to={routes.adminPanel} className="menu__button">Адмін-панель
+        {/* <Link to={routes.homePage} className={`menu__button`}>Головна
+            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                <path d="M1 1H51" strokeLinecap="round"/>
+            </svg>
+        </Link> */}
+        <Link to={routes.adminPanel + `?section=schedule`} className="menu__button">Адмін-панель
             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                 <path d="M1 1H51" strokeLinecap="round"/>
             </svg>
@@ -28,16 +33,25 @@ const securityLevelToLinks:Record<number,JSX.Element> = {
                 <path d="M1 1H51" strokeLinecap="round"/>
             </svg>
         </Link>
+        <Link to={routes.faq} className="menu__button">FAQ
+            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                <path d="M1 1H51" strokeLinecap="round"/>
+            </svg>
+        </Link>
     </>
 }
 
 const useHeaderVisibility = () => {
-    const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden'>('visible');
+    const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden' | 'visible_on_scroll' | 'visible_on_touch'>('visible');
+    const onTouchShowHeader = () => {
+        setHeaderVisibilityClass('visible_on_touch');
+    }
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
         const distanceFromTop = window.scrollY;
 
-        setHeaderVisibilityClass(distanceFromTop > lastScrollPos.current ? 'hidden' : 'visible');
+        setHeaderVisibilityClass(distanceFromTop > lastScrollPos.current ? 'hidden' : 'visible_on_scroll');
+        distanceFromTop < 30 && setHeaderVisibilityClass('visible');
         lastScrollPos.current = window.scrollY;
     }
     const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[lastScrollPos.current]);
@@ -46,19 +60,19 @@ const useHeaderVisibility = () => {
         window.addEventListener('scroll',debounceHandleScroll);
     },[]);
 
-    return {headerVisibilityClass}
+    return {headerVisibilityClass,onTouchShowHeader}
 }
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
-    const {headerVisibilityClass} = useHeaderVisibility();
+    const {headerVisibilityClass,onTouchShowHeader} = useHeaderVisibility();
 
     const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
 
-    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
+    return <header onMouseOver={onTouchShowHeader} className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
-            <div className="container">
+            <div className={`header_container ${headerVisibilityClass}`}>
                 <div className="header__wrapper">
                     <div className='headerLeft_mobile'>
                         <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
@@ -67,20 +81,18 @@ export const Header = () => {
                         <div className="logo__block">
                             <Link to="/" className="header__logo">
                                 <CollegeLogoSvg/>
-                                {/* <FilterIconSvg/> */}
-                                {/* sdfsd */}
                             </Link>
                         </div>
                     </div>
                     <nav className="nav">
+                        <Link to={routes.homePage} className="menu__button">
+                            Головна
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link>
                         {!route
                             && <>
-                            <Link to={'/'} className="menu__button">
-                                Головна
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </Link>
                             <button onClick={() => goToSection(sectionIds.news.scrollTo)} className="menu__button">Новини
                                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                     <path d="M1 1H51" strokeLinecap="round"/>

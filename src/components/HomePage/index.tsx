@@ -14,6 +14,7 @@ import { useHomePageSections } from '../../hooks/homePageSections';
 import { HomePageDataT, NewsT } from '../../types/homePageData';
 import { useHomePage } from '../../hooks/homePage';
 import { useUserStore } from '../../store/userStore';
+import { routes } from '../../consts/routes';
 
 const localNews:NewsT[] = [
     {
@@ -95,7 +96,7 @@ export const HomePage = () => {
                     <div className="main__paragraph">
                         <div className="gurnal">
                             <div className="line"></div>
-                            <h4 className="eGurnal">ЕЛЕКТРОНИЙ ЖУРНАЛ</h4>
+                            <h4 className="eGurnal">ЕЛЕКТРОННИЙ ЖУРНАЛ</h4>
                         </div>
                         <div className="main__phrase">
                             <h1 className="mPhrase">{homePageData?.topic || `Хто володіє інформацією – той володіє світом`}</h1>
@@ -184,7 +185,7 @@ export const HomePage = () => {
                     || `На сторінках електронного журналу можна знайти матеріали про академічні досягнення студентів, нові навчальні програми та проекти, які проводяться в коледжі. Також журнал містить розклад занять, інформацію про проведення конференцій та семінарів, анонси важливих подій та оголошення.
                     Електронний щоденник дозволяє вчителям швидко та зручно вносити інформацію про оцінки, пропущені заняття та інші важливі події в житті коледжу, а  учням - дізнаватися про ці події негайно.`}
                 </p>
-                <a href="#" className="info__btn">Увійти</a>
+                <a href={routes.signIn} className="info__btn">Увійти</a>
             </div>
         </div>
     </section>

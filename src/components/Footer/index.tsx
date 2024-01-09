@@ -14,17 +14,20 @@ export const Footer = () => {
     return <><footer>
         <div className={`footer__content ${theme} ${route+'home'}`}>
             <div className="footer__logo">
-                <CollegeLogoSvg/>
+                <Link to={routes.homePage}><CollegeLogoSvg/></Link>
                 <h1 className="footer__title">Електронний журнал - це журнал, який завжди поруч!</h1>
             </div>
             <div className="footer__circle"/>
             <div className="btn__lists">
                 <ul className="footer__list">
                     <h1 className="fList__title">Більше Про Журнал</h1>
-                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.start.distanceTop)}>Головна</button></li>
+                    {/* <li><button className="fList__btn" onClick={() => goToSection(sectionIds.start.distanceTop)}>Головна</button></li>
                     <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.distanceTop)}>Новини</button></li>
-                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.distanceTop)}>Про нас</button></li>
-                    <li><Link className="fList__btn" to={routes.faq}>FAQ</Link></li>
+                    <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.distanceTop)}>Про нас</button></li> */}
+                    <li><Link to={routes.homePage} className="fList__btn">Головна</Link></li>
+                    {!route && <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.scrollTo)}>Новини</button></li>}
+                    {!route && <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.scrollTo)}>Про нас</button></li>}
+                    {!route && <li><Link className="fList__btn" to={routes.faq}>FAQ</Link></li>}
                 </ul>
                 <div>
                     <h1 className="fList__title">Ми У Соц. Мережах</h1>
