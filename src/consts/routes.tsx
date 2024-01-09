@@ -30,7 +30,8 @@ export const routes = {
     faq:'/faq',
     createUser:'/create-user',
     editGroup:`/edit-group/:id`,
-    pickJournalSubject:'/pick-journal-subject'
+    pickJournalSubject:'/pick-journal-subject',
+    myProfile:'/my-profile'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -117,7 +118,7 @@ const securityLevelToRoutes:Record<number,string[]> = {
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
-    <Route key={routes.profile} element={<StudentProfile/>} path={routes.profile}/>,  
+    <Route key={routes.myProfile} element={<StudentProfile/>} path={routes.myProfile}/>,  
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
     <Route key={routes.students} element={<Students/>} path={routes.students}/>,

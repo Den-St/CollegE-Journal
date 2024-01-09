@@ -24,6 +24,8 @@
 }
 :root{
 	--primary-dark:#0B1D26;
+	--primary-orange:#EFB42D;
+	--primary-gray:#D0D0D0;
 }
 html,body{
     scroll-behavior: smooth;
@@ -35,6 +37,7 @@ html,body{
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+	background-color: var(--primary-dark);
 }
 body.scrollOff{
 	// position: fixed !important;
@@ -298,6 +301,14 @@ body{
 		}
 		.ant-modal-close-icon{
 			color:white;
+		}
+		.ant-popover-inner{
+			background-color: #0B1D26;
+			box-shadow: 0px 1px 10px 0px #D4D4D41A;
+
+		}
+		.ant-popover-arrow{
+			--antd-arrow-background-color:transparent;
 		}
 	}
 	&.light{

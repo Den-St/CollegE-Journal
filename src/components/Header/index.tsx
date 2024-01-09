@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import './headerStyles.scss';
 import {CollegeLogoSvg} from '../../assets/svgs/college_logo';
-import { Switch } from 'antd';
+import { Modal, Popover, Switch } from 'antd';
 import { themes } from '../../consts/themes';
 import { useThemeController } from '../../hooks/themeController';
 import { sectionIds } from '../../consts/sectionIds';
@@ -14,6 +14,7 @@ import { useSideMenu } from '../../hooks/sideMenu';
 import { SideMenu } from '../SideMenu';
 import { useUserStore } from '../../store/userStore';
 import { defaultAvatar } from '../../consts/defaultAvatar';
+import { UserPopup } from '../UserPopup';
 
 const securityLevelToLinks:Record<number,JSX.Element> = {
     0:<></>,
@@ -62,12 +63,26 @@ const useHeaderVisibility = () => {
 
     return {headerVisibilityClass,onTouchShowHeader}
 }
+
+const useHeaderProfilePopUp = () => {
+    const [popupOpened,setPopupOpened] = useState(false);
+
+    const onHoverOpen = () => {
+        setPopupOpened(true);
+    }
+    const onLeaveClose = () => {
+        setPopupOpened(false);
+    }
+
+    return {onHoverOpen,onLeaveClose,popupOpened};
+}
+
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
     const {headerVisibilityClass,onTouchShowHeader} = useHeaderVisibility();
-
+    const {onHoverOpen,onLeaveClose,popupOpened} = useHeaderProfilePopUp();
     const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
 
     return <header onMouseOver={onTouchShowHeader} className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
@@ -178,7 +193,11 @@ export const Header = () => {
                         ? <div className="signIn">
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
                         </div> 
-                        : <img className='header_avatar' src={defaultAvatar}/>}
+                        : <Popover content={<UserPopup/>} placement={'bottomRight'}>
+                            <Link to={routes.myProfile}>
+                                <img className='header_avatar' src={defaultAvatar}/>
+                            </Link>
+                        </Popover>}
                     </div>
                 </div>
             </div>

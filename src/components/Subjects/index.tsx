@@ -10,7 +10,7 @@ import './subjectsStyles.scss';
 export const Subjects = () => {
     const {loading} = useGroupsByTeacher();
     const pickedGroupId = useSearchParams()[0].get('group_id');
-    const [searchParams,setSearchParams] = useSearchParams();
+    // const [searchParams,setSearchParams] = useSearchParams();
     const group = useTeachersGroupsStore().groups.find(group => group._id === pickedGroupId);
     console.log(pickedGroupId,group);
     // const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
@@ -18,7 +18,7 @@ export const Subjects = () => {
     console.log(lastMonth);
 
     if(loading) return <Spin/>
-    if(!group) return <NoMatch is404={false} title={"Групи не знайдено"}/>
+    if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
 
     return <section className="subjectsMainContainer">
         <h2 className="subjectsMainTitle">Предмети</h2>

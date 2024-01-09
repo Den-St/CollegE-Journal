@@ -44,7 +44,7 @@ export const useCreateUser = (group?:GroupT) => {
         }
 
         try{
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim()},{headers:{Authorization:localToken || cookieToken}});
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_adress:data.mailbox_address,user_id:res.data.user_password});
             setCreateUserErrorCode(undefined);
             reset();
