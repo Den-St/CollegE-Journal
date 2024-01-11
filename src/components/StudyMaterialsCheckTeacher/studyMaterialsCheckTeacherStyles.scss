@@ -62,19 +62,19 @@
     &.dark{
         color:white;
         .smCheckHashTag__item{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .smCheckdescription__text{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskAttachedLinks__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskAttachedFiles__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskAttachFileInput__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
     }
     &.light{

@@ -1,11 +1,13 @@
 import { Select, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
+import { defaultAvatar } from "../../consts/defaultAvatar";
 import { groupCoursesNumbers } from "../../consts/groupsCoursesNumbers";
 import { routes } from "../../consts/routes";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useThemeStore } from "../../store/themeStore"
 import { NoMatch } from "../NoMatch";
+import { Students } from "../Students";
 import './groupsStyles.scss';
 const {Option} = Select;
 
@@ -64,5 +66,6 @@ export const Groups = () => {
                 ) : <NoMatch is404={false} title={'У вас немає груп'}/> : <Spin/>
             }
         </section>
+        
     </div>
 }

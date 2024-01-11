@@ -36,10 +36,10 @@
 
 .cookies__container{
     &.dark{
-        background-color: #102936;
+        background-color: var(--secondary-blue);
         .cookiesAccept_button{
-            color:#D0D0D0;
-            background-color: #0B1D26;
+            color:var(--primary-gray);
+            background-color: var(--primary-dark);
         }
         .cookiesAccept_button:hover{
             color:white;

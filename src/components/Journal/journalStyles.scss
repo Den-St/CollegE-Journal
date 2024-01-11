@@ -75,7 +75,7 @@
 .journalColumnsLeft__text{
     font-size: 18px;
     font-weight: 400;
-    color:#d0d0d0;
+    color:var(--primary-gray);
 }
 
 .journalColumnsCenter__container{
@@ -295,35 +295,35 @@
 .journalMain__container{
     &.dark{
         .journalRowItemCenterValue__text{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalRowItemRightValue__text{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalRowItem__container{
             &.even{
-                background-color: #102936;
+                background-color: var(--secondary-blue);
                 .journalRowItemCenterValue__text{
-                    background-color: #0B1D26;
+                    background-color: var(--primary-dark);
                 }
                 .journalRowItemRightValue__text{
-                    background-color: #0B1D26;
+                    background-color: var(--primary-dark);
                 }
             }
         }
         .journalRowItemLeft__container{
-            background-color: #0B1D26;
+            background-color: var(--primary-dark);
         }
         .journalRowItemLeft__container{
             &.even{
-                background-color: #102936;
+                background-color: var(--secondary-blue);
             }
         }
         .journal__title{
             color:white;
         }
         .journalFilterItem{
-            color: #D0D0D0;
+            color: var(--primary-gray);
         }
         .journalRowItemLeft__number{
             color:white;
@@ -338,10 +338,10 @@
             color:white;
         }
         .journalColumnsLeft__title{
-            color:#d0d0d0
+            color:var(--primary-gray)
         }
         .journalColumnsLeft__text{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .journalColumnsCenterItemType{
             color:white;
@@ -359,22 +359,22 @@
             color:white;
         }
         .journalColumnsLeft__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalColumnsCenterItemType{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalColumnsCenterItemDate__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalColumnsRightItemType{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalColumnsRightItemMonth{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalLessonThemeItem__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .journalLessonThemeItemDate__day{
             color:white;
@@ -383,16 +383,16 @@
             color:white;
         }
         .journalLessonThemeItem__text{
-            color:#d0d0d0;
+            color:var(--primary-gray);
         }
         .journalLessonsThemes__title{
             color:white;
         }
         .fillterImg {
-            stroke: #D0D0D0;
+            stroke: var(--primary-gray);
         }
         .journalLessonThemeItemType{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
     }
     &.light{
@@ -437,13 +437,13 @@
             background-color: #F2F2F2;
         }
         .journalColumnsCenterItemDate{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .journalLessonThemeItem__container{
             background: #F2F2F2;
         }
         .journalLessonThemeItemDate__date{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .journalLessonThemeItemType{
             color:black;
@@ -457,7 +457,7 @@
 .groupFillterItem__container:hover{
     cursor:pointer;
     .fillterImg{
-        stroke: #EFB42D;
+        stroke: var(--primary-orange);
     }
     .journalFilterItem{
         color:white;

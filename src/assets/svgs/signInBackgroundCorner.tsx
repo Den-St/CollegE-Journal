@@ -4,11 +4,11 @@ export const signInBackgroundCorner = () => {
         <defs>
             <linearGradient id="paint0_linear_38_60" x1="600" y1="300" x2="557.5" y2="264" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#616161" stop-opacity="0.5"/>
-                <stop offset="1" stop-color="#0B1D26" stop-opacity="0"/>
+                <stop offset="1" stop-color="var(--primary-dark)" stop-opacity="0"/>
             </linearGradient>
             <linearGradient id="paint1_linear_38_60" x1="600" y1="300" x2="531.5" y2="228" gradientUnits="userSpaceOnUse">
                 <stop offset="0.0437175" stop-color="#BFBFBF"/>
-                <stop offset="1" stop-color="#0B1D26" stop-opacity="0"/>
+                <stop offset="1" stop-color="var(--primary-dark)" stop-opacity="0"/>
             </linearGradient>
         </defs>
     </svg>

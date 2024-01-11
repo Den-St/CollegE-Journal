@@ -1,5 +1,5 @@
 import { Carousel } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { InstagramSvg } from '../../assets/svgs/instagram';
 import { TelegramSvg } from '../../assets/svgs/telegram';
 import { useThemeStore } from '../../store/themeStore';
@@ -15,6 +15,7 @@ import { HomePageDataT, NewsT } from '../../types/homePageData';
 import { useHomePage } from '../../hooks/homePage';
 import { useUserStore } from '../../store/userStore';
 import { routes } from '../../consts/routes';
+import { useEffect } from 'react';
 
 const localNews:NewsT[] = [
     {
@@ -69,7 +70,14 @@ export const HomePage = () => {
     const {onChangeSection,currentSection,sideNavShown} = useHomePageSections();
     const {homePageData,loading,} = useHomePage(); 
     const user = useUserStore().user;
+    const [searchParams,setSearchParams] = useSearchParams();
     
+    useEffect(() => {
+        const section = searchParams.get('section');
+        if(!section) return;
+        onChangeSection(sectionIds[section as sectionsKeys]);
+    },[searchParams]);
+
     return <div className={`homePage ${theme}`}>
             <section className="first_screen" id="start">
             <div className="homePage__container">

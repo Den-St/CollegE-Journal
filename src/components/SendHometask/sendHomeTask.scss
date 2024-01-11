@@ -335,19 +335,19 @@
     padding: 0 5px;
     border-radius: 10px 5px 10px 5px;
     box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.1019607843);
-    background-color: #102936;
+    background-color: var(--secondary-blue);
 }
 .sendHomeTaskMain__container{
     &.dark{
         color:white;    
         .sendHomeTaskHomeTaskText__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskText{
             color:white;
         }
         .sendHomeTaskHomeTaskAttachFileInput__styled{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color:white;
         }
         .sendHomeTaskMain__title{
@@ -360,28 +360,28 @@
             color:white;
         }
         .sendHomeTaskHomeTaskAttachedFileItemFormat{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .sendHomeTaskHomeTaskAttachedLinkItemUrl{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .sendHomeTaskHomeTaskAttachedFileItem{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskAttachedLinkItem{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .sendHomeTaskHomeTaskAttachFileInput__styled{
-            background-color:#102936 ;
+            background-color:var(--secondary-blue) ;
         }
         .sendHomeTaskComment__text{
-            background-color:#102936 ;
+            background-color:var(--secondary-blue) ;
         }
         .sendHomeTaskOtherTaskItem__container{
-            background-color:#102936 ;
+            background-color:var(--secondary-blue) ;
         }
         .sendHomeTaskCommentInput__container{
-            background-color:#102936 ;
+            background-color:var(--secondary-blue) ;
         }
         .ant-select-selection-search{
             color:white !important;
@@ -404,7 +404,7 @@
         }
         .sendHomeTaskHomeTaskAttachFileInput__container:hover{
             .sendHomeTaskHomeTaskAttachFileInput__styled{
-                color:#EFB42D;
+                color:var(--primary-orange);
                 transition: 0.2s;
 
             }
@@ -413,10 +413,10 @@
             }
         }
         .sendHomeTaskPeopleFilesNumber{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .sendHomeTaskPeopleComments{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .sendHomeTaskPeopleDoneDate{
             color:white;
@@ -425,29 +425,29 @@
             color:white;
         }
         .studyMaterialsSearch__input::placeholder{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .studyMaterialsSearchInput__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             .magnifierSvg{
                 fill:white;
             }
         }
         .sendHomeTaskPickedPeopleMark{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .commentTextArea{
    
-            background-color:#102936;
+            background-color:var(--secondary-blue);
         }
         .sendHomeTaskCommentInput__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
     }
     &.light{
         .sendHomeTaskHomeTaskAttachFileInput__container:hover{
             .sendHomeTaskHomeTaskAttachFileInput__styled{
-                color:#EFB42D;
+                color:var(--primary-orange);
                 transition: 0.2s;
             }
             input{

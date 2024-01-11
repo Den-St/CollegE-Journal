@@ -172,7 +172,7 @@
 }
 .studyMaterialsItemHoverAnimation{
     height:2px;
-    background-color: #EFB42D;
+    background-color: var(--primary-orange);
     border-radius:10px 5px;
     position: absolute;
     bottom:0;
@@ -195,25 +195,25 @@
 .studyMaterialsMain__container{
     &.dark{
         .studyMaterialsSearchInput__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .studyMaterialsSearch__input{
             color:white;
         }
         .studyMaterialsSearch__input::placeholder{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .fillterImg{
             stroke:white;
         }
         .studyMaterialsContent__container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .studyMaterialsContent__text{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .studyMaterialsContentHashTagItem__container{
-            background-color: #0B1D26;
+            background-color: var(--primary-dark);
         }
         .studyMaterialsContentHashTagItem__name{
             color:white;
@@ -230,15 +230,15 @@
         .studyMaterialsSearch__button:hover{
             .fillterImg{
                 transition: 0.2s;
-                stroke: #EFB42D;
+                stroke: var(--primary-orange);
             }
         }
         .studyMaterialSeeMore__button{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color:white;
         }
         .studyMaterialSeeMore__button:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         
     }
@@ -268,14 +268,14 @@
             background-color: #F2F2F2;
         }
         .studyMaterialsContentHashTagItem__name{
-            color:#0B1D26;
+            color:var(--primary-dark);
         }
         .studyMaterialsItem__title{
-            color:#0B1D26;
+            color:var(--primary-dark);
         }
         .studyMaterialsContent__container:hover{
             .studyMaterialsContent__text{
-                color:#0B1D26;
+                color:var(--primary-dark);
                 transition: 0.2s;
                 cursor: pointer;
             }
@@ -283,7 +283,7 @@
         .studyMaterialsSearch__button:hover{
             .fillterImg{
                 transition: 0.2s;
-                stroke: #EFB42D;
+                stroke: var(--primary-orange);
             }
         }
         .studyMaterialSeeMore__button{
@@ -292,7 +292,7 @@
             box-shadow: 0px 1px 15px 0px #0000001A;
         }
         .studyMaterialSeeMore__button:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
     }
 }

@@ -110,13 +110,13 @@
     font-family: Alegreya Sans;
 }
 .forgotPassword{
-    color:var(--primary-yellow,#EFB42D);
+    color:var(--primary-yellow,var(--primary-orange));
 }
 
 .signIn__button{
     width: 100%;
     height: 60px;
-    background-color: var(--primary-yellow,#EFB42D);
+    background-color: var(--primary-yellow,var(--primary-orange));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,6 +127,7 @@
     border-top-right-radius: 5px;
     font-size: 20px;
     font-weight: 500;
+    transition: 0.3s;
 }
 
 .signInWithGoogle__button{
@@ -142,7 +143,7 @@
     border-top-right-radius: 5px;
     position: relative;
     background-color: white;
-    box-shadow: 0px 1px 15px #0b1d26a7;
+    box-shadow: 0px 1px 15px var(--primary-dark)a7;
 }
 
 .signInWithGoogle__icon{
@@ -177,13 +178,19 @@
     width: 100%;
     padding: 6px 30px;
     border-radius: 10px 5px;
-    margin-top: -30px;
-    margin-bottom: -20px;
+
 }
 .dark{
     .signIn_errorMessage{
         background-color: #ED343466;
         color: white;
+    }
+    .signIn__button:hover{
+        box-shadow: 0px 0px 10px 0px #D4D4D41A;
+    }
+    .signIn__button:active{
+        background: linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)),
+linear-gradient(0deg, #EFB42D, #EFB42D);
     }
 }
 .light{
@@ -192,15 +199,15 @@
     }
     .email__input{
         ::placeholder{
-            color:var(--primary-black,#0B1D26);
+            color:var(--primary-black,var(--primary-dark));
         }
-        color:var(--primary-black,#0B1D26);
+        color:var(--primary-black,var(--primary-dark));
     }
     .password__input{
         ::placeholder{
-            color:var(--primary-black,#0B1D26);
+            color:var(--primary-black,var(--primary-dark));
         }
-        color:var(--primary-black,#0B1D26);
+        color:var(--primary-black,var(--primary-dark));
     }
     .signInInput__container{
         border-bottom: 2px solid rgb(0, 0, 0);
@@ -209,7 +216,7 @@
         color:black;
     }
     .noAccount__text{
-        color:#0B1D26;
+        color:var(--primary-dark);
     }
 }
 

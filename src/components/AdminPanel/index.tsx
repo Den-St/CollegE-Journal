@@ -1,3 +1,4 @@
+import { Carousel } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
@@ -30,6 +31,7 @@ const adminPanelSections = [{
     }
 ]
 type AdminPanelSectionsT = 'shedule' | 'groups' | 'news';
+
 export const AdminPanel = () => {
     const theme = useThemeStore().theme;
     const [searchParams,setSearchParams] = useSearchParams();
@@ -49,6 +51,16 @@ export const AdminPanel = () => {
                     </Link>
                 )}
             </div>
+            <Carousel className="adminPanelControllers__slider">
+                {adminPanelSections.map((section) => 
+                    <Link to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
+                        <p className={"adminPanelControllers__title"}>
+                            {section.title}
+                        </p>
+                        {section.icon}
+                    </Link>
+                )}
+            </Carousel> 
         </section>
         {adminPanelSections.find(sec => sec.key === searchParams.get('section'))?.component}
         <section className="adminPanelStats__container">

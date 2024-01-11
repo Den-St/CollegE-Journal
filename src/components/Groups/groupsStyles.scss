@@ -108,7 +108,7 @@
             background-image: url('../../assets/images/signInBackground.png');
         }
         .groupItem__container:hover{
-            color:#efb42d
+            color:var(--primary-orange)
         }
         .fillterImg{
             stroke: white;
@@ -135,7 +135,7 @@
         }
         .groupItem__container:hover{
             transition: 0.2s;
-            color:#efb42d;
+            color:var(--primary-orange);
             box-shadow: 0 1px 15px 0px #9b9b9b3b;
         }
         .fillterImg{
@@ -148,7 +148,7 @@
     cursor:pointer;
     .fillterImg{
         transition: 0.2s;
-        stroke: #EFB42D;
+        stroke: var(--primary-orange);
     }
 }   
 @media screen and (min-width:'1440px') {

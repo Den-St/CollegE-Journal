@@ -9,6 +9,7 @@ import { useSignIn } from '../../hooks/signIn';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { routes } from '../../consts/routes';
+import { emailPattern } from '../../consts/emailPattern';
 
 const statusCodes:Record<number,string> = {
     0:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!',
@@ -28,7 +29,8 @@ export const SignIn = () => {
         register,
         handleSubmit,
         setValue,
-        watch
+        watch,
+        formState:{errors}
     } = useForm<{mailbox_address:string,user_password:string}>();
 
     if(status === 1) return <Navigate to={routes.homePage}/>
@@ -39,7 +41,7 @@ export const SignIn = () => {
             <h1 className="signIn__header">Вхід</h1>
             <form onSubmit={handleSubmit(onLogin)} className="signIn__form" autoComplete={'off'}>
                 <div className="signInInput__container">
-                    <input autoComplete="off"  {...register('mailbox_address',)} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input autoComplete="off"  {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
                     <input autoComplete="off"  {...register('user_password')} type={passwordInputType} placeholder={"Password"} className={'password__input'}/>
@@ -52,7 +54,8 @@ export const SignIn = () => {
                     </div>
                     <p className="forgotPassword">Забули пароль?</p>
                 </div>
-                {status !== undefined && <p className='signIn_errorMessage'>{statusCodes[status]}</p>}
+                {status !== undefined && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{statusCodes[status]}</p>}
+                {!!errors.mailbox_address?.message && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
                 <input autoComplete="off"  disabled={loading} type={'submit'} className="signIn__button" value={'Увійти'}/>
             </form>
             <button className='signInWithGoogle__button'>

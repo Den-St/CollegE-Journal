@@ -45,9 +45,23 @@
 .studentProfile__name{
     font-weight: 500;
     font-size: 28px;
-    line-height: 34px;
+    display: flex;
+    gap:30px;
+    align-items: flex-end;
 }
-
+.editProfileSvg{
+    transition: 0.3s;
+    cursor: pointer;
+    fill: var(--primary-gray);
+}
+.editProfileSvg:hover{
+    fill: var(--primary-orange) !important;
+}
+.editUserProfile_button{
+    border: none;
+    outline: none;
+    background: transparent;
+}
 .studentProfile__email{
     font-weight: 400;
     font-size: 20px;
@@ -110,7 +124,7 @@
     color:#2DEF40;
 }
 .med{
-    color:#EFB42D;
+    color:var(--primary-orange);
 }
 
 @media screen and (min-width:'1440px'){
@@ -127,69 +141,66 @@
     text-align: start;
 }
 
-.studentProfile__container{
-    &.dark{
-        .studentProfile__name{
-            color:white;
-        }
-        .studentProfile__email{
-            color:#D0D0D0;
-        }
-        .studentProfile__group{
-            color:white;
-        }
-        .studentProfileTab__button{
-            color:white;
-            .diagonalArrowSvg {
-                fill:white;
-            }
-        }
-        .studentProfileTab__button.picked{
-            color:#EFB42D;
-            .diagonalArrowSvg{
-                fill:#EFB42D;
-            }
-        }
-        .studentProfileStatistic__header{
-            color:white;
-        }
-        .studentProfileStatistic__container{
-            background-color: rgb(27,40,48,0.85);
-        }
-        .studentProfileTab__title{
-            color:white;
-        }
-        .studentProfileTab__button:hover{
-            color:#EFB42D;
-            .diagonalArrowSvg{
-                fill:orange;
-            }
-        }
-        .medium{
-            color:#EFB42D;
+.dark{
+    .studentProfile__name{
+        color:white;
+    }
+    .studentProfile__email{
+        color:var(--primary-gray);
+    }
+    .studentProfile__group{
+        color:white;
+    }
+    .studentProfileTab__button{
+        color:white;
+        .diagonalArrowSvg {
+            fill:white;
         }
     }
-    &.light{
-        .studentProfileTab__button{
-            color:black;
-            .diagonalArrowSvg{
-                fill:black;
-            }
-        }
-        .studentProfileTab__button.picked{
-            color:#EFB42D;
-            .diagonalArrowSvg{
-                fill:#EFB42D;
-            }
-        }
-        .studentProfileTab__button:hover{
-            color:#EFB42D;
-            .diagonalArrowSvg{
-                fill:#EFB42D;
-            }
+    .studentProfileTab__button.picked{
+        color:var(--primary-orange);
+        .diagonalArrowSvg{
+            fill:var(--primary-orange);
         }
     }
-
+    .studentProfileStatistic__header{
+        color:white;
+    }
+    .studentProfileStatistic__container{
+        background-color: rgb(27,40,48,0.85);
+    }
+    .studentProfileTab__title{
+        color:white;
+    }
+    .studentProfileTab__button:hover{
+        color:var(--primary-orange);
+        .diagonalArrowSvg{
+            fill:orange;
+        }
+    }
+    .medium{
+        color:var(--primary-orange);
+    }
+}
+.light{
+    .studentProfileTab__button{
+        color:black;
+        .diagonalArrowSvg{
+            fill:black;
+        }
+    }
+    .studentProfileTab__button.picked{
+        color:var(--primary-orange);
+        .diagonalArrowSvg{
+            fill:var(--primary-orange);
+        }
+    }
+    .studentProfileTab__button:hover{
+        color:var(--primary-orange);
+        .diagonalArrowSvg{
+            fill:var(--primary-orange);
+        }
+    }
 }
 
 @media screen and (min-width:2200px) {

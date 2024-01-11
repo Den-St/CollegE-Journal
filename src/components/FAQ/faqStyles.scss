@@ -50,7 +50,7 @@
     padding: 20px 40px;
 }
 .ant-input::placeholder{
-    color:#D0D0D0;
+    color:var(--primary-gray);
     //styleName: H/H4;
     font-size: 18px;
     font-weight: 400;
@@ -89,8 +89,8 @@
         }
         .ant-collapse-item:hover{
             path{
-                stroke:#EFB42D !important;
-                fill:#EFB42D !important;
+                stroke:var(--primary-orange) !important;
+                fill:var(--primary-orange) !important;
             }
         }
         .ant-collapse-content {
@@ -98,22 +98,22 @@
             color:white;
         }
         .ant-input{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .ant-input{
             color:white;
         }
         .ant-input::placeholder{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .faqSubmit{
-            color:#D0D0D0;
-            background-color: #102936;
+            color:var(--primary-gray);
+            background-color: var(--secondary-blue);
         }
         .ant-collapse-item-active{
             path{
-                stroke:#EFB42D !important;
-                fill:#EFB42D !important;
+                stroke:var(--primary-orange) !important;
+                fill:var(--primary-orange) !important;
             }
         }
     }

@@ -63,12 +63,12 @@ export const FAQ = () => {
       ];
       const panelStyle: React.CSSProperties = theme === 'dark' ? {
         marginBottom: 20,
-        background: '#102936',
+        background: 'var(--secondary-blue)',
         borderRadius: '10px 5px',
         border: 'none',
       } :  {
         marginBottom: 20,
-        background: '#102936',
+        background: 'var(--secondary-blue)',
         borderRadius: '10px 5px',
         border: 'none',
         color:'black'

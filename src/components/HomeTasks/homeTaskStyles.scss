@@ -48,7 +48,7 @@
     width: 10px;
     height: 30px;
     border-radius: 5px;
-    background-color: #EFB42D;
+    background-color: var(--primary-orange);
 }
 .homeTasks_subject.inactive{
     cursor:not-allowed;
@@ -204,122 +204,124 @@
 
 
 
-.homeTaskMain__container{
-    &.dark{
-        .homeTaskMain__container{
-            background-image: url('../../assets/images/signInBackground.png');
-        }
-        .homeTaskTitle{
-            color:white;
-        }
-        .homeTaskFilter__name{
-            color:white;
-        }
-        .fillterImg{
-            stroke: white;
-        }
-        .homeTaskItem__text{
-            color:white;
-        }
-        .homeTaskItem__date{
-            color:white;
-        }
-        .homeTaskDeadline__title{
-            color:#d0d0d0;
-        }
-        .homeTaskDeadline__date{
-            color:white;
-        }
-        .homeTaskCommentsItemNoComment{
-            color:#d0d0d0;
-        }
-        .homeTaskCommentItem__text{
-            color:white;
-        }
-        .homeTaskItem{
-            background-color: #102936;
-        }
-        .homeTaskCommentsItem__container{
-            background-color: #102936;
-        }
-        .homeTaskFilter__select{
-            .ant-select-selection-item{
-                color:white !important;
-            }
-        }
-        .homeTasks_subject{
-            background-color: #0b1d26;
-            box-shadow: 0px 1px 15px 0px #D4D4D41A;
-            color:white;
-        }
-        .homeTasks_subject:hover{
-            color:#EFB42D;
-        }
-        .homeTaskSubjects_title{
-            color:white;
-        }
-        .homeTasks_subject.inactive{
-            color:#797979;
-            background-color: #102936;
-            box-shadow: none;
-        }
-        .homeTasks_subject.inactive:hover{
-            color:#797979;
+.dark{
+    .homeTaskMain__container{
+        background-image: url('../../assets/images/signInBackground.png');
+    }
+    .homeTaskTitle{
+        color:white;
+    }
+    .homeTaskFilter__name{
+        color:white;
+    }
+    .fillterImg{
+        stroke: white;
+    }
+    .homeTaskItem__text{
+        color:white;
+    }
+    .homeTaskItem__date{
+        color:white;
+    }
+    .homeTaskDeadline__title{
+        color:var(--primary-gray);
+    }
+    .homeTaskDeadline__date{
+        color:white;
+    }
+    .homeTaskCommentsItemNoComment{
+        color:var(--primary-gray);
+    }
+    .homeTaskCommentItem__text{
+        color:white;
+    }
+    .homeTaskItem{
+        background-color: var(--secondary-blue);
+    }
+    .homeTaskCommentsItem__container{
+        background-color: var(--secondary-blue);
+    }
+    .homeTaskFilter__select{
+        .ant-select-selection-item{
+            color:white !important;
         }
     }
-    &.light{
-        .homeTaskMain__container{
-            background-image: url('../../assets/images/signInBackgroundLight.png');
-        }
-        .homeTaskTitle{ 
-            color:black;
-        }
-        .homeTaskFilter__name{
-            color:black;
-        }
-        .fillterImg{
-            stroke: black;
-        }
-        .homeTaskItem__text{
-            color:black;
-        }
-        .homeTaskItem__date{
-            color:black;
-        }
-        .homeTaskDeadline__title{
-            color:black;
-        }
-        .homeTaskDeadline__date{
-            color:black;
-        }
-        .homeTaskCommentsItemNoComment{
-            color:black;
-        }
-        .homeTaskCommentItem__text{
-            color:black;
-        }
-        .homeTaskItem{
-            background-color: transparent;
-        }
-        .homeTaskCommentsItem__container{
-            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
-        }
-        .homeTaskItem{
-            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
-        }
-        .homeTaskFilter__select{
-            .ant-select-selection-item{
-                color:black !important;
-            }
-        }
-       
+    .homeTasks_subject{
+        background-color: var(--primary-dark);
+        box-shadow: 0px 1px 15px 0px #D4D4D41A;
+        color:white;
     }
+    .homeTasks_subject:hover{
+        color:var(--primary-orange);
+    }
+    .homeTasks_subject:active{
+        background: linear-gradient(0deg, #0B1D26, #0B1D26),
+        linear-gradient(0deg, rgba(16, 16, 16, 0.2), rgba(16, 16, 16, 0.2));
+    }
+    .homeTaskSubjects_title{
+        color:white;
+    }
+    .homeTasks_subject.inactive{
+        color:#797979;
+        background-color: var(--secondary-blue);
+        box-shadow: none;
+    }
+    .homeTasks_subject.inactive:hover{
+        color:#797979;
+    }
+}
+.light{
+    .homeTaskMain__container{
+        background-image: url('../../assets/images/signInBackgroundLight.png');
+    }
+    .homeTaskTitle{ 
+        color:black;
+    }
+    .homeTaskFilter__name{
+        color:black;
+    }
+    .fillterImg{
+        stroke: black;
+    }
+    .homeTaskItem__text{
+        color:black;
+    }
+    .homeTaskItem__date{
+        color:black;
+    }
+    .homeTaskDeadline__title{
+        color:black;
+    }
+    .homeTaskDeadline__date{
+        color:black;
+    }
+    .homeTaskCommentsItemNoComment{
+        color:black;
+    }
+    .homeTaskCommentItem__text{
+        color:black;
+    }
+    .homeTaskItem{
+        background-color: transparent;
+    }
+    .homeTaskCommentsItem__container{
+        box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
+    }
+    .homeTaskItem{
+        box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.205);
+    }
+    .homeTaskFilter__select{
+        .ant-select-selection-item{
+            color:black !important;
+        }
+    }
+    
 }
 .homeTaskFilter__container:hover{
     cursor:pointer;
     .fillterImg{
         transition: 0.2s;
-        stroke: #EFB42D;
+        stroke: var(--primary-orange);
     }
 }
 

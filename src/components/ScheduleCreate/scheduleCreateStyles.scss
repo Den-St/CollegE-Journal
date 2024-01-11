@@ -50,11 +50,11 @@
 }
 .scheduleCreateControllers__item:hover{
     .scheduleCreateControllerItem__title{
-        color:#EFB42D;
+        color:var(--primary-orange);
     }
     box-shadow: 0px 0px 10px 0px #D4D4D41A;
     svg{
-        stroke:#EFB42D;
+        stroke:var(--primary-orange);
        
     }
 }
@@ -63,7 +63,7 @@
     &.dark{
         color:white;
         .scheduleCreateControllers__item{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         svg{
             stroke:white;

@@ -101,10 +101,10 @@
         color:white;
     }
     .createUser__input::placeholder{
-        color:#D0D0D0;
+        color:var(--primary-gray);
     }
     .ant-select-selector{
-        background-color: #102936 !important;
+        background-color: var(--secondary-blue) !important;
         border:none !important;
         font-weight: 500;
     }
@@ -112,16 +112,16 @@
         color:white !important;
     }
     .createStudyMaterialsSelect__wrapper{
-        background-color: #102936;
+        background-color: var(--secondary-blue);
     }
     .createUser__input{
-        background-color: #102936;
+        background-color: var(--secondary-blue);
     }
     input{
         color:white;
     }
     .createUser__button{
-        background-color: #102936;
+        background-color: var(--secondary-blue);
     }
     .createUser__button{
         color:white;

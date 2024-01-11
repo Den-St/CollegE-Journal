@@ -28,7 +28,8 @@ export const useUserStore = create<StoreType>((set) => ({
         visit_per_day:null,
         visit_per_month:null,
         visit_per_week:null,
-        security_level:0
+        security_level:0,
+        group_fullname:''
     },
     signIn: (userData) => set((state) => ({ ...state,...userData,user:{...state.user,...userData} })),
     signOut: () => set(() => ({
@@ -47,7 +48,8 @@ export const useUserStore = create<StoreType>((set) => ({
             visit_per_day:null,
             visit_per_month:null,
             visit_per_week:null,
-            security_level:0
+            security_level:0,
+            group_fullname:''
         }
     })),
 }));

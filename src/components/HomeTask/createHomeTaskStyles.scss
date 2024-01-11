@@ -79,7 +79,7 @@
 
 
 .quill{
-    background-color: #102936;
+    background-color: var(--secondary-blue);
     border:none;
     max-width: 1120px;
 }
@@ -143,22 +143,22 @@
             color:white;
         }
         .createHomeTaskInputItem{
-            color:#D0D0D0;
-            background-color: #102936;
+            color:var(--primary-gray);
+            background-color: var(--secondary-blue);
         }
         .createHomeTaskDate{
-            color:#D0D0D0;
-            background-color: #102936;  
+            color:var(--primary-gray);
+            background-color: var(--secondary-blue);  
         }
         .createHomeTaskInputItem::placeholder{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .createHomeTaskButtons__button{
-            background-color: #102936;  
+            background-color: var(--secondary-blue);  
             color:white;
         }
         .quill{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             border:none;
         }
         .ql-editor{
@@ -190,7 +190,7 @@
         }
       
         .createHomeTaskButtons__button:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
             transition: 0.2s;
         }
     }
@@ -199,21 +199,21 @@
             color:black;
         }
         .createHomeTaskInputItem__title{
-            color:#0b1d26;
+            color:var(--primary-dark);
         }
         .createHomeTaskInputItem{
-            color:#D0D0D0;
+            color:var(--primary-gray);
             background-color: white;
             box-shadow: 0 0 15px 0 rgb(152, 152, 152);
         }
         .createHomeTaskDate{
-            color:#D0D0D0;
+            color:var(--primary-gray);
             background-color: white; 
             box-shadow: 0 0 15px 0 rgb(152, 152, 152);
 
         }
         .createHomeTaskInputItem::placeholder{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .createHomeTaskButtons__button{
             background-color: white;  
@@ -259,7 +259,7 @@
             background-color: #ffffff !important;
         }
         .createHomeTaskButtons__button:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
             transition: 0.2s;
         }
     }

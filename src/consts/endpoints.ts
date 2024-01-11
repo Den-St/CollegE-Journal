@@ -7,5 +7,6 @@ export const endpoints = {
     faq:'faq',
     getGroup:'admin/groups/group',
     journal:'journal/journal',
-    userGroups:'groups/usergroups'
+    userGroups:'groups/usergroups',
+    changeUserInfo:'change-user-info'
 }

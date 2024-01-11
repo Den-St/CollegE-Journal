@@ -1,7 +1,6 @@
 .header_container {
     max-width: 90.3%;
     margin: 0 auto;
-    height: 141px;
     transition: 0.3s;
 }
 header{
@@ -26,11 +25,17 @@ header{
 //     transform: translateY(-141px);
 // }
 @media screen and (max-width:780px) {
+    .header_container{
+        height: 71px;
+    }
     .header_container.visible_on_scroll{
         transform: translateY(0px);
     }
 }
 @media screen and (min-width:780px) {
+    .header_container{
+        height: 141px;
+    }
     .header_container:not(.visible_on_touch){
         transform: translateY(-141px);
     }
@@ -56,7 +61,7 @@ header{
 }
 .header_toggleMenu.shown{
     svg{
-        stroke: #EFB42D;
+        stroke: var(--primary-orange);
     }
 }
 .header_toggleMenu.hidden{
@@ -93,7 +98,7 @@ header{
     font-weight: 500;
     line-height: normal;
     border-radius: 10px 5px 10px 5px;
-    background: var(--primary-yellow, #EFB42D);
+    background: var(--primary-yellow, var(--primary-orange));
     color: #FFF;
     text-decoration: none;
 }
@@ -127,15 +132,15 @@ a:focus,a:active{outline: none;}
     background: transparent;
 }
 .menu__button:hover{
-    color:#EFB42D;
+    color:var(--primary-orange);
     .headerSvg{
-        stroke: var(--primary-yellow, #EFB42D);
+        stroke: var(--primary-yellow, var(--primary-orange));
     }
 }
 .menu__button.active{
-    color:#EFB42D;
+    color:var(--primary-orange);
     .headerSvg{
-        stroke: var(--primary-yellow, #EFB42D);
+        stroke: var(--primary-yellow, var(--primary-orange));
     }
 }
 
@@ -144,7 +149,7 @@ a:focus,a:active{outline: none;}
     transition: all 0.3s linear;
 }
 .headerSvg:hover{
-    stroke: var(--primary-yellow, #EFB42D);
+    stroke: var(--primary-yellow, var(--primary-orange));
 }
 .header__logo{
     .headerSvg:hover{
@@ -161,7 +166,7 @@ a:focus,a:active{outline: none;}
 }
 .ant-switch .ant-switch-handle{
     background-color: white;
-    background-color:#EFB42D;
+    background-color:var(--primary-orange);
     border-radius: 50%;
     z-index: 20;
     content:unset !important;
@@ -171,11 +176,11 @@ a:focus,a:active{outline: none;}
     content:unset !important;
 }
 .ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
-    background-color:#0B1D26;   
+    background-color:var(--primary-dark);   
 }
 
 .headerRightButtons__container .ant-switch-checked{
-    background-color: #0B1D26;
+    background-color: var(--primary-dark);
 }
 .header_avatar{
     border-radius: 50%;
@@ -190,9 +195,9 @@ a:focus,a:active{outline: none;}
             color:#FFF
        }
        .menu__button:hover{
-            color:var(--primary-yellow, #EFB42D);
+            color:var(--primary-yellow, var(--primary-orange));
             .headerSvg{
-                stroke: var(--primary-yellow, #EFB42D);
+                stroke: var(--primary-yellow, var(--primary-orange));
             }
         }
         .ant-switch:not(.ant-switch-disabled) {
@@ -209,7 +214,7 @@ a:focus,a:active{outline: none;}
         }
         .menu__button:hover{
             .headerSvg{
-                stroke: var(--primary-black,#0B1D26);
+                stroke: var(--primary-black,var(--primary-dark));
             }
         }
         .ant-switch:not(.ant-switch-disabled) {
@@ -224,7 +229,7 @@ a:focus,a:active{outline: none;}
             }
             .menu__button:hover{
                 .headerSvg{
-                    stroke: var(--primary-black,#0B1D26);
+                    stroke: var(--primary-black,var(--primary-dark));
                 }
             }
             .ant-switch:not(.ant-switch-disabled) {

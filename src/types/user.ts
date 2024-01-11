@@ -13,7 +13,8 @@ export type UserT = {
     visit_per_day:number | null
     visit_per_month:number | null
     visit_per_week:number | null,
-    security_level:number | null
+    security_level:number | null,
+    group_fullname:string
 }
 
 export type GroupUserT = {

@@ -64,7 +64,7 @@
 
 .lessonsScheduleLessonGroup:hover{
     path{
-        stroke:#EFB42D;
+        stroke:var(--primary-orange);
     }
 }
 .scheduleTimingsTitle{
@@ -104,7 +104,7 @@ path{
 .lessonsSchedule__container{
     &.dark{
         .lessonsScheduleDay__header{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .lessonsScheduleLessonNumber{
             color:white;
@@ -118,13 +118,13 @@ path{
             color:#797979;
         }
         .lessonsScheduleDay__header.currentDay{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .scheduleTimingsTitle{
             color:white;
         }
         .studentProfielScheduleGoToTasks_container{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
         }
         .studentProfielScheduleGoToTasks_title{
             color:white;
@@ -146,26 +146,26 @@ path{
         }
         .lessonsScheduleLessonGroup:hover{
             path{
-                stroke:#EFB42D;
+                stroke:var(--primary-orange);
             }
         }
         .studentProfielScheduleGoToTasks_container:hover{
             .magnifierSvg{
-                fill:#EFB42D;
+                fill:var(--primary-orange);
                 path{
-                    fill:#EFB42D;
+                    fill:var(--primary-orange);
                 }
             }
             path{
-                stroke:#EFB42D;
+                stroke:var(--primary-orange);
             }
             .studentProfielScheduleGoToTasks_title{
-                color:#EFB42D;
+                color:var(--primary-orange);
             }
         }
         .lessonsScheduleLessonEnd,
         .lessonsScheduleLessonStart{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
     }
     // &.light{
@@ -225,15 +225,15 @@ path{
     .lessonsScheduleDay__container{
         width: unset;
     }
+    .shedule{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .lessonsScheduleDayLessons__container{
+            width: 200px;
+        }
+    }
     // .lessonsScheduleDay__header{
     //     display: none;
     // }
-}
-.shedule{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .lessonsScheduleDayLessons__container{
-        width: 200px;
-    }
 }

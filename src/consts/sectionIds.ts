@@ -26,7 +26,7 @@ export const sectionIds:Record<'start' | 'news' | 'info' | 'about',sectionType> 
     about:{
         id:'#about',
         distanceTop:1720,
-        scrollTo:2020,
+        scrollTo:2120,
         distanceBottom:2550,
         title:"Про Нас"
     }

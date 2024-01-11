@@ -1,0 +1,75 @@
+.editProfileMain_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 229px 12%;
+    gap:50px;
+    font-family: Montserrat;
+    background-image: url('../../assets/images/signInBackground.png');
+}
+.editProfile_header{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.1em;
+}
+.editProfile_section{
+    display: flex;
+    gap:80px;
+}
+.editProfileChangePhoto_container{
+    width: 81px;
+}
+.editProfile_form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 600px;
+}
+.editProfile_input{
+    width: 100%;
+}
+.editProfileModal_container{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.editProfileModal{
+    width: 50% !important;
+}
+.editProfileModal_header{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+}
+.editProfileModal_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.editFormButtons_container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.editProfileUserInfo{
+    gap:80px !important;
+}
+.dark{
+    .editProfile_header{
+        color:white;
+    }
+    .editProfile_section_header{
+        color:white;
+    }
+    .uploadButton{
+        background-color: var(--secondary-blue);
+        color:white;
+        border: none;
+    }
+    .uploadButton:hover{
+        color:var(--primary-orange) !important;
+    }
+}

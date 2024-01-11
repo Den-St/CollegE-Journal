@@ -34,11 +34,7 @@ const securityLevelToLinks:Record<number,JSX.Element> = {
                 <path d="M1 1H51" strokeLinecap="round"/>
             </svg>
         </Link>
-        <Link to={routes.faq} className="menu__button">FAQ
-            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                <path d="M1 1H51" strokeLinecap="round"/>
-            </svg>
-        </Link>
+        
     </>
 }
 
@@ -64,25 +60,11 @@ const useHeaderVisibility = () => {
     return {headerVisibilityClass,onTouchShowHeader}
 }
 
-const useHeaderProfilePopUp = () => {
-    const [popupOpened,setPopupOpened] = useState(false);
-
-    const onHoverOpen = () => {
-        setPopupOpened(true);
-    }
-    const onLeaveClose = () => {
-        setPopupOpened(false);
-    }
-
-    return {onHoverOpen,onLeaveClose,popupOpened};
-}
-
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
     const {headerVisibilityClass,onTouchShowHeader} = useHeaderVisibility();
-    const {onHoverOpen,onLeaveClose,popupOpened} = useHeaderProfilePopUp();
     const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
 
     return <header onMouseOver={onTouchShowHeader} className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
@@ -100,27 +82,52 @@ export const Header = () => {
                         </div>
                     </div>
                     <nav className="nav">
-                        <Link to={routes.homePage} className="menu__button">
+                        {/* <Link to={routes.homePage} className="menu__button">
                             Головна
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
                             </svg>
-                        </Link>
+                        </Link> */}
+                        {/* <Link to={routes.homePage} className="menu__button">
+                            Головна
+                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                <path d="M1 1H51" strokeLinecap="round"/>
+                            </svg>
+                        </Link> */}
                         {!route
-                            && <>
+                            ? <>
+                            <Link to={'https://college.suitt.edu.ua/'} target={'_blank'} className="menu__button">
+                                Сайт коледжу
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </Link>
                             <button onClick={() => goToSection(sectionIds.news.scrollTo)} className="menu__button">Новини
                                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                     <path d="M1 1H51" strokeLinecap="round"/>
                                 </svg>
                             </button>
-                            <button onClick={() => goToSection(sectionIds.about.scrollTo)} className="menu__button">Про нас
+                            <Link to={routes.faq} className="menu__button">FAQ
                                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                     <path d="M1 1H51" strokeLinecap="round"/>
                                 </svg>
-                            </button>
+                            </Link>
                             </>
-                        }
+                        : <>
+                            {/* <Link to={routes.homePage} className="menu__button">
+                                Головна
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </Link>
+                            <Link to={routes.faq} className="menu__button">FAQ
+                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                                    <path d="M1 1H51" strokeLinecap="round"/>
+                                </svg>
+                            </Link> */}
+                        </>}
                         {securityLevelToLinks[user.security_level || 0]}
+                        {!!route && <Link className="menu__button" to={routes.homePage + '?section=news'}>Новини</Link>}
                         {/* <Link to={routes.journal.replace(':id','1')} className="menu__button">Journal
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>
@@ -193,7 +200,7 @@ export const Header = () => {
                         ? <div className="signIn">
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
                         </div> 
-                        : <Popover content={<UserPopup/>} placement={'bottomRight'}>
+                        : <Popover arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
                             <Link to={routes.myProfile}>
                                 <img className='header_avatar' src={defaultAvatar}/>
                             </Link>

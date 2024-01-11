@@ -57,7 +57,7 @@ footer {
 
 .fList__title {
     margin-bottom: 30px;
-    color: var(--primary-yellow, #EFB42D);
+    color: var(--primary-yellow, var(--primary-orange));
     font-family: Montserrat;
     font-size: 20px;
     font-style: normal;
@@ -95,7 +95,7 @@ footer {
 }
 
 .bottom__text {
-    color: var(--secondary-gray, #D0D0D0);
+    color: var(--secondary-gray, var(--primary-gray));
     font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
@@ -110,13 +110,13 @@ footer {
             color:#FFF;
         }
         .fList__title{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .fList__btn:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .fList__btn{
-            color: var(--secondary-gray, #D0D0D0);
+            color: var(--secondary-gray, var(--primary-gray));
         }
         .footer__circle{
             display: none;
@@ -130,28 +130,28 @@ footer {
             background-color: #FFF;
         }
         .footer__title{
-            color:var(--primary-black,#0B1D26);
+            color:var(--primary-black,var(--primary-dark));
         }
 
         .fList__btn{
-            color:var(--primary-black,#0B1D26);
+            color:var(--primary-black,var(--primary-dark));
         }
         .fList__btn:hover{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .bottom__text{
-            color:#0B1D26;
+            color:var(--primary-dark);
         }
       
         .fList__title{
-            color:#EFB42D;
+            color:var(--primary-orange);
         }
         .footer__circle{
             display: none;
         }
         &.home{
             .footer__title{
-                color:var(--primary-black,#0B1D26);
+                color:var(--primary-black,var(--primary-dark));
             }
         }
     }

@@ -84,11 +84,11 @@
 .createStudyMaterialsMain__container{
     &.dark{
         .createStudyMaterialsHeader__input{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color:white;
         }
         .createStudyMaterialsSelect__wrapper{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color:white;
         }
         .createStudyMaterialsTitle{
@@ -98,29 +98,29 @@
             color:white;
         }
         .sendHomeTaskHomeTaskAttachedFileItem{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color: white;
 
         }
         .sendHomeTaskHomeTaskAttachedLinkItem{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color: white;
         }
         .sendHomeTaskHomeTaskAttachedFileItemFormat{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .sendHomeTaskHomeTaskAttachedLinkItemUrl{
-            color:#D0D0D0;
+            color:var(--primary-gray);
         }
         .sendHomeTaskHomeTaskAttachFileInput__styled{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             color:white;
         }
         .createStudyMaterialsMain__container.dark .createStudyMaterialsHeader__input{
             caret-color: white;
         }
         .quill{
-            background-color: #102936;
+            background-color: var(--secondary-blue);
             border:none;
             max-width: 1120px;
         }
@@ -152,12 +152,12 @@
             color:white;
         }
         .ant-select-selector{
-            background-color: #102936 !important;
+            background-color: var(--secondary-blue) !important;
             border: none;
         }
         .sendHomeTaskHomeTaskAttachFileInput__container:hover{
             .sendHomeTaskHomeTaskAttachFileInput__styled{
-                color:#EFB42D;
+                color:var(--primary-orange);
                 transition: 0.2s;
 
             }
@@ -222,7 +222,7 @@
         }
         .sendHomeTaskHomeTaskAttachFileInput__container:hover{
             .sendHomeTaskHomeTaskAttachFileInput__styled{
-                color:#EFB42D;
+                color:var(--primary-orange);
                 transition: 0.2s;
 
             }

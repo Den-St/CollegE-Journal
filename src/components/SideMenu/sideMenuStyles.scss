@@ -39,7 +39,7 @@
     background-color: transparent;
 }
 .sideMenu_nav__link:hover{
-    background-color: #102936;
+    background-color: var(--secondary-blue);
 }
 
 @media screen and (max-width:780px) {
@@ -53,7 +53,7 @@
         // transform: translateX(0px); fix!
     }
     body{
-        overflow: scroll !important;
+        overflow: scroll;
     }
     .header.sideMenushown{
         background-color: transparent;

@@ -48,7 +48,7 @@
 //     width: 10px;
 //     height: 30px;
 //     border-radius: 5px;
-//     background-color: #EFB42D;
+//     background-color: var(--primary-orange);
 // }
 // .homeTasks_subject.inactive{
 //     cursor:not-allowed;
@@ -223,22 +223,22 @@
 //         color:white;
 //     }
 //     .homeTaskDeadline__title{
-//         color:#d0d0d0;
+//         color:var(--primary-gray);
 //     }
 //     .homeTaskDeadline__date{
 //         color:white;
 //     }
 //     .homeTaskCommentsItemNoComment{
-//         color:#d0d0d0;
+//         color:var(--primary-gray);
 //     }
 //     .homeTaskCommentItem__text{
 //         color:white;
 //     }
 //     .homeTaskItem{
-//         background-color: #102936;
+//         background-color: var(--secondary-blue);
 //     }
 //     .homeTaskCommentsItem__container{
-//         background-color: #102936;
+//         background-color: var(--secondary-blue);
 //     }
 //     .homeTaskFilter__select{
 //         .ant-select-selection-item{
@@ -246,19 +246,19 @@
 //         }
 //     }
 //     .homeTasks_subject{
-//         background-color: #0b1d26;
+//         background-color: var(--primary-dark);
 //         box-shadow: 0px 1px 15px 0px #D4D4D41A;
 //         color:white;
 //     }
 //     .homeTasks_subject:hover{
-//         color:#EFB42D;
+//         color:var(--primary-orange);
 //     }
 //     .homeTaskSubjects_title{
 //         color:white;
 //     }
 //     .homeTasks_subject.inactive{
 //         color:#797979;
-//         background-color: #102936;
+//         background-color: var(--secondary-blue);
 //         box-shadow: none;
 //     }
 //     .homeTasks_subject.inactive:hover{
@@ -316,7 +316,7 @@
 //     cursor:pointer;
 //     .fillterImg{
 //         transition: 0.2s;
-//         stroke: #EFB42D;
+//         stroke: var(--primary-orange);
 //     }
 // }
 
@@ -364,7 +364,7 @@
 .subjectsMainContainer{
     width: 100%;
     display: flex;
-    padding: 200px 9%;
+    padding: 200px 12%;
     flex-direction: column;
     gap:40px;
 }
@@ -375,6 +375,11 @@
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0.1em;
+}
+.subjectsContainer{
+    display: flex;
+    column-gap: 30px;
+    row-gap: 48px;
 }
 .dark{
     .subjectsMainTitle{

@@ -43,7 +43,7 @@
     flex-wrap: wrap;
     row-gap: 20px;
     column-gap: 30px;
-    justify-content: center;
+    // justify-content: center;
 }
 
 .student__container {
@@ -63,6 +63,7 @@
     align-items: center;
     gap: 23px;
     font-family: Montserrat;
+    max-width: 67%;
 }
 
 .studentName {
@@ -102,31 +103,35 @@
         color: white;
     }
     .fillterImg {
-        stroke: #D0D0D0;
+        stroke: var(--primary-gray);
     }
     .student__container{
-        background:#102936;
+        background:var(--secondary-blue);
     }
     .student__info{
         color: white;
     }
     .studentButton{
-        background:#102936;
+        background:var(--secondary-blue);
         box-shadow: 0px 1px 10px 0px rgba(212, 212, 212, 0.10);
         color:#FFF;
     }
     .studentButton:hover{
-        background: #0B1D26;
+        background: var(--primary-dark);
+    }
+    .studentButton:active{
+        color: var(--primary-orange);
+        background: var(--primary-dark);
     }
     .main__container{
-        background-color: #0B1D26;
+        background-color: var(--primary-dark);
         background-image: url('./../../assets/images/signInBackground.png');
     }
     .studentFillters__container:hover{
         cursor: pointer;
         transition: 0.2s;
         .fillterImg{
-            stroke:#EFB42D;
+            stroke:var(--primary-orange);
         }
     }
 }
@@ -145,15 +150,15 @@
         background:white;
     }
     .student__info{
-        color: #0B1D26;
+        color: var(--primary-dark);
     }
     .studentButton{
         background:white;
         box-shadow: 0px 1px 15px 0px rgba(0, 0, 0, 0.10);
-        color:#0B1D26;
+        color:var(--primary-dark);
     }
     .studentButton:hover{
-        background: #EFB42D;
+        background: var(--primary-orange);
     }
     .main__container{
         background-color: white;
@@ -163,7 +168,7 @@
         cursor: pointer;
         transition: 0.2s;
         .fillterImg{
-            stroke:#EFB42D;
+            stroke:var(--primary-orange);
         }
     }
 }
@@ -185,7 +190,7 @@
 }
 @media screen and (max-width:1440px) {
     .studentList__container{
-        width: 85%;
+        // width: 85%;
     }
     .studentTitle__container{
         width: 75%;
