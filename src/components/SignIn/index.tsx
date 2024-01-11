@@ -41,10 +41,10 @@ export const SignIn = () => {
             <h1 className="signIn__header">Вхід</h1>
             <form onSubmit={handleSubmit(onLogin)} className="signIn__form" autoComplete={'off'}>
                 <div className="signInInput__container">
-                    <input autoComplete="off"  {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input autoComplete="off"  {...register('user_password')} type={passwordInputType} placeholder={"Password"} className={'password__input'}/>
+                    <input {...register('user_password')} type={passwordInputType} placeholder={"Password"} className={'password__input'}/>
                     <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                 </div>
                 <div className="signInSettings__container">

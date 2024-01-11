@@ -20,7 +20,6 @@ export const useGetAdminGroups = () => {
         setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.getGroups,{headers:{Authorization:localToken || cookieToken}});
-            console.log(res.data);
             setGroups(res.data as GroupT[]);
             //@ts-ignore
             setGroupsByGrage(Object.groupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]));

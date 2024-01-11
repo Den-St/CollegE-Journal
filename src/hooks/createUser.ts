@@ -17,7 +17,6 @@ export const useCreateUser = (group?:GroupT) => {
     const cookieToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
     const [crateUserFormErrorMessage,setErrorMessage] = useState('');
-    console.log(createUserErrorCode);
 
     const {
         register,
@@ -29,7 +28,6 @@ export const useCreateUser = (group?:GroupT) => {
     } = useForm<CreateUserT>();
 
     const onCreateUser = async (data:CreateUserT) => {
-        console.log(data);
         if(!data.education_form) {
             setErrorMessage('Оберіть форму навчання!')
             return;

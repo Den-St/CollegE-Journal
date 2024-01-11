@@ -25,14 +25,12 @@ export const useGroupsByTeacher = () => {
         try{
             const res = await axiosConfig.get(endpoints.userGroups,{headers:{Authorization:localToken || cookieToken}});
             setGroups(res.data);
-            console.log(res.data);
         }catch(err){
             console.error(err);
         }finally{
             setLoading(false);
         }
     }  
-    console.log('groups',groups);
     useEffect(() => {
         fetch();
     },[]);

@@ -40,25 +40,25 @@ const localNews:NewsT[] = [
 const carousels = [
     {
         slidesToShow:4,
-        className:'slider_xxxl',
+        className:'slider_xxxl homePage_slider',
         dots:false,
         arrows:true
     },
     {
         slidesToShow:3,
-        className:'slider_xxl',
+        className:'slider_xxl homePage_slider',
         dots:false,
         arrows:true
     },
     {
         slidesToShow:2,
-        className:'slider_xl',
+        className:'slider_xl homePage_slider',
         dots:false,
         arrows:true
     },
     {
         slidesToShow:1,
-        className:'slider_l',
+        className:'slider_l homePage_slider',
         dots:true,
         arrows:false
     },

@@ -15,28 +15,7 @@ import { SideMenu } from '../SideMenu';
 import { useUserStore } from '../../store/userStore';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { UserPopup } from '../UserPopup';
-
-const securityLevelToLinks:Record<number,JSX.Element> = {
-    0:<></>,
-    5:<>
-        {/* <Link to={routes.homePage} className={`menu__button`}>Головна
-            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                <path d="M1 1H51" strokeLinecap="round"/>
-            </svg>
-        </Link> */}
-        <Link to={routes.adminPanel + `?section=schedule`} className="menu__button">Адмін-панель
-            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                <path d="M1 1H51" strokeLinecap="round"/>
-            </svg>
-        </Link>
-        <Link to={routes.groups} className="menu__button">Журнал
-            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                <path d="M1 1H51" strokeLinecap="round"/>
-            </svg>
-        </Link>
-        
-    </>
-}
+import { HeaderNavLinks } from './HeaderNavLinks';
 
 const useHeaderVisibility = () => {
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden' | 'visible_on_scroll' | 'visible_on_touch'>('visible');
@@ -60,6 +39,7 @@ const useHeaderVisibility = () => {
     return {headerVisibilityClass,onTouchShowHeader}
 }
 
+
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
@@ -76,58 +56,13 @@ export const Header = () => {
                             <FilterIconSvg/>
                         </button>
                         <div className="logo__block">
-                            <Link to="/" className="header__logo">
+                            <Link to={routes.homePage} className="header__logo">
                                 <CollegeLogoSvg/>
                             </Link>
                         </div>
                     </div>
                     <nav className="nav">
-                        {/* <Link to={routes.homePage} className="menu__button">
-                            Головна
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </Link> */}
-                        {/* <Link to={routes.homePage} className="menu__button">
-                            Головна
-                            <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                <path d="M1 1H51" strokeLinecap="round"/>
-                            </svg>
-                        </Link> */}
-                        {!route
-                            ? <>
-                            <Link to={'https://college.suitt.edu.ua/'} target={'_blank'} className="menu__button">
-                                Сайт коледжу
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </Link>
-                            <button onClick={() => goToSection(sectionIds.news.scrollTo)} className="menu__button">Новини
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </button>
-                            <Link to={routes.faq} className="menu__button">FAQ
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </Link>
-                            </>
-                        : <>
-                            {/* <Link to={routes.homePage} className="menu__button">
-                                Головна
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </Link>
-                            <Link to={routes.faq} className="menu__button">FAQ
-                                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                                    <path d="M1 1H51" strokeLinecap="round"/>
-                                </svg>
-                            </Link> */}
-                        </>}
-                        {securityLevelToLinks[user.security_level || 0]}
-                        {!!route && <Link className="menu__button" to={routes.homePage + '?section=news'}>Новини</Link>}
+                        <HeaderNavLinks linksClassName='menu__button'/>
                         {/* <Link to={routes.journal.replace(':id','1')} className="menu__button">Journal
                             <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                                 <path d="M1 1H51" strokeLinecap="round"/>

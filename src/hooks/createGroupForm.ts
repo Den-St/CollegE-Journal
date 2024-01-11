@@ -49,7 +49,6 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
             const res = await axiosConfig.post(endpoints.createGroup,data,{headers:{'Authorization':localToken || cookieToken}});
             onCloseCreateGroupModal();
             // refetchGroups();
-            console.log('res',res.data);
             if(res.status === 201) {
                 setErrorCode(undefined);
                 addGroup({group_id:res.data.inserted_id,group_full_name:data.group_full_name});

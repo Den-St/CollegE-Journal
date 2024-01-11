@@ -84,7 +84,7 @@
     width: 635px;
 }
 .adminPanelStatName{
-    font-size: 20;
+    font-size: 20px;
     font-weight: 400;
 }
 
@@ -438,7 +438,9 @@
         }
     }
 }
-
+.ant-carousel .slick-slider.adminPanelControllers__slider{
+    display: none;
+}
 @media screen and  (min-width:1440px) {
     .adminPanelControllerItem__container{
         width: 29%;
@@ -464,5 +466,23 @@
     }
     .adminPanelControllers__container{
         display: none;
+    }
+    .ant-carousel .slick-slider.adminPanelControllers__slider{
+        display: block;
+    }
+    .adminPanelControllerItem__container{
+        display: flex !important;
+        align-items: center;
+    }
+    .adminPanelStatsBlocks__container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .adminPanelStatBlock__container{
+        padding: 32px 0;
+        width: 90%;
+    }
+    .adminPanelControllerItem__container{
+        height: 185px;
     }
 }

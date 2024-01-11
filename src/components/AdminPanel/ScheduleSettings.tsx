@@ -24,7 +24,6 @@ export const ScheduleSettings = () => {
     const {group,groupLoading,fetchGroup} = useGetGroup(pickedGroupId);
     const {groups,groupsLoading} = useGetAdminGroups();
     const lessonNumbers = Array(1,2,3,4,5);
-    console.log(lessonNumbers)
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);

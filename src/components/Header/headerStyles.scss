@@ -137,6 +137,10 @@ a:focus,a:active{outline: none;}
         stroke: var(--primary-yellow, var(--primary-orange));
     }
 }
+.menu__button:active{
+    color: linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)),
+linear-gradient(0deg, #EFB42D, #EFB42D);
+}
 .menu__button.active{
     color:var(--primary-orange);
     .headerSvg{
@@ -194,8 +198,15 @@ a:focus,a:active{outline: none;}
        .menu__button{
             color:#FFF
        }
+
        .menu__button:hover{
             color:var(--primary-yellow, var(--primary-orange));
+            .headerSvg{
+                stroke: var(--primary-yellow, var(--primary-orange));
+            }
+        }
+        .menu__button.active_link{
+            color:var(--primary-orange);
             .headerSvg{
                 stroke: var(--primary-yellow, var(--primary-orange));
             }
