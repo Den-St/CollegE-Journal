@@ -15,7 +15,6 @@
     gap: 41px;
 }
 
-
 .groupTitle{
     font-weight: 500;
     font-size: 28px;
@@ -173,5 +172,20 @@
     }
     .groupsCourses__container{
         padding: 0 9%;
+    }
+}
+.ant-carousel .slick-slider.adminPanelGroups_carousel{
+    display: none;
+}
+@media screen and (max-width:780px) {
+    .groupCourseItemGroups__container{
+        display: none;
+    }  
+    .ant-carousel .slick-slider.adminPanelGroups_carousel{
+        display: block;
+        .groupItem__container{
+            width: 300px !important;
+            display: flex !important;
+        }
     }
 }

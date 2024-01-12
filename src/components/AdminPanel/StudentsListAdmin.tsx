@@ -1,4 +1,4 @@
-import { Modal, Select, Spin } from "antd";
+import { Carousel, Modal, Select, Spin } from "antd";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { groupCoursesNumbers } from "../../consts/groupsCoursesNumbers";
@@ -8,7 +8,6 @@ import { useGetAdminGroups } from "../../hooks/getGroups";
 import { useThemeController } from "../../hooks/themeController"
 import { CreateGroupT, GroupT } from "../../types/group";
 const {Option,} = Select;
-
 
 const errorCodes:Record<number,string> = {
     [-1]:'Некоректна назва групи',
@@ -94,6 +93,13 @@ export const StudentsListAdmin = () => {
                             </Link>
                         )}
                     </div>
+                    <Carousel className='adminPanelGroups_carousel' dots slidesToShow={1}>
+                        {groupesByGrade?.[key].map((group:GroupT) => 
+                            <Link to={routes.editGroup.replace(':id',group.group_id)} className="groupItem__container">
+                                {group.group_full_name}
+                            </Link>
+                        )} 
+                    </Carousel>
                 </div>
             ) : <Spin/>}
         </section>

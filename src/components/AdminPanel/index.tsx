@@ -51,7 +51,7 @@ export const AdminPanel = () => {
                     </Link>
                 )}
             </div>
-            <Carousel className="adminPanelControllers__slider">
+            <Carousel className="adminPanelControllers__slider" initialSlide={adminPanelSections.findIndex(section => section.key === searchParams.get('section'))}>
                 {adminPanelSections.map((section) => 
                     <Link to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
                         <p className={"adminPanelControllers__title"}>

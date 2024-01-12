@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { themeType } from '../types/themeType';
 import { UserT } from '../types/user';
 
 type State = {
