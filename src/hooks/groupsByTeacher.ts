@@ -5,8 +5,8 @@ import { getToken } from './../helpers/auth';
 import { useUserStore } from './../store/userStore';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
-import { GroupT } from '../types/group';
 import { useTeachersGroupsStore } from '../store/teachersGroupsStore';
+import {myGroupBy} from './../helpers/groupBy';
 
 export const useGroupsByTeacher = () => {
     const [loading,setLoading] = useState(false);
@@ -38,7 +38,7 @@ export const useGroupsByTeacher = () => {
     useEffect(() => {
         if(!groups.length) return;
         //@ts-ignore
-        setGroupsByGrage(Object.groupBy(groups,({journal_group_full_name}) => journal_group_full_name.split('-')[1][0]));
+        setGroupsByGrage(myGroupBy(groups,({journal_group_full_name}) => journal_group_full_name.split('-')[1][0]));
     },[groups]);
 
     return {loading,groups,groupesByGrade}

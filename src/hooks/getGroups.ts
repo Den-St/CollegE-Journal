@@ -5,6 +5,7 @@ import { getToken } from "../helpers/auth";
 import { useAdminGroupsStore } from "../store/adminGroupsStore";
 import { useUserStore } from "../store/userStore";
 import { GroupT } from "../types/group";
+import {myGroupBy} from './../helpers/groupBy';
 
 export const useGetAdminGroups = () => {
     // const [groups,setGroups] = useState<GroupT[]>([]);
@@ -21,8 +22,20 @@ export const useGetAdminGroups = () => {
         try{
             const res = await axiosConfig.get(endpoints.getGroups,{headers:{Authorization:localToken || cookieToken}});
             setGroups(res.data as GroupT[]);
+            console.log(res.data);
+            const a = [
+                    {
+                        group_full_name: "Кн-41",
+                        group_id: "6599319d5edfe84f8d1b25ef"
+                    }, 
+                    {
+                        group_full_name: "Кб-11",
+                        group_id: "659ad3d4ee990ad4f4b163e2"
+                    }                    
+                ];
+            console.log('asd',myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]))
             //@ts-ignore
-            setGroupsByGrage(Object.groupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]));
+            setGroupsByGrage(myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]));
         }catch(err){
             console.error(err);
         }finally{
@@ -31,7 +44,7 @@ export const useGetAdminGroups = () => {
     }
     useEffect(() => {
         //@ts-ignore
-        setGroupsByGrage(Object.groupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
+        setGroupsByGrage(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
     },[groups]);
     
     useEffect(() => {fetchGroups()},[]);
