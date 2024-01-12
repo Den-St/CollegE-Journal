@@ -1,4 +1,4 @@
-import { Select, Spin } from "antd";
+import { Carousel, Select, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
@@ -14,7 +14,6 @@ import "./scheduleSettings.scss";
 const {Option} = Select;
 
 
-
 export const ScheduleSettings = () => {
     useEffect(() => {
         document.title = 'Налаштування розкладу';
@@ -27,9 +26,9 @@ export const ScheduleSettings = () => {
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);
-
+    console.log(group?.timetable);
     return <div className="adminPanelScheduleSettings__container">
-        <div className="fillter_container" style={{width:'100%',marginLeft:'12%'}}>
+        <div className="fillter_container">
             <Select 
                 placeholder={<div className="fillterPlaceholder_container">
                     <p className="fillter_placeholder">Група</p> <FilterIconSvg/>
@@ -56,8 +55,8 @@ export const ScheduleSettings = () => {
                 </div>
             </div>
         </div>
-        {!groupLoading ? group?.timetable ? <section className={`lessonsSchedule__container`}>
-            {Object.keys(group?.timetable).map((dayKey,i) => 
+        {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
+            {Object.keys(group?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
@@ -78,6 +77,29 @@ export const ScheduleSettings = () => {
                     </div>
                 </div>)}
         </section>
+        <Carousel className='lessonsScheduleDayCarousel' dots slidesToShow={1} initialSlide={Object.keys(group?.timetable || {}).findIndex((day,i) => i + 1 === dayNumber)}>
+            {Object.keys(group?.timetable || {}).map((dayKey,i) => 
+                <div key={dayKey} className="lessonsScheduleDay__container">
+                    <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
+                    <div className='lessonsScheduleDayLessons__container'>
+                        {lessonNumbers.map(lessonNumber =>
+                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name + i} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
+                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
+                                <p className="lessonsScheduleLessonGroup">
+                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                        <LinkSvg/>
+                                    </Link>
+                                    :<p>
+                                        <LinkSvg/>
+                                    </p>}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </div>)}
+        </Carousel>
+        </>
         : <NoSheduleComponent/>
         : <Spin/>}
     </div>

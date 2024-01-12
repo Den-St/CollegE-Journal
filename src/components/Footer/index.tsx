@@ -31,7 +31,7 @@ export const Footer = () => {
                     {!route ? 
                         <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.scrollTo)}>Про нас</button></li>
                     : <li><Link className="fList__btn" to={routes.homePage + `?section=about`}>Про нас</Link></li>}
-                    {!route && <li><Link className="fList__btn" to={routes.faq}>FAQ</Link></li>}
+                    <li><Link className="fList__btn" to={routes.faq}>FAQ</Link></li>
                 </ul>
                 <div>
                     <h1 className="fList__title">Ми У Соц. Мережах</h1>

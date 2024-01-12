@@ -9,6 +9,7 @@ import { useThemeStore } from "../../store/themeStore";
 import { useUserStore } from "../../store/userStore"
 import { UploadOutlined } from '@ant-design/icons';
 import "./editProfileStyles.scss";
+import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 
 type Props = {
     onEditClose:() => void
@@ -17,7 +18,6 @@ type Props = {
 export const EditProfile:React.FC<Props> = ({onEditClose}) => {
     const user = useUserStore().user;
     const theme = useThemeStore().theme;
-    const [onModal,setOnModal] = useState(false);
     const [formError,setFormError] = useState('');
     const {
         register,
@@ -26,8 +26,9 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         watch,
         reset,
         formState:{errors}
-    } = useForm<{new_password:string,new_password_confimation:string,old_password:string,avatar:string}>();
-    const onOpenModal = () => {
+    } = useForm<{new_password:string,new_password_confimation:string,avatar:string}>();
+
+    const onSubmit = async () => {
         const newPassword = watch('new_password');
         const newPasswordConfirmation = watch('new_password_confimation');
         const avatar = watch('avatar');
@@ -39,23 +40,16 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
             setFormError('Ви не змінили дані!');
             return;
         }
-        setFormError('');
-        setOnModal(true);
-    }
-    const onCloseModal = () => {
-        setOnModal(false);
-    }
-    const onSubmit = async () => {
         try{
             // const res = await axiosConfig(endpoints.changeUserInfo);
-            onCloseModal();
+            onEditClose();
         }catch(err){
             console.error(err);
         }
     }
 
     return <div className={`editProfileMain_container ${theme}`}>
-        <h1 className="editProfile_header">Редагування профілю</h1>
+        <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
         <div className='studentProfileInfo__container editProfileUserInfo'>
             <img className='studentProfile_img' src={user.avatar || defaultAvatar}/>
             <div className='studentProfileTextInfo__container'>
@@ -67,30 +61,17 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         <div className="editProfile_section">
             <div className="editProfileChangePhoto_container">
                 <Upload>
-                    <Button className="uploadButton" icon={<UploadOutlined />}>Upload</Button>
+                    <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
                 </Upload>
             </div>
-            <form className="editProfile_form">
+            <form onSubmit={handleSubmit(onSubmit)} className="editProfile_form">
                 <h2 className="editProfile_section_header">Змінити пароль</h2>
-                <input {...register('new_password')} className="input editProfile_input" placeholder="Введіть новий пароль"/>
-                <input {...register('new_password_confimation')} className="input editProfile_input" placeholder="Повторіть новий пароль"/>
+                <input {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль"/>
+                <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль"/>
                 {!!formError && <p className="signIn_errorMessage">{formError}</p>}
-                <span onClick={onOpenModal} className="primary_button">Зберегти зміни</span>
+                {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
+                <input type={'submit'} className="primary_button" value={'Зберегти зміни'}/>
             </form>
         </div>
-        <Modal open={onModal} onCancel={onCloseModal} footer={false} className={'editProfileModal'}>
-            <div className="editProfileModal_container">
-                <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
-                <form onSubmit={handleSubmit(onSubmit)} className="editProfileModal_form">
-                    <input {...register('old_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input"/>
-                    <div className="editFormButtons_container">
-                        <input type={'submit'} value={'Далі'} className="primary_button"/>
-                        <span className="forgotPassword">Забули пароль?</span>
-                    </div>
-                    {!!errors.old_password?.message && <p className="signIn_errorMessage">{errors.old_password?.message}</p>}
-                </form>
-                <button className="primary_button" onClick={onCloseModal}>Повернутися</button>
-            </div>
-        </Modal>
     </div>
 }

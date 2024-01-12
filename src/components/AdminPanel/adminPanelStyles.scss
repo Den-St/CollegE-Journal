@@ -116,6 +116,7 @@
 .adminPanelStatItemWeek{
     font-size: 20px;
     font-weight: 400;
+    font-family: Alegreya Sans;
 }
 .adminPanelStatItemMonth{
     font-size: 18px;
@@ -452,7 +453,7 @@
 
 @media screen and (max-width:780px) {
     .adminPanelMain__container{
-        padding: 110px 0px;
+        padding: 110px 0px 0px;
         width: 100%;
     }
     .adminPanelMain__title{
@@ -479,10 +480,13 @@
         align-items: center;
     }
     .adminPanelStatBlock__container{
-        padding: 32px 0;
+        padding: 32px 15px;
         width: 90%;
     }
     .adminPanelControllerItem__container{
         height: 185px;
+    }
+    .fillter_container{
+        margin-left: 0;
     }
 }

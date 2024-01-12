@@ -6,6 +6,13 @@
     flex-direction: column; 
     gap:60px;
 }
+.adminPanelScheduleSettings__container{
+    .fillter_container{
+        width: 100%;
+        margin-left: 12%;
+    }
+}
+
 .noSchedule_container{
     width: 100%;
     display: flex;
@@ -90,3 +97,23 @@
     text-align: center;
 }
 
+@media screen and (max-width:780px) {
+    .adminPanelScheduleSettings__container{
+        .fillter_container{
+            width: 100%;
+            margin-left: 0%;
+        }
+    }
+    .adminPanelScheduleSettingsInput__container{
+        width: unset;
+    }
+    .adminPanelScheduleSettingsInput__cover{
+        padding: 10px;
+    }
+    .noSchedule_text{
+        width: 90%;
+    }
+    .adminPanel__title{
+        padding-left: 5%;
+    }
+}
