@@ -197,6 +197,7 @@ input::placeholder{
 }
 .ant-carousel .slick-dots-bottom{
 	bottom: -20px !important;
+	z-index: 1 !important;
 }
 li.slick-active{
 	button{

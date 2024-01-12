@@ -1,4 +1,4 @@
-import { Select, Spin } from "antd";
+import { Carousel, Select, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
@@ -6,6 +6,7 @@ import { groupCoursesNumbers } from "../../consts/groupsCoursesNumbers";
 import { routes } from "../../consts/routes";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useThemeStore } from "../../store/themeStore"
+import { GroupT } from "../../types/group";
 import { NoMatch } from "../NoMatch";
 import { Students } from "../Students";
 import './groupsStyles.scss';
@@ -62,6 +63,13 @@ export const Groups = () => {
                                 </Link>
                             )}
                         </div>
+                        <Carousel className='groups_carousel' dots slidesToShow={1}>
+                            {groupesByGrade?.[key].map((group) => 
+                                <Link to={routes.pickJournalSubject + `?group_id=${group._id}`} className="groupItem__container">
+                                    {group.journal_group_full_name}
+                                </Link>
+                            )} 
+                        </Carousel>
                     </div>   
                 ) : <NoMatch is404={false} title={'У вас немає груп'}/> : <Spin/>
             }

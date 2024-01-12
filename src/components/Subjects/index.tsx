@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { Carousel, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { defaultAvatar } from "../../consts/defaultAvatar";
@@ -23,14 +23,22 @@ export const Subjects = () => {
     return <section className="subjectsMainContainer">
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
-        {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-            <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>{subject.subject_full_name}
-            {/* {i === 2 && <div className="newTask"/>} */}
-            </Link>
-        )}
+            {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
+                <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                    {subject.subject_full_name}
+                </Link>
+            )}
         {/* {subjects.map((subject,i) => <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject}&month=${lastMonth}`} className={`homeTasks_subject ${!subject.isActive && 'inactive'}`}>{subject.name}{i === 2 && <div className="newTask"/>}</Link>)} */}
         </div>
+        <Carousel className='subjects_carousel' dots slidesToShow={1}>
+            {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
+                <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                    {subject.subject_full_name}
+                </Link>
+            )}
+        </Carousel>
         <section className="studentList__container">
+            <h2 className="subjectsMainTitle">Список студентів</h2>
             <div className="studentItems__container">
                 {group.group_students.map(student => 
                     <div className="student__container" key={student.user_id}>
