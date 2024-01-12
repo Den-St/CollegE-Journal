@@ -2,6 +2,7 @@ import { DatePicker, Select } from 'antd';
 import { useState } from 'react';
 import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
+import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { setFromSubjects } from '../../helpers/setFromObjects';
 import { useGetJournal } from '../../hooks/getJournal';
 import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
@@ -121,6 +122,11 @@ export const Journal = () => {
                     </Select>
                 </div> */}
             </div>
+        </section>
+        <section className='journal_portraitModeWarning'>
+                <JournalPortraitModeWarning/>
+                <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
+                <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
         <section className='journal__container'>
             <div className='journalLeft__container'>

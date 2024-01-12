@@ -394,6 +394,12 @@
         .journalLessonThemeItemType{
             color:var(--primary-orange);
         }
+        .journal_portraitModeWarning_description{
+            color: var(--primary-gray);
+        }
+        .journal_portraitModeWarning{
+            color: white;
+        }
     }
     &.light{
         .fillterImg {
@@ -479,5 +485,50 @@
 @media screen and (max-width:'1440px') {
     .journalLeft__container{
         width:fit-content;
+    }
+}
+
+.journal_portraitModeWarning{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    align-items: center;
+}
+.journal_portraitModeWarning_header{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+.journal_portraitModeWarning_description{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+@media screen and (max-width:780px) {
+    .journalMain__container{
+        padding: 110px 5% 0;
+    }
+    .journalTop__container{
+        padding: 0;
+    }
+}
+@media screen and (orientation:portrait) and (max-width:780px) {
+	.journal__container{
+        display: none;
+    }
+    .journal_portraitModeWarning{
+        display: flex;
+    }
+}
+@media screen and (orientation:landscape) and (max-width:780px) {
+	.journal__container{
+        display: flex;
+    }
+    .journal_portraitModeWarning{
+        display: none;
     }
 }
