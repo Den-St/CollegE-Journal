@@ -1,6 +1,6 @@
 import { Collapse, CollapseProps, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect } from "react";
 import { useFaq } from "../../hooks/faq";
 import { useThemeStore } from "../../store/themeStore";
 import "./faqStyles.scss";
@@ -8,7 +8,9 @@ import "./faqStyles.scss";
 export const FAQ = () => {
     const theme = useThemeStore().theme;
     const {faqItems,loading} = useFaq();
-
+    useEffect(() => {
+      document.title = "Часті питання"
+    },[]);
     const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => 
     faqItems.length ?
       faqItems.map(faq => ({

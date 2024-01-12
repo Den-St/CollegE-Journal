@@ -1,6 +1,6 @@
 import { Button, Modal } from "antd";
 import Upload from "antd/es/upload/Upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axiosConfig from "../../axiosConfig";
 import { defaultAvatar } from "../../consts/defaultAvatar";

@@ -1,6 +1,8 @@
 import { Carousel, Spin } from "antd";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
+import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { routes } from "../../consts/routes";
 import { setFromSubjects } from "../../helpers/setFromObjects";
@@ -16,12 +18,14 @@ export const Subjects = () => {
     const group = useTeachersGroupsStore().groups.find(group => group._id === pickedGroupId);
     // const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
     const lastMonth = new Date().getMonth();
-
+    useEffect(() => {
+        document.title = `Предмети групи - ${group?.journal_group_full_name}`;
+    },[]);
     if(loading) return <Spin/>
     if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
 
     return <section className="subjectsMainContainer">
-        <h2 className="subjectsMainTitle">Предмети</h2>
+        <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
                 <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>

@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { EditProfileSvg } from '../../assets/svgs/editProfileSvg';
@@ -18,10 +18,7 @@ enum tabsNames  {
 };
 type tabsNamesType = keyof typeof tabsNames;
 
-export const StudentProfile = () => {
-    const theme = useThemeStore().theme;
-    const user = useUserStore().user;
-    const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
+const useTryEditProfile = () => {
     const [onRealEditing,setOnRealEditing] = useState(false);
     const [onTryEditing,setOnTryEditing] = useState(false);
     const onTryEdit = () => {
@@ -53,6 +50,18 @@ export const StudentProfile = () => {
         reset,
         formState:{errors}
     } = useForm<{password:string,}>();
+
+    return {onRealEditing,onTryEditing,onTryEdit,onRealEdittingClose,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors}
+}
+
+export const StudentProfile = () => {
+    const theme = useThemeStore().theme;
+    const user = useUserStore().user;
+    const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
+    const {onRealEditing,onTryEditing,onTryEdit,onRealEdittingClose,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors} = useTryEditProfile();
+    useEffect(() => {
+        document.title = onRealEditing ? 'Редагування профілю' : 'Мій профіль';
+    },[onRealEditing]);
 
     const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
         lessonsSchedule:{

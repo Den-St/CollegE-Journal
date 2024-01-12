@@ -375,6 +375,9 @@
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap:30px;
 }
 .subjectsContainer{
     display: flex;
@@ -393,6 +396,21 @@
 .ant-carousel .slick-slider.subjects_carousel{
     display: none;
 }
+.leftArrowButton{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    svg{
+        transition: 0.3s;
+        fill:#D0D0D0;
+    }
+}
+.leftArrowButton:hover{
+    svg{
+        fill:var(--primary-orange);
+    }
+}
+
 @media screen and (max-width:780px) {
     .subjectsContainer{
         display: none;

@@ -1,4 +1,5 @@
 import { Carousel, Select, Spin } from "antd";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
@@ -15,6 +16,9 @@ const {Option} = Select;
 export const Groups = () => {
     const theme = useThemeStore().theme;
     const {loading,groups,groupesByGrade} = useGroupsByTeacher();
+    useEffect(() => {
+        document.title = "Групи";
+    },[]);
 
     return <div className={`groupsMain__container ${theme}`}>
         {/* <section className="groupsTop__container">
