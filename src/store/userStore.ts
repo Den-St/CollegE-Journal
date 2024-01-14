@@ -15,7 +15,7 @@ export const useUserStore = create<StoreType>((set) => ({
     user:{
         user_id:'',
         full_name:'',
-        mailbox_adress:'',
+        mailbox_address:'',
         token:'',
         avatar: '',
         grades_per_month: null,
@@ -35,7 +35,7 @@ export const useUserStore = create<StoreType>((set) => ({
         user:{
             user_id:'',
             full_name:'',
-            mailbox_adress:'',
+            mailbox_address:'',
             token:'',
             avatar: '',
             grades_per_month: null,

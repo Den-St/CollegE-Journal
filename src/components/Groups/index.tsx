@@ -55,7 +55,7 @@ export const Groups = () => {
                 </div>
             </div>
         </section> */}
-        <section className="groupsCourses__container">
+        <section className="groupsCourses__container journalGroups">
             {
                 !loading ? !!groupesByGrade ? Object.keys(groupesByGrade).map(key => 
                     <div className="groupsCourseItem__container">

@@ -71,15 +71,17 @@ export const Journal = () => {
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
                     placeholder={<div className="fillterPlaceholder_container">
-                        <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
+                        <p className="fillter_placeholder">Місяць</p>
                     </div>}
                     className="fillter_select"
+                    
+                    defaultValue={fillters.month}
                     // allowClear
-                    // value={fillters.month}
-                    // onChange={(value) => onChangeFillters('month',value)}
+                    value={fillters.month}
+                    onChange={(value) => onChangeFillters('month',value)}
                     >
                         {months.map((month,i) => {
-                            if(i >= months.findIndex(_month => _month.number === fillters.month)) return null;
+                            if(i > months.findIndex(_month => _month.number === fillters.month)) return null;
                             return <Option value={month.number} label={month.name}>{month.name}</Option>
                         })}
                     </Select>
@@ -93,6 +95,7 @@ export const Journal = () => {
                         } 
                         className="fillter_select"
                         // allowClear
+                        loading={loading}
                         value={fillters.subject_id}
                         onChange={(value) => onChangeFillters('subject_id',value)}
                     >

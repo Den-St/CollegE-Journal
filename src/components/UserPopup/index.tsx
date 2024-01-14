@@ -13,7 +13,7 @@ export const UserPopup = () => {
     const user = useUserStore().user;
     const signOut = useUserStore().signOut;
     const navigate = useNavigate();
-    
+    console.log(user);
     const onSignOut = () => {
         signOut();
         deleteTokenCookie();
@@ -24,8 +24,7 @@ export const UserPopup = () => {
         <div className='userInfoPopup_container'>
             <img className='header_avatar' src={user.avatar || defaultAvatar} style={{marginBottom:'10px'}}/>
             <p className='userFullName'>{user.full_name}</p>
-            <p className='userEmail'>{user.full_name}</p>
-            <p className='userEmail'>{user.mailbox_adress}</p>
+            <p className='userEmail'>{user.mailbox_address}</p>
             <p className='userRole'>{securityLevelsToNames[user.security_level || 0]}</p>
         </div>
         <div className='userInfoPopupLinks_container'>

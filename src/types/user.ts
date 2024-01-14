@@ -1,7 +1,7 @@
 export type UserT = {
     user_id:string | null;
     full_name:string,
-    mailbox_adress:string,
+    mailbox_address:string,
     token:string,
     avatar: string,
     grades_per_month: number | null
@@ -20,7 +20,7 @@ export type UserT = {
 export type GroupUserT = {
     user_id:string | null;
     full_name:string,
-    mailbox_adress:string,
+    mailbox_address:string,
     avatar: string,
 }
 export type CreateUserT = {

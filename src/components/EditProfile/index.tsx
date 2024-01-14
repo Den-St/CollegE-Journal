@@ -54,7 +54,7 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
             <img className='studentProfile_img' src={user.avatar || defaultAvatar}/>
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>
-                <p className='studentProfile__email'>{user.mailbox_adress || `mail@gmail.com`}</p>
+                <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
                 <p className='studentProfile__group'>{user.group_fullname || `Група-00`}</p>
             </div>
         </div>
