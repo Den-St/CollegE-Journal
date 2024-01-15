@@ -54,6 +54,17 @@ export const Subjects = () => {
                     </div>
                 )}
             </div>
+            <Carousel slidesPerRow={10} className={'students_carousel'}>
+                    {group.group_students.map(student => 
+                        <div className="student__container" key={student.user_id}>
+                            <div className="student__info">
+                                <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt=""/>
+                                <p className="studentName">{student.full_name}</p>
+                            </div>
+                            <Link className="studentButton" to="#">Перейти</Link>
+                        </div>
+                    )}
+            </Carousel>
         </section>
     </section>
 }

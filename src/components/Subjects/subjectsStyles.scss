@@ -396,6 +396,9 @@
 .ant-carousel .slick-slider.subjects_carousel{
     display: none;
 }
+.ant-carousel .slick-slider.students_carousel{
+    display: none;
+}
 .leftArrowButton{
     background-color: transparent;
     border: none;
@@ -435,8 +438,28 @@
     }
     .student__container{
         width: 100% !important;
+        display: flex !important;
     }
     .student__info{
         max-width: 90% !important;
+    }
+    .studentItems__container{
+        display: none !important;
+    }
+    .ant-carousel .slick-slider.students_carousel{
+        display: block;
+    }
+    .ant-carousel .slick-slider.students_carousel{
+        .slick-slide>div{
+            display: flex !important;
+                flex-direction: column;
+                gap:20px;
+        }
+        .ant-carousel .slick-dots-bottom{
+            bottom: 60px !important;
+        }
+    }
+    .student__container{
+        width: 350px !important;
     }
 }

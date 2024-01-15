@@ -82,6 +82,9 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    path{
+        transition: 0.6s;
+    }
 }
 .dark{
     .editProfile_header{
@@ -98,7 +101,8 @@
     .uploadButton:hover{
         color:var(--primary-orange) !important;
     }
-    .questionMark_container.active{
+    .questionMark_container.active,
+    .questionMark_container:hover{
         .questionMarkSvg{
             path{
                 fill:var(--primary-orange) !important;
