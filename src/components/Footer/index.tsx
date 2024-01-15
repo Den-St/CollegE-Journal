@@ -43,6 +43,6 @@ export const Footer = () => {
             </div>
         </div>
     </footer>
-    <div className="bottom__title"><h1 className="bottom__text">© Електронний щоденник, ФКЗІ ДУІТЗ. Всі права захищені, 2023.</h1></div>
+    <div className="bottom__title"><h1 className="bottom__text">© Електронний щоденник, ФКЗІ ДУІТЗ. Всі права захищені, 2024.</h1></div>
     </>
 }
