@@ -60,7 +60,7 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         </div>
         <div className="editProfile_section">
             <div className="editProfileChangePhoto_container">
-                <Upload>
+                <Upload accept="image/png, image/jpeg">
                     <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
                 </Upload>
             </div>

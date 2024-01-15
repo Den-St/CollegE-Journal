@@ -59,6 +59,7 @@ export const Journal = () => {
     const {} = useGroupsByTeacher();
     const groupJournal = useTeachersGroupsStore().groups.find(group => group._id === fillters.group_id);
     const theme = useThemeStore().theme;
+    const currentMonth = new Date().getMonth();
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject._id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject._id === fillters.subject_id)?.subject_full_name;
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${months.find(month => month.number === fillters.month)?.name}`;
@@ -81,7 +82,7 @@ export const Journal = () => {
                     onChange={(value) => onChangeFillters('month',value)}
                     >
                         {months.map((month,i) => {
-                            if(i > months.findIndex(_month => _month.number === fillters.month)) return null;
+                            if(i > months.findIndex(_month => _month.number === currentMonth + 1)) return null;
                             return <Option value={month.number} label={month.name}>{month.name}</Option>
                         })}
                     </Select>

@@ -33,7 +33,7 @@ export const SignIn = () => {
         formState:{errors}
     } = useForm<{mailbox_address:string,user_password:string}>();
 
-    if(status === 1) return <Navigate to={routes.homePage}/>
+    if(status === 1) return <Navigate to={routes.myProfile}/>
 
     return <>
     <div className={`signIn__container ${theme}`}>

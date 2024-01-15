@@ -18,7 +18,7 @@ const adminPanelSections = [{
         key:'schedule'
     },
     {
-        title:'Налаштування групп',
+        title:'Налаштування груп',
         icon:<TwoPeopleSvg/>,
         component:<StudentsListAdmin/>,
         key:'groups'

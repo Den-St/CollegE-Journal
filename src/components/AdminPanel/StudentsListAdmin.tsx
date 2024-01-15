@@ -53,7 +53,7 @@ export const StudentsListAdmin = () => {
                         {/* <div className="createStudyMaterialsSelect__wrapper">
                             <Select
                                 className="createUserSelect"
-                                placeholder={'Оберіть группу'}
+                                placeholder={'Оберіть групу'}
                                 optionLabelProp="label"
                                 >   
                                 <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>

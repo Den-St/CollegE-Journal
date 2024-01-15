@@ -7,10 +7,9 @@ export const PasswordInfo = () => {
     return <div className={`passwordInfo_container ${theme}`}>
         <h2 className="passwordInfo_header">Яким має бути пароль?</h2>
         <ul className="passwordInfo_list">
-            <li className="passwordInfo_listItem">Мінімальна довжина 8 символів</li>
-            <li className="passwordInfo_listItem">Максимальна довжина 30 символів</li>
-            <li className="passwordInfo_listItem">Має містити лише літери англійського алфавіту, хоча б одну велику літеру </li>
-            <li className="passwordInfo_listItem">Має містити спеціальні символи(!@#$%^&*) та цифри</li>
+            <li className="passwordInfo_listItem">Довжина пароля має бути від 8 до 30 символів</li>
+            <li className="passwordInfo_listItem">Має містити лише літери латинського алфавіту та хоча б одну велику літеру</li>
+            <li className="passwordInfo_listItem">Має містити мінімум один спеціальний символ(!@#$%^&*) та мінімум одну цифру</li>
         </ul>
     </div>
 }
