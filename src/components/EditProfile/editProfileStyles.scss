@@ -15,6 +15,11 @@
     display: flex;
     gap: 30px;
 }
+.editProfile_header_container{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
 .editProfile_section{
     display: flex;
     gap:80px;
@@ -73,6 +78,11 @@
         fill:var(--primary-orange);
     }
 }
+.questionMarkSvg{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
 .dark{
     .editProfile_header{
         color:white;
@@ -87,5 +97,12 @@
     }
     .uploadButton:hover{
         color:var(--primary-orange) !important;
+    }
+    .questionMark_container.active{
+        .questionMarkSvg{
+            path{
+                fill:var(--primary-orange) !important;
+            }
+        }
     }
 }

@@ -315,9 +315,22 @@ body{
 			color:white;
 		}
 		.ant-popover-inner{
-			background-color: var(--primary-dark);
 			box-shadow: 0px 1px 10px 0px #D4D4D41A;
-
+		}
+		.ant-popover.userPopup{
+			.ant-popover-inner{
+				background-color: var(--primary-dark);
+			}
+			
+		}
+		.ant-popover.passwordInfo_popover{
+			.ant-popover-inner{
+				background-color: var(--secondary-blue);
+				box-shadow: none;
+			}
+			.ant-popover-arrow::before{
+				background-color: var(--secondary-blue) !important;
+			}
 		}
 		.input{
 			background-color: var(--secondary-blue);
@@ -341,6 +354,7 @@ body{
 		// .ant-popover-arrow{
 		// 	--antd-arrow-background-color:transparent;
 		// }
+		
 	}
 	&.light{
 		.ant-picker-dropdown .ant-picker-panel-container{

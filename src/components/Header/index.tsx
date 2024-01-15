@@ -135,7 +135,7 @@ export const Header = () => {
                         ? <div className="signIn">
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
                         </div> 
-                        : <Popover arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
+                        : <Popover rootClassName='userPopup' arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
                             <Link to={routes.myProfile}>
                                 <img className='header_avatar' src={defaultAvatar}/>
                             </Link>
