@@ -1,4 +1,4 @@
-import { Button, Modal, Popover } from "antd";
+import { Button, Modal, Popover, UploadProps } from "antd";
 import Upload from "antd/es/upload/Upload";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,10 +14,18 @@ import { PasswordInfo } from "../PasswordInfo";
 type Props = {
     onEditClose:() => void
 }
+// type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+
+// const getBase64 = (img: FileType, callback: (url: string) => void) => {
+//     const reader = new FileReader();
+//     reader.addEventListener('load', () => callback(reader.result as string));
+//     reader.readAsDataURL(img);
+//   };
 
 export const EditProfile:React.FC<Props> = ({onEditClose}) => {
     const user = useUserStore().user;
     const theme = useThemeStore().theme;
+    const [newAvatarUrl,setNewAvatarUrl] = useState('');
     const [formError,setFormError] = useState('');
     const {
         register,
@@ -26,8 +34,16 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         watch,
         reset,
         formState:{errors}
-    } = useForm<{new_password:string,new_password_confimation:string,avatar:string}>();
-
+    } = useForm<{new_password:string,new_password_confimation:string,avatar:File}>();
+    // const handleChange: UploadProps['onChange'] = (info) => {
+    //     setNewAvatarUrl(info.file.url || '');
+    //     console.log(info.file.)
+    //     // URL.createObjectURL(info.file.originFileObj as FileType);
+    // };
+    const onChangeAvatar = (file:File) => {
+        setValue('avatar',file);
+        console.log(file);
+    }
     const onSubmit = async () => {
         const newPassword = watch('new_password');
         const newPasswordConfirmation = watch('new_password_confimation');
@@ -51,7 +67,7 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
     return <div className={`editProfileMain_container ${theme}`}>
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
         <div className='studentProfileInfo__container editProfileUserInfo'>
-            <img className='studentProfile_img' src={user.avatar || defaultAvatar}/>
+            <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>
                 <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>

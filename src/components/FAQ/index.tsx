@@ -85,7 +85,7 @@ export const FAQ = () => {
         <div className="faqForm">
             <h1 className="faqTitle">Не має вашого питання?</h1>
             <TextArea className="faqQuestionTextArea" autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>
-            <button type={'submit'} value={'Надіслати'} className={'faqSubmit'}>Надіслати</button>
+            <input type={'submit'} value={'Надіслати'} className={'faqSubmit primary_button'}/>
         </div>
     </main>
 }

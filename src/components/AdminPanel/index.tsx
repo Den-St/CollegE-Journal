@@ -43,7 +43,7 @@ export const AdminPanel = () => {
             <h2 className={"adminPanel__title"}>Панель адміністратора</h2>
             <div className={"adminPanelControllers__container"}>
                 {adminPanelSections.map((section,i) => 
-                    <Link to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
+                    <Link  to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
                         <p className={"adminPanelControllers__title"}>
                             {section.title}
                         </p>
@@ -53,7 +53,7 @@ export const AdminPanel = () => {
             </div>
             <Carousel className="adminPanelControllers__slider" initialSlide={adminPanelSections.findIndex(section => section.key === searchParams.get('section'))}>
                 {adminPanelSections.map((section) => 
-                    <Link to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
+                    <Link  to={routes.adminPanel + `?section=${section.key}`} className={`adminPanelControllerItem__container ${section.key === searchParams.get('section') && 'activeSection'}`} key={section.title}>
                         <p className={"adminPanelControllers__title"}>
                             {section.title}
                         </p>

@@ -40,7 +40,7 @@ export const StudentsListAdmin = () => {
                     </Select>
                 </div> */}
                 <div className="adminPanelStudentList_conrollersContainer">
-                    <button className="adminPanelStudentList_add" onClick={onOpenCreateGroupModal}>Додати</button>
+                    <button className="adminPanelStudentList_add primary_button" onClick={onOpenCreateGroupModal}>Додати</button>
                     {/* <button className="adminPanelStudentList_save">Зберити</button> */}
                 </div>
             </div>
@@ -60,7 +60,7 @@ export const StudentsListAdmin = () => {
                             </Select>
                         </div> */}
                         <input placeholder="Назва групи" autoComplete="off" {...register('group_full_name',{required:true})} className="createUser__input"/>
-                        <p>{errorCode !== undefined && errorCodes[errorCode]}</p>
+                        {errorCode !== undefined && <p className="signIn_errorMessage"> {errorCodes[errorCode]}</p>}
                     </div>
                     {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
                         <label className="createUserInput__label">Куратор</label>
@@ -79,7 +79,7 @@ export const StudentsListAdmin = () => {
                         </div>
                     </div> */}
                 </div>
-                <input autoComplete="off"  type={'submit'} className="createUser__button" value={'Зареєструвати'}/>
+                <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Зареєструвати'}/>
             </form>
         </Modal>
         <section className="groupsCourses__container">
@@ -88,14 +88,14 @@ export const StudentsListAdmin = () => {
                     <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
                     <div className="groupCourseItemGroups__container">
                         {groupesByGrade?.[key].map((group:GroupT) => 
-                            <Link to={routes.editGroup.replace(':id',group.group_id)} className="groupItem__container">
+                            <Link  to={routes.editGroup.replace(':id',group.group_id)} className="groupItem__container">
                                 {group.group_full_name}
                             </Link>
                         )}
                     </div>
                     <Carousel className='adminPanelGroups_carousel' dots slidesToShow={1}>
                         {groupesByGrade?.[key].map((group:GroupT) => 
-                            <Link to={routes.editGroup.replace(':id',group.group_id)} className="groupItem__container">
+                            <Link  to={routes.editGroup.replace(':id',group.group_id)} className="groupItem__container">
                                 {group.group_full_name}
                             </Link>
                         )} 

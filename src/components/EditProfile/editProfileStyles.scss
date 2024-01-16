@@ -62,7 +62,7 @@
     justify-content: space-between;
 }
 .editProfileUserInfo{
-    gap:80px !important;
+    gap:50px !important;
 }
 .editProfile_leaveButton{
     background-color: transparent;
@@ -85,6 +85,10 @@
     path{
         transition: 0.6s;
     }
+}
+.studentProfile_img_edit{
+    width: 110px !important;
+    height: 110px !important;
 }
 .dark{
     .editProfile_header{

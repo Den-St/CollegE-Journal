@@ -15,6 +15,9 @@
     font-weight: 500;
     line-height: 34px;
     letter-spacing: 0.1em;
+    display: flex;
+    gap:20px;
+    align-items: center;
 }
 .editGroupMain_container.dark{
     .createUserInput__label{

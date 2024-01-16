@@ -15,7 +15,10 @@ export const useGetGroup = (groupId?:string) => {
     const group_id = useParams().id;
 
     const fetch = async (groupId?:string) => {
-        if(!groupId && !group_id) return;
+        if(!groupId && !group_id) {
+            setGroup(undefined);
+            return;
+        }
         setLoading(true);
         try{
             const res = await axiosConfig.post(endpoints.getGroup,{group_id:group_id || groupId},{headers:{Authorization:localToken || cookieToken}});

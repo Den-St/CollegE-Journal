@@ -8,6 +8,8 @@ import { Link, } from "react-router-dom";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { useGetGroup } from "../../hooks/getGroup";
 import { emailPattern } from "../../consts/emailPattern";
+import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
+import { routes } from "../../consts/routes";
 const {Option} = Select;
 
 const errorCodesToMessages:Record<number,string> = {
@@ -24,7 +26,7 @@ export const EditGroup = () => {
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
-        <h1 className="editGroupHeader">Змінення групи</h1>
+        <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Змінення групи</h1>
         <form className="createGroup_form" 
         onSubmit={changeGroupHangeSubmit(onChangeGroupInfo)}
         >
@@ -40,13 +42,14 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть куратора'}
                             optionLabelProp="label"
+                            allowClear
                             >
                             <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
                         </Select>
                     </div>
                 </div>
             </div>
-            <input autoComplete="off"  type={'submit'} className="createUser__button" value={'Змінити'}/>
+            <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
         </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
@@ -100,7 +103,7 @@ export const EditGroup = () => {
             <div className="createUserButtons__container">
                 <input 
                 // disabled={createUserDisabled} 
-                autoComplete="off" type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
+                autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Зареєструвати"}/>
             </div>
         </form>
         <section className="studentList__container">
@@ -111,7 +114,7 @@ export const EditGroup = () => {
                             <img className="studentList__avatar" src={student?.avatar || defaultAvatar} alt=""/>
                             <p className="studentName">{student?.full_name}</p>
                         </div>
-                        <Link className="studentButton" to="#">Перейти</Link>
+                        <Link  className="studentButton" to="#">Перейти</Link>
                     </div> 
                 )}
             </div>

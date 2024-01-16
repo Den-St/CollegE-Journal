@@ -349,7 +349,9 @@ body{
 		}
 		.primary_button:active{
 			color: var(--primary-orange);
-			background-color: var(--primary-dark);
+			background: linear-gradient(0deg, rgba(16, 16, 16, 0.2), rgba(16, 16, 16, 0.2)),
+			linear-gradient(0deg, #102936, #102936);
+
 		}
 		// .ant-popover-arrow{
 		// 	--antd-arrow-background-color:transparent;

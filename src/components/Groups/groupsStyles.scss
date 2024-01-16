@@ -83,63 +83,61 @@
     box-shadow: 0 1px 15px 0px #c3bfbf2b;
     border-radius:10px 5px 10px 5px;
     cursor:pointer;
+    transition: 0.3s;
 }
 
-
-.groupsMain__container{
-    &.dark{
-        .groupTitle{
-            color:white;
-        }
-        .groupYearSelectFilter{
-            color:white;
-        }
-        .groupSpecializationFilter{
-            color:white;
-        }
-        .groupsCourseItem__title{
-            color:white;
-        }
-        .groupItem__container{
-            color:white;
-        }
-        .groupsMain__container{
-            background-image: url('../../assets/images/signInBackground.png');
-        }
-        .groupItem__container:hover{
-            color:var(--primary-orange)
-        }
-        .fillterImg{
-            stroke: white;
-        }
+.dark{
+    .groupTitle{
+        color:white;
     }
-    &.light{
-        .groupTitle{
-            color:black;
-        }
-        .groupYearSelectFilter{
-            color:#797979;
-        }
-        .groupSpecializationFilter{
-            color:#797979;
-        }
-        .groupsCourseItem__title{
-            color:#797979;
-        }
-        .groupItem__container{
-            color:black;
-        }
-        .groupsMain__container{
-            background-image: url('../../assets/images/signInBackgroundLight.png');
-        }
-        .groupItem__container:hover{
-            transition: 0.2s;
-            color:var(--primary-orange);
-            box-shadow: 0 1px 15px 0px #9b9b9b3b;
-        }
-        .fillterImg{
-            stroke: #797979;
-        }
+    .groupYearSelectFilter{
+        color:white;
+    }
+    .groupSpecializationFilter{
+        color:white;
+    }
+    .groupsCourseItem__title{
+        color:white;
+    }
+    .groupItem__container{
+        color:white;
+    }
+    .groupsMain__container{
+        background-image: url('../../assets/images/signInBackground.png');
+    }
+    .groupItem__container:hover{
+        color:var(--primary-orange)
+    }
+    .fillterImg{
+        stroke: white;
+    }
+}
+.light{
+    .groupTitle{
+        color:black;
+    }
+    .groupYearSelectFilter{
+        color:#797979;
+    }
+    .groupSpecializationFilter{
+        color:#797979;
+    }
+    .groupsCourseItem__title{
+        color:#797979;
+    }
+    .groupItem__container{
+        color:black;
+    }
+    .groupsMain__container{
+        background-image: url('../../assets/images/signInBackgroundLight.png');
+    }
+    .groupItem__container:hover{
+        transition: 0.2s;
+        color:var(--primary-orange);
+        box-shadow: 0 1px 15px 0px #9b9b9b3b;
+    }
+    .fillterImg{
+        stroke: #797979;
     }
 }
 

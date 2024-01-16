@@ -26,7 +26,7 @@ export const ScheduleSettings = () => {
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);
-    console.log(group?.timetable);
+    
     return <div className="adminPanelScheduleSettings__container">
         <div className="fillter_container">
             <Select 
@@ -36,7 +36,8 @@ export const ScheduleSettings = () => {
                 onChange={setPickedGroupId}
                 value={pickedGroupId}
                 className="fillter_select"
-                // allowClear
+                allowClear
+                onClear={() => setPickedGroupId(undefined)}
             >
                 {groups.map(group => <Option value={group.group_id} label={group.group_full_name}>{group.group_full_name}</Option>)}
             </Select>

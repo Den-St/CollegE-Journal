@@ -29,7 +29,7 @@ export const UserPopup = () => {
         </div>
         <div className='userInfoPopupLinks_container'>
             <h6 className='userInfoPopupLinks_header'>кабінет</h6>
-            <Link to={routes.myProfile} className='userPopupSignOut_button'>Особистий кабінет</Link>
+            <Link  to={routes.myProfile} className='userPopupSignOut_button'>Особистий кабінет</Link>
             <button className='userPopupSignOut_button' onClick={onSignOut}>Вийти з акаунту</button>
         </div>
     </div>

@@ -72,7 +72,7 @@ export const CreateUser = () => {
                 </div>
             </div>
             <div className="createUserButtons__container">
-                <input autoComplete="off"  type={"submit"} className="createUser__button" value={"Зареєструвати"}/>
+                <input autoComplete="off"  type={"submit"} className="createUser__button primary_button"  value={"Зареєструвати"}/>
                 <button className="createUser__button">Наступний</button>
             </div>
         </form>

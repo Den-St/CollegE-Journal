@@ -56,7 +56,7 @@ export const Header = () => {
                             <FilterIconSvg/>
                         </button>
                         <div className="logo__block">
-                            <Link to={routes.homePage} className="header__logo">
+                            <Link  to={routes.homePage} className="header__logo">
                                 <CollegeLogoSvg/>
                             </Link>
                         </div>

@@ -28,7 +28,7 @@ export const Subjects = () => {
         <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}
@@ -36,7 +36,7 @@ export const Subjects = () => {
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}

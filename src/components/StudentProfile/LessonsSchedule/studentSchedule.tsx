@@ -141,7 +141,7 @@ export const LessonsScheduleStudents = () => {
                             <p className="lessonsScheduleLessonNumber">{i + 1}</p>
                             <p className="lessonsScheduleLessonName">{lesson.name}</p>
                             <p className="lessonsScheduleLessonGroup">
-                                <Link to={lesson.link} className='lessonsScheduleLink__button'>
+                                <Link target={"_blank"}to={lesson.link} className='lessonsScheduleLink__button'>
                                     <LinkSvg/>
                                 </Link>
                             </p>
@@ -159,7 +159,7 @@ export const LessonsScheduleStudents = () => {
                                 <p className="lessonsScheduleLessonNumber">{i + 1}</p>
                                 <p className="lessonsScheduleLessonName">{lesson.name}</p>
                                 <p className="lessonsScheduleLessonGroup">
-                                    <Link to={lesson.link} className='lessonsScheduleLink__button'>
+                                    <Link target={"_blank"} to={lesson.link} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                 </p>
@@ -181,12 +181,12 @@ export const LessonsScheduleStudents = () => {
                     )}
                 </div>
             </div>
-            <Link to={routes.homeTasks} className='studentProfielScheduleGoToTasks_container'>
+            <Link  to={routes.homeTasks} className='studentProfielScheduleGoToTasks_container'>
                 <MagnifierSvg/>
                 <h1 className='studentProfielScheduleGoToTasks_title'>Перейти до Завдань</h1>
                 <p className='studentProfielScheduleGoToTasks_text'>Посилання до сторінки ваших завдань</p>
             </Link>
-            <Link to={routes.studyMaterials} className='studentProfielScheduleGoToTasks_container'>
+            <Link  to={routes.studyMaterials} className='studentProfielScheduleGoToTasks_container'>
                 <FileSvg/>
                 <h1 className='studentProfielScheduleGoToTasks_title'>Перейти до Матеріалів</h1>
                 <p className='studentProfielScheduleGoToTasks_text'>Посилання до сторінки освітніх матеріалів</p>

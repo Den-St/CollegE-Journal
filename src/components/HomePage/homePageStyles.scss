@@ -374,6 +374,7 @@ img{vertical-align: top;}
     top:-20px;
     left:-20px;
 }
+
 .slick-prev::before{
     content: '<' !important;
     position: absolute;
@@ -771,6 +772,9 @@ img{vertical-align: top;}
         }
         .slick-arrow::before{
             color:black !important;
+        }
+        .slick-arrow::before:hover{
+            color:var(--primary-orange) !important;
         }
         .slick-prev::before{
             color:black !important;
