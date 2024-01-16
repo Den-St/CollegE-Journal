@@ -8,5 +8,6 @@ export const endpoints = {
     getGroup:'admin/groups/group',
     journal:'journal/journal',
     userGroups:'groups/usergroups',
-    changeUserInfo:'change-user-info'
+    changePassword:'users/change/password',
+    changeAvatar:'users/change/avatar',
 }

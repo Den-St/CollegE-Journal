@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { EditProfile } from "../components/EditProfile";
 import { SecurityLevelGuard } from "../components/SecurityLevelGuard";
 import { Subjects } from "../components/Subjects";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, StudentProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, MyProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
 import { securityLevels } from "./securityLevels";
 
 export const navRoutes = {
@@ -31,7 +32,8 @@ export const routes = {
     createUser:'/create-user',
     editGroup:`/edit-group/:id`,
     pickJournalSubject:'/pick-journal-subject',
-    myProfile:'/my-profile'
+    myProfile:'/my-profile',
+    editProfile:'/edit-profile',
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -118,7 +120,7 @@ const securityLevelToRoutes:Record<number,string[]> = {
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
-    <Route key={routes.myProfile} element={<StudentProfile/>} path={routes.myProfile}/>,  
+    <Route key={routes.myProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
     <Route key={routes.students} element={<Students/>} path={routes.students}/>,
@@ -135,6 +137,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><Subjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
+    <Route key={routes.editProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,

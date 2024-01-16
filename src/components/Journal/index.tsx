@@ -1,5 +1,5 @@
 import { DatePicker, Select } from 'antd';
-import { useEffect, useState } from 'react';
+import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -64,6 +64,7 @@ export const Journal = () => {
         const subjectName = groupJournal?.can_edit.find(subject => subject._id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject._id === fillters.subject_id)?.subject_full_name;
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${months.find(month => month.number === fillters.month)?.name}`;
     },[fillters.subject_id,fillters.month]);
+
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>

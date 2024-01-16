@@ -7,7 +7,7 @@ import { useThemeStore } from '../../store/themeStore';
 import { useEffect, useState } from 'react';
 import { useSignIn } from '../../hooks/signIn';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { routes } from '../../consts/routes';
 import { emailPattern } from '../../consts/emailPattern';
 
@@ -20,11 +20,21 @@ export const SignIn = () => {
     useEffect(() => {
         document.title = "Вхід до акаунту";
     },[]);
+
+
     const [passwordInputType,setPasswordInputType] = useState<"password" | "text">("password");
     const onTogglePassword = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");
     }
     const {onLogin,status,loading,setRemember} = useSignIn();
+    const [searchParams,setSearchParams] = useSearchParams();
+    useEffect(() => {
+        const mailbox_address = searchParams.get('mailbox_address');
+        const user_password = searchParams.get('password');
+        if(mailbox_address && user_password){
+            onLogin({mailbox_address,user_password});
+        }
+    },[]);
     const {
         register,
         handleSubmit,
@@ -34,17 +44,17 @@ export const SignIn = () => {
     } = useForm<{mailbox_address:string,user_password:string}>();
 
     if(status === 1) return <Navigate to={routes.myProfile}/>
-
+    
     return <>
     <div className={`signIn__container ${theme}`}>
         <div className='signIn__wrapper'>
             <h1 className="signIn__header">Вхід</h1>
-            <form onSubmit={handleSubmit(onLogin)} className="signIn__form" autoComplete={'off'}>
+            <form onSubmit={handleSubmit(onLogin)} className="signIn__form">
                 <div className="signInInput__container">
-                    <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} defaultValue={searchParams.get('mailbox_address') || ''} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input {...register('user_password')} type={passwordInputType} placeholder={"Password"} className={'password__input'}/>
+                    <input {...register('user_password')} type={passwordInputType} defaultValue={searchParams.get('password') || ''} placeholder={"Password"} className={'password__input'}/>
                     <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                 </div>
                 <div className="signInSettings__container">

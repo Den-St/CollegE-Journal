@@ -1,3 +1,5 @@
+import { routes } from './../consts/routes';
+import { useNavigate } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
 import { setToken } from './../helpers/auth';
 import { useUserStore } from '../store/userStore';
@@ -10,7 +12,7 @@ export const useSignIn = () => {
     const [loading,setLoading] = useState(false);
     const [remember,setRemember] = useState(false);
     const signIn = useUserStore().signIn;
-
+    const navigate = useNavigate();
     const auth = async (token:string) => {
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
@@ -26,14 +28,18 @@ export const useSignIn = () => {
                 data
             ));
             if(res?.data.status === 1){
-                if(remember) setToken(res.data.token);
+                if(remember) setToken(res.data.data.token);
                 signIn({
-                    token:res.data.token,
+                    token:res.data.data.token,
                     ...res.data.data
                 });
-                await auth(res.data.token);
+                await auth(res.data.data.token);
             }
             setStatus(res?.data.status);
+            if(!res.data.data.active) {
+                navigate(routes.myProfile + '?edit=true');
+                setStatus(2);
+            }
         }catch(err){
             setStatus(0);
             console.error(err);

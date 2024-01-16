@@ -1,6 +1,6 @@
 import { Button, Modal, Popover, UploadProps } from "antd";
 import Upload from "antd/es/upload/Upload";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { useThemeStore } from "../../store/themeStore";
@@ -10,23 +10,20 @@ import "./editProfileStyles.scss";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { QuestionMarkSvg } from "../../assets/svgs/questionMarkSvg";
 import { PasswordInfo } from "../PasswordInfo";
+import { endpoints } from "../../consts/endpoints";
+import axiosConfig from "../../axiosConfig";
+import { getToken } from "../../helpers/auth";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../consts/routes";
+import Cookies from "js-cookie";
 
-type Props = {
-    onEditClose:() => void
-}
-// type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
-
-// const getBase64 = (img: FileType, callback: (url: string) => void) => {
-//     const reader = new FileReader();
-//     reader.addEventListener('load', () => callback(reader.result as string));
-//     reader.readAsDataURL(img);
-//   };
-
-export const EditProfile:React.FC<Props> = ({onEditClose}) => {
+const useEditProfile = () => {
     const user = useUserStore().user;
-    const theme = useThemeStore().theme;
+    const localCookie = user.token;
+    const cookie = getToken();
     const [newAvatarUrl,setNewAvatarUrl] = useState('');
     const [formError,setFormError] = useState('');
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -35,14 +32,8 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         reset,
         formState:{errors}
     } = useForm<{new_password:string,new_password_confimation:string,avatar:File}>();
-    // const handleChange: UploadProps['onChange'] = (info) => {
-    //     setNewAvatarUrl(info.file.url || '');
-    //     console.log(info.file.)
-    //     // URL.createObjectURL(info.file.originFileObj as FileType);
-    // };
-    const onChangeAvatar = (file:File) => {
-        setValue('avatar',file);
-        console.log(file);
+    const onEditClose = () => {
+        navigate(routes.myProfile);
     }
     const onSubmit = async () => {
         const newPassword = watch('new_password');
@@ -57,12 +48,38 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
             return;
         }
         try{
-            // const res = await axiosConfig(endpoints.changeUserInfo);
+            if(avatar){
+                const reader = new FileReader();
+                reader.readAsDataURL(avatar);
+                reader.onload = async (result) => await axiosConfig.post(endpoints.changeAvatar,{avatar:result.target?.result},{headers:{Authorization:localCookie || cookie}});
+            }
+            if(newPassword){
+                const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:localCookie || cookie}});
+            }
+            Cookies.remove('comfirmedPassword');
             onEditClose();
         }catch(err){
             console.error(err);
         }
     }
+    useEffect(() => {
+        if(!Cookies.get('comfirmedPassword')){
+            navigate(routes.myProfile);
+        }
+    },[]);
+    
+    //@ts-ignore
+    const beforeUpload = (file) => {
+        setValue('avatar',file);
+        console.log(file);
+        setNewAvatarUrl(URL.createObjectURL(file));
+    };
+    return {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors}
+}
+
+export const EditProfile = () => {
+    const theme = useThemeStore().theme;
+    const {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
 
     return <div className={`editProfileMain_container ${theme}`}>
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
@@ -76,7 +93,7 @@ export const EditProfile:React.FC<Props> = ({onEditClose}) => {
         </div>
         <div className="editProfile_section">
             <div className="editProfileChangePhoto_container">
-                <Upload accept="image/png, image/jpeg">
+                <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
                     <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
                 </Upload>
             </div>

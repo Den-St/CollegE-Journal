@@ -15,6 +15,7 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
     const [createGroupModalOpened,setCreateGroupModalOpened] = useState(false);
     const [errorCode,setErrorCode] = useState<number>();
     const addGroup = useAdminGroupsStore().addGroup;
+    const validGroupPrefixes = ["З","Кн","Кб","Тр","То"];
 
     const onOpenCreateGroupModal = () => {
         setCreateGroupModalOpened(true);
@@ -35,12 +36,12 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
             setErrorCode(-1);
             return;
         }
-        const oneLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1] === '-' && !isNaN(+data.group_full_name[2]) && !isNaN(+data.group_full_name[3]) && +data.group_full_name[2] > 0 && +data.group_full_name[2] < 5 && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5;
+        const oneLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1] === '-' && !isNaN(+data.group_full_name[2]) && !isNaN(+data.group_full_name[3]) && +data.group_full_name[2] > 0 && +data.group_full_name[2] < 5 && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5 && validGroupPrefixes.includes(data.group_full_name[0]);
         if(data.group_full_name.length === 4 && !oneLetterNameCondition){
             setErrorCode(-1);
             return;
         }
-        const doubleLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1].match(/^[а-я]/u) && data.group_full_name[2] === '-' && !isNaN(+data.group_full_name[3]) && !isNaN(+data.group_full_name[4]) && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5 && +data.group_full_name[4] > 0 && +data.group_full_name[4] < 5;
+        const doubleLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1].match(/^[а-я]/u) && data.group_full_name[2] === '-' && !isNaN(+data.group_full_name[3]) && !isNaN(+data.group_full_name[4]) && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5 && +data.group_full_name[4] > 0 && +data.group_full_name[4] < 5 && validGroupPrefixes.includes(data.group_full_name[0] + data.group_full_name[1]);
         if(data.group_full_name.length === 5 && !doubleLetterNameCondition){
             setErrorCode(-1);
             return;

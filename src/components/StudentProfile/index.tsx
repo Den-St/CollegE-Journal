@@ -1,9 +1,12 @@
 import { Modal } from 'antd';
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { EditProfileSvg } from '../../assets/svgs/editProfileSvg';
 import { defaultAvatar } from '../../consts/defaultAvatar';
+import { routes } from '../../consts/routes';
 import { useThemeStore } from '../../store/themeStore';
 import { useUserStore } from '../../store/userStore';
 import { EditProfile } from '../EditProfile';
@@ -19,8 +22,10 @@ enum tabsNames  {
 type tabsNamesType = keyof typeof tabsNames;
 
 const useTryEditProfile = () => {
-    const [onRealEditing,setOnRealEditing] = useState(false);
-    const [onTryEditing,setOnTryEditing] = useState(false);
+    const navigate = useNavigate();
+    const initEdit = useSearchParams()[0].get('edit');
+    const [onTryEditing,setOnTryEditing] = useState(!!initEdit || false);
+    
     const onTryEdit = () => {
         setOnTryEditing(true);
     }
@@ -28,10 +33,8 @@ const useTryEditProfile = () => {
         setOnTryEditing(false);
     }
     const onRealEdittingOpen = () => {
-        setOnRealEditing(true);
-    }
-    const onRealEdittingClose = () => {
-        setOnRealEditing(false);
+        Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
+        navigate(routes.editProfile);
     }
     const onSubmitTryEditing = async () => {
         try{
@@ -51,17 +54,17 @@ const useTryEditProfile = () => {
         formState:{errors}
     } = useForm<{password:string,}>();
 
-    return {onRealEditing,onTryEditing,onTryEdit,onRealEdittingClose,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors}
+    return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors}
 }
 
-export const StudentProfile = () => {
+export const MyProfile = () => {
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
     const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
-    const {onRealEditing,onTryEditing,onTryEdit,onRealEdittingClose,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors} = useTryEditProfile();
+    const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors} = useTryEditProfile();
     useEffect(() => {
-        document.title = onRealEditing ? 'Редагування профілю' : 'Мій профіль';
-    },[onRealEditing]);
+        document.title = 'Мій профіль';
+    },[]);
 
     const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
         lessonsSchedule:{
@@ -78,8 +81,6 @@ export const StudentProfile = () => {
         }
     };
     
-    if(onRealEditing) return <EditProfile onEditClose={onRealEdittingClose}/>
-
     return <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
             <div className='studentProfileLeft__container'>

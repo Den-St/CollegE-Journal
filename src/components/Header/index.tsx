@@ -137,7 +137,7 @@ export const Header = () => {
                         </div> 
                         : <Popover rootClassName='userPopup' arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
                             <Link to={routes.myProfile}>
-                                <img className='header_avatar' src={defaultAvatar}/>
+                                <img className='header_avatar' src={user.avatar || defaultAvatar}/>
                             </Link>
                         </Popover>}
                     </div>
