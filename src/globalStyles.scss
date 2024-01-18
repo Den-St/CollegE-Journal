@@ -171,10 +171,10 @@ input::placeholder{
 }
 
 .ant-select-clear{
-	position: static !important;
-	width: 20px !important;
-	height: 20px !important;
-	margin-top: 3px !important;
+	// position: static !important;
+	// width: 20px !important;
+	// height: 20px !important;
+	margin-top: -9px !important;
 	// top:calc(50% - 3px) !important;
 	// right: -10px !important;
 	background-color: transparent !important;
@@ -183,6 +183,9 @@ input::placeholder{
 		font-size: 20px;
 		color:white !important;
 	}
+}
+.ant-select .ant-select-clear{
+	inset-inline-end:-2px;
 }
 .ant-select-selector{
 	border: none !important;
@@ -203,6 +206,9 @@ li.slick-active{
 	button{
 		background-color: var(--primary-orange) !important;
 	}
+}
+.ant-upload-list.ant-upload-list-text{
+	display: none !important;
 }
 body{
 	&.dark{

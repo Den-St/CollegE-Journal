@@ -20,12 +20,18 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     } = useForm<ChangeGroupT>();
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
-    const [chosenSupervisorId,setChosenSupervisorId] = useState<string>();
+    const [chosenSupervisorId,setChosenSupervisorId] = useState<string | null>(null);
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
-    console.log(chosenSupervisorId, group?.group_supervisor)
+    console.log(chosenSupervisorId, group?.group_supervisor);
+    useEffect(() => {
+        if(group?.group_supervisor?.user_id){
+            setChosenSupervisorId(group.group_supervisor.user_id);
+        }
+    },[group]);
+
     const onChangeGroupInfo = async (data:ChangeGroupT) => {
-        if(chosenSupervisorId === group?.group_supervisor && group?.group_full_name === data.group_full_name) return;
-        data.group_full_name = data.group_full_name.trim();
+        if(chosenSupervisorId === group?.group_supervisor?.user_id && group?.group_full_name === data.group_full_name) return;
+        data.group_full_name = data.group_full_name.trim() || group?.group_full_name.trim() || '';
         if(data.group_full_name.length !== 4 && data.group_full_name.length !== 5) {
             setIncorrectGroupName(true);
             return;
@@ -46,7 +52,7 @@ export const useChangeGroupInfo = (group?:GroupT) => {
             console.error(err);
         }
     }
-    const onChooseSupervisor = (id:string) => {
+    const onChooseSupervisor = (id:string | null) => {
         setChosenSupervisorId(id);
     }
 

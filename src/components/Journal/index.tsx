@@ -1,8 +1,12 @@
 import { DatePicker, Select } from 'antd';
+import { group } from 'console';
 import { LegacyRef, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CalendarSvg } from '../../assets/svgs/calendarSvg';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
+import { LeftArrowSvg } from '../../assets/svgs/leftArrowSvg';
+import { routes } from '../../consts/routes';
 import { setFromSubjects } from '../../helpers/setFromObjects';
 import { useGetJournal } from '../../hooks/getJournal';
 import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
@@ -68,7 +72,7 @@ export const Journal = () => {
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'>Журнал</h1>
+            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?._id}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
@@ -78,7 +82,7 @@ export const Journal = () => {
                     className="fillter_select"
                     
                     defaultValue={fillters.month}
-                    // allowClear
+                    allowClear
                     value={fillters.month}
                     onChange={(value) => onChangeFillters('month',value)}
                     >
