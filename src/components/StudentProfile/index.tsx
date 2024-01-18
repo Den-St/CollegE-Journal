@@ -134,10 +134,10 @@ export const MyProfile = () => {
         {onTryEditing && <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
-                <form onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
+                <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
                     <input {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input"/>
                     <div className="editFormButtons_container">
-                        <input type={'submit'} value={'Далі'} className="primary_button"/>
+                        <input autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
                         <span className="forgotPassword">Забули пароль?</span>
                     </div>
                     {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}

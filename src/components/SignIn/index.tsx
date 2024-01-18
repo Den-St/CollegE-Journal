@@ -54,7 +54,7 @@ export const SignIn = () => {
                     <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} defaultValue={searchParams.get('mailbox_address') || ''} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
-                    <input {...register('user_password')} type={passwordInputType} defaultValue={searchParams.get('password') || ''} placeholder={"Password"} className={'password__input'}/>
+                    <input {...register('user_password')} type={passwordInputType} defaultValue={searchParams.get('password') || ''} placeholder={"Password"} className={'password__input'} autoComplete={"off"}/>
                     <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                 </div>
                 <div className="signInSettings__container">

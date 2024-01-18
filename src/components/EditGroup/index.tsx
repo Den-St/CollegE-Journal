@@ -13,15 +13,19 @@ import { routes } from "../../consts/routes";
 import { useGetSupervisors } from "../../hooks/getSupervisors";
 const {Option} = Select;
 
-const errorCodesToMessages:Record<number,string> = {
-    0:'Користувач з такою поштовою адресою вже існує'
+const userErrorCodesToMessages:Record<number,string> = {
+    0:'Користувач з такою поштовою адресою вже існує!'
+}
+const changeErrorCodesToMessages:Record<number,string> = {
+    [-1]:'Некорректна назва групи!',
+    1:'Інформацію о групі змінено'
 }
 
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
     const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,crateUserFormErrorMessage} = useCreateUser(group);
-    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName} = useChangeGroupInfo(group);
+    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
@@ -34,7 +38,7 @@ export const EditGroup = () => {
             <div className="createUserFormSelects__container createGroupFormSelects__container">
                 <div className="editGroupSelect__container">
                     <label className="createUserInput__label">Спеціальність та курс</label>
-                    <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="createUser__input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:false})}/>
+                    <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="createUser__input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:false})} onChange={e => validateGroupName(e.target.value)}/>
                 </div>
                 <div className="createUserSelect__container createGroupCuratorSelect__container">
                     <label className="createUserInput__label">Куратор</label>
@@ -57,7 +61,7 @@ export const EditGroup = () => {
                     </div>
                 </div>
             </div>
-            {incorrectGroupName && <p className="signIn_errorMessage">Не корректна назва групи</p>}
+            {!!changeErrorCode && <p className={`signIn_errorMessage ${changeErrorCode === 1 && 'success_message'}`}>{changeErrorCodesToMessages[changeErrorCode]}</p>}
             <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
         </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>
@@ -108,7 +112,7 @@ export const EditGroup = () => {
             {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
             {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
             {!!crateUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{crateUserFormErrorMessage}</p>}
-            {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errorCodesToMessages[createUserErrorCode]}</p>}
+            {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>}
             <div className="createUserButtons__container">
                 <input 
                 // disabled={createUserDisabled} 

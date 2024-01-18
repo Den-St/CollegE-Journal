@@ -91,6 +91,10 @@ const useEditProfile = () => {
 export const EditProfile = () => {
     const theme = useThemeStore().theme;
     const {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
+    const [passwordInputType,setPasswordInputType] = useState<Record<number,("password" | "text")>>({1:"password",2:"password"});
+    const onTogglePassword = (i:number) => {
+        setPasswordInputType(prev => ({...prev,[i]:prev[i] === "password" ? "text" : "password"}));
+    };
 
     return <div className={`editProfileMain_container ${theme}`}>
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
@@ -108,13 +112,13 @@ export const EditProfile = () => {
                     <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
                 </Upload>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="editProfile_form">
+            <form onSubmit={handleSubmit(onSubmit)} className="editProfile_form" autoComplete={"off"}>
                 <div className="editProfile_header_container">
                     <h2 className="editProfile_section_header">Змінити пароль </h2>
                     <Popover rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
                 </div>
-                <input {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль"/>
-                <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль"/>
+                <input {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
+                <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
                 {!!formError && <p className="signIn_errorMessage">{formError}</p>}
                 {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
                 <input type={'submit'} className="primary_button" value={'Зберегти зміни'}/>

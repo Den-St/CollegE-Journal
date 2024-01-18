@@ -20,7 +20,7 @@ export const StudentsListAdmin = () => {
     },[])
     const theme = useThemeController().theme;
     const {groups,refetchGroups,groupsLoading,groupesByGrade} = useGetAdminGroups();
-    const {createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode} = useCreateGroupForm(refetchGroups);
+    const {createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode,validateGroupName} = useCreateGroupForm(refetchGroups);
 
     return <div className={`adminStudentListContainer ${theme}`}>
         <section className="studentTitle__container">
@@ -59,7 +59,7 @@ export const StudentsListAdmin = () => {
                                 <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
                             </Select>
                         </div> */}
-                        <input placeholder="Назва групи" autoComplete="off" {...register('group_full_name',{required:true})} className="createUser__input"/>
+                        <input placeholder="Назва групи" autoComplete="off" {...register('group_full_name',{required:true})} className="createUser__input" onChange={(e) => validateGroupName(e.target.value)}/>
                         {errorCode !== undefined && <p className="signIn_errorMessage"> {errorCodes[errorCode]}</p>}
                     </div>
                     {/* <div className="createUserSelect__container createGroupCuratorSelect__container">

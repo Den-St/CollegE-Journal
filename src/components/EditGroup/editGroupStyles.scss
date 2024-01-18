@@ -19,6 +19,9 @@
     gap:20px;
     align-items: center;
 }
+.success_message{
+    background-color: var(--primary-orange) !important;
+}
 .editGroupMain_container.dark{
     .createUserInput__label{
         color:white;

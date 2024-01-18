@@ -29,7 +29,24 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
     } = useForm<CreateGroupT>();
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
-
+    const validateGroupName = (group_full_name:string) => {
+        group_full_name = group_full_name.trim();
+        if(group_full_name.length !== 4 && group_full_name.length !== 5) {
+            setErrorCode(-1);
+            return;
+        }
+        const oneLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1] === '-' && !isNaN(+group_full_name[2]) && !isNaN(+group_full_name[3]) && +group_full_name[2] > 0 && +group_full_name[2] < 5 && +group_full_name[3] > 0 && +group_full_name[3] < 5 && validGroupPrefixes.includes(group_full_name[0]);
+        if(group_full_name.length === 4 && !oneLetterNameCondition){
+            setErrorCode(-1);
+            return;
+        }
+        const doubleLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1].match(/^[а-я]/u) && group_full_name[2] === '-' && !isNaN(+group_full_name[3]) && !isNaN(+group_full_name[4]) && +group_full_name[3] > 0 && +group_full_name[3] < 5 && +group_full_name[4] > 0 && +group_full_name[4] < 5 && validGroupPrefixes.includes(group_full_name[0] + group_full_name[1]);
+        if(group_full_name.length === 5 && !doubleLetterNameCondition){
+            setErrorCode(-1);
+            return;
+        }
+        setErrorCode(0);
+    }
     const onCreateGroup = async (data:CreateGroupT) => {
         data.group_full_name = data.group_full_name.trim();
         if(data.group_full_name.length !== 4 && data.group_full_name.length !== 5) {
@@ -62,5 +79,5 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
             console.error(err);
         }
     }
-    return {createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode};
+    return {validateGroupName,createGroupModalOpened,onCloseCreateGroupModal,onOpenCreateGroupModal,handleSubmit,register,onCreateGroup,errorCode};
 }

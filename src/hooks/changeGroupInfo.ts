@@ -22,32 +22,53 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const cookieToken = useUserStore().user.token;
     const [chosenSupervisorId,setChosenSupervisorId] = useState<string | null>(null);
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
+    const [changeErrorCode,setErrorCode] = useState<number>();
+
     console.log(chosenSupervisorId, group?.group_supervisor);
     useEffect(() => {
         if(group?.group_supervisor?.user_id){
             setChosenSupervisorId(group.group_supervisor.user_id);
         }
     },[group]);
-
+    const validateGroupName = (group_full_name:string) => {
+        group_full_name = group_full_name.trim();
+        if(group_full_name.length !== 4 && group_full_name.length !== 5) {
+            setErrorCode(-1);
+            return;
+        }
+        const oneLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1] === '-' && !isNaN(+group_full_name[2]) && !isNaN(+group_full_name[3]) && +group_full_name[2] > 0 && +group_full_name[2] < 5 && +group_full_name[3] > 0 && +group_full_name[3] < 5 && validGroupPrefixes.includes(group_full_name[0]);
+        if(group_full_name.length === 4 && !oneLetterNameCondition){
+            setErrorCode(-1);
+            return;
+        }
+        const doubleLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1].match(/^[а-я]/u) && group_full_name[2] === '-' && !isNaN(+group_full_name[3]) && !isNaN(+group_full_name[4]) && +group_full_name[3] > 0 && +group_full_name[3] < 5 && +group_full_name[4] > 0 && +group_full_name[4] < 5 && validGroupPrefixes.includes(group_full_name[0] + group_full_name[1]);
+        if(group_full_name.length === 5 && !doubleLetterNameCondition){
+            setErrorCode(-1);
+            return;
+        }
+        setErrorCode(0);
+    }
     const onChangeGroupInfo = async (data:ChangeGroupT) => {
         if(chosenSupervisorId === group?.group_supervisor?.user_id && group?.group_full_name === data.group_full_name) return;
         data.group_full_name = data.group_full_name.trim() || group?.group_full_name.trim() || '';
         if(data.group_full_name.length !== 4 && data.group_full_name.length !== 5) {
-            setIncorrectGroupName(true);
+            setErrorCode(-1);
             return;
         }
         const oneLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1] === '-' && !isNaN(+data.group_full_name[2]) && !isNaN(+data.group_full_name[3]) && +data.group_full_name[2] > 0 && +data.group_full_name[2] < 5 && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5 && validGroupPrefixes.includes(data.group_full_name[0]);
         if(data.group_full_name.length === 4 && !oneLetterNameCondition){
-            setIncorrectGroupName(true);
+            setErrorCode(-1);
             return;
         }
         const doubleLetterNameCondition = data.group_full_name[0].match(/^[А-Я]/u) && data.group_full_name[1].match(/^[а-я]/u) && data.group_full_name[2] === '-' && !isNaN(+data.group_full_name[3]) && !isNaN(+data.group_full_name[4]) && +data.group_full_name[3] > 0 && +data.group_full_name[3] < 5 && +data.group_full_name[4] > 0 && +data.group_full_name[4] < 5 && validGroupPrefixes.includes(data.group_full_name[0] + data.group_full_name[1]);
         if(data.group_full_name.length === 5 && !doubleLetterNameCondition){
-            setIncorrectGroupName(true);
+            setErrorCode(-1);
             return;
         }
+
         try{
-            const res = await axiosConfig.post(endpoints.changeGroup,{group_full_name:data.group_full_name,group_id:group?.group_id,group_supervisor:chosenSupervisorId || group?.group_supervisor?.user_id},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.changeGroup,{group_full_name:data.group_full_name,group_id:group?.group_id,group_supervisor:chosenSupervisorId || ''},{headers:{Authorization:localToken || cookieToken}});
+            setErrorCode(1);
         }catch(err){
             console.error(err);
         }
@@ -56,5 +77,5 @@ export const useChangeGroupInfo = (group?:GroupT) => {
         setChosenSupervisorId(id);
     }
 
-    return {incorrectGroupName,onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,onChooseSupervisor,chosenSupervisorId};
+    return {validateGroupName,incorrectGroupName,changeErrorCode,onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,onChooseSupervisor,chosenSupervisorId};
 }
