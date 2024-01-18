@@ -8,7 +8,8 @@ type State = {
 type Actions = {
     signIn:(userData:UserT) => void,
     signOut:() => void;
-    setToken:(token:string) => void
+    setToken:(token:string) => void,
+    setAvatar:(avatar:string) => void
 }
 type StoreType = State & Actions;
 
@@ -56,5 +57,8 @@ export const useUserStore = create<StoreType>((set) => ({
     })),
     setToken: (token:string) => set((state) => ({
         user:{...state.user,token}
+    })), 
+    setAvatar: (avatar:string) => set((state) => ({
+        user:{...state.user,avatar}
     }))
 }));

@@ -28,7 +28,6 @@ export const EditGroup = () => {
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
-    if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
         <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Змінення групи</h1>

@@ -101,77 +101,75 @@ path{
     line-height: 24px;
     letter-spacing: 0.1em;
 }
-.lessonsSchedule__container{
-    &.dark{
-        .lessonsScheduleDay__header{
-            color:var(--primary-gray);
-        }
-        .lessonsScheduleLessonNumber{
-            color:white;
-        }
-        .lessonsScheduleLessonName{
-            color:white;
-        }
-        .lessonsScheduleLessonGroup{
-            font-weight: 400;
-            font-size: 20px;
-            color:#797979;
-        }
-        .lessonsScheduleDay__header.currentDay{
-            color:var(--primary-orange);
-        }
-        .scheduleTimingsTitle{
-            color:white;
-        }
-        .studentProfielScheduleGoToTasks_container{
-            background-color: var(--secondary-blue);
-        }
-        .studentProfielScheduleGoToTasks_title{
-            color:white;
-        }
-        .studentProfielScheduleGoToTasks_text{
-            color:white;
-        }
-        svg{
-            fill: transparent;
-        }
+.dark{
+    .lessonsScheduleDay__header{
+        color:var(--primary-gray);
+    }
+    .lessonsScheduleLessonNumber{
+        color:white;
+    }
+    .lessonsScheduleLessonName{
+        color:white;
+    }
+    .lessonsScheduleLessonGroup{
+        font-weight: 400;
+        font-size: 20px;
+        color:#797979;
+    }
+    .lessonsScheduleDay__header.currentDay{
+        color:var(--primary-orange);
+    }
+    .scheduleTimingsTitle{
+        color:white;
+    }
+    .studentProfielScheduleGoToTasks_container{
+        background-color: var(--secondary-blue);
+    }
+    .studentProfielScheduleGoToTasks_title{
+        color:white;
+    }
+    .studentProfielScheduleGoToTasks_text{
+        color:white;
+    }
+    svg{
+        fill: transparent;
+    }
+    path{
+        stroke:white;
+    }   
+    .magnifierSvg{
+        fill:#ffffff;
         path{
-            stroke:white;
-        }   
-        .magnifierSvg{
             fill:#ffffff;
-            path{
-                fill:#ffffff;
-            }
-        }
-        .lessonsScheduleLessonGroup:hover{
-            path{
-                stroke:var(--primary-orange);
-            }
-        }
-        .studentProfielScheduleGoToTasks_container:hover{
-            .magnifierSvg{
-                fill:var(--primary-orange);
-                path{
-                    fill:var(--primary-orange);
-                }
-            }
-            path{
-                stroke:var(--primary-orange);
-            }
-            .studentProfielScheduleGoToTasks_title{
-                color:var(--primary-orange);
-            }
-        }
-        .lessonsScheduleLessonEnd,
-        .lessonsScheduleLessonStart{
-            color:var(--primary-gray);
         }
     }
-    // &.light{
-
-    // }
+    .lessonsScheduleLessonGroup:hover{
+        path{
+            stroke:var(--primary-orange);
+        }
+    }
+    .studentProfielScheduleGoToTasks_container:hover{
+        .magnifierSvg{
+            fill:var(--primary-orange);
+            path{
+                fill:var(--primary-orange);
+            }
+        }
+        path{
+            stroke:var(--primary-orange);
+        }
+        .studentProfielScheduleGoToTasks_title{
+            color:var(--primary-orange);
+        }
+    }
+    .lessonsScheduleLessonEnd,
+    .lessonsScheduleLessonStart{
+        color:var(--primary-gray);
+    }
 }
+// &.light{
+
+// }
 .ant-carousel .slick-slider.lessonsScheduleDayCarousel{
     display: none;
 }

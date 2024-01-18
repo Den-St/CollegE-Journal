@@ -9,6 +9,7 @@ import axiosConfig from '../../axiosConfig';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { endpoints } from '../../consts/endpoints';
 import { routes } from '../../consts/routes';
+import { securityLevels } from '../../consts/securityLevels';
 import { getToken } from '../../helpers/auth';
 import { useThemeStore } from '../../store/themeStore';
 import { useUserStore } from '../../store/userStore';
@@ -68,7 +69,20 @@ const useTryEditProfile = () => {
 
     return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status}
 }
-
+const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
+    lessonsSchedule:{
+        component:<TeacherSchedule/>,
+        title:'Розклад вчитель'
+    },
+    lessonsSchedule2:{
+        component:<LessonsScheduleStudents/>,
+        title:'Розклад студент'
+    },
+    lessonsSchedule3:{
+        component:<TeacherSchedule/>,
+        title:'Розклад пар3'
+    }
+};
 export const MyProfile = () => {
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
@@ -77,21 +91,39 @@ export const MyProfile = () => {
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);
+    const scheduleTimings = [
+        {
+            id:1,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:2,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:3,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:4,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:5,
+            start:'8:00',
+            end:'9:20'
+        },
+        {
+            id:6,
+            start:'8:00',
+            end:'9:20'
+        },
+    ]
 
-    const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
-        lessonsSchedule:{
-            component:<TeacherSchedule/>,
-            title:'Розклад вчитель'
-        },
-        lessonsSchedule2:{
-            component:<LessonsScheduleStudents/>,
-            title:'Розклад студент'
-        },
-        lessonsSchedule3:{
-            component:<TeacherSchedule/>,
-            title:'Розклад пар3'
-        }
-    };
     
     return <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
@@ -101,6 +133,7 @@ export const MyProfile = () => {
                     <div className='studentProfileTextInfo__container'>
                         <p className='studentProfile__name'>
                             {user.full_name}
+                            {/* {user.security_level !== securityLevels.admin &&  */}
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
                         </p>
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
@@ -115,7 +148,7 @@ export const MyProfile = () => {
                     </button>)}
                 </div>
             </div>
-            <div className='studentProfileStatistic__container'>
+            {user.security_level === securityLevels.student ? <div className='studentProfileStatistic__container'>
                     <h3 className='studentProfileStatistic__header'>
                         Середня Оцінка
                     </h3>
@@ -128,7 +161,22 @@ export const MyProfile = () => {
                         Рейтинг
                     </h3>
                     <p className='studentProfileStatistic__value medium'>143/316</p>
-                </div>
+                </div> 
+                :   <div className='lessonsScheduleDayLessons__container'>
+                        <div className="lessonsScheduleDayLessonItem__container">
+                            <p className="lessonsScheduleLessonNumber"></p>
+                            <p className="lessonsScheduleLessonStart">Початок</p>
+                            <p className="lessonsScheduleLessonEnd">Кінець</p>
+                        </div>
+                        {scheduleTimings.map((timing,i) => 
+                            <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{i + 1}</p>
+                                <p className="lessonsScheduleLessonStart" style={{width:'100px'}}>{timing.start}</p>
+                                <p className="lessonsScheduleLessonEnd">{timing.end}</p>
+                            </div>
+                        )}
+                    </div>
+                }
         </section>
         {tabs[tabIndex].component}
         {onTryEditing && <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
