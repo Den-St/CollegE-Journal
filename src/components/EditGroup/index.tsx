@@ -10,6 +10,7 @@ import { useGetGroup } from "../../hooks/getGroup";
 import { emailPattern } from "../../consts/emailPattern";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { routes } from "../../consts/routes";
+import { useGetSupervisors } from "../../hooks/getSupervisors";
 const {Option} = Select;
 
 const errorCodesToMessages:Record<number,string> = {
@@ -20,9 +21,10 @@ export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
     const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,crateUserFormErrorMessage} = useCreateUser(group);
-    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue} = useChangeGroupInfo();
+    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName} = useChangeGroupInfo(group);
     // const createUserDisabled = !createUserWatch('education_form') || !createUserWatch('education_type') || !!createUserFormErrors.full_name?.message || !!createUserFormErrors.mailbox_address?.message;
-
+    const {supervisors,supervisorsLoading} = useGetSupervisors();
+    console.log(supervisors);
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
@@ -43,12 +45,20 @@ export const EditGroup = () => {
                             placeholder={'Оберіть куратора'}
                             optionLabelProp="label"
                             allowClear
+                            defaultValue={group?.group_supervisor?.user_id}
+                            loading={supervisorsLoading}
+                            onChange={onChooseSupervisor}
+                            value={chosenSupervisorId}
+                            onClear={() => onChooseSupervisor('')}
                             >
-                            <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
+                                {supervisors.map(supervisor => 
+                                    <Option value={supervisor.user_id} label={supervisor.full_name}>{supervisor.full_name}</Option>
+                                )}
                         </Select>
                     </div>
                 </div>
             </div>
+            {incorrectGroupName && <p className="signIn_errorMessage">Не корректна назва групи</p>}
             <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
         </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>

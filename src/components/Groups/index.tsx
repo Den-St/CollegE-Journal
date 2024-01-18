@@ -75,7 +75,7 @@ export const Groups = () => {
                             )} 
                         </Carousel>
                     </div>   
-                ) : <NoMatch is404={false} title={'У вас немає груп'}/> : <Spin/>
+                ) : <NoMatch is404={false} isChildren title={'У вас немає груп'}/> : <Spin/>
             }
         </section>
         

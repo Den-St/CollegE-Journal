@@ -9,13 +9,13 @@ import { getToken } from "../helpers/auth";
 import { useAdminGroupsStore } from "../store/adminGroupsStore";
 import { useUserStore } from "../store/userStore";
 import { CreateGroupT } from "../types/group";
+import { validGroupPrefixes } from '../consts/validGroupPrefixes';
 
 export const useCreateGroupForm = (refetchGroups:() => void) => {
     const navigate = useNavigate();
     const [createGroupModalOpened,setCreateGroupModalOpened] = useState(false);
     const [errorCode,setErrorCode] = useState<number>();
     const addGroup = useAdminGroupsStore().addGroup;
-    const validGroupPrefixes = ["З","Кн","Кб","Тр","То"];
 
     const onOpenCreateGroupModal = () => {
         setCreateGroupModalOpened(true);

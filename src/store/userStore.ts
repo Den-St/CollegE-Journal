@@ -8,6 +8,7 @@ type State = {
 type Actions = {
     signIn:(userData:UserT) => void,
     signOut:() => void;
+    setToken:(token:string) => void
 }
 type StoreType = State & Actions;
 
@@ -28,7 +29,8 @@ export const useUserStore = create<StoreType>((set) => ({
         visit_per_month:null,
         visit_per_week:null,
         security_level:0,
-        group_fullname:''
+        group_fullname:'',
+        is_active:false
     },
     signIn: (userData) => set((state) => ({ ...state,...userData,user:{...state.user,...userData} })),
     signOut: () => set(() => ({
@@ -48,7 +50,11 @@ export const useUserStore = create<StoreType>((set) => ({
             visit_per_month:null,
             visit_per_week:null,
             security_level:0,
-            group_fullname:''
+            group_fullname:'',
+            is_active:false
         }
     })),
+    setToken: (token:string) => set((state) => ({
+        user:{...state.user,token}
+    }))
 }));

@@ -6,6 +6,7 @@ import { themes } from './consts/themes';
 import './globalStyles.scss';
 import { AuthProdiver } from './providers/authProvider';
 import { useThemeStore } from './store/themeStore';
+import { useUserStore } from './store/userStore';
 
 function App() {
   const theme = useThemeStore().theme;
@@ -22,7 +23,8 @@ function App() {
   useEffect(() => {
     window.scrollTo({top:0});
   },[route]);
-
+  const user = useUserStore().user;
+  console.log(user);
   return <Layout>
     <AuthProdiver>
       <RoutesSwitch/>

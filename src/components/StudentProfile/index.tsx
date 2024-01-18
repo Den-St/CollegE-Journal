@@ -5,8 +5,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { EditProfileSvg } from '../../assets/svgs/editProfileSvg';
+import axiosConfig from '../../axiosConfig';
 import { defaultAvatar } from '../../consts/defaultAvatar';
+import { endpoints } from '../../consts/endpoints';
 import { routes } from '../../consts/routes';
+import { getToken } from '../../helpers/auth';
 import { useThemeStore } from '../../store/themeStore';
 import { useUserStore } from '../../store/userStore';
 import { EditProfile } from '../EditProfile';
@@ -25,22 +28,31 @@ const useTryEditProfile = () => {
     const navigate = useNavigate();
     const initEdit = useSearchParams()[0].get('edit');
     const [onTryEditing,setOnTryEditing] = useState(!!initEdit || false);
-    
+    const user = useUserStore().user;
+    const localCookie = user.token;
+    const cookie = getToken();
+    const [status,setStatus] = useState<number>();
+
     const onTryEdit = () => {
         setOnTryEditing(true);
     }
     const onTryEditClose = () => {
         setOnTryEditing(false);
     }
-    const onRealEdittingOpen = () => {
+    const onRealEdittingOpen = async () => {
         Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
         navigate(routes.editProfile);
     }
-    const onSubmitTryEditing = async () => {
+    const onSubmitTryEditing = async (data:{user_password:string}) => {
         try{
-            // const res = 
-            onTryEditClose();
-            onRealEdittingOpen();
+            try{
+                const res = await axiosConfig.post(endpoints.login,{user_password:data.user_password,mailbox_address:user.mailbox_address},{headers:{Authorization:localCookie || cookie}});
+                onTryEditClose();
+                onRealEdittingOpen();
+            }catch(err){
+                setStatus(0);
+                console.error(err);
+            }
         }catch(err){
             console.error(err);
         }
@@ -52,16 +64,16 @@ const useTryEditProfile = () => {
         watch,
         reset,
         formState:{errors}
-    } = useForm<{password:string,}>();
+    } = useForm<{user_password:string,}>();
 
-    return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors}
+    return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status}
 }
 
 export const MyProfile = () => {
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
     const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
-    const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors} = useTryEditProfile();
+    const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status} = useTryEditProfile();
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);
@@ -123,12 +135,13 @@ export const MyProfile = () => {
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
                 <form onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
-                    <input {...register('password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input"/>
+                    <input {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input"/>
                     <div className="editFormButtons_container">
                         <input type={'submit'} value={'Далі'} className="primary_button"/>
                         <span className="forgotPassword">Забули пароль?</span>
                     </div>
-                    {!!errors.password?.message && <p className="signIn_errorMessage">{errors.password?.message}</p>}
+                    {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
+                    {status === 0 && <p className="signIn_errorMessage">Невірний пароль</p>}
                 </form>
                 <button className="primary_button" onClick={onTryEditClose}>Повернутися</button>
             </div>

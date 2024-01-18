@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 
 const useEditProfile = () => {
     const user = useUserStore().user;
+    const setToken = useUserStore().setToken;
     const localCookie = user.token;
     const cookie = getToken();
     const [newAvatarUrl,setNewAvatarUrl] = useState('');
@@ -48,14 +49,24 @@ const useEditProfile = () => {
             return;
         }
         try{
+            const queries = [];
             if(avatar){
-                const reader = new FileReader();
-                reader.readAsDataURL(avatar);
-                reader.onload = async (result) => await axiosConfig.post(endpoints.changeAvatar,{avatar:result.target?.result},{headers:{Authorization:localCookie || cookie}});
+                queries.push(async () => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(avatar);
+                    reader.onload = async (result) => await axiosConfig.post(endpoints.changeAvatar,{avatar:result.target?.result},{headers:{Authorization:localCookie || cookie}});
+                })
             }
             if(newPassword){
-                const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:localCookie || cookie}});
+                queries.push(async () => {
+                    const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:localCookie || cookie}});
+                    setToken(res.data.token);
+                    if(getToken()){
+                        Cookies.set('token',res.data.token);
+                    }
+                });
             }
+            await Promise.all(queries.map(q => q()));
             Cookies.remove('comfirmedPassword');
             onEditClose();
         }catch(err){

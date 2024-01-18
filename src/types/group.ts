@@ -1,10 +1,12 @@
+import { SupervisorT } from './supervisor';
 import { TimetableT } from './timetable';
-import { UserT, GroupUserT } from './user';
+import { GroupUserT } from './user';
+
 export type GroupT = {
     group_id:string
     group_full_name:string,
     group_students?:GroupUserT[]
-    group_supervisor?:null,
+    group_supervisor?:SupervisorT,
     timetable?:TimetableT
 }
 
@@ -15,5 +17,5 @@ export type CreateGroupT = {
 export type ChangeGroupT = {
     group_id:string
     group_full_name:string
-    group_supervisor:string
+    group_super:string
 }

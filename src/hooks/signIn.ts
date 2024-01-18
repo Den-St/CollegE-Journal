@@ -24,7 +24,7 @@ export const useSignIn = () => {
     const onLogin = async (data:{mailbox_address:string,user_password:string}) => {
         setLoading(true);
         try{
-            const res = (await axiosConfig.post('users/login',
+            const res = (await axiosConfig.post(endpoints.login,
                 data
             ));
             if(res?.data.status === 1){

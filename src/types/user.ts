@@ -14,7 +14,8 @@ export type UserT = {
     visit_per_month:number | null
     visit_per_week:number | null,
     security_level:number | null,
-    group_fullname:string
+    group_fullname:string,
+    is_active:boolean
 }
 
 export type GroupUserT = {

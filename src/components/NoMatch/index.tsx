@@ -5,13 +5,14 @@ import './noMatchStyles.scss';
 type Props = {
     title?:string;
     description?:string
-    is404:boolean
+    is404?:boolean,
+    isChildren?:boolean
 }
 
-export const NoMatch:React.FC<Props> = ({title,description,is404}) => {
+export const NoMatch:React.FC<Props> = ({title,description,is404,isChildren}) => {
     const theme = useThemeStore().theme;
 
-    return <main className={`noMatch__container ${theme} ${is404 && `no_match`}`}>
+    return <main className={`noMatch__container ${theme} ${(!isChildren || is404) && `no_match`}`}>
         <div className="noMatchImages__container">
             <NoMatchRobot/>
             {is404 && <span className="noMatch__404">404</span>}

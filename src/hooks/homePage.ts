@@ -1,3 +1,4 @@
+import { endpoints } from './../consts/endpoints';
 import { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { getToken } from "../helpers/auth";
@@ -5,7 +6,7 @@ import { useUserStore } from "../store/userStore";
 import { HomePageDataT } from "../types/homePageData";
 
 const fetchHomePageData = async (token:string) =>{
-    return await axiosConfig.get('main-page',{headers:{Authorization:token}}).then(res => res.data);
+    return await axiosConfig.get(endpoints.mainPage,{headers:{Authorization:token}}).then(res => res.data);
 }
 
 export const useHomePage = () => {
