@@ -21,6 +21,7 @@ export const Subjects = () => {
     useEffect(() => {
         document.title = `Предмети групи - ${group?.journal_group_full_name}`;
     },[]);
+    
     if(loading) return <Spin/>
     if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
 

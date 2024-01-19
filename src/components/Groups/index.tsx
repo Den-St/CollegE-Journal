@@ -20,6 +20,8 @@ export const Groups = () => {
         document.title = "Групи";
     },[]);
 
+    if(!loading && !groups) return <NoMatch is404={false} isChildren title={'У вас немає груп'}/>;
+
     return <div className={`groupsMain__container ${theme}`}>
         {/* <section className="groupsTop__container">
             <h1 className="groupTitle">Список груп</h1>
@@ -57,7 +59,7 @@ export const Groups = () => {
         </section> */}
         <section className="groupsCourses__container journalGroups">
             {
-                !loading ? !!groupesByGrade ? Object.keys(groupesByGrade).map(key => 
+                !loading ? !!groupesByGrade && Object.keys(groupesByGrade).map(key => 
                     <div className="groupsCourseItem__container">
                         <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
                         <div className="groupCourseItemGroups__container">
@@ -75,9 +77,8 @@ export const Groups = () => {
                             )} 
                         </Carousel>
                     </div>   
-                ) : <NoMatch is404={false} isChildren title={'У вас немає груп'}/> : <Spin/>
+                )  : <Spin/>
             }
         </section>
-        
     </div>
 }

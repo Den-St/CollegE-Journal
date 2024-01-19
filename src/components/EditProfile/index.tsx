@@ -98,8 +98,6 @@ export const EditProfile = () => {
         setPasswordInputType(prev => ({...prev,[i]:prev[i] === "password" ? "text" : "password"}));
     };
 
-    // if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
-
     return <div className={`editProfileMain_container ${theme}`}>
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
         <div className='studentProfileInfo__container editProfileUserInfo'>

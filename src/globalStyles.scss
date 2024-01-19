@@ -210,6 +210,13 @@ li.slick-active{
 .ant-upload-list.ant-upload-list-text{
 	display: none !important;
 }
+.securityGuardLoader{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{

@@ -11,8 +11,8 @@ type Props = {
 
 export const SecurityLevelGuard:React.FC<Props> = ({children,securityLevel,isActiveRequired,blockedForAdmin}) => {
     const user = useUserStore().user;
-    console.log(isActiveRequired ,user.is_active);
-    if(user.security_level === undefined || user.security_level === null) return <Spin/>;
+    console.log('qwe',user.security_level);
+    if(user.security_level === undefined || user.security_level === null) return <div className="securityGuardLoader"><Spin/></div>;
     if(user.security_level < securityLevel) return <NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>;
     if(isActiveRequired && !user.is_active) return <NoMatch title="Активуйте свій запис" description="Щоб отримати доступ до функціоналу електронного журналу необхідно змінити пароль." isChildren/>;
     // if(blockedForAdmin) return <NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>;
