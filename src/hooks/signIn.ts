@@ -6,6 +6,7 @@ import { useUserStore } from '../store/userStore';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
 import { UserT } from '../types/user';
+import Cookies from 'js-cookie';
 
 export const useSignIn = () => {
     const [status,setStatus] = useState<number>();
@@ -37,7 +38,8 @@ export const useSignIn = () => {
             }
             setStatus(res?.data.status);
             if(!res.data.data.active) {
-                navigate(routes.myProfile + '?edit=true');
+                Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
+                navigate(routes.editProfile);
                 setStatus(2);
             }
         }catch(err){
