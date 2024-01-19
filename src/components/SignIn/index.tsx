@@ -20,8 +20,6 @@ export const SignIn = () => {
     useEffect(() => {
         document.title = "Вхід до акаунту";
     },[]);
-
-
     const [passwordInputType,setPasswordInputType] = useState<"password" | "text">("password");
     const onTogglePassword = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");

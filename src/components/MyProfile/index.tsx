@@ -18,6 +18,8 @@ import { EditProfile } from '../EditProfile';
 import { TeacherSchedule } from './LessonsSchedule';
 import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
+import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
+import {EyeOutlined} from "@ant-design/icons";
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -66,6 +68,10 @@ const useTryEditProfile = () => {
 
 
 export const MyProfile = () => {
+    const [passwordInputType,setPasswordInputType] = useState<"password" | "text">("password");
+    const onTogglePassword = () => {
+        setPasswordInputType(prev => prev === "password" ? "text" : "password");
+    }
     const studentLinks = [
         {
             label:'Перегляд оцінок',
@@ -187,7 +193,10 @@ export const MyProfile = () => {
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
                 <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
-                    <input {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input"/>
+                    <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                        <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
+                        <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
+                    </div>
                     <div className="editFormButtons_container">
                         <input autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
                         <span className="forgotPassword">Забули пароль?</span>

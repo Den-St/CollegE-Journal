@@ -157,6 +157,5 @@ export const TeacherSchedule = () => {
                     </div>
                 </div>)}
             </Carousel>
-            
     </section>
 }
