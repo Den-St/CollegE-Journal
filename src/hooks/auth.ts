@@ -11,16 +11,20 @@ export const useAuth = () => {
     const signIn = useUserStore().signIn;
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
+    const onUserLoading = useUserStore().startLoading;
+    const onStopUserLoading = useUserStore().stopLoading;
 
     const auth = async () => {
         if(!localToken && !cookieToken) return;
         setLoading(true);
+        onUserLoading();
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
             signIn(res.data.data,);
         }catch(err){
             console.error(err);
         }finally{
+            onStopUserLoading();
             setLoading(false);
         }
     }

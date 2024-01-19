@@ -366,6 +366,9 @@ body{
 			linear-gradient(0deg, #102936, #102936);
 
 		}
+		.primary_button:disabled{
+			opacity: 0.2;
+		}
 		// .ant-popover-arrow{
 		// 	--antd-arrow-background-color:transparent;
 		// }

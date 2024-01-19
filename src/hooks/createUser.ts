@@ -17,6 +17,7 @@ export const useCreateUser = (group?:GroupT) => {
     const cookieToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
     const [crateUserFormErrorMessage,setErrorMessage] = useState('');
+    const [createUserLoading,setCreateUserLoading] = useState(false);
 
     const {
         register,
@@ -42,6 +43,7 @@ export const useCreateUser = (group?:GroupT) => {
         }
 
         try{
+            setCreateUserLoading(true);
             const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim()},{headers:{Authorization:localToken || cookieToken}});
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,user_id:res.data.user_password});
             setCreateUserErrorCode(undefined);
@@ -54,8 +56,10 @@ export const useCreateUser = (group?:GroupT) => {
             const errorStatus = (err as AxiosError).response?.data?.status;
             setCreateUserErrorCode(errorStatus);
             console.error(err as AxiosError);
+        }finally{
+            setCreateUserLoading(false)
         }
     }   
 
-    return {onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,crateUserFormErrorMessage};
+    return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,crateUserFormErrorMessage};
 }

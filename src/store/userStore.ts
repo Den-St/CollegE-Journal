@@ -3,13 +3,16 @@ import { UserT } from '../types/user';
 
 type State = {
     user:UserT;
+    loading:boolean
 }
 
 type Actions = {
     signIn:(userData:UserT) => void,
     signOut:() => void;
     setToken:(token:string) => void,
-    setAvatar:(avatar:string) => void
+    setAvatar:(avatar:string) => void,
+    startLoading:() => void,
+    stopLoading:() => void,
 }
 type StoreType = State & Actions;
 
@@ -33,6 +36,9 @@ export const useUserStore = create<StoreType>((set) => ({
         group_fullname:'',
         is_active:false
     },
+    loading:false,
+    startLoading:() => set((state) => ({...state,loading:true})),
+    stopLoading:() => set((state) => ({...state,loading:false})),
     signIn: (userData) => set((state) => ({ ...state,...userData,user:{...state.user,...userData} })),
     signOut: () => set(() => ({
         user:{
