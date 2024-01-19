@@ -2,6 +2,7 @@ import { Modal } from 'antd';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { EditProfileSvg } from '../../assets/svgs/editProfileSvg';
@@ -17,13 +18,6 @@ import { EditProfile } from '../EditProfile';
 import { TeacherSchedule } from './LessonsSchedule';
 import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
-
-enum tabsNames  {
-    lessonsSchedule = 'lessonsSchedule',
-    lessonsSchedule2 = 'lessonsSchedule2',
-    lessonsSchedule3 = 'lessonsSchedule3',
-};
-type tabsNamesType = keyof typeof tabsNames;
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -69,24 +63,32 @@ const useTryEditProfile = () => {
 
     return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status}
 }
-const tabs:Record<tabsNamesType,{component:React.ReactNode,title:string} > = {
-    lessonsSchedule:{
-        component:<TeacherSchedule/>,
-        title:'Розклад вчитель'
-    },
-    lessonsSchedule2:{
-        component:<LessonsScheduleStudents/>,
-        title:'Розклад студент'
-    },
-    lessonsSchedule3:{
-        component:<TeacherSchedule/>,
-        title:'Розклад пар3'
-    }
-};
+
+
 export const MyProfile = () => {
+    const studentLinks = [
+        {
+            label:'Перегляд оцінок',
+            link:'#'
+        },
+        {
+            label:'Домашнє завдання',
+            link:'#'
+        },
+    ];
+    
+    const teacherLinks = [
+        {
+            label:'Журнал оцінок',
+            link:routes.groups
+        },
+        {
+            label:'Завантажити завдання',
+            link:'#'
+        },
+    ];
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
-    const [tabIndex,setTabIndex] = useState<tabsNamesType>(tabsNames.lessonsSchedule);
     const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status} = useTryEditProfile();
     useEffect(() => {
         document.title = 'Мій профіль';
@@ -123,7 +125,6 @@ export const MyProfile = () => {
             end:'9:20'
         },
     ]
-
     
     return <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
@@ -141,11 +142,14 @@ export const MyProfile = () => {
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>
-                    {Object.keys(tabs).map((key) =>
-                     <button key={key} className={`studentProfileTab__button ${tabIndex === key ? 'picked' : ''}`}
-                             onClick={() => setTabIndex(key as tabsNamesType)}>
-                            {tabs[key as tabsNamesType].title} {DiagonalArrowSvg()}
-                    </button>)}
+                    {user.security_level === securityLevels.student ? studentLinks.map((link) =>
+                        <Link to={link.link} key={link.label} className={`studentProfileTab__button`}>
+                                {link.label} {DiagonalArrowSvg()}
+                        </Link>)
+                    : teacherLinks.map((link) =>
+                        <Link to={link.link} key={link.label} className={`studentProfileTab__button`}>
+                            {link.label} {DiagonalArrowSvg()}
+                        </Link>)}
                 </div>
             </div>
             {user.security_level === securityLevels.student ? <div className='studentProfileStatistic__container'>
@@ -163,22 +167,22 @@ export const MyProfile = () => {
                     <p className='studentProfileStatistic__value medium'>143/316</p>
                 </div> 
                 :   <div className='lessonsScheduleDayLessons__container'>
-                        <div className="lessonsScheduleDayLessonItem__container">
-                            <p className="lessonsScheduleLessonNumber"></p>
-                            <p className="lessonsScheduleLessonStart">Початок</p>
-                            <p className="lessonsScheduleLessonEnd">Кінець</p>
-                        </div>
-                        {scheduleTimings.map((timing,i) => 
-                            <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
-                                <p className="lessonsScheduleLessonNumber">{i + 1}</p>
-                                <p className="lessonsScheduleLessonStart" style={{width:'100px'}}>{timing.start}</p>
-                                <p className="lessonsScheduleLessonEnd">{timing.end}</p>
-                            </div>
-                        )}
+                    <div className="lessonsScheduleDayLessonItem__container">
+                        <p className="lessonsScheduleLessonNumber"></p>
+                        <p className="lessonsScheduleLessonStart">Початок</p>
+                        <p className="lessonsScheduleLessonEnd">Кінець</p>
                     </div>
+                    {scheduleTimings.map((timing,i) => 
+                        <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
+                            <p className="lessonsScheduleLessonNumber">{i + 1}</p>
+                            <p className="lessonsScheduleLessonStart" style={{width:'100px'}}>{timing.start}</p>
+                            <p className="lessonsScheduleLessonEnd">{timing.end}</p>
+                        </div>
+                    )}
+                </div>
                 }
         </section>
-        {tabs[tabIndex].component}
+        {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
         {onTryEditing && <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>

@@ -3,7 +3,7 @@ export { Groups } from './components/Groups/index';
 export { MissedClasses } from './components/MissedClasses/index';
 export { TeacherProfile } from './components/TeacherProfile';
 export { Students } from './components/Students/index';
-export { MyProfile } from './components/StudentProfile';
+export { MyProfile } from './components/MyProfile';
 export { HomePage } from './components/HomePage';
 export { SignIn } from './components/SignIn';
 export { Registration } from './components/Registration';

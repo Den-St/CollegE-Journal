@@ -1,5 +1,7 @@
 import { Carousel } from 'antd';
+import { securityLevels } from '../../../consts/securityLevels';
 import { useThemeStore } from '../../../store/themeStore';
+import { useUserStore } from '../../../store/userStore';
 import './lessonsSchedule.scss';
 
 export const TeacherSchedule = () => {
@@ -155,23 +157,6 @@ export const TeacherSchedule = () => {
                     </div>
                 </div>)}
             </Carousel>
-            <div className="lessonsScheduleDay__container shedule">
-                <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>   
-                <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>
-                <div className='lessonsScheduleDayLessons__container'>
-                    <div className="lessonsScheduleDayLessonItem__container">
-                        <p className="lessonsScheduleLessonNumber"></p>
-                        <p className="lessonsScheduleLessonStart">Початок</p>
-                        <p className="lessonsScheduleLessonEnd">Кінець</p>
-                    </div>
-                    {scheduleTimings.map((timing,i) => 
-                        <div key={timing.id} className="lessonsScheduleDayLessonItem__container">
-                            <p className="lessonsScheduleLessonNumber">{i + 1}</p>
-                            <p className="lessonsScheduleLessonStart" style={{width:'100px'}}>{timing.start}</p>
-                            <p className="lessonsScheduleLessonEnd">{timing.end}</p>
-                        </div>
-                    )}
-                </div>
-            </div>
+            
     </section>
 }

@@ -101,6 +101,46 @@ path{
     line-height: 24px;
     letter-spacing: 0.1em;
 }
+.lessonsSchedule__container{
+    &.dark{
+
+        svg{
+            fill: transparent;
+        }
+        path{
+            stroke:white;
+        }   
+        .magnifierSvg{
+            fill:#ffffff;
+            path{
+                fill:#ffffff;
+            }
+        }
+        .lessonsScheduleLessonGroup:hover{
+            path{
+                stroke:var(--primary-orange);
+            }
+        }
+        .studentProfielScheduleGoToTasks_container:hover{
+            .magnifierSvg{
+                fill:var(--primary-orange);
+                path{
+                    fill:var(--primary-orange);
+                }
+            }
+            path{
+                stroke:var(--primary-orange);
+            }
+            .studentProfielScheduleGoToTasks_title{
+                color:var(--primary-orange);
+            }
+        }
+        
+    }
+    // &.light{
+
+    // }
+}
 .dark{
     .lessonsScheduleDay__header{
         color:var(--primary-gray);
@@ -131,45 +171,11 @@ path{
     .studentProfielScheduleGoToTasks_text{
         color:white;
     }
-    svg{
-        fill: transparent;
-    }
-    path{
-        stroke:white;
-    }   
-    .magnifierSvg{
-        fill:#ffffff;
-        path{
-            fill:#ffffff;
-        }
-    }
-    .lessonsScheduleLessonGroup:hover{
-        path{
-            stroke:var(--primary-orange);
-        }
-    }
-    .studentProfielScheduleGoToTasks_container:hover{
-        .magnifierSvg{
-            fill:var(--primary-orange);
-            path{
-                fill:var(--primary-orange);
-            }
-        }
-        path{
-            stroke:var(--primary-orange);
-        }
-        .studentProfielScheduleGoToTasks_title{
-            color:var(--primary-orange);
-        }
-    }
     .lessonsScheduleLessonEnd,
     .lessonsScheduleLessonStart{
         color:var(--primary-gray);
     }
 }
-// &.light{
-
-// }
 .ant-carousel .slick-slider.lessonsScheduleDayCarousel{
     display: none;
 }
