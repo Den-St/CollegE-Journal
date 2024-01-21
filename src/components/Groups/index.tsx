@@ -20,7 +20,7 @@ export const Groups = () => {
         document.title = "Групи";
     },[]);
 
-    if(!loading && !groups) return <NoMatch is404={false} isChildren title={'У вас немає груп'}/>;
+    if(!loading && !groups?.length) return <NoMatch is404={false} title={'У вас немає груп'}/>;
 
     return <div className={`groupsMain__container ${theme}`}>
         {/* <section className="groupsTop__container">
@@ -64,15 +64,15 @@ export const Groups = () => {
                         <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
                         <div className="groupCourseItemGroups__container">
                             {groupesByGrade[key].map(group => 
-                                <Link  to={routes.pickJournalSubject + `?group_id=${group._id}`} className="groupItem__container">
-                                    {group.journal_group_full_name}
+                                <Link key={group.journal_group} to={routes.pickJournalSubject + `?group_id=${group.journal_group}`} className="groupItem__container">
+                                    {group.group_full_name}
                                 </Link>
                             )}
                         </div>
                         <Carousel className='groups_carousel' dots slidesToShow={1}>
                             {groupesByGrade?.[key].map((group) => 
-                                <Link  to={routes.pickJournalSubject + `?group_id=${group._id}`} className="groupItem__container">
-                                    {group.journal_group_full_name}
+                                <Link key={group.journal_group}  to={routes.pickJournalSubject + `?group_id=${group.journal_group}`} className="groupItem__container">
+                                    {group.group_full_name}
                                 </Link>
                             )} 
                         </Carousel>

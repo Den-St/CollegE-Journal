@@ -61,18 +61,18 @@ const months = [
 export const Journal = () => {
     const {fillters,loading,journal,onChangeFillters} = useGetJournal();
     const {} = useGroupsByTeacher();
-    const groupJournal = useTeachersGroupsStore().groups.find(group => group._id === fillters.group_id);
+    const groupJournal = useTeachersGroupsStore().groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
     const currentMonth = new Date().getMonth();
     useEffect(() => {
-        const subjectName = groupJournal?.can_edit.find(subject => subject._id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject._id === fillters.subject_id)?.subject_full_name;
-        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${months.find(month => month.number === fillters.month)?.name}`;
+        const subjectName = groupJournal?.can_edit.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
+        document.title = `${groupJournal?.group_full_name} - ${subjectName} - ${months.find(month => month.number === fillters.month)?.name}`;
     },[fillters.subject_id,fillters.month]);
 
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?._id}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
+            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
@@ -108,7 +108,7 @@ export const Journal = () => {
                         {!!groupJournal && 
                         setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
                         .map(subject => 
-                            <Option value={subject._id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                            <Option value={subject.subject_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
                         {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
                         <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>

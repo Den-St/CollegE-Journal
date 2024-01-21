@@ -13,13 +13,14 @@ import './subjectsStyles.scss';
 
 export const Subjects = () => {
     const {loading} = useGroupsByTeacher();
+    // const {} = useStudentSubjects();
     const pickedGroupId = useSearchParams()[0].get('group_id');
     // const [searchParams,setSearchParams] = useSearchParams();
-    const group = useTeachersGroupsStore().groups.find(group => group._id === pickedGroupId);
+    const group = useTeachersGroupsStore().groups.find(group => group.journal_group === pickedGroupId);
     // const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
     const lastMonth = new Date().getMonth();
     useEffect(() => {
-        document.title = `Предмети групи - ${group?.journal_group_full_name}`;
+        document.title = `Предмети групи - ${group?.group_full_name}`;
     },[]);
     
     if(loading) return <Spin/>
@@ -29,7 +30,7 @@ export const Subjects = () => {
         <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.subject_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}
@@ -37,7 +38,7 @@ export const Subjects = () => {
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject._id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.subject_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}

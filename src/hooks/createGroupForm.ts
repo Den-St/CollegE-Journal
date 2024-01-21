@@ -45,7 +45,7 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
             setErrorCode(-1);
             return;
         }
-        setErrorCode(0);
+        setErrorCode(undefined);
     }
     const onCreateGroup = async (data:CreateGroupT) => {
         data.group_full_name = data.group_full_name.trim();

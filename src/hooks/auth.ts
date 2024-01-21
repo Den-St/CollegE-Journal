@@ -20,7 +20,7 @@ export const useAuth = () => {
         onUserLoading();
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
-            signIn(res.data.data,);
+            signIn({...res.data.data},);
         }catch(err){
             console.error(err);
         }finally{

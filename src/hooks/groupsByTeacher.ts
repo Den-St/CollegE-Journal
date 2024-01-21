@@ -1,3 +1,4 @@
+import { securityLevels } from './../consts/securityLevels';
 import { JournalGroupT } from './../types/journalGroup';
 import { useEffect } from 'react';
 import { endpoints } from './../consts/endpoints';
@@ -15,6 +16,7 @@ export const useGroupsByTeacher = () => {
     const setGroups = useTeachersGroupsStore().setGroups;
 
     const teacher_id = useUserStore().user.user_id;
+    const security_level = useUserStore().user.security_level;
     const localToken = useUserStore().user.token;
     const cookieToken = getToken();
     const [groupesByGrade,setGroupsByGrage] = useState<Record<string,JournalGroupT[]>>();
@@ -24,21 +26,23 @@ export const useGroupsByTeacher = () => {
         setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.userGroups,{headers:{Authorization:localToken || cookieToken}});
+            console.log(res.data);
             setGroups(res.data);
         }catch(err){
             console.error(err);
         }finally{
             setLoading(false);
         }
-    }  
+    }
     useEffect(() => {
+        if(!security_level || security_level < securityLevels.teacher) return;
         fetch();
     },[]);
     
     useEffect(() => {
         if(!groups.length) return;
         //@ts-ignore
-        setGroupsByGrage(myGroupBy(groups,({journal_group_full_name}) => journal_group_full_name.split('-')[1][0]));
+        setGroupsByGrage(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
     },[groups]);
 
     return {loading,groups,groupesByGrade}

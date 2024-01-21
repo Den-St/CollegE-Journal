@@ -13,6 +13,13 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
     const isActiveLink = (link:string) => '/' + route === link || route.includes(link) ? ' active_link' : '';
     const securityLevelToLinks:Record<number,JSX.Element> = {
         0:<></>,
+        1:<>
+            <Link  to={routes.pickJournalSubject} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+        </>,
         5:<>
             {/* <Link to={routes.homePage} className={`menu__button`}>Головна
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
