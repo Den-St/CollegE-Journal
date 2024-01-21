@@ -14,7 +14,7 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
     const securityLevelToLinks:Record<number,JSX.Element> = {
         0:<></>,
         1:<>
-            <Link  to={routes.pickJournalSubject} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
+            <Link  to={routes.pickJournalSubjectStudent} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubjectStudent) + isActiveLink(routes.journal)}>Журнал
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
@@ -31,7 +31,7 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
+            <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubjectTeacher) + isActiveLink(routes.journal)}>Журнал
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>

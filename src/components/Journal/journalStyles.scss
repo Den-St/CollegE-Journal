@@ -9,7 +9,7 @@
 .journalTop__container{
     display: flex;
     flex-direction: column;
-    padding: 0 10%;
+    // padding: 0 10%;
     gap:20px;
 }
 
@@ -291,8 +291,22 @@
     font-size: 16px;
     font-weight: 400;
 }
-
-
+.journal_lessonTypeSelect{
+    .ant-select-selector{
+        padding: 0 !important;
+    }
+    .ant-select-selection-item{
+        font-size: 14px;
+    }
+    .ant-select-item-option-content{
+        flex: unset;
+    }
+    .ant-select-item{
+        padding: 0 !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
 
 .journalMain__container{
     &.dark{

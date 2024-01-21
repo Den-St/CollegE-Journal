@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { EditProfile } from "../components/EditProfile";
 import { SecurityLevelGuard } from "../components/SecurityLevelGuard";
-import { Subjects } from "../components/Subjects";
+import { TeacherSubjects } from "../components/Subjects";
+import { StudentSubjects } from "../components/Subjects/StudentSubjects";
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, MyProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
 import { securityLevels } from "./securityLevels";
 
@@ -31,9 +32,10 @@ export const routes = {
     faq:'/faq',
     createUser:'/create-user',
     editGroup:`/edit-group/:id`,
-    pickJournalSubject:'/pick-journal-subject',
+    pickJournalSubjectTeacher:'/pick-journal-subject',
     myProfile:'/my-profile',
     editProfile:'/edit-profile',
+    pickJournalSubjectStudent:'/pick-journal-subject-student',
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -136,7 +138,8 @@ export const PublicRoutes = [
     <Route key={routes.adminPanel} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
-    <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><Subjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
+    <Route key={routes.pickJournalSubjectTeacher} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><TeacherSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubjectTeacher}/>,
+    <Route key={routes.pickJournalSubjectStudent} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><StudentSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubjectStudent}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,

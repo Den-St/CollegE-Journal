@@ -11,7 +11,7 @@ import { useTeachersGroupsStore } from "../../store/teachersGroupsStore"
 import { NoMatch } from "../NoMatch";
 import './subjectsStyles.scss';
 
-export const Subjects = () => {
+export const TeacherSubjects = () => {
     const {loading} = useGroupsByTeacher();
     // const {} = useStudentSubjects();
     const pickedGroupId = useSearchParams()[0].get('group_id');

@@ -72,7 +72,7 @@ export const Journal = () => {
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
+            <h1 className='journal__title'><Link to={routes.pickJournalSubjectTeacher + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
@@ -180,7 +180,10 @@ export const Journal = () => {
                 <div className='journalRightColumns__container'>
                     <div className='journalColumnsCenter__container'>
                     <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Лекція</div>
+                        <div className='journalColumnsCenterItemType'>
+                            {/* <Select className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect' open><Option label={"Лекція"} value={"Лекція"}>Лекція</Option></Select> */}
+                            Лекція
+                        </div>
                         <div className='journalColumnsCenterItemDate__container'>
                             <p className='journalColumnsCenterItemDateDay'>ПН</p>
                             <p className='journalColumnsCenterItemDate'>01.05</p>
