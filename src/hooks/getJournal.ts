@@ -7,9 +7,10 @@ import axiosConfig from '../axiosConfig';
 import { getToken } from '../helpers/auth';
 import { useUserStore } from '../store/userStore';
 import { useTeachersGroupsStore } from '../store/teachersGroupsStore';
+import { TeacherJournalT } from '../types/teacherJournal';
 
 export const useGetTeacherJournal = () => {
-    const [journal,setJournal] = useState();
+    const [journal,setJournal] = useState<TeacherJournalT>();
     const [loading,setLoading] = useState(false);
     const groupId = useSearchParams()[0].get('group_id');
     const journalId = useTeachersGroupsStore().groups.find(group => group.journal_group === groupId)?.journal_id;

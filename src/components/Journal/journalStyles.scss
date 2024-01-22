@@ -54,8 +54,6 @@
     overflow-x: scroll;
 }
 
-
-
 .journalColumnsLeft__container{
     display: flex;
     flex-direction: column;
@@ -221,6 +219,13 @@
     justify-content: center;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
 }
+.journalRowItemCenterValue__input__text{
+    border-radius: 10px 5px;
+    height: 40px;
+    width: 40px;
+    padding: 7px;
+    box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
+}
 .journalRowItemRightValue__container{
     width: 82px;
     display: flex;
@@ -287,6 +292,13 @@
     white-space: break;
     text-overflow: ellipsis;
 }
+.journalLessonThemeItem__input__text{
+    font-size: 18px;
+    font-weight: 400;
+    // max-width: 90%;
+    width: 100%;
+    background-color: transparent;
+}
 .journalLessonThemeItemType{
     font-size: 16px;
     font-weight: 400;
@@ -310,7 +322,8 @@
 
 .journalMain__container{
     &.dark{
-        .journalRowItemCenterValue__text{
+        .journalRowItemCenterValue__text,
+        .journalRowItemCenterValue__input__text{
             background-color: var(--secondary-blue);
         }
         .journalRowItemRightValue__text{
@@ -319,7 +332,8 @@
         .journalRowItem__container{
             &.even{
                 background-color: var(--secondary-blue);
-                .journalRowItemCenterValue__text{
+                .journalRowItemCenterValue__text,
+                .journalRowItemCenterValue__input__text{
                     background-color: var(--primary-dark);
                 }
                 .journalRowItemRightValue__text{
@@ -347,7 +361,8 @@
         .journalRowItemLeft__name{
             color:white;
         }
-        .journalRowItemCenterValue__text{
+        .journalRowItemCenterValue__text,
+        .journalRowItemCenterValue__input__text{
             color:white;
         }
         .journalRowItemRightValue__container{
@@ -421,7 +436,8 @@
         .fillterImg {
             stroke: #797979;
         }
-        .journalRowItemCenterValue__text{
+        .journalRowItemCenterValue__text,
+        .journalRowItemCenterValue__input__text{
             background-color: #F2F2F2;
         }
         .journalRowItemRightValue__text{
@@ -435,7 +451,8 @@
         .journalRowItem__container{
             &.even{
                 background-color: #F2F2F2;
-                .journalRowItemCenterValue__text{
+                .journalRowItemCenterValue__text,
+                .journalRowItemCenterValue__input__text{
                     background-color: white;
                 }
                 .journalRowItemRightValue__text{

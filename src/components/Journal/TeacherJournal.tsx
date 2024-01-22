@@ -28,7 +28,6 @@ export const TeacherJournal = () => {
         document.title = `${groupJournal?.group_full_name} - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
     },[fillters.subject_id,fillters.month,groupJournal]);
 
-
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
@@ -69,30 +68,8 @@ export const TeacherJournal = () => {
                         .map(subject => 
                             <Option value={subject.subject_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
-                        {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
-                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
-                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
-                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option> */}
                     </Select>
                 </div>
-                {/* <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
-                        placeholder={
-                            <div className="fillterPlaceholder_container">
-                                <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
-                            </div>
-                        } 
-                        className="fillter_select"
-                        allowClear
-                        value={fillters.}
-                        onChange={(value) => onChangeFillters('subject_id',value)}
-                    >
-                        <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
-                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
-                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
-                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
-                    </Select>
-                </div> */}
             </div>
         </section>
         <section className='journal_portraitModeWarning'>
@@ -106,120 +83,35 @@ export const TeacherJournal = () => {
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
-                <div className='journalRowItemLeft__container'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container even'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container even'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container even'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
-                <div className='journalRowItemLeft__container'>
-                    <p className='journalRowItemLeft__number'>1.</p>
-                    <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
-                </div>
+                {journal?.students.map(student => 
+                    <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                        <p className='journalRowItemLeft__number'>{student.index}.</p>
+                        <p className='journalRowItemLeft__name'>{student.full_name}</p>
+                    </div>
+                )}
             </div>
             <div className='journalRight__container'>
                 <div className='journalRightColumns__container'>
                     <div className='journalColumnsCenter__container'>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>
-                            {/* <Select className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect' open><Option label={"Лекція"} value={"Лекція"}>Лекція</Option></Select> */}
-                            Лекція
+                    {journal?.columns.map(column => 
+                        <div className='journalColumnsCenterItem__container'>
+                            <div className='journalColumnsCenterItemType'>
+                                <Select defaultValue={column.lesson_type} className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect'>
+                                    <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
+                                    <Option label={"Практика"} value={"Практика"}>Практика</Option>
+                                    <Option label={"Залік"} value={"Залік"}>Залік</Option>
+                                    <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
+                                    <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
+                                </Select>
+                            </div>
+                            <div className='journalColumnsCenterItemDate__container'>
+                                <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
+                                <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
+                            </div>
                         </div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ПН</p>
-                            <p className='journalColumnsCenterItemDate'>01.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Практика</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ВТ</p>
-                            <p className='journalColumnsCenterItemDate'>02.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Залік</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>СР</p>
-                            <p className='journalColumnsCenterItemDate'>03.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Лаб</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
-                            <p className='journalColumnsCenterItemDate'>04.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Консульт</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                            <p className='journalColumnsCenterItemDate'>05.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Лекція</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ПН</p>
-                            <p className='journalColumnsCenterItemDate'>01.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Практика</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ВТ</p>
-                            <p className='journalColumnsCenterItemDate'>02.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Залік</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>СР</p>
-                            <p className='journalColumnsCenterItemDate'>03.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Лаб</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
-                            <p className='journalColumnsCenterItemDate'>04.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Консульт</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                            <p className='journalColumnsCenterItemDate'>05.05</p>
-                        </div>
-                    </div>
-                    <div className='journalColumnsCenterItem__container'>
-                        <div className='journalColumnsCenterItemType'>Консульт</div>
-                        <div className='journalColumnsCenterItemDate__container'>
-                            <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                            <p className='journalColumnsCenterItemDate'>05.05</p>
-                        </div>
-                    </div>
+                    )}
                 </div>
-                <div className='journalColumnsRight__container'>
+                {/* <div className='journalColumnsRight__container'>
                     <div className='journalColumnsRightItem__container'>
                         <div className='journalColumnsRightItemType'>Аттестація</div>
                         <div className='journalColumnsRightItemMonth'>
@@ -232,67 +124,25 @@ export const TeacherJournal = () => {
                             Травень
                         </div>
                     </div>
+                </div> */}
                 </div>
-                </div>
-                <div className='journalRowItem__container'>
-
-                    <div className='journalRowItemCenter__container'>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                {journal?.students.map((student) => 
+                    <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                        <div className='journalRowItemCenter__container'>
+                            {journal.columns.map(column => 
+                                <div className='journalRowItemCenterValue__container'>
+                                    <input className='journalRowItemCenterValue__input__text' defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                </div>
+                            )}
+                        </div>
+                        {/* <div className='journalRowItemRight__container'>
+                            <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                            <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                        </div> */}
                     </div>
-                    <div className='journalRowItemRight__container'>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    </div>
-                </div>
-                <div className='journalRowItem__container even'>
-                    <div className='journalRowItemCenter__container'>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    </div>
-                    <div className='journalRowItemRight__container'>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    </div>
-                </div>
-                <div className='journalRowItem__container'>
-                    <div className='journalRowItemCenter__container'>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    </div>
-                    <div className='journalRowItemRight__container'>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    </div>
-                </div>
-                <div className='journalRowItem__container even'>
+                )}
+                
+                {/* <div className='journalRowItem__container even'>
                     <div className='journalRowItemCenter__container'>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
                         <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
@@ -368,59 +218,59 @@ export const TeacherJournal = () => {
                         <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
                     </div>
                 </div>
+                <div className='journalRowItem__container even'>
+                    <div className='journalRowItemCenter__container'>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                    </div>
+                    <div className='journalRowItemRight__container'>
+                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                    </div>
+                </div>
+                <div className='journalRowItem__container'>
+                    <div className='journalRowItemCenter__container'>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                        <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                    </div>
+                    <div className='journalRowItemRight__container'>
+                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                        <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
+                    </div>
+                </div> */}
             </div>
         </section>
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми заннять</h1>
             <div className='journalLessonsThemes__container'>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
+                {journal?.columns.map(column => 
+                    <div className='journalLessonThemeItem__container' key={column.column_id}>
+                        <div className='journalLessonThemeItemDate__container'>
+                            <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[1]}</p>
+                            <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[0]}</p>
+                            <p className='journalLessonThemeItemType'>{column.lesson_type}</p>
+                        </div>
+                        <input placeholder='Заповніть тему заняття'  className='journalLessonThemeItem__input__text'/>
                     </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
-                    </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
-                    </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
-                    </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
-                    </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
-                <div className='journalLessonThemeItem__container'>
-                    <div className='journalLessonThemeItemDate__container'>
-                        <p className='journalLessonThemeItemDate__day'>ВТ</p>
-                        <p className='journalLessonThemeItemDate__date'>02.05</p>
-                        <p className='journalLessonThemeItemType'>Лекція</p>
-                    </div>
-                    <p className='journalLessonThemeItem__text'>Заповніть тему заняття</p>
-                </div>
+                )}
             </div>
         </section>
     </div>
