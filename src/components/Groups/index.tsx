@@ -64,14 +64,14 @@ export const Groups = () => {
                         <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
                         <div className="groupCourseItemGroups__container">
                             {groupesByGrade[key].map(group => 
-                                <Link key={group.journal_group} to={routes.pickJournalSubjectTeacher + `?group_id=${group.journal_group}`} className="groupItem__container">
+                                <Link key={group.journal_group} to={routes.pickJournalSubject + `?group_id=${group.journal_group}`} className="groupItem__container">
                                     {group.group_full_name}
                                 </Link>
                             )}
                         </div>
                         <Carousel className='groups_carousel' dots slidesToShow={1}>
                             {groupesByGrade?.[key].map((group) => 
-                                <Link key={group.journal_group}  to={routes.pickJournalSubjectTeacher + `?group_id=${group.journal_group}`} className="groupItem__container">
+                                <Link key={group.journal_group}  to={routes.pickJournalSubject + `?group_id=${group.journal_group}`} className="groupItem__container">
                                     {group.group_full_name}
                                 </Link>
                             )} 

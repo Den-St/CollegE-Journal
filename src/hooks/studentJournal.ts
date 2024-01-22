@@ -7,25 +7,24 @@ import axiosConfig from '../axiosConfig';
 import { getToken } from '../helpers/auth';
 import { useUserStore } from '../store/userStore';
 import { useTeachersGroupsStore } from '../store/teachersGroupsStore';
+import { useStudentJournalSubjectsStore } from '../store/studentJournalSubjects';
 
-export const useGetTeacherJournal = () => {
+export const useStudentJournal = () => {
     const [journal,setJournal] = useState();
     const [loading,setLoading] = useState(false);
-    const groupId = useSearchParams()[0].get('group_id');
-    const journalId = useTeachersGroupsStore().groups.find(group => group.journal_group === groupId)?.journal_id;
-    const [fillters,setFillters] = useState<{group_id:string,subject_id:string,month:number}>({
-        group_id:groupId || '',
+    const journalId = useStudentJournalSubjectsStore().journalSubjects?.journal_id;
+    const [fillters,setFillters] = useState<{subject_id:string,month:number}>({
         subject_id:useSearchParams()[0].get('subject_id') || '',
         month: +(useSearchParams()[0].get('month') || new Date().getMonth)
     });
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
 
-    const fetch = async (_fillters?:{group_id:string,subject_id:string,month:number}) => {
+    const fetch = async (_fillters?:{subject_id:string,month:number}) => {
         if(!journalId) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.journal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.studentJournal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId},{headers:{Authorization:localToken || cookieToken}});
             setJournal(res.data);
         }catch(err){
             console.error(err);
@@ -37,7 +36,7 @@ export const useGetTeacherJournal = () => {
         fetch();
     },[journalId,])
 
-    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number) => {
+    const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number) => {
         setFillters(prev => ({...prev,[fieldName]:value}));
         fetch({...fillters,[fieldName]:value});
     }

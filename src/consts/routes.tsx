@@ -1,10 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { EditProfile } from "../components/EditProfile";
+import { Journal } from "../components/Journal";
+import { StudentJournal } from "../components/Journal/StudentJournal";
 import { SecurityLevelGuard } from "../components/SecurityLevelGuard";
-import { TeacherSubjects } from "../components/Subjects";
-import { StudentSubjects } from "../components/Subjects/StudentSubjects";
-import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, MyProfile, Students, TeacherProfile, Rating, Groups, Journal, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher } from "../pages";
+import { TeacherSubjects } from "../components/PickJournalSubjects/TeacherSubjects";
+import { StudentSubjects } from "../components/PickJournalSubjects/StudentSubjects";
+import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, MyProfile, Students, TeacherProfile, Rating, Groups, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher, TeacherJournal } from "../pages";
 import { securityLevels } from "./securityLevels";
+import { PickJournalSubjects } from "../components/PickJournalSubjects";
 
 export const navRoutes = {
 }
@@ -21,7 +24,6 @@ export const routes = {
     missedClasses:'/missed-classes/:studentId',
     rating:'/rating',
     groups:'/groups',
-    journal:'/journal',
     createHomeTask:'/create-home-task',
     sendHomeTask:'/send-home-task',
     createStudyMaterials:'/create-study-materials',
@@ -32,10 +34,10 @@ export const routes = {
     faq:'/faq',
     createUser:'/create-user',
     editGroup:`/edit-group/:id`,
-    pickJournalSubjectTeacher:'/pick-journal-subject',
+    pickJournalSubject:'/pick-journal-subject',
     myProfile:'/my-profile',
     editProfile:'/edit-profile',
-    pickJournalSubjectStudent:'/pick-journal-subject-student',
+    journal:'/journal'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -131,15 +133,14 @@ export const PublicRoutes = [
     <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
     <Route key={routes.groups} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.teacher}><Groups/></SecurityLevelGuard>} path={routes.groups}/>,    
-    <Route key={routes.journal} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.teacher}><Journal/></SecurityLevelGuard>} path={routes.journal}/>,
+    <Route key={routes.journal} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><Journal/></SecurityLevelGuard>} path={routes.journal}/>,
     <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,
     <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,
     <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,
     <Route key={routes.adminPanel} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,
     <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
-    <Route key={routes.pickJournalSubjectTeacher} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><TeacherSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubjectTeacher}/>,
-    <Route key={routes.pickJournalSubjectStudent} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><StudentSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubjectStudent}/>,
+    <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,

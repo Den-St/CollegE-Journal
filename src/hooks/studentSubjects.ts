@@ -1,3 +1,4 @@
+import { useStudentJournalSubjectsStore } from './../store/studentJournalSubjects';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { endpoints } from './../consts/endpoints';
@@ -10,14 +11,16 @@ export const useStudentSubjects = () => {
     const localToken = useUserStore().user.token;
     const cookieToken = getToken();
     const [loading,setLoading] = useState(false);
-    const [journalSubjects,setJournalSubjects] = useState<StudentJournalSubjectsT>();
+    const setSubjects = useStudentJournalSubjectsStore().set;
+    const journalSubjects = useStudentJournalSubjectsStore().journalSubjects;
 
     const fetch = async () => {
+        if(journalSubjects.subjects.length) return;
         setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.studentGroupSubjects,{headers:{Authorization:localToken || cookieToken}});
             console.log(res.data);
-            setJournalSubjects(res.data);
+            setSubjects(res.data);
         }catch(err){
             console.error(err);
         }finally{

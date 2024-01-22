@@ -16,6 +16,8 @@ import { getToken } from "../../helpers/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { routes } from "../../consts/routes";
 import Cookies from "js-cookie";
+import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
+import {EyeOutlined} from "@ant-design/icons";
 
 const useEditProfile = () => {
     const user = useUserStore().user;
@@ -93,10 +95,10 @@ const useEditProfile = () => {
 export const EditProfile = () => {
     const theme = useThemeStore().theme;
     const {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
-    const [passwordInputType,setPasswordInputType] = useState<Record<number,("password" | "text")>>({1:"password",2:"password"});
-    const onTogglePassword = (i:number) => {
-        setPasswordInputType(prev => ({...prev,[i]:prev[i] === "password" ? "text" : "password"}));
-    };
+    const [passwordInputType,setPasswordInputType] = useState<Record<number,"password" | "text">>({1:'password',2:'password'});
+    const onTogglePassword = (index:number) => {
+        setPasswordInputType(prev => ({...prev,[index]:prev[index] === "password" ? "text" : "password"}));
+    }
 
     return <div className={`editProfileMain_container ${theme}`}>
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
@@ -119,8 +121,14 @@ export const EditProfile = () => {
                     <h2 className="editProfile_section_header">Змінити пароль </h2>
                     <Popover rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
                 </div>
-                <input {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
-                <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
+                <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                        <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
+                        <span onClick={() => onTogglePassword(1)} className='passwordEye__button'>{passwordInputType[1] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
+                    </div>
+                <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                    <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
+                    <span onClick={() => onTogglePassword(2)} className='passwordEye__button'>{passwordInputType[2] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
+                </div>
                 {!!formError && <p className="signIn_errorMessage">{formError}</p>}
                 {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
                 <input type={'submit'} className="primary_button" value={'Зберегти зміни'}/>

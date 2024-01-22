@@ -130,7 +130,8 @@ export const Header = () => {
                         </Link> */}
                     </nav>
                     <div className='headerRightButtons__container'>
-                        <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/>
+                        {/* <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/> */}
+                        <div style={{'width':'50px'}}></div>
                         {!user.full_name 
                         ? <div className="signIn">
                             <Link to="/sign-in" className="signBtn">Вхід</Link>

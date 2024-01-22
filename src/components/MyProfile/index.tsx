@@ -189,7 +189,7 @@ export const MyProfile = () => {
                 }
         </section>
         {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
-        {onTryEditing && <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
+        <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
                 <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
@@ -206,6 +206,6 @@ export const MyProfile = () => {
                 </form>
                 <button className="primary_button" onClick={onTryEditClose}>Повернутися</button>
             </div>
-        </Modal>}
+        </Modal>
     </div>
 }
