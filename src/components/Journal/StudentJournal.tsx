@@ -103,40 +103,40 @@ export const StudentJournal = () => {
             </div>
             <div className='journalRowItemLeft__container'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container even'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container even'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container even'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
             <div className='journalRowItemLeft__container'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Барвінок О. С.</p>
+                <p className='journalRowItemLeft__name'>Математика</p>
             </div>
         </div>
         <div className='journalRight__container'>
             <div className='journalRightColumns__container'>
                 <div className='journalColumnsCenter__container'>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>
+                    <div className='journalColumnsCenterItemType transparent'>
                         {/* <Select className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect' open><Option label={"Лекція"} value={"Лекція"}>Лекція</Option></Select> */}
-                        Лекція
+                        {/* Лекція */}
                     </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ПН</p>
@@ -144,70 +144,80 @@ export const StudentJournal = () => {
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Практика</div>
+                    <div className='journalColumnsCenterItemType transparent'>
+                    </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ВТ</p>
                         <p className='journalColumnsCenterItemDate'>02.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Залік</div>
+                    <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>СР</p>
                         <p className='journalColumnsCenterItemDate'>03.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Лаб</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                    </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
                         <p className='journalColumnsCenterItemDate'>04.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Консульт</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                    </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ПТ</p>
                         <p className='journalColumnsCenterItemDate'>05.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Лекція</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                    </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ПН</p>
                         <p className='journalColumnsCenterItemDate'>01.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Практика</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ВТ</p>
                         <p className='journalColumnsCenterItemDate'>02.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Залік</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>СР</p>
                         <p className='journalColumnsCenterItemDate'>03.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Лаб</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
                         <p className='journalColumnsCenterItemDate'>04.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Консульт</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ПТ</p>
                         <p className='journalColumnsCenterItemDate'>05.05</p>
                     </div>
                 </div>
                 <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType'>Консульт</div>
+                <div className='journalColumnsCenterItemType transparent'>
+                        </div>
                     <div className='journalColumnsCenterItemDate__container'>
                         <p className='journalColumnsCenterItemDateDay'>ПТ</p>
                         <p className='journalColumnsCenterItemDate'>05.05</p>

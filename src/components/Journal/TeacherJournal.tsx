@@ -268,7 +268,7 @@ export const TeacherJournal = () => {
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[0]}</p>
                             <p className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
-                        <input placeholder='Заповніть тему заняття'  className='journalLessonThemeItem__input__text'/>
+                        <input placeholder='Заповніть тему заннятя'  className='journalLessonThemeItem__input__text'/>
                     </div>
                 )}
             </div>
