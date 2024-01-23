@@ -10,11 +10,12 @@ import { setFromSubjects } from '../../helpers/setFromObjects';
 import { useGetTeacherJournal } from '../../hooks/getJournal';
 import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
 import { useThemeStore } from '../../store/themeStore';
+import { CellInput } from './CellInput';
 import './journalStyles.scss';
 const {Option} = Select;
 
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,token} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -27,7 +28,6 @@ export const TeacherJournal = () => {
         return false;
     }
     
-    const canEdit = groupJournal?.can_edit.some(subject => subject.subject_id === fillters.subject_id);
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.group_full_name || !subjectName){
@@ -105,7 +105,12 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div className='journalColumnsCenterItem__container'>
                             <div className='journalColumnsCenterItemType'>
-                                <Select defaultValue={column.lesson_type} className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect'>
+                                <Select 
+                                disabled={
+                                    // !journal.can_edit || 
+                                    isDisabledByDate(column.date)
+                                }
+                                defaultValue={column.lesson_type} className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect'>
                                     <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
                                     <Option label={"Практика"} value={"Практика"}>Практика</Option>
                                     <Option label={"Залік"} value={"Залік"}>Залік</Option>
@@ -139,9 +144,19 @@ export const TeacherJournal = () => {
                     <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                         <div className='journalRowItemCenter__container'>
                             {journal.columns.map(column => 
-                                <div className='journalRowItemCenterValue__container'>
-                                    <input disabled={canEdit || isDisabledByDate(column.date)} className='journalRowItemCenterValue__input__text' defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                </div>
+                                <>
+                                    {!isDisabledByDate(column.date) 
+                                    ? <CellInput token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} disabled={isDisabledByDate(column.date)} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                    : <p className='journalRowItemCenterValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                    // <div className='journalRowItemRightValue__container'>
+                                    //     <p className='journalRowItemRightValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                    // </div>
+                                    }
+                                    {/* <input disabled={
+                                        // !!journal.can_edit ||
+                                        isDisabledByDate(column.date)
+                                        } className='journalRowItemCenterValue__input__text' defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/> */}
+                                </>
                             )}
                         </div>
                         {/* <div className='journalRowItemRight__container'>

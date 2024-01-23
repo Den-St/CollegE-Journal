@@ -15,7 +15,6 @@ export const useGetSupervisors = () => {
         setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.supervisors,{headers:{Authorization:localToken || cookieToken}});
-            console.log(res.data.data.supervisors_list);
             setSupervisors(res.data.data.supervisors_list);
         }catch(err){
             console.error(err);

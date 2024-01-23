@@ -24,7 +24,6 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
     const [changeErrorCode,setErrorCode] = useState<number>();
 
-    console.log(chosenSupervisorId, group?.group_supervisor);
     useEffect(() => {
         if(group?.group_supervisor?.user_id){
             setChosenSupervisorId(group.group_supervisor.user_id);

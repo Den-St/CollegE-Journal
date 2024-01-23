@@ -13,7 +13,6 @@ export const UserPopup = () => {
     const user = useUserStore().user;
     const signOut = useUserStore().signOut;
     const navigate = useNavigate();
-    console.log(user);
     const onSignOut = () => {
         signOut();
         deleteTokenCookie();

@@ -19,7 +19,6 @@ export const useStudentSubjects = () => {
         setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.studentGroupSubjects,{headers:{Authorization:localToken || cookieToken}});
-            console.log(res.data);
             setSubjects(res.data);
         }catch(err){
             console.error(err);

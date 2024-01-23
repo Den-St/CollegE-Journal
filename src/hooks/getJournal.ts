@@ -43,5 +43,5 @@ export const useGetTeacherJournal = () => {
         fetch({...fillters,[fieldName]:value});
     }
 
-    return {loading,journal,fillters,onChangeFillters};
+    return {loading,journal,fillters,onChangeFillters,token:localToken || cookieToken};
 }

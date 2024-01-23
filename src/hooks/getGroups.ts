@@ -22,7 +22,6 @@ export const useGetAdminGroups = () => {
         try{
             const res = await axiosConfig.get(endpoints.getGroups,{headers:{Authorization:localToken || cookieToken}});
             setGroups(res.data as GroupT[]);
-            console.log(res.data);
             const a = [
                     {
                         group_full_name: "Кн-41",
@@ -33,7 +32,6 @@ export const useGetAdminGroups = () => {
                         group_id: "659ad3d4ee990ad4f4b163e2"
                     }                    
                 ];
-            console.log('asd',myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]))
             //@ts-ignore
             setGroupsByGrage(myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]));
         }catch(err){

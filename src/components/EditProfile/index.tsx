@@ -86,7 +86,6 @@ const useEditProfile = () => {
     //@ts-ignore
     const beforeUpload = (file) => {
         setValue('avatar',file);
-        console.log(file);
         setNewAvatarUrl(URL.createObjectURL(file));
     };
     return {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors}
