@@ -90,7 +90,7 @@ export const TeacherJournal = () => {
             <div className='journalLeft__container'>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
-                    <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
+                    <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                 </div>
                 {journal?.students.map(student => 
                     <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
@@ -105,18 +105,24 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div className='journalColumnsCenterItem__container'>
                             <div className='journalColumnsCenterItemType'>
-                                <Select 
-                                disabled={
-                                    // !journal.can_edit || 
-                                    isDisabledByDate(column.date)
+                                {
+                                    !isDisabledByDate(column.date) &&
+                                    <Select 
+                                        disabled={
+                                            // !journal.can_edit || 
+                                            isDisabledByDate(column.date)
+                                        }
+                                        defaultValue={column.lesson_type} 
+                                        className='journal_lessonTypeSelect' 
+                                        rootClassName='journal_lessonTypeSelect'
+                                        placeholder={'Тип'}>
+                                            <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
+                                            <Option label={"Практика"} value={"Практика"}>Практика</Option>
+                                            <Option label={"Залік"} value={"Залік"}>Залік</Option>
+                                            <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
+                                            <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
+                                    </Select>
                                 }
-                                defaultValue={column.lesson_type} className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect'>
-                                    <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
-                                    <Option label={"Практика"} value={"Практика"}>Практика</Option>
-                                    <Option label={"Залік"} value={"Залік"}>Залік</Option>
-                                    <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
-                                    <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
-                                </Select>
                             </div>
                             <div className='journalColumnsCenterItemDate__container'>
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
@@ -146,7 +152,7 @@ export const TeacherJournal = () => {
                             {journal.columns.map(column => 
                                 <>
                                     {!isDisabledByDate(column.date) 
-                                    ? <CellInput token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} disabled={isDisabledByDate(column.date)} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                    ? <CellInput token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
                                     : <p className='journalRowItemCenterValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                                     // <div className='journalRowItemRightValue__container'>
                                     //     <p className='journalRowItemRightValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>

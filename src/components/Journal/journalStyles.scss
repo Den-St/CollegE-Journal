@@ -226,6 +226,7 @@
     width: 40px;
     margin: 0 15px;
     padding: 7px;
+    text-align: center;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
 }
 .journalRowItemCenterValue__input__text:disabled{
@@ -332,6 +333,12 @@
             display: none !important;
         }
     }
+    // .ant-select-selector{
+
+    // }
+    // .ant-select-selection-search-input:not(:placeholder-shown){
+
+    // }
 }
 
 .journalMain__container{
