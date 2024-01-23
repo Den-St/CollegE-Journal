@@ -8,9 +8,10 @@ import { getToken } from '../helpers/auth';
 import { useUserStore } from '../store/userStore';
 import { useTeachersGroupsStore } from '../store/teachersGroupsStore';
 import { useStudentJournalSubjectsStore } from '../store/studentJournalSubjects';
+import { StudentJournalT } from '../types/studentJournal';
 
 export const useStudentJournal = () => {
-    const [journal,setJournal] = useState();
+    const [journal,setJournal] = useState<StudentJournalT>();
     const [loading,setLoading] = useState(false);
     const journalId = useStudentJournalSubjectsStore().journalSubjects?.journal_id;
     const [fillters,setFillters] = useState<{subject_id:string,month:number}>({

@@ -19,8 +19,8 @@ export const StudentJournal = () => {
     const currentMonth = new Date().getMonth();
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
+    const currentSubjectName = subjects.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
     useEffect(() => {
-        const currentSubjectName = subjects.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
         document.title = `Журнал - ${currentSubjectName}`;
     },[]);
 
@@ -34,7 +34,6 @@ export const StudentJournal = () => {
                     <p className="fillter_placeholder">Місяць</p>
                 </div>}
                 className="fillter_select"
-                
                 defaultValue={fillters.month}
                 allowClear
                 value={fillters.month}
@@ -103,128 +102,24 @@ export const StudentJournal = () => {
             </div>
             <div className='journalRowItemLeft__container'>
                 <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container even'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container even'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container even'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
-            </div>
-            <div className='journalRowItemLeft__container'>
-                <p className='journalRowItemLeft__number'>1.</p>
-                <p className='journalRowItemLeft__name'>Математика</p>
+                <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
             </div>
         </div>
         <div className='journalRight__container'>
             <div className='journalRightColumns__container'>
                 <div className='journalColumnsCenter__container'>
-                <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType transparent'>
-                        {/* <Select className='journal_lessonTypeSelect' rootClassName='journal_lessonTypeSelect' open><Option label={"Лекція"} value={"Лекція"}>Лекція</Option></Select> */}
-                        {/* Лекція */}
-                    </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ПН</p>
-                        <p className='journalColumnsCenterItemDate'>01.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType transparent'>
-                    </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ВТ</p>
-                        <p className='journalColumnsCenterItemDate'>02.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                    <div className='journalColumnsCenterItemType transparent'>
+                    {journal?.columns.map(column => 
+                        <div key={column.column_index} className='journalColumnsCenterItem__container'>
+                            <div className='journalColumnsCenterItemType transparent'>
+                            </div>
+                            <div className='journalColumnsCenterItemDate__container'>
+                                <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
+                                <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
+                            </div>
                         </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>СР</p>
-                        <p className='journalColumnsCenterItemDate'>03.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                    </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
-                        <p className='journalColumnsCenterItemDate'>04.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                    </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                        <p className='journalColumnsCenterItemDate'>05.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                    </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ПН</p>
-                        <p className='journalColumnsCenterItemDate'>01.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                        </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ВТ</p>
-                        <p className='journalColumnsCenterItemDate'>02.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                        </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>СР</p>
-                        <p className='journalColumnsCenterItemDate'>03.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                        </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ЧТ</p>
-                        <p className='journalColumnsCenterItemDate'>04.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                        </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                        <p className='journalColumnsCenterItemDate'>05.05</p>
-                    </div>
-                </div>
-                <div className='journalColumnsCenterItem__container'>
-                <div className='journalColumnsCenterItemType transparent'>
-                        </div>
-                    <div className='journalColumnsCenterItemDate__container'>
-                        <p className='journalColumnsCenterItemDateDay'>ПТ</p>
-                        <p className='journalColumnsCenterItemDate'>05.05</p>
-                    </div>
-                </div>
+                    )}
             </div>
-            <div className='journalColumnsRight__container'>
+            {/* <div className='journalColumnsRight__container'>
                 <div className='journalColumnsRightItem__container'>
                     <div className='journalColumnsRightItemType'>Аттестація</div>
                     <div className='journalColumnsRightItemMonth'>
@@ -237,141 +132,18 @@ export const StudentJournal = () => {
                         Травень
                     </div>
                 </div>
-            </div>
-            </div>
-            <div className='journalRowItem__container'>
-
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
-            </div>
-            <div className='journalRowItem__container even'>
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
+            </div> */}
             </div>
             <div className='journalRowItem__container'>
                 <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
+                    {journal?.columns.map(column => 
+                        <div key={column.cells[0].index} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>{column.cells[0].value}</p></div>
+                    )}
                 </div>
-                <div className='journalRowItemRight__container'>
+                {/* <div className='journalRowItemRight__container'>
                     <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
                     <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
-            </div>
-            <div className='journalRowItem__container even'>
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
-            </div>
-            <div className='journalRowItem__container'>
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
-            </div>
-            <div className='journalRowItem__container even'>
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
-            </div>
-            <div className='journalRowItem__container'>
-                <div className='journalRowItemCenter__container'>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                    <div className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text'>100</p></div>
-                </div>
-                <div className='journalRowItemRight__container'>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                    <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                </div>
+                </div> */}
             </div>
         </div>
     </section>

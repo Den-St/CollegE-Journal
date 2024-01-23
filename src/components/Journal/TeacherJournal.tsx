@@ -18,7 +18,16 @@ export const TeacherJournal = () => {
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
-    const currentMonth = new Date().getMonth();
+    const currentMonth = new Date().getMonth() + 1;
+    const currentDate = new Date().getDate();
+    const isDisabledByDate = (dateString:string) => {
+        if(+dateString.split(' ')[0].split('.')[0] > currentDate || +dateString.split(' ')[0].split('.')[1] > currentMonth) {
+            return true;
+        }
+        return false;
+    }
+    
+    const canEdit = groupJournal?.can_edit.some(subject => subject.subject_id === fillters.subject_id);
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.group_full_name || !subjectName){
@@ -131,7 +140,7 @@ export const TeacherJournal = () => {
                         <div className='journalRowItemCenter__container'>
                             {journal.columns.map(column => 
                                 <div className='journalRowItemCenterValue__container'>
-                                    <input className='journalRowItemCenterValue__input__text' defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                    <input disabled={canEdit || isDisabledByDate(column.date)} className='journalRowItemCenterValue__input__text' defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
                                 </div>
                             )}
                         </div>

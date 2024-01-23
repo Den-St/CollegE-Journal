@@ -8,7 +8,7 @@ import './subjectsStyles.scss';
 export const StudentSubjects = () => {
     const {journalSubjects,loading} = useStudentSubjects();
     const currentMonth = new Date().getMonth();
-
+    
     if(loading) return <Spin/>
     if(!journalSubjects?.subjects.length) return <NoMatch is404={false} title={"Предметів не знайдено"}/>
 

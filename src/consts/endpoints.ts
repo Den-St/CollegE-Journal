@@ -14,5 +14,5 @@ export const endpoints = {
     supervisors:'admin/groups/group-supervisors',
     login:'users/login',
     studentGroupSubjects:'groups/group',
-    studentJournal:'/student-journal'
+    studentJournal:'journal/student'
 }

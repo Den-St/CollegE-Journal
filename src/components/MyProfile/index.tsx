@@ -191,7 +191,7 @@ export const MyProfile = () => {
         {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
         <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
-                <h1 className="editProfileModal_header">Для редагування профілю треба ввести пароль</h1>
+                <h1 className="editProfileModal_header">{!user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>
                 <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
                     <div style={{display:'flex',gap:'20px',width:'100%'}}>
                         <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
