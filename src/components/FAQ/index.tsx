@@ -3,6 +3,7 @@ import TextArea from "antd/es/input/TextArea";
 import { CSSProperties, useEffect } from "react";
 import { useFaq } from "../../hooks/faq";
 import { useThemeStore } from "../../store/themeStore";
+import { Loader } from "../Loader/Loader";
 import "./faqStyles.scss";
 
 export const FAQ = () => {
@@ -81,7 +82,7 @@ export const FAQ = () => {
             <Collapse 
                 items={getItems(panelStyle)}
             /> 
-        </section>: <Spin/>}
+        </section> : <Loader/>}
         <div className="faqForm">
             <h1 className="faqTitle">Не має вашого питання?</h1>
             <TextArea className="faqQuestionTextArea" autoSize={true} rows={10} placeholder={'Запиши сюди своє питання до адміністрації сайту.'}/>

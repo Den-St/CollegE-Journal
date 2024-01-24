@@ -8,6 +8,7 @@ import { routes } from "../../consts/routes";
 import { setFromSubjects } from "../../helpers/setFromObjects";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useTeachersGroupsStore } from "../../store/teachersGroupsStore"
+import { Loader } from "../Loader/Loader";
 import { NoMatch } from "../NoMatch";
 import './subjectsStyles.scss';
 
@@ -23,7 +24,7 @@ export const TeacherSubjects = () => {
         document.title = `Предмети групи - ${group?.group_full_name}`;
     },[]);
     
-    if(loading) return <Spin/>
+    if(loading) return <Loader/>
     if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
 
     return <section className="subjectsMainContainer">

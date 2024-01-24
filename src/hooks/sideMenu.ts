@@ -1,6 +1,7 @@
 import { useState } from 'react';
 export const useSideMenu = () => {
     const [sideMenuOpened,setSideMenuOpened] = useState<"shown" | "hidden">("hidden");
+    
     const onToggleSideMenu = () => {
         setSideMenuOpened(sideMenuOpened === "hidden" ? "shown" : "hidden");
         if(sideMenuOpened === "hidden"){

@@ -14,7 +14,7 @@ export const SideMenu:React.FC<Props> = ({openedClass,goToSection,onToggleSideMe
         goToSection(sectionLocation);
     }
 
-    return <div className={`sideMenu_container ${openedClass}`}>
+    return <div id={'sideMenu_container'} className={`sideMenu_container ${openedClass}`}>
         <nav className="sideMenu_nav">
             <HeaderNavLinks onGoToSection={onGoToSection} linksClassName={'sideMenu_nav__link'}/>
         </nav>

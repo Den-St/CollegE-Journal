@@ -99,7 +99,17 @@
     text-align: center;
     border-radius: 10px 5px;
 }
+.ant-select.journal_lessonTypeSelect{
+    height: 40px;
+    .ant-select-selector{
+        border-radius: 10px 5px ;
+    }
+}
 
+.journal_lessonTypeSelect{
+    width: 70px !important;
+    text-align: center;
+}
 .journalColumnsCenterItemDate__container{
     display: flex;
     flex-direction: column;
@@ -328,17 +338,6 @@
     .ant-select-arrow{
         color:var(--primary-orange);
     }
-    &.ant-select-disabled{
-        .ant-select-arrow{
-            display: none !important;
-        }
-    }
-    // .ant-select-selector{
-
-    // }
-    // .ant-select-selection-search-input:not(:placeholder-shown){
-
-    // }
 }
 
 .journalMain__container{

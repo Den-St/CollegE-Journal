@@ -7,6 +7,7 @@ import { useCreateGroupForm } from "../../hooks/createGroupForm";
 import { useGetAdminGroups } from "../../hooks/getGroups";
 import { useThemeController } from "../../hooks/themeController"
 import { CreateGroupT, GroupT } from "../../types/group";
+import { Loader } from "../Loader/Loader";
 const {Option,} = Select;
 
 const errorCodes:Record<number,string> = {
@@ -101,7 +102,7 @@ export const StudentsListAdmin = () => {
                         )} 
                     </Carousel>
                 </div>
-            ) : <Spin/>}
+            ) : <Loader/>}
         </section>
     </div>
 }

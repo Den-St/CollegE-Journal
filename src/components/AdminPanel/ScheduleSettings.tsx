@@ -10,6 +10,7 @@ import { useGetGroup } from "../../hooks/getGroup";
 import { useGetAdminGroups } from "../../hooks/getGroups";
 import { DaysNumbersT } from "../../types/daysNames";
 import { GroupT } from "../../types/group";
+import { Loader } from "../Loader/Loader";
 import "./scheduleSettings.scss";
 const {Option} = Select;
 
@@ -102,7 +103,7 @@ export const ScheduleSettings = () => {
         </Carousel>
         </>
         : <NoSheduleComponent/>
-        : <Spin/>}
+        : <Loader/>}
     </div>
 }
 

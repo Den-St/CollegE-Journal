@@ -16,6 +16,7 @@ import { useUserStore } from '../../store/userStore';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { UserPopup } from '../UserPopup';
 import { HeaderNavLinks } from './HeaderNavLinks';
+import { useSideMenuStore } from '../../store/sideMenuStore';
 
 const useHeaderVisibility = () => {
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden' | 'visible_on_scroll' | 'visible_on_touch'>('visible');
@@ -39,13 +40,12 @@ const useHeaderVisibility = () => {
     return {headerVisibilityClass,onTouchShowHeader}
 }
 
-
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
     const {headerVisibilityClass,onTouchShowHeader} = useHeaderVisibility();
-    const {sideMenuOpened,onToggleSideMenu} = useSideMenu();
+    const {sideMenuOpened,onToggleSideMenu} = useSideMenuStore();
 
     return <header onMouseOver={onTouchShowHeader} className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>

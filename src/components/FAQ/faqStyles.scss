@@ -30,7 +30,6 @@
     line-height: 22px;
     letter-spacing: 0.1em;
     text-align: left;
-
 }
 .ant-collapse .ant-collapse-content{
     border: none;
@@ -122,5 +121,20 @@
 @media screen and (min-width:2200px) {
     .faqMain__container{
         padding: 190px 11% 0;
+    }
+}
+
+@media screen and (min-width:780px) {
+    .ant-collapse-content-box {
+        padding: 20px 40px !important;
+    }
+}
+
+@media screen and (max-width:780px) {
+    .faqMain__container{
+        padding: 110px 5% 0;
+    }
+    .ant-collapse-content-box {
+        padding: 0px 40px 10px !important;
     }
 }

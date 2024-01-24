@@ -8,6 +8,7 @@ import { routes } from "../../consts/routes";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useThemeStore } from "../../store/themeStore"
 import { GroupT } from "../../types/group";
+import { Loader } from "../Loader/Loader";
 import { NoMatch } from "../NoMatch";
 import { Students } from "../Students";
 import './groupsStyles.scss';
@@ -77,7 +78,7 @@ export const Groups = () => {
                             )} 
                         </Carousel>
                     </div>   
-                )  : <Spin/>
+                )  : <Loader/>
             }
         </section>
     </div>

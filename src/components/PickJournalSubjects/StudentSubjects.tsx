@@ -2,6 +2,7 @@ import { Carousel, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { routes } from "../../consts/routes";
 import { useStudentSubjects } from "../../hooks/studentSubjects";
+import { Loader } from "../Loader/Loader";
 import { NoMatch } from "../NoMatch";
 import './subjectsStyles.scss';
 
@@ -9,7 +10,7 @@ export const StudentSubjects = () => {
     const {journalSubjects,loading} = useStudentSubjects();
     const currentMonth = new Date().getMonth();
     
-    if(loading) return <Spin/>
+    if(loading) return <Loader/>
     if(!journalSubjects?.subjects.length) return <NoMatch is404={false} title={"Предметів не знайдено"}/>
 
     return <section className="subjectsMainContainer">

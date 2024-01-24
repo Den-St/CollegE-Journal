@@ -5,11 +5,13 @@ import { RoutesSwitch } from './consts/routes';
 import { themes } from './consts/themes';
 import './globalStyles.scss';
 import { AuthProdiver } from './providers/authProvider';
+import { useSideMenuStore } from './store/sideMenuStore';
 import { useThemeStore } from './store/themeStore';
 import { useUserStore } from './store/userStore';
 
 function App() {
   const theme = useThemeStore().theme;
+  const {onCloseSideMenu} = useSideMenuStore();
   const route = useLocation().pathname;
   useEffect(() => {
     if(theme === themes.dark){
@@ -22,7 +24,9 @@ function App() {
   },[theme]);
   useEffect(() => {
     window.scrollTo({top:0});
+    onCloseSideMenu();
   },[route]);
+  
   const user = useUserStore().user;
   console.log(user);
   return <Layout>
