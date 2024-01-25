@@ -13,7 +13,7 @@
 
 .studentProfileMain__container{
     display: flex;
-    align-items: flex-start;
+    // align-items: flex-start;
     gap:130px;
 }
 
@@ -216,6 +216,7 @@
 @media screen and (max-width:780px) {
     .studentProfileMain__container{
         flex-direction: column;
+        align-items: center;
     }
     .studentProfileTabs__container{
         margin-left: 0;

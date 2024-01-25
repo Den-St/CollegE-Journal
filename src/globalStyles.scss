@@ -402,10 +402,10 @@ body{
 }
 
 @media screen and (max-width:780px) {
-	.slick-slide.slick-active.slick-current{
+	.slick-slide.slick-active.slick-current,.slick-slide{
         // width: unset !important;
         width: 98vw;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
     }
