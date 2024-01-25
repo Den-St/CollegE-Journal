@@ -93,42 +93,10 @@ export const TeacherSchedule = () => {
                 },{
                     name:'Математика',group:'3-41'
                 },]
-        }];
-    const scheduleTimings = [
-        {
-            id:1,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:2,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:3,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:4,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:5,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:6,
-            start:'8:00',
-            end:'9:20'
-        },
-    ]
+    }];
 
     return <section className={`lessonsSchedule__container ${theme}`}>
-        <h1 className='studentProfileTab__title'>Розклад вчитель</h1>
+        <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}><h1 className='studentProfileTab__title'>Розклад вчитель</h1><button className='teacherShedule_addLink_button'>Посилання</button></div>
             {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">
                 <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    

@@ -25,6 +25,11 @@
     line-height: 34px;
     padding-left: 15px;
 }
+.teacherShedule_addLink_button{
+    border-radius: 10px 5px;
+    padding: 10px 25px;
+
+}
 
 .lessonsScheduleDayLessons__container{
     display: flex;
@@ -135,7 +140,10 @@ path{
                 color:var(--primary-orange);
             }
         }
-        
+        .teacherShedule_addLink_button{
+            color:white;
+            background: var(--secondary-blue);
+        }
     }
     // &.light{
 

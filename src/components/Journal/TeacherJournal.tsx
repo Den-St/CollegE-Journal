@@ -128,13 +128,14 @@ export const TeacherJournal = () => {
                                     !isDisabledByDate(column.date)) ?
                                     <Select 
                                         disabled={
-                                            // !journal.can_edit || 
+                                            !journal.can_edit || 
                                             isDisabledByDate(column.date)
                                         }
                                         defaultValue={column.lesson_type || null} 
                                         className='journal_lessonTypeSelect' 
                                         rootClassName='journal_lessonTypeSelect'
                                         placeholder={'Тип'}
+                                        showArrow={!column.lesson_type}
                                         onChange={(value) => onChangeLessonType(column.column_id,value)}>
                                             <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
                                             <Option label={"Практика"} value={"Практика"}>Практика</Option>

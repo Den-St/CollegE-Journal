@@ -20,6 +20,7 @@ import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
+import { scheduleTimings } from '../../consts/scheduleTimings';
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -99,38 +100,6 @@ export const MyProfile = () => {
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);
-    const scheduleTimings = [
-        {
-            id:1,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:2,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:3,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:4,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:5,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:6,
-            start:'8:00',
-            end:'9:20'
-        },
-    ]
     
     return <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
