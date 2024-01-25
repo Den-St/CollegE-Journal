@@ -124,7 +124,8 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div key={column.column_id} className='journalColumnsCenterItem__container'>
                                 {
-                                    !isDisabledByDate(column.date) ?
+                                    (!journal.can_edit ||
+                                    !isDisabledByDate(column.date)) ?
                                     <Select 
                                         disabled={
                                             // !journal.can_edit || 
@@ -169,7 +170,8 @@ export const TeacherJournal = () => {
                     <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                         <div className='journalRowItemCenter__container'>
                             {journal.columns.map(column => 
-                                !isDisabledByDate(column.date) 
+                                (!journal.can_edit ||
+                                !isDisabledByDate(column.date))
                                 ? <CellInput key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
                                 : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                             )}
@@ -194,7 +196,7 @@ export const TeacherJournal = () => {
                         </div>
                         <input
                         disabled={
-                            // !journal.can_edit || 
+                            !journal.can_edit ||
                             isDisabledByDate(column.date)
                         }
                         onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} placeholder='Заповніть тему заннятя' defaultValue={column.lesson_topic} className='journalLessonThemeItem__input__text'/>
