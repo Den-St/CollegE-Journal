@@ -16,7 +16,7 @@ export const useCreateUser = (group?:GroupT) => {
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
-    const [crateUserFormErrorMessage,setErrorMessage] = useState('');
+    const [createUserFormErrorMessage,setErrorMessage] = useState('');
     const [createUserLoading,setCreateUserLoading] = useState(false);
 
     const {
@@ -61,5 +61,5 @@ export const useCreateUser = (group?:GroupT) => {
         }
     }   
 
-    return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,crateUserFormErrorMessage};
+    return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,createUserFormErrorMessage};
 }

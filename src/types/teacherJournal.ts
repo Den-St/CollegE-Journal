@@ -9,7 +9,7 @@ export type TeacherJournalT = {
         }[],
         date:string,
         lesson_type:string,
-        topic:string
+        lesson_topic:string
     }[],
     journal_id:string,
     students:{

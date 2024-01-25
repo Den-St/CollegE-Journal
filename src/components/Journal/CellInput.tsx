@@ -1,4 +1,3 @@
-import { FocusEventHandler, useState } from "react"
 import axiosConfig from "../../axiosConfig"
 import { CellValueToColor } from "../../consts/cellVaueToColor"
 import { endpoints } from "../../consts/endpoints"
@@ -39,7 +38,7 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
     },token:string) => {
     if(!isValid(e.target.value)) return;
     try{
-        const res = await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
+        await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
     }catch(err){
         console.error(err);
     }
@@ -47,5 +46,5 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
 export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token}) => {
     // const [error,setError] = useState();
 
-    return <input style={{color:defaultValue && `${CellValueToColor[defaultValue]}`}} onBlur={(e) => onBlur(e,onBlurData,token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
+    return <input style={{color:defaultValue && CellValueToColor[defaultValue]}} onBlur={(e) => onBlur(e,onBlurData,token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
 }

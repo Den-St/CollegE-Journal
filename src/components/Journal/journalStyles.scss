@@ -99,6 +99,9 @@
     text-align: center;
     border-radius: 10px 5px;
 }
+.journalColumnsCenterItemType:empty{
+    cursor: not-allowed;
+}
 .ant-select.journal_lessonTypeSelect{
     height: 40px;
     .ant-select-selector{
@@ -292,6 +295,7 @@
     flex-direction: column;
     gap:10px;
     align-items: center;
+    text-align: center;
 }
 .journalLessonThemeItemDate__day{
     font-size: 18px;
@@ -315,6 +319,9 @@
     // max-width: 90%;
     width: 100%;
     background-color: transparent;
+}
+.journalLessonThemeItem__input__text:disabled{
+    cursor: not-allowed;
 }
 .journalLessonThemeItemType{
     font-size: 16px;

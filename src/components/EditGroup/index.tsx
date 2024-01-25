@@ -11,6 +11,8 @@ import { emailPattern } from "../../consts/emailPattern";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { routes } from "../../consts/routes";
 import { useGetSupervisors } from "../../hooks/getSupervisors";
+import { FieldErrors } from "react-hook-form";
+import { CreateUserT } from "../../types/user";
 const {Option} = Select;
 
 const userErrorCodesToMessages:Record<number,string> = {
@@ -24,7 +26,7 @@ const changeErrorCodesToMessages:Record<number,string> = {
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
-    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,crateUserFormErrorMessage,createUserLoading} = useCreateUser(group);
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
@@ -109,9 +111,12 @@ export const EditGroup = () => {
                     </div>
                 </div>
             </div>
+            {//@ts-ignore
+            // Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
+            }
             {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
             {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
-            {!!crateUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{crateUserFormErrorMessage}</p>}
+            {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>}
             {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>}
             <div className="createUserButtons__container">
                 <input 

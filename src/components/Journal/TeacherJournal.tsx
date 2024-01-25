@@ -5,6 +5,7 @@ import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { LeftArrowSvg } from '../../assets/svgs/leftArrowSvg';
 import axiosConfig from '../../axiosConfig';
+import { endpoints } from '../../consts/endpoints';
 import { routes } from '../../consts/routes';
 import { studyMonths } from '../../consts/studyMonths';
 import { setFromSubjects } from '../../helpers/setFromObjects';
@@ -30,9 +31,16 @@ export const TeacherJournal = () => {
         }
         return false;
     }
-    const onChangeLessonType = async (column_id:string,value:string) => {
+    const onChangeLessonType = async (column_id:string,lesson_type:string) => {
         try{
-            // const res = await axiosConfig.post('',{column_id,value},{headers:{Authorization:token}});
+            await axiosConfig.post(endpoints.journalEditCellType,{column_id,lesson_type,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
+        }catch(err){    
+            console.error(err);
+        }
+    }
+    const onBlurChangeLessonTopic = async (column_id:string,lesson_topic:string) => {
+        try{
+            await axiosConfig.post(endpoints.journalEditCellTopic,{column_id,lesson_topic,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
         }catch(err){
             console.error(err);
         }
@@ -184,7 +192,12 @@ export const TeacherJournal = () => {
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[0]}</p>
                             <p className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
-                        <input placeholder='Заповніть тему заннятя'  className='journalLessonThemeItem__input__text'/>
+                        <input
+                        disabled={
+                            // !journal.can_edit || 
+                            isDisabledByDate(column.date)
+                        }
+                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} placeholder='Заповніть тему заннятя' defaultValue={column.lesson_topic} className='journalLessonThemeItem__input__text'/>
                     </div>
                 )}
             </div>
