@@ -34,7 +34,11 @@ export const useUserStore = create<StoreType>((set) => ({
         visit_per_week:null,
         security_level:null,
         group_fullname:'',
-        is_active:false
+        is_active:false,
+        user_group:{
+            group_id:'',
+            group_full_name:''
+        }
     },
     loading:false,
     startLoading:() => set((state) => ({...state,loading:true})),
@@ -58,7 +62,11 @@ export const useUserStore = create<StoreType>((set) => ({
             visit_per_week:null,
             security_level:null,
             group_fullname:'',
-            is_active:false
+            is_active:false,
+            user_group:{
+                group_id:'',
+                group_full_name:''
+            }
         }
     })),
     setToken: (token:string) => set((state) => ({

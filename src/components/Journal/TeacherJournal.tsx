@@ -26,7 +26,7 @@ export const TeacherJournal = () => {
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
     const isDisabledByDate = (dateString:string) => {
-        if(+dateString.split(' ')[0].split('.')[0] > currentDate || +dateString.split(' ')[0].split('.')[1] > currentMonth) {
+        if(+dateString.split('\n')[0].split('.')[0] > currentDate || +dateString.split('\n')[0].split('.')[1] > currentMonth) {
             return true;
         }
         return false;

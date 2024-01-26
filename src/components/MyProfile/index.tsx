@@ -113,7 +113,7 @@ export const MyProfile = () => {
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
                         </p>
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
-                        <p className='studentProfile__group'>{user.group_fullname || `Група-00`}</p>
+                        {!!user?.user_group?.group_full_name && <p className='studentProfile__group'>{user?.user_group?.group_full_name}</p>}
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>

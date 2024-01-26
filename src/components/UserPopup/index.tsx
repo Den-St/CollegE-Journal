@@ -24,6 +24,7 @@ export const UserPopup = () => {
             <img className='header_avatar' src={user.avatar || defaultAvatar} style={{marginBottom:'10px'}}/>
             <p className='userFullName'>{user.full_name}</p>
             <p className='userEmail'>{user.mailbox_address}</p>
+            <p className='userEmail'>{user?.user_group?.group_full_name}</p>
             <p className='userRole'>{securityLevelsToNames[user.security_level || 0]}</p>
         </div>
         <div className='userInfoPopupLinks_container'>
