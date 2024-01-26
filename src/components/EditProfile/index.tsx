@@ -107,7 +107,7 @@ export const EditProfile = () => {
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>
                 <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
-                <p className='studentProfile__group'>{user.group_fullname || `Група-00`}</p>
+                {!!user?.user_group?.group_full_name && <p className='studentProfile__group'>{user?.user_group?.group_full_name}</p>}
             </div>
         </div>
         <div className="editProfile_section">
