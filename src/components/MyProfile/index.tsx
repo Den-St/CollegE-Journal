@@ -14,13 +14,13 @@ import { securityLevels } from '../../consts/securityLevels';
 import { getToken } from '../../helpers/auth';
 import { useThemeStore } from '../../store/themeStore';
 import { useUserStore } from '../../store/userStore';
-import { EditProfile } from '../EditProfile';
 import { TeacherSchedule } from './LessonsSchedule';
 import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import { scheduleTimings } from '../../consts/scheduleTimings';
+import { StarSvg } from '../../assets/svgs/starSvg';
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -110,10 +110,14 @@ export const MyProfile = () => {
                         <p className='studentProfile__name'>
                             {user.full_name}
                             {/* {user.security_level !== securityLevels.admin &&  */}
+                            <StarSvg/>
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
                         </p>
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
-                        {!!user?.user_group?.group_full_name && <Link to={routes.pickJournalSubject + `?group_id=${user?.user_group?.group_id}`} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>}
+                        {!!user?.user_group?.group_full_name && 
+                        user.security_level === 1 
+                        ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
+                        : <Link to={routes.pickJournalSubject + `?group_id=${user?.user_group?.group_id}`} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>}
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>
@@ -156,6 +160,49 @@ export const MyProfile = () => {
                     )}
                 </div>
                 }
+        </section>
+        <section className='profile_detailedInfo_section'>
+            <div className='profile_detailedInfo_dir_container'>
+                <h1 className='profile_detailedInfo_dir_header'>Інформація про студентаx</h1>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Пошта студента</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Номер студента</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Дата народження</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Місце знаходження</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Отримання стипендії</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Форма навчання</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Бюджет/Контракт</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Дата вступу</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+            </div>
+            <div className='profile_detailedInfo_dir_container' style={{flexDirection:'column'}}>
+                <h1 className='profile_detailedInfo_dir_header'>Важливо</h1>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Цю інформацію не бачать інші студенти, також ви не можете цю інформацію самостійно редагувати</h2>
+                </div>
+            </div>
         </section>
         {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
         <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>

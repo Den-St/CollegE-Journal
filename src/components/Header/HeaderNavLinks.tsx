@@ -20,12 +20,14 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                 </svg>
             </Link>
         </>,
-        5:<>
-            {/* <Link to={routes.homePage} className={`menu__button`}>Головна
+        4:<>
+            <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
-            </Link> */}
+            </Link>
+        </>,
+        5:<>
             <Link  to={routes.adminPanel + `?section=schedule`} className={linksClassName + isActiveLink(routes.adminPanel)+ isActiveLink(routes.editGroup)}>Адмін-панель
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
@@ -72,15 +74,6 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>}
-            {/* {!!route && !!user.full_name && <Link className={linksClassName + isActiveLink(routes.faq)} to={routes.faq}>FAQ
-                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
-                    <path d="M1 1H51" strokeLinecap="round"/>
-                </svg>
-            </Link>} */}
             </>
         </>
-    // return <>
-    //         {securityLevelToLinks[user.security_level || 0]}
-    //         {!!route && <Link className={linksClassName} to={routes.homePage + '?section=news'}>Новини</Link>}
-    //     </>
 }

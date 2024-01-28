@@ -133,6 +133,28 @@
     }
 }
 
+.profile_detailedInfo_section{
+    background: #102936;
+    display: flex;
+    padding: 30px 40px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.profile_detailedInfo_dir_container{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    // justify-content: space-between;
+    column-gap:60px;    
+}
+.profile_detailedInfo_dir_header{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    width: 100%;
+}
 .studentProfileTab__title{
     font-size: 28px;
     font-weight: 500;
@@ -140,8 +162,38 @@
     width: 97%;
     text-align: start;
 }
+.profile_detailedInfo_itemContainer{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: 250px;
+}
+.profile_detailedInfo_item_header{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.1em;
+}
+.profile_detailedInfo_item_text{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+}
 
 .dark{
+    .profile_detailedInfo_item_text{
+        color: white;
+    }
+    .profile_detailedInfo_item_header{
+        color: #D0D0D0;
+    }
+    .profile_detailedInfo_dir_header{
+        color:white;
+    }
+    .profile_detailedInfo_section{
+        background: #102936;
+    }
     .studentProfile__name{
         color:white;
     }
