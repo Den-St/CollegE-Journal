@@ -127,9 +127,11 @@
     color:var(--primary-orange);
 }
 
-@media screen and (min-width:'1440px'){
+@media screen and (min-width:'1450px'){
     .studentProfileMain__container{
         // width: 1189px;
+        width: 90%;
+        justify-content: space-between;
     }
 }
 

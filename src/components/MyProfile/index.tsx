@@ -161,9 +161,10 @@ export const MyProfile = () => {
                 </div>
                 }
         </section>
+        {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
         <section className='profile_detailedInfo_section'>
             <div className='profile_detailedInfo_dir_container'>
-                <h1 className='profile_detailedInfo_dir_header'>Інформація про студентаx</h1>
+                <h1 className='profile_detailedInfo_dir_header'>Інформація про студента</h1>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Пошта студента</h2>
                     <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
@@ -204,7 +205,6 @@ export const MyProfile = () => {
                 </div>
             </div>
         </section>
-        {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
         <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">{!user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>

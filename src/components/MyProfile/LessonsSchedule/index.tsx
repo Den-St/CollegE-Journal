@@ -96,7 +96,7 @@ export const TeacherSchedule = () => {
     }];
 
     return <section className={`lessonsSchedule__container ${theme}`}>
-        <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}><h1 className='studentProfileTab__title'>Розклад вчитель</h1><button className='teacherShedule_addLink_button'>Посилання</button></div>
+        <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}><h1 className='studentProfileTab__title'>Розклад заннять</h1><button className='teacherShedule_addLink_button'>Посилання</button></div>
             {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">
                 <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    

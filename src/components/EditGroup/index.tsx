@@ -78,8 +78,56 @@ export const EditGroup = () => {
                     <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
-            <div className="createUserFormSelects__container">
+            <div className="createUserFormInputs__container">
+                <div className="createUserEmailInput__container">
+                    <label className="createUserInput__label">Інтереси</label>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть інтереси студента'/>
+                </div>
+                <div className="createUserSelect__container" style={{width:'50%'}}>
+                    <label className="createUserInput__label">Посада</label>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть посаду студента'}
+                            optionLabelProp="label"
+                            // {...createUserRegister('education_type',{required:true})}
+                            onChange={(e) => createUserSetValue('education_type',e)}
+                            value={createUserWatch('education_type')}
+                            >   
+                            <Option value={"Посада 1"} label={"Посада 1"}>Посада 1</Option>
+                            <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option>
+                        </Select>
+                    </div>
+                </div>
+            </div>
+            <div className="createUserFormInputs__container">
+                <div className="createUserEmailInput__container">
+                    <label className="createUserInput__label">Дата народження</label>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть дату народження'/>
+                </div>
+                <div className="createUserEmailInput__container">
+                    <label className="createUserInput__label">Дата вступу</label>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть дату вступу'/>
+                </div>
                 <div className="createUserSelect__container">
+                    <label className="createUserInput__label">Місцезнаходження</label>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть 1 варіант'}
+                            optionLabelProp="label"
+                            // {...createUserRegister('education_type',{required:true})}
+                            onChange={(e) => createUserSetValue('education_type',e)}
+                            value={createUserWatch('education_type')}
+                            >   
+                            <Option value={"В Україні"} label={"В Україні"}>В Україні</Option>
+                            <Option value={"За кордоном"} label={"За кордоном"}>За кордоном</Option>
+                        </Select>
+                    </div>
+                </div>
+            </div>
+            <div className="createUserFormInputs__container">
+                <div className="createUserSelect__container" style={{width:'32%'}}>
                     <label className="createUserInput__label">Форма навчання</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
@@ -94,7 +142,7 @@ export const EditGroup = () => {
                         </Select>
                     </div>
                 </div>
-                <div className="createUserSelect__container">
+                <div className="createUserSelect__container" style={{width:'32%'}}>
                     <label className="createUserInput__label">Бюджет/Контракт</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
@@ -110,13 +158,31 @@ export const EditGroup = () => {
                         </Select>
                     </div>
                 </div>
+                <div className="createUserSelect__container" style={{width:'32%'}}>
+                    <label className="createUserInput__label">Отримання стипендії</label>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть 1 варіант'}
+                            optionLabelProp="label"
+                            // {...createUserRegister('education_type',{required:true})}
+                            onChange={(e) => createUserSetValue('education_type',e)}
+                            value={createUserWatch('education_type')}
+                            >   
+                            <Option value={"Так"} label={"Так"}>Так</Option>
+                            <Option value={"Ні"} label={"Ні"}>Ні</Option>
+                        </Select>
+                    </div>
+                </div>
             </div>
+            {/* <div className="createUserFormSelects__container"> */}
+            {/* </div> */}
             {//@ts-ignore
-            // Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
+            Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
             }
-            {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
+            {/* {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
             {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
-            {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>}
+            {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>} */}
             {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>}
             <div className="createUserButtons__container">
                 <input 
