@@ -41,7 +41,8 @@ export const StudentsListAdmin = () => {
                     </Select>
                 </div> */}
                 <div className="adminPanelStudentList_conrollersContainer">
-                    <button className="adminPanelStudentList_add primary_button" onClick={onOpenCreateGroupModal}>Додати</button>
+                    <button className="adminPanelStudentList_add primary_button" onClick={onOpenCreateGroupModal}>Додати групу</button>
+                    <Link to={routes.createTeacher} className="adminPanelStudentList_add primary_button">Додати вчителя</Link>
                     {/* <button className="adminPanelStudentList_save">Зберити</button> */}
                 </div>
             </div>

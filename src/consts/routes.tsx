@@ -8,6 +8,9 @@ import { StudentSubjects } from "../components/PickJournalSubjects/StudentSubjec
 import { HomePage, HomeTask, HomeTasks, SignIn, Registration, MissedClasses, MyProfile, Students, TeacherProfile, Rating, Groups, SendHomeTask, AdminPanel, StudyMaterials, EditGroup, CreateHomeTask, CreateStudyMaterials, CreateUser, FAQ, NoMatch, Schedule, StudyMaterialsCheckTeacher, TeacherJournal } from "../pages";
 import { securityLevels } from "./securityLevels";
 import { PickJournalSubjects } from "../components/PickJournalSubjects";
+import { CreateTeacher } from "../components/CreateTeacher";
+import { UserProfile } from "../components/UserProfile";
+import { EditUser } from "../components/EditUser";
 
 export const navRoutes = {
 }
@@ -37,7 +40,10 @@ export const routes = {
     pickJournalSubject:'/pick-journal-subject',
     myProfile:'/my-profile',
     editProfile:'/edit-profile',
-    journal:'/journal'
+    journal:'/journal',
+    createTeacher:'/create-teacher',
+    userProfile:'/user-profile/:id',
+    editUser:'/edit-user/:id'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -125,6 +131,7 @@ export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
     <Route key={routes.myProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
+    <Route key={routes.userProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><UserProfile/></SecurityLevelGuard>} path={routes.userProfile}/>,  
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
     <Route key={routes.students} element={<Students/>} path={routes.students}/>,
@@ -145,6 +152,8 @@ export const PublicRoutes = [
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,
+    <Route key={routes.editUser} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditUser/></SecurityLevelGuard>} path={routes.editUser}/>,
+    <Route key={routes.createTeacher} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><CreateTeacher/></SecurityLevelGuard>} path={routes.createTeacher}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

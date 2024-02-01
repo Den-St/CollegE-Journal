@@ -72,48 +72,46 @@
     height: 40px;
 }
 
-.faqMain__container{
-    &.dark{
-        .faqTitle{
-            color:white;
+.dark{
+    .faqTitle{
+        color:white;
+    }
+    .ant-collapse-header-text{
+        color:white;
+    }
+    .ant-collapse-expand-icon{
+        path{
+            stroke:white !important;
+            fill:white !important;
         }
-        .ant-collapse-header-text{
-            color:white;
+    }
+    .ant-collapse-item:hover{
+        path{
+            stroke:var(--primary-orange) !important;
+            fill:var(--primary-orange) !important;
         }
-        .ant-collapse-expand-icon{
-            path{
-                stroke:white !important;
-                fill:white !important;
-            }
-        }
-        .ant-collapse-item:hover{
-            path{
-                stroke:var(--primary-orange) !important;
-                fill:var(--primary-orange) !important;
-            }
-        }
-        .ant-collapse-content {
-            background-color: #0e2936 !important;
-            color:white;
-        }
-        .ant-input{
-            background-color: var(--secondary-blue);
-        }
-        .ant-input{
-            color:white;
-        }
-        .ant-input::placeholder{
-            color:var(--primary-gray);
-        }
-        .faqSubmit{
-            color:var(--primary-gray);
-            background-color: var(--secondary-blue);
-        }
-        .ant-collapse-item-active{
-            path{
-                stroke:var(--primary-orange) !important;
-                fill:var(--primary-orange) !important;
-            }
+    }
+    .ant-collapse-content {
+        background-color: #0e2936 !important;
+        color:white;
+    }
+    .ant-input{
+        background-color: var(--secondary-blue);
+    }
+    .ant-input{
+        color:white;
+    }
+    .ant-input::placeholder{
+        color:var(--primary-gray);
+    }
+    .faqSubmit{
+        color:var(--primary-gray);
+        background-color: var(--secondary-blue);
+    }
+    .ant-collapse-item-active{
+        path{
+            stroke:var(--primary-orange) !important;
+            fill:var(--primary-orange) !important;
         }
     }
 }

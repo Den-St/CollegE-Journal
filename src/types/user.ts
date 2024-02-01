@@ -23,7 +23,7 @@ export type UserT = {
 }
 
 export type GroupUserT = {
-    user_id:string | null;
+    student_id:string | null;
     full_name:string,
     mailbox_address:string,
     avatar: string,

@@ -174,6 +174,10 @@
     gap:20px;
     margin-bottom: 36px;
 }
+.journalRightColumns__container.fixed{
+    position: fixed;
+    top:10px;
+}
 .journalRowItem__container{
     display: flex;
     align-items: center;
@@ -355,176 +359,174 @@
     }
 }
 
-.journalMain__container{
-    &.dark{
-        .journalRowItemCenterValue__text,
-        .journalRowItemCenterValue__input__text{
+.dark{
+    .journalRowItemCenterValue__text,
+    .journalRowItemCenterValue__input__text{
+        background-color: var(--secondary-blue);
+    }
+    .journalRowItemRightValue__text{
+        background-color: var(--secondary-blue);
+    }
+    .journalRowItem__container{
+        &.even{
             background-color: var(--secondary-blue);
-        }
-        .journalRowItemRightValue__text{
-            background-color: var(--secondary-blue);
-        }
-        .journalRowItem__container{
-            &.even{
-                background-color: var(--secondary-blue);
-                .journalRowItemCenterValue__text,
-                .journalRowItemCenterValue__input__text{
-                    background-color: var(--primary-dark);
-                }
-                .journalRowItemRightValue__text{
-                    background-color: var(--primary-dark);
-                }
+            .journalRowItemCenterValue__text,
+            .journalRowItemCenterValue__input__text{
+                background-color: var(--primary-dark);
             }
-        }
-        .journalRowItemLeft__container{
-            background-color: var(--primary-dark);
-        }
-        .journalRowItemLeft__container{
-            &.even{
-                background-color: var(--secondary-blue);
+            .journalRowItemRightValue__text{
+                background-color: var(--primary-dark);
             }
-        }
-        .journal__title{
-            color:white;
-        }
-        .journalFilterItem{
-            color: var(--primary-gray);
-        }
-        .journalRowItemLeft__number{
-            color:white;
-        }
-        .journalRowItemLeft__name{
-            color:white;
-        }
-        .journalRowItemCenterValue__text,
-        .journalRowItemCenterValue__input__text{
-            color:white;
-        }
-        .journalRowItemRightValue__container{
-            color:white;
-        }
-        .journalColumnsLeft__title{
-            color:var(--primary-gray)
-        }
-        .journalColumnsLeft__text{
-            color:var(--primary-gray);
-        }
-        .journalColumnsCenterItemType{
-            color:white;
-        }
-        .journalColumnsCenterItemDateDay{
-            color:white;
-        }
-        .journalColumnsCenterItemDate{
-            color:white;
-        }
-        .journalColumnsRightItemType{
-            color:white;
-        }
-        .journalColumnsRightItemMonth{
-            color:white;
-        }
-        .journalColumnsLeft__container{
-            background-color: var(--secondary-blue);
-        }
-        .journalColumnsCenterItemType{
-            background-color: var(--secondary-blue);
-        }
-        .journalColumnsCenterItemDate__container{
-            background-color: var(--secondary-blue);
-        }
-        .journalColumnsRightItemType{
-            background-color: var(--secondary-blue);
-        }
-        .journalColumnsRightItemMonth{
-            background-color: var(--secondary-blue);
-        }
-        .journalLessonThemeItem__container{
-            background-color: var(--secondary-blue);
-        }
-        .journalLessonThemeItemDate__day{
-            color:white;
-        }
-        .journalLessonThemeItemDate__date{
-            color:white;
-        }
-        .journalLessonThemeItem__text{
-            color:var(--primary-gray);
-        }
-        .journalLessonsThemes__title{
-            color:white;
-        }
-        .fillterImg {
-            stroke: var(--primary-gray);
-        }
-        .journalLessonThemeItemType{
-            color:var(--primary-orange);
-        }
-        .journal_portraitModeWarning_description{
-            color: var(--primary-gray);
-        }
-        .journal_portraitModeWarning{
-            color: white;
         }
     }
-    &.light{
-        .fillterImg {
-            stroke: #797979;
+    .journalRowItemLeft__container{
+        background-color: var(--primary-dark);
+    }
+    .journalRowItemLeft__container{
+        &.even{
+            background-color: var(--secondary-blue);
         }
-        .journalRowItemCenterValue__text,
-        .journalRowItemCenterValue__input__text{
+    }
+    .journal__title{
+        color:white;
+    }
+    .journalFilterItem{
+        color: var(--primary-gray);
+    }
+    .journalRowItemLeft__number{
+        color:white;
+    }
+    .journalRowItemLeft__name{
+        color:white;
+    }
+    .journalRowItemCenterValue__text,
+    .journalRowItemCenterValue__input__text{
+        color:white;
+    }
+    .journalRowItemRightValue__container{
+        color:white;
+    }
+    .journalColumnsLeft__title{
+        color:var(--primary-gray)
+    }
+    .journalColumnsLeft__text{
+        color:var(--primary-gray);
+    }
+    .journalColumnsCenterItemType{
+        color:white;
+    }
+    .journalColumnsCenterItemDateDay{
+        color:white;
+    }
+    .journalColumnsCenterItemDate{
+        color:white;
+    }
+    .journalColumnsRightItemType{
+        color:white;
+    }
+    .journalColumnsRightItemMonth{
+        color:white;
+    }
+    .journalColumnsLeft__container{
+        background-color: var(--secondary-blue);
+    }
+    .journalColumnsCenterItemType{
+        background-color: var(--secondary-blue);
+    }
+    .journalColumnsCenterItemDate__container{
+        background-color: var(--secondary-blue);
+    }
+    .journalColumnsRightItemType{
+        background-color: var(--secondary-blue);
+    }
+    .journalColumnsRightItemMonth{
+        background-color: var(--secondary-blue);
+    }
+    .journalLessonThemeItem__container{
+        background-color: var(--secondary-blue);
+    }
+    .journalLessonThemeItemDate__day{
+        color:white;
+    }
+    .journalLessonThemeItemDate__date{
+        color:white;
+    }
+    .journalLessonThemeItem__text{
+        color:var(--primary-gray);
+    }
+    .journalLessonsThemes__title{
+        color:white;
+    }
+    .fillterImg {
+        stroke: var(--primary-gray);
+    }
+    .journalLessonThemeItemType{
+        color:var(--primary-orange);
+    }
+    .journal_portraitModeWarning_description{
+        color: var(--primary-gray);
+    }
+    .journal_portraitModeWarning{
+        color: white;
+    }
+}
+.light{
+    .fillterImg {
+        stroke: #797979;
+    }
+    .journalRowItemCenterValue__text,
+    .journalRowItemCenterValue__input__text{
+        background-color: #F2F2F2;
+    }
+    .journalRowItemRightValue__text{
+        background-color: white;
+    }
+    .journalRowItemLeft__container{
+        &.even{
             background-color: #F2F2F2;
         }
-        .journalRowItemRightValue__text{
-            background-color: white;
-        }
-        .journalRowItemLeft__container{
-            &.even{
+    }
+    .journalRowItem__container{
+        &.even{
+            background-color: #F2F2F2;
+            .journalRowItemCenterValue__text,
+            .journalRowItemCenterValue__input__text{
+                background-color: white;
+            }
+            .journalRowItemRightValue__text{
                 background-color: #F2F2F2;
             }
         }
-        .journalRowItem__container{
-            &.even{
-                background-color: #F2F2F2;
-                .journalRowItemCenterValue__text,
-                .journalRowItemCenterValue__input__text{
-                    background-color: white;
-                }
-                .journalRowItemRightValue__text{
-                    background-color: #F2F2F2;
-                }
-            }
-        }
-        .journalColumnsLeft__container{
-            background-color: #F2F2F2;
-        }
-        .journalColumnsCenterItemType{
-            background-color: #F2F2F2;
-        }
-        .journalColumnsCenterItemDate__container{
-            background-color: #F2F2F2;
-        }
-        .journalColumnsRightItemType{
-            background-color: #F2F2F2;
-        }
-        .journalColumnsRightItemMonth{
-            background-color: #F2F2F2;
-        }
-        .journalColumnsCenterItemDate{
-            color:var(--primary-orange);
-        }
-        .journalLessonThemeItem__container{
-            background: #F2F2F2;
-        }
-        .journalLessonThemeItemDate__date{
-            color:var(--primary-orange);
-        }
-        .journalLessonThemeItemType{
-            color:black;
-        }
-        .journalColumnsLeft__text{
-            color:#797979;
-        }
+    }
+    .journalColumnsLeft__container{
+        background-color: #F2F2F2;
+    }
+    .journalColumnsCenterItemType{
+        background-color: #F2F2F2;
+    }
+    .journalColumnsCenterItemDate__container{
+        background-color: #F2F2F2;
+    }
+    .journalColumnsRightItemType{
+        background-color: #F2F2F2;
+    }
+    .journalColumnsRightItemMonth{
+        background-color: #F2F2F2;
+    }
+    .journalColumnsCenterItemDate{
+        color:var(--primary-orange);
+    }
+    .journalLessonThemeItem__container{
+        background: #F2F2F2;
+    }
+    .journalLessonThemeItemDate__date{
+        color:var(--primary-orange);
+    }
+    .journalLessonThemeItemType{
+        color:black;
+    }
+    .journalColumnsLeft__text{
+        color:#797979;
     }
 }
 .journalColumnsCenterItemType.transparent{

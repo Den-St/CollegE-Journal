@@ -29,7 +29,7 @@ export const EditGroup = () => {
     const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
-
+    console.log('d',group?.group_students)
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
@@ -193,12 +193,12 @@ export const EditGroup = () => {
         <section className="studentList__container">
             <div className="studentItems__container" style={{'justifyContent':'space-between'}}>
                 {group?.group_students?.map(student => 
-                    <div id={student.user_id || ''} className="student__container">
+                    <div id={student.student_id || ''} className="student__container">
                         <div className="student__info">
                             <img className="studentList__avatar" src={student?.avatar || defaultAvatar} alt=""/>
                             <p className="studentName">{student?.full_name}</p>
                         </div>
-                        <Link  className="studentButton" to="#">Перейти</Link>
+                        <Link  className="studentButton" to={routes.userProfile.replace(':id',student.student_id || '')}>Перейти</Link>
                     </div> 
                 )}
             </div>

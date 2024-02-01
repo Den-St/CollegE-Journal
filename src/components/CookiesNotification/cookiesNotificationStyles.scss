@@ -34,19 +34,19 @@
     transition: 0.3s;
 }
 
-.cookies__container{
-    &.dark{
+.dark{
+    .cookies__container{
         background-color: var(--secondary-blue);
-        .cookiesAccept_button{
-            color:var(--primary-gray);
-            background-color: var(--primary-dark);
-        }
-        .cookiesAccept_button:hover{
-            color:white;
-            box-shadow: 0px 0px 10px 0px #D4D4D41A;
-        }
-        .cookiesInfo{
-            color:white;
-        }
+    }
+    .cookiesAccept_button{
+        color:var(--primary-gray);
+        background-color: var(--primary-dark);
+    }
+    .cookiesAccept_button:hover{
+        color:white;
+        box-shadow: 0px 0px 10px 0px #D4D4D41A;
+    }
+    .cookiesInfo{
+        color:white;
     }
 }

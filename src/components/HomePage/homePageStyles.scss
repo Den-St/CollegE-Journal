@@ -625,163 +625,161 @@ img{vertical-align: top;}
     display: none;
 }
 
-.homePage{
-    &.dark{
-        .rotate__text{
-            color:#FFF;
-        }
-        .inst{
-            fill:#FFF;
-        }
-        .tg{
-            fill:#FFF;
-        }
-        .first_screen{
-            background: url('../../assets/images/first_screen.png');
-            background-repeat: no-repeat;
-            background-size: 100% 835px;
-            background-position: center;
-        }
-        .eGurnal{
-            color:#FFF;
-        }
-        .line{
-            background-color:#FFF;
-        }
-        .mPhrase{
-            color:#FFF;
-        }
-        .newsLine{
-            background-color: var(--primary-orange);
-        }
-        .line{
-            background-color: var(--primary-orange);
-        }
-        .eGurnal{
-            color:var(--primary-yellow,var(--primary-orange));
-        }
-        .gournal__info{
-            background-image: url('../../assets/images/infoJournalBackDark.png');
-        }
-        .pNav__container.active{
-            border-color:white;
-        }
-        .pNav__btn .active{
-            color:white;
-        }
-        .pNav__container:hover{
-            border-color:white;
-            .pNav__btn{
-                color: white;
-            }
-        }
-        .info__btn:hover{
-            box-shadow: 0px 0px 10px 0px #D4D4D41A;
-        }
-        .info__btn:active{
-            background: linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)),
-    linear-gradient(0deg, #EFB42D, #EFB42D);
+.dark{
+    .rotate__text{
+        color:#FFF;
+    }
+    .inst{
+        fill:#FFF;
+    }
+    .tg{
+        fill:#FFF;
+    }
+    .first_screen{
+        background: url('../../assets/images/first_screen.png');
+        background-repeat: no-repeat;
+        background-size: 100% 835px;
+        background-position: center;
+    }
+    .eGurnal{
+        color:#FFF;
+    }
+    .line{
+        background-color:#FFF;
+    }
+    .mPhrase{
+        color:#FFF;
+    }
+    .newsLine{
+        background-color: var(--primary-orange);
+    }
+    .line{
+        background-color: var(--primary-orange);
+    }
+    .eGurnal{
+        color:var(--primary-yellow,var(--primary-orange));
+    }
+    .gournal__info{
+        background-image: url('../../assets/images/infoJournalBackDark.png');
+    }
+    .pNav__container.active{
+        border-color:white;
+    }
+    .pNav__btn .active{
+        color:white;
+    }
+    .pNav__container:hover{
+        border-color:white;
+        .pNav__btn{
+            color: white;
         }
     }
-    &.light{
-        .rotate__text{
-            color:var(--primary-black,var(--primary-dark));
-        }
-        .inst{
-            fill:var(--primary-dark);
-        }
-        .tg{
-            fill:var(--primary-dark);
-        }
-        .first_screen{
-            background: url('../../assets/images/firstScreenLight.png');
-            background-repeat: no-repeat;
-            background-size: 100% 835px;
-            background-position: center;
-        }
-        .eGurnal{
-            color:var(--primary-dark);
-        }
-        .line{
-            background: var(--primary-yellow, var(--primary-dark));
-        }
-        .mPhrase{
-            color:var(--primary-dark);
-        }
-        .pNav__container{
-            border-color:#FFF;
-        }
-        .pNav__container.active{
-            border-color:black;
-        }
+    .info__btn:hover{
+        box-shadow: 0px 0px 10px 0px #D4D4D41A;
+    }
+    .info__btn:active{
+        background: linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)),
+linear-gradient(0deg, #EFB42D, #EFB42D);
+    }
+}
+.light{
+    .rotate__text{
+        color:var(--primary-black,var(--primary-dark));
+    }
+    .inst{
+        fill:var(--primary-dark);
+    }
+    .tg{
+        fill:var(--primary-dark);
+    }
+    .first_screen{
+        background: url('../../assets/images/firstScreenLight.png');
+        background-repeat: no-repeat;
+        background-size: 100% 835px;
+        background-position: center;
+    }
+    .eGurnal{
+        color:var(--primary-dark);
+    }
+    .line{
+        background: var(--primary-yellow, var(--primary-dark));
+    }
+    .mPhrase{
+        color:var(--primary-dark);
+    }
+    .pNav__container{
+        border-color:#FFF;
+    }
+    .pNav__container.active{
+        border-color:black;
+    }
+    .pNav__btn{
+        color:#797979;
+    }
+    .pNav__btn .active{
+        color:#000000;
+    }
+    .pNav__container:hover{
+        border-color:var(--primary-dark);
         .pNav__btn{
-            color:#797979;
+            color: var(--primary-dark);
         }
-        .pNav__btn .active{
-            color:#000000;
-        }
-        .pNav__container:hover{
-            border-color:var(--primary-dark);
-            .pNav__btn{
-                color: var(--primary-dark);
-            }
-        }
-        .news__page{
-            background-color: #FFF;
-        }
-        .news__text{
-            color: #797979;
-        }
-        .slider__element{
-            background-color: #FFF;
-        }
-        .sectionNumber{
-            fill:black;
-        }
-        .news__date{
-            color:var(--primary-dark);
-        }
-        .newsLine{
-            background-color: var(--primary-orange);
-        }
-        .gournal__info{
-            background-color: #FFF;
-        }
-        .info__h1{
-            color:var(--primary-dark);
-        }
-        .about__h1{
-            color:var(--primary-dark);
-        }
-        .about__page{
-            background-color: #FFF;
-        }
-        .about__paragraph{
-            color:var(--primary-dark);
-        }
-        .info__paragraph{
-            color:var(--primary-dark);
-        }
-        .sup__circle{
-            background: #ebb52cb0;
-            filter: blur(60px); 
-        }
-        .thirdCircle{
-            background: #eb2c2cc3;
-            filter: blur(60px); 
-        }
-        .slick-arrow::before{
-            color:black !important;
-        }
-        .slick-arrow::before:hover{
-            color:var(--primary-orange) !important;
-        }
-        .slick-prev::before{
-            color:black !important;
-        }
-        .gournal__info{
-            background-image: url('../../assets/images/infoJournalBackLight.png');
-        }
+    }
+    .news__page{
+        background-color: #FFF;
+    }
+    .news__text{
+        color: #797979;
+    }
+    .slider__element{
+        background-color: #FFF;
+    }
+    .sectionNumber{
+        fill:black;
+    }
+    .news__date{
+        color:var(--primary-dark);
+    }
+    .newsLine{
+        background-color: var(--primary-orange);
+    }
+    .gournal__info{
+        background-color: #FFF;
+    }
+    .info__h1{
+        color:var(--primary-dark);
+    }
+    .about__h1{
+        color:var(--primary-dark);
+    }
+    .about__page{
+        background-color: #FFF;
+    }
+    .about__paragraph{
+        color:var(--primary-dark);
+    }
+    .info__paragraph{
+        color:var(--primary-dark);
+    }
+    .sup__circle{
+        background: #ebb52cb0;
+        filter: blur(60px); 
+    }
+    .thirdCircle{
+        background: #eb2c2cc3;
+        filter: blur(60px); 
+    }
+    .slick-arrow::before{
+        color:black !important;
+    }
+    .slick-arrow::before:hover{
+        color:var(--primary-orange) !important;
+    }
+    .slick-prev::before{
+        color:black !important;
+    }
+    .gournal__info{
+        background-image: url('../../assets/images/infoJournalBackLight.png');
     }
 }
 

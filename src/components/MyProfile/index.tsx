@@ -114,6 +114,7 @@ export const MyProfile = () => {
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
                         </p>
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
+                        {/* <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p> */}
                         {!!user?.user_group?.group_full_name && 
                         user.security_level === 1 
                         ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 

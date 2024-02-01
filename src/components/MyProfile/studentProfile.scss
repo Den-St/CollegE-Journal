@@ -67,7 +67,14 @@
     font-size: 20px;
     line-height: 24px;
 }
-
+.studentProfile__bio{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    width: 50%;
+}
 .studentProfile__group{
     font-weight: 400;
     font-size: 20px;
@@ -234,6 +241,9 @@
     }
     .medium{
         color:var(--primary-orange);
+    }
+    .studentProfile__bio{
+        color: #D0D0D0;
     }
 }
 .light{

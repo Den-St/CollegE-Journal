@@ -1,5 +1,5 @@
 import { Select } from 'antd';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -15,6 +15,7 @@ import { useThemeStore } from '../../store/themeStore';
 import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { CellInput } from './CellInput';
+import _debounce from 'lodash/debounce';
 import './journalStyles.scss';
 const {Option} = Select;
 
@@ -25,8 +26,13 @@ export const TeacherJournal = () => {
     const theme = useThemeStore().theme;
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
+    // const columnsDivRef = useRef<HTMLDivElement>(null);
+
     const isDisabledByDate = (dateString:string) => {
-        if(+dateString.split('\n')[0].split('.')[0] > currentDate || +dateString.split('\n')[0].split('.')[1] > currentMonth) {
+        if(+dateString.split('\n')[0].split('.')[1] > currentMonth) {
+            return true;
+        }
+        if(+dateString.split('\n')[0].split('.')[1] === currentMonth && +dateString.split('\n')[0].split('.')[0] > currentDate){
             return true;
         }
         return false;
@@ -54,6 +60,24 @@ export const TeacherJournal = () => {
         document.title = `${groupJournal?.group_full_name} - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
     },[fillters.subject_id,fillters.month,groupJournal]);
 
+    // useEffect(() => {
+    //     const distanceFromTop = window.scrollY;
+    //     console.log(columnsDivRef.current?.getBoundingClientRect().top);  
+    // },[columnsDivRef.current]); 
+
+    // const [columnsDivPosition,setColumsDivPosition] = useState<'static' | 'fixed'>('static');
+    // const handleScroll = () => {
+    //     const distanceFromTop = window.scrollY;
+    //     const distanceToElement = columnsDivRef.current?.getBoundingClientRect().top || 0;
+    //     setColumsDivPosition(distanceFromTop > distanceToElement ? 'fixed' : 'static');
+    // }
+    // const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[]);
+
+    // useEffect(() => {
+    //     window.addEventListener('scroll',debounceHandleScroll);
+    // },[]);
+    // console.log(columnsDivPosition);
+    console.log('re')
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
 
@@ -119,7 +143,7 @@ export const TeacherJournal = () => {
                 )}
             </div>
             <div className='journalRight__container'>
-                <div className='journalRightColumns__container'>
+                <div className={`journalRightColumns__container`}>
                     <div className='journalColumnsCenter__container'>
                     {journal?.columns.map(column => 
                         <div key={column.column_id} className='journalColumnsCenterItem__container'>
@@ -138,7 +162,7 @@ export const TeacherJournal = () => {
                                         // showArrow={!column.lesson_type}
                                         onChange={(value) => onChangeLessonType(column.column_id,value)}>
                                             <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
-                                            <Option label={"Практика1234213"} value={"Практика21342341"}>Практика14231423</Option>
+                                            <Option label={"Практика"} value={"Практика"}>Практика</Option>
                                             <Option label={"Залік"} value={"Залік"}>Залік</Option>
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
                                             <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
