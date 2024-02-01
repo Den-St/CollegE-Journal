@@ -14,6 +14,7 @@ type Props = {
 }
 const isValid = (value:string) => {
     if(value === "") return true;
+    if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
         if(value.length === 1 && value[0].toLowerCase() === 'н') return true;
