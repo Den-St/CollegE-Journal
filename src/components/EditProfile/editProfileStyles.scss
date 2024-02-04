@@ -26,6 +26,9 @@
 }
 .editProfileChangePhoto_container{
     width: 81px;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
 }
 .editProfile_form{
     display: flex;
@@ -89,6 +92,13 @@
 .studentProfile_img_edit{
     width: 110px !important;
     height: 110px !important;
+}
+.editProfile_section_header{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: left;
 }
 .dark{
     .editProfile_header{

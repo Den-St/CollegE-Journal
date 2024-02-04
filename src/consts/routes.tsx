@@ -11,6 +11,7 @@ import { PickJournalSubjects } from "../components/PickJournalSubjects";
 import { CreateTeacher } from "../components/CreateTeacher";
 import { UserProfile } from "../components/UserProfile";
 import { EditUser } from "../components/EditUser";
+import { Teachers } from "../components/Teachers";
 
 export const navRoutes = {
 }
@@ -43,7 +44,8 @@ export const routes = {
     journal:'/journal',
     createTeacher:'/create-teacher',
     userProfile:'/user-profile/:id',
-    editUser:'/edit-user/:id'
+    editUser:'/edit-user/:id',
+    teachers:'/teachers'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -149,6 +151,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
+    <Route key={routes.teachers} element={<SecurityLevelGuard securityLevel={securityLevels.student}><Teachers/></SecurityLevelGuard>} path={routes.teachers}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,

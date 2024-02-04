@@ -79,7 +79,7 @@ const useEditProfile = () => {
     }
     useEffect(() => {
         if(!Cookies.get('comfirmedPassword')){
-            navigate(routes.myProfile);
+            // navigate(routes.myProfile);
         }
     },[]);
     
@@ -103,18 +103,26 @@ export const EditProfile = () => {
         <h1 className="editProfile_header"><button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>Редагування профілю</h1>
         {/* {user.is_active && <h1 className="editProfile_header">Для того щоб активувати особовий запис потрібно змінити пароль.</h1>} */}
         <div className='studentProfileInfo__container editProfileUserInfo'>
-            <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
+            <div className="editProfileChangePhoto_container">
+                <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
+                <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
+                    <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
+                </Upload>
+            </div>
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>
                 <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
                 {!!user?.user_group?.group_full_name && <p className='studentProfile__group'>{user?.user_group?.group_full_name}</p>}
-            </div>
-        </div>
-        <div className="editProfile_section">
-            <div className="editProfileChangePhoto_container">
-                <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
-                    <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
-                </Upload>
+                <form onSubmit={handleSubmit(onSubmit)} style={{width:'400px'}} className="editProfile_form" autoComplete={"off"}>
+                    <h2 style={{marginBottom:'12px'}} className="editProfile_section_header">Інтереси</h2>
+                    <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                        <input
+                        className="input editProfile_input" placeholder="Введіть інтереси" autoComplete={"off"} />
+                    </div>
+                    {!!formError && <p className="signIn_errorMessage">{formError}</p>}
+                    {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
+                    <input type={'submit'} className="primary_button" value={'Зберегти зміни'}/>
+                </form>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="editProfile_form" autoComplete={"off"}>
                 <div className="editProfile_header_container">
@@ -129,10 +137,11 @@ export const EditProfile = () => {
                     <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
                     <span onClick={() => onTogglePassword(2)} className='passwordEye__button'>{passwordInputType[2] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
                 </div>
-                {!!formError && <p className="signIn_errorMessage">{formError}</p>}
-                {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
-                <input type={'submit'} className="primary_button" value={'Зберегти зміни'}/>
+                
             </form>
+        </div>
+        <div className="editProfile_section">
+            
         </div>
     </div>
 }

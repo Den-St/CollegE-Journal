@@ -28,9 +28,10 @@ export const Footer = () => {
                     {!route ?
                      <li><button className="fList__btn" onClick={() => goToSection(sectionIds.news.scrollTo)}>Новини</button></li> 
                     : <li><Link  className="fList__btn" to={routes.homePage + '?section=news'}>Новини</Link></li> }
-                    {!route ? 
+                    {/* {!route ? 
                         <li><button className="fList__btn" onClick={() => goToSection(sectionIds.about.scrollTo)}>Про нас</button></li>
-                    : <li><Link  className="fList__btn" to={routes.homePage + `?section=about`}>Про нас</Link></li>}
+                    : <li><Link  className="fList__btn" to={routes.homePage + `?section=about`}>Про нас</Link></li>} */}
+                    <li><Link  className="fList__btn" to={routes.teachers}>Викладачі</Link></li>
                     <li><Link  className="fList__btn" to={routes.faq}>FAQ</Link></li>
                 </ul>
                 <div>
