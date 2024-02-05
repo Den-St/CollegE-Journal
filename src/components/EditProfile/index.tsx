@@ -79,7 +79,7 @@ const useEditProfile = () => {
     }
     useEffect(() => {
         if(!Cookies.get('comfirmedPassword')){
-            // navigate(routes.myProfile);
+            navigate(routes.myProfile);
         }
     },[]);
     
@@ -106,7 +106,7 @@ export const EditProfile = () => {
             <div className="editProfileChangePhoto_container">
                 <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
                 <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
-                    <Button className="uploadButton" icon={<UploadOutlined />}>Загрузити</Button>
+                    <Button className="uploadButton" icon={<UploadOutlined />}>Завантажити</Button>
                 </Upload>
             </div>
             <div className='studentProfileTextInfo__container'>

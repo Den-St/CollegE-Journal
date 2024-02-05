@@ -29,7 +29,7 @@ export const CreateTeacher = () => {
                 </div>
             </div>
             <div className="createUserFormInputs__container">
-                <div className="createUserEmailInput__container">
+                <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Номер викладача</label>
                     <input autoComplete="off" {...createUserRegister('mailbox_address',{required:false,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть номер викладача'/>
                 </div>
@@ -39,7 +39,7 @@ export const CreateTeacher = () => {
                 </div>
             </div>
             <div className="createUserFormInputs__container">
-            <div className="createUserSelect__container" style={{width:'50%'}}>
+            <div className="createUserSelect__container" style={{width:'45%'}}>
                     <label className="createUserInput__label">Посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
@@ -55,7 +55,7 @@ export const CreateTeacher = () => {
                         </Select>
                     </div>
                 </div>
-                <div className="createUserSelect__container" style={{width:'50%'}}>
+                <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="createUserInput__label">Додаткова посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select

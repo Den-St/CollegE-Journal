@@ -83,7 +83,7 @@ export const EditGroup = () => {
                     <label className="createUserInput__label">Інтереси</label>
                     <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть інтереси студента'/>
                 </div>
-                <div className="createUserSelect__container" style={{width:'50%'}}>
+                <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="createUserInput__label">Посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
