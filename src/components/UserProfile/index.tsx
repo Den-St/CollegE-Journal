@@ -31,7 +31,7 @@ export const UserProfile = () => {
                                 {/* {user.security_level !== securityLevels.admin &&  */}
                                 <StarSvg/>
                                 {mySecurityLevel === securityLevels.admin && 
-                                <Link to={routes.editUser + `?${1}`} className='editUserProfile_button'><EditProfileSvg/></Link>}
+                                <Link to={routes.editUser.replace(':id','1')} className='editUserProfile_button'><EditProfileSvg/></Link>}
                             </p>
                             <p className='studentProfile__email'>{
                             // user.mailbox_address || 
