@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { StarSvg } from "../../assets/svgs/starSvg"
@@ -14,7 +15,7 @@ export const EditUser = () => {
     const theme = useThemeStore().theme;
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
-    
+
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
             <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>

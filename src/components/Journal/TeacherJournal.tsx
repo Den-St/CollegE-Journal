@@ -77,7 +77,7 @@ export const TeacherJournal = () => {
     //     window.addEventListener('scroll',debounceHandleScroll);
     // },[]);
     // console.log(columnsDivPosition);
-    console.log('re')
+
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
 

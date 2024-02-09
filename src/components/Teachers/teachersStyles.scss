@@ -12,6 +12,22 @@
     line-height: 34px;
     letter-spacing: 0.1em;
 }
+.teachersHeader_container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.teachersHeaderLeft_container{
+    display: flex;
+    gap:60px;
+    align-items: center;
+}
+.teachersHeaderRight_container{
+    display: flex;
+    gap:30px;
+    align-items: center;
+}
 .teachersSections_container{
     display: flex;
     flex-direction: column;
@@ -68,6 +84,13 @@
     line-height: 22px;
     letter-spacing: 0.1em;
 }
+.teachersGoToGroups_link{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
 .dark{
     .teachersHeader,
     .teacherItem_name,
@@ -81,5 +104,8 @@
     .teacherItem_container{
         background-color: var(--primary-dark);
         box-shadow: 0px 1px 15px 0px #D4D4D41A;
+    }
+    .teachersGoToGroups_link{
+        color: var(--primary-gray);
     }
 }

@@ -356,6 +356,7 @@
     display: flex;
     gap:30px;
 }
+
 .dark{
     .adminPanelStudentList_add{
         color:white;
@@ -398,6 +399,9 @@
         .fillterImg{
             stroke:var(--primary-orange);
         }
+    }
+    .adminPanelStudentList_teachers_link{
+        color:white;
     }
 }
 .light{

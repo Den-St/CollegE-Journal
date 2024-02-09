@@ -26,7 +26,7 @@ export const useGetTeacherJournal = () => {
         if(!journalId) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.journal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.journal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId,month:-1},{headers:{Authorization:localToken || cookieToken}});
             setJournal(res.data);
         }catch(err){
             console.error(err);

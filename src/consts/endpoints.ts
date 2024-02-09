@@ -6,7 +6,7 @@ export const endpoints = {
     changeGroup:'admin/groups/update-group',
     faq:'faq',
     getGroup:'admin/groups/group',
-    journal:'journal/teacher',
+    journal:'journal/one-subject/teacher',
     userGroups:'groups/user-groups',
     changePassword:'users/change/password',
     changeAvatar:'users/change/avatar',
@@ -14,7 +14,7 @@ export const endpoints = {
     supervisors:'admin/groups/group-supervisors',
     login:'users/login',
     studentGroupSubjects:'groups/group',
-    studentJournal:'journal/student',
+    studentJournal:'journal/one-subject/student',
     journalEditCell:'journal/edit-cell',
     journalEditCellType:'journal/edit-cell-type',
     journalEditCellTopic:'journal/edit-cell-topic'
