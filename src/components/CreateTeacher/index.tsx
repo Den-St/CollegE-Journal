@@ -22,7 +22,7 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
                     <input autoComplete="off"  
-                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї]*$/,message:'Некорректне ПІБ!'}})} 
+                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} 
                     className="createUser__input" placeholder='Введіть ПІБ викладача'/>
                 </div>
                 <div className="createUserEmailInput__container">

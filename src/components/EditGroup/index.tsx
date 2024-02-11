@@ -71,7 +71,7 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї]*$/,message:'Некорректне ПІБ!'}})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта студента</label>
