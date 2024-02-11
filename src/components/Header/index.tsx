@@ -17,6 +17,7 @@ import { defaultAvatar } from '../../consts/defaultAvatar';
 import { UserPopup } from '../UserPopup';
 import { HeaderNavLinks } from './HeaderNavLinks';
 import { useSideMenuStore } from '../../store/sideMenuStore';
+import { securityLevels } from '../../consts/securityLevels';
 
 const useHeaderVisibility = () => {
     const [headerVisibilityClass,setHeaderVisibilityClass] = useState<'visible' | 'hidden' | 'visible_on_scroll' | 'visible_on_touch'>('visible');
@@ -72,7 +73,7 @@ export const Header = () => {
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
                         </div> 
                         : <Popover rootClassName='userPopup' arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
-                            <Link to={routes.myProfile}>
+                            <Link to={user.security_level === securityLevels.admin ? routes.adminPanel : routes.myProfile}>
                                 <img className='header_avatar' src={user.avatar || defaultAvatar}/>
                             </Link>
                         </Popover>}

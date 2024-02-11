@@ -1,3 +1,4 @@
+import { securityLevels } from './../consts/securityLevels';
 import { routes } from './../consts/routes';
 import { useNavigate } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
@@ -14,10 +15,24 @@ export const useSignIn = () => {
     const [remember,setRemember] = useState(false);
     const signIn = useUserStore().signIn;
     const navigate = useNavigate();
-    const auth = async (token:string) => {
+    const auth = async (token:string,active:boolean) => {
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
             signIn(res.data.data);
+            if(res.data.data.security_level === securityLevels.admin) {
+                navigate(routes.adminPanel + '?section=schedule');
+                return;
+            }
+            console.log('active',active);
+            if(res.data.data.is_active){
+                navigate(routes.myProfile);
+                return;
+            }
+            if(!res.data.data.is_active) {
+                Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
+                navigate(routes.editProfile);
+                setStatus(2);
+            }
         }catch(err){
             console.error(err);
         }
@@ -34,14 +49,11 @@ export const useSignIn = () => {
                     token:res.data.data.token,
                     ...res.data.data
                 });
-                await auth(res.data.data.token);
+                await auth(res.data.data.token,res.data.data.active);
             }
-            setStatus(res?.data.status);
-            if(!res.data.data.active) {
-                Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
-                navigate(routes.editProfile);
-                setStatus(2);
-            }
+            console.log(res.data.data);
+            
+            // setStatus(res?.data.status);
         }catch(err){
             setStatus(0);
             console.error(err);

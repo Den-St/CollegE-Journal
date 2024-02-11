@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { routes } from '../../consts/routes';
-import { securityLevelsToNames } from '../../consts/securityLevels';
+import { securityLevels, securityLevelsToNames } from '../../consts/securityLevels';
 import { deleteTokenCookie } from '../../helpers/auth';
 import { useThemeController } from '../../hooks/themeController';
 import { useUserStore } from '../../store/userStore';
@@ -29,7 +29,9 @@ export const UserPopup = () => {
         </div>
         <div className='userInfoPopupLinks_container'>
             <h6 className='userInfoPopupLinks_header'>кабінет</h6>
-            <Link  to={routes.myProfile} className='userPopupSignOut_button'>Особистий кабінет</Link>
+            {user.security_level === securityLevels.admin  
+            ? <Link to={routes.adminPanel + '?section=schedule'} className='userPopupSignOut_button'>Кабінет адміністратора</Link> 
+            : <Link to={routes.myProfile} className='userPopupSignOut_button'>Особистий кабінет</Link>}
             <button className='userPopupSignOut_button' onClick={onSignOut}>Вийти з акаунту</button>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { securityLevels } from "../../consts/securityLevels";
 import { useUserStore } from "../../store/userStore"
 import { Loader } from "../Loader/Loader";
 import { NoMatch } from "../NoMatch";
@@ -16,7 +16,7 @@ export const SecurityLevelGuard:React.FC<Props> = ({children,securityLevel,isAct
     if(userLoading) return <Loader/>;
     if(user.security_level === null || user.security_level < securityLevel) return <NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>;
     if(isActiveRequired && !user.is_active) return <NoMatch title="Активуйте свій запис" description="Щоб отримати доступ до функціоналу електронного журналу необхідно змінити пароль."/>;
-    // if(blockedForAdmin) return <NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>;
+    if(blockedForAdmin && user.security_level === securityLevels.admin) return <NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>;
 
     return <>{children}</>
 }

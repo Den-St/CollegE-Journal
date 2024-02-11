@@ -132,7 +132,7 @@ const securityLevelToRoutes:Record<number,string[]> = {
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
-    <Route key={routes.myProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
+    <Route key={routes.myProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
     <Route key={routes.userProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><UserProfile/></SecurityLevelGuard>} path={routes.userProfile}/>,  
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
@@ -151,7 +151,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
-    <Route key={routes.teachers} element={<SecurityLevelGuard securityLevel={securityLevels.student}><Teachers/></SecurityLevelGuard>} path={routes.teachers}/>,
+    <Route key={routes.teachers} element={<Teachers/>} path={routes.teachers}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,
