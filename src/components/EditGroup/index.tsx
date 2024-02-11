@@ -29,13 +29,13 @@ export const EditGroup = () => {
     const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
-    console.log('d',group?.group_students)
+
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
         <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Змінення групи</h1>
         <form className="createGroup_form"
-        onSubmit={changeGroupHangeSubmit(onChangeGroupInfo)}
+            onSubmit={changeGroupHangeSubmit(onChangeGroupInfo)}
         >
             <div className="createUserFormSelects__container createGroupFormSelects__container">
                 <div className="editGroupSelect__container">
@@ -82,8 +82,8 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Інтереси</label>
                     <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})}
-                     type={'email'} className="createUser__input" placeholder='Введіть інтереси студента'/>
+                    {...createUserRegister('interests',{required:false})}
+                    className="createUser__input" placeholder='Введіть інтереси студента'/>
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="createUserInput__label">Посада</label>
@@ -92,9 +92,9 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть посаду студента'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('job_title',{required:false})}
+                            onChange={(e) => createUserSetValue('job_title',e)}
+                            value={createUserWatch('job_title')}
                             >   
                             <Option value={"Посада 1"} label={"Посада 1"}>Посада 1</Option>
                             <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option>
@@ -106,14 +106,14 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Дата народження</label>
                     <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})}
-                     type={'email'} className="createUser__input" placeholder='Введіть дату народження'/>
+                    {...createUserRegister('birth_date',{required:true})}
+                    className="createUser__input" placeholder='Введіть дату народження'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Дата вступу</label>
                     <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})}
-                     type={'email'} className="createUser__input" placeholder='Введіть дату вступу'/>
+                    {...createUserRegister('admission_date',{required:true})}
+                    className="createUser__input" placeholder='Введіть дату вступу'/>
                 </div>
                 <div className="createUserSelect__container">
                     <label className="createUserInput__label">Місцезнаходження</label>
@@ -122,9 +122,9 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть 1 варіант'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('location',{required:true})}
+                            onChange={(e) => createUserSetValue('location',e)}
+                            value={createUserWatch('location')}
                             >   
                             <Option value={"В Україні"} label={"В Україні"}>В Україні</Option>
                             <Option value={"За кордоном"} label={"За кордоном"}>За кордоном</Option>
@@ -140,8 +140,8 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
-                            // onChange={(e) => createUserSetValue('education_form',e)}
-                            // value={createUserWatch('education_form')}
+                            onChange={(e) => createUserSetValue('education_form',e)}
+                            value={createUserWatch('education_form')}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
@@ -155,7 +155,7 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
+                            {...createUserRegister('education_type',{required:true})}
                             onChange={(e) => createUserSetValue('education_type',e)}
                             value={createUserWatch('education_type')}
                             >   
@@ -171,9 +171,9 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть 1 варіант'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('is_on_scholarships',{required:true})}
+                            onChange={(e) => createUserSetValue('is_on_scholarships',e)}
+                            value={createUserWatch('is_on_scholarships') || null}
                             >   
                             <Option value={"Так"} label={"Так"}>Так</Option>
                             <Option value={"Ні"} label={"Ні"}>Ні</Option>
@@ -181,6 +181,16 @@ export const EditGroup = () => {
                     </div>
                 </div>
             </div>
+            <div className="createUserFormInputs__container">
+                    <div className="createUserNameInput__container">
+                        <label className="createUserInput__label">Номер студента</label>
+                        <input autoComplete="off" type={'tel'}  {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер студента!'},minLength:{value:10,message:'Некорректний номер студента!'},})} className="createUser__input" placeholder='Введіть номер студента'/>
+                    </div>
+                    <div className="createUserNameInput__container">
+                        <label className="createUserInput__label">Номер батьків</label>
+                        <input autoComplete="off" type={'tel'} {...createUserRegister('parents_phone_number',{required:{value:true,message:'Введіть номер батьків!'},minLength:{value:10,message:'Некорректний номер батьків!'},})} className="createUser__input" placeholder='Введіть номер батьків'/>
+                    </div>
+                </div>
             {/* <div className="createUserFormSelects__container"> */}
             {/* </div> */}
             {//@ts-ignore

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { emailPattern } from "../../consts/emailPattern";
 import { routes } from "../../consts/routes";
-import { useCreateTeach } from "../../hooks/createTeacher";
+import { useCreateTeacher } from "../../hooks/createTeacher";
 import { useThemeStore } from "../../store/themeStore";
 import "../EditGroup/editGroupStyles.scss";
 const {Option} = Select;
@@ -12,7 +12,7 @@ const userErrorCodesToMessages:Record<number,string> = {
     0:'Користувач з такою поштовою адресою вже існує!'
 }
 export const CreateTeacher = () => {
-    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading} = useCreateTeach();
+    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading} = useCreateTeacher();
     const theme = useThemeStore().theme;
 
     return <div className={`editGroupMain_container ${theme}`}>
@@ -22,13 +22,13 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Ім’я (ПІБ)</label>
                     <input autoComplete="off"  
-                    // {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї]*$/,message:'Некорректне ПІБ!'}})} 
-                    className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї]*$/,message:'Некорректне ПІБ!'}})} 
+                    className="createUser__input" placeholder='Введіть ПІБ викладача'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Пошта викладача</label>
                     <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
+                    {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
                     className="createUser__input" placeholder='Введіть пошту викладача'/>
                 </div>
             </div>
@@ -36,14 +36,24 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="createUserInput__label">Номер викладача</label>
                     <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:false,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
+                    {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер викладача!'},minLength:{value:10,message:'Некорректний номер викладача!'},})}
                     className="createUser__input" placeholder='Введіть номер викладача'/>
                 </div>
-                <div className="createUserEmailInput__container">
+                <div className="createUserSelect__container" style={{width:'50%'}}>
                     <label className="createUserInput__label">Циклова комісія</label>
-                    <input autoComplete="off" 
-                    // {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
-                    className="createUser__input" placeholder='Введіть інтереси викладача'/>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть циклову комісію'}
+                            optionLabelProp="label"
+                            // {...createUserRegister('education_type',{required:true})}
+                            // onChange={(e) => createUserSetValue('education_type',e)}
+                            // value={createUserWatch('education_type')}
+                            >   
+                            <Option value={"Циклова комісія 1"} label={"Циклова комісія 1"}>Циклова комісія 1</Option>
+                            <Option value={"Циклова комісія 2"} label={"Циклова комісія 2"}>Циклова комісія 2</Option>
+                        </Select>
+                    </div>
                 </div>
             </div>
             <div className="createUserFormInputs__container">

@@ -27,7 +27,7 @@ export const ScheduleSettings = () => {
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);
-    
+
     return <div className="adminPanelScheduleSettings__container">
         <div className="fillter_container">
             <Select 
@@ -44,7 +44,7 @@ export const ScheduleSettings = () => {
             </Select>
         </div>
         <div className="adminPanelScheduleSettingsInput__container">
-            <input autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
+            <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
             <div className="adminPanelScheduleSettingsInput__cover">
                 <UploadSvg/>
                 <div className="adminPanelScheduleSettingsInputCoverText_container">

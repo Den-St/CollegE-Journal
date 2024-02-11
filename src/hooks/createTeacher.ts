@@ -10,7 +10,7 @@ import { useUserStore } from "../store/userStore";
 import { CreateUserT, UserT } from "../types/user";
 import { useGetAdminGroups } from "./getGroups";
 
-export const useCreateTeach = (group?:GroupT) => {
+export const useCreateTeacher = (group?:GroupT) => {
     // const {groups} = useGetGroups();
     const groupId = useParams().id;
     const localToken = getToken();

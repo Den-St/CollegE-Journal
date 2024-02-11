@@ -222,6 +222,11 @@ li.slick-active{
 	align-items: center;
 	justify-content: center;
 }
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{

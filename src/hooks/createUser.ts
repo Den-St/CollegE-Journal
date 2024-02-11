@@ -41,15 +41,25 @@ export const useCreateUser = (group?:GroupT) => {
             setErrorMessage('Некорректно введене ПІБ!')
             return;
         }
-
+        if(data.phone_number?.[0] !== '+'){
+            setErrorMessage('Некорректно введений номер студента!')
+            return;
+        }
+        if(data.parents_phone_number?.[0] !== '+'){
+            setErrorMessage('Некорректно введений номер батьків!')
+            return;
+        }
         try{
             setCreateUserLoading(true);
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim()},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken || cookieToken}});
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data.user_password});
             setCreateUserErrorCode(undefined);
             reset();
             setValue('education_form',null);
             setValue('education_type',null);
+            setValue('location',null);
+            setValue('is_on_scholarships',null);
+            setValue('additional_job_title',null);
             setErrorMessage('');
         }catch(err){
             //@ts-ignore
