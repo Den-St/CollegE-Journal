@@ -46,9 +46,9 @@ export const CreateTeacher = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть циклову комісію'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('department',{required:true})}
+                            onChange={(e) => createUserSetValue('department',e)}
+                            value={createUserWatch('department')}
                             >   
                             <Option value={"Циклова комісія 1"} label={"Циклова комісія 1"}>Циклова комісія 1</Option>
                             <Option value={"Циклова комісія 2"} label={"Циклова комісія 2"}>Циклова комісія 2</Option>
@@ -64,9 +64,9 @@ export const CreateTeacher = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть посаду викладача'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('job_title',{required:false})}
+                            onChange={(e) => createUserSetValue('job_title',e)}
+                            value={createUserWatch('job_title')}
                             >   
                             <Option value={"Посада 1"} label={"Посада 1"}>Посада 1</Option>
                             <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option>
@@ -80,25 +80,20 @@ export const CreateTeacher = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть додаткова посада викладача'}
                             optionLabelProp="label"
-                            // {...createUserRegister('education_type',{required:true})}
-                            // onChange={(e) => createUserSetValue('education_type',e)}
-                            // value={createUserWatch('education_type')}
+                            {...createUserRegister('additional_job_title',{required:false})}
+                            onChange={(e) => createUserSetValue('additional_job_title',e)}
+                            value={createUserWatch('additional_job_title')}
                             >   
-                            <Option value={"Посада 1"} label={"Посада 1"}>Посада 1</Option>
-                            <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option>
+                            <Option value={"Додаткова посада 1"} label={"Додаткова посада 1"}>Додаткова посада 1</Option>
+                            <Option value={"Додаткова посада 2"} label={"Додаткова посада 2"}>Додаткова осада 2</Option>
                         </Select>
                     </div>
                 </div>
             </div>
-            {/* <div className="createUserFormSelects__container"> */}
-            {/* </div> */}
             {//@ts-ignore
-            // Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
+            Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
             }
-            {/* {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
-            {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
-            {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>} */}
-            {/* {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>} */}
+            {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>}
             <div className="createUserButtons__container">
                 <input 
                 // disabled={createUserDisabled} 

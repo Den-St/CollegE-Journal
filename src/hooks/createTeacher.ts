@@ -1,18 +1,13 @@
-import { GroupT } from './../types/group';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { useParams, useSearchParams } from "react-router-dom";
 import axiosConfig from "../axiosConfig";
 import { endpoints } from "../consts/endpoints";
 import { getToken } from "../helpers/auth";
 import { useUserStore } from "../store/userStore";
-import { CreateUserT, UserT } from "../types/user";
-import { useGetAdminGroups } from "./getGroups";
+import { CreateUserT, } from "../types/user";
 
-export const useCreateTeacher = (group?:GroupT) => {
-    // const {groups} = useGetGroups();
-    const groupId = useParams().id;
+export const useCreateTeacher = () => {
     const localToken = getToken();
     const cookieToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
@@ -29,27 +24,21 @@ export const useCreateTeacher = (group?:GroupT) => {
     } = useForm<CreateUserT>();
 
     const onCreateUser = async (data:CreateUserT) => {
-        if(!data.education_form) {
-            setErrorMessage('Оберіть форму навчання!')
-            return;
-        }
-        if(!data.education_type){
-            setErrorMessage('Оберіть тип навчання!')
-            return;
-        }
         if(!data.full_name.includes(' ')){
             setErrorMessage('Некорректно введене ПІБ!')
             return;
         }
-
+        if(data.phone_number?.[0] !== '+'){
+            setErrorMessage('Некорректно введений номер студента!')
+            return;
+        }
         try{
             setCreateUserLoading(true);
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim()},{headers:{Authorization:localToken || cookieToken}});
-            group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data.user_password});
+            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'teacher',full_name:data.full_name.trim(),security_level:4,is_active:false,avatar:''},{headers:{Authorization:localToken || cookieToken}});
             setCreateUserErrorCode(undefined);
             reset();
-            setValue('education_form',null);
-            setValue('education_type',null);
+            setValue('additional_job_title',null);
+            setValue('job_title',null);
             setErrorMessage('');
         }catch(err){
             //@ts-ignore

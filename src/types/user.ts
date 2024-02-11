@@ -40,6 +40,7 @@ export type CreateUserT = {
     parents_phone_number:string
     is_on_scholarships:string | null
     interests:string
-    job_title:string,
+    job_title:string | null,
     additional_job_title:string | null
+    department:string | null
 }
