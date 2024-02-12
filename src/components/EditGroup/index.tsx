@@ -106,13 +106,13 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Дата народження</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('birth_date',{required:true})}
+                    {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
                     className="createUser__input" placeholder='Введіть дату народження'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Дата вступу</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('admission_date',{required:true})}
+                    {...createUserRegister('admission_date',{required:{value:true,message:'Введіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
                     className="createUser__input" placeholder='Введіть дату вступу'/>
                 </div>
                 <div className="createUserSelect__container">
@@ -193,9 +193,11 @@ export const EditGroup = () => {
                 </div>
             {/* <div className="createUserFormSelects__container"> */}
             {/* </div> */}
-            {//@ts-ignore
-            Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
-            }
+            {!!Object.keys(createUserFormErrors).length && <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+                {//@ts-ignore
+                Object.keys(createUserFormErrors).map(key => !!createUserFormErrors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors[key]?.message}</p>)
+                }
+            </div>}
             {/* {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
             {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
             {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>} */}
