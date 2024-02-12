@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { EditProfileSvg } from "../../assets/svgs/editProfileSvg";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { StarSvg } from "../../assets/svgs/starSvg";
@@ -13,7 +13,9 @@ export const UserProfile = () => {
     const theme = useThemeStore().theme;
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
-
+    const userId = useParams().id;
+    console.log(userId);
+    
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
             <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
@@ -30,8 +32,8 @@ export const UserProfile = () => {
                                 Призвіще Ім'я По батькові
                                 {/* {user.security_level !== securityLevels.admin &&  */}
                                 <StarSvg/>
-                                {mySecurityLevel === securityLevels.admin && 
-                                <Link to={routes.editUser.replace(':id','1')} className='editUserProfile_button'><EditProfileSvg/></Link>}
+                                {mySecurityLevel === securityLevels.admin && !!userId && 
+                                <Link to={routes.editUser.replace(':id',userId)} className='editUserProfile_button'><EditProfileSvg/></Link>}
                             </p>
                             <p className='studentProfile__email'>{
                             // user.mailbox_address || 
