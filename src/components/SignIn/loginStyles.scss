@@ -10,7 +10,6 @@
     background: url('../../assets/images/signInBackground.png');
 }
 
-
 .signIn__wrapper{
     width: 474px;
     display: flex;
@@ -114,6 +113,7 @@
 }
 .forgotPassword{
     background-color: transparent;
+    cursor: pointer;
 }
 .signIn__button{
     width: 100%;

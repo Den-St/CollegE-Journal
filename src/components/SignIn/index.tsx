@@ -83,7 +83,7 @@ export const SignIn = () => {
         </div>
     </div>
     <Modal open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
-        <ForgotPasswordModal/>
+        <ForgotPasswordModal onClose={() => setOnForgotPasswordModal(false)}/>
     </Modal>
     </>
 }
