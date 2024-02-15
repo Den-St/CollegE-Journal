@@ -4,6 +4,7 @@ import { FileSvg } from '../../../assets/svgs/fileSvg';
 import { LinkSvg } from '../../../assets/svgs/linkSvg';
 import { MagnifierSvg } from '../../../assets/svgs/MagnifierSvg';
 import { routes } from '../../../consts/routes';
+import { scheduleTimings } from '../../../consts/scheduleTimings';
 import { useThemeStore } from '../../../store/themeStore';
 import './lessonsSchedule.scss';
 
@@ -96,39 +97,7 @@ export const LessonsScheduleStudents = () => {
                 },{
                     name:'Математика',link:'#'
                 },]
-        }];
-    const scheduleTimings = [
-        {
-            id:1,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:2,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:3,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:4,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:5,
-            start:'8:00',
-            end:'9:20'
-        },
-        {
-            id:6,
-            start:'8:00',
-            end:'9:20'
-        },
-    ]
+    }];
 
     return <section className={`lessonsSchedule__container ${theme}`}>
         <h1 className='studentProfileTab__title'>Розклад студент</h1>

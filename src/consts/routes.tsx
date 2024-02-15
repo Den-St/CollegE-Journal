@@ -12,6 +12,7 @@ import { CreateTeacher } from "../components/CreateTeacher";
 import { UserProfile } from "../components/UserProfile";
 import { EditUser } from "../components/EditUser";
 import { Teachers } from "../components/Teachers";
+import { MyGroup } from "../components/MyGroup";
 
 export const navRoutes = {
 }
@@ -45,7 +46,8 @@ export const routes = {
     createTeacher:'/create-teacher',
     userProfile:'/user-profile/:id',
     editUser:'/edit-user/:id',
-    teachers:'/teachers'
+    teachers:'/teachers',
+    myGroup:'/my-group'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -152,6 +154,7 @@ export const PublicRoutes = [
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     <Route key={routes.teachers} element={<Teachers/>} path={routes.teachers}/>,
+    <Route key={routes.myGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><MyGroup/></SecurityLevelGuard>} path={routes.myGroup}/>,
     // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,

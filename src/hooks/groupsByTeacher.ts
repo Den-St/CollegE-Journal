@@ -19,13 +19,12 @@ export const useGroupsByTeacher = () => {
     const security_level = useUserStore().user.security_level;
     const localToken = useUserStore().user.token;
     const cookieToken = getToken();
-    const [groupesByGrade,setGroupsByGrage] = useState<Record<string,JournalGroupT[]>>();
+    const [groupesByGrade,setGroupsByGrade] = useState<Record<string,JournalGroupT[]>>();
 
     const fetch = async () => {
         if(groups.length) return;
         setLoading(true);
         try{
-            
             const res = await axiosConfig.get(endpoints.userGroups,{headers:{Authorization:localToken || cookieToken}});
             setGroups(res.data);
         }catch(err){
@@ -42,7 +41,7 @@ export const useGroupsByTeacher = () => {
     useEffect(() => {
         if(!groups.length) return;
         //@ts-ignore
-        setGroupsByGrage(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
+        setGroupsByGrade(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
     },[groups]);
 
     return {loading,groups,groupesByGrade}

@@ -73,7 +73,7 @@ export const Header = () => {
                             <Link to="/sign-in" className="signBtn">Вхід</Link>
                         </div> 
                         : <Popover rootClassName='userPopup' arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
-                            <Link to={user.security_level === securityLevels.admin ? routes.adminPanel : routes.myProfile}>
+                            <Link to={user.security_level === securityLevels.admin ? routes.adminPanel + '?section=schedule' : routes.myProfile}>
                                 <img className='header_avatar' src={user.avatar || defaultAvatar}/>
                             </Link>
                         </Popover>}

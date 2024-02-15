@@ -2,7 +2,7 @@ import { GoogleIconSvg } from '../../assets/svgs/googleIconSvg';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import './loginStyles.scss';
-import {Input} from 'antd';
+import {Input, Modal} from 'antd';
 import { useThemeStore } from '../../store/themeStore';
 import { useEffect, useState } from 'react';
 import { useSignIn } from '../../hooks/signIn';
@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import { routes } from '../../consts/routes';
 import { emailPattern } from '../../consts/emailPattern';
+import { ForgotPasswordModal } from '../ForgotPasswordModal';
 
 const statusCodes:Record<number,string> = {
     0:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!',
@@ -26,6 +27,7 @@ export const SignIn = () => {
     }
     const {onLogin,status,loading,setRemember} = useSignIn();
     const [searchParams,setSearchParams] = useSearchParams();
+    const [onForgotPasswordModal,setOnForgotPasswordModal] = useState(false);
     useEffect(() => {
         const mailbox_address = searchParams.get('mailbox_address');
         const user_password = searchParams.get('password');
@@ -60,7 +62,7 @@ export const SignIn = () => {
                         <input autoComplete="off"  type='checkbox' onChange={(e) => setRemember(e.target.checked)} className="rememberMe__checkbox"/>
                         <p className="rememberMe__title">Запам'ятати мене</p>
                     </div>
-                    <p className="forgotPassword">Забули пароль?</p>
+                    <span onClick={() => setOnForgotPasswordModal(true)} className="forgotPassword">Забули пароль?</span>
                 </div>
                 {status !== undefined && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{statusCodes[status]}</p>}
                 {!!errors.mailbox_address?.message && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
@@ -79,5 +81,9 @@ export const SignIn = () => {
                 <span className='noAccount__text'>Будь ласка, отримайте дані входу у куратора, для підтвердження облікового запису.</span>
             </div>
         </div>
-    </div></>
+    </div>
+    <Modal open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
+        <ForgotPasswordModal/>
+    </Modal>
+    </>
 }

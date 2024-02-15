@@ -14,12 +14,11 @@ export const UserProfile = () => {
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
     const userId = useParams().id;
-    console.log(userId);
     
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
             <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
-                <h2 className="subjectsMainTitle"><button onClick={() => navigate(-1)} className={'leftArrowButton'}><LeftArrowSvg/></button>Профіль студента</h2>
+                <h2 className="subjectsMainTitle"><button onClick={() => navigate(-2)} className={'leftArrowButton'}><LeftArrowSvg/></button>Профіль</h2>
                 <div className='studentProfileLeft__container'>
                     <div className='studentProfileInfo__container'>
                         <img className='studentProfile_img' src={

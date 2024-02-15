@@ -117,8 +117,9 @@ export const MyProfile = () => {
                         {/* <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p> */}
                         {!!user?.user_group?.group_full_name && 
                         user.security_level === 1 
-                        ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
-                        : <Link to={routes.pickJournalSubject + `?group_id=${user?.user_group?.group_id}`} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>}
+                        ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
+                        : <Link to={routes.pickJournalSubject} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
+                        }
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>

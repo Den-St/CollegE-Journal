@@ -79,11 +79,29 @@ export const EditGroup = () => {
                 </div>
             </div>
             <div className="createUserFormInputs__container">
-                <div className="createUserEmailInput__container">
+                {/* <div className="createUserEmailInput__container">
                     <label className="createUserInput__label">Інтереси</label>
                     <input autoComplete="off" 
                     {...createUserRegister('interests',{required:false})}
                     className="createUser__input" placeholder='Введіть інтереси студента'/>
+                </div> */}
+                <div className="createUserSelect__container" style={{width:'55%'}}>
+                    <label className="createUserInput__label">Додаткова посада</label>
+                    <div className="createStudyMaterialsSelect__wrapper">
+                        <Select
+                            className="createUserSelect"
+                            placeholder={'Оберіть додаткову посаду студента'}
+                            optionLabelProp="label"
+                            {...createUserRegister('additional_job_title',{required:false})}
+                            onChange={(e) => createUserSetValue('additional_job_title',e)}
+                            value={createUserWatch('additional_job_title')}
+                            >   
+                            <Option value={"Cтароста"} label={"Cтароста"}>Cтароста</Option>
+                            <Option value={"Зам. старости"} label={"Зам. старости"}>Зам. старости</Option>
+                            <Option value={"Член студ. ради"} label={"Член студ. ради"}>Член студ. ради</Option>
+                            <Option value={"Голова студ. ради"} label={"Голова студ. ради"}>Голова студ. ради</Option>
+                        </Select>
+                    </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="createUserInput__label">Посада</label>
@@ -95,9 +113,9 @@ export const EditGroup = () => {
                             {...createUserRegister('job_title',{required:false})}
                             onChange={(e) => createUserSetValue('job_title',e)}
                             value={createUserWatch('job_title')}
+                            defaultValue={"Студент"}
                             >   
-                            <Option value={"Посада 1"} label={"Посада 1"}>Посада 1</Option>
-                            <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option>
+                            <Option value={"Студент"} label={"Студент"}>Студент</Option>
                         </Select>
                     </div>
                 </div>

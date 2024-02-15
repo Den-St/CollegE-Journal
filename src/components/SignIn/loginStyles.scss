@@ -112,7 +112,9 @@
 .forgotPassword{
     color:var(--primary-yellow,var(--primary-orange));
 }
-
+.forgotPassword{
+    background-color: transparent;
+}
 .signIn__button{
     width: 100%;
     height: 60px;
