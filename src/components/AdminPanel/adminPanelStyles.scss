@@ -241,12 +241,13 @@
         color:white;
     }
     .lessonsScheduleLessonName{
-        color:white;
+        color:var(--primary-gray);
     }
     .lessonsScheduleLessonGroup{
         font-weight: 400;
         font-size: 20px;
-        color:#797979;
+        color:var(--primary-gray);
+
     }
     .lessonsScheduleDay__header.currentDay{
         color:var(--primary-orange);

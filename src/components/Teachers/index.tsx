@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import { defaultAvatar } from "../../consts/defaultAvatar"
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
+import { useGetTeachers } from "../../hooks/getTeachers";
 import { useUserStore } from "../../store/userStore";
+import { Loader } from "../Loader/Loader";
 import "./teachersStyles.scss";
 
 export const Teachers = () => {
     const mySecurityLevel = useUserStore().user.security_level || 0;
+    const {teachersByDepartment,loading} = useGetTeachers();
+
+    if(loading) return <Loader/>
 
     return <div className="teachersMain_container">
         <div className="teachersHeader_container">
@@ -23,222 +28,22 @@ export const Teachers = () => {
             </div>
         </div>
         <div className="teachersSections_container">
-            <div className="teacherSectionItem_container">
-                <h2 className="teacherSection_header">Циклова комісія інформаційних технологій</h2>
-                <div className="teachers_container">
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
+            {teachersByDepartment && Object.keys(teachersByDepartment).map(key => 
+                <div id={key} className="teacherSectionItem_container">
+                    <h2 className="teacherSection_header">{key}</h2>
+                    <div className="teachers_container">
+                        {teachersByDepartment[key].map(teacher => 
+                            <div id={teacher.user_id} className="teacherItem_container">
+                                <img className="teacherAvatar" src={teacher.avatar || defaultAvatar}/>
+                                <div className="teacherItemText_container">
+                                    <p className="teacherItem_name">{teacher.full_name}</p>
+                                    <p className="teacherItem_role">Викладач</p>
+                                </div>
+                            </div>    
+                        )}
                     </div>
                 </div>
-            </div>
-            <div className="teacherSectionItem_container">
-                <h2 className="teacherSection_header">Циклова комісія іноземних мов</h2>
-                <div className="teachers_container">
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="teacherSectionItem_container">
-                <h2 className="teacherSection_header">Циклова комісія інформаційних технологій</h2>
-                <div className="teachers_container">
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="teacherSectionItem_container">
-                <h2 className="teacherSection_header">Циклова комісія інформаційних технологій</h2>
-                <div className="teachers_container">
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                    <div className="teacherItem_container">
-                        <img className="teacherAvatar" src={defaultAvatar}/>
-                        <div className="teacherItemText_container">
-                            <p className="teacherItem_name">Ігор Сорока Сергійович</p>
-                            <p className="teacherItem_role">Викладач</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            )}
         </div>
     </div>
 }

@@ -17,5 +17,6 @@ export const endpoints = {
     studentJournal:'journal/one-subject/student',
     journalEditCell:'journal/edit-cell',
     journalEditCellType:'journal/edit-cell-type',
-    journalEditCellTopic:'journal/edit-cell-topic'
+    journalEditCellTopic:'journal/edit-cell-topic',
+    getTeachers:'teacher-page'
 }
