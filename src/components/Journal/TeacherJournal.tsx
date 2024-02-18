@@ -81,7 +81,7 @@ export const TeacherJournal = () => {
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
-    
+
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
@@ -211,7 +211,7 @@ export const TeacherJournal = () => {
             </div>
         </section>
         <section className='journalLessonsThemes__section'>
-            <h1 className='journalLessonsThemes__title'>Теми заннять</h1>
+            <h1 className='journalLessonsThemes__title'>Теми занять</h1>
             <div className='journalLessonsThemes__container'>
                 {journal?.columns.map(column => 
                     <div className='journalLessonThemeItem__container' key={column.column_id}>
@@ -225,7 +225,7 @@ export const TeacherJournal = () => {
                             !journal.can_edit ||
                             isDisabledByDate(column.date)
                         }
-                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} placeholder='Заповніть тему заннятя' defaultValue={column.lesson_topic} className='journalLessonThemeItem__input__text'/>
+                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} className='journalLessonThemeItem__input__text'/>
                     </div>
                 )}
             </div>
