@@ -1,1 +1,1 @@
-export const validGroupPrefixes = ["З","Кн","Кб","Тр","То"];
+export const validGroupPrefixes = ["З","Кн","Кб","Тр","То","Те"];
