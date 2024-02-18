@@ -13,7 +13,7 @@ export const useGetTeacherJournal = () => {
     const [journal,setJournal] = useState<TeacherJournalT>();
     const [loading,setLoading] = useState(false);
     const groupId = useSearchParams()[0].get('group_id');
-    const journalId = useTeachersGroupsStore().groups.find(group => group.journal_group === groupId)?.journal_id;
+    // const journalId = useTeachersGroupsStore().groups.find(group => group.journal_group === groupId)?.journal_id;
     const [fillters,setFillters] = useState<{group_id:string,subject_id:string,month:number}>({
         group_id:groupId || '',
         subject_id:useSearchParams()[0].get('subject_id') || '',
@@ -23,10 +23,10 @@ export const useGetTeacherJournal = () => {
     const cookieToken = useUserStore().user.token;
 
     const fetch = async (_fillters?:{group_id:string,subject_id:string,month:number}) => {
-        if(!journalId) return;
+        if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.journal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId,month:-1},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.journal,{year:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,month:-1},{headers:{Authorization:localToken || cookieToken}});
             setJournal(res.data);
         }catch(err){
             console.error(err);
@@ -36,7 +36,7 @@ export const useGetTeacherJournal = () => {
 
     useEffect(() => {
         fetch();
-    },[journalId,])
+    },[])
 
     const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number) => {
         setFillters(prev => ({...prev,[fieldName]:value}));

@@ -13,7 +13,6 @@ import { StudentJournalT } from '../types/studentJournal';
 export const useStudentJournal = () => {
     const [journal,setJournal] = useState<StudentJournalT>();
     const [loading,setLoading] = useState(false);
-    const journalId = useStudentJournalSubjectsStore().journalSubjects?.journal_id;
     const [fillters,setFillters] = useState<{subject_id:string,month:number}>({
         subject_id:useSearchParams()[0].get('subject_id') || '',
         month: +(useSearchParams()[0].get('month') || new Date().getMonth)
@@ -22,10 +21,10 @@ export const useStudentJournal = () => {
     const cookieToken = useUserStore().user.token;
 
     const fetch = async (_fillters?:{subject_id:string,month:number}) => {
-        if(!journalId) return;
+        if(!fillters.subject_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.studentJournal,{subject_id:_fillters?.subject_id || fillters?.subject_id,journal_id:journalId,month:-1},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:fillters.subject_id || _fillters?.subject_id,month:-1,year:-1},{headers:{Authorization:localToken || cookieToken}});
             setJournal(res.data);
         }catch(err){
             console.error(err);
@@ -35,7 +34,7 @@ export const useStudentJournal = () => {
 
     useEffect(() => {
         fetch();
-    },[journalId,])
+    },[])
 
     const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number) => {
         setFillters(prev => ({...prev,[fieldName]:value}));

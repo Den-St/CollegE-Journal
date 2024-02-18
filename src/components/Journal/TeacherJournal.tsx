@@ -52,12 +52,12 @@ export const TeacherJournal = () => {
         }
     }
     useEffect(() => {
-        const subjectName = groupJournal?.can_edit.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.subject_id === fillters.subject_id)?.subject_full_name;
-        if(!groupJournal?.group_full_name || !subjectName){
+        const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
+        if(!groupJournal?.journal_group_full_name || !subjectName){
             document.title = `Журнал`;
             return;
         }
-        document.title = `${groupJournal?.group_full_name} - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
+        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
     },[fillters.subject_id,fillters.month,groupJournal]);
 
     // useEffect(() => {
@@ -80,7 +80,8 @@ export const TeacherJournal = () => {
 
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
-
+    if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
+    
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
@@ -118,7 +119,7 @@ export const TeacherJournal = () => {
                         {!!groupJournal && 
                         setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
                         .map(subject => 
-                            <Option key={subject.subject_id} value={subject.subject_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                            <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
                     </Select>
                 </div>

@@ -122,7 +122,7 @@ export const CreateTeacher = () => {
                                     <p className="teacherItem_name">{teacher.full_name}</p>
                                     <p className="teacherItem_role">Викладач</p>
                                 </div>
-                            </div>    
+                            </div>
                         )}
                     </div>
                 </div>

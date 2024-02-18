@@ -21,7 +21,7 @@ export const TeacherSubjects = () => {
     // const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
     const lastMonth = new Date().getMonth();
     useEffect(() => {
-        document.title = `Предмети групи - ${group?.group_full_name}`;
+        document.title = `Предмети групи - ${group?.journal_group_full_name}`;
     },[]);
     
     if(loading) return <Loader/>
@@ -31,7 +31,7 @@ export const TeacherSubjects = () => {
         <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.subject_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}
@@ -39,7 +39,7 @@ export const TeacherSubjects = () => {
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.subject_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}
