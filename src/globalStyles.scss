@@ -222,6 +222,15 @@ li.slick-active{
 	align-items: center;
 	justify-content: center;
 }
+.ant-modal-header{
+	background-color: transparent !important;
+}
+.ant-modal-title{
+	color:white !important;
+}
+.img-crop-control-zoom button{
+	color: white !important;
+}
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;

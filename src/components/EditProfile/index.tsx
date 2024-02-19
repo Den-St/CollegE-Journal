@@ -18,6 +18,7 @@ import { routes } from "../../consts/routes";
 import Cookies from "js-cookie";
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
+import AntdImgCrop from "antd-img-crop";
 
 const useEditProfile = () => {
     const user = useUserStore().user;
@@ -79,7 +80,7 @@ const useEditProfile = () => {
     }
     useEffect(() => {
         if(!Cookies.get('comfirmedPassword')){
-            navigate(routes.myProfile);
+            // navigate(routes.myProfile);
         }
     },[]);
     
@@ -105,9 +106,11 @@ export const EditProfile = () => {
         <div className='studentProfileInfo__container editProfileUserInfo'>
             <div className="editProfileChangePhoto_container">
                 <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
-                <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
-                    <Button className="uploadButton" icon={<UploadOutlined />}>Завантажити</Button>
-                </Upload>
+                <AntdImgCrop>
+                    <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
+                        <Button className="uploadButton" icon={<UploadOutlined />}>Завантажити</Button>
+                    </Upload>
+                </AntdImgCrop>
             </div>
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>

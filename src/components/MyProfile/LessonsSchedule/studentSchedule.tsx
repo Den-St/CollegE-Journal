@@ -138,7 +138,7 @@ export const LessonsScheduleStudents = () => {
                 </div>)}
             </Carousel>
             <div className="lessonsScheduleDay__container" style={{width:'unset'}}>
-                <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>   
+                <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>
                 <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>
                 <div className='lessonsScheduleDayLessons__container'>
                     {scheduleTimings.map((timing,i) => 
