@@ -100,7 +100,7 @@ export const LessonsScheduleStudents = () => {
     }];
 
     return <section className={`lessonsSchedule__container ${theme}`}>
-        <h1 className='studentProfileTab__title'>Розклад студент</h1>
+        <h1 className='studentProfileTab__title'>Розклад</h1>
             {days.map((day,i) => 
             <div key={day.name} className="lessonsScheduleDay__container">
                 <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{day.name}</h2>    
@@ -150,12 +150,12 @@ export const LessonsScheduleStudents = () => {
                     )}
                 </div>
             </div>
-            <Link  to={routes.homeTasks} className='studentProfielScheduleGoToTasks_container'>
+            <Link  to={'#'} className='studentProfielScheduleGoToTasks_container'>
                 <MagnifierSvg/>
                 <h1 className='studentProfielScheduleGoToTasks_title'>Перейти до Завдань</h1>
                 <p className='studentProfielScheduleGoToTasks_text'>Посилання до сторінки ваших завдань</p>
             </Link>
-            <Link  to={routes.studyMaterials} className='studentProfielScheduleGoToTasks_container'>
+            <Link  to={'#'} className='studentProfielScheduleGoToTasks_container'>
                 <FileSvg/>
                 <h1 className='studentProfielScheduleGoToTasks_title'>Перейти до Матеріалів</h1>
                 <p className='studentProfielScheduleGoToTasks_text'>Посилання до сторінки освітніх матеріалів</p>
