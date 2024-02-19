@@ -106,7 +106,7 @@ export const EditProfile = () => {
         <div className='studentProfileInfo__container editProfileUserInfo'>
             <div className="editProfileChangePhoto_container">
                 <img className='studentProfile_img studentProfile_img_edit' src={newAvatarUrl || user.avatar || defaultAvatar}/>
-                <AntdImgCrop>
+                <AntdImgCrop showReset resetText="Відмінити зміни" rotationSlider showGrid modalTitle="Обробка фото" modalOk="Підтвердити" modalCancel="Відмінити">
                     <Upload beforeUpload={beforeUpload} accept="image/png, image/jpeg">
                         <Button className="uploadButton" icon={<UploadOutlined />}>Завантажити</Button>
                     </Upload>
