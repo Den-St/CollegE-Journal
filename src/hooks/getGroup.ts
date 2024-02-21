@@ -22,8 +22,8 @@ export const useGetGroup = (groupId?:string) => {
         setLoading(true);
         try{
             const res = await axiosConfig.post(endpoints.getGroup,{group_id:group_id || groupId},{headers:{Authorization:localToken || cookieToken}});
-            if(Object.keys(res.data.timetable).length && !res.data.timetable[6]){
-                res.data.timetable[6] = [
+            if(Object.keys(res.data.timetable).length && !res.data.timetable[5]){
+                res.data.timetable[5] = [
                     {
                         audience:0,
                         lesson_number:0,

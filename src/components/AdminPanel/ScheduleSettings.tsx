@@ -27,7 +27,7 @@ export const ScheduleSettings = () => {
     useEffect(() => {
         fetchGroup(pickedGroupId);
     },[pickedGroupId]);
-
+    console.log(group?.timetable)
     return <div className="adminPanelScheduleSettings__container">
         <div className="fillter_container">
             <Select 
