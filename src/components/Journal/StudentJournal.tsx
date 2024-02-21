@@ -151,6 +151,7 @@ export const StudentJournal = () => {
                         <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
                     </div> */}
                 </div>
+                
             </div>
         </section>
     </div>

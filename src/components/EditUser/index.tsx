@@ -31,8 +31,8 @@ export const EditUser = () => {
                             <p className='studentProfile__name'>
                                 {/* {user.full_name} */}
                                 Призвіще Ім'я По батькові
-                                {/* {user.security_level !== securityLevels.admin &&  */}
-                                <StarSvg/>
+                                {/* {user.security_level !== securityLevels.admin &&  <StarSvg/>*/}
+                                
                             </p>
                             <p className='studentProfile__email'>{
                             // user.mailbox_address || 

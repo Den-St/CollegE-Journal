@@ -5,6 +5,7 @@ import { routes } from '../../consts/routes';
 import { securityLevels, securityLevelsToNames } from '../../consts/securityLevels';
 import { deleteTokenCookie } from '../../helpers/auth';
 import { useThemeController } from '../../hooks/themeController';
+import { useTeachersGroupsStore } from '../../store/teachersGroupsStore';
 import { useUserStore } from '../../store/userStore';
 import './userPopupStyles.scss';
 
@@ -12,9 +13,11 @@ export const UserPopup = () => {
     const theme = useThemeController().theme;
     const user = useUserStore().user;
     const signOut = useUserStore().signOut;
+    const clearTeacher = useTeachersGroupsStore().clear;
     const navigate = useNavigate();
     const onSignOut = () => {
         signOut();
+        clearTeacher();
         deleteTokenCookie();
         navigate(routes.signIn);
     }

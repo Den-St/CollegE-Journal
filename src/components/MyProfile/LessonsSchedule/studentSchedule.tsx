@@ -110,7 +110,7 @@ export const LessonsScheduleStudents = () => {
                             <p className="lessonsScheduleLessonNumber">{i + 1}</p>
                             <p className="lessonsScheduleLessonName">{lesson.name}</p>
                             <p className="lessonsScheduleLessonGroup">
-                                <Link target={"_blank"}to={lesson.link} className='lessonsScheduleLink__button'>
+                                <Link target={"_blank"} to={lesson.link} className='lessonsScheduleLink__button'>
                                     <LinkSvg/>
                                 </Link>
                             </p>
