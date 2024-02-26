@@ -1,3 +1,6 @@
+import { routes } from './../consts/routes';
+import { useNavigate } from 'react-router-dom';
+import { setChangeProfileCookie } from './../helpers/setChangeProfileCookie';
 import { UserT } from './../types/user';
 import { useUserStore } from './../store/userStore';
 import { useEffect } from 'react';
@@ -13,6 +16,7 @@ export const useAuth = () => {
     const cookieToken = useUserStore().user.token;
     const onUserLoading = useUserStore().startLoading;
     const onStopUserLoading = useUserStore().stopLoading;
+    const navigate = useNavigate();
 
     const auth = async () => {
         if(!localToken && !cookieToken) return;
@@ -21,6 +25,10 @@ export const useAuth = () => {
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
             signIn({...res.data.data},);
+            if(!res.data.data.is_active){
+                setChangeProfileCookie();
+                navigate(routes.editProfile);
+            }
         }catch(err){
             console.error(err);
         }finally{

@@ -134,7 +134,7 @@ const securityLevelToRoutes:Record<number,string[]> = {
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
-    <Route key={routes.myProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
+    <Route key={routes.myProfile} element={<SecurityLevelGuard blockedForAdmin isActiveRequired securityLevel={securityLevels.student}><MyProfile/></SecurityLevelGuard>} path={routes.myProfile}/>,  
     <Route key={routes.userProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><UserProfile/></SecurityLevelGuard>} path={routes.userProfile}/>,  
     <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,

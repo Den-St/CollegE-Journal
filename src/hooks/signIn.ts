@@ -8,6 +8,7 @@ import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
 import { UserT } from '../types/user';
 import Cookies from 'js-cookie';
+import { setChangeProfileCookie } from '../helpers/setChangeProfileCookie';
 
 export const useSignIn = () => {
     const [status,setStatus] = useState<number>();
@@ -29,7 +30,7 @@ export const useSignIn = () => {
                 return;
             }
             if(!res.data.data.is_active) {
-                Cookies.set('comfirmedPassword','true',{expires:new Date(new Date().getTime() + 10 * 1000)});
+                setChangeProfileCookie();
                 navigate(routes.editProfile);
                 setStatus(2);
             }

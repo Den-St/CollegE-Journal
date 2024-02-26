@@ -67,7 +67,7 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
             </Link>
             </>}
             <>
-            {securityLevelToLinks[user.security_level || 0]}
+            {user.is_active && securityLevelToLinks[user.security_level || 0]}
             {!!route && !!user.full_name && <Link  className={linksClassName} to={routes.homePage + '?section=news'}>
                 Новини
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
