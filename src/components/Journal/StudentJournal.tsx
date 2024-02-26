@@ -108,7 +108,7 @@ export const StudentJournal = () => {
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
                 <div className='journalRowItemLeft__container'>
-                    <p className='journalRowItemLeft__number'>1.</p>
+                    {/* <p className='journalRowItemLeft__number'>1.</p> */}
                     <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
                 </div>
             </div>

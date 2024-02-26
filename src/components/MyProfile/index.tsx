@@ -76,7 +76,7 @@ export const MyProfile = () => {
     const studentLinks = [
         {
             label:'Перегляд оцінок',
-            link:'#'
+            link:routes.pickJournalSubject
         },
         {
             label:'Домашнє завдання',

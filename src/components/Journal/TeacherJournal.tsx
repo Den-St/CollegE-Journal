@@ -130,18 +130,15 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div key={column.column_id} className='journalColumnsCenterItem__container'>
                                 {
-                                    (journal.can_edit === 1 &&
-                                    !isDisabledByDate(column.date)) ?
+                                    journal.can_edit === 1 ?
                                     <Select 
                                         disabled={
-                                            !journal.can_edit || 
-                                            isDisabledByDate(column.date)
+                                            journal.can_edit !== 1
                                         }
                                         defaultValue={column.lesson_type || null} 
                                         className='journal_lessonTypeSelect' 
                                         rootClassName='journal_lessonTypeSelect'
                                         placeholder={'Тип'}
-                                        // showArrow={!column.lesson_type}
                                         onChange={(value) => onChangeLessonType(column.column_id,value)}>
                                             <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
                                             <Option label={"Практика"} value={"Практика"}>Практика</Option>
@@ -203,8 +200,7 @@ export const TeacherJournal = () => {
                         </div>
                         <input
                         disabled={
-                            !journal.can_edit ||
-                            isDisabledByDate(column.date)
+                            journal.can_edit === 0
                         }
                         onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} 
                         placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} 

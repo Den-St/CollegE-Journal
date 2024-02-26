@@ -64,10 +64,14 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
 }
 export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex}) => {
     const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter' || e.key === 'ArrowDown'){
             document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus();
+            return;
+        }
+        if(e.key === 'ArrowUp'){
+            document.getElementById((rowIndex - 1) + ',' + columnIndex)?.focus();
         }
     }
-    // console.log(defaultValue);
+
     return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
 }
