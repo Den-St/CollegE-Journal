@@ -4,14 +4,14 @@ import { useUserStore } from './../store/userStore';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
 import { myGroupBy } from '../helpers/groupBy';
+export type TeacherT = {
+    user_id:string,
+    full_name:string
+    department:string
+    avatar:string
+}
 export const useGetTeachers = () => {
-    type TeacherT = {
-        user_id:string,
-        full_name:string
-        department:string
-        avatar:string
-    }
-    const [teachersByDepartment,setTeachersByDepartment] = useState<Record<string,TeacherT[]>>();
+    const [teachersByDepartment,setTeachersByDepartment] = useState<Record<string,TeacherT[]>>({});
     const [loading,setLoading] = useState(false);
     const token = useUserStore().user.token;
 
@@ -30,6 +30,9 @@ export const useGetTeachers = () => {
 
     useEffect(() => {
         fetch();
-    },[])
-    return {teachersByDepartment,loading};
+    },[]);
+    const onAddTeacherLocally = (teacher:TeacherT) => {
+        setTeachersByDepartment(prev => ({...prev,[teacher.department]:{...prev[teacher.department],teacher}}));
+    }
+    return {teachersByDepartment,loading,onAddTeacherLocally};
 }

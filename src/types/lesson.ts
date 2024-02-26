@@ -3,5 +3,6 @@ export type LessonT = {
     lesson_number:number,
     link:string,
     subject_name:string,
-    time:string
+    time:string,
+    subject_id:string
 }

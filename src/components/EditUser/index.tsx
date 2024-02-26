@@ -1,6 +1,6 @@
 import { Select } from "antd";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { StarSvg } from "../../assets/svgs/starSvg"
 import { defaultAvatar } from "../../consts/defaultAvatar"
@@ -16,11 +16,12 @@ export const EditUser = () => {
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
     const userId = useParams().id;
+    const from = useSearchParams()[0].get('from');
 
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
             <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
-                {!!userId && <h2 className="subjectsMainTitle"><Link to={routes.userProfile.replace(':id',userId)} className={'leftArrowButton'}><LeftArrowSvg/></Link>Профіль</h2>}
+                {!!userId && <h2 className="subjectsMainTitle"><Link to={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from} className={'leftArrowButton'}><LeftArrowSvg/></Link>Профіль</h2>}
                 <div className='studentProfileLeft__container'>
                     <div className='studentProfileInfo__container'>
                         <img className='studentProfile_img' src={

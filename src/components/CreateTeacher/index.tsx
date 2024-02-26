@@ -16,9 +16,9 @@ const userErrorCodesToMessages:Record<number,string> = {
     0:'Користувач з такою поштовою адресою вже існує!'
 }
 export const CreateTeacher = () => {
-    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading} = useCreateTeacher();
     const theme = useThemeStore().theme;
-    const {teachersByDepartment,loading} = useGetTeachers();
+    const {teachersByDepartment,loading,onAddTeacherLocally} = useGetTeachers();
+    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading,} = useCreateTeacher(onAddTeacherLocally);
 
     return <div className={`editGroupMain_container ${theme}`}>
         <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Створення викладача</h1>
@@ -122,7 +122,8 @@ export const CreateTeacher = () => {
                                     <p className="teacherItem_name">{teacher.full_name}</p>
                                     <p className="teacherItem_role">Викладач</p>
                                 </div>
-                            </div>
+                                <Link className="studentButton" to={routes.editUser.replace(':id',teacher.user_id) + '?from=' + routes.createTeacher}>Редагувати</Link>
+                            </div>    
                         )}
                     </div>
                 </div>

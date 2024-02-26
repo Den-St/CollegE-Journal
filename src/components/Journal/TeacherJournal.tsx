@@ -14,13 +14,13 @@ import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
 import { useThemeStore } from '../../store/themeStore';
 import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
-import { CellInput } from './CellInput';
+import { CellInput, getColorByValue } from './CellInput';
 import _debounce from 'lodash/debounce';
 import './journalStyles.scss';
 const {Option} = Select;
 
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,token} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,token,setJournal} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -39,7 +39,12 @@ export const TeacherJournal = () => {
     }
     const onChangeLessonType = async (column_id:string,lesson_type:string) => {
         try{
+            // setJournal(prev => ({...prev,columns:[...prev?.columns,prev?.columns.find(column => column.column_id === column_id)]}))
             await axiosConfig.post(endpoints.journalEditCellType,{column_id,lesson_type,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
+            const lessonTypeP = document.getElementById(column_id);
+            if(lessonTypeP?.innerText){
+                lessonTypeP.innerText = lesson_type;
+            }
         }catch(err){    
             console.error(err);
         }
@@ -149,7 +154,7 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div key={column.column_id} className='journalColumnsCenterItem__container'>
                                 {
-                                    (!journal.can_edit ||
+                                    (journal.can_edit === 1 &&
                                     !isDisabledByDate(column.date)) ?
                                     <Select 
                                         disabled={
@@ -168,7 +173,7 @@ export const TeacherJournal = () => {
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
                                             <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
                                     </Select>
-                                    : <div className='journalColumnsCenterItemType'></div>
+                                    : <div className='journalColumnsCenterItemType'>{column.lesson_type || ''}</div>
                                 }
                             <div className='journalColumnsCenterItemDate__container'>
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
@@ -192,14 +197,14 @@ export const TeacherJournal = () => {
                     </div>
                 </div> */}
                 </div>
-                {journal?.students.map((student) => 
+                {journal?.students.map((student,i) => 
                     <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                         <div className='journalRowItemCenter__container'>
-                            {journal.columns.map(column => 
-                                (!journal.can_edit ||
+                            {journal.columns.map((column,j) => 
+                                (journal.can_edit === 1 &&
                                 !isDisabledByDate(column.date))
-                                ? <CellInput key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed'}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                ? <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),caretColor:'white !important',}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                             )}
                         </div>
                         {/* <div className='journalRowItemRight__container'>
@@ -218,7 +223,7 @@ export const TeacherJournal = () => {
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[1]}</p>
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[0]}</p>
-                            <p className='journalLessonThemeItemType'>{column.lesson_type}</p>
+                            <p id={column.column_id} className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
                         <input
                         disabled={

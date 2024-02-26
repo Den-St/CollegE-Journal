@@ -1,3 +1,4 @@
+import React from "react"
 import axiosConfig from "../../axiosConfig"
 import { CellValueToColor } from "../../consts/cellVaueToColor"
 import { endpoints } from "../../consts/endpoints"
@@ -10,7 +11,9 @@ type Props = {
         column_id: string,
         student_id:string
     },
-    token:string
+    token:string,
+    rowIndex:number,
+    columnIndex:number
 }
 const isValid = (value:string) => {
     if(value === "") return true;
@@ -31,21 +34,40 @@ const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         return;
     }
 };
+export const getColorByValue = (value:string) => {
+    if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
+    if(value !== "" && +value < 60) return "#ED3434";
+    if(+value >= 60) return "#2DEF40";
+    if(value === "н" || value === "Н") return "#EFB42D";
+    if(!value) return "white";
+    return "white";
+}
 const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         journal_id: string,
         subject_id: string,
         column_id: string,
-        student_id:string
+        student_id:string,
+        rowIndex:number,
+        columnIndex:number
     },token:string) => {
     if(!isValid(e.target.value)) return;
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
+        const input = document.getElementById(onBlurData.rowIndex + ',' + onBlurData.columnIndex);
+        if(input) {
+            input.style.color = getColorByValue(e.target.value);
+            input.style.caretColor = "white";
+        }
     }catch(err){
         console.error(err);
     }
 }
-export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token}) => {
-    // const [error,setError] = useState();
-
-    return <input style={{color:defaultValue && CellValueToColor[defaultValue]}} onBlur={(e) => onBlur(e,onBlurData,token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
+export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex}) => {
+    const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter'){
+            document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus();
+        }
+    }
+    // console.log(defaultValue);
+    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{color:getColorByValue(defaultValue || "")}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
 }

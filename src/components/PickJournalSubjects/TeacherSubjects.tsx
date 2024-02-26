@@ -46,7 +46,7 @@ export const TeacherSubjects = () => {
         </Carousel>
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>
-            <div className="studentItems__container" style={{height:80 * group.group_students.length / 2}}>
+            <div className="studentItems__container" style={{height:80 * Math.round(group.group_students.length / 2)}}>
                 {group.group_students.map(student => 
                     <div className="student__container" key={student.student_id}>
                         <div className="student__info">

@@ -10,6 +10,7 @@ import './footerStyles.scss'
 export const Footer = () => {
     const theme = useThemeStore().theme;
     const route = useLocation().pathname.replace('/','');
+    const year = new Date().getFullYear();
     
     return <><footer>
         <div className={`footer__content ${theme} ${route+'home'}`}>
@@ -44,6 +45,6 @@ export const Footer = () => {
             </div>
         </div>
     </footer>
-    <div className="bottom__title"><h1 className="bottom__text">© Електронний щоденник, ФКЗІ ДУІТЗ. Всі права захищені, 2024.</h1></div>
+    <div className="bottom__title"><h1 className="bottom__text">© Електронний щоденник, ФКЗІ ДУІТЗ. Всі права захищені, {year}.</h1></div>
     </>
 }

@@ -227,7 +227,7 @@ export const EditGroup = () => {
             </div>
         </form>
         <section className="studentList__container">
-            <div className="studentItems__container" style={{'justifyContent':'space-between'}}>
+            <div className="studentItems__container"  style={{height:80 * Math.round((group?.group_students?.length || 0) / 2)}} >
                 {group?.group_students?.map(student => 
                     <div id={student.student_id || ''} className="student__container">
                         <div className="student__info">
