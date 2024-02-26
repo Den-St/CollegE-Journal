@@ -69,5 +69,5 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         }
     }
     // console.log(defaultValue);
-    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{color:getColorByValue(defaultValue || "")}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
+    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
 }

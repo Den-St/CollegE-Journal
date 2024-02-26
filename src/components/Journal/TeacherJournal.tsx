@@ -19,43 +19,19 @@ import _debounce from 'lodash/debounce';
 import './journalStyles.scss';
 const {Option} = Select;
 
+const useTeacherJournalControllers = () => {
+    
+    return {}
+}
+
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,token,setJournal} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
-    const currentMonth = new Date().getMonth() + 1;
-    const currentDate = new Date().getDate();
+    
     // const columnsDivRef = useRef<HTMLDivElement>(null);
 
-    const isDisabledByDate = (dateString:string) => {
-        if(+dateString.split('\n')[0].split('.')[1] > currentMonth) {
-            return true;
-        }
-        if(+dateString.split('\n')[0].split('.')[1] === currentMonth && +dateString.split('\n')[0].split('.')[0] > currentDate){
-            return true;
-        }
-        return false;
-    }
-    const onChangeLessonType = async (column_id:string,lesson_type:string) => {
-        try{
-            // setJournal(prev => ({...prev,columns:[...prev?.columns,prev?.columns.find(column => column.column_id === column_id)]}))
-            await axiosConfig.post(endpoints.journalEditCellType,{column_id,lesson_type,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
-            const lessonTypeP = document.getElementById(column_id);
-            if(lessonTypeP?.innerText){
-                lessonTypeP.innerText = lesson_type;
-            }
-        }catch(err){    
-            console.error(err);
-        }
-    }
-    const onBlurChangeLessonTopic = async (column_id:string,lesson_topic:string) => {
-        try{
-            await axiosConfig.post(endpoints.journalEditCellTopic,{column_id,lesson_topic,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
-        }catch(err){
-            console.error(err);
-        }
-    }
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
@@ -203,8 +179,8 @@ export const TeacherJournal = () => {
                             {journal.columns.map((column,j) => 
                                 (journal.can_edit === 1 &&
                                 !isDisabledByDate(column.date))
-                                ? <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),caretColor:'white !important',}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                             )}
                         </div>
                         {/* <div className='journalRowItemRight__container'>
@@ -230,7 +206,9 @@ export const TeacherJournal = () => {
                             !journal.can_edit ||
                             isDisabledByDate(column.date)
                         }
-                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} className='journalLessonThemeItem__input__text'/>
+                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} 
+                        placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} 
+                        className='journalLessonThemeItem__input__text'/>
                     </div>
                 )}
             </div>
