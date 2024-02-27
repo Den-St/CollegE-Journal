@@ -4,7 +4,9 @@ import { defaultAvatar } from '../../consts/defaultAvatar';
 import { routes } from '../../consts/routes';
 import { securityLevels, securityLevelsToNames } from '../../consts/securityLevels';
 import { deleteTokenCookie } from '../../helpers/auth';
+import { useStudentJournal } from '../../hooks/studentJournal';
 import { useThemeController } from '../../hooks/themeController';
+import { useStudentJournalSubjectsStore } from '../../store/studentJournalSubjects';
 import { useTeachersGroupsStore } from '../../store/teachersGroupsStore';
 import { useUserStore } from '../../store/userStore';
 import './userPopupStyles.scss';
@@ -13,11 +15,13 @@ export const UserPopup = () => {
     const theme = useThemeController().theme;
     const user = useUserStore().user;
     const signOut = useUserStore().signOut;
-    const clearTeacher = useTeachersGroupsStore().clear;
+    const clearTeacherJournal = useTeachersGroupsStore().clear;
+    const clearStudentJournal = useStudentJournalSubjectsStore().clear;
     const navigate = useNavigate();
     const onSignOut = () => {
         signOut();
-        clearTeacher();
+        clearTeacherJournal();
+        clearStudentJournal();
         deleteTokenCookie();
         navigate(routes.signIn);
     }

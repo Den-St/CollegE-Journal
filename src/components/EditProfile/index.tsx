@@ -67,6 +67,7 @@ const useEditProfile = () => {
                 queries.push(async () => {
                     const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:localCookie || cookie}});
                     setToken(res.data.token);
+                    setActive();
                     if(getToken()){
                         Cookies.set('token',res.data.token);
                     }

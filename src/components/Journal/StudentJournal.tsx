@@ -144,7 +144,7 @@ export const StudentJournal = () => {
                 <div className='journalRowItem__container'>
                     <div className='journalRowItemCenter__container'>
                         {journal?.columns.map(column => 
-                            <div key={column.cells[0].index} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0].value)}}>{column.cells[0].value}</p></div>
+                            <div key={column.cells[0]?.index} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                         )}
                     </div>
                     {/* <div className='journalRowItemRight__container'>

@@ -9,6 +9,7 @@ type State = {
 
 type Actions = {
     set:(journalSubjects:StudentJournalSubjectsT) => void,
+    clear:() => void
 }
 type StoreType = State & Actions;
 
@@ -18,4 +19,5 @@ export const useStudentJournalSubjectsStore = create<StoreType>((set) => ({
         subjects:[]
     },
     set:(journalSubjects)  => set((state) => ({...state,journalSubjects:journalSubjects})),
+    clear:() => set((state) => ({...state,journalSubjects:{journal_id:'',subjects:[]}}))
 }));
