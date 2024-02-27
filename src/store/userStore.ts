@@ -13,6 +13,7 @@ type Actions = {
     setAvatar:(avatar:string) => void,
     startLoading:() => void,
     stopLoading:() => void,
+    setActive:() => void
 }
 type StoreType = State & Actions;
 
@@ -74,5 +75,6 @@ export const useUserStore = create<StoreType>((set) => ({
     })), 
     setAvatar: (avatar:string) => set((state) => ({
         user:{...state.user,avatar}
-    }))
+    })),
+    setActive: () => set((state) => ({...state,user:{...state.user,is_active:true}}))
 }));

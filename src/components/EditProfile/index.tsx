@@ -24,6 +24,7 @@ const useEditProfile = () => {
     const user = useUserStore().user;
     const setToken = useUserStore().setToken;
     const setAvatar = useUserStore().setAvatar;
+    const setActive = useUserStore().setActive;
     const localCookie = user.token;
     const cookie = getToken();
     const [newAvatarUrl,setNewAvatarUrl] = useState('');
