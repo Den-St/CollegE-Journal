@@ -137,11 +137,11 @@ export const EditProfile = () => {
                     <Popover rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
                 </div>
                 <div style={{display:'flex',gap:'20px',width:'100%'}}>
-                        <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
-                        <span onClick={() => onTogglePassword(1)} className='passwordEye__button'>{passwordInputType[1] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
-                    </div>
+                    <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
+                    <span onClick={() => onTogglePassword(1)} className='passwordEye__button'>{passwordInputType[1] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
+                </div>
                 <div style={{display:'flex',gap:'20px',width:'100%'}}>
-                    <input {...register('new_password_confimation',)} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
+                    <input {...register('new_password_confimation',)} type={passwordInputType[2]} className="input editProfile_input" placeholder="Повторіть новий пароль" autoComplete={"off"}/>
                     <span onClick={() => onTogglePassword(2)} className='passwordEye__button'>{passwordInputType[2] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
                 </div>
                 
