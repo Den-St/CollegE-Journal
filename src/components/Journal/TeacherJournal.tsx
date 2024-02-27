@@ -19,6 +19,7 @@ import _debounce from 'lodash/debounce';
 import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import './journalStyles.scss';
+import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 const {Option} = Select;
 
 
@@ -172,7 +173,8 @@ export const TeacherJournal = () => {
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
+            <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
+            <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 

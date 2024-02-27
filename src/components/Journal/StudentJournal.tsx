@@ -1,6 +1,7 @@
 import { Select } from 'antd';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { LeftArrowSvg } from '../../assets/svgs/leftArrowSvg';
@@ -33,7 +34,8 @@ export const StudentJournal = () => {
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'><Link to={routes.pickJournalSubject} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
+            <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
+            <h1 className='journal__title'>Журнал</h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 

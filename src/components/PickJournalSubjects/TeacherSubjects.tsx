@@ -2,6 +2,7 @@ import { Carousel, Spin } from "antd";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
+import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { routes } from "../../consts/routes";
@@ -28,7 +29,9 @@ export const TeacherSubjects = () => {
     if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
 
     return <section className="subjectsMainContainer">
-        <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2>
+        {/* <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2> */}
+        <LinkBack title={"Список груп"} route={routes.groups}/>
+        <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
                 <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
