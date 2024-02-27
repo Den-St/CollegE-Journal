@@ -16,20 +16,127 @@ import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { CellInput, getColorByValue } from './CellInput';
 import _debounce from 'lodash/debounce';
+import { Table } from 'antd';
+import type { TableColumnsType } from 'antd';
 import './journalStyles.scss';
 const {Option} = Select;
 
-const useTeacherJournalControllers = () => {
-    
-    return {}
+
+interface DataType {
+  key: React.Key;
+  name: React.ReactNode;
+  grade:React.ReactNode;
 }
+
 
 export const TeacherJournal = () => {
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
+    // const columns: TableColumnsType<DataType> = journal?.columns ? [{
+    //         title:'',
+    //         width:100,
+    //         dataIndex: 'name',
+    //         key: 'name',
+    //         fixed: 'left',
+    // },...journal.columns.map(column => 
+    //         ({
+    //             title:'',
+    //             width:100,
+    //             dataIndex: 'grade',
+    //             key: 'grade',
+    //             fixed: 'left',
+    //         })
+    //     ) 
+    // ] : [];
     
+    //     {
+    //       title: 'Full Name',
+    //       width: 100,
+    //       dataIndex: 'name',
+    //       key: 'name',
+    //       fixed: 'left',
+    //     },
+    //     {
+    //       title: 'Age',
+    //       width: 100,
+    //       dataIndex: 'age',
+    //       key: 'age',
+    //       fixed: 'left',
+    //     },
+    //     {
+    //       title: 'Column 1',
+    //       dataIndex: 'address',
+    //       key: '1',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 2',
+    //       dataIndex: 'address',
+    //       key: '2',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 3',
+    //       dataIndex: 'address',
+    //       key: '3',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 4',
+    //       dataIndex: 'address',
+    //       key: '4',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 5',
+    //       dataIndex: 'address',
+    //       key: '5',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 6',
+    //       dataIndex: 'address',
+    //       key: '6',
+    //       width: 150,
+    //     },
+    //     {
+    //       title: 'Column 7',
+    //       dataIndex: 'address',
+    //       key: '7',
+    //       width: 150,
+    //     },
+    //     { title: 'Column 8', dataIndex: 'address', key: '8' },
+    //   ];
+      
+    //   const data: DataType[] = [];
+    //   for (let i = 0; i < 100; i++) {
+    //     // data.push({
+    //     //   key: i,
+    //     //   name: `Edward ${i}`,
+    //     // });
+    //   }
+    //   {journal?.students.map((student,i) => 
+    //     data.push({
+    //         key:student.index,
+    //         name:<div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
+    //             <p className='journalRowItemLeft__number'>{student.index}.</p>
+    //             <p className='journalRowItemLeft__name'>{student.full_name}</p>
+    //         </div>,
+    //         grade:<div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
+    //             <div className='journalRowItemCenter__container'>
+    //                 {journal.columns.map((column,j) => 
+    //                     (journal.can_edit === 1 &&
+    //                     !isDisabledByDate(column.date))
+    //                     ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+    //                     : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+    //                 )}
+    //             </div>
+    //         </div>
+    //     })
+    // )}
+      
     // const columnsDivRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -65,7 +172,7 @@ export const TeacherJournal = () => {
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
-            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал</h1>
+            <h1 className='journal__title'><Link to={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`} className="editProfile_leaveButton"><LeftArrowSvg/></Link>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
             <div className='journalFillters__container'>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
@@ -155,21 +262,7 @@ export const TeacherJournal = () => {
                         </div>
                     )}
                 </div>
-                {/* <div className='journalColumnsRight__container'>
-                    <div className='journalColumnsRightItem__container'>
-                        <div className='journalColumnsRightItemType'>Аттестація</div>
-                        <div className='journalColumnsRightItemMonth'>
-                            Травень
-                        </div>
-                    </div>
-                    <div className='journalColumnsRightItem__container'>
-                        <div className='journalColumnsRightItemType'>Коригуюча</div>
-                        <div className='journalColumnsRightItemMonth'>
-                            Травень
-                        </div>
-                    </div>
-                </div> */}
-                </div>
+            </div>
                 {journal?.students.map((student,i) => 
                     <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                         <div className='journalRowItemCenter__container'>
@@ -180,14 +273,11 @@ export const TeacherJournal = () => {
                                 : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                             )}
                         </div>
-                        {/* <div className='journalRowItemRight__container'>
-                            <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                            <div className='journalRowItemRightValue__container'><p className='journalRowItemRightValue__text'>100</p></div>
-                        </div> */}
                     </div>
                 )}
             </div>
         </section>
+        {/* <Table columns={columns} dataSource={data} scroll={{ x: 1500, y: 300 }} /> */}
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
             <div className='journalLessonsThemes__container'>

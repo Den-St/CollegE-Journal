@@ -358,7 +358,14 @@
         color:var(--primary-orange);
     }
 }
-
+.journalGroup_groupName{
+    font-family: Montserrat;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.1em;
+    color:var(--primary-orange);
+}
 .dark{
     .journalRowItemCenterValue__text,
     .journalRowItemCenterValue__input__text{
