@@ -21,6 +21,7 @@ import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import { scheduleTimings } from '../../consts/scheduleTimings';
 import { StarSvg } from '../../assets/svgs/starSvg';
+import { useGetGroup } from '../../hooks/getGroup';
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -97,6 +98,7 @@ export const MyProfile = () => {
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
     const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status} = useTryEditProfile();
+    
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);

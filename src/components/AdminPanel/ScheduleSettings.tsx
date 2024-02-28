@@ -107,7 +107,7 @@ export const ScheduleSettings = () => {
     </div>
 }
 
-const NoSheduleComponent = () => {
+export const NoSheduleComponent = () => {
     return <div className="noSchedule_container">
         <RobotSvg/>
         <h1 className="noSchedule_title">Нажаль, розклад ще не завантажен.</h1>

@@ -1,4 +1,5 @@
 import { Carousel, Spin } from "antd";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../../consts/routes";
 import { useStudentSubjects } from "../../hooks/studentSubjects";
@@ -10,6 +11,9 @@ export const StudentSubjects = () => {
     const {journalSubjects,loading} = useStudentSubjects();
     const currentMonth = new Date().getMonth();
     
+    useEffect(() => {
+        document.title = "Обрати предмет"
+    },[])
     if(loading) return <Loader/>
     if(!journalSubjects?.subjects.length) return <NoMatch is404={false} title={"Предметів не знайдено"}/>
 

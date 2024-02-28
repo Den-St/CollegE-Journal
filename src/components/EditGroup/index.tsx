@@ -228,7 +228,7 @@ export const EditGroup = () => {
         </form>
         <section className="studentList__container">
             <div className="studentItems__container"  style={{height:80 * Math.round((group?.group_students?.length || 0) / 2)}} >
-                {group?.group_students?.map(student => 
+                {group?.group_students?.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
                     <div id={student.student_id || ''} className="student__container">
                         <div className="student__info">
                             <img className="studentList__avatar" src={student?.avatar || defaultAvatar} alt=""/>

@@ -50,7 +50,7 @@ export const TeacherSubjects = () => {
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>
             <div className="studentItems__container" style={{height:80 * Math.round(group.group_students.length / 2)}}>
-                {group.group_students.map(student => 
+                {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
                     <div className="student__container" key={student.student_id}>
                         <div className="student__info">
                             <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt=""/>

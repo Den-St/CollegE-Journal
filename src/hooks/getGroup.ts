@@ -70,7 +70,7 @@ export const useGetGroup = (groupId?:string) => {
     }
 
     useEffect(() => {
-        fetch();
+        fetch(groupId);
     }, [group_id,groupId])
     
     return {group,groupLoading:loading,fetchGroup:fetch}

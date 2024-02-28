@@ -18,5 +18,6 @@ export const endpoints = {
     journalEditCell:'journal/edit-cell',
     journalEditCellType:'journal/edit-cell-type',
     journalEditCellTopic:'journal/edit-cell-topic',
-    getTeachers:'teacher-page'
+    getTeachers:'teacher-page',
+    myGroup:'my-group'
 }
