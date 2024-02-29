@@ -6,7 +6,9 @@
     svg{
         fill:var(--primary-gray);
     }
+    transition: 0.3s;
 }
+
 
 .linkBackTitle{
     font-family: Montserrat;
@@ -17,3 +19,11 @@
     color:var(--primary-gray);
 }
 
+.linkBackContainer:hover{
+    .linkBackTitle{
+        color:white;
+    }
+    svg{
+        fill:white;
+    }
+}

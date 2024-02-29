@@ -8,8 +8,5 @@ type Props = {
 }
 
 export const LinkBack:React.FC<Props> = ({route,title}) => {
-    return <div className="linkBackContainer">
-        <Link to={route}><LeftArrowSvg/></Link>
-        <h2 className="linkBackTitle">{title}</h2>
-    </div>
+    return <Link className="linkBackContainer" to={route}><LeftArrowSvg/><h2 className="linkBackTitle">{title}</h2></Link>
 }
