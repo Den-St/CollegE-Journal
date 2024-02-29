@@ -9,7 +9,6 @@ import { StudentJournalSubjectsT } from '../types/studentJournalSubjects';
 
 export const useStudentSubjects = () => {
     const localToken = useUserStore().user.token;
-    const cookieToken = getToken();
     const [loading,setLoading] = useState(false);
     const setSubjects = useStudentJournalSubjectsStore().set;
     const journalSubjects = useStudentJournalSubjectsStore().journalSubjects;
@@ -18,7 +17,7 @@ export const useStudentSubjects = () => {
         if(journalSubjects.subjects.length) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.get(endpoints.studentGroupSubjects,{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.get(endpoints.studentGroupSubjects,{headers:{Authorization:localToken}});
             setSubjects(res.data);
         }catch(err){
             console.error(err);

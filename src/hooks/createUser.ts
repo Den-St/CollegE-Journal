@@ -13,8 +13,7 @@ import { useGetAdminGroups } from "./getGroups";
 export const useCreateUser = (group?:GroupT) => {
     // const {groups} = useGetGroups();
     const groupId = useParams().id;
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
     const [createUserFormErrorMessage,setErrorMessage] = useState('');
     const [createUserLoading,setCreateUserLoading] = useState(false);
@@ -51,7 +50,7 @@ export const useCreateUser = (group?:GroupT) => {
         }
         try{
             setCreateUserLoading(true);
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken}});
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data.user_password});
             setCreateUserErrorCode(undefined);
             reset();

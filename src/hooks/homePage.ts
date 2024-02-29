@@ -12,13 +12,12 @@ const fetchHomePageData = async (token:string) =>{
 export const useHomePage = () => {
     const [homePageData,setHomePageData] = useState<HomePageDataT>();
     const [loading,setLoading] = useState(false);
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
 
     const fetchData = async () => {
         setLoading(true);
         try{
-            const res = await fetchHomePageData(localToken || cookieToken) as HomePageDataT;
+            const res = await fetchHomePageData(localToken) as HomePageDataT;
             setHomePageData(res);
         }catch(err){
             console.error(err);

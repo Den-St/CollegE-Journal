@@ -11,7 +11,6 @@ export const useGetGroup = (groupId?:string) => {
     const [loading,setLoading] = useState(false);
     const [group,setGroup] = useState<GroupT>();
     const localToken = useUserStore().user.token;
-    const cookieToken = getToken();
     const group_id = useParams().id;
 
     const fetch = async (groupId?:string) => {
@@ -21,7 +20,7 @@ export const useGetGroup = (groupId?:string) => {
         }
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.getGroup,{group_id:group_id || groupId},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.getGroup,{group_id:group_id || groupId},{headers:{Authorization:localToken}});
             if(Object.keys(res.data.timetable).length && !res.data.timetable[5]){
                 res.data.timetable[5] = [
                     {

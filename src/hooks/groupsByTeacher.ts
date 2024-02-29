@@ -18,14 +18,13 @@ export const useGroupsByTeacher = () => {
     const teacher_id = useUserStore().user.user_id;
     const security_level = useUserStore().user.security_level;
     const localToken = useUserStore().user.token;
-    const cookieToken = getToken();
     const [groupesByGrade,setGroupsByGrade] = useState<Record<string,JournalGroupT[]>>();
 
     const fetch = async () => {
         if(groups.length) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.get(endpoints.userGroups,{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.get(endpoints.userGroups,{headers:{Authorization:localToken}});
             setGroups(res.data);
         }catch(err){
             console.error(err);

@@ -13,14 +13,13 @@ export const useGetAdminGroups = () => {
     const groups = useAdminGroupsStore().groups;
     const [groupesByGrade,setGroupsByGrage] = useState<Record<string,GroupT[]>>();
     const [loading,setLoading] = useState(false);
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
     
     const fetchGroups = async () => {
         if(groups.length) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.get(endpoints.getGroups,{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.get(endpoints.getGroups,{headers:{Authorization:localToken}});
             setGroups(res.data as GroupT[]);
             const a = [
                     {

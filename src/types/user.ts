@@ -16,6 +16,17 @@ export type UserT = {
     security_level:number | null,
     group_fullname:string,
     is_active:boolean,
+    phone_number:string,
+    admission_date:string,
+    birth_date:string,
+    education_form:string,
+    education_type:string,
+    interests:string,
+    job_title:string | null,
+    additional_job_title:string | null,
+    location:string,
+    parents_phone_number:string,
+    
     user_group:{
         group_id:string,
         group_full_name:string

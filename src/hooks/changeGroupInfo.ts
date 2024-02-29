@@ -18,8 +18,7 @@ export const useChangeGroupInfo = (group?:GroupT) => {
         setValue,
         watch,
     } = useForm<ChangeGroupT>();
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
     const [chosenSupervisorId,setChosenSupervisorId] = useState<string | null>(null);
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
     const [changeErrorCode,setErrorCode] = useState<number>();
@@ -66,7 +65,7 @@ export const useChangeGroupInfo = (group?:GroupT) => {
         }
 
         try{
-            const res = await axiosConfig.post(endpoints.changeGroup,{group_full_name:data.group_full_name,group_id:group?.group_id,group_supervisor:chosenSupervisorId || ''},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.changeGroup,{group_full_name:data.group_full_name,group_id:group?.group_id,group_supervisor:chosenSupervisorId || ''},{headers:{Authorization:localToken}});
             setErrorCode(1);
         }catch(err){
             console.error(err);

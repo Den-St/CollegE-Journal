@@ -36,6 +36,16 @@ export const useUserStore = create<StoreType>((set) => ({
         security_level:null,
         group_fullname:'',
         is_active:false,
+        phone_number:'',
+        admission_date:'',
+        birth_date:'',
+        education_form:'',
+        education_type:'',
+        interests:'',
+        job_title:'',
+        additional_job_title:'',
+        location:'',
+        parents_phone_number:'',
         user_group:{
             group_id:'',
             group_full_name:''
@@ -64,6 +74,16 @@ export const useUserStore = create<StoreType>((set) => ({
             security_level:null,
             group_fullname:'',
             is_active:false,
+            phone_number:'',
+            admission_date:'',
+            birth_date:'',
+            education_form:'',
+            education_type:'',
+            interests:'',
+            job_title:'',
+            additional_job_title:'',
+            location:'',
+            parents_phone_number:'',
             user_group:{
                 group_id:'',
                 group_full_name:''

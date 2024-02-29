@@ -12,8 +12,8 @@ import { endpoints } from '../consts/endpoints';
 export const useAuth = () => {
     const [loading,setLoading] = useState(false);
     const signIn = useUserStore().signIn;
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const cookieToken = getToken();
+    const localToken = useUserStore().user.token;
     const onUserLoading = useUserStore().startLoading;
     const onStopUserLoading = useUserStore().stopLoading;
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const useAuth = () => {
         onUserLoading();
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
-            signIn({...res.data.data},);
+            signIn({...res.data.data,token:cookieToken || ''},);
             if(!res.data.data.is_active){
                 setChangeProfileCookie();
                 navigate(routes.editProfile);

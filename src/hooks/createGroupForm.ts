@@ -27,8 +27,8 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
         register,
         handleSubmit,
     } = useForm<CreateGroupT>();
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+
+    const localToken = useUserStore().user.token;
     const validateGroupName = (group_full_name:string) => {
         group_full_name = group_full_name.trim();
         if(group_full_name.length !== 4 && group_full_name.length !== 5) {
@@ -64,7 +64,7 @@ export const useCreateGroupForm = (refetchGroups:() => void) => {
             return;
         }
         try{
-            const res = await axiosConfig.post(endpoints.createGroup,data,{headers:{'Authorization':localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.createGroup,data,{headers:{'Authorization':localToken}});
             onCloseCreateGroupModal();
             // refetchGroups();
             if(res.status === 201) {

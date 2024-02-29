@@ -6,15 +6,14 @@ import { useUserStore } from "../store/userStore";
 import { SupervisorT } from "../types/supervisor";
 
 export const useGetSupervisors = () => {
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
     const [supervisors,setSupervisors] = useState<SupervisorT[]>([]);
     const [loading,setLoading] = useState<boolean>(false);
     
     const fetchSupervisors = async () => {
         setLoading(true);
         try{
-            const res = await axiosConfig.get(endpoints.supervisors,{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.get(endpoints.supervisors,{headers:{Authorization:localToken}});
             setSupervisors(res.data.data.supervisors_list);
         }catch(err){
             console.error(err);

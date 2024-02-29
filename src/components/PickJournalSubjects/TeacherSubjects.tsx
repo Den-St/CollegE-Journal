@@ -61,7 +61,7 @@ export const TeacherSubjects = () => {
                 )}
             </div>
             <Carousel slidesPerRow={10} className={'students_carousel'}>
-                    {group.group_students.map(student => 
+                    {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
                         <div className="student__container" key={student.student_id}>
                             <div className="student__info">
                                 <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt=""/>

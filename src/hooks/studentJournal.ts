@@ -17,14 +17,13 @@ export const useStudentJournal = () => {
         subject_id:useSearchParams()[0].get('subject_id') || '',
         month: +(useSearchParams()[0].get('month') || new Date().getMonth)
     });
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
 
     const fetch = async (_fillters?:{subject_id:string,month:number}) => {
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:fillters.subject_id || _fillters?.subject_id,month:-1,year:-1},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:fillters.subject_id || _fillters?.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
             setJournal(res.data);
         }catch(err){
             console.error(err);

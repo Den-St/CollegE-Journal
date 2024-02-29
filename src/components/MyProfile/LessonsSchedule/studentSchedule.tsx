@@ -106,11 +106,11 @@ export const LessonsScheduleStudents = () => {
                 },]
     }];
     const lessonNumbers = Array(1,2,3,4,5);
-    const {groupLoading,group} = useGetGroup(groupId);
+    // const {groupLoading,group} = useGetGroup(groupId);
 
     return <section className={`lessonsSchedule__container ${theme}`}>
         <h1 className='studentProfileTab__title'>Розклад</h1>
-        {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
+        {/* {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
             {Object.keys(group?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
@@ -156,7 +156,8 @@ export const LessonsScheduleStudents = () => {
         </Carousel>
         </>
         : <NoSheduleComponent/>
-        : <Loader/>}
+        : <Loader/>} */}
+        <NoSheduleComponent/>
         <div className="lessonsScheduleDay__container" style={{width:'unset'}}>
             <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>
             <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>

@@ -118,9 +118,9 @@ export const MyProfile = () => {
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
                         {/* <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p> */}
                         {!!user?.user_group?.group_full_name && 
-                        user.security_level === 1 
+                        user.security_level === securityLevels.student
                         ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
-                        : <Link to={routes.pickJournalSubject} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
+                        : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.groups} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
                         }
                     </div>
                 </div>
@@ -175,31 +175,31 @@ export const MyProfile = () => {
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Номер студента</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.phone_number}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата народження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.birth_date}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Місце знаходження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.location}</h2>
                 </div>
-                <div className='profile_detailedInfo_itemContainer'>
+                {/* <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Отримання стипендії</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
-                </div>
+                    <h2 className='profile_detailedInfo_item_text'>{user.}</h2>
+                </div> */}
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Форма навчання</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.education_form}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Бюджет/Контракт</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.education_type}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата вступу</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.admission_date}</h2>
                 </div>
             </div>
             <div className='profile_detailedInfo_dir_container' style={{flexDirection:'column'}}>

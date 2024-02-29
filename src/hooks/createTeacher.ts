@@ -9,8 +9,7 @@ import { CreateUserT, } from "../types/user";
 import { TeacherT } from './getTeachers';
 
 export const useCreateTeacher = (onAddTeacherLocally:(teacher:TeacherT) => void) => {
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
     const [createUserErrorCode,setCreateUserErrorCode] = useState<number>();
     const [createUserFormErrorMessage,setErrorMessage] = useState('');
     const [createUserLoading,setCreateUserLoading] = useState(false);
@@ -35,7 +34,7 @@ export const useCreateTeacher = (onAddTeacherLocally:(teacher:TeacherT) => void)
         }
         try{
             setCreateUserLoading(true);
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'teacher',full_name:data.full_name.trim(),security_level:4,is_active:false,avatar:''},{headers:{Authorization:localToken || cookieToken}});
+            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'teacher',full_name:data.full_name.trim(),security_level:4,is_active:false,avatar:''},{headers:{Authorization:localToken}});
             setCreateUserErrorCode(undefined);
             onAddTeacherLocally({avatar:'',department:data.department || '',full_name:data.full_name,user_id:''});
             reset();

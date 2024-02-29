@@ -9,13 +9,12 @@ import { FaqType } from '../types/faq';
 export const useFaq = () => {
     const [faqItems,setFaqItems] = useState<FaqType[]>([]);
     const [loading,setLoading] = useState(false);
-    const localToken = getToken();
-    const cookieToken = useUserStore().user.token;
+    const localToken = useUserStore().user.token;
 
     const fetchFaq = async () => {
         try{
             setLoading(true);
-            const res = await (await axiosConfig.get(endpoints.faq,{headers:{Authorization:localToken || cookieToken}})).data as {questions:FaqType[]};
+            const res = await (await axiosConfig.get(endpoints.faq,{headers:{Authorization:localToken}})).data as {questions:FaqType[]};
             setFaqItems(res.questions);
         }catch(err){
             console.error(err);

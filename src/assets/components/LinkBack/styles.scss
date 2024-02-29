@@ -19,6 +19,12 @@
     color:var(--primary-gray);
 }
 
+@media screen and (width < 720px) {
+    .linkBackContainer{
+        margin-left: 0;
+    }
+}
+
 .linkBackContainer:hover{
     .linkBackTitle{
         color:white;
