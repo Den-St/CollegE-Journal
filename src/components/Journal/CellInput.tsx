@@ -1,6 +1,5 @@
 import React from "react"
 import axiosConfig from "../../axiosConfig"
-import { CellValueToColor } from "../../consts/cellVaueToColor"
 import { endpoints } from "../../consts/endpoints"
 
 type Props = {
@@ -37,7 +36,8 @@ const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
 export const getColorByValue = (value:string) => {
     if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
     if(value !== "" && +value < 60) return "#ED3434";
-    if(+value >= 60) return "#2DEF40";
+    if(+value >= 74) return "#2DEF40";
+    if(+value >= 60 && +value <= 73) return "white";
     if(value === "н" || value === "Н") return "#EFB42D";
     if(!value) return "white";
     return "white";
