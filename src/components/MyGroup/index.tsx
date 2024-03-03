@@ -39,6 +39,9 @@ const useGetMyGroup = () => {
 export const MyGroup = () => {
     const {students,loading} = useGetMyGroup();
 
+    useEffect(() => {
+        document.title = "Моя група"
+    },[])
     if(loading) return <Loader/>
     if(!students.length && !loading) return <NoMatch title="Групи не знайдено"/>
 
