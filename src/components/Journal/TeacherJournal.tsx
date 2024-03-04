@@ -40,7 +40,6 @@ export const TeacherJournal = () => {
     const mainContainerRef = useRef<HTMLDivElement>(null);
     const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
     
-
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
@@ -151,44 +150,9 @@ export const TeacherJournal = () => {
                         </div>
                     )}
                 </div>
-                {/* {journal?.students.map(student => 
-                    <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
-                        <p className='journalRowItemLeft__number'>{student.index}.</p>
-                        <p className='journalRowItemLeft__name'>{student.full_name}</p>
-                    </div>
-                )} */}
             </div>
             <div className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
-                    {/* <div className='journalColumnsCenter__container'>
-                        {journal?.columns.map(column => 
-                            <div key={column.column_id} className='journalColumnsCenterItem__container'>
-                                    {
-                                        journal.can_edit === 1 ?
-                                        <Select 
-                                            disabled={
-                                                journal.can_edit !== 1
-                                            }
-                                            defaultValue={column.lesson_type || null} 
-                                            className='journal_lessonTypeSelect' 
-                                            rootClassName='journal_lessonTypeSelect'
-                                            placeholder={'Тип'}
-                                            onChange={(value) => onChangeLessonType(column.column_id,value)}>
-                                                <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
-                                                <Option label={"Практика"} value={"Практика"}>Практика</Option>
-                                                <Option label={"Залік"} value={"Залік"}>Залік</Option>
-                                                <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
-                                                <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
-                                        </Select>
-                                        : <div className='journalColumnsCenterItemType'>{column.lesson_type || ''}</div>
-                                    }
-                                <div className='journalColumnsCenterItemDate__container'>
-                                    <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
-                                    <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
-                                </div>
-                            </div>
-                        )}
-                    </div> */}
                         {journal?.students.map(student => 
                             <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
                                 <p className='journalRowItemLeft__number'>{student.index}.</p>
@@ -212,7 +176,6 @@ export const TeacherJournal = () => {
                 </div>
             </div>
         </section>
-        {/* <Table columns={columns} dataSource={data} scroll={{ x: 1500, y: 300 }} /> */}
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
             <div className='journalLessonsThemes__container'>
