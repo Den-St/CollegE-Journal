@@ -42,21 +42,18 @@ export const TeacherJournal = () => {
     
 
     const handleHorizontalScroll = () => {
-        console.log('sadf')
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
     }
     const handleVerticalScroll = () => {
         if(mainContainerRef.current === null || cellsRef.current === null) return;
-        // mainContainerRef.current.scrollTop = cellsRef.current.scrollTop;
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
-    // const debounceHandleScroll = useCallback(_debounce(handleScroll, 100),[cellsHorizontalRef.current]);
 
     useEffect(() => {
         setJournalWidth(document.getElementById('journal__container')?.clientWidth);
     },[document.getElementById('journal__container')?.clientWidth]);
-    
+
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){

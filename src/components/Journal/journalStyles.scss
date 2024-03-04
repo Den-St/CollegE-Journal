@@ -58,7 +58,8 @@
     overflow-x: hidden;
     position: relative;
     // overflow-x:auto;
-    height: 600px;
+    // height: 600px;
+    height: 50vh;
     // overflow-x: scroll;
 }
 .journalRightRowsContainer{
@@ -389,6 +390,22 @@
     letter-spacing: 0.1em;
     color:var(--primary-orange);
 }
+
+// @media screen and (height < 900px) {
+//     .journalRight__container{
+//         height: 500px;
+//     }
+// }
+// @media screen and (height <= 700px) {
+//     .journalRight__container{
+//         height: 400px;
+//     }
+// }
+// @media screen and (height > 900px) {
+//     .journalRight__container{
+//         height: 600px;
+//     }
+// }
 .dark{
     .journalRowItemCenterValue__text,
     .journalRowItemCenterValue__input__text{
