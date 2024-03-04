@@ -49,7 +49,8 @@ export const useUserStore = create<StoreType>((set) => ({
         user_group:{
             group_id:'',
             group_full_name:''
-        }
+        },
+        timetable:null
     },
     loading:false,
     startLoading:() => set((state) => ({...state,loading:true})),
@@ -87,7 +88,8 @@ export const useUserStore = create<StoreType>((set) => ({
             user_group:{
                 group_id:'',
                 group_full_name:''
-            }
+            },
+            timetable:null
         }
     })),
     setToken: (token:string) => set((state) => ({

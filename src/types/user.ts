@@ -1,3 +1,5 @@
+import { TimetableT } from "./timetable";
+
 export type UserT = {
     user_id:string | null;
     full_name:string,
@@ -26,7 +28,7 @@ export type UserT = {
     additional_job_title:string | null,
     location:string,
     parents_phone_number:string,
-    
+    timetable:TimetableT | null,
     user_group:{
         group_id:string,
         group_full_name:string

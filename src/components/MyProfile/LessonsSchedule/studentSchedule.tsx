@@ -105,22 +105,68 @@ export const LessonsScheduleStudents = () => {
                     name:'Математика',link:'#'
                 },]
     }];
+    const user = useUserStore().user;
+    if(Object.keys(user.timetable || {}).length && !user.timetable?.[5] && !!user.timetable){
+        user.timetable[5] = [
+            {
+                audience:0,
+                lesson_number:0,
+                link:'',
+                subject_name:'',
+                time:'8:00',
+                subject_id:''
+            },
+            {
+                audience:0,
+                lesson_number:0,
+                link:'',
+                subject_name:'',
+                time:'9:45',
+                subject_id:''
+            },
+            {
+                audience:0,
+                lesson_number:0,
+                link:'',
+                subject_name:'',
+                time:'11:30',
+                subject_id:''
+            },
+            {
+                audience:0,
+                lesson_number:0,
+                link:'',
+                subject_name:'',
+                time:'13:15',
+                subject_id:''
+            },
+            {
+                audience:0,
+                lesson_number:0,
+                link:'',
+                subject_name:'',
+                time:'14:45',
+                subject_id:''
+            },
+        ];
+    }
+    console.log(user.timetable);
     const lessonNumbers = Array(1,2,3,4,5);
     // const {groupLoading,group} = useGetGroup(groupId);
 
     return <section className={`lessonsSchedule__container ${theme}`}>
         <h1 className='studentProfileTab__title'>Розклад</h1>
-        {/* {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
-            {Object.keys(group?.timetable || {}).map((dayKey,i) => 
+        {Object.keys(user?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
+            {Object.keys(user?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
                         {lessonNumbers.map(lessonNumber =>
-                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
-                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
+                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
-                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    {user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                     :<div>
@@ -132,17 +178,17 @@ export const LessonsScheduleStudents = () => {
                     </div>
                 </div>)}
         </section>
-        <Carousel className='lessonsScheduleDayCarousel' dots slidesToShow={1} initialSlide={Object.keys(group?.timetable || {}).findIndex((day,i) => i + 1 === dayNumber)}>
-            {Object.keys(group?.timetable || {}).map((dayKey,i) => 
+        <Carousel className='lessonsScheduleDayCarousel' dots slidesToShow={1} initialSlide={Object.keys(user?.timetable || {}).findIndex((day,i) => i + 1 === dayNumber)}>
+            {Object.keys(user?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
                         {lessonNumbers.map(lessonNumber =>
-                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
-                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
+                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
-                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    {user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={user?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                     :<div>
@@ -155,9 +201,8 @@ export const LessonsScheduleStudents = () => {
                 </div>)}
         </Carousel>
         </>
-        : <NoSheduleComponent/>
-        : <Loader/>} */}
-        <NoSheduleComponent/>
+        : <NoSheduleComponent/>}
+        {/* <NoSheduleComponent/> */}
         <div className="lessonsScheduleDay__container" style={{width:'unset'}}>
             <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>
             <h3 className='scheduleTimingsTitle'>Час проведення пар</h3>
