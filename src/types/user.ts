@@ -28,7 +28,8 @@ export type UserT = {
     additional_job_title:string | null,
     location:string,
     parents_phone_number:string,
-    timetable:TimetableT | null,
+    timetable:{audience:string,link:string,subject_name:string}[][] | null
+    // TimetableT | null,
     user_group:{
         group_id:string,
         group_full_name:string
