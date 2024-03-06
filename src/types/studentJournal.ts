@@ -4,12 +4,14 @@ export type StudentJournalT = {
         full_name:string,
         index:number
     },
-    columns:{
-        column_index:number,
-        date:string,
-        cells:{
-            index:number,
-            value:string
-        }[]
+    columns:JournalColumnT[]
+}
+
+export type JournalColumnT = {
+    column_index: number;
+    date: string;
+    cells: {
+        index: number;
+        value: string;
     }[]
 }

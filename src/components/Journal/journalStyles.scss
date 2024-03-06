@@ -46,7 +46,7 @@
 
 .journalLeft__container{
     display: flex;
-
+    margin-bottom: 36px;
     // flex-direction: column;
     
     // padding: 0 0 0 37px;
@@ -79,7 +79,7 @@
     align-items: center;
     text-align: center;
     padding: 10px 16px;
-    margin-bottom: 36px;
+    // margin-bottom: 36px;
     // width: 332px;
     max-width:332px;
     min-width:332px;
@@ -153,6 +153,7 @@
     gap:5px;
     border-radius: 10px 5px;
     height: 70px;
+    width: 70px;
 }
 
 .journalColumnsRight__container{
@@ -238,7 +239,7 @@
 .journalRowItemCenter__container{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     // padding-left: 3.9%;
     margin-left: 66px;
     gap:10px;

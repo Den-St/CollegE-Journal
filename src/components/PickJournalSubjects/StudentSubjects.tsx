@@ -23,6 +23,7 @@ export const StudentSubjects = () => {
             {journalSubjects?.subjects.map((subject,i) => 
                 <Link  
                 to={routes.journal + `?&subject_id=${subject.journal_id}&month=${currentMonth + 1}`}
+                key={subject.journal_id}
                 className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
@@ -32,7 +33,8 @@ export const StudentSubjects = () => {
             {journalSubjects?.subjects.map((subject,i) => 
                 <Link 
                 to={routes.journal + `?&subject_id=${subject.journal_id}&month=${currentMonth + 1}`}
-                 className={`homeTasks_subject`}>
+                key={subject.journal_id}
+                className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}

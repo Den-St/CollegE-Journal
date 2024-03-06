@@ -19,7 +19,7 @@ const {Option} = Select;
 
 export const StudentJournal = () => {
     const theme = useThemeStore().theme;
-    const {loading,journal,fillters,onChangeFillters} = useStudentJournal()
+    const {loading,journal,fillters,onChangeFillters,columnByMonth} = useStudentJournal()
     const currentMonth = new Date().getMonth();
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
@@ -79,7 +79,7 @@ export const StudentJournal = () => {
                     >
                         {studyMonths.map((month,i) => {
                             if(i > studyMonths.findIndex(_month => _month.number === currentMonth + 1)) return null;
-                            return <Option value={month.number} label={month.name}>{month.name}</Option>
+                            return <Option key={month.number} value={month.number} label={month.name}>{month.name}</Option>
                         })}
                     </Select>
                 </div>
@@ -99,32 +99,10 @@ export const StudentJournal = () => {
                         {!!subjects.length && 
                         subjects
                         .map(subject => 
-                            <Option value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                            <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                         )}
-                        {/* <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
-                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
-                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
-                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option> */}
                     </Select>
                 </div>
-                {/* <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
-                        placeholder={
-                            <div className="fillterPlaceholder_container">
-                                <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
-                            </div>
-                        } 
-                        className="fillter_select"
-                        allowClear
-                        value={fillters.}
-                        onChange={(value) => onChangeFillters('subject_id',value)}
-                    >
-                        <Option value={'Математика1'} label={'Математика1'}>Математика1 <FilterIconSvg/></Option>
-                        <Option value={'Математика2'} label={'Математика2'}>Математика2 <FilterIconSvg/></Option>
-                        <Option value={'Математика3'} label={'Математика3'}>Математика3 <FilterIconSvg/></Option>
-                        <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
-                    </Select>
-                </div> */}
             </div>
         </section>
         <section className='journal_portraitModeWarning'>
@@ -139,7 +117,7 @@ export const StudentJournal = () => {
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
                 <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
-                    {journal?.columns.map(column => 
+                    {columnByMonth[0].map(column => 
                         <div key={column.column_index} className='journalColumnsCenterItem__container'>
                             <div className='journalColumnsCenterItemType transparent'>
                             </div>
@@ -154,16 +132,29 @@ export const StudentJournal = () => {
             <div className='journalRight__container' style={{height:'unset'}}>
                 <div className='journalRightColumns__container'>
                         <div className='journalRowItemLeft__container'>
-                            {/* <p className='journalRowItemLeft__number'>1.</p> */}
                             <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
                         </div>
                     </div>
                 <div className='journalRightRowsContainer' style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset',position:'unset'}} ref={cellsRef} onScroll={handleHorizontalScroll}>
-                    <div className='journalRowItemCenter__container'>
-                        {journal?.columns.map(column => 
-                            <div key={column.cells[0]?.index} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
-                        )}
-                    </div>
+                    {columnByMonth.map((columns,i) => 
+                    <>
+                        {i !== 0 && <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset'}}>
+                            {columns.map(column => 
+                                <div key={column.column_index} className='journalColumnsCenterItem__container'>
+                                    <div className='journalColumnsCenterItemDate__container'>
+                                        <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
+                                        <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>}
+                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px'}}>
+                            {columns.map(column => 
+                                <div key={column.cells[0]?.index + column.date} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
+                            )}
+                        </div>
+                    </>
+                    )}
                 </div>
             </div>
         </section>
