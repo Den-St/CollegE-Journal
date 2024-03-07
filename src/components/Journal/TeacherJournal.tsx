@@ -38,7 +38,7 @@ export const TeacherJournal = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
-    const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
+    // const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
     
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
@@ -49,9 +49,9 @@ export const TeacherJournal = () => {
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
 
-    useEffect(() => {
-        setJournalWidth(document.getElementById('journal__container')?.clientWidth);
-    },[document.getElementById('journal__container')?.clientWidth]);
+    // useEffect(() => {
+    //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
+    // },[document.getElementById('journal__container')?.clientWidth]);
 
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -66,6 +66,7 @@ export const TeacherJournal = () => {
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
     console.log('sdf',document.getElementById('journal__container')?.clientWidth)
+
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
@@ -160,7 +161,9 @@ export const TeacherJournal = () => {
                             </div>
                         )}
                 </div>
-                <div className='journalRightRowsContainer' style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}} ref={cellsRef} onScroll={handleHorizontalScroll}>
+                <div className='journalRightRowsContainer'
+                // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
+                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {journal?.students.map((student,i) => 
                         <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                             <div className='journalRowItemCenter__container'>

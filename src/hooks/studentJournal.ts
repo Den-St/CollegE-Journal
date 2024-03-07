@@ -28,7 +28,7 @@ export const useStudentJournal = () => {
         try{
             const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:_fillters?.subject_id || fillters.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
             setJournal(res.data);
-            const _columnsByDate:JournalColumnT[][] = [[]];
+            const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
             console.log(res.data.columns)
             for(let i = 1;i < res.data.columns.length;i++){
                 if(res.data.columns[i].date.split('.')[1].slice(0,2) === res.data.columns[i - 1].date.split('.')[1].slice(0,2)){

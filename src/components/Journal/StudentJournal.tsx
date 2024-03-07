@@ -24,7 +24,7 @@ export const StudentJournal = () => {
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
-
+    console.log(columnByMonth);
     useEffect(() => {
         const subjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!subjectName){
@@ -37,15 +37,15 @@ export const StudentJournal = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     // const mainContainerRef = useRef<HTMLDivElement>(null);
-    const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
+    // const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
     
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
     }
-    useEffect(() => {
-        setJournalWidth(document.getElementById('journal__container')?.clientWidth);
-    },[document.getElementById('journal__container')?.clientWidth]);
+    // useEffect(() => {
+    //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
+    // },[document.getElementById('journal__container')?.clientWidth]);
 
     if(loading) return <Loader/>
     if(!journal) return <div className={`journalMain__container ${theme}`}>
@@ -135,7 +135,9 @@ export const StudentJournal = () => {
                             <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
                         </div>
                     </div>
-                <div className='journalRightRowsContainer' style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset',position:'unset'}} ref={cellsRef} onScroll={handleHorizontalScroll}>
+                <div className='journalRightRowsContainer' 
+                style={{position:'unset'}} 
+                ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {columnByMonth.map((columns,i) => 
                     <>
                         {i !== 0 && <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset'}}>
