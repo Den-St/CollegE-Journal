@@ -24,7 +24,6 @@ export const useSignIn = () => {
                 navigate(routes.adminPanel + '?section=schedule');
                 return;
             }
-            console.log('active',active);
             if(res.data.data.is_active){
                 navigate(routes.myProfile);
                 return;
@@ -52,7 +51,6 @@ export const useSignIn = () => {
                 });
                 await auth(res.data.data.token,res.data.data.active);
             }
-            console.log(res.data.data);
             
             // setStatus(res?.data.status);
         }catch(err){

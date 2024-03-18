@@ -16,7 +16,6 @@ const useGetMyGroup = () => {
     const [loading,setLoading] = useState(false);
     const token = useUserStore().user.token;
 
-    console.log(token)
     const fetch = async () => {
         try{
             setLoading(true);
@@ -51,7 +50,7 @@ export const MyGroup = () => {
         <section className="studentList__container">
             <div className="studentItems__container" style={{height:80 * Math.round((students?.length || 0) / 2)}}>
                 {!!students.length ? students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(
-                    student => <div id={student.student_id} className="student__container">
+                    student => <div key={student.student_id} className="student__container">
                         <div className="student__info">
                             <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt="Аватар"/>
                             <p className="studentName">{student.full_name}</p>

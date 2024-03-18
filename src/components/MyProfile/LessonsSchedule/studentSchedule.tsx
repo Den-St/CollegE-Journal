@@ -139,7 +139,6 @@ export const LessonsScheduleStudents = () => {
             },
         ];
     }
-    console.log(user.timetable);
     const lessonNumbers = Array(0,1,2,3,4,);
     // const {groupLoading,group} = useGetGroup(groupId);
 

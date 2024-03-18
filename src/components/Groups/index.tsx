@@ -61,7 +61,7 @@ export const Groups = () => {
         <section className="groupsCourses__container journalGroups">
             {
                 !loading ? !!groupesByGrade && Object.keys(groupesByGrade).map(key => 
-                    <div className="groupsCourseItem__container">
+                    <div key={key} className="groupsCourseItem__container">
                         <h2 className="groupsCourseItem__title">{groupCoursesNumbers[+key]}</h2>
                         <div className="groupCourseItemGroups__container">
                             {groupesByGrade[key].map(group => 

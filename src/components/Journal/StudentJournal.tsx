@@ -1,5 +1,5 @@
 import { Select } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
@@ -24,7 +24,7 @@ export const StudentJournal = () => {
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
-    console.log(columnByMonth);
+
     useEffect(() => {
         const subjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!subjectName){
@@ -111,51 +111,29 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
         <section className='journal__container'>
-            <div className='journalLeft__container'>
-                <div className='journalColumnsLeft__container'>
-                    <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
-                    <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
-                </div>
-                <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
-                    {columnByMonth[0].map(column => 
-                        <div key={column.column_index} className='journalColumnsCenterItem__container'>
-                            <div className='journalColumnsCenterItemType transparent'>
-                            </div>
-                            <div className='journalColumnsCenterItemDate__container'>
-                                <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
-                                <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
             <div className='journalRight__container' style={{height:'unset'}}>
-                <div className='journalRightColumns__container'>
-                        <div className='journalRowItemLeft__container'>
-                            <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
-                        </div>
-                    </div>
                 <div className='journalRightRowsContainer' 
-                style={{position:'unset'}} 
+                style={{position:'unset',width:'unset'}} 
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {columnByMonth.map((columns,i) => 
-                    <>
-                        {i !== 0 && <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset'}}>
+                    <Fragment key={columns[0].column_index}>
+                        {/* <h1>НАЗВА МІСЯЦЯ</h1> */}
+                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:'unset'}}>
                             {columns.map(column => 
                                 <div key={column.column_index} className='journalColumnsCenterItem__container'>
                                     <div className='journalColumnsCenterItemDate__container'>
-                                        <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
-                                        <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
+                                        <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
+                                        <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>
                                     </div>
                                 </div>
                             )}
-                        </div>}
-                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px'}}>
+                        </div>
+                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:'unset'}}>
                             {columns.map(column => 
-                                <div key={column.cells[0]?.index + column.date} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
+                                <div key={column?.column_index + column.date} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
-                    </>
+                    </Fragment>
                     )}
                 </div>
             </div>

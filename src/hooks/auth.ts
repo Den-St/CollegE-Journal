@@ -20,8 +20,8 @@ export const useAuth = () => {
 
     const auth = async () => {
         if(!localToken && !cookieToken) return;
-        setLoading(true);
         onUserLoading();
+        setLoading(true);
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken || cookieToken}});
             signIn({...res.data.data,token:cookieToken || ''},);

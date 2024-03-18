@@ -14,7 +14,6 @@ export const ForgotPasswordModal:React.FC<{onClose:() => void}> = ({onClose}) =>
     } = useForm<{mailbox_address:string}>();
 
     const onSubmit = (data:{mailbox_address:string}) => {
-        console.log(data);
         onClose();
     }
     return <div className="forgotPassword_container">

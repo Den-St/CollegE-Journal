@@ -34,7 +34,7 @@ export const TeacherSubjects = () => {
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}
@@ -42,7 +42,7 @@ export const TeacherSubjects = () => {
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
+                <Link  key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}&month=${lastMonth + 1}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
                 </Link>
             )}

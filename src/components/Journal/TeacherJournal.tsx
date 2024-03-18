@@ -1,4 +1,4 @@
-import { Select } from 'antd';
+import { Select, Slider } from 'antd';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
@@ -16,19 +16,9 @@ import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { CellInput, getColorByValue } from './CellInput';
 import _debounce from 'lodash/debounce';
-import { Table } from 'antd';
-import type { TableColumnsType } from 'antd';
 import './journalStyles.scss';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 const {Option} = Select;
-
-
-interface DataType {
-  key: React.Key;
-  name: React.ReactNode;
-  grade:React.ReactNode;
-}
-
 
 export const TeacherJournal = () => {
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token} = useGetTeacherJournal();
@@ -65,7 +55,6 @@ export const TeacherJournal = () => {
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
-    console.log('sdf',document.getElementById('journal__container')?.clientWidth)
 
     return <div className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
@@ -145,8 +134,8 @@ export const TeacherJournal = () => {
                                     : <div className='journalColumnsCenterItemType'>{column.lesson_type || ''}</div>
                                 }
                             <div className='journalColumnsCenterItemDate__container'>
-                                <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[1]}</p>
-                                <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[0]}</p>
+                                <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
+                                <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>
                             </div>
                         </div>
                     )}
@@ -185,8 +174,8 @@ export const TeacherJournal = () => {
                 {journal?.columns.map(column => 
                     <div className='journalLessonThemeItem__container' key={column.column_id}>
                         <div className='journalLessonThemeItemDate__container'>
-                            <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[1]}</p>
-                            <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[0]}</p>
+                            <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
+                            <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[1]}</p>
                             <p id={column.column_id} className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
                         <input

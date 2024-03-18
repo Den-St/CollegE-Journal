@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { RoutesSwitch } from './consts/routes';
 import { themes } from './consts/themes';
