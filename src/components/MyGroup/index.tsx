@@ -50,10 +50,10 @@ export const MyGroup = () => {
         <section className="studentList__container">
             <div className="studentItems__container" style={{height:80 * Math.round((students?.length || 0) / 2)}}>
                 {!!students.length ? students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(
-                    student => <div key={student.student_id} className="student__container">
+                    (student,i) => <div key={student.student_id} className="student__container">
                         <div className="student__info">
                             <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt="Аватар"/>
-                            <p className="studentName">{student.full_name}</p>
+                            <p className="studentName">{i+1}. {student.full_name}</p>
                         </div>
                         <Link className="studentButton" to={routes.userProfile.replace(':id', student.student_id)}>Перейти</Link>
                     </div> 

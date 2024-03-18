@@ -50,22 +50,22 @@ export const TeacherSubjects = () => {
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>
             <div className="studentItems__container" style={{height:80 * Math.round(group.group_students.length / 2)}}>
-                {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
+                {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map((student,i) => 
                     <div className="student__container" key={student.student_id}>
                         <div className="student__info">
                             <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt=""/>
-                            <p className="studentName">{student.full_name}</p>
+                            <p className="studentName">{i+1+`. `}{student.full_name}</p>
                         </div>
                         <Link className="studentButton" to={routes.userProfile.replace(':id',student.student_id || '')}>Перейти</Link>
                     </div>
                 )}
             </div>
             <Carousel slidesPerRow={10} className={'students_carousel'}>
-                    {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
+                    {group.group_students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map((student,i) => 
                         <div className="student__container" key={student.student_id}>
                             <div className="student__info">
                                 <img className="studentList__avatar" src={student.avatar || defaultAvatar} alt=""/>
-                                <p className="studentName">{student.full_name}</p>
+                                <p className="studentName">{i+1+`. `}{student.full_name}</p>
                             </div>
                             <Link className="studentButton" to={routes.userProfile.replace(':id',student.student_id || '')}>Перейти</Link>
                         </div>
