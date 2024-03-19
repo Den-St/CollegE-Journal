@@ -21,22 +21,26 @@ export const useStudentJournal = () => {
     });
 
     const localToken = useUserStore().user.token;
-
+    const getColumnsByDate = (res:any) => {
+        const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
+        for(let i = 1;i < res.data.columns.length;i++){
+            if(res.data.columns[i].date.split('.')[1].slice(0,2) === res.data.columns[i - 1].date.split('.')[1].slice(0,2)){
+                _columnsByDate[_columnsByDate.length - 1].push(res.data.columns[i]);
+            }else{
+                _columnsByDate.push([res.data.columns[i]]);
+            }
+        }
+        setColumnsByMonth(_columnsByDate);
+    }
     const fetch = async (_fillters?:{subject_id:string,month:number}) => {
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
             const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:_fillters?.subject_id || fillters.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
             setJournal(res.data);
-            const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
-            for(let i = 1;i < res.data.columns.length;i++){
-                if(res.data.columns[i].date.split('.')[1].slice(0,2) === res.data.columns[i - 1].date.split('.')[1].slice(0,2)){
-                    _columnsByDate[_columnsByDate.length - 1].push(res.data.columns[i]);
-                }else{
-                    _columnsByDate.push([res.data.columns[i]]);
-                }
+            if(_fillters?.month === undefined) {
+                getColumnsByDate(res);
             }
-            setColumnsByMonth(_columnsByDate);
         }catch(err){
             console.error(err);
         }finally{
@@ -45,7 +49,7 @@ export const useStudentJournal = () => {
     }
 
     useEffect(() => {
-        fetch();
+        fetch(fillters);
     },[])
 
     const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number) => {
