@@ -120,9 +120,12 @@
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     text-align: center;
     border-radius: 10px 5px;
+    overflow: hidden;
+    white-space: break;
+    text-overflow: ellipsis;
 }
 .journalColumnsCenterItemType:empty{
     cursor: not-allowed;
@@ -366,6 +369,19 @@
     font-size: 16px;
     font-weight: 400;
 }
+.specialLessonType:not(.specialLessonType+.specialLessonType){
+    margin-left: 40px;
+}
+.specialLessonType+.specialLessonType{
+    margin-right: 40px;
+}
+.specialLessonType_cell:not(.specialLessonType_cell+.specialLessonType_cell){
+    margin-left: 55px;
+}
+.specialLessonType_cell+.specialLessonType_cell{
+    margin-right: 55px;
+}
+
 .journal_lessonTypeSelect{
     .ant-select-selector{
         padding: 0 !important;
@@ -394,6 +410,23 @@
     color:var(--primary-gray);
 }
 
+.scrollableDiv{
+    display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    top: calc(50vh - 20px);
+    // width: 100%;
+    height: 20px;
+    background-color: green;
+    position: absolute;
+    width: calc(100% - 332px);
+}
+.journalRightRowsContainer::-webkit-scrollbar{
+    // position: absolute !important;
+    // top:-1000px;
+    // margin-bottom: 100px;
+    // background-color: green;
+}
 // @media screen and (height < 900px) {
 //     .journalRight__container{
 //         height: 500px;

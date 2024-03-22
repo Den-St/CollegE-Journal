@@ -12,7 +12,8 @@ type Props = {
     },
     token:string,
     rowIndex:number,
-    columnIndex:number
+    columnIndex:number,
+    date:string
 }
 const isValid = (value:string) => {
     if(value === "") return true;
@@ -62,7 +63,7 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         console.error(err);
     }
 }
-export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex}) => {
+export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date}) => {
     const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter' || e.key === 'ArrowDown'){
             document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus();
@@ -73,5 +74,5 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         }
     }
 
-    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className='journalRowItemCenterValue__input__text' defaultValue={defaultValue}/>
+    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
 }

@@ -24,7 +24,7 @@ export const useStudentJournal = () => {
     const getColumnsByDate = (res:any) => {
         const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
         for(let i = 1;i < res.data.columns.length;i++){
-            if(res.data.columns[i].date.split('.')[1].slice(0,2) === res.data.columns[i - 1].date.split('.')[1].slice(0,2)){
+            if(res.data.columns[i].date.split('.')?.[1].slice(0,2) === res.data.columns[i - 1].date.split('.')?.[1].slice(0,2) || !res.data.columns[i].date.includes('.')){
                 _columnsByDate[_columnsByDate.length - 1].push(res.data.columns[i]);
             }else{
                 _columnsByDate.push([res.data.columns[i]]);

@@ -133,9 +133,16 @@ input::placeholder{
 	line-height: 22px !important;
 	letter-spacing: 0.1em !important;
 }
+.journalSubject_fillter_container{
+	.fillter_select{
+		max-width: 400px;
+		overflow: hidden;
+	}
+
+}
 .fillter_container{
 	align-items: center;
-	width: calc(fit-content + 100px) !important;
+	// width: calc(fit-content + 100px) !important;
 
 	.ant-select-arrow{
 		display: none;

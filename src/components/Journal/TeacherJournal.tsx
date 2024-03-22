@@ -78,14 +78,17 @@ export const TeacherJournal = () => {
                         })}
                     </Select>
                 </div>
-                <div className="adminPanelStudentList_fillterContainer fillter_container">
+                <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
+                        style={{height:'300px !important',overflow:'hidden'}}
+                        >
                     <Select 
                         placeholder={
                             <div className="fillterPlaceholder_container">
                                 <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
                             </div>
-                        } 
+                        }
                         className="fillter_select"
+                        style={{width:'300px !important'}}
                         // allowClear
                         loading={loading}
                         value={fillters.subject_id}
@@ -113,12 +116,12 @@ export const TeacherJournal = () => {
                 </div>
                 <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
                     {journal?.columns.map(column => 
-                        <div key={column.column_id} className='journalColumnsCenterItem__container'>
+                        <div key={column.column_id} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                 {
-                                    journal.can_edit === 1 ?
+                                    journal.can_edit === 1  && column.date.includes('\n') ?
                                     <Select 
                                         disabled={
-                                            journal.can_edit !== 1
+                                            journal.can_edit !== 1 || !column.date.includes('\n')
                                         }
                                         defaultValue={column.lesson_type || null} 
                                         className='journal_lessonTypeSelect' 
@@ -129,7 +132,7 @@ export const TeacherJournal = () => {
                                             <Option label={"Практика"} value={"Практика"}>Практика</Option>
                                             <Option label={"Залік"} value={"Залік"}>Залік</Option>
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
-                                            <Option label={"Консульт"} value={"Консульт"}>Консульт</Option>
+                                            <Option label={"Консультація"} value={"Консультація"}>Консультація</Option>
                                     </Select>
                                     : <div className='journalColumnsCenterItemType'>{column.lesson_type || ''}</div>
                                 }
@@ -150,23 +153,23 @@ export const TeacherJournal = () => {
                             </div>
                         )}
                 </div>
-                <div className='journalRightRowsContainer'
-                // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
-                 ref={cellsRef} onScroll={handleHorizontalScroll}>
-                    {journal?.students.map((student,i) => 
-                        <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
-                            <div className='journalRowItemCenter__container'>
-                                {journal.columns.map((column,j) => 
-                                    (journal.can_edit === 1 &&
-                                    !isDisabledByDate(column.date))
-                                    ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                    : <p key={column.column_id} className='journalRowItemCenterValue__text' style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
-                                )}
-                            </div>
+                    <div className='journalRightRowsContainer'
+                        // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
+                        ref={cellsRef} onScroll={handleHorizontalScroll}>
+                            {journal?.students.map((student,i) => 
+                                <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                                    <div className='journalRowItemCenter__container'>
+                                        {journal.columns.map((column,j) => 
+                                            (journal.can_edit === 1 &&
+                                            !isDisabledByDate(column.date))
+                                            ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                            : <p key={column.column_id} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-            </div>
+                    </div>
         </section>
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
