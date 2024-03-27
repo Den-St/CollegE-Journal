@@ -1,3 +1,4 @@
+import { useNavigate, useNavigation } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
 import { useEffect } from 'react';
@@ -11,6 +12,7 @@ import { useStudentJournalSubjectsStore } from '../store/studentJournalSubjects'
 import { JournalColumnT, StudentJournalT } from '../types/studentJournal';
 
 export const useStudentJournal = () => {
+    const navigate = useNavigate();
     const [journal,setJournal] = useState<StudentJournalT>();
     const [columnByMonth,setColumnsByMonth] = useState<JournalColumnT[][]>([[]]);
     const [loading,setLoading] = useState(false);
@@ -55,6 +57,9 @@ export const useStudentJournal = () => {
     const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number) => {
         setFillters(prev => ({...prev,[fieldName]:value}));
         fetch({...fillters,[fieldName]:value});
+        if(fieldName === 'subject_id') navigate(`/journal?subject_id=${value}&month=${fillters.month}`)
+        else if(fieldName === 'month') navigate(`/journal?subject_id=${fillters.subject_id}&month=${value}`)
+        
         // setSearchParams({[fieldName]:value});
     }
 

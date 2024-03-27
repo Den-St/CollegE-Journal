@@ -32,7 +32,7 @@ export const StudentJournal = () => {
             return;
         }
         document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
-    },[fillters.subject_id,fillters.month,journal]);
+    },[fillters.subject_id,fillters.month,journal,subjects]);
 
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
@@ -117,8 +117,9 @@ export const StudentJournal = () => {
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
                 <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
-                    {fillters.month !== undefined && journal.columns.map(column => <div key={column.column_index} className='journalColumnsCenterItem__container'>
-                            <div className='journalColumnsCenterItemType transparent'>
+                    {fillters.month !== undefined && journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                            <div className={`journalColumnsCenterItemType ${column.date.includes('\n') && `transparent`}`}>
+                                {!column.date.includes('\n') && column?.lesson_type}
                             </div>
                             <div className='journalColumnsCenterItemDate__container'>
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
@@ -140,23 +141,23 @@ export const StudentJournal = () => {
                     <Fragment key={columns[0]?.column_index}>
                         { <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
                             {columns.map(column => 
-                                <div key={column?.column_index} className='journalColumnsCenterItem__container'>
+                                <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                     <div className='journalColumnsCenterItemDate__container'>
-                                        <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
-                                        <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>
+                                        <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')?.[0]}</p>
+                                        <p className='journalColumnsCenterItemDate'>{column.date.split('\n')?.[1]}</p>
                                     </div>
                                 </div>
                             )}
                         </div> }
                         <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
                             {columns.map(column => 
-                                <div key={column?.column_index + column.date} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
+                                <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
                     </Fragment>
                     ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
                         {journal.columns.map(column => 
-                            <div key={column?.column_index + column.date} className='journalRowItemCenterValue__container'><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
+                            <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                         )}
                     </div>}
                 </div>
