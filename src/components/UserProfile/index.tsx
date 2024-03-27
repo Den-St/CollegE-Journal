@@ -1,4 +1,5 @@
-import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useNavigation, useParams, useSearchParams } from "react-router-dom";
+import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { EditProfileSvg } from "../../assets/svgs/editProfileSvg";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { StarSvg } from "../../assets/svgs/starSvg";
@@ -19,7 +20,8 @@ export const UserProfile = () => {
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
             <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
-                <h2 className="subjectsMainTitle"><button onClick={() => !!from ? navigate(from) : navigate(-1)} className={'leftArrowButton'}><LeftArrowSvg/></button>Профіль</h2>
+                <LinkBack title="Список студентів" goTo={() => !!from ? navigate(from) : navigate(-1)}/>
+                {/* <h2 className="subjectsMainTitle"><button onClick={() => !!from ? navigate(from) : navigate(-1)} className={'leftArrowButton'}><LeftArrowSvg/></button>Список студентів</h2> */}
                 <div className='studentProfileLeft__container'>
                     <div className='studentProfileInfo__container'>
                         <img className='studentProfile_img' src={

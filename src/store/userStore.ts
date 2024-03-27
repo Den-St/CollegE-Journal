@@ -55,7 +55,7 @@ export const useUserStore = create<StoreType>((set) => ({
     loading:false,
     startLoading:() => set((state) => ({...state,loading:true})),
     stopLoading:() => set((state) => ({...state,loading:false})),
-    signIn: (userData) => set((state) => ({ ...state,...userData,user:{...state.user,...userData} })),
+    signIn: (userData) => set((state) => ({ ...state,user:{...state.user,...userData} })),
     signOut: () => set(() => ({
         user:{
             user_id:'',

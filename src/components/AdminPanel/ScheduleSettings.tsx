@@ -43,20 +43,7 @@ export const ScheduleSettings = () => {
                 {groups.map(group => <Option value={group.group_id} label={group.group_full_name} key={group.group_id}>{group.group_full_name}</Option>)}
             </Select>
         </div>
-        <div className="adminPanelScheduleSettingsInput__container">
-            <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
-            <div className="adminPanelScheduleSettingsInput__cover">
-                <UploadSvg/>
-                <div className="adminPanelScheduleSettingsInputCoverText_container">
-                    <h1 className="adminPanelScheduleSettingsInputCoverTitle">
-                        Імпортувати Файл
-                    </h1>
-                    <p className="adminPanelScheduleSettingsInputCoverText">
-                        XML, XLSM, XLSX
-                    </p>
-                </div>
-            </div>
-        </div>
+        
         {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
             {Object.keys(group?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
@@ -104,6 +91,20 @@ export const ScheduleSettings = () => {
         </>
         : <NoSheduleComponent/>
         : <Loader/>}
+        <div className="adminPanelScheduleSettingsInput__container">
+            <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
+            <div className="adminPanelScheduleSettingsInput__cover">
+                <UploadSvg/>
+                <div className="adminPanelScheduleSettingsInputCoverText_container">
+                    <h1 className="adminPanelScheduleSettingsInputCoverTitle">
+                        Імпортувати Файл
+                    </h1>
+                    <p className="adminPanelScheduleSettingsInputCoverText">
+                        XML, XLSM, XLSX
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 }
 

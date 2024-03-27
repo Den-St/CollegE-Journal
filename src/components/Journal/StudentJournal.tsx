@@ -137,10 +137,10 @@ export const StudentJournal = () => {
                 style={{position:'unset',width:fillters.month === undefined ? '100%' : 'calc(100% - 332px)'}} 
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {fillters.month === undefined ? columnByMonth?.map((columns,i) => 
-                    <Fragment key={columns[0].column_index}>
+                    <Fragment key={columns[0]?.column_index}>
                         { <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
                             {columns.map(column => 
-                                <div key={column.column_index} className='journalColumnsCenterItem__container'>
+                                <div key={column?.column_index} className='journalColumnsCenterItem__container'>
                                     <div className='journalColumnsCenterItemDate__container'>
                                         <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
                                         <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>

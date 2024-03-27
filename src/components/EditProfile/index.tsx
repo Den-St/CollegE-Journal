@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import AntdImgCrop from "antd-img-crop";
+import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 
 const useEditProfile = () => {
     const user = useUserStore().user;
@@ -82,7 +83,7 @@ const useEditProfile = () => {
     }
     useEffect(() => {
         if(!Cookies.get('comfirmedPassword')){
-            // navigate(routes.myProfile);
+            navigate(routes.myProfile);
         }
     },[]);
     
@@ -103,9 +104,7 @@ export const EditProfile = () => {
     }
 
     return <div className={`editProfileMain_container ${theme}`}>
-        <h1 className="editProfile_header">
-            {user.is_active && <button onClick={onEditClose} className="editProfile_leaveButton"><LeftArrowSvg/></button>}
-            Редагування профілю</h1>
+        {user.is_active && <LinkBack title="Профіль" route={routes.myProfile}/>}
         {/* {user.is_active && <h1 className="editProfile_header">Для того щоб активувати особовий запис потрібно змінити пароль.</h1>} */}
         <div className='studentProfileInfo__container editProfileUserInfo'>
             <div className="editProfileChangePhoto_container">

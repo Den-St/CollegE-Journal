@@ -69,6 +69,8 @@
     position: absolute;
     left: 332px;
     width: calc(100% - 332px);
+    cursor: grab;
+    user-select: none;
     // overflow-y: hidden;
 }
 .journalRowItemLeft__container {

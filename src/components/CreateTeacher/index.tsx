@@ -1,6 +1,7 @@
 import { Select } from "antd";
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom";
+import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { emailPattern } from "../../consts/emailPattern";
@@ -21,7 +22,8 @@ export const CreateTeacher = () => {
     const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading,} = useCreateTeacher(onAddTeacherLocally);
 
     return <div className={`editGroupMain_container ${theme}`}>
-        <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Створення викладача</h1>
+        <LinkBack title=""/>
+        {/* <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Створення викладача</h1> */}
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">

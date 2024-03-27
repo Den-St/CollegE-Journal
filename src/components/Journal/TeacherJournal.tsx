@@ -1,5 +1,5 @@
 import { Select, Slider } from 'antd';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -28,6 +28,7 @@ export const TeacherJournal = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
+    const [isMouseDown,setIsMouseDown] = useState(false);
     // const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
     
     const handleHorizontalScroll = () => {
@@ -38,7 +39,36 @@ export const TeacherJournal = () => {
         if(mainContainerRef.current === null || cellsRef.current === null) return;
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
+    const mouseDownHandler = () => {
+        // setIsMouseDown(true);
+    }
+    const mouseUpHandler = () => {
+        // setIsMouseDown(false);
+    }
+    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
+        // if(!isMouseDown) return;
+        // if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        // if(mainContainerRef.current === null || cellsRef.current === null) return;
+        // // console.log(e.clientX);
+        // console.log('1',cellsRef.current.offsetLeft + cellsRef.current.scrollLeft - e.clientX);
+        // console.log('2',cellsRef.current.offsetLeft);
+        // console.log('3',cellsRef.current.scrollLeft);
+        // console.log('4',Math.abs(cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX));
+        // if(e.clientX === 0) return;
+        
+        // lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX;
+        // cellsRef.current.scrollLeft = cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX;
+        // cellsRef.current.scrollTop = cellsRef.current.offsetTop - e.clientY;
 
+        // const slider = cellsRef.current;
+        // const x = e.pageX - slider.offsetLeft;
+        // const y = e.pageY - slider.offsetTop;
+        // const walkX = (x - e.pageX - slider.offsetLeft);
+        // const walkY = (y - e.pageY - slider.offsetTop);
+        // slider.scrollLeft = slider.scrollLeft - walkX;
+        // slider.scrollTop = slider.scrollTop - walkY;
+
+    }
     // useEffect(() => {
     //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
     // },[document.getElementById('journal__container')?.clientWidth]);
@@ -144,7 +174,7 @@ export const TeacherJournal = () => {
                     )}
                 </div>
             </div>
-            <div className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
+            <div onMouseUp={mouseUpHandler} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
                         {journal?.students.map(student => 
                             <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
@@ -154,6 +184,10 @@ export const TeacherJournal = () => {
                         )}
                 </div>
                     <div className='journalRightRowsContainer'
+                        onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
+                        onMouseMove={onMouseMove}
+                        // onDrag={onMouseMove}
+                        // draggable
                         // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
                         ref={cellsRef} onScroll={handleHorizontalScroll}>
                             {journal?.students.map((student,i) => 
@@ -161,7 +195,7 @@ export const TeacherJournal = () => {
                                     <div className='journalRowItemCenter__container'>
                                         {journal.columns.map((column,j) => 
                                             (journal.can_edit === 1 &&
-                                            !isDisabledByDate(column.date))
+                                            (!isDisabledByDate(column.date) || !column.date.includes('\n')))
                                             ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
                                             : <p key={column.column_id} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                                         )}
