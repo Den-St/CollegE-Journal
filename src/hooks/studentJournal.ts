@@ -17,16 +17,16 @@ export const useStudentJournal = () => {
     const [columnByMonth,setColumnsByMonth] = useState<JournalColumnT[][]>([[]]);
     const [loading,setLoading] = useState(false);
     const [searchParams,setSearchParams] = useSearchParams();
-    const [fillters,setFillters] = useState<{subject_id:string,month:number}>({
+    const [fillters,setFillters] = useState<{subject_id:string,month:number | null}>({
         subject_id:searchParams.get('subject_id') || '',
-        month: +(searchParams.get('month') || new Date().getMonth)
+        month: searchParams.get('month') !== 'null' ? +(searchParams.get('month') || new Date().getMonth) : null
     });
 
     const localToken = useUserStore().user.token;
     const getColumnsByDate = (res:any) => {
         const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
         for(let i = 1;i < res.data.columns.length;i++){
-            if(res.data.columns[i].date.split('.')?.[1].slice(0,2) === res.data.columns[i - 1].date.split('.')?.[1].slice(0,2) || !res.data.columns[i].date.includes('.')){
+            if(res.data.columns[i].date.split('.')?.[1]?.slice(0,2) === res.data.columns[i - 1].date.split('.')?.[1]?.slice(0,2) || !res.data.columns[i].date.includes('\n')){
                 _columnsByDate[_columnsByDate.length - 1].push(res.data.columns[i]);
             }else{
                 _columnsByDate.push([res.data.columns[i]]);
@@ -34,13 +34,14 @@ export const useStudentJournal = () => {
         }
         setColumnsByMonth(_columnsByDate);
     }
-    const fetch = async (_fillters?:{subject_id:string,month:number}) => {
+    const fetch = async (_fillters?:{subject_id:string,month:number | null}) => {
+        console.log(_fillters,fillters);
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
             const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:_fillters?.subject_id || fillters.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
             setJournal(res.data);
-            if(_fillters?.month === undefined) {
+            if(_fillters?.month === null) {
                 getColumnsByDate(res);
             }
         }catch(err){
@@ -54,11 +55,11 @@ export const useStudentJournal = () => {
         fetch(fillters);
     },[])
 
-    const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number) => {
+    const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number | null) => {
+        const localFillters = {...fillters,[fieldName]:value || null}
         setFillters(prev => ({...prev,[fieldName]:value}));
-        fetch({...fillters,[fieldName]:value});
-        if(fieldName === 'subject_id') navigate(`/journal?subject_id=${value}&month=${fillters.month}`)
-        else if(fieldName === 'month') navigate(`/journal?subject_id=${fillters.subject_id}&month=${value}`)
+        fetch({...fillters,[fieldName]:value || null});
+        navigate(`/journal?subject_id=${localFillters.subject_id}&month=${localFillters.month}`)
         
         // setSearchParams({[fieldName]:value});
     }

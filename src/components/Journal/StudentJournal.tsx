@@ -24,14 +24,14 @@ export const StudentJournal = () => {
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
-
+    console.log(fillters.month);
     useEffect(() => {
         const subjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!subjectName){
             document.title = `Журнал`;
             return;
         }
-        document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
+        document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
 
     const cellsRef = useRef<HTMLDivElement>(null);
@@ -72,10 +72,11 @@ export const StudentJournal = () => {
                         <p className="fillter_placeholder">Місяць</p>
                     </div>}
                     className="fillter_select"
-                    defaultValue={fillters.month}
+                    defaultValue={fillters.month || null}
                     allowClear
-                    value={fillters.month}
-                    onChange={(value) => onChangeFillters('month',value)}
+                    onClear={() => onChangeFillters('month',null)}
+                    value={fillters.month || null}
+                    onChange={(value) => onChangeFillters('month',value || null)}
                     >
                         {studyMonths.map((month,i) => {
                             if(i > studyMonths.findIndex(_month => _month.number === currentMonth + 1)) return null;
@@ -111,13 +112,13 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
         <section className='journal__container'>
-            {fillters.month !== undefined && <div className='journalLeft__container'>
+            {fillters.month !== null && <div className='journalLeft__container'>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
                 <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
-                    {fillters.month !== undefined && journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                    {fillters.month !== null && journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                             <div className={`journalColumnsCenterItemType ${column.date.includes('\n') && `transparent`}`}>
                                 {!column.date.includes('\n') && column?.lesson_type}
                             </div>
@@ -129,17 +130,17 @@ export const StudentJournal = () => {
                 </div>
             </div>}
             <div className='journalRight__container' style={{height:'unset'}}>
-                {fillters.month !== undefined && <div className='journalRightColumns__container'>
+                {fillters.month !== null && <div className='journalRightColumns__container'>
                         <div className='journalRowItemLeft__container'>
                             <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
                         </div>
                     </div>}
                 <div className='journalRightRowsContainer' 
-                style={{position:'unset',width:fillters.month === undefined ? '100%' : 'calc(100% - 332px)'}} 
+                style={{position:'unset',width:fillters.month === null ? '100%' : 'calc(100% - 332px)'}} 
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
-                    {fillters.month === undefined ? columnByMonth?.map((columns,i) => 
+                    {fillters.month === null ? columnByMonth?.map((columns,i) => 
                     <Fragment key={columns[0]?.column_index}>
-                        { <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
+                        { <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:fillters.month === null ? 'unset' : '66px'}}>
                             {columns.map(column => 
                                 <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                     <div className='journalColumnsCenterItemDate__container'>
@@ -149,13 +150,13 @@ export const StudentJournal = () => {
                                 </div>
                             )}
                         </div> }
-                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
+                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}>
                             {columns.map(column => 
                                 <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
                     </Fragment>
-                    ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === undefined ? 'unset' : '66px'}}>
+                    ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}>
                         {journal.columns.map(column => 
                             <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                         )}

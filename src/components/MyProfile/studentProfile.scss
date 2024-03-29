@@ -40,6 +40,10 @@
     display:flex;
     flex-direction: column;
     gap:10px;
+    width: 50%;
+    p{
+        width: fit-content;
+    }
 }
 
 .studentProfile__name{
@@ -196,7 +200,11 @@
     line-height: 24px;
     letter-spacing: 0.1em;
 }
-
+.onEditing{
+    svg{
+        fill:var(--primary-orange);
+    }
+}
 .dark{
     .profile_detailedInfo_item_text{
         color: white;

@@ -140,6 +140,31 @@ input::placeholder{
 	}
 
 }
+.header{
+	font-family: Montserrat;
+	font-size: 28px;
+	font-weight: 500;
+	line-height: 34.13px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}
+.subHeader{
+	font-family: Montserrat;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 24.38px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}
+.subSubHeader{
+	font-family: Montserrat;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 21.94px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}
+
 .fillter_container{
 	align-items: center;
 	// width: calc(fit-content + 100px) !important;
@@ -401,7 +426,15 @@ body{
 		// .ant-popover-arrow{
 		// 	--antd-arrow-background-color:transparent;
 		// }
-		
+		.header{
+			color: white;
+		}
+		.subHeader{
+			color: white;
+		}
+		.subSubHeader{
+			color:var(--primary-gray);
+		}
 	}
 	&.light{
 		.ant-picker-dropdown .ant-picker-panel-container{
