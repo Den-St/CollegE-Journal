@@ -28,7 +28,7 @@ export const useHomePage = () => {
     }
 
     useEffect(() => {
-        document.title = "Електронний журнал";
+        document.title = "Електронний Журнал";
     },[]);
     
     useEffect(() => {

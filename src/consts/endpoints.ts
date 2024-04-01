@@ -20,5 +20,8 @@ export const endpoints = {
     journalEditCellType:'journal/teacher/edit-cell-type',
     journalEditCellTopic:'journal/teacher/edit-cell-topic',
     getTeachers:'teacher-page',
-    myGroup:'groups/student/group'
+    myGroup:'groups/student/group',
+    sendRecovery:'users/recovery/send',
+    checkRecoveryToken:'users/recovery/check',
+    recoveryPassword:'users/recovery/password'
 }

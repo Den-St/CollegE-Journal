@@ -13,6 +13,7 @@ import { UserProfile } from "../components/UserProfile";
 import { EditUser } from "../components/EditUser";
 import { Teachers } from "../components/Teachers";
 import { MyGroup } from "../components/MyGroup";
+import { RecoveryPassword } from "../components/RecoveryPassword";
 
 export const navRoutes = {
 }
@@ -47,7 +48,8 @@ export const routes = {
     userProfile:'/user-profile/:id',
     editUser:'/edit-user/:id',
     teachers:'/teachers',
-    myGroup:'/my-group'
+    myGroup:'/my-group',
+    recovery:'/recovery-password'
 } as const;
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
@@ -160,6 +162,7 @@ export const PublicRoutes = [
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,
     <Route key={routes.editUser} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditUser/></SecurityLevelGuard>} path={routes.editUser}/>,
     <Route key={routes.createTeacher} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><CreateTeacher/></SecurityLevelGuard>} path={routes.createTeacher}/>,
+    <Route key={routes.recovery} element={<RecoveryPassword/>} path={routes.recovery}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

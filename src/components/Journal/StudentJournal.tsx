@@ -32,16 +32,49 @@ export const StudentJournal = () => {
         }
         document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
-
+    const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
+    const [isMouseDown,setIsMouseDown] = useState(false);
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
-    // const mainContainerRef = useRef<HTMLDivElement>(null);
-    // const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
-    
+    const mainContainerRef = useRef<HTMLDivElement>(null);
+
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
     }
+    const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
+        mousePos.current.x = e.clientX;
+        mousePos.current.y = e.clientY;
+        setIsMouseDown(true);
+        onMouseMove(e,true,{x:e.clientX,y:e.clientY});
+    }
+    const mouseUpHandler = () => {
+        setIsMouseDown(false);
+    }
+    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
+        if(!isMouseDown && !localIsMouseDown) return;
+        if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        if(mainContainerRef.current === null || cellsRef.current === null) return;
+        console.log('SD')
+        
+        const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
+        const deltaY = !localMousePos ? e.clientY - mousePos.current.y : e.clientY - localMousePos.y;
+        if(deltaX < 0){
+            cellsRef.current.scrollLeft += 5 - deltaX;
+        }else if(deltaX > 0){
+            cellsRef.current.scrollLeft -= 5 + deltaX;
+        }
+        if(deltaY < 0){
+            cellsRef.current.scrollTop += 5 - deltaY;
+            mainContainerRef.current.scrollTop += 5 - deltaY;
+        }else if(deltaY > 0){
+            cellsRef.current.scrollTop -= 5 + deltaY;
+            mainContainerRef.current.scrollTop -= 5 + deltaY;
+        }
+        mousePos.current.x = e.clientX;
+        mousePos.current.y = e.clientY;
+    }
+
     // useEffect(() => {
     //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
     // },[document.getElementById('journal__container')?.clientWidth]);
@@ -60,7 +93,7 @@ export const StudentJournal = () => {
             <NoMatch title={`Журналу не знайдено`} isChildren={true}/>
         </div>
 
-    return <div className={`journalMain__container ${theme}`}>
+    return <div onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
             <h1 className='journal__title'>Журнал</h1>
@@ -110,7 +143,7 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
-        <section className='journal__container'>
+        <section ref={cellsRef} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove} className='journal__container'>
             {fillters.month !== null && <div className='journalLeft__container'>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
@@ -128,7 +161,9 @@ export const StudentJournal = () => {
                     </div>)}
                 </div>
             </div>}
-            <div className='journalRight__container' style={{height:'unset'}}>
+            <div className='journalRight__container' style={{height:'unset'}}
+            ref={cellsRef} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
+            >
                 {fillters.month !== null && <div className='journalRightColumns__container'>
                         <div className='journalRowItemLeft__container'>
                             <p className='journalRowItemLeft__name'>{currentSubjectName}</p>
@@ -136,6 +171,7 @@ export const StudentJournal = () => {
                     </div>}
                 <div className='journalRightRowsContainer' 
                 style={{position:'unset',width:fillters.month === null ? '100%' : 'calc(100% - 332px)'}} 
+                onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {fillters.month === null ? columnByMonth?.map((columns,i) => 
                     <Fragment key={columns[0]?.column_index}>
