@@ -194,6 +194,9 @@ export const EditUser = () => {
                 autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Зареєструвати"} 
                 // disabled={createUserLoading}
                 />
+                <input 
+                autoComplete="off" type={"submit"} className="createUser__button primary_button" style={{'width':'unset'}} value={"Видалити випадково створений запис"} 
+                />
             </div>
         </form>
     </div>

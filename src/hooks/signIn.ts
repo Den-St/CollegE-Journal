@@ -41,7 +41,7 @@ export const useSignIn = () => {
         setLoading(true);
         try{
             const res = (await axiosConfig.post(endpoints.login,
-                data
+                {...data,user_password:data.user_password?.trim()}
             ));
             if(res?.data.status === 1){
                 if(remember) setToken(res.data.data.token);

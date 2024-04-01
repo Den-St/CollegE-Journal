@@ -28,8 +28,9 @@ export const TeacherJournal = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
+    const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
+    console.log(mousePos);
     const [isMouseDown,setIsMouseDown] = useState(false);
-    // const [journalWidth,setJournalWidth] = useState(document.getElementById('journal__container')?.clientWidth);
     
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
@@ -39,39 +40,37 @@ export const TeacherJournal = () => {
         if(mainContainerRef.current === null || cellsRef.current === null) return;
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
-    const mouseDownHandler = () => {
-        // setIsMouseDown(true);
+    const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
+        mousePos.current.x = e.clientX;
+        mousePos.current.y = e.clientY;
+        setIsMouseDown(true);
+        onMouseMove(e,true,{x:e.clientX,y:e.clientY});
     }
     const mouseUpHandler = () => {
-        // setIsMouseDown(false);
+        setIsMouseDown(false);
     }
-    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        // if(!isMouseDown) return;
-        // if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        // if(mainContainerRef.current === null || cellsRef.current === null) return;
-        // // console.log(e.clientX);
-        // console.log('1',cellsRef.current.offsetLeft + cellsRef.current.scrollLeft - e.clientX);
-        // console.log('2',cellsRef.current.offsetLeft);
-        // console.log('3',cellsRef.current.scrollLeft);
-        // console.log('4',Math.abs(cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX));
-        // if(e.clientX === 0) return;
+    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
+        if(!isMouseDown && !localIsMouseDown) return;
+        if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        if(mainContainerRef.current === null || cellsRef.current === null) return;
         
-        // lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX;
-        // cellsRef.current.scrollLeft = cellsRef.current.scrollLeft + cellsRef.current.offsetLeft - e.clientX;
-        // cellsRef.current.scrollTop = cellsRef.current.offsetTop - e.clientY;
-
-        // const slider = cellsRef.current;
-        // const x = e.pageX - slider.offsetLeft;
-        // const y = e.pageY - slider.offsetTop;
-        // const walkX = (x - e.pageX - slider.offsetLeft);
-        // const walkY = (y - e.pageY - slider.offsetTop);
-        // slider.scrollLeft = slider.scrollLeft - walkX;
-        // slider.scrollTop = slider.scrollTop - walkY;
-
+        const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
+        const deltaY = !localMousePos ? e.clientY - mousePos.current.y : e.clientY - localMousePos.y;
+        if(deltaX < 0){
+            cellsRef.current.scrollLeft += 5 - deltaX;
+        }else if(deltaX > 0){
+            cellsRef.current.scrollLeft -= 5 + deltaX;
+        }
+        if(deltaY < 0){
+            cellsRef.current.scrollTop += 5 - deltaY;
+            mainContainerRef.current.scrollTop += 5 - deltaY;
+        }else if(deltaY > 0){
+            cellsRef.current.scrollTop -= 5 + deltaY;
+            mainContainerRef.current.scrollTop -= 5 + deltaY;
+        }
+        mousePos.current.x = e.clientX;
+        mousePos.current.y = e.clientY;
     }
-    // useEffect(() => {
-    //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
-    // },[document.getElementById('journal__container')?.clientWidth]);
 
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -86,7 +85,7 @@ export const TeacherJournal = () => {
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
 
-    return <div className={`journalMain__container ${theme}`}>
+    return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
         <section className='journalTop__container'>
             <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
             <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
