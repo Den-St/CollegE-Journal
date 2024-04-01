@@ -35,7 +35,6 @@ export const useStudentJournal = () => {
         setColumnsByMonth(_columnsByDate);
     }
     const fetch = async (_fillters?:{subject_id:string,month:number | null}) => {
-        console.log(_fillters,fillters);
         if(!fillters.subject_id) return;
         setLoading(true);
         try{

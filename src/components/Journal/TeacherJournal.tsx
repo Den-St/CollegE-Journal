@@ -29,7 +29,6 @@ export const TeacherJournal = () => {
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
     const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
-    console.log(mousePos);
     const [isMouseDown,setIsMouseDown] = useState(false);
     
     const handleHorizontalScroll = () => {

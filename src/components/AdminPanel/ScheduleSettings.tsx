@@ -6,6 +6,7 @@ import { LinkSvg } from "../../assets/svgs/linkSvg";
 import { RobotSvg } from "../../assets/svgs/robotSvg";
 import { UploadSvg } from "../../assets/svgs/uploadSvg"
 import { dayNamesToNumbers } from "../../consts/dayNamesToNumbers";
+import { validGroupPrefixes } from "../../consts/validGroupPrefixes";
 import { useGetGroup } from "../../hooks/getGroup";
 import { useGetAdminGroups } from "../../hooks/getGroups";
 import { DaysNumbersT } from "../../types/daysNames";
@@ -91,6 +92,51 @@ export const ScheduleSettings = () => {
         </>
         : <NoSheduleComponent/>
         : <Loader/>}
+        <form className="scheduleSettingsForm">
+            <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
+            <div className="createUserNameInput__container" style={{width:'49%'}}>
+                <label className="createUserInput__label">Курс навчання</label>
+                <input autoComplete="off"  
+                // {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} 
+                className="createUser__input" placeholder='Оберіть рік навчання'/>
+            </div>
+            <div className="createUserSelect__container" style={{width:'49%'}}>
+                <label className="createUserInput__label">Спеціальність</label>
+                <div className="createStudyMaterialsSelect__wrapper">
+                    <Select
+                        className="createUserSelect"
+                        placeholder={'Оберіть спеціальність'}
+                        optionLabelProp="label"
+                        // {...createUserRegister('department',{required:true})}
+                        // onChange={(e) => createUserSetValue('department',e)}
+                        // value={createUserWatch('department')}
+                        >  
+                        {validGroupPrefixes.map(pref => <Option value={pref} label={pref}>{pref}</Option>)} 
+                    </Select>
+                </div>
+            </div>
+            <div className="createUserEmailInput__container" style={{width:'32%'}}>
+                <label className="createUserInput__label">Дата початку семетру</label>
+                <input autoComplete="off" 
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="createUser__input" placeholder='Оберіть дату початку семестру'/>
+            </div>
+            <div className="createUserEmailInput__container" style={{width:'32%'}}>
+                <label className="createUserInput__label">Дата закінчення семестру</label>
+                <input autoComplete="off" 
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="createUser__input" placeholder='Оберіть дату закінчення семестру'/>
+            </div>
+            <div className="createUserNameInput__container" style={{width:'32%'}}>
+                <label className="createUserInput__label">Кількість субот</label>
+                <input autoComplete="off"
+                // {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} 
+                className="createUser__input" placeholder='Оберіть кількість субот'/>
+            </div>
+            <div style={{width:'100%'}}>
+                <input type={'submit'} value={'Зберегти'} className={"primary_button"}/>
+            </div>
+        </form>
         <div className="adminPanelScheduleSettingsInput__container">
             <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
             <div className="adminPanelScheduleSettingsInput__cover">

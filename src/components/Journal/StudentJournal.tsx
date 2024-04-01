@@ -24,7 +24,6 @@ export const StudentJournal = () => {
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
-    console.log(fillters.month);
     useEffect(() => {
         const subjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!subjectName){

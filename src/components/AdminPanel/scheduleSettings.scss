@@ -96,7 +96,12 @@
     letter-spacing: 0em;
     text-align: center;
 }
-
+.scheduleSettingsForm{
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+    padding: 0 5%;
+}
 @media screen and (max-width:780px) {
     .adminPanelScheduleSettings__container{
         .fillter_container{
