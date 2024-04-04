@@ -29,6 +29,10 @@ const useRecoveryPassword = () => {
         }
         try{
             const res = await axiosConfig.post(endpoints.checkRecoveryToken,{recovery_token});
+            if(res.data.data.status === 0) {
+                navigate('/');
+                return; 
+            }
             setEmail(res.data.data.mailbox_address);
         }catch(err){
             console.error(err);

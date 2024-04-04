@@ -36,7 +36,6 @@ export const StudentJournal = () => {
     const [isMouseDown,setIsMouseDown] = useState(false);
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
-    const mainContainerRef = useRef<HTMLDivElement>(null);
 
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
@@ -54,7 +53,6 @@ export const StudentJournal = () => {
     const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
         if(!isMouseDown && !localIsMouseDown) return;
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        if(mainContainerRef.current === null || cellsRef.current === null) return;
         console.log('SD')
         
         const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
@@ -66,10 +64,8 @@ export const StudentJournal = () => {
         }
         if(deltaY < 0){
             cellsRef.current.scrollTop += 5 - deltaY;
-            mainContainerRef.current.scrollTop += 5 - deltaY;
         }else if(deltaY > 0){
             cellsRef.current.scrollTop -= 5 + deltaY;
-            mainContainerRef.current.scrollTop -= 5 + deltaY;
         }
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
@@ -143,7 +139,7 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
-        <section ref={cellsRef} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove} className='journal__container'>
+        <section className='journal__container'>
             {fillters.month !== null && <div className='journalLeft__container'>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
@@ -162,7 +158,8 @@ export const StudentJournal = () => {
                 </div>
             </div>}
             <div className='journalRight__container' style={{height:'unset'}}
-            ref={cellsRef} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
+            // ref={cellsRef} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
+            // onScroll={handleHorizontalScroll}
             >
                 {fillters.month !== null && <div className='journalRightColumns__container'>
                         <div className='journalRowItemLeft__container'>
@@ -185,13 +182,18 @@ export const StudentJournal = () => {
                                 </div>
                             )}
                         </div> }
-                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}>
+                        <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}
+                      
+                        >
                             {columns.map(column => 
                                 <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
                     </Fragment>
-                    ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}>
+                    ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:fillters.month === null ? 'unset' : '66px'}}
+                    onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
+                    ref={cellsRef} onScroll={handleHorizontalScroll}
+                    >
                         {journal.columns.map(column => 
                             <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value)}}>{column.cells[0]?.value}</p></div>
                         )}

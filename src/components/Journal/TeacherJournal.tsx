@@ -194,8 +194,8 @@ export const TeacherJournal = () => {
                                         {journal.columns.map((column,j) => 
                                             (journal.can_edit === 1 &&
                                             (!isDisabledByDate(column.date) || !column.date.includes('\n')))
-                                            ? !!token && <CellInput rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                            : <p key={column.column_id} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                            ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                            : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                                         )}
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@ export const TeacherJournal = () => {
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
             <div className='journalLessonsThemes__container'>
-                {journal?.columns.map(column => 
+                {journal?.columns.map(column => !column.date.includes('.') &&
                     <div className='journalLessonThemeItem__container' key={column.column_id}>
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>

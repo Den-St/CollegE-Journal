@@ -13,16 +13,19 @@ type Props = {
     token:string,
     rowIndex:number,
     columnIndex:number,
-    date:string
+    date:string,
+    onMouseUp:() => void,
+    onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void
 }
 const isValid = (value:string) => {
     if(value === "") return true;
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
-        if(value.length === 1 && value[0].toLowerCase() === 'н') return true;
-        // if(value.length === 2 && value[1] === '/') return true;
-        // if(value.length === 3 && value[2] === 'а') return true;
+        if(value.length === 1 && value[0].toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2].toLowerCase() === 'а') {
+            value = value.toUpperCase();
+            return true;
+        }
     }
     return false;
 }
@@ -39,7 +42,7 @@ export const getColorByValue = (value:string) => {
     if(value !== "" && +value < 60) return "#ED3434";
     if(+value >= 74) return "#2DEF40";
     if(+value >= 60 && +value <= 73) return "white";
-    if(value === "н" || value === "Н") return "#EFB42D";
+    if(value.toLowerCase() === "н" || value.toLowerCase() === "н/a") return "#EFB42D";
     if(!value) return "white";
     return "white";
 }
@@ -63,7 +66,7 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         console.error(err);
     }
 }
-export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date}) => {
+export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove}) => {
     const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter' || e.key === 'ArrowDown'){
             document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus();
@@ -74,5 +77,5 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         }
     }
 
-    return <input id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
+    return <input onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
 }

@@ -45,7 +45,7 @@ export const ScheduleSettings = () => {
             </Select>
         </div>
         
-        {!groupLoading ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
+        {!groupLoading ? !!pickedGroupId ? Object.keys(group?.timetable || {}).length ? <><section className={`lessonsSchedule__container`}>
             {Object.keys(group?.timetable || {}).map((dayKey,i) => 
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
@@ -91,6 +91,7 @@ export const ScheduleSettings = () => {
         </Carousel>
         </>
         : <NoSheduleComponent/>
+        : <h1>Оберіть розклад</h1>
         : <Loader/>}
         <form className="scheduleSettingsForm">
             <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
