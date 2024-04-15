@@ -7,6 +7,8 @@ import { endpoints } from "../../consts/endpoints";
 import {EyeOutlined} from "@ant-design/icons";
 import { Loader } from "../Loader/Loader";
 import { Spin } from "antd";
+import axios from "axios";
+import { routes } from "../../consts/routes";
 
 const useRecoveryPassword = () => {
     const [email,setEmail] = useState();
@@ -23,19 +25,24 @@ const useRecoveryPassword = () => {
     const navigate = useNavigate();
 
     const checkToken = async () => {
+        console.log('rere')
+
         if(!recovery_token) {
             navigate('/');
             return;
         }
         try{
             const res = await axiosConfig.post(endpoints.checkRecoveryToken,{recovery_token});
-            if(res.data.data.status === 0) {
-                navigate('/');
-                return; 
-            }
             setEmail(res.data.data.mailbox_address);
         }catch(err){
-            console.error(err);
+
+            if(axios.isAxiosError(err)){
+                console.error(err?.response?.data);
+                if(err?.response?.data.status === 0) {
+                    navigate('/');
+                    return; 
+                }
+            }
         }
     }
 
@@ -47,6 +54,7 @@ const useRecoveryPassword = () => {
         setFormError('');
         try{
             const res = await axiosConfig.post(endpoints.recoveryPassword,{recovery_token,user_password:data.user_password});
+            navigate(routes.signIn);
         }catch(err){
             console.error(err);
         }

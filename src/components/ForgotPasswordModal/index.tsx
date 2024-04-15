@@ -7,7 +7,8 @@ import { endpoints } from "../../consts/endpoints";
 import "./styles.scss";
 
 const errorCodesToMessages:Record<string,string> = {
-    'User not found.':'Користувача з таким email не знайдено'
+    'User not found.':'Користувача з таким email не знайдено',
+    'User mail isn\'t valid.':'Email не корректний'
 }
 const useForgotPassword = (onClose:() => void) => {
     const {
