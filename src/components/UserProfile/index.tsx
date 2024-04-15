@@ -1,15 +1,18 @@
 import { Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useNavigation, useParams, useSearchParams } from "react-router-dom";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { EditProfileSvg } from "../../assets/svgs/editProfileSvg";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { StarSvg } from "../../assets/svgs/starSvg";
+import axiosConfig from "../../axiosConfig";
 import { defaultAvatar } from "../../consts/defaultAvatar";
+import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
 import { useThemeStore } from "../../store/themeStore";
 import { useUserStore } from "../../store/userStore";
+import { UserProfileT } from "../../types/userProfile";
 import '../MyProfile/studentProfile.scss';
 const {Option} = Select;
 
@@ -25,13 +28,37 @@ const useEditLessonGroups = () => {
     return {onToggleEditLG,isOnEditingLG,onChangeLG};
 }
 
+const useGetUserProfile = () => {
+    const [user,setUser] = useState<UserProfileT>();
+    const [loading,setLoading] = useState(false);
+    const user_id = useParams().id;
+
+    const fetch = async () => {
+        setLoading(true);
+        try{
+            const res = await axiosConfig.post(endpoints.getUser,{user_id});
+            setUser(res.data.data);
+            document.title = `Профіль студента - ${res.data.data.full_name}`;
+            console.log(res.data);
+        }catch(err){
+            console.error(err);
+        }
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetch()
+    }, [])
+    
+    return {user,loading,user_id};
+}
 export const UserProfile = () => {
     const theme = useThemeStore().theme;
     const mySecurityLevel = useUserStore().user.security_level;
     const from = useSearchParams()[0].get('from');
     const navigate = useNavigate();
-    const userId = useParams().id;
     const {onToggleEditLG,isOnEditingLG,onChangeLG} = useEditLessonGroups();
+    const {user_id,user,loading} = useGetUserProfile();
 
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
@@ -44,45 +71,43 @@ export const UserProfile = () => {
                     <div className='studentProfileLeft__container'>
                         <div className='studentProfileInfo__container'>
                             <img className='studentProfile_img' src={
-                                // user.avatar || 
+                                user?.avatar || 
                                 defaultAvatar
                             }/>
                             <div className='studentProfileTextInfo__container'>
                                 <p className='studentProfile__name'>
-                                    {/* {user.full_name} */}
-                                    Призвіще Ім'я По батькові
+                                    {user?.full_name}
                                     {/* {user.security_level !== securityLevels.admin &&  */}
-                                    <StarSvg/>
-                                    {mySecurityLevel === securityLevels.admin && !!userId && 
-                                    <Link to={routes.editUser.replace(':id',userId)} className='editUserProfile_button'><EditProfileSvg/></Link>}
+                                    {/* <StarSvg/> */}
+                                    {mySecurityLevel === securityLevels.admin && !!user_id && 
+                                    <Link to={routes.editUser.replace(':id',user_id)} className='editUserProfile_button'><EditProfileSvg/></Link>}
                                 </p>
-                                <p className='studentProfile__email'>{
-                                // user.mailbox_address || 
-                                `mail@gmail.com`}</p>
-                                <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p>
-                                {
-                                // !!user?.user_group?.group_full_name && 
-                                mySecurityLevel !== securityLevels.admin 
+                                {/* {
+                                !!user?.user_group?.group_full_name && 
+                                mySecurityLevel === securityLevels.admin || mySecurityLevel === securityLevels.teacher
                                 ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>
-                                    {/* {user?.user_group?.group_full_name} */}
-                                    Група-00
+                                    {user?.user_group?.group_full_name}
                                     </Link> 
-                                : <Link to={routes.pickJournalSubject 
-                                    // + 
-                                    // `?group_id=${user?.user_group?.group_id}
-                                    } className='studentProfile__group'>
-                                    {/* {user?.user_group?.group_full_name} */}
-                                    Група-00
-                                </Link>}
+                                : <p className='studentProfile__group'>
+                                    {user?.user_group?.group_full_name}
+                                </p>} */}
+                                <p className='studentProfile__group'>
+                                    {user?.user_group?.group_full_name}
+                                </p>
+                                <p className='studentProfile__bio'>
+                                    {user?.interests}
+                                </p>
+                              
                             </div>
                         </div>
                     </div>
                     </div>
                     {
-                    mySecurityLevel === securityLevels.admin && 
-                    true
-                     && <div style={{'display':'flex','flexDirection':'column','gap':'60px','maxWidth':'500px',width:'50%'}}>
-                        <div style={{'display':'flex','gap':'30px'}}><h2 className="header">Додаткова інформація</h2><button className={`editUserProfile_button ${isOnEditingLG && `onEditing`}`} style={{'fill':isOnEditingLG ? 'orange' : 'gray'}} onClick={onToggleEditLG}><EditProfileSvg/></button></div>
+                    mySecurityLevel === securityLevels.admin || mySecurityLevel === securityLevels.teacher
+                    && <div style={{'display':'flex','flexDirection':'column','gap':'60px','maxWidth':'500px',width:'50%'}}>
+                        <div style={{'display':'flex','gap':'30px'}}><h2 className="header">Додаткова інформація</h2>
+                            {mySecurityLevel === securityLevels.admin && <button className={`editUserProfile_button ${isOnEditingLG && `onEditing`}`} style={{'fill':isOnEditingLG ? 'orange' : 'gray'}} onClick={onToggleEditLG}><EditProfileSvg/></button>}
+                        </div>
                         <div className="studentProfile_editLessonGroups_container">
                             <div style={{'display':'flex','flexWrap':'wrap','justifyContent':'space-between','rowGap':'30px',}}>
                                 <div style={{'display':'flex','flexDirection':'column','gap':'10px',width:'50%',maxWidth:'200px'}}>
@@ -147,41 +172,46 @@ export const UserProfile = () => {
                 </div>
             </div>
         </section>
-        {mySecurityLevel === securityLevels.admin && 
+        {
+        mySecurityLevel === securityLevels.admin || mySecurityLevel === securityLevels.teacher &&
         <section className='profile_detailedInfo_section'>
             <div className='profile_detailedInfo_dir_container'>
                 <h1 className='profile_detailedInfo_dir_header'>Інформація про студента</h1>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Пошта студента</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.mailbox_address}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Номер студента</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.phone_number}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата народження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.birth_date}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Місце знаходження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.location}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Номер батьків</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.parents_phone_number}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Отримання стипендії</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.is_on_scholarships ? 'Отримує стипендію' : 'Не отримує стипендію'}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Форма навчання</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.education_form}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Бюджет/Контракт</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.education_type}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата вступу</h2>
-                    <h2 className='profile_detailedInfo_item_text'>email@gmail.com</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.admission_date}</h2>
                 </div>
             </div>
             <div className='profile_detailedInfo_dir_container' style={{flexDirection:'column'}}>

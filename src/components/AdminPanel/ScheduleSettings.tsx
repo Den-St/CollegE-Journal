@@ -91,7 +91,7 @@ export const ScheduleSettings = () => {
         </Carousel>
         </>
         : <NoSheduleComponent/>
-        : <h1>Оберіть розклад</h1>
+        : <h1 className="header">Оберіть розклад</h1>
         : <Loader/>}
         <form className="scheduleSettingsForm">
             <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>

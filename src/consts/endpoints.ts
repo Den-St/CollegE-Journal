@@ -23,5 +23,6 @@ export const endpoints = {
     myGroup:'groups/student/group',
     sendRecovery:'users/recovery/send',
     checkRecoveryToken:'users/recovery/check',
-    recoveryPassword:'users/recovery/password'
+    recoveryPassword:'users/recovery/password',
+    getUser:'users/user'
 }
