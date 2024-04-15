@@ -58,10 +58,8 @@ export const useStudentJournal = () => {
     const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number | null) => {
         const localFillters = {...fillters,[fieldName]:value || null}
         setFillters(prev => ({...prev,[fieldName]:value}));
-        // fetch({...fillters,[fieldName]:value || null});
+        fetch({...fillters,[fieldName]:value || null});
         navigate(`/journal?subject_id=${localFillters.subject_id}&month=${localFillters.month}`)
-        
-        // setSearchParams({[fieldName]:value});
     }
 
     return {loading,journal,fillters,onChangeFillters,columnByMonth};
