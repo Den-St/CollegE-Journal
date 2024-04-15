@@ -38,6 +38,7 @@ export const useStudentJournal = () => {
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
+            console.log('fetch');
             const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:_fillters?.subject_id || fillters.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
             setJournal(res.data);
             if(_fillters?.month === null) {
@@ -57,7 +58,7 @@ export const useStudentJournal = () => {
     const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number | null) => {
         const localFillters = {...fillters,[fieldName]:value || null}
         setFillters(prev => ({...prev,[fieldName]:value}));
-        fetch({...fillters,[fieldName]:value || null});
+        // fetch({...fillters,[fieldName]:value || null});
         navigate(`/journal?subject_id=${localFillters.subject_id}&month=${localFillters.month}`)
         
         // setSearchParams({[fieldName]:value});

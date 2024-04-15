@@ -32,6 +32,7 @@ export const StudentJournal = () => {
         }
         document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
+    
     const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
     const [isMouseDown,setIsMouseDown] = useState(false);
     const cellsRef = useRef<HTMLDivElement>(null);
