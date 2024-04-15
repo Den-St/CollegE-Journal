@@ -37,6 +37,18 @@
 	padding: 10px 5px;
 	font-family: Montserrat;
 }
+.textButton{
+	color:var(--primary-orange);
+    background-color: transparent;
+    cursor: pointer;
+	transition: 0.2s;
+}
+.textButton:hover{
+	color: white;
+}
+.textButton:active{
+	color: rgb(187,151,66);
+}
 
 html,body{
     scroll-behavior: smooth;
@@ -332,7 +344,7 @@ body{
         }
 
 		.ant-picker-cell{
-			transition: 0.3s;
+			transition: 0.2s;
 			border-radius: 5px;
 		}
 		.ant-picker-cell:hover{
@@ -412,7 +424,7 @@ body{
 		.primary_button{
 			background-color: var(--secondary-blue);
 			color:white;
-			transition: 0.3s;
+			transition: 0.2s;
 		}
 		.primary_button:hover{
 			color: var(--primary-orange);

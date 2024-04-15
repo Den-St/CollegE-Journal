@@ -8,6 +8,7 @@
     color:white;
     position:relative;
     background: url('../../assets/images/signInBackground.png');
+    flex-direction: column;
 }
 
 .signIn__wrapper{
@@ -110,8 +111,6 @@
 }
 .forgotPassword{
     color:var(--primary-yellow,var(--primary-orange));
-}
-.forgotPassword{
     background-color: transparent;
     cursor: pointer;
 }
@@ -129,7 +128,7 @@
     border-top-right-radius: 5px;
     font-size: 20px;
     font-weight: 500;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .signInWithGoogle__button{

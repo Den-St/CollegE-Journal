@@ -45,8 +45,7 @@ export const SignIn = () => {
 
     // if(status === 1) return <Navigate to={routes.myProfile}/>
     
-    return <>
-    <div className={`signIn__container ${theme}`}>
+    return <div className={`signIn__container ${theme}`}>
         <div className='signIn__wrapper'>
             <h1 className="signIn__header">Вхід</h1>
             <form onSubmit={handleSubmit(onLogin)} className="signIn__form">
@@ -62,7 +61,7 @@ export const SignIn = () => {
                         <input autoComplete="off"  type='checkbox' onChange={(e) => setRemember(e.target.checked)} className="rememberMe__checkbox"/>
                         <p className="rememberMe__title">Запам'ятати мене</p>
                     </div>
-                    <span onClick={() => setOnForgotPasswordModal(true)} className="forgotPassword">Забули пароль?</span>
+                    <span onClick={() => setOnForgotPasswordModal(true)} className="forgotPassword textButton">Забули пароль?</span>
                 </div>
                 {status !== undefined && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{statusCodes[status]}</p>}
                 {!!errors.mailbox_address?.message && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
@@ -81,9 +80,8 @@ export const SignIn = () => {
                 <span className='noAccount__text'>Будь ласка, отримайте дані входу у куратора, для підтвердження облікового запису.</span>
             </div>
         </div>
+        <Modal open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
+            <ForgotPasswordModal onClose={() => setOnForgotPasswordModal(false)}/>
+        </Modal>
     </div>
-    <Modal open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
-        <ForgotPasswordModal onClose={() => setOnForgotPasswordModal(false)}/>
-    </Modal>
-    </>
 }

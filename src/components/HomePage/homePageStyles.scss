@@ -130,7 +130,7 @@ img{vertical-align: top;}
     position: fixed;
     right: 70px;
     z-index: 3;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 .pageNav.shown{
     opacity: 1;
@@ -146,7 +146,7 @@ img{vertical-align: top;}
     height: 78px;
     border-right: 4px solid;
     border-color: #797979;
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
     background-color: transparent;
 }
 
@@ -160,7 +160,7 @@ img{vertical-align: top;}
     font-weight: 400;
     line-height: normal;
     letter-spacing: 2px;
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
 }
 
 .pNav__container:hover {
@@ -503,7 +503,7 @@ img{vertical-align: top;}
 }
 
 .info__btn {
-    transition: 0.3s;
+    transition: 0.2s;
     display: flex;
     margin-top: 40px;
     align-items: center;
