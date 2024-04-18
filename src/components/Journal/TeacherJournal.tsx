@@ -206,7 +206,7 @@ export const TeacherJournal = () => {
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
             <div className='journalLessonsThemes__container'>
-                {journal?.columns.map(column => !column.date.includes('.') &&
+                {journal?.columns.map(column => column.date.includes('.') &&
                     <div className='journalLessonThemeItem__container' key={column.column_id}>
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
