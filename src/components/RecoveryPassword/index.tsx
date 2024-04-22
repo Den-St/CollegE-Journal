@@ -6,9 +6,11 @@ import axiosConfig from "../../axiosConfig";
 import { endpoints } from "../../consts/endpoints";
 import {EyeOutlined} from "@ant-design/icons";
 import { Loader } from "../Loader/Loader";
-import { Spin } from "antd";
+import { Popover, Spin } from "antd";
 import axios from "axios";
 import { routes } from "../../consts/routes";
+import { PasswordInfo } from "../PasswordInfo";
+import { QuestionMarkSvg } from "../../assets/svgs/questionMarkSvg";
 
 const useRecoveryPassword = () => {
     const [email,setEmail] = useState();
@@ -76,7 +78,12 @@ export const RecoveryPassword = () => {
         <h1 className="header">Сторінка зміни паролю</h1>
         <h1 className="header" style={{marginBottom:'-10px'}}>{email || <Spin/>}</h1>
         <form onSubmit={handleSubmit(onSubmit)} style={{'display':'flex',gap:'20px',flexDirection:'column',width:'50%'}}>
-            <h1 className="subSubHeader">Змінити пароль</h1>
+            <div style={{display:'flex',gap:'30px','alignItems':'center'}}>
+                <h1 className="subSubHeader">
+                    Змінити пароль
+                </h1>
+                <Popover open={!!errors.user_password?.message } rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.user_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
+            </div>
             <div style={{display:'flex',gap:'20px'}}>
                 <input
                     style={{'width':'100%'}}
@@ -89,7 +96,7 @@ export const RecoveryPassword = () => {
             <div style={{display:'flex',gap:'20px'}}>
                 <input
                     style={{'width':'100%'}}
-                    {...register('confirmation_user_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/_])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*+-/_]{8,30}$/,message:'Пароль некорректний'},required:{value:true,message:'Повторіть новий пароль'}})}
+                    {...register('confirmation_user_password',{required:{value:true,message:'Повторіть новий пароль'}})}
                     className="input" placeholder="Повторіть новий пароль"
                     type={passwordInputType[2]}
                     />
