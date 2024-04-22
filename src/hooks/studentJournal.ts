@@ -17,12 +17,18 @@ export const useStudentJournal = () => {
     const [columnByMonth,setColumnsByMonth] = useState<JournalColumnT[][]>([[]]);
     const [loading,setLoading] = useState(false);
     const [searchParams,setSearchParams] = useSearchParams();
+    const [attestations,setAttestations] = useState<{
+        active:boolean,
+        end:number,
+        start:number,
+        name:string
+    }[]>();
     const [fillters,setFillters] = useState<{subject_id:string,month:number | null}>({
         subject_id:searchParams.get('subject_id') || '',
         month: searchParams.get('month') !== 'null' ? +(searchParams.get('month') || new Date().getMonth) : null
     });
 
-    const localToken = useUserStore().user.token;
+    const token = useUserStore().user.token;
     const getColumnsByDate = (res:any) => {
         const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
         for(let i = 1;i < res.data.columns.length;i++){
@@ -34,14 +40,18 @@ export const useStudentJournal = () => {
         }
         setColumnsByMonth(_columnsByDate);
     }
-    const fetch = async (_fillters?:{subject_id:string,month:number | null}) => {
+    const fetch = async (_fillters?:{subject_id:string,month:string | undefined}) => {
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
-            console.log('fetch');
-            const res = await axiosConfig.post(endpoints.studentJournal,{journal_id:_fillters?.subject_id || fillters.subject_id,month:-1,year:-1},{headers:{Authorization:localToken}});
+            const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
+            ? await axiosConfig.post(endpoints.studentJournal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1},{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.studentJournal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1)},{headers:{Authorization:token}});
+            
+            if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
+            if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
-            if(_fillters?.month === null) {
+            if(_fillters?.month === undefined) {
                 getColumnsByDate(res);
             }
         }catch(err){
@@ -52,15 +62,21 @@ export const useStudentJournal = () => {
     }
 
     useEffect(() => {
-        fetch(fillters);
-    },[])
+        fetch();
+    },[]);
 
-    const onChangeFillters = (fieldName: 'subject_id' | 'month',value:string | number | null) => {
-        const localFillters = {...fillters,[fieldName]:value || null}
+    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number | undefined) => {
         setFillters(prev => ({...prev,[fieldName]:value}));
-        fetch({...fillters,[fieldName]:value || null});
-        navigate(`/journal?subject_id=${localFillters.subject_id}&month=${localFillters.month}`)
+
+        if(fieldName === 'month'){
+            const newAtts = attestations?.map(att => att.name === value ? {...att,active:true} : {...att,active:false});
+            setAttestations(newAtts);
+            fetch({'subject_id':fillters.subject_id,'month':(value || '').toString()});
+        }else{
+            fetch({'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',[fieldName]:value});
+        }
+
     }
 
-    return {loading,journal,fillters,onChangeFillters,columnByMonth};
+    return {loading,journal,fillters,onChangeFillters,columnByMonth,attestations};
 }

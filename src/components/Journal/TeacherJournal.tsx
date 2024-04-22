@@ -21,7 +21,7 @@ import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 const {Option} = Select;
 
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -77,8 +77,8 @@ export const TeacherJournal = () => {
             document.title = `Журнал`;
             return;
         }
-        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name}`;
-    },[fillters.subject_id,fillters.month,groupJournal]);
+        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${attestations?.find(att => att.active)?.name}`;
+    },[fillters.subject_id,journal,groupJournal]);
 
     if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
@@ -95,15 +95,19 @@ export const TeacherJournal = () => {
                         <p className="fillter_placeholder">Місяць</p>
                     </div>}
                     className="fillter_select"
-                    defaultValue={fillters.month}
+                    defaultValue={attestations?.find(att => att.active)?.name}
                     allowClear
-                    value={fillters.month}
+                    value={attestations?.find(att => att.active)?.name}
                     onChange={(value) => onChangeFillters('month',value)}
+                    // onClear={() => onChangeFillters('month',null)}
                     >
-                        {studyMonths.map((month,i) => {
+                        {/* {studyMonths.map((month,i) => {
                             if(i > studyMonths.findIndex(_month => _month.number === currentMonth + 1)) return null;
                             return <Option key={month.number} value={month.number} label={month.name}>{month.name}</Option>
-                        })}
+                        })} */}
+                        {attestations?.map(att => 
+                            <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
+                        )}
                     </Select>
                 </div>
                 <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"

@@ -1,33 +1,40 @@
 import { useSearchParams } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
 import { getToken } from '../helpers/auth';
 import { useUserStore } from '../store/userStore';
-import { useTeachersGroupsStore } from '../store/teachersGroupsStore';
 import { TeacherJournalT } from '../types/teacherJournal';
 
 export const useGetTeacherJournal = () => {
     const [journal,setJournal] = useState<TeacherJournalT>();
     const [loading,setLoading] = useState(false);
+    const [attestations,setAttestations] = useState<{
+        active:boolean,
+        end:number,
+        start:number,
+        name:string
+    }[]>();
     const groupId = useSearchParams()[0].get('group_id');
-    // const journalId = useTeachersGroupsStore().groups.find(group => group.journal_group === groupId)?.journal_id;
-    const [fillters,setFillters] = useState<{group_id:string,subject_id:string,month:number}>({
+    const [fillters,setFillters] = useState<{group_id:string,subject_id:string}>({
         group_id:groupId || '',
         subject_id:useSearchParams()[0].get('subject_id') || '',
-        month: +(useSearchParams()[0].get('month') || new Date().getMonth)
     });
     const token = useUserStore().user.token || getToken();
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
 
-    const fetch = async (_fillters?:{group_id:string,subject_id:string,month:number}) => {
+    const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined}) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.journal,{year:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,month:-1},{headers:{Authorization:token}});
+            const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
+            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1},{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1)},{headers:{Authorization:token}});
+            
+            if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
+            if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
         }catch(err){
             console.error(err);
@@ -39,9 +46,17 @@ export const useGetTeacherJournal = () => {
         fetch();
     },[])
 
-    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number) => {
+    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number | undefined) => {
         setFillters(prev => ({...prev,[fieldName]:value}));
-        fetch({...fillters,[fieldName]:value});
+
+        if(fieldName === 'month'){
+            const newAtts = attestations?.map(att => att.name === value ? {...att,active:true} : {...att,active:false});
+            setAttestations(newAtts);
+            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':(value || '').toString()});
+        }else{
+            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',[fieldName]:value});
+        }
+
     }
 
     const isDisabledByDate = (dateString:string) => {
@@ -72,5 +87,5 @@ export const useGetTeacherJournal = () => {
         }
     }
 
-    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,onChangeLessonType,onBlurChangeLessonTopic,currentMonth};
+    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations};
 }

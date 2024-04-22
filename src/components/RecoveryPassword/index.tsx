@@ -27,8 +27,6 @@ const useRecoveryPassword = () => {
     const navigate = useNavigate();
 
     const checkToken = async () => {
-        console.log('rere')
-
         if(!recovery_token) {
             navigate('/');
             return;
