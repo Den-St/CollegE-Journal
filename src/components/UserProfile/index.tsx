@@ -134,7 +134,7 @@ export const UserProfile = () => {
                             <div style={{'display':'flex','flexWrap':'wrap','justifyContent':'space-between','rowGap':'30px',}}>
                                 <div style={{'display':'flex','flexDirection':'column','gap':'10px',width:'50%',maxWidth:'200px'}}>
                                     <h3 className="subSubHeader" style={{'height':'40px'}}>Англ. Мова підгрупа</h3>
-                                    {!isOnEditingLG ? <p className="subHeader">{lg.english}</p>
+                                    {!isOnEditingLG ? <p className="subHeader">{lg.english || 'Не обрано'}</p>
                                         : <Select
                                         className="createUserSelect"
                                         placeholder={'Оберіть'}
@@ -148,7 +148,7 @@ export const UserProfile = () => {
                                 </div>
                                 <div style={{'display':'flex','flexDirection':'column','gap':'10px',width:'50%',maxWidth:'200px'}}>
                                     <h3 className="subSubHeader" style={{'height':'40px'}}>Фіз-культура група</h3>
-                                    {!isOnEditingLG ? <p className="subHeader">{lg.phisicaledu}</p>
+                                    {!isOnEditingLG ? <p className="subHeader">{lg.phisicaledu || 'Не обрано'}</p>
                                         : <Select
                                         className="createUserSelect"
                                         placeholder={'Оберіть'}
@@ -162,7 +162,7 @@ export const UserProfile = () => {
                                 </div>
                                 <div style={{'display':'flex','flexDirection':'column','gap':'10px',width:'50%',maxWidth:'200px'}}>
                                     <h3 className="subSubHeader" style={{'height':'40px'}}>Спец. куср Англ. мови</h3>
-                                    {!isOnEditingLG ? <p className="subHeader">{lg.english_additional ? "Вивчає" : "Не вивчає"}</p>
+                                    {!isOnEditingLG ? <p className="subHeader">{lg.english_additional === true ? "Вивчає" : lg.english_additional === false ? "Не вивчає" : 'Не обрано'}</p>
                                         : <Select
                                         className="createUserSelect"
                                         placeholder={'Оберіть'}
@@ -176,7 +176,7 @@ export const UserProfile = () => {
                                 </div>
                                 <div style={{'display':'flex','flexDirection':'column','gap':'10px',width:'50%',maxWidth:'200px'}}>
                                     <h3 className="subSubHeader" style={{'height':'40px'}}>Німецька мова</h3>
-                                    {!isOnEditingLG ? <p className="subHeader">{lg.germany ? "Вивчає" : "Не вивчає"}</p>
+                                    {!isOnEditingLG ? <p className="subHeader">{lg.germany === true ? "Вивчає" : lg.germany === false ? "Не вивчає" : 'Не обрано'}</p>
                                         : <Select
                                         className="createUserSelect"
                                         placeholder={'Оберіть'}

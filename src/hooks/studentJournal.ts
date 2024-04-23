@@ -30,6 +30,7 @@ export const useStudentJournal = () => {
 
     const token = useUserStore().user.token;
     const getColumnsByDate = (res:any) => {
+        console.log('res',res);
         const _columnsByDate:JournalColumnT[][] = [[res.data.columns[0]]];
         for(let i = 1;i < res.data.columns.length;i++){
             if(res.data.columns[i].date.split('.')?.[1]?.slice(0,2) === res.data.columns[i - 1].date.split('.')?.[1]?.slice(0,2) || !res.data.columns[i].date.includes('\n')){
@@ -51,7 +52,7 @@ export const useStudentJournal = () => {
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
-            if(_fillters?.month === undefined) {
+            if(_fillters?.month === '') {
                 getColumnsByDate(res);
             }
         }catch(err){

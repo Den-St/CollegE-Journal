@@ -70,7 +70,7 @@ export const StudentJournal = () => {
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
     }
-
+    console.log(columnByMonth);
     // useEffect(() => {
     //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
     // },[document.getElementById('journal__container')?.clientWidth]);
@@ -169,7 +169,7 @@ export const StudentJournal = () => {
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {!attestations?.some(att => att.active) ? columnByMonth?.map((columns,i) => 
                     <Fragment key={columns[0]?.column_index}>
-                        { <div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}>
+                        {<div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}>
                             {columns.map(column => 
                                 <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                     <div className='journalColumnsCenterItemDate__container'>
@@ -178,7 +178,7 @@ export const StudentJournal = () => {
                                     </div>
                                 </div>
                             )}
-                        </div> }
+                        </div>}
                         <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}
                       
                         >

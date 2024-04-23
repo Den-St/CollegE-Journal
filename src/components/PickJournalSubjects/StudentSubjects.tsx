@@ -22,7 +22,7 @@ export const StudentSubjects = () => {
         <div className="subjectsContainer">
             {journalSubjects?.subjects.map((subject,i) => 
                 <Link  
-                to={routes.journal + `?&subject_id=${subject.journal_id}&month=${currentMonth + 1}`}
+                to={routes.journal + `?&subject_id=${subject.journal_id}`}
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
                     {subject.subject_full_name}
@@ -32,7 +32,7 @@ export const StudentSubjects = () => {
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {journalSubjects?.subjects.map((subject,i) => 
                 <Link 
-                to={routes.journal + `?&subject_id=${subject.journal_id}&month=${currentMonth + 1}`}
+                to={routes.journal + `?&subject_id=${subject.journal_id}`}
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
                     {subject.subject_full_name}
