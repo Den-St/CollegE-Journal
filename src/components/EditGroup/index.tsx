@@ -41,11 +41,11 @@ export const EditGroup = () => {
         >
             <div className="createUserFormSelects__container createGroupFormSelects__container">
                 <div className="editGroupSelect__container">
-                    <label className="createUserInput__label">Спеціальність та курс</label>
-                    <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="createUser__input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:false})} onChange={e => validateGroupName(e.target.value)}/>
+                    <label className="select_label">Спеціальність та курс</label>
+                    <input placeholder="Введіть назву групи" defaultValue={group?.group_full_name || ''} className="form_input" autoComplete="off" {...changeGroupRegister('group_full_name',{required:false})} onChange={e => validateGroupName(e.target.value)}/>
                 </div>
                 <div className="createUserSelect__container createGroupCuratorSelect__container">
-                    <label className="createUserInput__label">Куратор</label>
+                    <label className="select_label">Куратор</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -72,23 +72,23 @@ export const EditGroup = () => {
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
-                    <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <label className="select_label">Ім’я (ПІБ)</label>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} className="form_input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Пошта студента</label>
-                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <label className="select_label">Пошта студента</label>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="form_input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormInputs__container">
                 {/* <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Інтереси</label>
+                    <label className="select_label">Інтереси</label>
                     <input autoComplete="off" 
                     {...createUserRegister('interests',{required:false})}
-                    className="createUser__input" placeholder='Введіть інтереси студента'/>
+                    className="form_input" placeholder='Введіть інтереси студента'/>
                 </div> */}
                 <div className="createUserSelect__container" style={{width:'55%'}}>
-                    <label className="createUserInput__label">Додаткова посада</label>
+                    <label className="select_label">Додаткова посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -106,7 +106,7 @@ export const EditGroup = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
-                    <label className="createUserInput__label">Посада</label>
+                    <label className="select_label">Посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -124,19 +124,19 @@ export const EditGroup = () => {
             </div>
             <div className="createUserFormInputs__container">
                 <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Дата народження</label>
+                    <label className="select_label">Дата народження</label>
                     <input autoComplete="off" 
                     {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                    className="createUser__input" placeholder='Введіть дату народження'/>
+                    className="form_input" placeholder='Введіть дату народження'/>
                 </div>
                 <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Дата вступу</label>
+                    <label className="select_label">Дата вступу</label>
                     <input autoComplete="off" 
                     {...createUserRegister('admission_date',{required:{value:true,message:'Введіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
-                    className="createUser__input" placeholder='Введіть дату вступу'/>
+                    className="form_input" placeholder='Введіть дату вступу'/>
                 </div>
                 <div className="createUserSelect__container">
-                    <label className="createUserInput__label">Місцезнаходження</label>
+                    <label className="select_label">Місцезнаходження</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -154,7 +154,7 @@ export const EditGroup = () => {
             </div>
             <div className="createUserFormInputs__container">
                 <div className="createUserSelect__container" style={{width:'32%'}}>
-                    <label className="createUserInput__label">Форма навчання</label>
+                    <label className="select_label">Форма навчання</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -169,7 +169,7 @@ export const EditGroup = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'32%'}}>
-                    <label className="createUserInput__label">Бюджет/Контракт</label>
+                    <label className="select_label">Бюджет/Контракт</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -185,7 +185,7 @@ export const EditGroup = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'32%'}}>
-                    <label className="createUserInput__label">Отримання стипендії</label>
+                    <label className="select_label">Отримання стипендії</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -203,12 +203,12 @@ export const EditGroup = () => {
             </div>
             <div className="createUserFormInputs__container">
                     <div className="createUserNameInput__container">
-                        <label className="createUserInput__label">Номер студента</label>
-                        <input autoComplete="off" type={'tel'}  {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер студента!'},minLength:{value:10,message:'Некорректний номер студента!'},})} className="createUser__input" placeholder='Введіть номер студента'/>
+                        <label className="select_label">Номер студента</label>
+                        <input autoComplete="off" type={'tel'}  {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер студента!'},minLength:{value:10,message:'Некорректний номер студента!'},})} className="form_input" placeholder='Введіть номер студента'/>
                     </div>
                     <div className="createUserNameInput__container">
-                        <label className="createUserInput__label">Номер батьків</label>
-                        <input autoComplete="off" type={'tel'} {...createUserRegister('parents_phone_number',{required:{value:true,message:'Введіть номер батьків!'},minLength:{value:10,message:'Некорректний номер батьків!'},})} className="createUser__input" placeholder='Введіть номер батьків'/>
+                        <label className="select_label">Номер батьків</label>
+                        <input autoComplete="off" type={'tel'} {...createUserRegister('parents_phone_number',{required:{value:true,message:'Введіть номер батьків!'},minLength:{value:10,message:'Некорректний номер батьків!'},})} className="form_input" placeholder='Введіть номер батьків'/>
                     </div>
                 </div>
             {/* <div className="createUserFormSelects__container"> */}

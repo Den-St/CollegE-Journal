@@ -43,7 +43,7 @@
     min-width: 250px;
     
 }
-.createUserInput__label{
+.select_label{
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
@@ -51,13 +51,6 @@
     text-align: left;
 }
 
-.createUser__input{
-    width: 100%;
-    font-size: 18px;
-    border-radius: 10px 5px;
-    height: 63px;
-    padding-left:28px;
-}
 .createUserFormSelects__container{
     width: 100%;
     display: flex;
@@ -97,11 +90,8 @@
     .createUserTitle{
         color:white;
     }
-    .createUserInput__label{
+    .select_label{
         color:white;
-    }
-    .createUser__input::placeholder{
-        color:var(--primary-gray);
     }
     .ant-select-selector{
         background-color: var(--secondary-blue) !important;
@@ -114,9 +104,7 @@
     .createStudyMaterialsSelect__wrapper{
         background-color: var(--secondary-blue);
     }
-    .createUser__input{
-        background-color: var(--secondary-blue);
-    }
+
     input{
         color:white;
     }

@@ -27,27 +27,27 @@ export const CreateTeacher = () => {
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
-                    <label className="createUserInput__label">Ім’я (ПІБ)</label>
+                    <label className="select_label">Ім’я (ПІБ)</label>
                     <input autoComplete="off"  
                     {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} 
-                    className="createUser__input" placeholder='Введіть ПІБ викладача'/>
+                    className="form_input" placeholder='Введіть ПІБ викладача'/>
                 </div>
                 <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Пошта викладача</label>
+                    <label className="select_label">Пошта викладача</label>
                     <input autoComplete="off" 
                     {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
-                    className="createUser__input" placeholder='Введіть пошту викладача'/>
+                    className="form_input" placeholder='Введіть пошту викладача'/>
                 </div>
             </div>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
-                    <label className="createUserInput__label">Номер викладача</label>
+                    <label className="select_label">Номер викладача</label>
                     <input autoComplete="off" 
                     {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер викладача!'},minLength:{value:10,message:'Некорректний номер викладача!'},})}
-                    className="createUser__input" placeholder='Введіть номер викладача'/>
+                    className="form_input" placeholder='Введіть номер викладача'/>
                 </div>
                 <div className="createUserSelect__container" style={{width:'50%'}}>
-                    <label className="createUserInput__label">Циклова комісія</label>
+                    <label className="select_label">Циклова комісія</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -69,7 +69,7 @@ export const CreateTeacher = () => {
             </div>
             <div className="createUserFormInputs__container">
             <div className="createUserSelect__container" style={{width:'45%'}}>
-                    <label className="createUserInput__label">Посада</label>
+                    <label className="select_label">Посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -86,7 +86,7 @@ export const CreateTeacher = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
-                    <label className="createUserInput__label">Додаткова посада</label>
+                    <label className="select_label">Додаткова посада</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"

@@ -10,8 +10,8 @@ import { useGetGroup } from '../../../hooks/getGroup';
 import { useThemeStore } from '../../../store/themeStore';
 import { useUserStore } from '../../../store/userStore';
 import { DaysNumbersT } from '../../../types/daysNames';
-import { NoSheduleComponent } from '../../AdminPanel/ScheduleSettings';
 import { Loader } from '../../Loader/Loader';
+import { NoMatch } from '../../NoMatch';
 import './lessonsSchedule.scss';
 
 export const LessonsScheduleStudents = () => {
@@ -189,7 +189,7 @@ export const LessonsScheduleStudents = () => {
                 </div>)}
         </Carousel>
         </>
-        : <NoSheduleComponent/>}
+        : <NoMatch isChildren title="Нажаль, розклад ще не завантажен" description="Зазвичай розклад генерується у 10-тих числах місяця"/>}
         {/* <NoSheduleComponent/> */}
         <div className="lessonsScheduleDay__container" style={{width:'unset'}}>
             <h2 className={`lessonsScheduleDay__header`}>Додатково</h2>

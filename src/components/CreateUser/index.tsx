@@ -19,17 +19,17 @@ export const CreateUser = () => {
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
-                    <label className="createUserInput__label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...createUserRegister('full_name',{required:true})} className="createUser__input" placeholder='Введіть ПІБ студента'/>
+                    <label className="select_label">Ім’я (ПІБ)</label>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:true})} className="form_input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
-                    <label className="createUserInput__label">Пошта студента</label>
-                    <input autoComplete="off"  {...createUserRegister('mailbox_address',{required:true})} className="createUser__input" placeholder='Введіть пошту студента'/>
+                    <label className="select_label">Пошта студента</label>
+                    <input autoComplete="off"  {...createUserRegister('mailbox_address',{required:true})} className="form_input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormSelects__container">
                 <div className="createUserSelect__container">
-                    <label className="createUserInput__label">Група студента</label>
+                    <label className="select_label">Група студента</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         {/* <Select
                             className="createUserSelect"
@@ -42,7 +42,7 @@ export const CreateUser = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container">
-                    <label className="createUserInput__label">Форма навчання</label>
+                    <label className="select_label">Форма навчання</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"
@@ -57,7 +57,7 @@ export const CreateUser = () => {
                     </div>
                 </div>
                 <div className="createUserSelect__container">
-                    <label className="createUserInput__label">Бюджет/Контракт</label>
+                    <label className="select_label">Бюджет/Контракт</label>
                     <div className="createStudyMaterialsSelect__wrapper">
                         <Select
                             className="createUserSelect"

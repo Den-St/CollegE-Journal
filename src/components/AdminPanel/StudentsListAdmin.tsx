@@ -52,7 +52,7 @@ export const StudentsListAdmin = () => {
             <form className="createGroup_form" onSubmit={handleSubmit(onCreateGroup)}>
                 <div className="createUserFormSelects__container createGroupFormSelects__container">
                     <div className="createUserSelect__container createGroupSelect__container">
-                        <label className="createUserInput__label">Спеціальність та курс</label>
+                        <label className="select_label">Спеціальність та курс</label>
                         {/* <div className="createStudyMaterialsSelect__wrapper">
                             <Select
                                 className="createUserSelect"
@@ -62,11 +62,11 @@ export const StudentsListAdmin = () => {
                                 <Option value={'random hashtag'} label={'random hashtag'}>'random hashtag'</Option>
                             </Select>
                         </div> */}
-                        <input placeholder="Назва групи" autoComplete="off" {...register('group_full_name',{required:true})} className="createUser__input" onChange={(e) => validateGroupName(e.target.value)}/>
+                        <input placeholder="Назва групи" autoComplete="off" {...register('group_full_name',{required:true})} className="form_input" onChange={(e) => validateGroupName(e.target.value)}/>
                         {errorCode !== undefined && <p className="signIn_errorMessage"> {errorCodes[errorCode]}</p>}
                     </div>
                     {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
-                        <label className="createUserInput__label">Куратор</label>
+                        <label className="select_label">Куратор</label>
                         <div className="createStudyMaterialsSelect__wrapper">
                             <Select
                                 className="createUserSelect"
