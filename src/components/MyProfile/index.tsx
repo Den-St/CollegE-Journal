@@ -217,12 +217,12 @@ export const MyProfile = () => {
                         <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
                         <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                     </div>
+                    {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
+                    {status === 0 && <p className="signIn_errorMessage">Невірний пароль</p>}
                     <div className="editFormButtons_container">
                         <input autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
                         <span className="forgotPassword">Забули пароль?</span>
                     </div>
-                    {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
-                    {status === 0 && <p className="signIn_errorMessage">Невірний пароль</p>}
                 </form>
                 <button className="primary_button" onClick={onTryEditClose}>Повернутися</button>
             </div>

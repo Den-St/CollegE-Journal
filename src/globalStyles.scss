@@ -26,6 +26,10 @@
 	font-size: 18px;
 	font-family: Montserrat;
 }
+input:focus::placeholder {
+	color: transparent !important;
+}
+
 .primary_button{
 	width: 191px;
     height: 41px;	
