@@ -444,6 +444,9 @@
 //         height: 600px;
 //     }
 // }
+.journalLessonThemeItem__container .journalLessonThemeItem__input__text:focus::before{
+    content: 'asdf';
+}
 .dark{
     .journalRowItemCenterValue__text,
     .journalRowItemCenterValue__input__text{

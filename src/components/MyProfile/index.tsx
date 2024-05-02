@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+    import { Modal } from 'antd';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';

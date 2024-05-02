@@ -6,6 +6,7 @@ import { securityLevels, securityLevelsToNames } from '../../consts/securityLeve
 import { deleteTokenCookie } from '../../helpers/auth';
 import { useStudentJournal } from '../../hooks/studentJournal';
 import { useThemeController } from '../../hooks/themeController';
+import { useAdminGroupsStore } from '../../store/adminGroupsStore';
 import { useStudentJournalSubjectsStore } from '../../store/studentJournalSubjects';
 import { useTeachersGroupsStore } from '../../store/teachersGroupsStore';
 import { useUserStore } from '../../store/userStore';
@@ -17,12 +18,14 @@ export const UserPopup = () => {
     const signOut = useUserStore().signOut;
     const clearTeacherJournal = useTeachersGroupsStore().clear;
     const clearStudentJournal = useStudentJournalSubjectsStore().clear;
+    const clearAdminGroupStore = useAdminGroupsStore().clear;
     const navigate = useNavigate();
     const onSignOut = () => {
         signOut();
         clearTeacherJournal();
         clearStudentJournal();
         deleteTokenCookie();
+        clearAdminGroupStore();
         navigate(routes.signIn);
     }
 
