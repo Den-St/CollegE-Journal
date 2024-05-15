@@ -25,9 +25,14 @@
     padding:20px 28px;
 	font-size: 18px;
 	font-family: Montserrat;
+	transition: 0.3s;
 }
-input:focus::placeholder {
+.form_input:focus::placeholder {
 	color: transparent !important;
+}
+.form_input:focus{
+	// box-shadow: 0px 3px 5px var(--primary-orange);
+	// border-bottom: 1px solid var(--primary-orange);
 }
 
 .primary_button{
@@ -247,6 +252,17 @@ input::placeholder{
 	overflow: hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
+	transition: 0.3s;
+	outline: none;
+	border: none;
+	color:white !important;
+	input,input::placeholder{
+		color:white !important;
+	}
+	
+	.ant-picker-suffix{
+		color:white;
+	}
 }
 .ant-select-clear{
 	// position: static !important;
@@ -373,7 +389,14 @@ body{
 		.ant-picker-today-btn:hover{
             color:var(--primary-orange) !important;
         }
-
+		.ant-picker-clear{
+			background-color: var(--primary-dark) !important;
+			color: white;
+		}
+		.ant-picker-clear:hover{
+			background-color: inherit;
+			color: white;
+		}
 		.ant-picker-cell{
 			transition: 0.2s;
 			border-radius: 5px;

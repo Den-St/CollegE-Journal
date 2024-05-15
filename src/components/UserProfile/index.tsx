@@ -10,6 +10,7 @@ import { defaultAvatar } from "../../consts/defaultAvatar";
 import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
+import { useGetUserProfile } from "../../hooks/getUserProfile";
 import { useThemeStore } from "../../store/themeStore";
 import { useUserStore } from "../../store/userStore";
 import { UserProfileT } from "../../types/userProfile";
@@ -46,30 +47,6 @@ const useEditLessonGroups = (user:UserProfileT | undefined) => {
     return {onToggleEditLG,isOnEditingLG,onChangeLG,lg,onConfirmLGChange};
 }
 
-const useGetUserProfile = () => {
-    const [user,setUser] = useState<UserProfileT>();
-    const [loading,setLoading] = useState(false);
-    const user_id = useParams().id;
-    const token = useUserStore().user.token;
-
-    const fetch = async () => {
-        setLoading(true);
-        try{
-            const res = await axiosConfig.post(endpoints.getUser,{user_id},{headers:{Authorization:token}});
-            setUser(res.data.data);
-            document.title = `Профіль студента - ${res.data.data.full_name}`;
-        }catch(err){
-            console.error(err);
-        }
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        fetch()
-    }, [])
-    
-    return {user,loading,user_id};
-}
 
 export const UserProfile = () => {
     const theme = useThemeStore().theme;

@@ -1,6 +1,6 @@
 export type UserProfileT = {
     admission_date: string | null,
-    avatar: null,
+    avatar: string | null,
     birth_date: string | null,
     deduction_date: string | null,
     education_form: string | null,

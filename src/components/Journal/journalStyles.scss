@@ -285,9 +285,14 @@
     padding: 7px;
     text-align: center;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
+    transition: 0.3s;
+    border:0px solid var(--primary-orange);
 }
 .journalRowItemCenterValue__input__text:disabled{
     cursor:not-allowed;
+}
+.journalRowItemCenterValue__input__text:focus{
+    border:1px solid var(--primary-orange);
 }
 .journalRowItemRightValue__container{
     width: 82px;
@@ -332,14 +337,23 @@
     align-items: center;
     width: 100%;
     padding: 20px 30px;
-    border-radius: 10px 5px ;
+    border-radius: 10px 5px;
+    padding-left: 35px;
+    transition: 0.3s;
+    border-left: 0px solid var(--primary-orange);
+
 }
+.journalLessonThemeItem__container:hover{
+    border-left: 5px solid var(--primary-orange);
+}
+
 .journalLessonThemeItemDate__container{
     display: flex;
     flex-direction: column;
     gap:10px;
     align-items: center;
     text-align: center;
+    width: 80px;
 }
 .journalLessonThemeItemDate__day{
     font-size: 18px;

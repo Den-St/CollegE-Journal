@@ -6,7 +6,6 @@ export const setToken = (token:string) =>{
 export const getToken = () =>{
     return Cookies.get("token");
 }
-
 export const deleteTokenCookie = () =>{
     Cookies.remove("token");
 }

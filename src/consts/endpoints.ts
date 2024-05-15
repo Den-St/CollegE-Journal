@@ -25,5 +25,6 @@ export const endpoints = {
     checkRecoveryToken:'users/recovery/check',
     recoveryPassword:'users/recovery/password',
     getUser:'users/user',
-    changeLG:'users/students/additional-groups'
+    changeLG:'users/students/additional-groups',
+    editUser:'admin/user/change-info'
 }
