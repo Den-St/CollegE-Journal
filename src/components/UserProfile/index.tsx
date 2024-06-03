@@ -186,7 +186,7 @@ export const UserProfile = () => {
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата народження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user?.birth_date}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{!!user?.birth_date && new Date(user.birth_date * 1000).toLocaleString().split(', ')[0]}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Місце знаходження</h2>
@@ -210,7 +210,7 @@ export const UserProfile = () => {
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата вступу</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{user?.admission_date}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{!!user?.admission_date && new Date(user.admission_date * 1000).toLocaleString().split(', ')[0]}</h2>
                 </div>
             </div>
             <div className='profile_detailedInfo_dir_container' style={{flexDirection:'column'}}>

@@ -6,6 +6,7 @@ import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { emailPattern } from "../../consts/emailPattern";
 import { routes } from "../../consts/routes";
+import { namePattern } from "../../helpers/namePattern";
 import { useCreateTeacher } from "../../hooks/createTeacher";
 import { useGetTeachers } from "../../hooks/getTeachers";
 import { useThemeStore } from "../../store/themeStore";
@@ -29,7 +30,7 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="select_label">Ім’я (ПІБ)</label>
                     <input autoComplete="off"  
-                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:/^[а-яА-Я\s\-\і\ґ\ї\є\І\Ґ\Ї\Є]*$/,message:'Некорректне ПІБ!'}})} 
+                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:namePattern,message:'Некорректне ПІБ!'}})} 
                     className="form_input" placeholder='Введіть ПІБ викладача'/>
                 </div>
                 <div className="createUserEmailInput__container">

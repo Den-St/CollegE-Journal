@@ -1,7 +1,7 @@
 export type UserProfileT = {
-    admission_date: string | null,
+    admission_date: number | null,
     avatar: string | null,
-    birth_date: string | null,
+    birth_date: number | null,
     deduction_date: string | null,
     education_form: string | null,
     education_type: string | null,
@@ -19,5 +19,6 @@ export type UserProfileT = {
     user_group: {
         group_full_name: string | null,
         group_id: string | null
-    } | null
+    } | null,
+    user_type:'student' | 'teacher'
 }

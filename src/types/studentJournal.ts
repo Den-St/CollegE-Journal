@@ -4,7 +4,8 @@ export type StudentJournalT = {
         full_name:string,
         index:number
     },
-    columns:JournalColumnT[]
+    columns:JournalColumnT[],
+    subject_system:number
 }
 
 export type JournalColumnT = {

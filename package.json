@@ -20,6 +20,7 @@
     "antd": "^5.9.4",
     "antd-img-crop": "^4.21.0",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.11",
     "gh-pages": "^6.0.0",
     "js-cookie": "^3.0.5",
     "lodash.debounce": "^4.0.8",

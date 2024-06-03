@@ -59,13 +59,13 @@ export type CreateUserT = {
     department:string | null
 }
 
-export type EditUserT = {
+export type EditUserStudentT = {
     mailbox_address:string,
     full_name:string
     education_form:string | null 
     education_type:string | null
-    birth_date:string;
-    admission_date:string
+    birth_date:Date | null;
+    admission_date:Date | null
     location:string | null
     phone_number:string
     parents_phone_number:string
@@ -74,5 +74,18 @@ export type EditUserT = {
     job_title:string | null,
     additional_job_title:string | null
     department:string | null,
-    avatar:string | null
+    avatar:string | null,
+    user_type:string | undefined,
+}
+
+export type EditUserTeacherT = {
+    mailbox_address:string,
+    full_name:string
+    phone_number:string
+    job_title:string | null,
+    additional_job_title:string | null
+    department:string | null,
+    avatar:string | null,
+    user_type:string | undefined,
+    interests:string
 }

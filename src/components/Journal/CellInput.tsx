@@ -8,14 +8,16 @@ type Props = {
         journal_id: string,
         subject_id: string,
         column_id: string,
-        student_id:string
+        student_id:string,
+        subject_system:number
     },
     token:string,
     rowIndex:number,
     columnIndex:number,
     date:string,
     onMouseUp:() => void,
-    onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void
+    onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
+
 }
 const isValid = (value:string) => {
     if(value === "") return true;
@@ -37,11 +39,14 @@ const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         return;
     }
 };
-export const getColorByValue = (value:string) => {
-    if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
-    if(value !== "" && +value < 60) return "#ED3434";
-    if(+value >= 74) return "#2DEF40";
-    if(+value >= 60 && +value <= 73) return "white";
+export const getColorByValue = (value:string,system:number) => {
+    if(system === 100){
+        if(value !== "" && +value < 60) return "#ED3434";
+        if(+value >= 74) return "#2DEF40";
+        if(+value >= 60 && +value <= 73) return "white";
+    }else{
+        if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
+    }
     if(value.toLowerCase() === "н" || value.toLowerCase() === "н/a") return "#EFB42D";
     if(!value) return "white";
     return "white";
@@ -52,14 +57,15 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         column_id: string,
         student_id:string,
         rowIndex:number,
-        columnIndex:number
+        columnIndex:number,
+        subject_system:number
     },token:string) => {
     if(!isValid(e.target.value)) return;
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
         const input = document.getElementById(onBlurData.rowIndex + ',' + onBlurData.columnIndex);
         if(input) {
-            input.style.color = getColorByValue(e.target.value);
+            input.style.color = getColorByValue(e.target.value,onBlurData.subject_system);
             input.style.caretColor = "white";
         }
     }catch(err){
@@ -77,5 +83,5 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         }
     }
 
-    return <input onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || ""),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
+    return <input onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
 }

@@ -16,7 +16,8 @@ export const useGetUserProfile = () => {
         try{
             const res = await axiosConfig.post(endpoints.getUser,{user_id},{headers:{Authorization:token}});
             setUser(res.data.data);
-            document.title = `Профіль студента - ${res.data.data.full_name}`;
+            console.log(res?.data?.data)
+            // document.title = `Профіль студента - ${res.data.data.full_name}`;
         }catch(err){
             console.error(err);
         }
