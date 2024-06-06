@@ -1,4 +1,4 @@
-import { Carousel, Select, Spin } from "antd";
+import { Carousel, Select, Spin, Steps } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
@@ -20,6 +20,21 @@ const {Option} = Select;
 const lessonNumbers = Array(1,2,3,4,5);
 const courseNumbers = [1,2,3,4];
 const currYear = new Date().getFullYear();
+const stepsItems = [
+    {
+        title:'1 Курс',
+    },
+    {
+        title:'2 Курс',
+    },
+    {
+        title:'3 Курс',
+    },
+    {
+        title:'4 Курс',
+    },
+
+]
 export const ScheduleSettings = () => {
     useEffect(() => {
         document.title = 'Налаштування розкладу';
@@ -87,18 +102,22 @@ export const ScheduleSettings = () => {
                     </Select>
                 </div>
             </div>
+            <Steps
+                current={courseNumber - 1}
+                items={stepsItems}
+            />
             <h2 className="subSubHeader" style={{width:'100%'}}>Спеціальність - <span style={{color:'var(--primary-orange)'}}>З; Кн; Кб;</span></h2>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата початку розкладу</label>
                 <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Введіть дату початку  семестру'/>
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="form_input" placeholder='Оберіть дату початку  семестру'/>
             </div>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата закінчення розкладу</label>
                 <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Введіть дату закінчення семестру'/>
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="form_input" placeholder='Оберіть дату закінчення семестру'/>
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
@@ -121,14 +140,14 @@ export const ScheduleSettings = () => {
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата початку розкладу</label>
                 <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Введіть дату початку  семестру'/>
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="form_input" placeholder='Оберіть дату початку  семестру'/>
             </div>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата закінчення розкладу</label>
                 <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Введіть дату закінчення семестру'/>
+                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                className="form_input" placeholder='Оберіть дату закінчення семестру'/>
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>

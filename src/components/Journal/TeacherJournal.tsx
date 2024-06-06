@@ -35,11 +35,16 @@ export const TeacherJournal = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
     }
+    const handleHorizontalScrollLessonTypes = () => {
+        if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        cellsRef.current.scrollLeft = lessonTypesRef.current.scrollLeft;
+    }
     const handleVerticalScroll = () => {
         if(mainContainerRef.current === null || cellsRef.current === null) return;
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
     const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
+        console.log('1')
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
         setIsMouseDown(true);
@@ -50,15 +55,17 @@ export const TeacherJournal = () => {
     }
     const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
         if(!isMouseDown && !localIsMouseDown) return;
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        if(mainContainerRef.current === null || cellsRef.current === null) return;
+        console.log('1')
+        if(lessonTypesRef.current === null || cellsRef.current === null || mainContainerRef.current === null) return;
         
         const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
         const deltaY = !localMousePos ? e.clientY - mousePos.current.y : e.clientY - localMousePos.y;
         if(deltaX < 0){
             cellsRef.current.scrollLeft += 5 - deltaX;
+            lessonTypesRef.current.scrollLeft += 5 - deltaX;
         }else if(deltaX > 0){
             cellsRef.current.scrollLeft -= 5 + deltaX;
+            lessonTypesRef.current.scrollLeft -= 5 - deltaX;
         }
         if(deltaY < 0){
             cellsRef.current.scrollTop += 5 - deltaY;
@@ -140,13 +147,13 @@ export const TeacherJournal = () => {
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
-        <section className='journal__container' id={'journal__container'}>
-            <div className='journalLeft__container'>
+        <section className='journal__container'>
+            <div className='journalLeft__container' onMouseMove={onMouseMove} onMouseDown={mouseDownHandler}  onMouseUp={mouseUpHandler}>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                 </div>
-                <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
+                <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {journal?.columns.map(column => 
                         <div key={column.column_id} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                 {

@@ -168,23 +168,23 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             <div className="createUserEmailInput__container">
                 <label className="select_label">Дата народження</label>
                 <DatePicker
-                placeholder="Введіть дату народження"
+                placeholder="Оберіть дату народження"
                 className="form_input"
                 format={customFormat}
                 style={{'visibility':'visible'}}
                 value={dayjs(watch('birth_date'))}
-                {...register('birth_date',{required:{value:true,message:'Введіть дату народження'},
+                {...register('birth_date',{required:{value:true,message:'Оберіть дату народження'},
                 })}
                 onChange={(e) => setValue('birth_date',e?.toDate() || null)} />
             </div>
             <div className="createUserEmailInput__container">
                 <label className="select_label">Дата вступу</label>
                 <DatePicker
-                placeholder="Введіть дату вступу"
+                placeholder="Оберіть дату вступу"
                 className="form_input"
                 format={customFormat}
                 style={{'visibility':'visible'}}
-                {...register('admission_date',{required:{value:true,message:'Введіть дату вступу'},
+                {...register('admission_date',{required:{value:true,message:'Оберіть дату вступу'},
                 })}
                 value={dayjs(watch('admission_date'))}
                 onChange={(e) => setValue('admission_date',e?.toDate() || null)} />
@@ -219,7 +219,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                         value={watch('education_form')}
                         >   
                         <Option value={"Очно"} label={"Очно"}>Очно</Option>
-                        <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
+                        <Option value={"Дистанційно"} label={"Дистанційно"}>Дистанційно</Option>
                     </Select>
                 </div>
             </div>

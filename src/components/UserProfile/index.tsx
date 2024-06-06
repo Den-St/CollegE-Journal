@@ -75,7 +75,7 @@ export const UserProfile = () => {
                                 <p className='studentProfile__name'>
                                     {user?.full_name}
                                     {/* {user.security_level !== securityLevels.admin &&  */}
-                                    {/* <StarSvg/> */}
+                                    {/* {user?. <StarSvg/> */}
                                     {mySecurityLevel === securityLevels.admin && !!user_id && 
                                     <Link to={routes.editUser.replace(':id',user_id)} className='editUserProfile_button'><EditProfileSvg/></Link>}
                                 </p>

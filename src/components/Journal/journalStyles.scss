@@ -108,8 +108,17 @@
     gap:10px;
     padding-left: 66px;
     // margin-left: 66px;
-    overflow: hidden;
+    overflow: scroll;
     // padding-left:4.3%;
+}
+.journalColumnsCenter__container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.journalColumnsCenter__container {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 
 .journalColumnsCenterItem__container{

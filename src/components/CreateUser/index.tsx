@@ -51,7 +51,7 @@ export const CreateUser = () => {
                             onChange={(e) => createUserSetValue('education_form',e)}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
-                            <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
+                            <Option value={"Дистанційно"} label={"Дистанційно"}>Дистанційно</Option>
                         </Select>
                         
                     </div>

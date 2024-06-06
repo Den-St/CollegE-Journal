@@ -133,7 +133,7 @@ export const EditProfile = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="editProfile_form" autoComplete={"off"}>
                 <div className="editProfile_header_container">
                     <h2 className="editProfile_section_header">Змінити пароль </h2>
-                    <Popover open={!!errors.new_password?.message } rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
+                    <Popover open={!!errors.new_password?.message} rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
                 </div>
                 <div style={{display:'flex',gap:'20px',width:'100%'}}>
                     <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/_])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*+-/_]{8,30}$/,message:'Пароль некорректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />

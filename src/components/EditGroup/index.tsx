@@ -127,14 +127,14 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата народження</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('birth_date',{required:{value:true,message:'Введіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                    className="form_input" placeholder='Введіть дату народження'/>
+                    {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                    className="form_input" placeholder='Оберіть дату народження'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата вступу</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('admission_date',{required:{value:true,message:'Введіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
-                    className="form_input" placeholder='Введіть дату вступу'/>
+                    {...createUserRegister('admission_date',{required:{value:true,message:'Оберіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
+                    className="form_input" placeholder='Оберіть дату вступу'/>
                 </div>
                 <div className="createUserSelect__container">
                     <label className="select_label">Місцезнаходження</label>
@@ -165,7 +165,7 @@ export const EditGroup = () => {
                             value={createUserWatch('education_form')}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
-                            <Option value={"Заочно"} label={"Заочно"}>Заочно</Option>
+                            <Option value={"Дистанційно"} label={"Дистанційно"}>Дистанційно</Option>
                         </Select>
                     </div>
                 </div>
