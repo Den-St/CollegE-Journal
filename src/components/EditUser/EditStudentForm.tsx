@@ -1,4 +1,4 @@
-import { Select, DatePicker, DatePickerProps } from "antd";
+import { Select, DatePicker, DatePickerProps, Modal } from "antd";
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -10,10 +10,12 @@ import { emailPattern } from "../../consts/emailPattern";
 import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
+import { customDateFormat } from "../../helpers/dateFormat";
 import { namePattern } from "../../helpers/namePattern";
 import { useUserStore } from "../../store/userStore";
 import { EditUserStudentT } from "../../types/user";
 import { UserProfileT } from "../../types/userProfile";
+import { ExpelStudentModal } from "./ExpelStudentModal";
 const {Option} = Select;
 
 const useEditUserStudent = (user:UserProfileT) => {
@@ -40,14 +42,11 @@ const useEditUserStudent = (user:UserProfileT) => {
             console.log(err);
         }
     }
-    console.log(watch('birth_date'));
+
     const fetch = async () => {
         const datesKeys = ['admission_date','birth_date']
         Object.keys(user).forEach((key) => {
             if(Object.keys(watch()).includes(key)) {
-            //@ts-ignore
-                console.log(key, !datesKeys.includes(key) ? (user[key] || null) : !!user[key] ? dayjs(new Date(user[key] * 1000)) : new Date());
-
             //@ts-ignore
                 setValue(key, !datesKeys.includes(key) ? (user[key] || null) : !!user[key] ? new Date(user[key] * 1000) : new Date());
             }
@@ -61,8 +60,6 @@ const useEditUserStudent = (user:UserProfileT) => {
     return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,};
 }
 
-const dateFormat = 'DD.MM.YYYY';
-const customFormat: DatePickerProps['format'] = (value) => value.format(dateFormat);
 
 type Props = {
     user:UserProfileT
@@ -70,6 +67,7 @@ type Props = {
 
 export const EditStudentForm:React.FC<Props> = ({user}) => {
     const {onEdit,register,handleSubmit,setValue,watch,reset,errors} = useEditUserStudent(user);
+    const [isExpelModal,setIsExpelModal] = useState(false);
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
     const userId = useParams().id;
@@ -129,7 +127,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
         <div className="createUserFormInputs__container">
             <div className="createUserNameInput__container">
                 <label className="select_label">Ім’я (ПІБ)</label>
-                <input autoComplete="off"  
+                <input autoComplete="off"
                 {...register('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некорректне ПІБ!'}})} 
                 className="form_input" placeholder='Введіть ПІБ студента'/>
             </div>
@@ -170,7 +168,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                 <DatePicker
                 placeholder="Оберіть дату народження"
                 className="form_input"
-                format={customFormat}
+                format={customDateFormat}
                 style={{'visibility':'visible'}}
                 value={dayjs(watch('birth_date'))}
                 {...register('birth_date',{required:{value:true,message:'Оберіть дату народження'},
@@ -182,7 +180,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                 <DatePicker
                 placeholder="Оберіть дату вступу"
                 className="form_input"
-                format={customFormat}
+                format={customDateFormat}
                 style={{'visibility':'visible'}}
                 {...register('admission_date',{required:{value:true,message:'Оберіть дату вступу'},
                 })}
@@ -277,16 +275,25 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
         {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
         {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>} */}
         {/* {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>} */}
-        <div className="createUserButtons__container">
-            <input 
-            // disabled={createUserDisabled} 
-            autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Змінити"} 
-            // disabled={createUserLoading}
-            />
-            {/* <input 
-            autoComplete="off" type={"submit"} className="createUser__button primary_button" style={{'width':'unset'}} value={"Видалити випадково створений запис"} 
-            /> */}
+        <div className="createUserButtons__container" style={{'justifyContent':'space-between'}}>
+            <div className="createUserButtons__container">
+                <input 
+                // disabled={createUserDisabled} 
+                autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Змінити"} 
+                // disabled={createUserLoading}
+                />
+                <input 
+                autoComplete="off" type={"submit"} className="createUser__button primary_button" style={{'width':'unset'}} value={"Видалити випадково створений запис"} 
+                />
+            </div>
+            <span 
+                onClick={() => setIsExpelModal(true)}
+                className="createUser__button primary_button" style={{'width':'unset'}} 
+            >
+                Відрахувати
+            </span>
         </div>
     </form>
+    <Modal rootClassName="expelStudentModal" footer={false} open={isExpelModal} onCancel={() => setIsExpelModal(false)}><ExpelStudentModal onClose={() => setIsExpelModal(false)} user={user}/></Modal>
     </>
 }
