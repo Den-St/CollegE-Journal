@@ -15,7 +15,7 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
             <div className="createUserSelect__container">
                 <label className="select_label">Курс навчання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         defaultValue={1}
                         className="createUserSelect"
@@ -34,7 +34,7 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             {!!courseNumber && <>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Рік навчання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть рік навчання'}
@@ -50,7 +50,7 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Семестр</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть семестр навчання'}
@@ -79,7 +79,7 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть кількість тижнів'}
@@ -109,7 +109,7 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть кількість тижнів'}

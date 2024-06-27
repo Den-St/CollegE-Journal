@@ -53,7 +53,7 @@ export const StudentsListAdmin = () => {
                 <div className="createUserFormSelects__container createGroupFormSelects__container">
                     <div className="createUserSelect__container createGroupSelect__container">
                         <label className="select_label">Спеціальність та курс</label>
-                        {/* <div className="createStudyMaterialsSelect__wrapper">
+                        {/* <div className="select_wrapper">
                             <Select
                                 className="createUserSelect"
                                 placeholder={'Оберіть групу'}
@@ -67,7 +67,7 @@ export const StudentsListAdmin = () => {
                     </div>
                     {/* <div className="createUserSelect__container createGroupCuratorSelect__container">
                         <label className="select_label">Куратор</label>
-                        <div className="createStudyMaterialsSelect__wrapper">
+                        <div className="select_wrapper">
                             <Select
                                 className="createUserSelect"
                                 placeholder={'Оберіть куратора'}

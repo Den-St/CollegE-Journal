@@ -49,7 +49,7 @@ export const CreateTeacher = () => {
                 </div>
                 <div className="createUserSelect__container" style={{width:'50%'}}>
                     <label className="select_label">Циклова комісія</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         <Select
                             className="createUserSelect"
                             placeholder={'Оберіть циклову комісію'}
@@ -71,7 +71,7 @@ export const CreateTeacher = () => {
             <div className="createUserFormInputs__container">
             <div className="createUserSelect__container" style={{width:'45%'}}>
                     <label className="select_label">Посада</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         <Select
                             className="createUserSelect"
                             placeholder={'Оберіть посаду викладача'}
@@ -88,7 +88,7 @@ export const CreateTeacher = () => {
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="select_label">Додаткова посада</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         <Select
                             className="createUserSelect"
                             placeholder={'Оберіть додаткову посаду викладача'}

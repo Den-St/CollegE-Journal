@@ -30,7 +30,7 @@ export const CreateUser = () => {
             <div className="createUserFormSelects__container">
                 <div className="createUserSelect__container">
                     <label className="select_label">Група студента</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         {/* <Select
                             className="createUserSelect"
                             placeholder={'Оберіть групу'}
@@ -43,7 +43,7 @@ export const CreateUser = () => {
                 </div>
                 <div className="createUserSelect__container">
                     <label className="select_label">Форма навчання</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         <Select
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
@@ -58,7 +58,7 @@ export const CreateUser = () => {
                 </div>
                 <div className="createUserSelect__container">
                     <label className="select_label">Бюджет/Контракт</label>
-                    <div className="createStudyMaterialsSelect__wrapper">
+                    <div className="select_wrapper">
                         <Select
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}

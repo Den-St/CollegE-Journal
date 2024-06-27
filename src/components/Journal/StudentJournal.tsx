@@ -37,7 +37,10 @@ export const StudentJournal = () => {
     const [isMouseDown,setIsMouseDown] = useState(false);
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
-
+    const handleHorizontalScrollLessonTypes = () => {
+        if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        cellsRef.current.scrollLeft = lessonTypesRef.current.scrollLeft;
+    }
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
@@ -142,7 +145,9 @@ export const StudentJournal = () => {
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
                 </div>
-                <div className='journalColumnsCenter__container' ref={lessonTypesRef}>
+                <div className='journalColumnsCenter__container'
+                    onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
+                    onMouseMove={onMouseMove} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {attestations?.some(att => att.active) && journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                             <div className={`journalColumnsCenterItemType ${column.date.includes('\n') && `transparent`}`}>
                                 {!column.date.includes('\n') && column?.lesson_type}

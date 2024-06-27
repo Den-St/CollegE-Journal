@@ -19,7 +19,7 @@ export const CreateStudyMaterials = () => {
                 <div className='createStudyMaterialsSelect__container'>
                     <h2 className='createStudyMaterialsInput__title'>Фільтри</h2>
                     {/* <input autoComplete="off"  className="createStudyMaterialsFilters__input" placeholder='Введіть теги, за допомогою “Enter”'/> */}
-                    <div className='createStudyMaterialsSelect__wrapper'>
+                    <div className='select_wrapper'>
                         <Select
                         placeholder={'Оберіть хеш-теги'}
                         mode="multiple"
@@ -40,7 +40,7 @@ export const CreateStudyMaterials = () => {
                 </div>
                 <div className='createStudyMaterialsSelect__container'>
                     <h2 className='createStudyMaterialsInput__title'>Налаштування доступу</h2>
-                    <div className='createStudyMaterialsSelect__wrapper'>
+                    <div className='select_wrapper'>
                         <Select
                         placeholder={'Оберіть рівень доступу'}
                         mode="multiple"

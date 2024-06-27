@@ -109,12 +109,12 @@ export const MyProfile = () => {
                 <div className='studentProfileInfo__container'>
                     <img className='studentProfile_img' src={user.avatar || defaultAvatar}/>
                     <div className='studentProfileTextInfo__container'>
-                        <p className='studentProfile__name'>
-                            {user.full_name}
+                        <div className='studentProfile__name_container'>
+                            <p className='studentProfile__name'>{user.full_name}</p>
                             {/* {user.security_level !== securityLevels.admin &&  */}
                             <StarSvg/>
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
-                        </p>
+                        </div>
                         <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
                         {/* <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p> */}
                         {!!user?.user_group?.group_full_name && 

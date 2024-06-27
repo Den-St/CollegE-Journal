@@ -133,7 +133,7 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
             </div>
             <div className="createUserSelect__container" style={{width:'55%'}}>
                 <label className="select_label">Циклова комісія</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть циклову комісію'}
@@ -158,7 +158,7 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
                 <input autoComplete="off" 
                 {...register('job_title',{required:{value:true,message:'Введіть посаду викладача'}})}
                 className="form_input" placeholder='Введіть посаду викладача'/>
-                {/* <div className="createStudyMaterialsSelect__wrapper"> */}
+                {/* <div className="select_wrapper"> */}
                     {/* <Select
                         className="createUserSelect"
                         placeholder={'Оберіть посаду студента'}
@@ -177,7 +177,7 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
                 <input autoComplete="off" 
                 {...register('additional_job_title',{required:{value:true,message:'Введіть додаткову посаду викладача'}})}
                 className="form_input" placeholder='Введіть додаткову посаду викладача'/>
-                {/* <div className="createStudyMaterialsSelect__wrapper">
+                {/* <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть додаткову посаду викладача'}

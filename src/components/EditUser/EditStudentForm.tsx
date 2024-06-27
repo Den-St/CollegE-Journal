@@ -147,7 +147,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             </div>
             <div className="createUserSelect__container" style={{width:'55%'}}>
                 <label className="select_label">Посада</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть посаду студента'}
@@ -189,7 +189,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             </div>
             <div className="createUserSelect__container">
                 <label className="select_label">Місцезнаходження</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть 1 варіант'}
@@ -207,7 +207,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
         <div className="createUserFormInputs__container">
             <div className="createUserSelect__container" style={{width:'32%'}}>
                 <label className="select_label">Форма навчання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть форму навчання'}
@@ -223,7 +223,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             </div>
             <div className="createUserSelect__container" style={{width:'32%'}}>
                 <label className="select_label">Бюджет/Контракт</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть тип навчання'}
@@ -239,7 +239,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             </div>
             <div className="createUserSelect__container" style={{width:'32%'}}>
                 <label className="select_label">Отримання стипендії</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть 1 варіант'}

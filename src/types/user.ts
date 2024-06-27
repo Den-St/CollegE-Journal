@@ -28,7 +28,12 @@ export type UserT = {
     additional_job_title:string | null,
     location:string,
     parents_phone_number:string,
-    timetable:{audience:string,link:string,subject_name:string}[][] | null
+    timetable:{
+        split:boolean,
+        audience:string | SplitedLessonT,
+        link:string | SplitedLessonT,
+        subject_name:string | SplitedLessonT 
+    }[][] | null
     // TimetableT | null,
     user_group:{
         group_id:string,
@@ -89,3 +94,5 @@ export type EditUserTeacherT = {
     user_type:string | undefined,
     interests:string
 }
+
+export type SplitedLessonT = {'*':string,'**':string};

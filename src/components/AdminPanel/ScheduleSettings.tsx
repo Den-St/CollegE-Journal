@@ -54,7 +54,7 @@ export const ScheduleSettings = () => {
             <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
             <div className="createUserSelect__container" style={{width:courseNumber ? '30%' : ''}}>
                 <label className="select_label">Курс навчання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть курс навчання'}
@@ -72,7 +72,7 @@ export const ScheduleSettings = () => {
             {!!courseNumber && <>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Рік навчання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть рік навчання'}
@@ -88,7 +88,7 @@ export const ScheduleSettings = () => {
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Семестр</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть семестр навчання'}
@@ -121,7 +121,7 @@ export const ScheduleSettings = () => {
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть кількість тижнів'}
@@ -151,7 +151,7 @@ export const ScheduleSettings = () => {
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="createStudyMaterialsSelect__wrapper">
+                <div className="select_wrapper">
                     <Select
                         className="createUserSelect"
                         placeholder={'Оберіть кількість тижнів'}
