@@ -240,7 +240,7 @@ export const TeacherJournal = () => {
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[1]}</p>
-                            <p id={column.column_index.toString()} className='journalLessonThemeItemType'>{column.lesson_type}</p>
+                            <p id={'lessonTheme'+column.column_index.toString()} className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
                         <input
                         disabled={

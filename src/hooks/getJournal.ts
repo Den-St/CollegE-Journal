@@ -71,7 +71,7 @@ export const useGetTeacherJournal = () => {
     const onChangeLessonType = async (column_id:string,lesson_type:string,column_index:number) => {
         try{
             await axiosConfig.post(endpoints.journalEditCellType,{column_id,lesson_type,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
-            const lessonTypeP = document.getElementById(column_index.toString());
+            const lessonTypeP = document.getElementById('lessonTheme'+column_index.toString());
             if(lessonTypeP?.innerText){
                 lessonTypeP.innerText = lesson_type;
             }
