@@ -1,12 +1,6 @@
 import { Select } from "antd";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import axiosConfig from "../../axiosConfig";
-import { endpoints } from "../../consts/endpoints";
 import { useCreateUser } from "../../hooks/createUser";
 import { useThemeStore } from "../../store/themeStore"
-import { GroupT } from "../../types/group";
-import { CreateUserT } from "../../types/user";
 import './createUser.scss';
 const {Option} = Select;
 

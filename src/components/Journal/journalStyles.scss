@@ -46,7 +46,8 @@
 
 .journalLeft__container{
     display: flex;
-    margin-bottom: 36px;
+    padding-bottom: 36px;
+    user-select: none;
     // flex-direction: column;
     
     // padding: 0 0 0 37px;
@@ -131,7 +132,7 @@ scrollbar-width: none;  /* Firefox */
     height: 40px;
     display: flex;
     align-items: center;
-    // justify-content: center;
+    justify-content: center;
     text-align: center;
     border-radius: 10px 5px;
     overflow: hidden;
@@ -294,7 +295,6 @@ scrollbar-width: none;  /* Firefox */
     padding: 7px;
     text-align: center;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
-    transition: 0.3s;
     border:0px solid var(--primary-orange);
 }
 .journalRowItemCenterValue__input__text:disabled{

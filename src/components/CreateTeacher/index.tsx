@@ -1,8 +1,6 @@
 import { Select } from "antd";
-import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
-import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { emailPattern } from "../../consts/emailPattern";
 import { routes } from "../../consts/routes";

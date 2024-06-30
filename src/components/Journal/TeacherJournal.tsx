@@ -1,4 +1,4 @@
-import { Select, Slider } from 'antd';
+import { Select, Slider, Tooltip } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
@@ -20,17 +20,24 @@ import './journalStyles.scss';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 const {Option} = Select;
 
-export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations} = useGetTeacherJournal();
-    const {groups} = useGroupsByTeacher();
-    const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
-    const theme = useThemeStore().theme;
+const lessonTypesNames:Record<string,string> = {
+    "Лекція":"Лк",
+    "Практика":"Пр",
+    "Залік":"Злк",
+    "Лаб":"Лаб",
+    "Консультація":"Кон",
+    "Атестаційна":"Ат",
+    "Коригуюча":"Кор",
+    "Підсумкова":"Підс",
+    "Річна":"Річна"
+}
+
+const useJournalDragScroll = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
     const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
     const [isMouseDown,setIsMouseDown] = useState(false);
-    
     const handleHorizontalScroll = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
@@ -78,6 +85,17 @@ export const TeacherJournal = () => {
         mousePos.current.y = e.clientY;
     }
 
+        
+    return {cellsRef,lessonTypesRef,mainContainerRef,mousePos,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll}
+}
+
+export const TeacherJournal = () => {
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations} = useGetTeacherJournal();
+    const {groups} = useGroupsByTeacher();
+    const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
+    const theme = useThemeStore().theme;
+    const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
+    
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
@@ -166,14 +184,17 @@ export const TeacherJournal = () => {
                                         className='journal_lessonTypeSelect' 
                                         rootClassName='journal_lessonTypeSelect'
                                         placeholder={'Тип'}
-                                        onChange={(value) => onChangeLessonType(column.column_id,value)}>
-                                            <Option label={"Лекція"} value={"Лекція"}>Лекція</Option>
+                                        onChange={(value) => onChangeLessonType(column.column_id,value,column.column_index)}>
+                                            <Option label={"Лк"} value={"Лекція"}>Лекція</Option>
                                             <Option label={"Практика"} value={"Практика"}>Практика</Option>
                                             <Option label={"Залік"} value={"Залік"}>Залік</Option>
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
                                             <Option label={"Консультація"} value={"Консультація"}>Консультація</Option>
                                     </Select>
-                                    : <div className='journalColumnsCenterItemType'>{column.lesson_type || ''}</div>
+                                    : 
+                                    <Tooltip title={column.lesson_type}>
+                                        <div className='journalColumnsCenterItemType'>{lessonTypesNames[column.lesson_type] || ''}</div>
+                                    </Tooltip>
                                 }
                             <div className='journalColumnsCenterItemDate__container'>
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
@@ -192,27 +213,24 @@ export const TeacherJournal = () => {
                             </div>
                         )}
                 </div>
-                    <div className='journalRightRowsContainer'
-                        onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
-                        onMouseMove={onMouseMove}
-                        // onDrag={onMouseMove}
-                        // draggable
-                        // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
-                        ref={cellsRef} onScroll={handleHorizontalScroll}>
-                            {journal?.students.map((student,i) => 
-                                <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
-                                    <div className='journalRowItemCenter__container'>
-                                        {journal.columns.map((column,j) => 
-                                            (journal.can_edit === 1 &&
-                                            (!isDisabledByDate(column.date) || !column.date.includes('\n')))
-                                            ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                            : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
-                                        )}
-                                    </div>
+                <div className='journalRightRowsContainer'
+                    onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
+                    onMouseMove={onMouseMove}
+                    ref={cellsRef} onScroll={handleHorizontalScroll}>
+                        {journal?.students.map((student,i) => 
+                            <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                                <div className='journalRowItemCenter__container'>
+                                    {journal.columns.map((column,j) => 
+                                        (journal.can_edit === 1 &&
+                                        (!isDisabledByDate(column.date) || !column.date.includes('\n')))
+                                        ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                        : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                    )}
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
+                </div>
         </section>
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
@@ -222,7 +240,7 @@ export const TeacherJournal = () => {
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[1]}</p>
-                            <p id={column.column_id} className='journalLessonThemeItemType'>{column.lesson_type}</p>
+                            <p id={column.column_index.toString()} className='journalLessonThemeItemType'>{column.lesson_type}</p>
                         </div>
                         <input
                         disabled={

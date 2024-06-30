@@ -81,18 +81,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         'ArrowLeft':() => document.getElementById((rowIndex) + ',' + (columnIndex - 1))?.focus()
     }
     const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
-        keysToMoves[e.key]();
-
-        // if(e.key === 'Enter' || e.key === 'ArrowDown'){
-        //     document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus();
-        //     return;
-        // }
-        // if(e.key === 'ArrowUp'){
-        //     document.getElementById((rowIndex - 1) + ',' + columnIndex)?.focus();
-        // }
-        // if(e.key === 'ArrowRight'){
-        //     document.getElementById((rowIndex) + ',' + (columnIndex + 1))?.focus();
-        // }
+        keysToMoves[e.key]?.();
     }
 
     return <input onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>

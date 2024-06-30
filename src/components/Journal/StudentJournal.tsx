@@ -140,7 +140,9 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
         <section className='journal__container'>
-            {attestations?.some(att => att.active) && <div className='journalLeft__container'>
+            {attestations?.some(att => att.active) && <div className='journalLeft__container'
+            onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
+            onMouseMove={onMouseMove}>
                 <div className='journalColumnsLeft__container'>
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>" У жовтні кожного року проходить акція«відрахуй випускника» "</p>
@@ -185,7 +187,6 @@ export const StudentJournal = () => {
                             )}
                         </div>}
                         <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}
-                      
                         >
                             {columns.map(column => 
                                 <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>

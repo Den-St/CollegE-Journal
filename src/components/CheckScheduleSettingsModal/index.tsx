@@ -5,15 +5,15 @@ const {Option} = Select;
 type Props = {
     setCourseNumber:(n:number) => void,
     courseNumber:number,
-    courseNumbers:number[]
+    courseNumbers:number[],
+    onImportFile:() => void
 }
 const currYear = new Date().getFullYear();
 
-export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,courseNumber,courseNumbers}) => {
-    return <Modal>
-        <form className="scheduleSettingsForm">
+export const CheckScheduleSettingsModal:React.FC<Props> = ({onImportFile,setCourseNumber,courseNumber,courseNumbers}) => {
+    return <div  className="scheduleSettingsForm">
             <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
-            <div className="createUserSelect__container">
+            <div className="createUserSelect__container" style={{'width':'30%'}}>
                 <label className="select_label">Курс навчання</label>
                 <div className="select_wrapper">
                     <Select
@@ -34,102 +34,43 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
             {!!courseNumber && <>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Рік навчання</label>
-                <div className="select_wrapper">
-                    <Select
-                        className="createUserSelect"
-                        placeholder={'Оберіть рік навчання'}
-                        optionLabelProp="label"
-                        // {...createUserRegister('department',{required:true})}
-                        // onChange={(e) => createUserSetValue('department',e)}
-                        // value={createUserWatch('department')}
-                        >  
-                        <Option value={(currYear-1)+'-'+(currYear)} label={(currYear-1)+'-'+(currYear)}>{(currYear-1)+'-'+(currYear)}</Option>
-                        <Option value={(currYear)+'-'+(currYear+1)} label={(currYear)+'-'+(currYear+1)}>{(currYear)+'-'+(currYear+1)}</Option>
-                    </Select>
-                </div>
+                <p className="semesterSettings_confirm_modal_value">20XX-20XX+1</p>
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">Семестр</label>
-                <div className="select_wrapper">
-                    <Select
-                        className="createUserSelect"
-                        placeholder={'Оберіть семестр навчання'}
-                        optionLabelProp="label"
-                        // {...createUserRegister('department',{required:true})}
-                        // onChange={(e) => createUserSetValue('department',e)}
-                        // value={createUserWatch('department')}
-                        >  
-                        <Option value={1} label={1}>{1}</Option>
-                        <Option value={2} label={2}>{2}</Option>
-                    </Select>
-                </div>
+                <p className="semesterSettings_confirm_modal_value">2</p>
             </div>
             <h2 className="subSubHeader" style={{width:'100%'}}>Спеціальність - <span style={{color:'var(--primary-orange)'}}>З; Кн; Кб;</span></h2>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата початку розкладу</label>
-                <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Оберіть дату початку  семестру'/>
+                <p className="semesterSettings_confirm_modal_value">00.00.0000</p>
             </div>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата закінчення розкладу</label>
-                <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Оберіть дату закінчення семестру'/>
+                <p className="semesterSettings_confirm_modal_value">00.00.0000</p>
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="select_wrapper">
-                    <Select
-                        className="createUserSelect"
-                        placeholder={'Оберіть кількість тижнів'}
-                        optionLabelProp="label"
-                        // {...createUserRegister('department',{required:true})}
-                        // onChange={(e) => createUserSetValue('department',e)}
-                        // value={createUserWatch('department')}
-                        >  
-                        <Option value={1} label={1}>{1}</Option>
-                        <Option value={2} label={2}>{2}</Option>
-                        <Option value={3} label={3}>{3}</Option>
-                    </Select>
-                </div>
+                <p className="semesterSettings_confirm_modal_value">3</p>
             </div>
             <h2 className="subSubHeader" style={{width:'100%'}}>Спеціальність - <span style={{color:'var(--primary-orange)'}}>Тр; То;</span></h2>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата початку розкладу</label>
-                <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Оберіть дату початку  семестру'/>
+                <p className="semesterSettings_confirm_modal_value">00.00.0000</p>
+
             </div>
             <div className="createUserEmailInput__container" style={{width:'30%'}}>
                 <label className="select_label">Дата закінчення розкладу</label>
-                <input autoComplete="off" 
-                // {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                className="form_input" placeholder='Оберіть дату закінчення семестру'/>
+                <p className="semesterSettings_confirm_modal_value">00.00.0000</p>
+
             </div>
             <div className="createUserSelect__container" style={{width:'30%'}}>
                 <label className="select_label">К-сть тижнів для відпрацювання</label>
-                <div className="select_wrapper">
-                    <Select
-                        className="createUserSelect"
-                        placeholder={'Оберіть кількість тижнів'}
-                        optionLabelProp="label"
-                        // {...createUserRegister('department',{required:true})}
-                        // onChange={(e) => createUserSetValue('department',e)}
-                        // value={createUserWatch('department')}
-                        >  
-                        <Option value={1} label={1}>{1}</Option>
-                        <Option value={2} label={2}>{2}</Option>
-                        <Option value={3} label={3}>{3}</Option>
-                    </Select>
-                </div>
+                <p className="semesterSettings_confirm_modal_value">3</p>
             </div>
-            <div style={{width:'100%'}}>
-                <input type={'submit'} value={'Зберегти'} className={"primary_button"}/>
-            </div>
-            <div style={{'display':'flex',gap:'30px'}}>
+            <div style={{'display':'flex',width:'100%','justifyContent':'center'}}>
                 <div className="adminPanelScheduleSettingsInput__container">
-                    <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
+                    <input onChange={onImportFile} autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
                     <div className="adminPanelScheduleSettingsInput__cover">
                         <UploadSvg/>
                         <div className="adminPanelScheduleSettingsInputCoverText_container">
@@ -144,6 +85,5 @@ export const CheckScheduleSettingsModal:React.FC<Props> = ({setCourseNumber,cour
                 </div>
             </div>
             </>}
-        </form>
-    </Modal>
+        </div>
 }
