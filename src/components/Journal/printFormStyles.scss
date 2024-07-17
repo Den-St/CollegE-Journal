@@ -1,8 +1,8 @@
 .printForm_container{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    z-index: -1;
+    // position: absolute;
+    // z-index: -1000;
 }
 .printForm_page{
     width: 797px;
@@ -36,7 +36,7 @@
     line-height: 20.7px;
 }
 
-.printFormJournal_top_left,.printFormLessons_top_task,.printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task.printFormJournal_top_dates_date,.printFormJournal_top_dates_date,.printFormJournal__student,.printFormJournal__mark{
+.printFormJournal_top_left,.printFormJournal_top_dates_specialDate,.printFormJournal_top_student,.printFormJournal__studentNumber,.printFormLessons_top_task,.printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task.printFormJournal_top_dates_date,.printFormJournal_top_dates_date,.printFormJournal__student,.printFormJournal__mark{
     border-right: 1px solid black;
     border-bottom: 1px solid black;
 }
@@ -78,13 +78,47 @@
     padding-top: 3px;
 }
 
-.printFormJournal_top_dates_date{
+.printFormJournal_top_dates_date,.printFormJournal_top_dates_specialDate{
     width: 25px;
     height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
-
+.printFormJournal_top_dates_date:after{
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:43px;
+    right: -44px;
+    top:0;
+    transform: rotate(126deg);
+    transform-origin: 0% 0%;
+  }
+.printFormJournal__studentNumber{
+    width: 47px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .printFormJournal_top_left{
+    width: 47px;
+    height: 35px;
+    position: relative;
+}
+.printFormJournal_top_left:after{
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:58px;
+    transform: rotate(36deg);
+    transform-origin: 0% 0%;
+  }
+.printFormJournal_top_student{
     width: 145px;
+    height: 35px;
 }
 .printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task{
     display: flex;

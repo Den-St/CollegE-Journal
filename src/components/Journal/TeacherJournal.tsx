@@ -95,7 +95,32 @@ export const TeacherJournal = () => {
     const handlePrint = useReactToPrint({
       content: () => componentRef.current
     });
-    
+    // useEffect(() => {
+    //     document.addEventListener('keydown', function(event) {
+    //         // Object to keep track of pressed keys
+    //         const keysPressed:Record<string,boolean> = {};
+        
+    //         // Function to handle keydown event
+    //         function handleKeydown(event:any) {
+    //             keysPressed[event.key] = true;
+    //             console.log(keysPressed);
+        
+    //             // Check if the specific combination is pressed (e.g., "Shift" + "A")
+    //             if (keysPressed['Meta'] && keysPressed['p'] || keysPressed['Meta'] && keysPressed['P'] || keysPressed['Meta'] && keysPressed['p'] || keysPressed['Control'] && keysPressed['P'] || keysPressed['Control'] && keysPressed['p']) {
+    //                 handlePrint();
+    //             }
+    //         }
+        
+    //         // Function to handle keyup event
+    //         function handleKeyup(event:any) {
+    //             delete keysPressed[event.key];
+    //         }
+        
+    //         // Attach event listeners
+    //         window.addEventListener('keydown', handleKeydown);
+    //         window.addEventListener('keyup', handleKeyup);
+    //     });
+    // },[]);
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
