@@ -3,11 +3,10 @@
     flex-direction: column;
     position: absolute;
     z-index: -1;
-    gap:50px;
 }
 .printForm_page{
     width: 797px;
-    height: 1120px;
+    height: 297mm;
     display: flex;
     flex-direction: column;
     padding: 2cm 1cm 2cm 2.5cm;

@@ -102,7 +102,8 @@ export const TeacherJournal = () => {
             document.title = `Журнал`;
             return;
         }
-        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName} - ${attestations?.find(att => att.active)?.name}`;
+        const month = attestations?.find(att => att.active)?.name
+        document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
 
     if(loading) return <Loader/>
