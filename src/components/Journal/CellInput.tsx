@@ -17,7 +17,7 @@ type Props = {
     date:string,
     onMouseUp:() => void,
     onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
-
+    studentIndex:number
 }
 const isValid = (value:string) => {
     if(value === "") return true;
@@ -51,7 +51,28 @@ export const getColorByValue = (value:string,system:number) => {
     if(!value) return "white";
     return "white";
 }
-const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
+
+
+
+export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex}) => {
+    const keysToMoves:Record<string,() => void> = {
+        'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
+        'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
+        'ArrowUp':() => document.getElementById((rowIndex - 1) + ',' + columnIndex)?.focus(),
+        'ArrowRight':() => document.getElementById((rowIndex) + ',' + (columnIndex + 1))?.focus(),
+        'ArrowLeft':() => document.getElementById((rowIndex) + ',' + (columnIndex - 1))?.focus()
+    }
+    const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        keysToMoves[e.key]?.();
+    }
+    const onFocus = () => {
+        const column = document.getElementById('column_'+(columnIndex+1).toString());
+        const student = document.getElementById('student_'+studentIndex);
+        if(!column || !student) return;
+        column.style.border = "1px solid orange";
+        student.style.border = "1px solid orange";
+    }
+    const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         journal_id: string,
         subject_id: string,
         column_id: string,
@@ -59,7 +80,13 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         rowIndex:number,
         columnIndex:number,
         subject_system:number
-    },token:string) => {
+    },token:string,) => {
+    const column = document.getElementById('column_'+(columnIndex+1).toString());
+    const student = document.getElementById('student_'+studentIndex);
+    if(!column || !student) return;
+    column.style.border = "none";
+    student.style.border = "none";
+    
     if(!isValid(e.target.value)) return;
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
@@ -72,17 +99,5 @@ const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         console.error(err);
     }
 }
-export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove}) => {
-    const keysToMoves:Record<string,() => void> = {
-        'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
-        'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
-        'ArrowUp':() => document.getElementById((rowIndex - 1) + ',' + columnIndex)?.focus(),
-        'ArrowRight':() => document.getElementById((rowIndex) + ',' + (columnIndex + 1))?.focus(),
-        'ArrowLeft':() => document.getElementById((rowIndex) + ',' + (columnIndex - 1))?.focus()
-    }
-    const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
-        keysToMoves[e.key]?.();
-    }
-
-    return <input onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
+    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
 }

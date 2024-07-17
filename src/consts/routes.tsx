@@ -14,6 +14,7 @@ import { EditUser } from "../components/EditUser";
 import { Teachers } from "../components/Teachers";
 import { MyGroup } from "../components/MyGroup";
 import { RecoveryPassword } from "../components/RecoveryPassword";
+import { PrintForm } from "../components/Journal/PrintForm";
 
 export const navRoutes = {
 }
@@ -49,8 +50,9 @@ export const routes = {
     editUser:'/edit-user/:id',
     teachers:'/teachers',
     myGroup:'/my-group',
-    recovery:'/recovery-password'
+    recovery:'/recovery-password',
 } as const;
+
 export const headerRoutes = {
     studentProfile:'/student-profile/:id',
     homeTasks:'/home-tasks',
@@ -72,67 +74,6 @@ export const headerRoutes = {
     signIn:''
 } as const;
 
-// const securityLevelToRoutes:Record<number,{link:string,title:string,page:JSX.Element}[]> = {
-//     [securityLevels.unauthorized]:[
-//         {
-//             link:routes.homePage,
-//             title:'Головна',
-//             page:<HomePage/>
-//         },
-//         {
-//             link:headerRoutes.faq,
-//             title:'FAQ',
-//             page:<FAQ/>
-//         },
-//         {
-//             link:routes.signIn,
-//             title:'Вхід',
-//             page:<SignIn/>
-//         },
-      
-//     ],
-//     [securityLevels.student]:[
-//         {
-//             link:routes.homeTask,
-//             title:'Домашнє завдання',
-//             page:<HomeTask/>
-//         },
-//         {
-//             link:routes.homeTask,
-//             title:'Домашні завдання',
-//             page:<HomeTasks/>
-//         },
-//     ],
-//     [securityLevels.admin]:[
-//         {
-//             link:headerRoutes.adminPanel,
-//             title:'Адмін-панель',
-//             page:<AdminPanel/>
-//         },
-//         {
-//             link:routes.editGroup,
-//             title:'Редагування группи',
-//             page:<EditGroup/>
-//         },
-//     ]
-// };
-
-const securityLevelToRoutes:Record<number,string[]> = {
-    [securityLevels.unauthorized]:[
-        routes.homePage,
-        headerRoutes.faq,
-        routes.signIn,
-        
-    ],
-    [securityLevels.student]:[
-        routes.homeTask,
-        routes.homeTask,
-    ],
-    [securityLevels.admin]:[
-        headerRoutes.adminPanel,
-        routes.editGroup,
-    ]
-};
 export const PublicRoutes = [
     <Route key={routes.signIn} element={<SignIn/>} path={routes.signIn}/>,   
     <Route key={routes.homePage} element={<HomePage/>} path={routes.homePage}/>,   
@@ -157,7 +98,6 @@ export const PublicRoutes = [
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     <Route key={routes.teachers} element={<Teachers/>} path={routes.teachers}/>,
     <Route key={routes.myGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><MyGroup/></SecurityLevelGuard>} path={routes.myGroup}/>,
-    // <Route key={routes.scheduleCreate} element={<ScheduleCreate/>} path={routes.scheduleCreate}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,
     <Route key={routes.editGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditGroup/></SecurityLevelGuard>} path={routes.editGroup}/>,
     <Route key={routes.editUser} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditUser/></SecurityLevelGuard>} path={routes.editUser}/>,

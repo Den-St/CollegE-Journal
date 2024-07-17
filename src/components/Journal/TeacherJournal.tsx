@@ -1,13 +1,8 @@
-import { Select, Slider, Tooltip } from 'antd';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Select, Tooltip } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
-import { LeftArrowSvg } from '../../assets/svgs/leftArrowSvg';
-import axiosConfig from '../../axiosConfig';
-import { endpoints } from '../../consts/endpoints';
 import { routes } from '../../consts/routes';
-import { studyMonths } from '../../consts/studyMonths';
 import { setFromSubjects } from '../../helpers/setFromObjects';
 import { useGetTeacherJournal } from '../../hooks/getJournal';
 import { useGroupsByTeacher } from '../../hooks/groupsByTeacher';
@@ -18,6 +13,8 @@ import { CellInput, getColorByValue } from './CellInput';
 import _debounce from 'lodash/debounce';
 import './journalStyles.scss';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
+import { PrintForm } from './PrintForm';
+import { useReactToPrint } from 'react-to-print';
 const {Option} = Select;
 
 const lessonTypesNames:Record<string,string> = {
@@ -51,7 +48,6 @@ const useJournalDragScroll = () => {
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
     const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        console.log('1')
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
         setIsMouseDown(true);
@@ -62,7 +58,6 @@ const useJournalDragScroll = () => {
     }
     const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
         if(!isMouseDown && !localIsMouseDown) return;
-        console.log('1')
         if(lessonTypesRef.current === null || cellsRef.current === null || mainContainerRef.current === null) return;
         
         const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
@@ -95,6 +90,11 @@ export const TeacherJournal = () => {
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
+    const subjectName = !!groupJournal && setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
+    const componentRef = useRef(null);
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current
+    });
     
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -110,10 +110,12 @@ export const TeacherJournal = () => {
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
+        {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
         <section className='journalTop__container'>
             <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
             <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
             <div className='journalFillters__container'>
+                <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
                     placeholder={<div className="fillterPlaceholder_container">
@@ -158,6 +160,8 @@ export const TeacherJournal = () => {
                         )}
                     </Select>
                 </div>
+                </div>
+                <button onClick={handlePrint} className='primary_button'>Печать</button>
             </div>
         </section>
         <section className='journal_portraitModeWarning'>
@@ -173,7 +177,7 @@ export const TeacherJournal = () => {
                 </div>
                 <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {journal?.columns.map(column => 
-                        <div key={column.column_id} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                        <div key={column.column_id} id={'column_'+column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                 {
                                     journal.can_edit === 1  && column.date.includes('\n') ?
                                     <Select 
@@ -207,7 +211,7 @@ export const TeacherJournal = () => {
             <div onMouseUp={mouseUpHandler} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
                         {journal?.students.map(student => 
-                            <div key={student.student_id} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                            <div key={student.student_id} id={'student_'+student.index} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
                                 <p className='journalRowItemLeft__number'>{student.index}.</p>
                                 <p className='journalRowItemLeft__name'>{student.full_name}</p>
                             </div>
@@ -223,7 +227,7 @@ export const TeacherJournal = () => {
                                     {journal.columns.map((column,j) => 
                                         (journal.can_edit === 1 &&
                                         (!isDisabledByDate(column.date) || !column.date.includes('\n')))
-                                        ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} columnIndex={j} key={column.column_id} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
+                                        ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} studentIndex={student.index} columnIndex={j} key={`${column.column_id}_${i}`} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
                                         : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                                     )}
                                 </div>

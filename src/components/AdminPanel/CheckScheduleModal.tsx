@@ -14,23 +14,29 @@ const useScrollAndDrag = () => {
     const cellsRef = useRef<HTMLDivElement>(null);
     const lessonTypesRef = useRef<HTMLDivElement>(null);
     const mainContainerRef = useRef<HTMLDivElement>(null);
+    const datesRef = useRef<HTMLDivElement>(null);
     const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
     const [isMouseDown,setIsMouseDown] = useState(false);
     
     const handleHorizontalScroll = () => {
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
+        if(lessonTypesRef.current === null || cellsRef.current === null || datesRef.current === null) return;
         lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
+        datesRef.current.scrollTop = cellsRef.current.scrollTop;
+    }
+    const handleDatesScroll = () => {
+        if(cellsRef.current === null || datesRef.current === null) return;
+        console.log('1')
+        cellsRef.current.scrollTop = datesRef.current.scrollTop;
     }
     const handleHorizontalScrollLessonTypes = () => {
         if(lessonTypesRef.current === null || cellsRef.current === null) return;
         cellsRef.current.scrollLeft = lessonTypesRef.current.scrollLeft;
     }
     const handleVerticalScroll = () => {
-        if(mainContainerRef.current === null || cellsRef.current === null) return;
+        if(mainContainerRef.current === null || cellsRef.current === null || datesRef.current === null) return;
         cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
     }
     const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        console.log('1')
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
         setIsMouseDown(true);
@@ -66,12 +72,13 @@ const useScrollAndDrag = () => {
 
     return {cellsRef,lessonTypesRef,mainContainerRef,mousePos,handleHorizontalScroll,
             handleHorizontalScrollLessonTypes,handleVerticalScroll,mouseDownHandler,
-            mouseUpHandler,onMouseMove}
+            mouseUpHandler,onMouseMove,datesRef,handleDatesScroll}
 }
+
 export const CheckScheduleModal:React.FC<Props> = ({onClose}) => {
     const {cellsRef,lessonTypesRef,mainContainerRef,mousePos,handleHorizontalScroll,
         handleHorizontalScrollLessonTypes,handleVerticalScroll,mouseDownHandler,
-        mouseUpHandler,onMouseMove} = useScrollAndDrag();
+        mouseUpHandler,onMouseMove,datesRef,handleDatesScroll} = useScrollAndDrag();
 
     return <div className="checkScheduleModal_container">
         <div className="checkScheduleModal_header">
@@ -94,12 +101,15 @@ export const CheckScheduleModal:React.FC<Props> = ({onClose}) => {
             </div>
             <div className="checkScheduleModal_center" ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className="checkScheduleModal_dates"
-                onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
-                onMouseMove={onMouseMove}
-                // onDrag={onMouseMove}
-                // draggable
-                // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
-                ref={cellsRef} onScroll={handleVerticalScroll}
+                ref={datesRef}
+                onScroll={handleDatesScroll}
+                onMouseMove={onMouseMove} onMouseDown={mouseDownHandler}  onMouseUp={mouseUpHandler} 
+                // onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
+                // onMouseMove={onMouseMove}
+                // // onDrag={onMouseMove}
+                // // draggable
+                // // style={{width:!!journalWidth ? (+journalWidth - 332)+'px' : 'unset'}}
+                // ref={cellsRef} onScroll={handleVerticalScroll}
                 >
                     {days.map(day => <div className="checkScheduleModal_daySchedule_container">
                         <p className="checkScheduleModal_daySchedule_day">{day}</p>

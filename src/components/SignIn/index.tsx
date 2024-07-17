@@ -13,7 +13,7 @@ import { emailPattern } from '../../consts/emailPattern';
 import { ForgotPasswordModal } from '../ForgotPasswordModal';
 
 const statusCodes:Record<number,string> = {
-    0:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!',
+    0:'На жаль, дані введені некоректно, перевірте їх та спробуйте ще раз!',
 }
 
 export const SignIn = () => {

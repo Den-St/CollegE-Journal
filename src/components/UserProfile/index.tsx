@@ -59,10 +59,10 @@ export const UserProfile = () => {
     if(loading) return <Loader/>
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
         <section className='studentProfileMain__container'>
-            <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
+            <div style={{display:'flex',flexDirection:'column',gap:'30px',width:'100%'}}>
                 <LinkBack title="Список студентів" goTo={() => !!from ? navigate(from) : navigate(-1)}/>
                 {/* <h2 className="subjectsMainTitle"><button onClick={() => !!from ? navigate(from) : navigate(-1)} className={'leftArrowButton'}><LeftArrowSvg/></button>Список студентів</h2> */}
-                <div style={{'display':'flex'}}>
+                <div style={{display: 'flex',width: '100%',justifyContent: 'space-between'}}>
                     <div style={{'display':'flex','flexDirection':'column','gap':'60px'}}>
                     <h1 className="header">Профіль студента</h1>
                     <div className='studentProfileLeft__container'>
@@ -73,7 +73,7 @@ export const UserProfile = () => {
                             }/>
                             <div className='studentProfileTextInfo__container'>
                                 <p className='studentProfile__name'>
-                                    {user?.full_name}
+                                    {user?.full_name + ' '}
                                     {/* {user.security_level !== securityLevels.admin &&  */}
                                     {/* {user?. <StarSvg/> */}
                                     {mySecurityLevel === securityLevels.admin && !!user_id && 

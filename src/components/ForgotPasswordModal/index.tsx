@@ -53,7 +53,7 @@ export const ForgotPasswordModal:React.FC<{onClose:() => void}> = ({onClose}) =>
             <p className="forgotPassword_description">
                 На цю пошту прийде автоматичний лист із запитом на зміну паролю. Також поки ви не змінете пароль за цим запитом, аккаунт буде недійсний
             </p>
-            <input type={'submit'} disabled={submitBlocked} className="primary_button" value={"Підтвердити запит"}/>
+            <input type={'submit'} disabled={submitBlocked} style={{width:'271px'}} className="primary_button" value={"Підтвердити запит"}/>
         </form>
     </div>
 }
