@@ -66,11 +66,13 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         keysToMoves[e.key]?.();
     }
     const onFocus = () => {
-        const column = document.getElementById('column_'+(columnIndex+1).toString());
+        const columnSelect = document.getElementById('columnSelect_'+(columnIndex+1).toString());
+        const columnDate = document.getElementById('columnDate_'+(columnIndex+1).toString());
         const student = document.getElementById('student_'+studentIndex);
-        if(!column || !student) return;
-        column.style.border = "1px solid orange";
-        student.style.border = "1px solid orange";
+        if(!columnDate || !student || !columnSelect) return;
+        columnDate.style.border = "1px solid #EFB42D";
+        columnSelect.style.border = "1px solid #EFB42D";
+        student.style.border = "1px solid #EFB42D";
     }
     const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         journal_id: string,
@@ -81,11 +83,13 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         columnIndex:number,
         subject_system:number
     },token:string,) => {
-    const column = document.getElementById('column_'+(columnIndex+1).toString());
+    const columnSelect = document.getElementById('columnSelect_'+(columnIndex+1).toString());
+    const columnDate = document.getElementById('columnDate_'+(columnIndex+1).toString());
     const student = document.getElementById('student_'+studentIndex);
-    if(!column || !student) return;
-    column.style.border = "none";
-    student.style.border = "none";
+    if(!columnDate || !student || !columnSelect) return;
+    columnSelect.style.border = "1px solid transparent";
+    columnDate.style.border = "1px solid transparent";
+    student.style.border = "1px solid transparent";
     
     if(!isValid(e.target.value)) return;
     try{

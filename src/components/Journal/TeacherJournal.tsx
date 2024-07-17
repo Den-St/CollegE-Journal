@@ -177,10 +177,13 @@ export const TeacherJournal = () => {
                 </div>
                 <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {journal?.columns.map(column => 
-                        <div key={column.column_id} id={'column_'+column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                        <div key={column.column_id}  className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                 {
                                     journal.can_edit === 1  && column.date.includes('\n') ?
-                                    <Select 
+                                    <div id={'columnSelect_'+column.column_index}
+                                    className='journal_lessonTypeSelect_wrapper' 
+                                    >
+                                        <Select 
                                         disabled={
                                             journal.can_edit !== 1 || !column.date.includes('\n')
                                         }
@@ -194,13 +197,15 @@ export const TeacherJournal = () => {
                                             <Option label={"Залік"} value={"Залік"}>Залік</Option>
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
                                             <Option label={"Консультація"} value={"Консультація"}>Консультація</Option>
-                                    </Select>
+                                    </Select></div>
                                     : 
                                     <Tooltip title={column.lesson_type}>
                                         <div className='journalColumnsCenterItemType'>{lessonTypesNames[column.lesson_type] || ''}</div>
                                     </Tooltip>
                                 }
-                            <div className='journalColumnsCenterItemDate__container'>
+                            <div className='journalColumnsCenterItemDate__container'
+                                id={'columnDate_'+column.column_index}
+                            >
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
                                 <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>
                             </div>
