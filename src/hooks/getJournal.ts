@@ -25,6 +25,7 @@ export const useGetTeacherJournal = () => {
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
 
+    
     const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined}) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
@@ -41,6 +42,20 @@ export const useGetTeacherJournal = () => {
         }
         setLoading(false);
     }
+    const refecth = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined}) => {
+        if(!fillters.subject_id && !_fillters?.subject_id) return;
+        try{
+            const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
+            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1},{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1)},{headers:{Authorization:token}});
+            
+            if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
+            if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
+            setJournal(res.data);
+        }catch(err){
+            console.error(err);
+        }
+    }
 
     useEffect(() => {
         fetch();
@@ -56,7 +71,6 @@ export const useGetTeacherJournal = () => {
         }else{
             fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',[fieldName]:value});
         }
-
     }
 
     const isDisabledByDate = (dateString:string) => {
@@ -87,5 +101,5 @@ export const useGetTeacherJournal = () => {
         }
     }
 
-    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations};
+    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,refecth};
 }

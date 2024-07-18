@@ -1,4 +1,4 @@
-import { Select, Tooltip } from 'antd';
+import { Select, Spin, Tooltip } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -85,7 +85,8 @@ const useJournalDragScroll = () => {
 }
 
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations,refecth} = useGetTeacherJournal();
+    const [printLoading,setPrintLoading] = useState(false);
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -93,8 +94,27 @@ export const TeacherJournal = () => {
     const subjectName = !!groupJournal && setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
     const componentRef = useRef(null);
     const handlePrint = useReactToPrint({
-      content: () => componentRef.current
+      content: () => componentRef.current,
+      onBeforeGetContent:async () => {
+        const printForm = document.getElementById('printForm');
+        if(!printForm) return;
+        printForm.style.display = 'flex';
+      },
+      onAfterPrint:() => {
+        const printForm = document.getElementById('printForm');
+        if(!printForm) return;
+        printForm.style.display = 'none';
+      },
     });
+    const handlePrintAndRefetch = async () => {
+        setPrintLoading(true);
+        await refecth({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || ''});
+        setTimeout(() => {
+            handlePrint();
+            setPrintLoading(false);
+        },100);
+        
+    }
     // useEffect(() => {
     //     document.addEventListener('keydown', function(event) {
     //         // Object to keep track of pressed keys
@@ -187,7 +207,7 @@ export const TeacherJournal = () => {
                     </Select>
                 </div>
                 </div>
-                <button onClick={handlePrint} className='primary_button'>Печать</button>
+                <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>
             </div>
         </section>
         <section className='journal_portraitModeWarning'>

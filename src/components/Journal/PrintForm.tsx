@@ -16,7 +16,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
     const limitLessons = Array.from(Array(limitLessonsNumber).keys());
     const numberOfLessonsPages = !!journal?.columns.length && Array.from(Array(Math.round(journal?.columns.length/limitLessonsNumber)).keys());
 
-    return <div className="printForm_container" ref={props}>
+    return <div className="printForm_container" ref={props} id={'printForm'}>
         {!!numberOfJournalPages && numberOfJournalPages.map(pageNumber => 
             <div className="printForm_page" key={pageNumber}>
                 <div>
