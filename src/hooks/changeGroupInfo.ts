@@ -75,5 +75,13 @@ export const useChangeGroupInfo = (group?:GroupT) => {
         setChosenSupervisorId(id);
     }
 
-    return {validateGroupName,incorrectGroupName,changeErrorCode,onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,onChooseSupervisor,chosenSupervisorId};
+    const onInvertEngGroups = async () => {
+        try{
+            await axiosConfig.post(endpoints.invertEngGroups,{group_id:group?.group_id});
+        }catch(err){
+            console.error(err);
+        }
+    }
+
+    return {validateGroupName,incorrectGroupName,changeErrorCode,onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,onChooseSupervisor,chosenSupervisorId,onInvertEngGroups};
 }

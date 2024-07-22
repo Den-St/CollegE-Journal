@@ -29,7 +29,7 @@ export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
     const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading} = useCreateUser(group);
-    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName} = useChangeGroupInfo(group);
+    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName,onInvertEngGroups} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
@@ -67,7 +67,10 @@ export const EditGroup = () => {
                 </div>
             </div>
             {!!changeErrorCode && <p className={`signIn_errorMessage ${changeErrorCode === 1 && 'success_message'}`}>{changeErrorCodesToMessages[changeErrorCode]}</p>}
-            <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
+            <div style={{'display':'flex',gap:'30px'}}>
+                <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
+                <span onClick={onInvertEngGroups} className="createUser__button primary_button"  style={{'padding':'10px 30px'}}>Інвертувати під-групи Англійської</span>
+            </div>
         </form>
         <h1 className="createUserTitle">Створення аккаунту</h1>
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>

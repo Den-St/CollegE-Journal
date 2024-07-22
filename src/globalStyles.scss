@@ -36,7 +36,8 @@
 }
 
 .primary_button{
-	width: 191px;
+	width: fit-content;
+	min-width: 191px;
     height: 41px;	
     border-radius: 10px 5px;
 	display: flex;

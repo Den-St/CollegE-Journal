@@ -26,5 +26,6 @@ export const endpoints = {
     recoveryPassword:'users/recovery/password',
     getUser:'users/user',
     changeLG:'users/students/additional-groups',
-    editUser:'admin/user/change-info'
+    editUser:'admin/user/change-info',
+    invertEngGroups:'admin/groups/invert_subgroups'
 }
