@@ -17,7 +17,7 @@ import { PrintForm } from './PrintForm';
 import { useReactToPrint } from 'react-to-print';
 const {Option} = Select;
 
-const lessonTypesNames:Record<string,string> = {
+export const lessonTypesNamesAbbreviations:Record<string,string> = {
     "Лекція":"Лк",
     "Практика":"Пр",
     "Залік":"Злк",
@@ -246,7 +246,7 @@ export const TeacherJournal = () => {
                                     </Select></div>
                                     : 
                                     <Tooltip title={column.lesson_type}>
-                                        <div className='journalColumnsCenterItemType'>{lessonTypesNames[column.lesson_type] || ''}</div>
+                                        <div className='journalColumnsCenterItemType'>{lessonTypesNamesAbbreviations[column.lesson_type] || ''}</div>
                                     </Tooltip>
                                 }
                             <div className='journalColumnsCenterItemDate__container'

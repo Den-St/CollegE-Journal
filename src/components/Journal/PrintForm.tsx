@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { forwardRef } from "react"
 import { TeacherJournalT } from "../../types/teacherJournal"
 import "./printFormStyles.scss"
+import { lessonTypesNamesAbbreviations } from "./TeacherJournal"
 
 type Props = {
     journal?:TeacherJournalT,
@@ -10,14 +11,14 @@ type Props = {
 
 export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName},props) => {
     const limitColumnsNumber = 18;
-    const limitLessonsNumber = 16;
+    const limitLessonsNumber = 18;
     const limitColumns = Array.from(Array(limitColumnsNumber).keys());
     const numberOfJournalPages = !!journal?.columns.length && Array.from(Array(Math.ceil(journal?.columns.length/limitColumnsNumber)).keys());
     const limitLessons = Array.from(Array(limitLessonsNumber).keys());
     const numberOfLessonsPages = !!journal?.columns.length && Array.from(Array(Math.round(journal?.columns.length/limitLessonsNumber)).keys());
 
     return <div className="printForm_container" ref={props} id={'printForm'}>
-        {!!numberOfJournalPages && numberOfJournalPages.map(pageNumber => 
+        {!!numberOfJournalPages && numberOfJournalPages.map(pageNumber => <>
             <div className="printForm_page" key={pageNumber}>
                 <div>
                     <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
@@ -40,13 +41,13 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         </div>
                         <div className='printFormJournal_top_dates'>
                             {limitColumns.map(columnNumber => !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.column_id &&
-                                journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.date.includes('\n') 
+                                journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.date.includes('.')
                                 ? <div className="printFormJournal_top_dates_date" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)].column_id}>
                                     <p style={{position:'absolute',top:'2px',left:'2px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[0]}</p>
                                     <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]}</p>
                                 </div> 
                                 : !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)] 
-                                && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date || journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.lesson_type}</div>
+                                && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>{lessonTypesNamesAbbreviations[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.lesson_type]}</div>
                             )}
                             {/* {journal?.columns.map(column => 
                                 <div className="printFormJournal_top_dates_date" key={column.column_id}>
@@ -88,8 +89,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
             </div>
-        )}
-        {!!numberOfLessonsPages && numberOfLessonsPages.map(pageNumber =>
+        {/* {!!numberOfLessonsPages && numberOfLessonsPages.map(pageNumber => */}
             <div className="printForm_page" key={pageNumber}>
                 <div>
                     <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
@@ -110,12 +110,12 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         <div className="printFormLessons_top_task">Завдання</div>
                     </div>
                     <div className="printFormLessons_lessons">
-                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)] &&
+                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('\n') &&
                             <div key={journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].column_id} className="printFormLessons_lesson">
                                 <div className="printFormLessons_top_type">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].lesson_type}</div>
                                 <div className="printFormLessons_top_date">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].date}</div>
                                 <div className="printFormLessons_top_theme">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].lesson_topic}</div>
-                                <div className="printFormLessons_top_task">Завдання</div>
+                                <div className="printFormLessons_top_task"></div>
                             </div>)}
                         {/* {journal?.columns.map(column => 
                             <div key={column.column_id} className="printFormLessons_lesson">
@@ -132,6 +132,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
             </div>
+            </>
         )}
     </div>
 });
