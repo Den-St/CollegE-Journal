@@ -20,13 +20,13 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
     return <div className="printForm_container" ref={props} id={'printForm'}>
         {!!numberOfJournalPages && numberOfJournalPages.map(pageNumber => <>
             <div className="printForm_page" key={pageNumber}>
-                <div>
+                {pageNumber === 0 && <div>
                     <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
                     <h1 className="printForm_header">ЗВ’ЯЗКУ</h1>
                     <h1 className="printForm_subheader">ВІДОКРЕМЛЕНИЙ СТРУКТУРНИЙ  ПІДРОЗДІЛ</h1>
                     <h1 className="printForm_subheader">«ФАХОВИЙ КОЛЕДЖ ЗВ’ЯЗКУ ТА ІНФОРМАТИЗАЦІЇ</h1>
                     <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
-                </div>
+                </div>}
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
                     <span className="printForm_subsubheader">{subjectName}</span>
                     <span className="printForm_subsubheader">ПІБ Викладача</span>
@@ -91,13 +91,13 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
             </div>
         {/* {!!numberOfLessonsPages && numberOfLessonsPages.map(pageNumber => */}
             <div className="printForm_page" key={pageNumber}>
-                <div>
+                {/* <div>
                     <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
                     <h1 className="printForm_header">ЗВ’ЯЗКУ</h1>
                     <h1 className="printForm_subheader">ВІДОКРЕМЛЕНИЙ СТРУКТУРНИЙ  ПІДРОЗДІЛ</h1>
                     <h1 className="printForm_subheader">«ФАХОВИЙ КОЛЕДЖ ЗВ’ЯЗКУ ТА ІНФОРМАТИЗАЦІЇ</h1>
                     <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
-                </div>
+                </div> */}
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
                     <span className="printForm_subsubheader">{subjectName}</span>
                     <span className="printForm_subsubheader">ПІБ Викладача</span>
