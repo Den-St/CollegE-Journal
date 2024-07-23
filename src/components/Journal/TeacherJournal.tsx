@@ -26,7 +26,8 @@ export const lessonTypesNamesAbbreviations:Record<string,string> = {
     "Атестаційна":"Ат",
     "Коригуюча":"Кор",
     "Підсумкова":"Підс",
-    "Річна":"Річна"
+    "Річна":"Річна",
+    "Зошит":"Зш",
 }
 
 const useJournalDragScroll = () => {
@@ -155,7 +156,7 @@ export const TeacherJournal = () => {
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
     if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
 
-    return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
+    return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
         {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
         <section className='journalTop__container'>
             <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
@@ -225,13 +226,13 @@ export const TeacherJournal = () => {
                     {journal?.columns.map(column => 
                         <div key={column.column_id}  className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
                                 {
-                                    journal.can_edit === 1  && column.date.includes('\n') ?
+                                    journal.can_edit === 1  && column.date.includes('.') ?
                                     <div id={'columnSelect_'+column.column_index}
                                     className='journal_lessonTypeSelect_wrapper' 
                                     >
                                         <Select 
                                         disabled={
-                                            journal.can_edit !== 1 || !column.date.includes('\n')
+                                            journal.can_edit !== 1 || !column.date.includes('.')
                                         }
                                         defaultValue={column.lesson_type || null} 
                                         className='journal_lessonTypeSelect' 
@@ -261,12 +262,12 @@ export const TeacherJournal = () => {
             </div>
             <div onMouseUp={mouseUpHandler} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
-                        {journal?.students.map(student => 
-                            <div key={student.student_id} id={'student_'+student.index} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
-                                <p className='journalRowItemLeft__number'>{student.index}.</p>
-                                <p className='journalRowItemLeft__name'>{student.full_name}</p>
-                            </div>
-                        )}
+                    {journal?.students.map(student => 
+                        <div key={student.student_id} id={'student_'+student.index} className={`journalRowItemLeft__container ${student.index%2 === 0 ? 'even' : ''}`}>
+                            <p className='journalRowItemLeft__number'>{student.index}.</p>
+                            <p className='journalRowItemLeft__name'>{student.full_name}</p>
+                        </div>
+                    )}
                 </div>
                 <div className='journalRightRowsContainer'
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}

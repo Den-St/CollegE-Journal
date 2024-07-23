@@ -90,6 +90,8 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                 </div>
             </div>
         {/* {!!numberOfLessonsPages && numberOfLessonsPages.map(pageNumber => */}
+        {limitLessons.some(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('.')) &&
+
             <div className="printForm_page" key={pageNumber}>
                 {/* <div>
                     <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
@@ -110,10 +112,10 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         <div className="printFormLessons_top_task">Завдання</div>
                     </div>
                     <div className="printFormLessons_lessons">
-                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('\n') &&
+                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('.') &&
                             <div key={journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].column_id} className="printFormLessons_lesson">
                                 <div className="printFormLessons_top_type">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].lesson_type}</div>
-                                <div className="printFormLessons_top_date">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].date}</div>
+                                <div className="printFormLessons_top_date">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].date.split('\n')[1]}</div>
                                 <div className="printFormLessons_top_theme">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].lesson_topic}</div>
                                 <div className="printFormLessons_top_task"></div>
                             </div>)}
@@ -131,7 +133,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     <span className="printForm_subsubheader">ПІБ Викладача</span>
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
-            </div>
+            </div>}
             </>
         )}
     </div>

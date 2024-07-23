@@ -13,7 +13,7 @@ export const useGetTeacherJournal = () => {
     const [attestations,setAttestations] = useState<{
         active:boolean,
         end:number,
-        start:number,
+        start:number | string,
         name:string
     }[]>();
     const groupId = useSearchParams()[0].get('group_id');

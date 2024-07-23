@@ -399,17 +399,34 @@ scrollbar-width: none;  /* Firefox */
     font-size: 16px;
     font-weight: 400;
 }
-.specialLessonType:not(.specialLessonType+.specialLessonType){
-    margin-left: 40px;
+.notOnlyAtts{
+    .specialLessonType:not(.specialLessonType+.specialLessonType){
+        margin-left: 40px;
+    }
+    .specialLessonType+.specialLessonType{
+        margin-right: 40px;
+    }
+    .specialLessonType_cell:not(.specialLessonType_cell+.specialLessonType_cell){
+        margin-left: 55px;
+    }
+    .specialLessonType_cell+.specialLessonType_cell{
+        margin-right: 55px;
+    }
 }
-.specialLessonType+.specialLessonType{
-    margin-right: 40px;
-}
-.specialLessonType_cell:not(.specialLessonType_cell+.specialLessonType_cell){
-    margin-left: 55px;
-}
-.specialLessonType_cell+.specialLessonType_cell{
-    margin-right: 55px;
+
+.onlyAtts{
+    .specialLessonType:nth-child(2n){
+        margin-right: 40px;
+    }
+    .specialLessonType_cell:nth-child(2n){
+        margin-right: 55px;
+    }
+    .specialLessonType:first-child{
+        margin-left: 40px;
+    }
+    .specialLessonType_cell:first-child{
+        margin-left: 55px;
+    }
 }
 
 .journal_lessonTypeSelect{
