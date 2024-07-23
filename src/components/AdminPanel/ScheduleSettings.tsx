@@ -11,14 +11,15 @@ import { useGetGroup } from "../../hooks/getGroup";
 import { useGetAdminGroups } from "../../hooks/getGroups";
 import { DaysNumbersT } from "../../types/daysNames";
 import { GroupT } from "../../types/group";
+import { SplitedLessonT } from "../../types/user";
 import { CheckScheduleSettingsModal } from "../CheckScheduleSettingsModal";
 import { Loader } from "../Loader/Loader";
+import { lessonNumbers } from "../MyProfile/LessonsSchedule/studentSchedule";
 import { NoMatch } from "../NoMatch";
 import "./scheduleSettings.scss";
 import { SemesterSettings } from "./SemesterSettings";
 const {Option} = Select;
 
-const lessonNumbers = Array(1,2,3,4,5);
 
 export const ScheduleSettings = () => {
     useEffect(() => {
@@ -54,12 +55,39 @@ export const ScheduleSettings = () => {
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
-                        {lessonNumbers.map(lessonNumber =>
-                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
-                                <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
-                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
+                    {lessonNumbers.map(lessonNumber =>
+                            group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
+                            <>
+                            <div key={dayKey + (group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
+                                <p className="lessonsScheduleLessonName">*{(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
-                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["*"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                        <LinkSvg/>
+                                    </Link>
+                                    :<div>
+                                        <LinkSvg/>
+                                    </div>}
+                                </div>
+                            </div>
+                            <div key={dayKey + (group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber"></p>
+                                <p className="lessonsScheduleLessonName">**{(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <div className="lessonsScheduleLessonGroup">
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["**"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                        <LinkSvg/>
+                                    </Link>
+                                    :<div>
+                                        <LinkSvg/>
+                                    </div>}
+                                </div>
+                            </div>
+                            </>
+                            : <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
+                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <div className="lessonsScheduleLessonGroup">
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string ? <Link to={group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                     :<div>
@@ -76,12 +104,39 @@ export const ScheduleSettings = () => {
                 <div key={dayKey} className="lessonsScheduleDay__container">
                     <h2 className={`lessonsScheduleDay__header ${i + 1 === dayNumber && 'currentDay'}`}>{dayNamesToNumbers[dayKey as DaysNumbersT]}</h2>    
                     <div className='lessonsScheduleDayLessons__container'>
-                        {lessonNumbers.map(lessonNumber =>
-                            <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_id + lessonNumber} className="lessonsScheduleDayLessonItem__container">
-                                <p className="lessonsScheduleLessonNumber">{lessonNumber}</p>
-                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.subject_name || '-'}</p>
+                    {lessonNumbers.map(lessonNumber =>
+                            group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
+                            <>
+                            <div key={dayKey + (group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
+                                <p className="lessonsScheduleLessonName">*{(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
-                                    {group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link ? <Link to={group?.timetable?.[dayKey as DaysNumbersT]?.find(lesson => lesson.lesson_number === lessonNumber)?.link || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["*"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                        <LinkSvg/>
+                                    </Link>
+                                    :<div>
+                                        <LinkSvg/>
+                                    </div>}
+                                </div>
+                            </div>
+                            <div key={dayKey + (group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber"></p>
+                                <p className="lessonsScheduleLessonName">**{(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <div className="lessonsScheduleLessonGroup">
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["**"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
+                                        <LinkSvg/>
+                                    </Link>
+                                    :<div>
+                                        <LinkSvg/>
+                                    </div>}
+                                </div>
+                            </div>
+                            </>
+                            : <div key={dayKey + group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                                <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
+                                <p className="lessonsScheduleLessonName">{group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <div className="lessonsScheduleLessonGroup">
+                                    {group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string ? <Link to={group?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
                                     </Link>
                                     :<div>

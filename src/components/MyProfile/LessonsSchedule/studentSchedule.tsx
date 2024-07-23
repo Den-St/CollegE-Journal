@@ -14,6 +14,7 @@ import { SplitedLessonT } from '../../../types/user';
 import { Loader } from '../../Loader/Loader';
 import { NoMatch } from '../../NoMatch';
 import './lessonsSchedule.scss';
+export const lessonNumbers = Array(0,1,2,3,4,);
 
 export const LessonsScheduleStudents = () => {
     const theme = useThemeStore().theme;
@@ -145,7 +146,6 @@ export const LessonsScheduleStudents = () => {
             },
         ];
     }
-    const lessonNumbers = Array(0,1,2,3,4,);
     // const {groupLoading,group} = useGetGroup(groupId);
 
     return <section className={`lessonsSchedule__container ${theme}`}>
