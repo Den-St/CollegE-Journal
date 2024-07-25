@@ -74,11 +74,10 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const onChooseSupervisor = (id:string | null) => {
         setChosenSupervisorId(id);
     }
-    const token = useUserStore().user.token;
 
     const onInvertEngGroups = async () => {
         try{
-            await axiosConfig.post(endpoints.invertEngGroups,{group_id:group?.group_id},{headers: {Authorization: token}});
+            await axiosConfig.post(endpoints.invertEngGroups,{group_id:group?.group_id},{headers: {Authorization: localToken}});
         }catch(err){
             console.error(err);
         }

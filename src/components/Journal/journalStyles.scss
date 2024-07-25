@@ -157,6 +157,9 @@ scrollbar-width: none;  /* Firefox */
         inset-inline-end:1px !important;
     }
 }
+.journalColumnsCenterItem__container:last-child{
+    padding-right: 15px;
+}
 .journal_lessonTypeSelect{
     width: 68px !important;
     text-align: center;
