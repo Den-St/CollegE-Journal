@@ -177,7 +177,10 @@ export const TeacherJournal = () => {
                         )}
                     </Select>
                 </div>
-                {/* <input type={'checkbox'} title={'Тільки атестації'} value={fillters['onlyAtts']} defaultChecked={false} onChange={(e) => onChangeFillters('onlyAtts',e.target.value)}/> */}
+                {/* <div>
+                    <input type={'checkbox'} onChange={(e) => onChangeFillters('onlyAtts',e.target.checked)}/>
+                    <span>Тільки аттестації</span>
+                </div> */}
                 </div>
                 <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>
             </div>
