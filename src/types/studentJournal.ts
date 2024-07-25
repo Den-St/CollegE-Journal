@@ -15,5 +15,5 @@ export type JournalColumnT = {
         index: number;
         value: string;
     }[],
-    lesson_type?:string | null
+    lesson_type?:string
 }

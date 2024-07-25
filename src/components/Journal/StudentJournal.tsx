@@ -1,20 +1,18 @@
-import { Select } from 'antd';
+import { Select, Tooltip } from 'antd';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
-import { LeftArrowSvg } from '../../assets/svgs/leftArrowSvg';
 import { routes } from '../../consts/routes';
 import { studyMonths } from '../../consts/studyMonths';
 import { useStudentJournal } from '../../hooks/studentJournal';
 import { useStudentSubjects } from '../../hooks/studentSubjects';
-import { useStudentJournalSubjectsStore } from '../../store/studentJournalSubjects';
 import { useThemeStore } from '../../store/themeStore';
 import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { getColorByValue } from './CellInput';
 import './journalStyles.scss';
+import { lessonTypesNamesAbbreviations } from './TeacherJournal';
 const {Option} = Select;
 
 export const StudentJournal = () => {
@@ -33,6 +31,10 @@ export const StudentJournal = () => {
         document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
     
+    // useEffect(() => {
+    //     const googleAuthWindow = window.open('https://www.youtube.com/watch?v=oXPFW0L4olY&ab_channel=ceh9%D0%9B%D0%90%D0%99%D0%92','name')
+    // },[])
+
     const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
     const [isMouseDown,setIsMouseDown] = useState(false);
     const cellsRef = useRef<HTMLDivElement>(null);
@@ -73,10 +75,7 @@ export const StudentJournal = () => {
         mousePos.current.x = e.clientX;
         mousePos.current.y = e.clientY;
     }
-    console.log(columnByMonth);
-    // useEffect(() => {
-    //     setJournalWidth(document.getElementById('journal__container')?.clientWidth);
-    // },[document.getElementById('journal__container')?.clientWidth]);
+
     if(loading) return <Loader/>
     if(!journal) return <div className={`journalMain__container ${theme}`}>
             <section className='journalTop__container'>
@@ -150,9 +149,12 @@ export const StudentJournal = () => {
                 <div className='journalColumnsCenter__container'
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
                     onMouseMove={onMouseMove} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
-                    {attestations?.some(att => att.active) && journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
-                            <div className={`journalColumnsCenterItemType ${column.date.includes('\n') && `transparent`}`}>
-                                {!column.date.includes('\n') && column?.lesson_type}
+                    {journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                            <div className={`journalColumnsCenterItemType ${(column.date.includes('.') || !column.lesson_type) && `transparent`}`}>
+                                {!column.date.includes('.') && !!column.lesson_type &&
+                                <Tooltip title={column.lesson_type}>
+                                    <div className='journalColumnsCenterItemType'>{lessonTypesNamesAbbreviations[column.lesson_type] || ''}</div>
+                                </Tooltip>}
                             </div>
                             <div className='journalColumnsCenterItemDate__container'>
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
@@ -179,10 +181,20 @@ export const StudentJournal = () => {
                         {<div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}>
                             {columns.map(column => 
                                 <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
-                                    <div className='journalColumnsCenterItemDate__container'>
+                                    {column.date.includes('.') 
+                                    ? <div className='journalColumnsCenterItemDate__container'>
                                         <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')?.[0]}</p>
                                         <p className='journalColumnsCenterItemDate'>{column.date.split('\n')?.[1]}</p>
                                     </div>
+                                    :  <Tooltip title={column.lesson_type}>
+                                        <div className='journalColumnsCenterItemDate__container'>
+                                            <p className='journalColumnsCenterItemDateDay'>
+                                                {column.lesson_type ? lessonTypesNamesAbbreviations[column.lesson_type] : column.date.split('\n')[0]}
+                                            </p>
+                                        </div>
+                                    </Tooltip>
+                                    }
+                                    
                                 </div>
                             )}
                         </div>}

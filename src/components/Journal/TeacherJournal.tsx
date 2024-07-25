@@ -1,4 +1,4 @@
-import { Select, Spin, Tooltip } from 'antd';
+import { Checkbox, Radio, Select, Spin, Tooltip } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -86,7 +86,8 @@ const useJournalDragScroll = () => {
 }
 
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,onChangeLessonType,currentMonth,token,attestations,refecth} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
+           onChangeLessonType,currentMonth,token,attestations,refecth,} = useGetTeacherJournal();
     const [printLoading,setPrintLoading] = useState(false);
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
@@ -109,39 +110,13 @@ export const TeacherJournal = () => {
     });
     const handlePrintAndRefetch = async () => {
         setPrintLoading(true);
-        await refecth({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || ''});
+        await refecth({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts});
         setTimeout(() => {
             handlePrint();
             setPrintLoading(false);
         },100);
-        
     }
-    // useEffect(() => {
-    //     document.addEventListener('keydown', function(event) {
-    //         // Object to keep track of pressed keys
-    //         const keysPressed:Record<string,boolean> = {};
-        
-    //         // Function to handle keydown event
-    //         function handleKeydown(event:any) {
-    //             keysPressed[event.key] = true;
-    //             console.log(keysPressed);
-        
-    //             // Check if the specific combination is pressed (e.g., "Shift" + "A")
-    //             if (keysPressed['Meta'] && keysPressed['p'] || keysPressed['Meta'] && keysPressed['P'] || keysPressed['Meta'] && keysPressed['p'] || keysPressed['Control'] && keysPressed['P'] || keysPressed['Control'] && keysPressed['p']) {
-    //                 handlePrint();
-    //             }
-    //         }
-        
-    //         // Function to handle keyup event
-    //         function handleKeyup(event:any) {
-    //             delete keysPressed[event.key];
-    //         }
-        
-    //         // Attach event listeners
-    //         window.addEventListener('keydown', handleKeydown);
-    //         window.addEventListener('keyup', handleKeyup);
-    //     });
-    // },[]);
+
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
@@ -173,12 +148,7 @@ export const TeacherJournal = () => {
                     allowClear
                     value={attestations?.find(att => att.active)?.name}
                     onChange={(value) => onChangeFillters('month',value)}
-                    // onClear={() => onChangeFillters('month',null)}
                     >
-                        {/* {studyMonths.map((month,i) => {
-                            if(i > studyMonths.findIndex(_month => _month.number === currentMonth + 1)) return null;
-                            return <Option key={month.number} value={month.number} label={month.name}>{month.name}</Option>
-                        })} */}
                         {attestations?.map(att => 
                             <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
                         )}
@@ -207,6 +177,7 @@ export const TeacherJournal = () => {
                         )}
                     </Select>
                 </div>
+                {/* <input type={'checkbox'} title={'Тільки атестації'} value={fillters['onlyAtts']} defaultChecked={false} onChange={(e) => onChangeFillters('onlyAtts',e.target.value)}/> */}
                 </div>
                 <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>
             </div>

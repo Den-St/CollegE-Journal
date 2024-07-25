@@ -17,22 +17,23 @@ export const useGetTeacherJournal = () => {
         name:string
     }[]>();
     const groupId = useSearchParams()[0].get('group_id');
-    const [fillters,setFillters] = useState<{group_id:string,subject_id:string}>({
+    const [fillters,setFillters] = useState<{group_id:string,subject_id:string,onlyAtts:boolean}>({
         group_id:groupId || '',
         subject_id:useSearchParams()[0].get('subject_id') || '',
+        onlyAtts:false
     });
     const token = useUserStore().user.token || getToken();
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
 
     
-    const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined}) => {
+    const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
         try{
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
-            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1},{headers:{Authorization:token}}) 
-            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1)},{headers:{Authorization:token}});
+            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:+_fillters.onlyAtts ? 1 : 0},{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:+(_fillters?.onlyAtts || fillters?.onlyAtts) ? 1 : 0},{headers:{Authorization:token}});
             
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
@@ -42,12 +43,12 @@ export const useGetTeacherJournal = () => {
         }
         setLoading(false);
     }
-    const refecth = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined}) => {
+    const refecth = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         try{
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
-            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1},{headers:{Authorization:token}}) 
-            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1)},{headers:{Authorization:token}});
+            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:+_fillters.onlyAtts ? 1 : 0},{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:+(_fillters?.onlyAtts || fillters?.onlyAtts) ? 1 : 0},{headers:{Authorization:token}});
             
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
@@ -61,15 +62,16 @@ export const useGetTeacherJournal = () => {
         fetch();
     },[])
 
-    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month',value:string | number | undefined) => {
-        setFillters(prev => ({...prev,[fieldName]:value}));
-
+    const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => {
+        setFillters(prev => ({ ...prev,[fieldName]:value}));
+        console.log(value);
+        console.log('c',fillters.onlyAtts);
         if(fieldName === 'month'){
             const newAtts = attestations?.map(att => att.name === value ? {...att,active:true} : {...att,active:false});
             setAttestations(newAtts);
-            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':(value || '').toString()});
+            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':(value || '').toString(),onlyAtts:fillters.onlyAtts});
         }else{
-            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',[fieldName]:value});
+            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters['onlyAtts'],[fieldName]:value});
         }
     }
 
@@ -101,5 +103,7 @@ export const useGetTeacherJournal = () => {
         }
     }
 
-    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,refecth};
+    return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,
+            onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,
+            refecth,};
 }
