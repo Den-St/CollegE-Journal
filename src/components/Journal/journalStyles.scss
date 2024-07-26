@@ -129,7 +129,7 @@ scrollbar-width: none;  /* Firefox */
     gap:14px;
 }
 .journalColumnsCenterItemType{
-    width: 70px;
+    width: 68px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -401,35 +401,42 @@ scrollbar-width: none;  /* Firefox */
     font-size: 16px;
     font-weight: 400;
 }
-.notOnlyAtts{
-    .specialLessonType:not(.specialLessonType+.specialLessonType){
+// .notOnlyAtts{
+    .specialLessonType:not(.specialLessonType_last+.specialLessonType){
         margin-left: 40px;
     }
-    .specialLessonType+.specialLessonType{
+    .specialLessonType_last{
         margin-right: 40px;
     }
-    .specialLessonType_cell:not(.specialLessonType_cell+.specialLessonType_cell){
+    // .specialLessonType+.specialLessonType{
+    //     margin-right: 40px;
+    // }
+    .specialLessonType_cell:not(.specialLessonType_last_cell+.specialLessonType_cell){
         margin-left: 55px;
     }
-    .specialLessonType_cell+.specialLessonType_cell{
+    .specialLessonType_last_cell{
         margin-right: 55px;
     }
-}
+    // .specialLessonType_cell+.specialLessonType_cell{
+    //     margin-right: 55px;
+    // }
+// }
 
-.onlyAtts{
-    .specialLessonType:nth-child(2n){
-        margin-right: 40px;
-    }
-    .specialLessonType_cell:nth-child(2n){
-        margin-right: 55px;
-    }
-    .specialLessonType:first-child{
-        margin-left: 40px;
-    }
-    .specialLessonType_cell:first-child{
-        margin-left: 55px;
-    }
-}
+
+// .onlyAtts{
+//     .specialLessonType:nth-child(2n){
+//         margin-right: 40px;
+//     }
+//     .specialLessonType_cell:nth-child(2n){
+//         margin-right: 55px;
+//     }
+//     .specialLessonType:first-child{
+//         margin-left: 40px;
+//     }
+//     .specialLessonType_cell:first-child{
+//         margin-left: 55px;
+//     }
+// }
 
 .journal_lessonTypeSelect{
     .ant-select-selector{

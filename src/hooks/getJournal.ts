@@ -6,21 +6,19 @@ import axiosConfig from '../axiosConfig';
 import { getToken } from '../helpers/auth';
 import { useUserStore } from '../store/userStore';
 import { TeacherJournalT } from '../types/teacherJournal';
+import { JournalAttestationT } from '../types/journalAttestation';
+import { TeacherJournalFilltersT } from '../types/teacherJournalFillters';
 
 export const useGetTeacherJournal = () => {
     const [journal,setJournal] = useState<TeacherJournalT>();
     const [loading,setLoading] = useState(false);
-    const [attestations,setAttestations] = useState<{
-        active:boolean,
-        end:number,
-        start:number | string,
-        name:string
-    }[]>();
+    const [attestations,setAttestations] = useState<JournalAttestationT[]>();
     const groupId = useSearchParams()[0].get('group_id');
-    const [fillters,setFillters] = useState<{group_id:string,subject_id:string,onlyAtts:boolean}>({
+    const [fillters,setFillters] = useState<TeacherJournalFilltersT>({
         group_id:groupId || '',
         subject_id:useSearchParams()[0].get('subject_id') || '',
-        onlyAtts:false
+        onlyAtts:false,
+        month:''
     });
     const token = useUserStore().user.token || getToken();
     const currentMonth = new Date().getMonth() + 1;
@@ -28,12 +26,13 @@ export const useGetTeacherJournal = () => {
 
     
     const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
+        console.log('fd',_fillters?.onlyAtts)
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
         try{
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
             ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:+_fillters.onlyAtts ? 1 : 0},{headers:{Authorization:token}}) 
-            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:+(_fillters?.onlyAtts || fillters?.onlyAtts) ? 1 : 0},{headers:{Authorization:token}});
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:_fillters?.onlyAtts ? 1 : 0},{headers:{Authorization:token}});
             
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
@@ -43,7 +42,7 @@ export const useGetTeacherJournal = () => {
         }
         setLoading(false);
     }
-    const refecth = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
+    const refetch = async (_fillters?:TeacherJournalFilltersT) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         try{
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
@@ -63,6 +62,7 @@ export const useGetTeacherJournal = () => {
     },[])
 
     const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => {
+        //@ts-ignore
         setFillters(prev => ({ ...prev,[fieldName]:value}));
         console.log(value);
         console.log('c',fillters.onlyAtts);
@@ -71,7 +71,7 @@ export const useGetTeacherJournal = () => {
             setAttestations(newAtts);
             fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':(value || '').toString(),onlyAtts:fillters.onlyAtts});
         }else{
-            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters['onlyAtts'],[fieldName]:value});
+            fetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts,[fieldName]:value});
         }
     }
 
@@ -105,5 +105,5 @@ export const useGetTeacherJournal = () => {
 
     return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,
             onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,
-            refecth,};
+            refetch,};
 }

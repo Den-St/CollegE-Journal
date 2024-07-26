@@ -226,6 +226,7 @@ input::placeholder{
 	display: flex;
 	gap:30px;
 	align-items: center;
+	color:white;
 }
 .select_container{
     display: flex;
@@ -403,6 +404,10 @@ li.slick-active{
 	display: flex;
 	align-items: center;
 }
+.ant-switch{
+	background: var(--secondary-blue) !important;
+}
+
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;

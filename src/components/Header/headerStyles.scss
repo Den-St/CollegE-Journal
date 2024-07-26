@@ -185,9 +185,9 @@ linear-gradient(0deg, #EFB42D, #EFB42D);
 .ant-switch .ant-switch-handle::before{
     content:unset !important;
 }
-.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
-    background-color:var(--primary-dark);   
-}
+// .ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+//     background-color:var(--primary-dark);   
+// }
 
 .headerRightButtons__container .ant-switch-checked{
     background-color: var(--primary-dark);

@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { forwardRef } from "react"
+import { lessonTypesNamesAbbreviations } from "../../consts/lessonTypesNamesAbbreviations"
 import { TeacherJournalT } from "../../types/teacherJournal"
 import "./printFormStyles.scss"
-import { lessonTypesNamesAbbreviations } from "./TeacherJournal"
 
 type Props = {
     journal?:TeacherJournalT,

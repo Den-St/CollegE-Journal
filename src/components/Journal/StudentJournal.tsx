@@ -3,6 +3,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
+import { lessonTypesNamesAbbreviations } from '../../consts/lessonTypesNamesAbbreviations';
 import { routes } from '../../consts/routes';
 import { studyMonths } from '../../consts/studyMonths';
 import { useStudentJournal } from '../../hooks/studentJournal';
@@ -12,7 +13,6 @@ import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { getColorByValue } from './CellInput';
 import './journalStyles.scss';
-import { lessonTypesNamesAbbreviations } from './TeacherJournal';
 const {Option} = Select;
 
 export const StudentJournal = () => {

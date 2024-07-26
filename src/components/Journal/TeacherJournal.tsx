@@ -1,4 +1,4 @@
-import { Checkbox, Radio, Select, Spin, Tooltip } from 'antd';
+import { Checkbox, Radio, Select, Spin, Switch, Tooltip } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
@@ -15,107 +15,25 @@ import './journalStyles.scss';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { PrintForm } from './PrintForm';
 import { useReactToPrint } from 'react-to-print';
+import { useJournalDragScroll } from '../../hooks/useJournalDragScroll';
+import { lessonTypesNamesAbbreviations } from '../../consts/lessonTypesNamesAbbreviations';
+import { useJournalPrintForm } from '../../hooks/useJournalPrintForm';
+import { JournalGroupT } from '../../types/journalGroup';
+import { JournalAttestationT } from '../../types/journalAttestation';
+import { TeacherJournalFilltersT } from '../../types/teacherJournalFillters';
+import { TeacherJournalT } from '../../types/teacherJournal';
 const {Option} = Select;
 
-export const lessonTypesNamesAbbreviations:Record<string,string> = {
-    "Лекція":"Лк",
-    "Практика":"Пр",
-    "Залік":"Злк",
-    "Лаб":"Лаб",
-    "Консультація":"Кон",
-    "Атестаційна":"Ат",
-    "Коригуюча":"Кор",
-    "Підсумкова":"Підс",
-    "Річна":"Річна",
-    "Зошит":"Зш",
-}
-
-const useJournalDragScroll = () => {
-    const cellsRef = useRef<HTMLDivElement>(null);
-    const lessonTypesRef = useRef<HTMLDivElement>(null);
-    const mainContainerRef = useRef<HTMLDivElement>(null);
-    const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
-    const [isMouseDown,setIsMouseDown] = useState(false);
-    const handleHorizontalScroll = () => {
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
-    }
-    const handleHorizontalScrollLessonTypes = () => {
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        cellsRef.current.scrollLeft = lessonTypesRef.current.scrollLeft;
-    }
-    const handleVerticalScroll = () => {
-        if(mainContainerRef.current === null || cellsRef.current === null) return;
-        cellsRef.current.scrollTop = mainContainerRef.current.scrollTop;
-    }
-    const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        mousePos.current.x = e.clientX;
-        mousePos.current.y = e.clientY;
-        setIsMouseDown(true);
-        onMouseMove(e,true,{x:e.clientX,y:e.clientY});
-    }
-    const mouseUpHandler = () => {
-        setIsMouseDown(false);
-    }
-    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
-        if(!isMouseDown && !localIsMouseDown) return;
-        if(lessonTypesRef.current === null || cellsRef.current === null || mainContainerRef.current === null) return;
-        
-        const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
-        const deltaY = !localMousePos ? e.clientY - mousePos.current.y : e.clientY - localMousePos.y;
-        if(deltaX < 0){
-            cellsRef.current.scrollLeft += 5 - deltaX;
-            lessonTypesRef.current.scrollLeft += 5 - deltaX;
-        }else if(deltaX > 0){
-            cellsRef.current.scrollLeft -= 5 + deltaX;
-            lessonTypesRef.current.scrollLeft -= 5 - deltaX;
-        }
-        if(deltaY < 0){
-            cellsRef.current.scrollTop += 5 - deltaY;
-            mainContainerRef.current.scrollTop += 5 - deltaY;
-        }else if(deltaY > 0){
-            cellsRef.current.scrollTop -= 5 + deltaY;
-            mainContainerRef.current.scrollTop -= 5 + deltaY;
-        }
-        mousePos.current.x = e.clientX;
-        mousePos.current.y = e.clientY;
-    }
-
-        
-    return {cellsRef,lessonTypesRef,mainContainerRef,mousePos,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll}
-}
 
 export const TeacherJournal = () => {
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
-           onChangeLessonType,currentMonth,token,attestations,refecth,} = useGetTeacherJournal();
-    const [printLoading,setPrintLoading] = useState(false);
+           onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
-    const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
-    const subjectName = !!groupJournal && setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
-    const componentRef = useRef(null);
-    const handlePrint = useReactToPrint({
-      content: () => componentRef.current,
-      onBeforeGetContent:async () => {
-        const printForm = document.getElementById('printForm');
-        if(!printForm) return;
-        printForm.style.display = 'flex';
-      },
-      onAfterPrint:() => {
-        const printForm = document.getElementById('printForm');
-        if(!printForm) return;
-        printForm.style.display = 'none';
-      },
-    });
-    const handlePrintAndRefetch = async () => {
-        setPrintLoading(true);
-        await refecth({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts});
-        setTimeout(() => {
-            handlePrint();
-            setPrintLoading(false);
-        },100);
-    }
+    const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
+           mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
+    const subjectName = !!groupJournal ? setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || null : null;
 
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -126,65 +44,16 @@ export const TeacherJournal = () => {
         const month = attestations?.find(att => att.active)?.name
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
-
-    if(loading) return <Loader/>
+    console.log(journal);
+    // if(loading) return <Loader/>
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
-    if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
+    // if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
-        {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
-        <section className='journalTop__container'>
-            <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
-            <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
-            <div className='journalFillters__container'>
-                <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
-                <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
-                    placeholder={<div className="fillterPlaceholder_container">
-                        <p className="fillter_placeholder">Місяць</p>
-                    </div>}
-                    className="fillter_select"
-                    defaultValue={attestations?.find(att => att.active)?.name}
-                    allowClear
-                    value={attestations?.find(att => att.active)?.name}
-                    onChange={(value) => onChangeFillters('month',value)}
-                    >
-                        {attestations?.map(att => 
-                            <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
-                        )}
-                    </Select>
-                </div>
-                <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
-                        style={{height:'300px !important',overflow:'hidden'}}
-                        >
-                    <Select 
-                        placeholder={
-                            <div className="fillterPlaceholder_container">
-                                <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
-                            </div>
-                        }
-                        className="fillter_select"
-                        style={{width:'300px !important'}}
-                        // allowClear
-                        loading={loading}
-                        value={fillters.subject_id}
-                        onChange={(value) => onChangeFillters('subject_id',value)}
-                    >
-                        {!!groupJournal && 
-                        setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
-                        .map(subject => 
-                            <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
-                        )}
-                    </Select>
-                </div>
-                {/* <div>
-                    <input type={'checkbox'} onChange={(e) => onChangeFillters('onlyAtts',e.target.checked)}/>
-                    <span>Тільки аттестації</span>
-                </div> */}
-                </div>
-                <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>
-            </div>
-        </section>
+        <TeacherJournalFillters onChangeFillters={onChangeFillters} loading={loading} journal={journal} attestations={attestations} fillters={fillters} groupJournal={groupJournal} subjectName={subjectName} refetch={refetch} 
+        />
+        {loading ?  <Loader/>
+        : (!journal.students.length || !journal.columns.length) ? <NoMatch isChildren title="Журнал пустий"/> : <>
         <section className='journal_portraitModeWarning'>
                 <JournalPortraitModeWarning/>
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
@@ -197,13 +66,12 @@ export const TeacherJournal = () => {
                     <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                 </div>
                 <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
-                    {journal?.columns.map(column => 
-                        <div key={column.column_id}  className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
-                                {
-                                    journal.can_edit === 1  && column.date.includes('.') ?
-                                    <div id={'columnSelect_'+column.column_index}
+                    {journal?.columns.map((column,i) => 
+                        <div key={column.column_id}  className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && !!i && journal.columns[i-1]?.date !== column.date ? `specialLessonType` : ``} ${!column.date.includes('\n') && !!i && journal.columns[i+1]?.date !== column.date ? `specialLessonType_last` : ``}`}>
+                                <div id={'columnSelect_'+column.column_index}
                                     className='journal_lessonTypeSelect_wrapper' 
-                                    >
+                                    >{
+                                    journal.can_edit === 1  && column.date.includes('.') ?
                                         <Select 
                                         disabled={
                                             journal.can_edit !== 1 || !column.date.includes('.')
@@ -218,12 +86,12 @@ export const TeacherJournal = () => {
                                             <Option label={"Залік"} value={"Залік"}>Залік</Option>
                                             <Option label={"Лаб"} value={"Лаб"}>Лаб</Option>
                                             <Option label={"Консультація"} value={"Консультація"}>Консультація</Option>
-                                    </Select></div>
+                                    </Select>
                                     : 
                                     <Tooltip title={column.lesson_type}>
-                                        <div className='journalColumnsCenterItemType'>{lessonTypesNamesAbbreviations[column.lesson_type] || ''}</div>
+                                        <div className='journalColumnsCenterItemType'>{lessonTypesNamesAbbreviations[column.lesson_type] || '-'}</div>
                                     </Tooltip>
-                                }
+                                }</div>
                             <div className='journalColumnsCenterItemDate__container'
                                 id={'columnDate_'+column.column_index}
                             >
@@ -254,7 +122,7 @@ export const TeacherJournal = () => {
                                         (journal.can_edit === 1 &&
                                         (!isDisabledByDate(column.date) || !column.date.includes('\n')))
                                         ? !!token && <CellInput onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} studentIndex={student.index} columnIndex={j} key={`${column.column_id}_${i}`} token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} defaultValue={column.cells.find(cell => cell.index === student.index)?.value}/>
-                                        : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && 'specialLessonType_cell'}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                        : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
                                     )}
                                 </div>
                             </div>
@@ -283,5 +151,74 @@ export const TeacherJournal = () => {
                 )}
             </div>
         </section>
+        </>}
     </div>
+}
+
+type Props = {
+    groupJournal:JournalGroupT | undefined,
+    subjectName:string | null,
+    refetch:(_fillters?:TeacherJournalFilltersT) => void,
+    fillters:TeacherJournalFilltersT,
+    attestations?:JournalAttestationT[],
+    journal:TeacherJournalT,
+    loading:boolean,
+    onChangeFillters:(fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => void
+}
+export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,subjectName,refetch,attestations,fillters,journal,onChangeFillters,}) => {
+    const {handlePrintAndRefetch,printLoading,componentRef} = useJournalPrintForm(async () => await refetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts}))
+
+    return <section className='journalTop__container'>
+        {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
+        <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
+        <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
+        <div className='journalFillters__container'>
+            <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
+            <div className="adminPanelStudentList_fillterContainer fillter_container">
+                <Select 
+                placeholder={<div className="fillterPlaceholder_container">
+                    <p className="fillter_placeholder">Місяць</p>
+                </div>}
+                className="fillter_select"
+                defaultValue={attestations?.find(att => att.active)?.name}
+                allowClear
+                value={attestations?.find(att => att.active)?.name}
+                onChange={(value) => onChangeFillters('month',value)}
+                >
+                    {attestations?.map(att => 
+                        <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
+                    )}
+                </Select>
+            </div>
+            <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
+                    style={{height:'300px !important',overflow:'hidden'}}
+                    >
+                <Select 
+                    placeholder={
+                        <div className="fillterPlaceholder_container">
+                            <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
+                        </div>
+                    }
+                    className="fillter_select"
+                    style={{width:'300px !important'}}
+                    // allowClear
+                    loading={loading}
+                    value={fillters.subject_id}
+                    onChange={(value) => onChangeFillters('subject_id',value)}
+                >
+                    {!!groupJournal && 
+                    setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
+                    .map(subject => 
+                        <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                    )}
+                </Select>
+            </div>
+            <div style={{'display':'flex','alignItems':'center','gap':'30px'}}>
+                <Switch checked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
+                <span className='fillter_placeholder'>Тільки атестації</span>
+            </div>
+            </div>
+            {!loading && (!journal.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>}
+        </div>
+    </section>
 }
