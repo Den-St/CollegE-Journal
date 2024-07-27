@@ -45,10 +45,8 @@ export const useStudentJournal = () => {
                 }
             }else{
                 if(res.data.columns[i].date === res.data.columns[i - 1].date){
-                    console.log('1')
                     _columnsByDate[_columnsByDate.length - 1].push(res.data.columns[i]);
                 }else{
-                    console.log('2')
                     _columnsByDate.push([res.data.columns[i]]);
                 }
             }
@@ -56,7 +54,6 @@ export const useStudentJournal = () => {
         setColumnsByMonth(_columnsByDate);
     }
     const fetch = async (_fillters?:{subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
-        console.log('fetch',_fillters?.onlyAtts)
         if(!fillters.subject_id) return;
         setLoading(true);
         try{
@@ -76,7 +73,6 @@ export const useStudentJournal = () => {
             setLoading(false);
         }
     }
-    console.log(columnByMonth);
     useEffect(() => {
         fetch();
     },[]);

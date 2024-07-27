@@ -20,14 +20,12 @@ export const useGetTeacherJournal = () => {
     const subject_id_param = searchParams.get('subject_id');
     const attestationsParam = searchParams.get('attestations');
 
-    console.log(attestationsParam,!!attestationsParam);
     const [fillters,setFillters] = useState<TeacherJournalFilltersT>({
         group_id:groupId_param || '',
         subject_id:subject_id_param || '',
         onlyAtts:attestationsParam ? +attestationsParam === 1 : false,
         month:''
     });
-    console.log(fillters.onlyAtts);
 
     const token = useUserStore().user.token || getToken();
     const currentMonth = new Date().getMonth() + 1;

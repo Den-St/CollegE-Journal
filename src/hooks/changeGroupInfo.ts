@@ -1,3 +1,4 @@
+import { useTeachersGroupsStore } from './../store/teachersGroupsStore';
 import { useGetSupervisors } from './getSupervisors';
 import { useEffect } from 'react';
 import { SupervisorT } from './../types/supervisor';
@@ -22,7 +23,8 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const [chosenSupervisorId,setChosenSupervisorId] = useState<string | null>(null);
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
     const [changeErrorCode,setErrorCode] = useState<number>();
-
+    const clearJournalGroups = useTeachersGroupsStore().clear; //to clear journal groups after inverting them, so they will be updated
+    
     useEffect(() => {
         if(group?.group_supervisor?.user_id){
             setChosenSupervisorId(group.group_supervisor.user_id);
@@ -78,6 +80,7 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const onInvertEngGroups = async () => {
         try{
             await axiosConfig.post(endpoints.invertEngGroups,{group_id:group?.group_id},{headers: {Authorization: localToken}});
+            clearJournalGroups();
         }catch(err){
             console.error(err);
         }
