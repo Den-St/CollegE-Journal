@@ -1,14 +1,16 @@
-import { Select, Tooltip } from 'antd';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Select, Switch, Tooltip } from 'antd';
+import { useEffect } from 'react';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { lessonTypesNamesAbbreviations } from '../../consts/lessonTypesNamesAbbreviations';
 import { routes } from '../../consts/routes';
-import { studyMonths } from '../../consts/studyMonths';
 import { useStudentJournal } from '../../hooks/studentJournal';
 import { useStudentSubjects } from '../../hooks/studentSubjects';
+import { useJournalDragScroll } from '../../hooks/useJournalDragScroll';
 import { useThemeStore } from '../../store/themeStore';
+import { JournalAttestationT } from '../../types/journalAttestation';
+import { StudentJournalFilltersT } from '../../types/studentJournalFillters';
 import { Loader } from '../Loader/Loader';
 import { NoMatch } from '../NoMatch';
 import { getColorByValue } from './CellInput';
@@ -18,7 +20,6 @@ const {Option} = Select;
 export const StudentJournal = () => {
     const theme = useThemeStore().theme;
     const {loading,journal,fillters,onChangeFillters,columnByMonth,attestations} = useStudentJournal()
-    const currentMonth = new Date().getMonth();
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -28,111 +29,15 @@ export const StudentJournal = () => {
             document.title = `Журнал`;
             return;
         }
-        document.title = `Журнал - ${subjectName} - ${studyMonths.find(month => month.number === fillters.month)?.name || 'Увесь семестр'}`;
+        document.title = `Журнал - ${subjectName} - ${attestations?.find(att => att.active)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
-    
-    // useEffect(() => {
-    //     const googleAuthWindow = window.open('https://www.youtube.com/watch?v=oXPFW0L4olY&ab_channel=ceh9%D0%9B%D0%90%D0%99%D0%92','name')
-    // },[])
-
-    const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
-    const [isMouseDown,setIsMouseDown] = useState(false);
-    const cellsRef = useRef<HTMLDivElement>(null);
-    const lessonTypesRef = useRef<HTMLDivElement>(null);
-    const handleHorizontalScrollLessonTypes = () => {
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        cellsRef.current.scrollLeft = lessonTypesRef.current.scrollLeft;
-    }
-    const handleHorizontalScroll = () => {
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        lessonTypesRef.current.scrollLeft = cellsRef.current.scrollLeft;
-    }
-    const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        mousePos.current.x = e.clientX;
-        mousePos.current.y = e.clientY;
-        setIsMouseDown(true);
-        onMouseMove(e,true,{x:e.clientX,y:e.clientY});
-    }
-    const mouseUpHandler = () => {
-        setIsMouseDown(false);
-    }
-    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
-        if(!isMouseDown && !localIsMouseDown) return;
-        if(lessonTypesRef.current === null || cellsRef.current === null) return;
-        
-        const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
-        const deltaY = !localMousePos ? e.clientY - mousePos.current.y : e.clientY - localMousePos.y;
-        if(deltaX < 0){
-            cellsRef.current.scrollLeft += 5 - deltaX;
-        }else if(deltaX > 0){
-            cellsRef.current.scrollLeft -= 5 + deltaX;
-        }
-        if(deltaY < 0){
-            cellsRef.current.scrollTop += 5 - deltaY;
-        }else if(deltaY > 0){
-            cellsRef.current.scrollTop -= 5 + deltaY;
-        }
-        mousePos.current.x = e.clientX;
-        mousePos.current.y = e.clientY;
-    }
-
-    if(loading) return <Loader/>
-    if(!journal) return <div className={`journalMain__container ${theme}`}>
-            <section className='journalTop__container'>
-                <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
-            </section>
-            <NoMatch title={`Журналу не знайдено`} isChildren={true}/>
-        </div>
-    if(!journal.columns.length) return <div className={`journalMain__container ${theme}`}>
-            <section className='journalTop__container'>
-                <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
-            </section>
-            <NoMatch title={`Журналу не знайдено`} isChildren={true}/>
-        </div>
-
+    const {mouseUpHandler,mouseDownHandler,onMouseMove,cellsRef,handleHorizontalScroll,handleHorizontalScrollLessonTypes,lessonTypesRef} = useJournalDragScroll();
+    console.log(columnByMonth);
     return <div onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
-        <section className='journalTop__container'>
-            <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
-            <h1 className='journal__title'>Журнал</h1>
-            <div className='journalFillters__container'>
-                <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
-                    placeholder={<div className="fillterPlaceholder_container">
-                        <p className="fillter_placeholder">Місяць</p>
-                    </div>}
-                    className="fillter_select"
-                    defaultValue={attestations?.find(att => att.active)?.name}
-                    allowClear
-                    value={attestations?.find(att => att.active)?.name}
-                    onChange={(value) => onChangeFillters('month',value)}
-                    >
-                        {attestations?.map(att => 
-                            <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
-                        )}
-                    </Select>
-                </div>
-                <div className="adminPanelStudentList_fillterContainer fillter_container">
-                    <Select 
-                        placeholder={
-                            <div className="fillterPlaceholder_container">
-                                <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
-                            </div>
-                        } 
-                        className="fillter_select"
-                        // allowClear
-                        loading={loading}
-                        value={fillters.subject_id}
-                        onChange={(value) => onChangeFillters('subject_id',value)}
-                    >
-                        {!!subjects.length && 
-                        subjects
-                        .map(subject => 
-                            <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
-                        )}
-                    </Select>
-                </div>
-            </div>
-        </section>
+        <StudentJournalFillters subjects={subjects} attestations={attestations} fillters={fillters} onChangeFillters={onChangeFillters} loading={loading}/>
+        {loading ? <Loader/>
+        : !journal?.columns.length ? <NoMatch isChildren title="Журнал пустий"/> 
+        : <>
         <section className='journal_portraitModeWarning'>
                 <JournalPortraitModeWarning/>
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
@@ -149,7 +54,7 @@ export const StudentJournal = () => {
                 <div className='journalColumnsCenter__container'
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
                     onMouseMove={onMouseMove} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
-                    {journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                    {journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}>
                             <div className={`journalColumnsCenterItemType ${(column.date.includes('.') || !column.lesson_type) && `transparent`}`}>
                                 {!column.date.includes('.') && !!column.lesson_type &&
                                 <Tooltip title={column.lesson_type}>
@@ -177,10 +82,12 @@ export const StudentJournal = () => {
                 onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {!attestations?.some(att => att.active) ? columnByMonth?.map((columns,i) => 
-                    <Fragment key={columns[0]?.column_index}>
+                    <div style={{'display':'flex'}} key={columns[0]?.column_index}>
+                        {fillters.onlyAtts && <p className='studentJournal_monthName'>{columns[0].date}</p>}
+                        <div>
                         {<div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}>
                             {columns.map(column => 
-                                <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType'}`}>
+                                <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}>
                                     {column.date.includes('.') 
                                     ? <div className='journalColumnsCenterItemDate__container'>
                                         <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')?.[0]}</p>
@@ -201,20 +108,82 @@ export const StudentJournal = () => {
                         <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}
                         >
                             {columns.map(column => 
-                                <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
+                                <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
-                    </Fragment>
+                        </div>
+                    </div>
                     ) : <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
                     ref={cellsRef} onScroll={handleHorizontalScroll}
                     >
                         {journal.columns.map(column => 
-                            <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
+                            <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
                         )}
                     </div>}
                 </div>
             </div>
         </section>
+        </>}
     </div>
+}
+
+type Props = {
+    fillters:StudentJournalFilltersT,
+    attestations?:JournalAttestationT[],
+    loading:boolean,
+    onChangeFillters:(fieldName: 'subject_id' | 'month' | 'onlyAtts',value:string | undefined | boolean) => void,
+    subjects:{
+        subject_full_name:string,
+        journal_id:string
+    }[]
+}
+
+const StudentJournalFillters:React.FC<Props> = ({attestations,onChangeFillters,fillters,loading,subjects}) => {
+    return <section className='journalTop__container'>
+        <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
+        <h1 className='journal__title'>Журнал</h1>
+        <div className='journalFillters__container'>
+            <div className="adminPanelStudentList_fillterContainer fillter_container">
+                <Select 
+                placeholder={<div className="fillterPlaceholder_container">
+                    <p className="fillter_placeholder">Місяць</p>
+                </div>}
+                className="fillter_select"
+                defaultValue={attestations?.find(att => att.active)?.name}
+                allowClear
+                value={attestations?.find(att => att.active)?.name}
+                onChange={(value) => onChangeFillters('month',value)}
+                >
+                    {attestations?.map(att => 
+                        <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
+                    )}
+                </Select>
+            </div>
+            <div className="adminPanelStudentList_fillterContainer fillter_container">
+                <Select 
+                    placeholder={
+                        <div className="fillterPlaceholder_container">
+                            <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
+                        </div>
+                    } 
+                    className="fillter_select"
+                    // allowClear
+                    loading={loading}
+                    value={fillters.subject_id}
+                    onChange={(value) => onChangeFillters('subject_id',value)}
+                >
+                    {!!subjects.length && 
+                    subjects
+                    .map(subject => 
+                        <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                    )}
+                </Select>
+            </div>
+            <div style={{'display':'flex','alignItems':'center','gap':'30px'}}>
+                <Switch defaultChecked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
+                <span className='fillter_placeholder'>Тільки атестації</span>
+            </div>
+        </div>
+    </section>
 }

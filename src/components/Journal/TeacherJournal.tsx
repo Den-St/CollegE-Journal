@@ -1,5 +1,5 @@
-import { Checkbox, Radio, Select, Spin, Switch, Tooltip } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { Select, Spin, Switch, Tooltip } from 'antd';
+import React, { useEffect, } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { routes } from '../../consts/routes';
@@ -14,7 +14,6 @@ import _debounce from 'lodash/debounce';
 import './journalStyles.scss';
 import { LinkBack } from '../../assets/components/LinkBack/LinkBack';
 import { PrintForm } from './PrintForm';
-import { useReactToPrint } from 'react-to-print';
 import { useJournalDragScroll } from '../../hooks/useJournalDragScroll';
 import { lessonTypesNamesAbbreviations } from '../../consts/lessonTypesNamesAbbreviations';
 import { useJournalPrintForm } from '../../hooks/useJournalPrintForm';
@@ -23,7 +22,6 @@ import { JournalAttestationT } from '../../types/journalAttestation';
 import { TeacherJournalFilltersT } from '../../types/teacherJournalFillters';
 import { TeacherJournalT } from '../../types/teacherJournal';
 const {Option} = Select;
-
 
 export const TeacherJournal = () => {
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
@@ -44,10 +42,8 @@ export const TeacherJournal = () => {
         const month = attestations?.find(att => att.active)?.name
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
-    console.log(journal);
-    // if(loading) return <Loader/>
+
     if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
-    // if(!journal.students.length || !journal.columns.length) return <NoMatch title="Журнал ще не створено"/>
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
         <TeacherJournalFillters onChangeFillters={onChangeFillters} loading={loading} journal={journal} attestations={attestations} fillters={fillters} groupJournal={groupJournal} subjectName={subjectName} refetch={refetch} 
@@ -185,9 +181,9 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 value={attestations?.find(att => att.active)?.name}
                 onChange={(value) => onChangeFillters('month',value)}
                 >
-                    {attestations?.map(att => 
+                    {/* {attestations?.map(att => 
                         <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
-                    )}
+                    )} */}
                 </Select>
             </div>
             <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
@@ -214,11 +210,11 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 </Select>
             </div>
             <div style={{'display':'flex','alignItems':'center','gap':'30px'}}>
-                <Switch checked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
+                <Switch defaultChecked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
                 <span className='fillter_placeholder'>Тільки атестації</span>
             </div>
             </div>
-            {!loading && (!journal.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>}
+            {!loading && !(!journal.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>}
         </div>
     </section>
 }

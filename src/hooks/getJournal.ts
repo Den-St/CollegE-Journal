@@ -1,4 +1,5 @@
-import { useSearchParams } from 'react-router-dom';
+import { routes } from './../consts/routes';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -10,29 +11,37 @@ import { JournalAttestationT } from '../types/journalAttestation';
 import { TeacherJournalFilltersT } from '../types/teacherJournalFillters';
 
 export const useGetTeacherJournal = () => {
+    const navigate = useNavigate();
     const [journal,setJournal] = useState<TeacherJournalT>();
     const [loading,setLoading] = useState(false);
     const [attestations,setAttestations] = useState<JournalAttestationT[]>();
-    const groupId = useSearchParams()[0].get('group_id');
+    const [searchParams,setSearchParams] = useSearchParams();
+    const groupId_param = searchParams.get('group_id');
+    const subject_id_param = searchParams.get('subject_id');
+    const attestationsParam = searchParams.get('attestations');
+
+    console.log(attestationsParam,!!attestationsParam);
     const [fillters,setFillters] = useState<TeacherJournalFilltersT>({
-        group_id:groupId || '',
-        subject_id:useSearchParams()[0].get('subject_id') || '',
-        onlyAtts:false,
+        group_id:groupId_param || '',
+        subject_id:subject_id_param || '',
+        onlyAtts:attestationsParam ? +attestationsParam === 1 : false,
         month:''
     });
+    console.log(fillters.onlyAtts);
+
     const token = useUserStore().user.token || getToken();
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
 
     
     const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
-        console.log('fd',_fillters?.onlyAtts)
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
         try{
+            const onlyAtts = _fillters?.onlyAtts === undefined ? + fillters.onlyAtts : +_fillters?.onlyAtts
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
-            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:+_fillters.onlyAtts ? 1 : 0},{headers:{Authorization:token}}) 
-            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:_fillters?.onlyAtts ? 1 : 0},{headers:{Authorization:token}});
+            ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:onlyAtts },{headers:{Authorization:token}}) 
+            : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:onlyAtts},{headers:{Authorization:token}});
             
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
@@ -64,8 +73,7 @@ export const useGetTeacherJournal = () => {
     const onChangeFillters = (fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => {
         //@ts-ignore
         setFillters(prev => ({ ...prev,[fieldName]:value}));
-        console.log(value);
-        console.log('c',fillters.onlyAtts);
+
         if(fieldName === 'month'){
             const newAtts = attestations?.map(att => att.name === value ? {...att,active:true} : {...att,active:false});
             setAttestations(newAtts);
@@ -102,6 +110,10 @@ export const useGetTeacherJournal = () => {
             console.error(err);
         }
     }
+
+    useEffect(() => {
+        navigate(routes.journal+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+    },[fillters]);
 
     return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,
             onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,

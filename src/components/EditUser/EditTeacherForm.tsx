@@ -40,7 +40,6 @@ const useEditUserTeacher = (user:UserProfileT) => {
     const fetch = async () => {
         Object.keys(user).forEach((key) => {
             if(Object.keys(watch()).includes(key)) {
-                console.log(key,);
                 //@ts-ignore
                 setValue(key, user[key] || null);
             }

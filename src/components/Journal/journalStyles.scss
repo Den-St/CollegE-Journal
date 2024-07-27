@@ -24,7 +24,7 @@
 .journalFillters__container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // justify-content: space-between;
     gap:50px;
 }
 .journalFilterItem{
@@ -401,26 +401,23 @@ scrollbar-width: none;  /* Firefox */
     font-size: 16px;
     font-weight: 400;
 }
-// .notOnlyAtts{
-    .specialLessonType:not(.specialLessonType_last+.specialLessonType){
-        margin-left: 40px;
-    }
-    .specialLessonType_last{
-        margin-right: 40px;
-    }
-    // .specialLessonType+.specialLessonType{
-    //     margin-right: 40px;
-    // }
-    .specialLessonType_cell:not(.specialLessonType_last_cell+.specialLessonType_cell){
-        margin-left: 55px;
-    }
-    .specialLessonType_last_cell{
-        margin-right: 55px;
-    }
-    // .specialLessonType_cell+.specialLessonType_cell{
-    //     margin-right: 55px;
-    // }
-// }
+.specialLessonType_student:not(.specialLessonType_student+.specialLessonType_student){
+    margin-left: 40px;
+}
+.specialLessonType:not(.specialLessonType_last+.specialLessonType){
+    margin-left: 40px;
+}
+.specialLessonType_last{
+    margin-right: 40px;
+}
+
+.specialLessonType_cell:not(.specialLessonType_last_cell+.specialLessonType_cell){
+    margin-left: 55px;
+}
+.specialLessonType_last_cell{
+    margin-right: 55px;
+}
+   
 
 
 // .onlyAtts{
@@ -476,6 +473,16 @@ scrollbar-width: none;  /* Firefox */
     background-color: green;
     position: absolute;
     width: calc(100% - 332px);
+}
+.studentJournal_monthName{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    color: white;
+    width: 150px;
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
 }
 .journalRightRowsContainer::-webkit-scrollbar{
     // position: absolute !important;

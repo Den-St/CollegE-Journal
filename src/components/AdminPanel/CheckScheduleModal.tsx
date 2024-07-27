@@ -25,7 +25,6 @@ const useScrollAndDrag = () => {
     }
     const handleDatesScroll = () => {
         if(cellsRef.current === null || datesRef.current === null) return;
-        console.log('1')
         cellsRef.current.scrollTop = datesRef.current.scrollTop;
     }
     const handleHorizontalScrollLessonTypes = () => {
@@ -47,7 +46,6 @@ const useScrollAndDrag = () => {
     }
     const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
         if(!isMouseDown && !localIsMouseDown) return;
-        console.log('1')
         if(lessonTypesRef.current === null || cellsRef.current === null || mainContainerRef.current === null) return;
         
         const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;

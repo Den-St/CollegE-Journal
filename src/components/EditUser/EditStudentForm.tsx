@@ -39,7 +39,7 @@ const useEditUserStudent = (user:UserProfileT) => {
             const res = await axiosConfig.put(endpoints.editUser,{...clearData,user_id,admission_date,birth_date, avatar:data.avatar || null},{headers:{Authorization:token}})
             navigate(routes.userProfile.replace(':id',user_id));
         }catch(err){
-            console.log(err);
+            console.error(err);
         }
     }
 
