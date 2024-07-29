@@ -1,3 +1,5 @@
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../consts/routes";
 import { useThemeStore } from "../../store/themeStore";
 import { CookiesNotification } from "../CookiesNotification";
 import { Footer } from "../Footer";
@@ -9,10 +11,12 @@ type Props = {
 
 export const Layout:React.FC<Props> = ({children}) => {
     const theme = useThemeStore().theme;
+    const route = useLocation().pathname;
+    console.log('',route)
     return <div className={`layout__container ${theme}`}>
-            <Header/>
+            {route !== routes.googleLogin && <Header/>}
             <main>{children}</main>
-            <Footer/>
-            <CookiesNotification/>
+            {route !== routes.googleLogin && <Footer/>}
+            {route !== routes.googleLogin && <CookiesNotification/>}
         </div>
 }
