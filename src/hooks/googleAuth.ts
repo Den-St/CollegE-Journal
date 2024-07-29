@@ -7,6 +7,7 @@ import { useUserStore } from '../store/userStore';
 import { setChangeProfileCookie } from '../helpers/setChangeProfileCookie';
 import { routes } from '../consts/routes';
 import { UserT } from '../types/user';
+import { originUrl } from '../consts/originUrl';
 
 export const useGoogleAuth = () => {
     const [searchParams,_] = useSearchParams();
@@ -61,7 +62,7 @@ export const useGoogleAuth = () => {
             console.log(res);
             if(!res.data.data.token) return;
             setToken(res.data.data.token);
-            window.opener.postMessage({a:'success_close'},'http://localhost:3000/sign-in');
+            window.opener.postMessage({a:'success_close'},originUrl);
             window.close();
         }catch(err){
             console.log(err);
