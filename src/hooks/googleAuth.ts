@@ -12,17 +12,17 @@ import { originUrl } from '../consts/originUrl';
 
 export const useGoogleAuthRequest = () => {
     const signIn = useUserStore().signIn;
-    const localToken = useUserStore().user.token;
     const onUserLoading = useUserStore().startLoading;
     const onStopUserLoading = useUserStore().stopLoading;
     const navigate = useNavigate();
-    
-    const auth = async () => {
-        if(!localToken) return;
+    const [loading,setLoading] = useState(false);
+
+    const auth = async (token:string) => {
+        if(!token) return;
         onUserLoading();
         try{
-            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken}});
-            signIn({...res.data.data,token:localToken || ''},);
+            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
+            signIn({...res.data.data,token:token || ''},);
             console.log('auth',res.data.data);
             if(!res.data.data.is_active){
                 setChangeProfileCookie();
@@ -37,23 +37,32 @@ export const useGoogleAuthRequest = () => {
     const onOpenAuthWindow = async () => {
         try{
             const res = await axiosConfig.get(endpoints.googleAuthGetUrl);
-            console.log(res);
             const popup = window.open(res.data.redirect_url,'googleAuthPopup','width=600,height=400,left=200,top=200',);
             if(!popup) return;
             window.addEventListener('message', async function(event) {
-                    console.log('asd',event.data);
-                    console.log('asd2',event);
-                    if (event.data.message === 'success_close') {
-                        await auth();
-                        return;
-                    }
-                }, false);
+                console.log('asd',event.data);
+                
+                if (event.data.message !== 'success_close') {
+                    return;
+                }
+                setLoading(true);
+                const {state,code,scope,authuser,prompt} = event.data;
+                try{
+                    const res = await axiosConfig.get(endpoints.googleLogin+`?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`);
+                    setToken(res.data.data.token);
+                    await auth(res.data.data.token);
+                }catch(err){
+                    console.error(err);
+                }finally{
+                    setLoading(false);
+                }
+            }, false);
         }catch(err){
             console.error(err);
         }
     }
 
-    return {onOpenAuthWindow};
+    return {onOpenAuthWindow,loading};
 }
 
 export const useGoogleAuthLogin = () => {
@@ -63,28 +72,14 @@ export const useGoogleAuthLogin = () => {
     const scope = searchParams.get('scope');
     const authuser = searchParams.get('authuser');
     const prompt = searchParams.get('prompt');
-    const [loading,setLoading] = useState(false);
 
     const onGoogleLogin =  async () => {
-        setLoading(true);
-        try{
-            const res = await axiosConfig.get(endpoints.googleLogin+`?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`);
-            console.log(res);
-            if(!res.data.data.token) return;
-            setToken(res.data.data.token);
-            window.opener.postMessage({message:'success_close'},originUrl);
-            window.close();
-        }catch(err){
-            console.log(err);
-        }finally{
-            setLoading(false);
-        }
+        window.opener.postMessage({message:'success_close',state,code,scope,authuser,prompt},originUrl);
+        window.close();
     }
 
     useEffect(() => {
         if(!state || !code || !scope || authuser === null || !prompt) return;
         onGoogleLogin();
     },[state,code,scope,authuser,prompt])
-
-    return {loading};
 }
