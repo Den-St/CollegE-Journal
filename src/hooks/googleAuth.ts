@@ -26,8 +26,8 @@ export const useGoogleAuth = () => {
         try{
             const res = await axiosConfig.get(endpoints.googleLogin+`?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`);
             console.log(res);
-            if(!res.data.token) return;
-            setToken(res.data.token);
+            if(!res.data.data.token) return;
+            setToken(res.data.data.token);
             window.close();
         }catch(err){
             console.log(err);
