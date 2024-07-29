@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { setToken } from './../helpers/auth';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -9,13 +10,7 @@ import { routes } from '../consts/routes';
 import { UserT } from '../types/user';
 import { originUrl } from '../consts/originUrl';
 
-export const useGoogleAuth = () => {
-    const [searchParams,_] = useSearchParams();
-    const state = searchParams.get('state');
-    const code = searchParams.get('code');
-    const scope = searchParams.get('scope');
-    const authuser = searchParams.get('authuser');
-    const prompt = searchParams.get('prompt');
+export const useGoogleAuthRequest = () => {
     const signIn = useUserStore().signIn;
     const localToken = useUserStore().user.token;
     const onUserLoading = useUserStore().startLoading;
@@ -28,6 +23,7 @@ export const useGoogleAuth = () => {
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:localToken}});
             signIn({...res.data.data,token:localToken || ''},);
+            console.log('auth',res.data.data);
             if(!res.data.data.is_active){
                 setChangeProfileCookie();
                 navigate(routes.editProfile);
@@ -47,25 +43,41 @@ export const useGoogleAuth = () => {
             window.addEventListener('message', async function(event) {
                     console.log('asd',event.data);
                     console.log('asd2',event);
-                    // if (event.data !== 'success_close') {
-                    //     return;
-                    // }
-                    await auth();
+                    if (event.data.message === 'success_close') {
+                        await auth();
+                        return;
+                    }
                 }, false);
         }catch(err){
             console.error(err);
         }
     }
+
+    return {onOpenAuthWindow};
+}
+
+export const useGoogleAuthLogin = () => {
+    const [searchParams,_] = useSearchParams();
+    const state = searchParams.get('state');
+    const code = searchParams.get('code');
+    const scope = searchParams.get('scope');
+    const authuser = searchParams.get('authuser');
+    const prompt = searchParams.get('prompt');
+    const [loading,setLoading] = useState(false);
+
     const onGoogleLogin =  async () => {
+        setLoading(true);
         try{
             const res = await axiosConfig.get(endpoints.googleLogin+`?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`);
             console.log(res);
             if(!res.data.data.token) return;
             setToken(res.data.data.token);
-            window.opener.postMessage({a:'success_close'},originUrl);
+            window.opener.postMessage({message:'success_close'},originUrl);
             window.close();
         }catch(err){
             console.log(err);
+        }finally{
+            setLoading(false);
         }
     }
 
@@ -74,5 +86,5 @@ export const useGoogleAuth = () => {
         onGoogleLogin();
     },[state,code,scope,authuser,prompt])
 
-    return {onOpenAuthWindow};
+    return {loading};
 }

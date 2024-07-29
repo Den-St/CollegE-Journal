@@ -52,7 +52,7 @@ export const routes = {
     teachers:'/teachers',
     myGroup:'/my-group',
     recovery:'/recovery-password',
-    googleLogin:'/api/google/login'
+    googleLogin:'/google/login'
 } as const;
 
 export const headerRoutes = {

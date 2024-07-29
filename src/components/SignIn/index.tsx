@@ -11,7 +11,7 @@ import { Navigate, useSearchParams } from 'react-router-dom';
 import { routes } from '../../consts/routes';
 import { emailPattern } from '../../consts/emailPattern';
 import { ForgotPasswordModal } from '../ForgotPasswordModal';
-import { useGoogleAuth } from '../../hooks/googleAuth';
+import { useGoogleAuthRequest } from '../../hooks/googleAuth';
 
 const statusCodes:Record<number,string> = {
     0:'На жаль, дані введені некоректно, перевірте їх та спробуйте ще раз!',
@@ -27,7 +27,7 @@ export const SignIn = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");
     }
     const {onLogin,status,loading,setRemember} = useSignIn();
-    const {onOpenAuthWindow} = useGoogleAuth();
+    const {onOpenAuthWindow} = useGoogleAuthRequest();
     const [searchParams,setSearchParams] = useSearchParams();
     const [onForgotPasswordModal,setOnForgotPasswordModal] = useState(false);
     useEffect(() => {
