@@ -15,6 +15,7 @@ import { Teachers } from "../components/Teachers";
 import { MyGroup } from "../components/MyGroup";
 import { RecoveryPassword } from "../components/RecoveryPassword";
 import { PrintForm } from "../components/Journal/PrintForm";
+import { GoogleLogin } from "../components/GoogleLogin";
 
 export const navRoutes = {
 }
@@ -51,6 +52,7 @@ export const routes = {
     teachers:'/teachers',
     myGroup:'/my-group',
     recovery:'/recovery-password',
+    googleLogin:'/api/google/login'
 } as const;
 
 export const headerRoutes = {
@@ -103,6 +105,7 @@ export const PublicRoutes = [
     <Route key={routes.editUser} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><EditUser/></SecurityLevelGuard>} path={routes.editUser}/>,
     <Route key={routes.createTeacher} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><CreateTeacher/></SecurityLevelGuard>} path={routes.createTeacher}/>,
     <Route key={routes.recovery} element={<RecoveryPassword/>} path={routes.recovery}/>,
+    <Route key={routes.googleLogin} element={<GoogleLogin/>} path={routes.googleLogin}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

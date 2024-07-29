@@ -27,5 +27,7 @@ export const endpoints = {
     getUser:'users/user',
     changeLG:'users/students/additional-groups',
     editUser:'admin/user/change-info',
-    invertEngGroups:'admin/groups/invert_subgroups'
+    invertEngGroups:'admin/groups/invert_subgroups',
+    googleAuthGetUrl:'google/request',
+    googleLogin:'google/login'
 }

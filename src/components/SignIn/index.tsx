@@ -11,6 +11,7 @@ import { Navigate, useSearchParams } from 'react-router-dom';
 import { routes } from '../../consts/routes';
 import { emailPattern } from '../../consts/emailPattern';
 import { ForgotPasswordModal } from '../ForgotPasswordModal';
+import { useGoogleAuth } from '../../hooks/googleAuth';
 
 const statusCodes:Record<number,string> = {
     0:'На жаль, дані введені некоректно, перевірте їх та спробуйте ще раз!',
@@ -26,6 +27,7 @@ export const SignIn = () => {
         setPasswordInputType(prev => prev === "password" ? "text" : "password");
     }
     const {onLogin,status,loading,setRemember} = useSignIn();
+    const {onOpenAuthWindow} = useGoogleAuth();
     const [searchParams,setSearchParams] = useSearchParams();
     const [onForgotPasswordModal,setOnForgotPasswordModal] = useState(false);
     useEffect(() => {
@@ -67,7 +69,7 @@ export const SignIn = () => {
                 {!!errors.mailbox_address?.message && <p style={{marginTop:'-30px',marginBottom:'-20px'}} className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
                 <input autoComplete="off"  disabled={loading} type={'submit'} className="signIn__button" value={'Увійти'}/>
             </form>
-            <button className='signInWithGoogle__button'>
+            <button onClick={onOpenAuthWindow} className='signInWithGoogle__button'>
                 <span className='signInWithGoogle__icon'>
                     <GoogleIconSvg/>
                 </span>
