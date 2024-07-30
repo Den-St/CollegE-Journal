@@ -61,5 +61,5 @@ export const useSignIn = () => {
         }
     }
 
-    return {onLogin,status,loading,setRemember};
+    return {onLogin,status,loading,setRemember,remember,setStatus};
 }

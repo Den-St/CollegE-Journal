@@ -9,13 +9,14 @@ import { setChangeProfileCookie } from '../helpers/setChangeProfileCookie';
 import { routes } from '../consts/routes';
 import { UserT } from '../types/user';
 import { originUrl } from '../consts/originUrl';
+import { securityLevels } from '../consts/securityLevels';
 
-export const useGoogleAuthRequest = () => {
+export const useGoogleAuthRequest = (setErrorStatus:(statusNumber:number) => void,rememberMe?:boolean,) => {
     const signIn = useUserStore().signIn;
     const onUserLoading = useUserStore().startLoading;
     const onStopUserLoading = useUserStore().stopLoading;
     const navigate = useNavigate();
-    const [loading,setLoading] = useState(false);
+    const [googleAuthLoading,setLoading] = useState(false);
 
     const auth = async (token:string) => {
         if(!token) return;
@@ -23,12 +24,20 @@ export const useGoogleAuthRequest = () => {
         try{
             const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
             signIn({...res.data.data,token:token || ''},);
-            console.log('auth',res.data.data);
-            if(!res.data.data.is_active){
+            if(res.data.data.security_level === securityLevels.admin) {
+                navigate(routes.adminPanel + '?section=schedule');
+                return;
+            }
+            if(res.data.data.is_active){
+                navigate(routes.myProfile);
+                return;
+            }
+            if(!res.data.data.is_active) {
                 setChangeProfileCookie();
                 navigate(routes.editProfile);
             }
         }catch(err){
+            setErrorStatus(0);
             console.error(err);
         }finally{
             onStopUserLoading();
@@ -40,8 +49,6 @@ export const useGoogleAuthRequest = () => {
             const popup = window.open(res.data.redirect_url,'googleAuthPopup','width=600,height=400,left=200,top=200',);
             if(!popup) return;
             window.addEventListener('message', async function(event) {
-                console.log('asd',event.data);
-                
                 if (event.data.message !== 'success_close') {
                     return;
                 }
@@ -49,7 +56,7 @@ export const useGoogleAuthRequest = () => {
                 const {state,code,scope,authuser,prompt} = event.data;
                 try{
                     const res = await axiosConfig.get(endpoints.googleLogin+`?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`);
-                    setToken(res.data.data.token);
+                    if(rememberMe) setToken(res.data.data.token);
                     await auth(res.data.data.token);
                 }catch(err){
                     console.error(err);
@@ -62,7 +69,7 @@ export const useGoogleAuthRequest = () => {
         }
     }
 
-    return {onOpenAuthWindow,loading};
+    return {onOpenAuthWindow,googleAuthLoading};
 }
 
 export const useGoogleAuthLogin = () => {
