@@ -55,7 +55,7 @@ export const StudentJournal = () => {
                 <div className='journalColumnsCenter__container'
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
                     onMouseMove={onMouseMove} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
-                    {journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}>
+                    {journal.columns.map(column => <div key={column.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('.') && 'specialLessonType_student'}`}>
                             <div className={`journalColumnsCenterItemType ${(column.date.includes('.') || !column.lesson_type) && `transparent`}`}>
                                 {!column.date.includes('.') && !!column.lesson_type &&
                                 <Tooltip title={column.lesson_type}>
@@ -88,7 +88,7 @@ export const StudentJournal = () => {
                         <div>
                         {<div className='journalRowItemCenter__container' style={{marginBottom:'30px',justifyContent:'unset',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}>
                             {columns.map(column => 
-                                <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}>
+                                <div key={column?.column_index} className={`journalColumnsCenterItem__container ${!column.date.includes('.') && 'specialLessonType_student'}`}>
                                     {column.date.includes('.') 
                                     ? <div className='journalColumnsCenterItemDate__container'>
                                         <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')?.[0]}</p>
@@ -109,7 +109,7 @@ export const StudentJournal = () => {
                         <div className='journalRowItemCenter__container' style={{marginBottom:'30px',marginLeft:!attestations?.some(att => att.active) ? 'unset' : '66px'}}
                         >
                             {columns.map(column => 
-                                <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
+                                <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('.') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
                             )}
                         </div>
                         </div>
@@ -119,7 +119,7 @@ export const StudentJournal = () => {
                     ref={cellsRef} onScroll={handleHorizontalScroll}
                     >
                         {journal.columns.map(column => 
-                            <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('\n') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
+                            <div key={column?.column_index + column.date} className={`journalRowItemCenterValue__container ${!column.date.includes('.') && 'specialLessonType_student'}`}><p className='journalRowItemCenterValue__text' style={{color:getColorByValue(column.cells[0]?.value,journal.subject_system)}}>{column.cells[0]?.value}</p></div>
                         )}
                     </div>}
                 </div>
