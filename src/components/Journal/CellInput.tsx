@@ -24,7 +24,7 @@ const isValid = (value:string) => {
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
-        if(value.length === 1 && value[0].toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2].toLowerCase() === 'а') {
+        if(value.length === 1 && value[0]?.toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2]?.toLowerCase() === 'а') {
             value = value.toUpperCase();
             return true;
         }
@@ -47,7 +47,7 @@ export const getColorByValue = (value:string,system:number) => {
     }else{
         if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
     }
-    if(value.toLowerCase() === "н" || value.toLowerCase() === "н/a") return "#EFB42D";
+    if(value?.toLowerCase() === "н" || value?.toLowerCase() === "н/a") return "#EFB42D";
     if(!value) return "white";
     return "white";
 }
