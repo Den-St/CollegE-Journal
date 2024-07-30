@@ -37,7 +37,6 @@ export const useGoogleAuthRequest = (setErrorStatus:(statusNumber:number) => voi
                 navigate(routes.editProfile);
             }
         }catch(err){
-            setErrorStatus(0);
             console.error(err);
         }finally{
             onStopUserLoading();
@@ -59,6 +58,7 @@ export const useGoogleAuthRequest = (setErrorStatus:(statusNumber:number) => voi
                     if(rememberMe) setToken(res.data.data.token);
                     await auth(res.data.data.token);
                 }catch(err){
+                    setErrorStatus(0);
                     console.error(err);
                 }finally{
                     setLoading(false);
