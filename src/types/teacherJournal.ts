@@ -18,5 +18,6 @@ export type TeacherJournalT = {
         student_id:string
     }[],
     subject_id:string,
-    subject_system:number
+    subject_system:number,
+    journal_owner:string
 }

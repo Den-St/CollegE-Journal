@@ -32,7 +32,7 @@ export const TeacherJournal = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const subjectName = !!groupJournal ? setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || null : null;
-
+    console.log('attestations',attestations);
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
@@ -181,9 +181,9 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 value={attestations?.find(att => att.active)?.name}
                 onChange={(value) => onChangeFillters('month',value)}
                 >
-                    {/* {attestations?.map(att => 
+                    {attestations?.map(att => 
                         <Option key={att.name} value={att.name} label={att.name}>{att.name}</Option>
-                    )} */}
+                    )}
                 </Select>
             </div>
             <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"

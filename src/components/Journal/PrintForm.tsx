@@ -29,7 +29,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                 </div>}
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
                     <span className="printForm_subsubheader">{subjectName}</span>
-                    <span className="printForm_subsubheader">ПІБ Викладача</span>
+                    <span className="printForm_subsubheader">{journal.journal_owner}</span>
                 </div>
                 <section className='printFormJournal__container'>
                     <div className='printFormJournal_top'>
@@ -85,7 +85,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     </div>
                 </section>
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
-                    <span className="printForm_subsubheader">ПІБ Викладача</span>
+                    <span className="printForm_subsubheader">{journal.journal_owner}</span>
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
             </div>
@@ -102,7 +102,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                 </div> */}
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
                     <span className="printForm_subsubheader">{subjectName}</span>
-                    <span className="printForm_subsubheader">ПІБ Викладача</span>
+                    <span className="printForm_subsubheader">{journal.journal_owner}</span>
                 </div>
                 <div className="printFormLessons_main">
                     <div className="printFormLessons_top">
@@ -130,7 +130,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     </div>
                 </div>
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
-                    <span className="printForm_subsubheader">ПІБ Викладача</span>
+                    <span className="printForm_subsubheader">{journal.journal_owner}</span>
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
             </div>}
