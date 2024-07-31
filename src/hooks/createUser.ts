@@ -50,8 +50,10 @@ export const useCreateUser = (group?:GroupT) => {
         }
         try{
             setCreateUserLoading(true);
-            const res = await axiosConfig.post(endpoints.addUser,{...data,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken}});
-            group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data.user_password});
+            const admission_date = !!data.admission_date?.getTime ? Math.round((data.admission_date?.getTime() || 0)/1000) : null;
+            const birth_date = !!data.birth_date?.getTime ? Math.round((data.birth_date?.getTime() || 0)/1000) : null;
+            const res = await axiosConfig.post(endpoints.addUser,{...data,birth_date,admission_date,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken}});
+            group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data?.user_id});
             setCreateUserErrorCode(undefined);
             reset();
             setValue('education_form',null);
@@ -70,5 +72,7 @@ export const useCreateUser = (group?:GroupT) => {
         }
     }   
 
-    return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,createUserFormErrors:errors,createUserFormErrorMessage};
+    return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,
+            createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,
+            createUserFormErrors:errors,createUserFormErrorMessage,watch,register,setValue};
 }

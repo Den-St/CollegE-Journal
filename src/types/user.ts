@@ -52,8 +52,8 @@ export type CreateUserT = {
     full_name:string
     education_form:string | null 
     education_type:string | null
-    birth_date:string;
-    admission_date:string
+    birth_date:Date | null;
+    admission_date:Date | null
     location:string | null
     phone_number:string
     parents_phone_number:string

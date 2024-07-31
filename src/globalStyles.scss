@@ -407,7 +407,119 @@ li.slick-active{
 .ant-switch{
 	background: var(--secondary-blue) !important;
 }
+.createUser__main{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    width: 100%;
+    padding: 191px 5% 0 5%;
+    font-family: Montserrat;
+}
 
+.createUserTitle{
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
+.createUserForm{
+    display: flex;
+    flex-direction: column;
+    gap:60px;
+    width: 100%;
+}
+
+.createUserFormInputs__container{
+    display: flex;
+    width:100%;
+    gap:30px;
+}
+.createUserNameInput__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 55%;
+    // max-width: 640px;
+    min-width: 350px;
+}
+.createUserEmailInput__container{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 45%;
+    // max-width: 640px;
+    min-width: 250px;
+    
+}
+.select_label{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
+
+.createUserFormSelects__container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap:30px;
+}
+@media screen and (max-width:'900px'){
+    .createUserFormInputs__container{
+        flex-wrap: wrap;
+    }
+    .createUserNameInput__container{
+        max-width: unset;
+        width: 100%;
+    }
+    .createUserEmailInput__container{
+        max-width: unset;
+        width: 100%;
+    }
+}
+.createUserSelect__container{
+    display: flex;
+    gap:20px;
+    flex-direction: column;
+}
+
+
+.createUserButtons__container{
+    display: flex;
+    gap:20px;
+}
+
+.dark{
+    .createUserTitle{
+        color:white;
+    }
+    .select_label{
+        color:white;
+    }
+    .ant-select-selector{
+        background-color: var(--secondary-blue) !important;
+        border:none !important;
+        font-weight: 500;
+    }
+    .ant-select-selection-item{
+        color:white !important;
+    }
+    .select_wrapper{
+        background-color: var(--secondary-blue);
+    }
+
+    input{
+        color:white;
+    }
+    .createUser__button{
+        background-color: var(--secondary-blue);
+    }
+    .createUser__button{
+        color:white;
+    }
+}
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;

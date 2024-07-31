@@ -15,7 +15,6 @@ export { AdminPanel } from './components/AdminPanel';
 export { StudyMaterials } from './components/StudyMaterials';
 export { EditGroup } from './components/EditGroup';
 export { CreateStudyMaterials } from "./components/CreateStudyMaterials";
-export { CreateUser } from "./components/CreateUser";
 export { FAQ } from "./components/FAQ";
 export { CreateHomeTask } from "./components/HomeTask/createHomeTask";
 export { NoMatch } from "./components/NoMatch";

@@ -1,5 +1,5 @@
 import "./editGroupStyles.scss";
-import { Select } from "antd";
+import { DatePicker, Select } from "antd";
 import { useCreateUser } from "../../hooks/createUser"
 import { useThemeStore } from "../../store/themeStore";
 import { useChangeGroupInfo } from "../../hooks/changeGroupInfo";
@@ -8,13 +8,12 @@ import { Link, } from "react-router-dom";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { useGetGroup } from "../../hooks/getGroup";
 import { emailPattern } from "../../consts/emailPattern";
-import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { routes } from "../../consts/routes";
 import { useGetSupervisors } from "../../hooks/getSupervisors";
-import { FieldErrors } from "react-hook-form";
-import { CreateUserT } from "../../types/user";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { namePattern } from "../../helpers/namePattern";
+import dayjs from "dayjs";
+import { customDateFormat } from "../../helpers/dateFormat";
 const {Option} = Select;
 
 const userErrorCodesToMessages:Record<number,string> = {
@@ -28,7 +27,7 @@ const changeErrorCodesToMessages:Record<number,string> = {
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
-    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading} = useCreateUser(group);
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading,watch,register,setValue} = useCreateUser(group);
     const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName,onInvertEngGroups} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
@@ -129,15 +128,33 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата народження</label>
-                    <input autoComplete="off" 
+                    {/* <input autoComplete="off" 
                     {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
-                    className="form_input" placeholder='Оберіть дату народження'/>
+                    className="form_input" placeholder='Оберіть дату народження'/> */}
+                     <DatePicker
+                        placeholder="Оберіть дату народження"
+                        className="form_input"
+                        format={customDateFormat}
+                        style={{'visibility':'visible'}}
+                        value={dayjs(watch('birth_date'))}
+                        {...register('birth_date',{required:{value:true,message:'Оберіть дату народження'},
+                        })}
+                        onChange={(e) => setValue('birth_date',e?.toDate() || null)} />
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата вступу</label>
-                    <input autoComplete="off" 
+                    {/* <input autoComplete="off" 
                     {...createUserRegister('admission_date',{required:{value:true,message:'Оберіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
-                    className="form_input" placeholder='Оберіть дату вступу'/>
+                    className="form_input" placeholder='Оберіть дату вступу'/> */}
+                    <DatePicker
+                        placeholder="Оберіть дату вступу"
+                        className="form_input"
+                        format={customDateFormat}
+                        style={{'visibility':'visible'}}
+                        value={dayjs(watch('admission_date'))}
+                        {...register('admission_date',{required:{value:true,message:'Оберіть дату вступу'},
+                        })}
+                        onChange={(e) => setValue('admission_date',e?.toDate() || null)} />
                 </div>
                 <div className="createUserSelect__container">
                     <label className="select_label">Місцезнаходження</label>
@@ -235,12 +252,12 @@ export const EditGroup = () => {
         <section className="studentList__container">
             <div className="studentItems__container"  style={{height:80 * Math.round((group?.group_students?.length || 0) / 2)}} >
                 {group?.group_students?.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(student => 
-                    <div id={student.student_id || ''} className="student__container">
+                    <div id={student?.student_id || ''} className="student__container">
                         <div className="student__info">
                             <img className="studentList__avatar" src={student?.avatar || defaultAvatar} alt=""/>
                             <p className="studentName">{student?.full_name}</p>
                         </div>
-                        <Link  className="studentButton" to={routes.userProfile.replace(':id',student.student_id || '')}>Перейти</Link>
+                        <Link  className="studentButton" to={routes.userProfile.replace(':id',student?.student_id || '')}>Перейти</Link>
                     </div> 
                 )}
             </div>
