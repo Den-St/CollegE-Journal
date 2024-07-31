@@ -167,7 +167,7 @@ input::placeholder{
 
 }
 .header{
-	font-family: Montserrat;
+	font-family: Montserrat !important;
 	font-size: 28px;
 	font-weight: 500;
 	line-height: 34.13px;
@@ -525,7 +525,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
 }
-
+.ant-modal-content{
+	padding: 30px 40px !important;
+}
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{

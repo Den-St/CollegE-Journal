@@ -268,13 +268,11 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                 className="form_input" placeholder='Телефонний номер батьків'/>
             </div>
         </div>
-        {//@ts-ignore
-        Object.keys(errors).map(key => !!errors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errors[key]?.message}</p>)
-        }
-        {/* {!!createUserFormErrors.full_name?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.full_name?.message}</p>}
-        {!!createUserFormErrors.mailbox_address?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrors.mailbox_address?.message}</p>}
-        {!!createUserFormErrorMessage && <p style={{width:'fit-content'}} className="signIn_errorMessage">{createUserFormErrorMessage}</p>} */}
-        {/* {createUserErrorCode !== undefined && <p style={{width:'fit-content'}} className="signIn_errorMessage">{userErrorCodesToMessages[createUserErrorCode]}</p>} */}
+        {!!Object.keys(errors).length && <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+            {//@ts-ignore
+            Object.keys(errors).map(key => !!errors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errors[key]?.message}</p>)
+            }
+        </div>}
         <div className="createUserButtons__container" style={{'justifyContent':'space-between'}}>
             <div className="createUserButtons__container">
                 <input 

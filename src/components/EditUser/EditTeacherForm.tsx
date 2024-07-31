@@ -191,9 +191,11 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
                 </div> */}
             </div>
         </div>
-        {//@ts-ignore
-        Object.keys(errors).map(key => !!errors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errors[key]?.message}</p>)
-        }
+        {!!Object.keys(errors).length && <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+            {//@ts-ignore
+            Object.keys(errors).map(key => !!errors[key]?.message && <p style={{width:'fit-content'}} className="signIn_errorMessage">{errors[key]?.message}</p>)
+            }
+        </div>}
         <div className="createUserButtons__container">
             <input 
             // disabled={createUserDisabled} 
