@@ -45,15 +45,15 @@ export const ForgotPasswordModal:React.FC<{onClose:() => void}> = ({onClose}) =>
         <form onSubmit={handleSubmit(onSubmit)} className="forgotPassword_form">
             <h1 className="header">Забули пароль?</h1>
             <div className="forgotPassword_input_container">
-                <h2 className="forgotPassword_subheader">Введіть свою пошту, яка прив’язана до аккаунту</h2>
+                <h2 className="forgotPassword_subheader">Введіть свою пошту, яка прив’язана до акаунту</h2>
                 <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Нажаль дані введені не корректно або ця пошта не прив’язана до журналу, перевірте їх та спробуйте ще раз!'},required:{value:true,message:'Введіть поштову адресу!'}})} className="input" placeholder="Введіть свою пошту"/>
             </div>
             {!!errors.mailbox_address?.message && <p className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
             {formError && <p className='signIn_errorMessage'>{errorCodesToMessages[formError]}</p>}
             <p className="forgotPassword_description">
-                На цю пошту прийде автоматичний лист із запитом на зміну паролю. Також поки ви не змінете пароль за цим запитом, аккаунт буде недійсний
+                На введену пошту прийде автоматичний лист із запитом на зміну паролю. Також, поки ви не змінете пароль за надісланим запитом, акаунт буде недійсний
             </p>
-            <input type={'submit'} disabled={submitBlocked} style={{width:'271px'}} className="primary_button" value={"Підтвердити запит"}/>
+            <input type={'submit'} disabled={submitBlocked} style={{width:'270px',height:'40px'}} className="primary_button" value={"Підтвердити запит"}/>
         </form>
     </div>
 }

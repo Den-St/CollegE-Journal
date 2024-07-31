@@ -71,7 +71,7 @@ export const EditGroup = () => {
                 <span onClick={onInvertEngGroups} className="createUser__button primary_button"  style={{'padding':'10px 30px'}}>Інвертувати під-групи Англійської</span>
             </div>
         </form>
-        <h1 className="createUserTitle">Створення аккаунту</h1>
+        <h1 className="createUserTitle">Створення акаунту</h1>
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
