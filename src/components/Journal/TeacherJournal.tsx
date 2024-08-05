@@ -32,7 +32,7 @@ export const TeacherJournal = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const subjectName = !!groupJournal ? setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || null : null;
-    console.log('attestations',attestations);
+
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!groupJournal?.journal_group_full_name || !subjectName){
@@ -43,12 +43,12 @@ export const TeacherJournal = () => {
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
 
-    if(!journal) return <NoMatch title={`Журналу не знайдено`}/>
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
         <TeacherJournalFillters onChangeFillters={onChangeFillters} loading={loading} journal={journal} attestations={attestations} fillters={fillters} groupJournal={groupJournal} subjectName={subjectName} refetch={refetch} 
         />
-        {loading ?  <Loader/>
+        {loading ? <Loader/>
+        : !journal ? <NoMatch title={`Журналу не знайдено`}/>
         : (!journal.students.length || !journal.columns.length) ? <NoMatch isChildren title="Журнал пустий"/> : <>
         <section className='journal_portraitModeWarning'>
                 <JournalPortraitModeWarning/>
@@ -157,12 +157,13 @@ type Props = {
     refetch:(_fillters?:TeacherJournalFilltersT) => void,
     fillters:TeacherJournalFilltersT,
     attestations?:JournalAttestationT[],
-    journal:TeacherJournalT,
+    journal?:TeacherJournalT,
     loading:boolean,
     onChangeFillters:(fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => void
 }
 export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,subjectName,refetch,attestations,fillters,journal,onChangeFillters,}) => {
     const {handlePrintAndRefetch,printLoading,componentRef} = useJournalPrintForm(async () => await refetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts}))
+    const unique_subjects = setFromSubjects([...groupJournal?.can_edit || [],...groupJournal?.can_view || []]);
 
     return <section className='journalTop__container'>
         {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
@@ -189,7 +190,9 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
             <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
                     style={{height:'300px !important',overflow:'hidden'}}
                     >
-                <Select 
+                {!unique_subjects.find(sub => sub.journal_id === fillters.subject_id)?.journal_id 
+                ? <div style={{width:'100px',height:'50px'}}><Loader/></div>
+                : <Select 
                     placeholder={
                         <div className="fillterPlaceholder_container">
                             <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
@@ -199,7 +202,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                     style={{width:'300px !important'}}
                     // allowClear
                     loading={loading}
-                    value={fillters.subject_id}
+                    value={unique_subjects.find(sub => sub.journal_id === fillters.subject_id)?.journal_id || ''}
                     onChange={(value) => onChangeFillters('subject_id',value)}
                 >
                     {!!groupJournal && 
@@ -207,14 +210,14 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                     .map(subject => 
                         <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
                     )}
-                </Select>
+                </Select>}
             </div>
             <div style={{'display':'flex','alignItems':'center','gap':'30px'}}>
                 <Switch defaultChecked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
                 <span className='fillter_placeholder'>Тільки атестації</span>
             </div>
             </div>
-            {!loading && !(!journal.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Печать` : <Spin/>}</button>}
+            {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
         </div>
     </section>
 }

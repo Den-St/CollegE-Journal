@@ -28,10 +28,10 @@ export const useCreateUser = (group?:GroupT) => {
     } = useForm<CreateUserT>();
 
     const onCreateUser = async (data:CreateUserT) => {
-        if(!data.education_form) {
-            setErrorMessage('Оберіть форму навчання!')
-            return;
-        }
+        // if(!data.education_form) {
+        //     setErrorMessage('Оберіть форму навчання!')
+        //     return;
+        // }
         if(!data.education_type){
             setErrorMessage('Оберіть тип навчання!')
             return;
@@ -40,11 +40,19 @@ export const useCreateUser = (group?:GroupT) => {
             setErrorMessage('Некорректно введене ПІБ!')
             return;
         }
-        if(data.phone_number?.[0] !== '+'){
+        // if(data.phone_number?.[0] !== '+'){
+        //     setErrorMessage('Некорректно введений номер студента!')
+        //     return;
+        // }
+        // if(data.parents_phone_number?.[0] !== '+'){
+        //     setErrorMessage('Некорректно введений номер батьків!')
+        //     return;
+        // }
+        if(!data.phone_number?.includes('+')){
             setErrorMessage('Некорректно введений номер студента!')
             return;
         }
-        if(data.parents_phone_number?.[0] !== '+'){
+        if(!data.parents_phone_number?.includes('+')){
             setErrorMessage('Некорректно введений номер батьків!')
             return;
         }

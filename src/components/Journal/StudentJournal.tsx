@@ -22,8 +22,8 @@ export const StudentJournal = () => {
     const {loading,journal,fillters,onChangeFillters,columnByMonth,attestations} = useStudentJournal()
     const {journalSubjects} = useStudentSubjects();
     const subjects = journalSubjects.subjects;
-    console.log('jor',journal)
     const currentSubjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
+    
     useEffect(() => {
         const subjectName = subjects.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
         if(!subjectName){
@@ -33,7 +33,7 @@ export const StudentJournal = () => {
         document.title = `Журнал - ${subjectName} - ${attestations?.find(att => att.active)?.name || 'Увесь семестр'}`;
     },[fillters.subject_id,fillters.month,journal,subjects]);
     const {mouseUpHandler,mouseDownHandler,onMouseMove,cellsRef,handleHorizontalScroll,handleHorizontalScrollLessonTypes,lessonTypesRef} = useJournalDragScroll();
-    console.log(columnByMonth);
+
     return <div onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
         <StudentJournalFillters subjects={subjects} attestations={attestations} fillters={fillters} onChangeFillters={onChangeFillters} loading={loading}/>
         {loading ? <Loader/>

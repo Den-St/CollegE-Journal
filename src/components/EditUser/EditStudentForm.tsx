@@ -212,7 +212,9 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                         className="createUserSelect"
                         placeholder={'Оберіть форму навчання'}
                         optionLabelProp="label"
-                        {...register('education_form',{required:{value:true,message:'Оберіть форму навчання'}})}
+                        {...register('education_form',
+                        // {required:{value:true,message:'Оберіть форму навчання'}}
+                        )}
                         onChange={(e) => setValue('education_form',e)}
                         value={watch('education_form')}
                         >   

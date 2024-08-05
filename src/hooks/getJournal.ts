@@ -51,6 +51,7 @@ export const useGetTeacherJournal = () => {
     }
     const refetch = async (_fillters?:TeacherJournalFilltersT) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
+        setLoading(true);
         try{
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
             ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:+_fillters.onlyAtts ? 1 : 0},{headers:{Authorization:token}}) 
@@ -62,6 +63,7 @@ export const useGetTeacherJournal = () => {
         }catch(err){
             console.error(err);
         }
+        setLoading(false);
     }
 
     useEffect(() => {

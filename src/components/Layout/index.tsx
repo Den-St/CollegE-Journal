@@ -12,7 +12,7 @@ type Props = {
 export const Layout:React.FC<Props> = ({children}) => {
     const theme = useThemeStore().theme;
     const route = useLocation().pathname;
-    console.log('',route)
+
     return <div className={`layout__container ${theme}`}>
             {route !== routes.googleLogin && <Header/>}
             <main>{children}</main>

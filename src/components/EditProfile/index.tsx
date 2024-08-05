@@ -22,12 +22,8 @@ import AntdImgCrop from "antd-img-crop";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 
 const useEditProfile = () => {
-    const user = useUserStore().user;
-    const setToken = useUserStore().setToken;
-    const setAvatar = useUserStore().setAvatar;
-    const setActive = useUserStore().setActive;
-    const localCookie = user.token;
-    const cookie = getToken();
+    const {user,setToken,setAvatar,setActive} = useUserStore();
+    const token = user.token;
     const [newAvatarUrl,setNewAvatarUrl] = useState('');
     const [formError,setFormError] = useState('');
     const navigate = useNavigate();
@@ -38,9 +34,13 @@ const useEditProfile = () => {
         watch,
         reset,
         formState:{errors}
-    } = useForm<{new_password:string,new_password_confimation:string,avatar:File}>();
+    } = useForm<{new_password:string,new_password_confimation:string,avatar:File | string}>();
     const onEditClose = () => {
         navigate(routes.myProfile);
+    }
+    const onChangeToGoogleAvatar = () => {
+        setValue('avatar','google');
+        
     }
     const onSubmit = async () => {
         const newPassword = watch('new_password');
@@ -50,23 +50,27 @@ const useEditProfile = () => {
             setFormError('Паролі не співпадають!');
             return;
         }
-        if(!newPassword && !avatar){
+        if(!newPassword && !avatar && avatar !== 'google'){
             setFormError('Ви не змінили дані!');
             return;
         }
         try{
             const queries = [];
             if(avatar){
-                queries.push(async () => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(avatar);
-                    reader.onload = async (result) => {await axiosConfig.post(endpoints.changeAvatar,{avatar:result.target?.result},{headers:{Authorization:localCookie || cookie}});setAvatar(result.target?.result?.toString() || user.avatar);}
-                })
-                
+                if(avatar instanceof File){
+                    queries.push(async () => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(avatar);
+                        reader.onload = async (result) => {await axiosConfig.post(endpoints.changeAvatar,{avatar:result.target?.result},{headers:{Authorization:token}});setAvatar(result.target?.result?.toString() || user.avatar);}
+                    })
+                }else{
+                    await axiosConfig.post(endpoints.changeAvatar,{avatar:'google'},{headers:{Authorization:token}});
+                    setAvatar('');
+                }
             }
             if(newPassword){
                 queries.push(async () => {
-                    const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:localCookie || cookie}});
+                    const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:token}});
                     setToken(res.data.token);
                     setActive();
                     if(getToken()){
@@ -92,12 +96,13 @@ const useEditProfile = () => {
         setValue('avatar',file);
         setNewAvatarUrl(URL.createObjectURL(file));
     };
-    return {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors}
+    return {onEditClose,beforeUpload,onSubmit,register,handleSubmit,
+            newAvatarUrl,formError,user,errors,onChangeToGoogleAvatar}
 }
 
 export const EditProfile = () => {
     const theme = useThemeStore().theme;
-    const {onEditClose,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
+    const {onEditClose,onChangeToGoogleAvatar,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
     const [passwordInputType,setPasswordInputType] = useState<Record<number,"password" | "text">>({1:'password',2:'password'});
     const onTogglePassword = (index:number) => {
         setPasswordInputType(prev => ({...prev,[index]:prev[index] === "password" ? "text" : "password"}));
@@ -114,6 +119,7 @@ export const EditProfile = () => {
                         <Button className="uploadButton" icon={<UploadOutlined />}>Завантажити</Button>
                     </Upload>
                 </AntdImgCrop>
+                <Button onClick={onChangeToGoogleAvatar} className="uploadButton" icon={<UploadOutlined />}>Використовувати з Google</Button>
             </div>
             <div className='studentProfileTextInfo__container'>
                 <p className='studentProfile__name'>{user.full_name}</p>
