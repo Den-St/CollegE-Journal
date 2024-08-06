@@ -34,10 +34,11 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                 <section className='printFormJournal__container'>
                     <div className='printFormJournal_top'>
                         <div className='printFormJournal_top_left'>
-                            <span style={{position:'absolute',top:'2px',left:'24px'}}>Дата</span>
-                            <span style={{position:'absolute',top:'23px',left:'3px'}}>№ ПП</span>
+                            <span>№ за ПП</span>
                         </div>
                         <div className='printFormJournal_top_student'>
+                            <span style={{position:'absolute',top:'2px',left:'122px'}}>Дата</span>
+                            <span style={{position:'absolute',top:'12px',left:'2px'}}>ПІБ студента<br/> або студентки</span>
                         </div>
                         <div className='printFormJournal_top_dates'>
                             {limitColumns.map(columnNumber => !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.column_id &&

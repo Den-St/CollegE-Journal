@@ -1,9 +1,9 @@
 .printForm_container{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    z-index: -1000;
-    display: none;
+    // position: absolute;
+    // z-index: -1000;
+    // display: none;
 }
 .printForm_page{
     width: 797px;
@@ -107,20 +107,32 @@
 .printFormJournal_top_left{
     width: 47px;
     height: 35px;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // position: relative;
 }
-.printFormJournal_top_left:after{
-    content:"";
-    position:absolute;
-    border-top:1px solid black;
-    width:58px;
-    transform: rotate(36deg);
-    transform-origin: 0% 0%;
-  }
+// .printFormJournal_top_left:after{
+//     content:"";
+//     position:absolute;
+//     border-top:1px solid black;
+//     width:58px;
+//     transform: rotate(36deg);
+//     transform-origin: 0% 0%;
+//   }
 .printFormJournal_top_student{
     width: 145px;
     height: 35px;
+    position: relative;
 }
+.printFormJournal_top_student:after{
+    content:"";
+    position:absolute;
+    border-top:1px solid black;
+    width:148px;
+    transform: rotate(13deg);
+    transform-origin: 0% 0%;
+  }
 .printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task{
     display: flex;
     align-items: center;
