@@ -161,6 +161,20 @@ text-align: center;
 
     // }
 }
+.teacherTimetable_groupName{
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.38px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color: #797979;
+    width: 70px;
+    transition: 0.2s;
+}
+.teacherTimetable_groupName:hover{
+    color: #D0D0D0;
+}
 .dark{
     .lessonsScheduleDay__header{
         color:var(--primary-gray);

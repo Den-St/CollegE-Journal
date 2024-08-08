@@ -32,7 +32,9 @@ export type UserT = {
         split:boolean,
         audience:string | SplitedLessonT,
         link:string | SplitedLessonT,
-        subject_name:string | SplitedLessonT 
+        subject_name:string | SplitedLessonT,
+        group_full_name?:string | SplitedLessonT,
+        group_id?:string | SplitedLessonT,
     }[][] | null
     // TimetableT | null,
     user_group:{
