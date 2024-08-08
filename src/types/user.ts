@@ -33,6 +33,7 @@ export type UserT = {
         audience:string | SplitedLessonT,
         link:string | SplitedLessonT,
         subject_name:string | SplitedLessonT,
+        subject_id:string | SplitedLessonT,
         group_full_name?:string | SplitedLessonT,
         group_id?:string | SplitedLessonT,
     }[][] | null
