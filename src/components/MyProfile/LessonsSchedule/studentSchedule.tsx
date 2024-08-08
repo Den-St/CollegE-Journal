@@ -4,6 +4,7 @@ import { FileSvg } from '../../../assets/svgs/fileSvg';
 import { LinkSvg } from '../../../assets/svgs/linkSvg';
 import { MagnifierSvg } from '../../../assets/svgs/MagnifierSvg';
 import { dayNamesToNumbers } from '../../../consts/dayNamesToNumbers';
+import { lessonNumbers } from '../../../consts/lessonNumbers';
 import { routes } from '../../../consts/routes';
 import { scheduleTimings } from '../../../consts/scheduleTimings';
 import { useGetGroup } from '../../../hooks/getGroup';
@@ -14,7 +15,6 @@ import { SplitedLessonT } from '../../../types/user';
 import { Loader } from '../../Loader/Loader';
 import { NoMatch } from '../../NoMatch';
 import './lessonsSchedule.scss';
-export const lessonNumbers = Array(0,1,2,3,4,);
 
 export const LessonsScheduleStudents = () => {
     const theme = useThemeStore().theme;

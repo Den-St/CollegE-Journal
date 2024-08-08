@@ -6,6 +6,7 @@ import { LinkSvg } from "../../assets/svgs/linkSvg";
 import { RobotSvg } from "../../assets/svgs/robotSvg";
 import { UploadSvg } from "../../assets/svgs/uploadSvg"
 import { dayNamesToNumbers } from "../../consts/dayNamesToNumbers";
+import { lessonNumbers } from "../../consts/lessonNumbers";
 import { validGroupPrefixes } from "../../consts/validGroupPrefixes";
 import { useGetGroup } from "../../hooks/getGroup";
 import { useGetAdminGroups } from "../../hooks/getGroups";
@@ -14,7 +15,6 @@ import { GroupT } from "../../types/group";
 import { SplitedLessonT } from "../../types/user";
 import { CheckScheduleSettingsModal } from "../CheckScheduleSettingsModal";
 import { Loader } from "../Loader/Loader";
-import { lessonNumbers } from "../MyProfile/LessonsSchedule/studentSchedule";
 import { NoMatch } from "../NoMatch";
 import "./scheduleSettings.scss";
 import { SemesterSettings } from "./SemesterSettings";
