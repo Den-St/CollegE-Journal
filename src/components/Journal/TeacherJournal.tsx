@@ -21,6 +21,8 @@ import { JournalGroupT } from '../../types/journalGroup';
 import { JournalAttestationT } from '../../types/journalAttestation';
 import { TeacherJournalFilltersT } from '../../types/teacherJournalFillters';
 import { TeacherJournalT } from '../../types/teacherJournal';
+import { useUserStore } from '../../store/userStore';
+import { securityLevels } from '../../consts/securityLevels';
 const {Option} = Select;
 
 export const TeacherJournal = () => {
@@ -162,8 +164,9 @@ type Props = {
     onChangeFillters:(fieldName:'group_id' | 'subject_id' | 'month' | 'onlyAtts',value:string | number | undefined | boolean) => void
 }
 export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,subjectName,refetch,attestations,fillters,journal,onChangeFillters,}) => {
-    const {handlePrintAndRefetch,printLoading,componentRef} = useJournalPrintForm(async () => await refetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts}))
+    const {handlePrintAndRefetch,printLoading,componentRef} = useJournalPrintForm(async () => refetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts}))
     const unique_subjects = setFromSubjects([...groupJournal?.can_edit || [],...groupJournal?.can_view || []]);
+    const isAdmin = useUserStore().user.security_level === securityLevels.admin;
 
     return <section className='journalTop__container'>
         {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
@@ -217,6 +220,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 <span className='fillter_placeholder'>Тільки атестації</span>
             </div>
             </div>
+            {isAdmin && <button className='primary_button'>Змінити викладача</button>}
             {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
         </div>
     </section>

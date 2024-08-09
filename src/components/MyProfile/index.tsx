@@ -166,6 +166,7 @@ export const MyProfile = () => {
                 }
         </section>
         {user.security_level === securityLevels.student ? <LessonsScheduleStudents/> : <TeacherSchedule/>}
+        {user.security_level === securityLevels.student && 
         <section className='profile_detailedInfo_section'>
             <div className='profile_detailedInfo_dir_container'>
                 <h1 className='profile_detailedInfo_dir_header'>Інформація про студента</h1>
@@ -208,7 +209,7 @@ export const MyProfile = () => {
                     <h2 className='profile_detailedInfo_item_header'>Цю інформацію не бачать інші студенти, також ви не можете цю інформацію самостійно редагувати</h2>
                 </div>
             </div>
-        </section>
+        </section>}
         <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">{user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>

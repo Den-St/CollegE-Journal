@@ -182,8 +182,8 @@ const StudentJournalFillters:React.FC<Props> = ({attestations,onChangeFillters,f
                 </Select>
             </div>
             <div style={{'display':'flex','alignItems':'center','gap':'30px'}}>
-                <Switch defaultChecked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
                 <span className='fillter_placeholder'>Тільки атестації</span>
+                <Switch defaultChecked={fillters.onlyAtts} onChange={(val) => onChangeFillters('onlyAtts',val)}/>
             </div>
         </div>
     </section>
