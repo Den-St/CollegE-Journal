@@ -220,7 +220,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 <span className='fillter_placeholder'>Тільки атестації</span>
             </div>
             </div>
-            {isAdmin && <button className='primary_button'>Змінити викладача</button>}
+            {/* {isAdmin && <button className='primary_button'>Змінити викладача</button>} */}
             {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
         </div>
     </section>

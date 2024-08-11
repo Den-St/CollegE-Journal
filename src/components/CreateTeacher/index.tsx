@@ -70,7 +70,7 @@ export const CreateTeacher = () => {
             <div className="createUserSelect__container" style={{width:'45%'}}>
                     <label className="select_label">Посада</label>
                     <div className="select_wrapper">
-                        <Select
+                        {/* <Select
                             className="createUserSelect"
                             placeholder={'Оберіть посаду викладача'}
                             optionLabelProp="label"
@@ -80,14 +80,17 @@ export const CreateTeacher = () => {
                             defaultValue={'Тестова посада'}
                             >   
                             <Option value={"Тестова посада"} label={"Тестова посада"}>Тестова посада</Option>
-                            {/* <Option value={"Посада 2"} label={"Посада 2"}>Посада 2</Option> */}
-                        </Select>
+                        
+                        </Select> */}
+                         <input autoComplete="off" 
+                            {...createUserRegister('job_title',{required:false,})}
+                            className="form_input" placeholder='Введіть посаду викладача'/>
                     </div>
                 </div>
                 <div className="createUserSelect__container" style={{width:'55%'}}>
                     <label className="select_label">Додаткова посада</label>
                     <div className="select_wrapper">
-                        <Select
+                        {/* <Select
                             className="createUserSelect"
                             placeholder={'Оберіть додаткову посаду викладача'}
                             optionLabelProp="label"
@@ -97,7 +100,10 @@ export const CreateTeacher = () => {
                             >   
                             <Option value={"Додаткова посада 1"} label={"Додаткова посада 1"}>Додаткова посада 1</Option>
                             <Option value={"Додаткова посада 2"} label={"Додаткова посада 2"}>Додаткова осада 2</Option>
-                        </Select>
+                        </Select> */}
+                         <input autoComplete="off" 
+                            {...createUserRegister('additional_job_title',{required:false,})}
+                            className="form_input" placeholder='Введіть додаткову посаду викладача'/>
                     </div>
                 </div>
             </div>
