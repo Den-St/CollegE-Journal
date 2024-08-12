@@ -174,14 +174,22 @@ linear-gradient(0deg, #EFB42D, #EFB42D);
     width:192px;
     margin-left: auto;
 }
-.ant-switch .ant-switch-handle{
+.ant-switch-handle{
     background-color: white;
-    background-color:var(--primary-orange);
     border-radius: 50%;
     z-index: 20;
     content:unset !important;
 }
-
+.ant-switch .ant-switch-handle{
+    background-color: white;
+    background-color:#797979;
+    border-radius: 50%;
+    z-index: 20;
+    content:unset !important;
+}
+.ant-switch-checked .ant-switch-handle{
+    background-color:var(--primary-orange);
+}
 .ant-switch .ant-switch-handle::before{
     content:unset !important;
 }
