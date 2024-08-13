@@ -4,6 +4,7 @@ import { endpoints } from "../../consts/endpoints"
 
 type Props = {
     defaultValue?:string,
+    className:string,
     onBlurData:{
         journal_id: string,
         subject_id: string,
@@ -54,7 +55,7 @@ export const getColorByValue = (value:string,system:number) => {
 
 
 
-export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex}) => {
+export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex}) => {
     const keysToMoves:Record<string,() => void> = {
         'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
         'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
@@ -103,5 +104,5 @@ export const CellInput:React.FC<Props> = ({defaultValue,onBlurData,token,rowInde
         console.error(err);
     }
 }
-    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${!date.includes('\n') && 'specialLessonType_cell'}`} defaultValue={defaultValue}/>
+    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
 }
