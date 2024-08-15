@@ -21,7 +21,35 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
             </Link>
         </>,
         4:<>
-            <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
+            <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>
+                Журнал
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.homeTasks
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                    ' ')}>
+                Завдання
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.schedule
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                ' ')}>
+                Розклад
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.studyMaterials
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                ' ')}>
+                Матеріал
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
@@ -34,6 +62,33 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                 </svg>
             </Link>
             <Link  to={routes.groups} className={linksClassName + isActiveLink(routes.groups) + isActiveLink(routes.pickJournalSubject) + isActiveLink(routes.journal)}>Журнал
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.homeTasks
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                    ' ')}>
+                Завдання
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.schedule
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                ' ')}>
+                Розклад
+                <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
+                    <path d="M1 1H51" strokeLinecap="round"/>
+                </svg>
+            </Link>
+            <Link  to={// routes.studyMaterials
+                '#'
+                } className={linksClassName + isActiveLink(// routes.groups
+                ' ')}>
+                Матеріал
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
@@ -60,7 +115,8 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                         <path d="M1 1H51" strokeLinecap="round"/>
                     </svg>
                 </Link>}
-            <Link  to={routes.faq} className={linksClassName + isActiveLink(routes.faq)}>FAQ
+            <Link  to={routes.faq} className={linksClassName + isActiveLink(routes.faq)}>
+                FAQ
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
