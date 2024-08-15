@@ -72,7 +72,7 @@ export const useCreateUser = (group?:GroupT) => {
             setErrorMessage('');
         }catch(err){
             //@ts-ignore
-            const errorStatus = (err as AxiosError).response?.data?.status;
+            const errorStatus = (err as AxiosError).response?.data?.internal_error_code;
             setCreateUserErrorCode(errorStatus);
             console.error(err as AxiosError);
         }finally{

@@ -17,7 +17,8 @@ import { customDateFormat } from "../../helpers/dateFormat";
 const {Option} = Select;
 
 const userErrorCodesToMessages:Record<number,string> = {
-    0:'Користувач з такою поштовою адресою вже існує!'
+    409:'Користувач з такою поштовою адресою вже існує!',
+    422:'Некорректно введені дан!',
 }
 const changeErrorCodesToMessages:Record<number,string> = {
     [-1]:'Некорректна назва групи!',

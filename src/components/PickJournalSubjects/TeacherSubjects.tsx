@@ -15,12 +15,8 @@ import './subjectsStyles.scss';
 
 export const TeacherSubjects = () => {
     const {loading} = useGroupsByTeacher();
-    // const {} = useStudentSubjects();
     const pickedGroupId = useSearchParams()[0].get('group_id');
-    // const [searchParams,setSearchParams] = useSearchParams();
     const group = useTeachersGroupsStore().groups.find(group => group.journal_group === pickedGroupId);
-    // const subjects = [{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:true},{name:'АПСК',isActive:true},{name:'РКСЗ',isActive:true},{name:'WEB-технології',isActive:true},{name:'ОБЗД',isActive:false},];
-    const lastMonth = new Date().getMonth();
     useEffect(() => {
         document.title = `Предмети групи - ${group?.journal_group_full_name}`;
     },[]);

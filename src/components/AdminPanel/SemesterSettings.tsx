@@ -32,7 +32,7 @@ type SemesterSettingsT = {
     temporary:boolean
 }
 const useSemesterSettings = () => {
-    const [courseNumber,setCourseNumber] = useState<number | null>(null);
+    const [courseNumber,setCourseNumber] = useState<number>(1);
     const [onCheckSettingsModal,setOnCheckSettingsModal] = useState(false);
     const [onCheckScheduleModal,setOnCheckScheduleModal] = useState(false);
     const {
@@ -55,11 +55,26 @@ const useSemesterSettings = () => {
 }
 
 export const SemesterSettings = () => {
+    
+    return <>
+    <SemesterSettingsPart/>
+    {/* <Modal footer={false} onCancel={() => setOnCheckSettingsModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckSettingsModal}>
+        <CheckScheduleSettingsModal 
+        onImportFile={onImportFile}
+        setCourseNumber={setCourseNumber} courseNumber={1} courseNumbers={courseNumbers}/>
+    </Modal>
+    <Modal footer={false} onCancel={() => setOnCheckScheduleModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckScheduleModal}>
+        <CheckScheduleModal onClose={() => setOnCheckScheduleModal(false)}/>
+    </Modal> */}
+    </>
+}
+
+
+const SemesterSettingsPart = () =>{
     const {onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal} = useSemesterSettings();
 
-    return <>
-    <form className="scheduleSettingsForm" onSubmit={handleSubmit(onSaveSettings)}>
-        <div style={{width:'100%'}}><h1 className="header">Налаштування розкладу</h1></div>
+    return <form className="scheduleSettingsForm" onSubmit={handleSubmit(onSaveSettings)}>
+        <div style={{width:'100%'}}><h1 className="header">Налаштування семестру</h1></div>
         <div className="createUserSelect__container" style={{width:courseNumber ? '30%' : ''}}>
             <label className="select_label">Курс навчання</label>
             <div className="select_wrapper">
@@ -77,7 +92,6 @@ export const SemesterSettings = () => {
                 </Select>
             </div>
         </div>
-        {!!courseNumber && <>
         <div className="createUserSelect__container" style={{width:'30%'}}>
             <label className="select_label">Рік навчання</label>
             <div className="select_wrapper">
@@ -116,7 +130,7 @@ export const SemesterSettings = () => {
         />
         <h2 className="subSubHeader" style={{width:'100%'}}>Спеціальність - <span style={{color:'var(--primary-orange)'}}>З; Кн; Кб;</span></h2>
         <div className="createUserEmailInput__container" style={{width:'30%'}}>
-            <label className="select_label">Дата початку розкладу</label>
+            <label className="select_label">Дата початку семестру</label>
             <DatePicker
                 allowClear={false}
                 placeholder="Оберіть дату початку семестру"
@@ -207,31 +221,7 @@ export const SemesterSettings = () => {
             <Checkbox onChange={(value) => setValue('temporary',value.target.value)}>Тимчасовий розклад</Checkbox>
         </div>
         <div style={{'display':'flex',gap:'30px'}}>
-            {/* <div className="adminPanelScheduleSettingsInput__container">
-                <input  autoComplete="off" accept=".xml,.xlsm,.xlsx" className="adminPanelScheduleSettingsInput" type={'file'}/>
-                <div className="adminPanelScheduleSettingsInput__cover">
-                    <UploadSvg/>
-                    <div className="adminPanelScheduleSettingsInputCoverText_container">
-                        <h1 className="adminPanelScheduleSettingsInputCoverTitle">
-                            Імпортувати Файл
-                        </h1>
-                        <p className="adminPanelScheduleSettingsInputCoverText">
-                            XML, XLSM, XLSX
-                        </p>
-                    </div>
-                </div>
-            </div> */}
             <span onClick={() => setOnCheckSettingsModal(true)} style={{width:'unset',padding:'0 20px'}} className={"primary_button"}>Завантажити розклад</span>
         </div>
-        </>}
     </form>
-    <Modal footer={false} onCancel={() => setOnCheckSettingsModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckSettingsModal}>
-        <CheckScheduleSettingsModal 
-        onImportFile={onImportFile}
-        setCourseNumber={setCourseNumber} courseNumber={1} courseNumbers={courseNumbers}/>
-    </Modal>
-    <Modal footer={false} onCancel={() => setOnCheckScheduleModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckScheduleModal}>
-        <CheckScheduleModal onClose={() => setOnCheckScheduleModal(false)}/>
-    </Modal>
-    </>
 }

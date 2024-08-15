@@ -42,6 +42,11 @@
     border-bottom: 1px solid black;
 }
 
+.printFormJournal_top_dates_specialDate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .printFormJournal__container,.printFormLessons_main{
     display: flex;
     width: fit-content;

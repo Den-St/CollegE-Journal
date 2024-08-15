@@ -8,7 +8,27 @@ type Props = {
     journal?:TeacherJournalT,
     subjectName:string
 }
+// const lessonTypesWithoutMonth = [
+//     'Підсумкова',''
+// ]
 
+const shortMonthNames:Record<string,string> = {
+    'Січень': 'Січ',
+    'Лютий': 'Лют',
+    'Березень': 'Бер',
+    'Квітень': 'Квіт',
+    'Травень': 'Трав',
+    'Червень': 'Черв',
+    'Липень': 'Лип',
+    'Серпень': 'Серп',
+    'Вересень': 'Вер',
+    'Жовтень': 'Жовт',
+    'Листопад': 'Лист',
+    'Грудень': 'Груд',
+    'I семестр':'I см',
+    'II семестр':'II см',
+
+};
 export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName},props) => {
     const limitColumnsNumber = 18;
     const limitLessonsNumber = 18;
@@ -45,10 +65,13 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                                 journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.date.includes('.')
                                 ? <div className="printFormJournal_top_dates_date" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)].column_id}>
                                     <p style={{position:'absolute',top:'2px',left:'2px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[0]}</p>
-                                    <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]}</p>
+                                    <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]+'234324532453'}</p>
                                 </div> 
                                 : !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)] 
-                                && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>{lessonTypesNamesAbbreviations[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.lesson_type]}</div>
+                                && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>
+                                        <p>{lessonTypesNamesAbbreviations[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.lesson_type]}</p>
+                                        <p>{!!journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date && shortMonthNames[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date]}</p>
+                                    </div>
                             )}
                             {/* {journal?.columns.map(column => 
                                 <div className="printFormJournal_top_dates_date" key={column.column_id}>
