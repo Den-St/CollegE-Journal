@@ -6,5 +6,7 @@ export const securityLevels = {
 }
 export const securityLevelsToNames:Record<number,string> = {
     0:'',
+    1:'Студент',
+    4:'Вчитель',
     5:'Адміністратор'
 }
