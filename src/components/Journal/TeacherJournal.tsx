@@ -1,5 +1,5 @@
 import { Select, Spin, Switch, Tooltip } from 'antd';
-import React, { useEffect, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { JournalPortraitModeWarning } from '../../assets/svgs/journalPortraitModeWarningSvg';
 import { routes } from '../../consts/routes';
@@ -23,6 +23,7 @@ import { TeacherJournalFilltersT } from '../../types/teacherJournalFillters';
 import { TeacherJournalT } from '../../types/teacherJournal';
 import { useUserStore } from '../../store/userStore';
 import { securityLevels } from '../../consts/securityLevels';
+import { TeacherSettingsModal, useTeacherSettingsModal } from './TeacherSettings';
 const {Option} = Select;
 
 export const TeacherJournal = () => {
@@ -167,8 +168,10 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
     const {handlePrintAndRefetch,printLoading,componentRef} = useJournalPrintForm(async () => refetch({'group_id':fillters.group_id,'subject_id':fillters.subject_id,'month':attestations?.find(att => att.active)?.name || '',onlyAtts:fillters.onlyAtts}))
     const unique_subjects = setFromSubjects([...groupJournal?.can_edit || [],...groupJournal?.can_view || []]);
     const isAdmin = useUserStore().user.security_level === securityLevels.admin;
-
-    return <section className='journalTop__container'>
+    const {onCloseTeacherSettings,onOpenTeacherSettings,isOnTeacherSettings} = useTeacherSettingsModal();
+    
+    return <>
+    <section className='journalTop__container'>
         {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
         <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
         <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
@@ -220,8 +223,12 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 <span className='fillter_placeholder'>Тільки атестації</span>
             </div>
             </div>
-            {/* {isAdmin && <button className='primary_button'>Змінити викладача</button>} */}
-            {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
+            <div style={{'display':'flex','gap':'30px'}}>
+                {isAdmin && <button onClick={onOpenTeacherSettings} className='primary_button' style={{padding:'0 41px'}}>Налаштування викладачів</button>}
+                {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
+            </div>
         </div>
     </section>
+    <TeacherSettingsModal open={isOnTeacherSettings} onClose={onCloseTeacherSettings}/>
+    </>
 }

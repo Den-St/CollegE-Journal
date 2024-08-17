@@ -79,7 +79,7 @@ export const FAQ = () => {
     return <main className={`faqMain__container ${theme}`}>
         <h1 className="faqTitle">Питання до сайту які можуть виникнути</h1>
         {!loading ? <section className="faqQuestions__container">
-            <Collapse 
+            <Collapse className="faqCollapse"
                 items={getItems(panelStyle)}
             /> 
         </section> : <Loader/>}
