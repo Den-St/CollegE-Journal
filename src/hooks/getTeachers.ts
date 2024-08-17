@@ -27,12 +27,13 @@ export const useGetTeachers = () => {
             setLoading(false);
         }
     }
+    console.log(teachersByDepartment)
 
     useEffect(() => {
         fetch();
     },[]);
     const onAddTeacherLocally = (teacher:TeacherT) => {
-        setTeachersByDepartment(prev => ({...prev,[teacher.department]:{...prev[teacher.department],teacher}}));
+        setTeachersByDepartment(prev => ({...prev,[teacher.department]:[...prev[teacher.department],teacher]}));
     }
     return {teachersByDepartment,loading,onAddTeacherLocally};
 }
