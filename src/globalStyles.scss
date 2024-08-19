@@ -34,6 +34,10 @@
 	// box-shadow: 0px 3px 5px var(--primary-orange);
 	// border-bottom: 1px solid var(--primary-orange);
 }
+button{
+    cursor: pointer;
+	transition: 0.2s;
+}
 
 .primary_button{
 	width: fit-content;

@@ -47,6 +47,19 @@ header{
         transform: translateY(0px);
     }
 }
+@media screen and (max-width:1440px) {
+    .header_container{
+        padding: 0 70px;
+        justify-content: space-between;
+    }
+}
+@media screen and (min-width:1441px) {
+    .header_container{
+        padding: 0 221px;
+        justify-content: space-between;
+    }
+}
+
 // .header_container.visible{
 //     transform: translateY(0px);
 // }

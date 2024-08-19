@@ -112,16 +112,16 @@ export const MyProfile = () => {
                         <div className='studentProfile__name_container'>
                             <p className='studentProfile__name'>{user.full_name}</p>
                             {/* {user.security_level !== securityLevels.admin &&  */}
-                            <StarSvg/>
+                            {/* <StarSvg/> */}
                             <button className='editUserProfile_button' onClick={onTryEdit}><EditProfileSvg/></button>
                         </div>
-                        <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p>
-                        {/* <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p> */}
+                        {/* <p className='studentProfile__email'>{user.mailbox_address || `mail@gmail.com`}</p> */}
                         {!!user?.user_group?.group_full_name && 
                         user.security_level === securityLevels.student
                         ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
                         : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.groups} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
                         }
+                        <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p>
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>

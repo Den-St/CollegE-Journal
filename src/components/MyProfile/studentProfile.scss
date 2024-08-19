@@ -35,12 +35,23 @@
     object-fit: cover;
     border-radius:50%;
 }
-
+@media screen and (min-width:1440px) {
+    .studentProfile_img{
+        width: 121px;
+        height: 121px;
+    }
+}
+@media screen and (max-width:1440px) {
+    .studentProfile_img{
+        width: 81px;
+        height: 81px;
+    }
+}
 .studentProfileTextInfo__container{
     display:flex;
     flex-direction: column;
     gap:10px;
-    // width: 50%;
+    width: 50%;
     p{
         width: fit-content;
     }
@@ -69,6 +80,11 @@
     border: none;
     outline: none;
     background: transparent;
+}
+.editUserProfile_button:focus{
+    svg{
+        fill:#797979;
+    }
 }
 .studentProfile__email{
     font-weight: 400;
@@ -143,7 +159,7 @@
     color:var(--primary-orange);
 }
 
-@media screen and (min-width:'1450px'){
+@media screen and (min-width:'1440px'){
     .studentProfileMain__container{
         // width: 1189px;
         width: 90%;
@@ -229,7 +245,7 @@
         color:var(--primary-gray);
     }
     .studentProfile__group{
-        color:white;
+        color:var(--primary-gray);
     }
     .studentProfileTab__button{
         color:white;
@@ -297,12 +313,20 @@
 }
 @media screen and (max-width:1700px) {
     .studentProfileTextInfo__container{
-        width: 70%;
+        width: 100%;
     }
 }
 @media screen and (max-width:1280px){
     .studentProfile__name_container{
         gap:10px;
+    }
+}
+@media screen and (min-width:1441px){
+    .studentProfileLeft__container{
+        width: 50%;
+    }
+    .studentProfileTabs__container{
+        margin-left: 151px;
     }
 }
 @media screen and (max-width:780px) {
