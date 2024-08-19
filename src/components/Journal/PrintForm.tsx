@@ -65,7 +65,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                                 journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.date.includes('.')
                                 ? <div className="printFormJournal_top_dates_date" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)].column_id}>
                                     <p style={{position:'absolute',top:'2px',left:'2px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[0]}</p>
-                                    <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]+'234324532453'}</p>
+                                    <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]}</p>
                                 </div> 
                                 : !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)] 
                                 && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>
