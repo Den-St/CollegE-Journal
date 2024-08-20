@@ -9,11 +9,13 @@ import { routes } from "../../consts/routes";
 import { setFromSubjects } from "../../helpers/setFromObjects";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useTeachersGroupsStore } from "../../store/teachersGroupsStore"
+import { useUserStore } from "../../store/userStore";
 import { Loader } from "../Loader/Loader";
 import { NoMatch } from "../NoMatch";
 import './subjectsStyles.scss';
 
 export const TeacherSubjects = () => {
+    const userSecurityLevel = useUserStore().user.security_level;
     const {loading} = useGroupsByTeacher();
     const pickedGroupId = useSearchParams()[0].get('group_id');
     const group = useTeachersGroupsStore().groups.find(group => group.journal_group === pickedGroupId);
@@ -42,6 +44,18 @@ export const TeacherSubjects = () => {
                     {subject.subject_full_name}
                 </Link>
             )}
+        </Carousel>
+        {}
+        <h2 className="subjectsMainTitle">Сводні таблиці</h2>
+        <div className="subjectsContainer">
+            <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                Список відсутніх за тиждень
+            </Link>
+        </div>
+        <Carousel className='subjects_carousel' dots slidesToShow={1}>
+            <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                Список відсутніх за тиждень
+            </Link>
         </Carousel>
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>

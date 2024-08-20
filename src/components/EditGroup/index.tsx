@@ -135,12 +135,14 @@ export const EditGroup = () => {
                      <DatePicker
                         placeholder="Оберіть дату народження"
                         className="form_input"
-                        format={customDateFormat}
+                        // format={customDateFormat}
                         style={{'visibility':'visible'}}
-                        value={dayjs(watch('birth_date'))}
+                        // value={dayjs(watch('birth_date'))}
+                        
                         {...register('birth_date',{required:{value:true,message:'Оберіть дату народження'},
                         })}
-                        onChange={(e) => setValue('birth_date',e?.toDate() || null)} />
+                        onChange={(e) => setValue('birth_date',e?.toDate() || null)} 
+                        />
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата вступу</label>
@@ -150,9 +152,9 @@ export const EditGroup = () => {
                     <DatePicker
                         placeholder="Оберіть дату вступу"
                         className="form_input"
-                        format={customDateFormat}
+                        // format={customDateFormat}
                         style={{'visibility':'visible'}}
-                        value={dayjs(watch('admission_date'))}
+                        // value={dayjs(watch('admission_date'))}
                         {...register('admission_date',{required:{value:true,message:'Оберіть дату вступу'},
                         })}
                         onChange={(e) => setValue('admission_date',e?.toDate() || null)} />

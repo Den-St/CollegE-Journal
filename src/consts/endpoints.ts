@@ -29,5 +29,6 @@ export const endpoints = {
     editUser:'admin/user/change-info',
     invertEngGroups:'admin/groups/invert_subgroups',
     googleAuthGetUrl:'google/request',
-    googleLogin:'google/login'
+    googleLogin:'google/login',
+    absenceTable:'admin/summary-tables/absence_table/data'
 }
