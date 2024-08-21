@@ -1,0 +1,107 @@
+.absenceTable_weekFillter{
+	display:flex;
+	gap:20px;
+	align-items:center;
+	button{
+		width: 9px;
+		height: 18px;
+		background-color: transparent;
+		svg{
+			width: 9px !important;
+			height: 18px !important;
+			fill: var(--primary-gray);
+		}
+		svg:hover{
+			fill: var(--primary-orange);
+		}
+	}
+	p{
+		font-family: Montserrat;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 24.38px;
+		letter-spacing: 0.1em;
+		text-align: left;
+		color: white;
+	}
+}
+
+.absenceTable_dayContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.absenceTable_day{
+    width: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 5px;
+    background-color: var(--secondary-blue);
+    color:var(--primary-gray);
+    padding: 15px 0;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.38px;
+    letter-spacing: 0.1em;
+}
+.absenceTable_dayNumberContainer{
+    display: flex;
+    gap: 10px;
+}
+.absenceTable_dayNumber{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px 5px;
+    //styleName: H/H2;
+    font-family: Montserrat;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34.13px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color:var(--primary-gray);
+    background-color: var(--secondary-blue);
+}
+.absenceTable_teacherSection{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.absenceTable_teachersContainer{
+    display: flex;
+    gap:65px;
+}
+.absenceTable_teachersSection_header{
+    width: 333px;
+    min-width: 333px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    color: var(--primary-gray);
+    background-color: var(--secondary-blue);
+    border-radius: 10px 5px;
+}
+.absenceTable_teachersContainer{
+    display: flex;
+    gap:10px;
+    overflow-x: scroll;
+}
+.absenceTable_teacher{
+    height: 300px;
+    width: 70px;
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-lr;
+    transform:rotate(-180deg);
+    color: var(--primary-gray);
+    background-color: var(--secondary-blue);
+    border-radius: 10px 5px;
+}

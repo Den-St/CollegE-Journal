@@ -16,7 +16,7 @@ import { MyGroup } from "../components/MyGroup";
 import { RecoveryPassword } from "../components/RecoveryPassword";
 import { PrintForm } from "../components/Journal/PrintForm";
 import { GoogleLogin } from "../components/GoogleLogin";
-import { AbsenceTable } from "../components/Journal/AbsenceTable";
+import { AbsenceTable } from "../components/Journal/AbsenceTable/AbsenceTable";
 
 export const navRoutes = {
 }

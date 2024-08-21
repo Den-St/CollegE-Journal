@@ -537,6 +537,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ant-modal-content{
 	padding: 30px 40px !important;
 }
+.rightArrowSvg{
+	fill: var(--primary-gray);
+	transition: 0.2s;
+}
+.rightArrowSvg:hover{
+	fill: var(--primary-orange);
+}
+
+
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{

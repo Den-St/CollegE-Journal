@@ -2,7 +2,6 @@ import { securityLevels } from './../consts/securityLevels';
 import { JournalGroupT } from './../types/journalGroup';
 import { useEffect } from 'react';
 import { endpoints } from './../consts/endpoints';
-import { getToken } from './../helpers/auth';
 import { useUserStore } from './../store/userStore';
 import { useState } from 'react';
 import axiosConfig from '../axiosConfig';
@@ -15,7 +14,6 @@ export const useGroupsByTeacher = () => {
     const groups = useTeachersGroupsStore().groups;
     const setGroups = useTeachersGroupsStore().setGroups;
 
-    const teacher_id = useUserStore().user.user_id;
     const security_level = useUserStore().user.security_level;
     const localToken = useUserStore().user.token;
     const [groupesByGrade,setGroupsByGrade] = useState<Record<string,JournalGroupT[]>>();
@@ -33,9 +31,9 @@ export const useGroupsByTeacher = () => {
         }
     }
     useEffect(() => {
-        if(!security_level || security_level < securityLevels.teacher) return;
+        if(!localToken || !security_level || security_level < securityLevels.teacher) return;
         fetch();
-    },[]);
+    },[security_level,localToken]);
     
     useEffect(() => {
         if(!groups.length) return;
