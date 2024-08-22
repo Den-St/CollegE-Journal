@@ -30,5 +30,6 @@ export const endpoints = {
     invertEngGroups:'admin/groups/invert_subgroups',
     googleAuthGetUrl:'google/request',
     googleLogin:'google/login',
-    absenceTable:'admin/summary-tables/absence_table/data'
+    absenceTable:'admin/summary-tables/absence_table/data',
+    absenceTableFile:'admin/summary-tables/absence_table/file'
 }

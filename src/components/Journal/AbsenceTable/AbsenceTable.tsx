@@ -1,6 +1,6 @@
 import { Select, Tooltip, Switch, Spin } from "antd";
 import { eachDayOfInterval, format, nextSaturday } from "date-fns";
-import { useState, useEffect, Fragment, useMemo, useRef } from "react";
+import { useState, useEffect, Fragment, useMemo, useRef, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { LinkBack } from "../../../assets/components/LinkBack/LinkBack";
 import { FilterIconSvg } from "../../../assets/svgs/filterIconSvg";
@@ -19,6 +19,9 @@ import { useUserStore } from "../../../store/userStore";
 import { JournalGroupT } from "../../../types/journalGroup";
 import { Loader } from "../../Loader/Loader";
 import { NoMatch } from "../../NoMatch";
+import {FastForwardFilled} from '@ant-design/icons';
+import _debounce from 'lodash/debounce';
+
 import './absenceTableStyles.scss';
 const {Option} = Select;
 
@@ -95,22 +98,23 @@ const useGetAbsenceTable = () => {
         if(!fillters.group_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.absenceTable,{group_id,start,end},{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end},{headers:{Authorization:token}});
             setTable(res.data.data);
         }catch(err){
             console.error(err);
         }
         setLoading(false);
     }
+    const debounceOnIncrementOffset = useCallback(_debounce(fetch, 300),[]);
 
     useEffect(() => {
-        fetch();
+        fetch({'group_id':fillters.group_id,'offset':offset_param});
     },[])
 
     const onChangeOffset = (fieldName:'group_id' | 'offset',value:number | string) => {
         if(!group_id) return;
         setFillters(prev => ({ ...prev,[fieldName]:value}));
-        fetch({...fillters,[fieldName]:value});
+        debounceOnIncrementOffset({...fillters,[fieldName]:value});
     }
 
     useEffect(() => {
@@ -179,7 +183,7 @@ export const AbsenceTable = () => {
     console.log(new Date(start*1000).toLocaleDateString());
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
-        <AbsenceTableFillters start={new Date(start*1000).toLocaleDateString()} end={new Date(end*1000).toLocaleDateString()} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
+        <AbsenceTableFillters start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
         {loading ? <Loader/>
         : !table ? <NoMatch title={`Таблиці за групою не знайдено`}/>
         : (!table.dates?.length || !table.student_list.length || !table.subjects.length) ? <NoMatch isChildren title="Таблиця пуста"/> : <>
@@ -273,14 +277,37 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
     </section>
 }
 
-const useAbsenceTablePrint = () => {
+const useAbsenceTablePrint = (start:number,end:number,group_name?:string,group_id?:string,) => {
     const [printLoading,setPrintLoading] = useState(false);
-    const fetchFile = () => {
+    const token = useUserStore().user.token;
+
+    const fetchFile = async () => {
+        if(!group_id || !group_name) return;
         setPrintLoading(true);
+
+        console.log('safasdaf');
+        try{
+            const res = axiosConfig.post(endpoints.absenceTableFile,{group_id:group_id,start,end},{headers:{Authorization:token}})
+            .then(response => {
+                const blob = new Blob([response.data], { type: 'application/vnd.ms-excel' });
+                const url = window.URL.createObjectURL(blob);  // Create a URL for the blob
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'file.xls';  // Set the file name for download
+                document.body.appendChild(a);
+                a.click();  // Programmatically click the anchor to trigger the download
+                window.URL.revokeObjectURL(url);  // Clean up the URL object
+                document.body.removeChild(a);  // Remove the anchor element
+            })
+            .catch(error => console.error('Error downloading the file:', error));
+        }catch(err){
+            console.error(err);
+        }
         setPrintLoading(false);
     }
 
-    return {printLoading}
+    return {printLoading,fetchFile}
 }
 type Props = {
     fillters:AbsenceTableFilltersT,
@@ -288,59 +315,64 @@ type Props = {
     onChangeFillters:(fieldName:'group_id' | 'offset',value:number | string) => void,
     groups:JournalGroupT[],
     table?:AbsenceTableT,
-    start:string,
-    end:string
+    start:number,
+    end:number
 }
 
 export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
-    const {printLoading} = useAbsenceTablePrint();
+    const {printLoading,fetchFile} = useAbsenceTablePrint(start,end,groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name,groups.find(group => group.journal_group === fillters.group_id)?.journal_group);
     const onDecrementOffset = () => {
         onChangeFillters('offset',fillters.offset - 1);
     }
     const onIncrementOffset = () => {
         onChangeFillters('offset',fillters.offset + 1);
+    }  
+    const onJumpToEnd = () => {
+        onChangeFillters('offset',0);
     }
+
     return <>
-    <section className='journalTop__container'>
-        <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
-        <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name}</p></h1>
-        <div className='journalFillters__container'>
-            <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
-                <div className="absenceTable_weekFillter">
-                    <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
-                    <p className="absenceTable_datesFillter">{start+'-'+end}</p>
-                    <button className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
-                </div>
-            <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
-                    style={{height:'300px !important',overflow:'hidden'}}
+        <section className='journalTop__container'>
+            <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
+            <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name}</p></h1>
+            <div className='journalFillters__container'>
+                <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
+                    <div className="absenceTable_weekFillter">
+                        <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
+                        <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
+                        <button className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
+                        <button style={{'display':'flex',marginLeft:'-10px','fontSize':'20px'}} className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button>
+                    </div>
+                <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
+                        style={{height:'300px !important',overflow:'hidden'}}
+                        >
+                    {loading || !groups.length
+                    ? <div style={{width:'100px',height:'50px'}}><Loader/></div>
+                    : <Select 
+                        placeholder={
+                            <div className="fillterPlaceholder_container">
+                                <p className="fillter_placeholder">Група</p><FilterIconSvg/>
+                            </div>
+                        }
+                        className="fillter_select"
+                        style={{width:'300px !important'}}
+                        // allowClear
+                        loading={loading}
+                        value={groups.find(group => group.journal_group === fillters.group_id)?.journal_group || ''}
+                        onChange={(value) => onChangeFillters('group_id',value)}
                     >
-                {loading || !groups.length
-                ? <div style={{width:'100px',height:'50px'}}><Loader/></div>
-                : <Select 
-                    placeholder={
-                        <div className="fillterPlaceholder_container">
-                            <p className="fillter_placeholder">Група</p><FilterIconSvg/>
-                        </div>
-                    }
-                    className="fillter_select"
-                    style={{width:'300px !important'}}
-                    // allowClear
-                    loading={loading}
-                    value={groups.find(group => group.journal_group === fillters.group_id)?.journal_group || ''}
-                    onChange={(value) => onChangeFillters('group_id',value)}
-                >
-                    {!!fillters.group_id && 
-                    groups
-                    .map(group =>
-                        <Option key={group.journal_group} value={group.journal_group} label={group.journal_group_full_name}>{group.journal_group_full_name}</Option>
-                    )}
-                </Select>}
+                        {!!fillters.group_id && 
+                        groups
+                        .map(group =>
+                            <Option key={group.journal_group} value={group.journal_group} label={group.journal_group_full_name}>{group.journal_group_full_name}</Option>
+                        )}
+                    </Select>}
+                </div>
+                </div>
+                <div style={{'display':'flex','gap':'30px'}}>
+                    {!loading && !!table && <button disabled={printLoading} className='primary_button' onClick={fetchFile}>{!printLoading ? `Друк` : <Spin/>}</button>}
+                </div>
             </div>
-            </div>
-            <div style={{'display':'flex','gap':'30px'}}>
-                {!loading && !!table && <button disabled={printLoading} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
-            </div>
-        </div>
-    </section>
+        </section>
     </>
 }
