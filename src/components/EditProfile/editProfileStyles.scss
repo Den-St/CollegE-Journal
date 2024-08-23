@@ -101,6 +101,57 @@
     letter-spacing: 0.1em;
     text-align: left;
 }
+.uploadButton{
+    //styleName: H/H7;
+font-family: Alegreya Sans;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: center;
+width: 200px;
+}
+.img-crop-modal{
+    .ant-modal-title{
+        //styleName: H/H2;
+font-family: Montserrat;
+font-size: 28px;
+font-weight: 500;
+line-height: 34.13px;
+letter-spacing: 0.1em;
+text-align: left;
+margin-bottom: 50px;
+    }
+    .ant-modal{
+        width: 700px !important;
+        height: 660px !important;
+    }
+    .img-crop-control{
+        button:hover{
+            color:var(--primary-orange);
+        }
+    }
+    .img-crop-control:first-child{
+        margin-top: 27px !important;
+    }
+    .img-crop-control:last-child{
+        margin-bottom: 15px !important;
+    }
+    .ant-slider-track{
+        background-color: var(--primary-orange);
+    }
+    .ant-slider-track:hover{
+        background-color: var(--primary-orange) !important;
+    }
+    .ant-slider-handle::after{
+        background-color: var(--secondary-blue);
+        box-shadow:0 0 0 2px var(--primary-orange);
+    }
+    button:nth-child(7){
+        span{
+            color:white !important;
+        }
+    }
+}
 .dark{
     .editProfile_header{
         color:white;

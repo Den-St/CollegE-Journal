@@ -15,6 +15,12 @@
 			fill: var(--primary-orange);
 		}
 	}
+    .disabled{
+        cursor:not-allowed;
+        svg:hover{
+			fill: var(--primary-gray);
+		}
+    }
 	p{
 		font-family: Montserrat;
 		font-size: 20px;

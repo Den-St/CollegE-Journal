@@ -6,6 +6,7 @@ import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { LeftArrowSvg } from "../../assets/svgs/leftArrowSvg";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { routes } from "../../consts/routes";
+import { securityLevels } from "../../consts/securityLevels";
 import { setFromSubjects } from "../../helpers/setFromObjects";
 import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useTeachersGroupsStore } from "../../store/teachersGroupsStore"
@@ -45,7 +46,7 @@ export const TeacherSubjects = () => {
                 </Link>
             )}
         </Carousel>
-        {}
+        {group?.is_supervisor || userSecurityLevel === securityLevels.admin && <>
         <h2 className="subjectsMainTitle">Сводні таблиці</h2>
         <div className="subjectsContainer">
             <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
@@ -56,7 +57,7 @@ export const TeacherSubjects = () => {
             <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                 Список відсутніх за тиждень
             </Link>
-        </Carousel>
+        </Carousel></>}
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>
             <div className="studentItems__container" style={{height:80 * Math.round(group.group_students.length / 2)}}>

@@ -23,6 +23,7 @@ import {FastForwardFilled} from '@ant-design/icons';
 import _debounce from 'lodash/debounce';
 
 import './absenceTableStyles.scss';
+import { securityLevels } from "../../../consts/securityLevels";
 const {Option} = Select;
 
 type AbsenceTableT = {
@@ -121,7 +122,7 @@ const useGetAbsenceTable = () => {
         navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
     },[fillters]);
 
-    return {table,start,end,loading,fillters,onChangeOffset}
+    return {table,start,end,loading,fillters,onChangeOffset,navigate}
 }
 
 const useAbsenceTableTeacherSubjectsDragToScroll = () => {
@@ -166,12 +167,17 @@ const useAbsenceTableTeacherSubjectsDragToScroll = () => {
 }
 
 export const AbsenceTable = () => {
-    const {table,start,end,loading,fillters,onChangeOffset} = useGetAbsenceTable();
+    const {table,start,end,loading,fillters,onChangeOffset,navigate} = useGetAbsenceTable();
     const {groups} = useGroupsByTeacher();
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
+    const isAdmin = useUserStore().user.security_level === securityLevels.admin;
+    
+    useEffect(() => {
+        if(!isAdmin && !group?.is_supervisor) navigate(routes.groups);
+    },[isAdmin,group])
 
     useEffect(() => {
         if(!group?.journal_group_full_name){
@@ -230,7 +236,7 @@ export const AbsenceTable = () => {
                         <div key={student.full_name+i} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
                             <div className='journalRowItemCenter__container'>
                                 {student.columns.map((dayValues,j) => 
-                                    <Fragment key={j}>{dayValues.map(day => <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text`} style={{cursor:'not-allowed',}}>{day}</p>)}</Fragment>
+                                    <Fragment key={j}>{dayValues.map(day => <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text`} style={{cursor:'not-allowed',color:'var(--primary-orange)'}}>{day}</p>)}</Fragment>
                                 )}
                             </div>
                         </div>
@@ -321,6 +327,7 @@ type Props = {
 
 export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
     const {printLoading,fetchFile} = useAbsenceTablePrint(start,end,groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name,groups.find(group => group.journal_group === fillters.group_id)?.journal_group);
+    const isAdmin = useUserStore().user.security_level === securityLevels.admin;
     const onDecrementOffset = () => {
         onChangeFillters('offset',fillters.offset - 1);
     }
@@ -340,10 +347,10 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                     <div className="absenceTable_weekFillter">
                         <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
                         <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
-                        <button className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
-                        <button style={{'display':'flex',marginLeft:'-10px','fontSize':'20px'}} className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button>
+                        <button className={`absenceTable_fillterArrowButton ${fillters.offset === 0 ? 'disabled' : ''}`}  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
+                        <button style={{'display':'flex',marginLeft:'-10px','fontSize':'20px','width':'20px',height:'20px'}} className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button>
                     </div>
-                <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
+                {isAdmin && <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
                         style={{height:'300px !important',overflow:'hidden'}}
                         >
                     {loading || !groups.length
@@ -367,7 +374,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                             <Option key={group.journal_group} value={group.journal_group} label={group.journal_group_full_name}>{group.journal_group_full_name}</Option>
                         )}
                     </Select>}
-                </div>
+                </div>}
                 </div>
                 <div style={{'display':'flex','gap':'30px'}}>
                     {!loading && !!table && <button disabled={printLoading} className='primary_button' onClick={fetchFile}>{!printLoading ? `Друк` : <Spin/>}</button>}

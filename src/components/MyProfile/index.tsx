@@ -121,7 +121,7 @@ export const MyProfile = () => {
                         ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
                         : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.groups} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
                         }
-                        <p className='studentProfile__bio'>Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять</p>
+                        <p className='studentProfile__bio'>{user.interests || `Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять`}</p>
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>

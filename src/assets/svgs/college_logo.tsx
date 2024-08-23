@@ -1,6 +1,6 @@
 export const CollegeLogoSvg = () => {
    return <svg width="81" height="80" viewBox="0 0 81 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-<rect width="81" height="80" fill="url(#pattern0_2305_168)"/>
+<rect width="81" height="81" fill="url(#pattern0_2305_168)"/>
 <defs>
 <pattern id="pattern0_2305_168" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlinkHref="#image0_2305_168" transform="matrix(0.00193424 0 0 0.00195841 0 -0.00135397)"/>
