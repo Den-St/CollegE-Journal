@@ -173,11 +173,11 @@ export const AbsenceTable = () => {
     const theme = useThemeStore().theme;
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
-    const isAdmin = useUserStore().user.security_level === securityLevels.admin;
+    const user_level = useUserStore().user.security_level;
     
     useEffect(() => {
-        if(!isAdmin && !group?.is_supervisor) navigate(routes.groups);
-    },[isAdmin,group])
+        if(!!user_level && user_level !== securityLevels.admin && !group?.is_supervisor) navigate(routes.groups);
+    },[user_level,group])
 
     useEffect(() => {
         if(!group?.journal_group_full_name){
@@ -186,7 +186,6 @@ export const AbsenceTable = () => {
         }
         document.title = `Таблиця відсутніх - ${group?.journal_group_full_name}`;
     },[table,group]);
-    console.log(new Date(start*1000).toLocaleDateString());
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
         <AbsenceTableFillters start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
@@ -293,14 +292,14 @@ const useAbsenceTablePrint = (start:number,end:number,group_name?:string,group_i
 
         console.log('safasdaf');
         try{
-            const res = axiosConfig.post(endpoints.absenceTableFile,{group_id:group_id,start,end},{headers:{Authorization:token}})
+            axiosConfig.post(endpoints.absenceTableFile,{group_id:group_id,start,end},{headers:{Authorization:token},responseType:'arraybuffer'})
             .then(response => {
                 const blob = new Blob([response.data], { type: 'application/vnd.ms-excel' });
                 const url = window.URL.createObjectURL(blob);  // Create a URL for the blob
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                a.download = 'file.xls';  // Set the file name for download
+                a.download = `${group_name}_список_відсутніх_${new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}.xls`;  // Set the file name for download
                 document.body.appendChild(a);
                 a.click();  // Programmatically click the anchor to trigger the download
                 window.URL.revokeObjectURL(url);  // Clean up the URL object
@@ -348,7 +347,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                         <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
                         <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
                         <button className={`absenceTable_fillterArrowButton ${fillters.offset === 0 ? 'disabled' : ''}`}  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
-                        <button style={{'display':'flex',marginLeft:'-10px','fontSize':'20px','width':'20px',height:'20px'}} className="absenceTable_fillterArrowButton"  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button>
+                        {/* <button  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button> */}
                     </div>
                 {isAdmin && <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
                         style={{height:'300px !important',overflow:'hidden'}}
