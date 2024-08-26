@@ -1,4 +1,5 @@
 import { Select, Tooltip, Switch, Spin } from "antd";
+import { useReactToPrint } from "react-to-print";
 import { eachDayOfInterval, format, nextSaturday } from "date-fns";
 import { useState, useEffect, Fragment, useMemo, useRef, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -21,150 +22,17 @@ import { Loader } from "../../Loader/Loader";
 import { NoMatch } from "../../NoMatch";
 import {FastForwardFilled} from '@ant-design/icons';
 import _debounce from 'lodash/debounce';
-
 import './absenceTableStyles.scss';
 import { securityLevels } from "../../../consts/securityLevels";
+import { useJournalPrintForm } from "../../../hooks/useJournalPrintForm";
+import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
+import { AbsenceTableFilltersT, AbsenceTableT } from "../../../types/absenceTable";
+import { useAbsenceTableDownload } from "../../../hooks/absenceTableDownload";
+import { useAbsenceTableTeacherSubjectsDragToScroll } from "../../../hooks/absenceTableDragToScroll";
+import { useAbsenceTablePrintForm } from "../../../hooks/absenceTablePrintform";
+import { useGetAbsenceTable } from "../../../hooks/getAbsenceTable";
 const {Option} = Select;
 
-type AbsenceTableT = {
-    dates:string[],
-    group_leader_data: {
-        full_name: string,
-        phone_number: string
-    },
-    supervisor_data: {
-        full_name: string
-        phone_number: string
-    },
-    teachers:string[][],
-    subjects:string[][],
-    student_list:{
-        columns: string[][] 
-        full_name:string
-        total: number
-    }[],
-    group_name:string
-}
-
-type AbsenceTableFilltersT = {
-    group_id:string,
-    offset:number,
-}
-
-const getMondaysAndSaturdays = () => {
-    const today = new Date();
-    today.setHours(6);
-    const days = eachDayOfInterval({
-        start: new Date(today.getFullYear(), 0, 1,6),
-        end: nextSaturday(today)
-    })
-    const formatedModaysAndSaturdays = days.map(el => { 
-        if(format(el, 'EEEE') !== "Monday" &&  format(el, 'EEEE') !== 'Saturday') return;
-
-        const date = new Date(el);
-        date.setHours(6);
-        return date;
-    }).filter(date => !!date);
-    console.log(formatedModaysAndSaturdays);
-    return formatedModaysAndSaturdays;
-}
-const getStartAndEnd = (offset:number,formatedModaysAndSaturdays:(Date | undefined)[]) => {
-
-
-    const currentMonday = formatedModaysAndSaturdays?.[formatedModaysAndSaturdays.length-1+(offset*2 - 1)];
-    const currentSaturday = formatedModaysAndSaturdays?.[formatedModaysAndSaturdays.length-1+(offset*2)];
-
-    return {start:Math.round((currentMonday?.getTime() || 0)/1000),end:Math.round((currentSaturday?.getTime() || 0)/1000)};
-}
-
-
-const useGetAbsenceTable = () => {
-    const navigate = useNavigate();
-    const [table,setTable] = useState<AbsenceTableT>();
-    const [loading,setLoading] = useState(false);
-    const [searchParams,setSearchParams] = useSearchParams();
-    const group_id = searchParams.get('group_id');
-    const offset_param = (Number(searchParams.get('offset')) || 0) > 0 ? 0 : Number(searchParams.get('offset'));
-    const [fillters,setFillters] = useState<AbsenceTableFilltersT>({
-        group_id:group_id || '',
-        offset:Number(offset_param) || 0
-    });
-    const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
-    const {start,end} = getStartAndEnd(fillters.offset,formatedModaysAndSaturdays);
-    console.log(start,end);
-
-    const token = useUserStore().user.token || getToken();
-    
-    const fetch = async (_fillters?:AbsenceTableFilltersT) => {
-        if(!fillters.group_id) return;
-        setLoading(true);
-        try{
-            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end},{headers:{Authorization:token}});
-            setTable(res.data.data);
-        }catch(err){
-            console.error(err);
-        }
-        setLoading(false);
-    }
-    const debounceOnIncrementOffset = useCallback(_debounce(fetch, 300),[]);
-
-    useEffect(() => {
-        fetch({'group_id':fillters.group_id,'offset':offset_param});
-    },[])
-
-    const onChangeOffset = (fieldName:'group_id' | 'offset',value:number | string) => {
-        if(!group_id) return;
-        setFillters(prev => ({ ...prev,[fieldName]:value}));
-        debounceOnIncrementOffset({...fillters,[fieldName]:value});
-    }
-
-    useEffect(() => {
-        navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
-    },[fillters]);
-
-    return {table,start,end,loading,fillters,onChangeOffset,navigate}
-}
-
-const useAbsenceTableTeacherSubjectsDragToScroll = () => {
-    const teachersRef = useRef<HTMLDivElement>(null);
-    const subjectsRef = useRef<HTMLDivElement>(null);
-    const mousePos = useRef<{x:number,y:number}>({x:0,y:0})
-    const [isMouseDown,setIsMouseDown] = useState(false);
-    const handleHorizontalScrollTeachers = () => {
-        if(subjectsRef.current === null || teachersRef.current === null) return;
-        subjectsRef.current.scrollLeft = teachersRef.current.scrollLeft;
-    }
-    const handleHorizontalScrollSubjects = () => {
-        if(subjectsRef.current === null || teachersRef.current === null) return;
-        teachersRef.current.scrollLeft = subjectsRef.current.scrollLeft;
-    }
-
-    const mouseDownHandler = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) => {
-        mousePos.current.x = e.clientX;
-        mousePos.current.y = e.clientY;
-        setIsMouseDown(true);
-        onMouseMove(e,true,{x:e.clientX,y:e.clientY});
-    }
-    const mouseUpHandler = () => {
-        setIsMouseDown(false);
-    }
-    const onMouseMove = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,localIsMouseDown?:boolean,localMousePos?:{x:number,y:number}) => {
-        if(!isMouseDown && !localIsMouseDown) return;
-        if(subjectsRef.current === null || teachersRef.current === null) return;
-        
-        const deltaX = !localMousePos ? e.clientX - mousePos.current.x : e.clientX - localMousePos.x;
-        if(deltaX < 0){
-            teachersRef.current.scrollLeft += 5 - deltaX;
-            subjectsRef.current.scrollLeft += 5 - deltaX;
-        }else if(deltaX > 0){
-            teachersRef.current.scrollLeft -= 5 + deltaX;
-            subjectsRef.current.scrollLeft -= 5 - deltaX;
-        }
-        mousePos.current.x = e.clientX;
-    }
-
-    return {teachersRef,subjectsRef,mousePos,onMouseMove,mouseUpHandler,mouseDownHandler,handleHorizontalScrollSubjects,handleHorizontalScrollTeachers}
-}
 
 export const AbsenceTable = () => {
     const {table,start,end,loading,fillters,onChangeOffset,navigate} = useGetAbsenceTable();
@@ -282,38 +150,6 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
     </section>
 }
 
-const useAbsenceTablePrint = (start:number,end:number,group_name?:string,group_id?:string,) => {
-    const [printLoading,setPrintLoading] = useState(false);
-    const token = useUserStore().user.token;
-
-    const fetchFile = async () => {
-        if(!group_id || !group_name) return;
-        setPrintLoading(true);
-
-        console.log('safasdaf');
-        try{
-            axiosConfig.post(endpoints.absenceTableFile,{group_id:group_id,start,end},{headers:{Authorization:token},responseType:'arraybuffer'})
-            .then(response => {
-                const blob = new Blob([response.data], { type: 'application/vnd.ms-excel' });
-                const url = window.URL.createObjectURL(blob);  // Create a URL for the blob
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = `${group_name}_список_відсутніх_${new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}.xls`;  // Set the file name for download
-                document.body.appendChild(a);
-                a.click();  // Programmatically click the anchor to trigger the download
-                window.URL.revokeObjectURL(url);  // Clean up the URL object
-                document.body.removeChild(a);  // Remove the anchor element
-            })
-            .catch(error => console.error('Error downloading the file:', error));
-        }catch(err){
-            console.error(err);
-        }
-        setPrintLoading(false);
-    }
-
-    return {printLoading,fetchFile}
-}
 type Props = {
     fillters:AbsenceTableFilltersT,
     loading:boolean,
@@ -325,7 +161,9 @@ type Props = {
 }
 
 export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
-    const {printLoading,fetchFile} = useAbsenceTablePrint(start,end,groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name,groups.find(group => group.journal_group === fillters.group_id)?.journal_group);
+    const group = groups.find(group => group.journal_group === fillters.group_id);
+    const {handlePrint,componentRef} = useAbsenceTablePrintForm()
+    const {downloadLoading,fetchFile} = useAbsenceTableDownload(start,end,group?.journal_group_full_name,group?.journal_group);
     const isAdmin = useUserStore().user.security_level === securityLevels.admin;
     const onDecrementOffset = () => {
         onChangeFillters('offset',fillters.offset - 1);
@@ -339,8 +177,15 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
 
     return <>
         <section className='journalTop__container'>
+            {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
-            <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name}</p></h1>
+            <div style={{'width':'100%','justifyContent':'space-between','display':'flex'}}>
+                <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{group?.journal_group_full_name}</p></h1>
+                <div style={{'display':'flex','gap':'30px'}}>
+                    {!loading && !!table && <button disabled={downloadLoading} className='primary_button' onClick={fetchFile}>{!downloadLoading ? `Завантажити` : <Spin/>}</button>}
+                    {!loading && !!table && <button className='primary_button' onClick={handlePrint}>Друк</button>}
+                </div>
+            </div>
             <div className='journalFillters__container'>
                 <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
                     <div className="absenceTable_weekFillter">
@@ -375,9 +220,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                     </Select>}
                 </div>}
                 </div>
-                <div style={{'display':'flex','gap':'30px'}}>
-                    {!loading && !!table && <button disabled={printLoading} className='primary_button' onClick={fetchFile}>{!printLoading ? `Друк` : <Spin/>}</button>}
-                </div>
+               
             </div>
         </section>
     </>

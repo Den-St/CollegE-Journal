@@ -49,7 +49,7 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                 '#'
                 } className={linksClassName + isActiveLink(// routes.groups
                 ' ')}>
-                Матеріал
+                Осв. матеріали
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
