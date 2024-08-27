@@ -23,7 +23,6 @@ export const useGetAbsenceTable = () => {
     });
     const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
     const {start,end} = getStartAndEnd(fillters.offset,formatedModaysAndSaturdays);
-    console.log(start,end);
 
     const token = useUserStore().user.token || getToken();
     

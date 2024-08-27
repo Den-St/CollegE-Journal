@@ -27,7 +27,6 @@ export const useGetTeachers = () => {
             setLoading(false);
         }
     }
-    console.log(teachersByDepartment)
 
     useEffect(() => {
         fetch();
