@@ -176,7 +176,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
         <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
         <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
         <div className='journalFillters__container'>
-            <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
+            <div style={{'display':'flex','gap':'60px','flexWrap':'wrap'}}>
             <div className="adminPanelStudentList_fillterContainer fillter_container">
                 <Select 
                 placeholder={<div className="fillterPlaceholder_container">

@@ -12,7 +12,7 @@ export const HomeTasks = () => {
 
   return <div className={`homeTaskMain__container ${theme}`}>
     <section className="homeTaskSubjects_main">
-      <h2 className="homeTaskSubjects_title">Предмети</h2>
+      <h2 className="header">Предмети</h2>
       <div className="homeTaskSubjects_container">
         {subjects.map((subject,i) => <p className={`homeTasks_subject ${!subject.isActive && 'inactive'}`}>{subject.name}{i === 2 && <div className="newTask"/>}</p>)}
       </div>

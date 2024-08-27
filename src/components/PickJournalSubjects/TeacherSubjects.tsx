@@ -20,7 +20,7 @@ export const TeacherSubjects = () => {
     const {loading,groups} = useGroupsByTeacher();
     const pickedGroupId = useSearchParams()[0].get('group_id');
     const group = groups.find(group => group.journal_group === pickedGroupId);
-    console.log(groups,pickedGroupId,group?.is_supervisor || (userSecurityLevel === securityLevels.admin));
+
     useEffect(() => {
         document.title = `Предмети групи - ${group?.journal_group_full_name}`;
     },[group]);
@@ -31,6 +31,7 @@ export const TeacherSubjects = () => {
     return <section className="subjectsMainContainer">
         {/* <h2 className="subjectsMainTitle"><Link to={routes.groups} className={'leftArrowButton'}><LeftArrowSvg/></Link>Предмети</h2> */}
         <LinkBack title={"Список груп"} route={routes.groups}/>
+        <h1 className="header">Обрати предмет</h1>
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 

@@ -18,7 +18,7 @@ export const StudentSubjects = () => {
     if(!journalSubjects?.subjects.length) return <NoMatch is404={false} title={"Предметів не знайдено"}/>
 
     return <section className="subjectsMainContainer">
-        <h2 className="subjectsMainTitle">Предмети</h2>
+        <h2 className="header">Предмети</h2>
         <div className="subjectsContainer">
             {journalSubjects?.subjects.map((subject,i) => 
                 <Link  

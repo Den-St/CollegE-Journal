@@ -296,6 +296,10 @@ input::placeholder{
 .ant-select-selector{
 	border: none !important;
 	box-shadow: none !important;
+	padding: 0 11px 0 0 !important;
+}
+.ant-select-selection-item{
+	padding-left: 0 !important;
 }
 .ant-select-focused{
 	border: none;

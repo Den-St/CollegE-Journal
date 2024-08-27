@@ -12,6 +12,11 @@
         padding: 191px 221px 0 221px;
     }
 }
+@media screen and (max-width:1440px) {
+    .groupsMain__container{
+        padding: 191px 70px 0 70px;
+    }
+}
 .groupsTop__container{
     width: 100%;
     padding: 0 15%;

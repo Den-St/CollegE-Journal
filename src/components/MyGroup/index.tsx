@@ -46,7 +46,7 @@ export const MyGroup = () => {
 
     return <div style={{padding:'229px 7% 0',display:'flex',gap:'60px',flexDirection:'column'}}>
         <LinkBack title={'Профіль'} route={routes.myProfile}/>
-        <h2 className="subjectsMainTitle">Мої одногрупники</h2>
+        <h2 className="header">Мої одногрупники</h2>
         <section className="studentList__container">
             <div className="studentItems__container" style={{height:80 * Math.round((students?.length || 0) / 2)}}>
                 {!!students.length ? students.sort((a,b) => a.full_name.localeCompare(b.full_name)).map(

@@ -374,6 +374,11 @@
         padding: 191px 221px 0 221px;
     }
 }
+@media screen and (max-width:1440px) {
+    .subjectsMainContainer{
+        padding: 191px 70px 0 70px;
+    }
+}
 .subjectsMainTitle{
     font-family: Montserrat;
     font-size: 20px;

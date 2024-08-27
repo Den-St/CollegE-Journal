@@ -187,7 +187,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                 </div>
             </div>
             <div className='journalFillters__container'>
-                <div style={{'display':'flex','gap':'50px','flexWrap':'wrap'}}>
+                <div style={{'display':'flex','gap':'60px','flexWrap':'wrap'}}>
                     <div className="absenceTable_weekFillter">
                         <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
                         <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
