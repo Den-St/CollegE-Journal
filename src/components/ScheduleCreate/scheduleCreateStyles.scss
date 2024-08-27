@@ -7,6 +7,11 @@
     font-family: Montserrat;
     background-image: url('../../assets/images/signInBackground.png');
 }
+@media screen and (min-width:1441px) {
+    .scheduleCreate__main{
+        padding: 191px 221px 0 221px;
+    }
+}
 .scheduleCreate__h1{
     font-size: 28px;
     letter-spacing: 10%;

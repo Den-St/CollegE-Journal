@@ -60,7 +60,7 @@ export const TeacherSchedule = () => {
     }
 
     return <section className={`lessonsSchedule__container ${theme}`}>
-        <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}><h1 className='studentProfileTab__title'>Розклад заняття</h1><button className='teacherShedule_addLink_button'>Посилання</button></div>
+        <div style={{width:'100%',display:'flex',justifyContent:'space-between','paddingLeft':'60px'}}><h1 className='studentProfileTab__title'>Розклад пар</h1><button className='primary_button' style={{'width':'180px'}}>Посилання</button></div>
         {Object.keys(user?.timetable || {}).length ? 
         <>
         <section className={`lessonsSchedule__container`}>

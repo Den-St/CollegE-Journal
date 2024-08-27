@@ -419,6 +419,11 @@ li.slick-active{
     padding: 191px 5% 0 5%;
     font-family: Montserrat;
 }
+@media screen and (min-width:1441px) {
+	.createUser__main{
+		padding: 191px 221px 0 221px;
+	}
+}
 
 .createUserTitle{
     font-size: 28px;
@@ -744,7 +749,7 @@ body{
 	}
 }
 
-@media screen and (min-width:1440px) {
+@media screen and (min-width:1441px) {
 	.fillter_container{
 		margin-left: -11px;
 	}

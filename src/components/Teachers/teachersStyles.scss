@@ -5,7 +5,11 @@
     padding: 191px 11% 0;
     font-family: Montserrat;
 }
-
+@media screen and (min-width:1441px) {
+    .teachersMain_container{
+        padding: 191px 221px 0 221px;
+    }
+}
 .teachersHeader{
     font-size: 28px;
     font-weight: 500;

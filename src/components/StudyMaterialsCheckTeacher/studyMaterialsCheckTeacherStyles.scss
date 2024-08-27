@@ -6,7 +6,11 @@
     gap:42px;
     font-family: Montserrat;
 }
-
+@media screen and (min-width:1441px) {
+    .smCheck__main{
+        padding: 191px 221px 0 221px;
+    }
+}
 .smCheckAttachFileInput__container{
     display: flex;
     gap:30px;

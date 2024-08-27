@@ -92,6 +92,11 @@
             padding: 191px 11% 0;
         }
     }
+    @media screen and (min-width:1441px) {
+        .faqMain__container{
+            padding: 191px 221px 0 221px;
+        }
+    }
     
     @media screen and (min-width:780px) {
         .ant-collapse-content-box {

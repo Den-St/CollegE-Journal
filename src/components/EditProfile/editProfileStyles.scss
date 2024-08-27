@@ -7,6 +7,11 @@
     font-family: Montserrat;
     background-image: url('../../assets/images/signInBackground.png');
 }
+@media screen and (min-width:1441px) {
+	.editProfileMain_container{
+		padding: 191px 221px 0 221px;
+	}
+}
 .editProfile_header{
     font-size: 28px;
     font-weight: 500;

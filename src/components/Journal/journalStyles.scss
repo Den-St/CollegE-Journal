@@ -5,7 +5,11 @@
     padding: 191px 9% 0 9%;
     font-family: Montserrat;
 }
-
+@media screen and (min-width:1441px) {
+    .journalMain__container{
+        padding: 191px 221px 0 221px;
+    }
+}
 .journalTop__container{
     display: flex;
     flex-direction: column;
@@ -692,7 +696,7 @@ scrollbar-width: none;  /* Firefox */
     }
 }
 
-@media screen and (min-width:1440px) {
+@media screen and (min-width:1441px) {
     .journalTop__container{
         padding: 0;
     }

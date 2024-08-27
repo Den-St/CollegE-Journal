@@ -10,7 +10,11 @@
     font-family: Montserrat;
     background-image: url('../../assets/images/signInBackground.png');
 }
-
+@media screen and (min-width:1441px) {
+    .studentProfile__container{
+        padding: 191px 221px 0 221px;
+    }
+}
 .studentProfileMain__container{
     display: flex;
     // align-items: flex-start;
@@ -20,7 +24,7 @@
 .studentProfileLeft__container{
     display: flex;
     flex-direction: column;
-    gap:90px;
+    gap:60px;
 }
 
 .studentProfileInfo__container{
@@ -35,7 +39,7 @@
     object-fit: cover;
     border-radius:50%;
 }
-@media screen and (min-width:1440px) {
+@media screen and (min-width:1441px) {
     .studentProfile_img{
         width: 121px;
         height: 121px;
@@ -126,6 +130,14 @@
     align-items: center;
     gap:30px;
     transition: 0.2s;
+    //styleName: H/H2;
+font-family: Montserrat;
+font-size: 28px;
+font-weight: 500;
+line-height: 34.13px;
+letter-spacing: 0.1em;
+text-align: left;
+
 }
 .diagonalArrowSvg{
     transition: 0.2s;
@@ -162,7 +174,6 @@
 @media screen and (min-width:'1440px'){
     .studentProfileMain__container{
         // width: 1189px;
-        width: 90%;
         justify-content: space-between;
     }
 }
@@ -186,7 +197,15 @@
     flex-wrap: wrap;
     row-gap: 20px;
     // justify-content: space-between;
-    column-gap:60px;    
+    column-gap:60px;  
+}
+.profile_detailedInfo_dir_container_important{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    // justify-content: space-between;
+    column-gap:60px;  
+    width: 265px;
 }
 .profile_detailedInfo_dir_header{
     font-size: 20px;
@@ -201,12 +220,24 @@
     line-height: 34px;
     width: 97%;
     text-align: start;
+    //styleName: H/H2;
+font-family: Montserrat;
+font-size: 28px;
+font-weight: 500;
+line-height: 34.13px;
+letter-spacing: 0.1em;
+text-align: left;
+
 }
 .profile_detailedInfo_itemContainer{
     display: flex;
     flex-direction: column;
     gap:5px;
-    min-width: 250px;
+}
+@media screen and (min-width:1441px) {
+    .profile_detailedInfo_itemContainer{
+        min-width: 200px;
+    }
 }
 .profile_detailedInfo_item_header{
     font-size: 18px;
@@ -248,7 +279,7 @@
         color:var(--primary-gray);
     }
     .studentProfileTab__button{
-        color:white;
+        color:var(--primary-gray);;
         .diagonalArrowSvg {
             fill:white;
         }
@@ -311,11 +342,7 @@
         padding: 25px 105px 25px 151px;
     }
 }
-@media screen and (max-width:1700px) {
-    .studentProfileTextInfo__container{
-        width: 100%;
-    }
-}
+
 @media screen and (max-width:1280px){
     .studentProfile__name_container{
         gap:10px;

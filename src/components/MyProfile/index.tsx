@@ -150,6 +150,7 @@ export const MyProfile = () => {
                     <p className='studentProfileStatistic__value medium'>143/316</p>
                 </div> 
                 :   <div className='lessonsScheduleDayLessons__container'>
+                    <h1 className='header' style={{'marginBottom':'10px'}}>Час проведення пар</h1>
                     <div className="lessonsScheduleDayLessonItem__container">
                         <p className="lessonsScheduleLessonNumber"></p>
                         <p className="lessonsScheduleLessonStart">Початок</p>
@@ -203,7 +204,35 @@ export const MyProfile = () => {
                     <h2 className='profile_detailedInfo_item_text'>{new Date(user.admission_date).toLocaleString()}</h2>
                 </div>
             </div>
-            <div className='profile_detailedInfo_dir_container' style={{flexDirection:'column'}}>
+            <div className='profile_detailedInfo_dir_container_important' style={{flexDirection:'column'}}>
+                <h1 className='profile_detailedInfo_dir_header'>Важливо</h1>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Цю інформацію не бачать інші студенти, також ви не можете цю інформацію самостійно редагувати</h2>
+                </div>
+            </div>
+        </section>}
+        {user.security_level === securityLevels.teacher && 
+        <section className='profile_detailedInfo_section'>
+            <div className='profile_detailedInfo_dir_container'>
+                <h1 className='profile_detailedInfo_dir_header'>Інформація про викладача</h1>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Пошта викладача</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.mailbox_address}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Номер викладача</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.phone_number}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Посада</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.job_title}</h2>
+                </div>
+                <div className='profile_detailedInfo_itemContainer'>
+                    <h2 className='profile_detailedInfo_item_header'>Додаткова посада</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user.additional_job_title}</h2>
+                </div>
+            </div>
+            <div className='profile_detailedInfo_dir_container_important' style={{flexDirection:'column'}}>
                 <h1 className='profile_detailedInfo_dir_header'>Важливо</h1>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Цю інформацію не бачать інші студенти, також ви не можете цю інформацію самостійно редагувати</h2>

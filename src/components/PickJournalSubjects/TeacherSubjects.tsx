@@ -17,12 +17,13 @@ import './subjectsStyles.scss';
 
 export const TeacherSubjects = () => {
     const userSecurityLevel = useUserStore().user.security_level;
-    const {loading} = useGroupsByTeacher();
+    const {loading,groups} = useGroupsByTeacher();
     const pickedGroupId = useSearchParams()[0].get('group_id');
-    const group = useTeachersGroupsStore().groups.find(group => group.journal_group === pickedGroupId);
+    const group = groups.find(group => group.journal_group === pickedGroupId);
+    console.log(groups,pickedGroupId,group?.is_supervisor || (userSecurityLevel === securityLevels.admin));
     useEffect(() => {
         document.title = `Предмети групи - ${group?.journal_group_full_name}`;
-    },[]);
+    },[group]);
     
     if(loading) return <Loader/>
     if(!group) return <NoMatch is404={false} title={"Предметів за групою не знайдено"}/>
@@ -46,18 +47,18 @@ export const TeacherSubjects = () => {
                 </Link>
             )}
         </Carousel>
-        {group?.is_supervisor || userSecurityLevel === securityLevels.admin && <>
-        <h2 className="subjectsMainTitle">Сводні таблиці</h2>
-        <div className="subjectsContainer">
-            <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
-                Список відсутніх за тиждень
-            </Link>
-        </div>
-        <Carousel className='subjects_carousel' dots slidesToShow={1}>
-            <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
-                Список відсутніх за тиждень
-            </Link>
-        </Carousel></>}
+        {(group?.is_supervisor || (userSecurityLevel === securityLevels.admin)) && <>
+            <h2 className="subjectsMainTitle">Сводні таблиці</h2>
+            <div className="subjectsContainer">
+                <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                    Список відсутніх за тиждень
+                </Link>
+            </div>
+            <Carousel className='subjects_carousel' dots slidesToShow={1}>
+                <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                    Список відсутніх за тиждень
+                </Link>
+            </Carousel></>}
         <section className="studentList__container">
             <h2 className="subjectsMainTitle">Список студентів</h2>
             <div className="studentItems__container" style={{height:80 * Math.round(group.group_students.length / 2)}}>

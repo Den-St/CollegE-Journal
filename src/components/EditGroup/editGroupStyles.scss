@@ -5,6 +5,13 @@
     padding: 191px 5% 100px 5%;
     font-family: Montserrat;
 }
+
+@media screen and (min-width:1441px) {
+	.editGroupMain_container{
+		padding: 191px 221px 0 221px;
+	}
+}
+
 .editGroupSelect__container{
     display: flex;
     gap: 20px;

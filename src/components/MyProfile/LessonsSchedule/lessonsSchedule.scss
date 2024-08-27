@@ -50,7 +50,7 @@
 .lessonsScheduleLessonName{
     font-weight: 400;
     font-size: 20px;
-    width: 60%;
+    width: 192px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -59,6 +59,7 @@
     font-weight: 400;
     font-size: 20px;
     color:#797979;
+    width: 80px;
     path{
         transition: 0.2s;
         stroke:#797979;
@@ -213,6 +214,11 @@ text-align: center;
 }
 .ant-carousel .slick-slider.lessonsScheduleDayCarousel{
     display: none;
+}
+@media screen and (min-width:1441px) {
+    .lessonsSchedule__container{
+        max-width: 1249px;
+    }
 }
 @media screen and (max-width:1450px) {
     .lessonsSchedule__container{
