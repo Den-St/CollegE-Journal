@@ -12,13 +12,15 @@
 }
 @media screen and (min-width:1441px) {
     .studentProfile__container{
-        padding: 191px 221px 0 221px;
+        padding: 233px 221px 0 221px;
     }
+  
 }
 .studentProfileMain__container{
     display: flex;
     // align-items: flex-start;
     gap:130px;
+    justify-content: space-between;
 }
 
 .studentProfileLeft__container{
@@ -31,6 +33,8 @@
     display: flex;
     gap:30px;
     align-items: flex-start;
+    width: 660px;
+
 }
 
 .studentProfile_img{
@@ -55,7 +59,6 @@
     display:flex;
     flex-direction: column;
     gap:10px;
-    width: 50%;
     p{
         width: fit-content;
     }
@@ -175,6 +178,10 @@ text-align: left;
     .studentProfileMain__container{
         // width: 1189px;
         justify-content: space-between;
+        width: 100%;
+    }
+    .studentProfileTextInfo__container{
+
     }
 }
 
@@ -349,6 +356,9 @@ text-align: left;
     }
 }
 @media screen and (min-width:1441px){
+    .studentProfileInfo__container{
+        width: 660px;
+    }
     .studentProfileLeft__container{
         width: 50%;
     }
@@ -356,6 +366,7 @@ text-align: left;
         margin-left: 151px;
     }
 }
+
 @media screen and (max-width:780px) {
     .studentProfileMain__container{
         flex-direction: column;

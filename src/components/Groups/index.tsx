@@ -24,9 +24,9 @@ export const Groups = () => {
     if(!loading && !groups?.length) return <NoMatch is404={false} title={'У вас немає груп'}/>;
 
     return <div className={`groupsMain__container ${theme}`}>
-        {/* <section className="groupsTop__container">
-            <h1 className="groupTitle">Список груп</h1>
-            <div className="groupsFillters__container">
+        <section className="groupsTop__container">
+            <h1 className="header">Список груп</h1>
+            {/* <div className="groupsFillters__container">
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
                     placeholder={<div className="fillterPlaceholder_container">
@@ -56,8 +56,8 @@ export const Groups = () => {
                         <Option value={'Математика4'} label={'Математика4'}>Математика4 <FilterIconSvg/></Option>
                     </Select>
                 </div>
-            </div>
-        </section> */}
+            </div> */}
+        </section>
         <section className="groupsCourses__container journalGroups">
             {
                 !loading ? !!groupesByGrade && Object.keys(groupesByGrade).map(key => 

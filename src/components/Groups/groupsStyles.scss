@@ -19,7 +19,7 @@
 }
 .groupsTop__container{
     width: 100%;
-    padding: 0 15%;
+    padding: 0 15% 0 30px;
     display: flex;
     flex-direction: column;
     gap: 41px;
@@ -158,17 +158,13 @@
         stroke: var(--primary-orange);
     }
 }   
-@media screen and (min-width:'1440px') {
-    .groupsTop__container{
-        padding: 0 15%;
-    }
-}
+
 @media screen and (min-width:'1440px'){
     // .groupsFillters__container{
     //     margin-left: -11px;
     // }
     .groupsTop__container{
-        padding: 0 10%;
+        padding: 0 15% 0 30px;
         gap:20px;
     }
     .groupItem__container{
