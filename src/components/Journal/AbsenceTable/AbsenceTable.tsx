@@ -44,7 +44,8 @@ export const AbsenceTable = () => {
     const user_level = useUserStore().user.security_level;
     
     useEffect(() => {
-        if(!!user_level && user_level !== securityLevels.admin && !group?.is_supervisor) navigate(routes.groups);
+        console.log(user_level,group);
+        if(!!user_level && user_level !== securityLevels.admin && !!group && !group?.is_supervisor) navigate(routes.groups);
     },[user_level,group])
 
     useEffect(() => {

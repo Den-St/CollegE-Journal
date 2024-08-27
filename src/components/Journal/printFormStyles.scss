@@ -1,9 +1,9 @@
 .printForm_container{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    z-index: -1000;
-    display: none;
+    // position: absolute;
+    // z-index: -1000;
+    // display: none;
 }
 .printForm_page{
     width: 797px;
@@ -37,7 +37,7 @@
     line-height: 20.7px;
 }
 
-.printFormJournal_top_left,.printFormAbsenceTable_teacherHeader_container,.printFormAbsence_top_total,.printFormAbsence_top_student,.printFormJournal_top_days_day,.printFormJournal_top_dates_specialDate,.printFormJournal_top_student,.printFormJournal__studentNumber,.printFormLessons_top_task,.printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task.printFormJournal_top_dates_date,.printFormJournal_top_dates_date,.printFormJournal__student,.printFormJournal__mark{
+.printFormJournal_top_left,.printFormAbsenceTable_teacherHeader_container,.printFormAbsence_top_total,.printFormAbsence_teachers_end,.printFormAbsence_top_student,.printFormJournal_top_days_day,.printFormJournal_top_dates_specialDate,.printFormJournal_top_student,.printFormJournal__studentNumber,.printFormLessons_top_task,.printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task.printFormJournal_top_dates_date,.printFormJournal_top_dates_date,.printFormJournal__student,.printFormJournal__mark{
     border-right: 1px solid black;
     border-bottom: 1px solid black;
 }
@@ -199,7 +199,6 @@
 }
 .printFormAbsenceTable_teacherHeader_container{
     width: 192px;
-    height: 68px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -208,8 +207,8 @@
     display: flex;
 }
 .printFormAbsenceTable_teacherName_container{
-    height: 68px;
     width: 12px;
+    height: inherit;
     min-width: 12px;
     writing-mode: vertical-lr;
     transform:rotate(-180deg);
@@ -220,4 +219,8 @@
     text-align: left;
     border-top: 1px solid black;
     border-left: 1px solid black;
+    padding: 2px  0 2px 0;   
 }
+.printFormAbsence_teachers_end{
+    width: 95px;
+    }

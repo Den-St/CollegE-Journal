@@ -81,7 +81,7 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                         <div className="printFormAbsenceTable_teacherNames_container">
                             {table.teachers.map(teachers => <>{teachers.map(teacher => <div className="printFormAbsenceTable_teacherName_container">{teacher}</div>)}</>)}
                         </div>
-                        <p className="printFormAbsence_top_total" style={{'height':'68px'}}></p>
+                        <p className="printFormAbsence_teachers_end"></p>
                     </div>
                     <div className="printFormAbsenceTable_teacher_container">
                         <div className="printFormAbsenceTable_teacherHeader_container">
@@ -90,7 +90,7 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                         <div className="printFormAbsenceTable_teacherNames_container">
                             {table.subjects.map(subjects => <>{subjects.map(subject => <div className="printFormAbsenceTable_teacherName_container">{subject}</div>)}</>)}
                         </div>
-                        <p className="printFormAbsence_top_total" style={{'height':'68px'}}></p>
+                        <p className="printFormAbsence_teachers_end"></p>
                     </div>
                 </section>
             </div>
