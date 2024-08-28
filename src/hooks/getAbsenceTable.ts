@@ -22,7 +22,7 @@ export const useGetAbsenceTable = () => {
         offset:Number(offset_param) || 0
     });
     const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
-    const {start,end} = getStartAndEnd(fillters.offset,formatedModaysAndSaturdays);
+    const [startEnd,setStartEnd] = useState(getStartAndEnd(fillters.offset,formatedModaysAndSaturdays));
 
     const token = useUserStore().user.token || getToken();
     
@@ -30,14 +30,14 @@ export const useGetAbsenceTable = () => {
         if(!fillters.group_id) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end},{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start:startEnd.start,end:startEnd.end},{headers:{Authorization:token}});
             setTable(res.data.data);
         }catch(err){
             console.error(err);
         }
         setLoading(false);
     }
-    const debounceOnIncrementOffset = useCallback(_debounce(fetch, 300),[]);
+    const debounceOnIncrementOffset = useCallback(_debounce(fetch, 300),[startEnd.end,startEnd.start]);
 
     useEffect(() => {
         fetch({'group_id':fillters.group_id,'offset':offset_param});
@@ -45,6 +45,10 @@ export const useGetAbsenceTable = () => {
 
     const onChangeOffset = (fieldName:'group_id' | 'offset',value:number | string) => {
         if(!group_id) return;
+        if(fieldName === 'offset') {
+            console.log('offsetChanged',value);
+            setStartEnd(getStartAndEnd(+value,formatedModaysAndSaturdays));
+        }
         setFillters(prev => ({ ...prev,[fieldName]:value}));
         debounceOnIncrementOffset({...fillters,[fieldName]:value});
     }
@@ -53,5 +57,5 @@ export const useGetAbsenceTable = () => {
         navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
     },[fillters]);
 
-    return {table,start,end,loading,fillters,onChangeOffset,navigate}
+    return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate}
 }

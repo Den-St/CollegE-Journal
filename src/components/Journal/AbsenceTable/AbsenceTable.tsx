@@ -1,17 +1,11 @@
-import { Select, Tooltip, Switch, Spin } from "antd";
-import { useReactToPrint } from "react-to-print";
-import { eachDayOfInterval, format, nextSaturday } from "date-fns";
-import { useState, useEffect, Fragment, useMemo, useRef, useCallback } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Select, Spin } from "antd";
+import {  useEffect, Fragment,  } from "react";
 import { LinkBack } from "../../../assets/components/LinkBack/LinkBack";
 import { FilterIconSvg } from "../../../assets/svgs/filterIconSvg";
 import { JournalPortraitModeWarning } from "../../../assets/svgs/journalPortraitModeWarningSvg";
 import { LeftArrowSvg } from "../../../assets/svgs/leftArrowSvg";
 import { RightArrowSvg } from "../../../assets/svgs/rightArrowSvg";
-import axiosConfig from "../../../axiosConfig";
-import { endpoints } from "../../../consts/endpoints";
 import { routes } from "../../../consts/routes";
-import { getToken } from "../../../helpers/auth";
 import { daysShort } from "../../../helpers/daysShort";
 import { useGroupsByTeacher } from "../../../hooks/groupsByTeacher";
 import { useJournalDragScroll } from "../../../hooks/useJournalDragScroll";
@@ -20,11 +14,9 @@ import { useUserStore } from "../../../store/userStore";
 import { JournalGroupT } from "../../../types/journalGroup";
 import { Loader } from "../../Loader/Loader";
 import { NoMatch } from "../../NoMatch";
-import {FastForwardFilled} from '@ant-design/icons';
 import _debounce from 'lodash/debounce';
-import './absenceTableStyles.scss';
+import './absenceTableStyles.scss'; 
 import { securityLevels } from "../../../consts/securityLevels";
-import { useJournalPrintForm } from "../../../hooks/useJournalPrintForm";
 import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
 import { AbsenceTableFilltersT, AbsenceTableT } from "../../../types/absenceTable";
 import { useAbsenceTableDownload } from "../../../hooks/absenceTableDownload";
@@ -42,7 +34,8 @@ export const AbsenceTable = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const user_level = useUserStore().user.security_level;
-    
+    console.log(table);
+    console.log('1',start,end);
     useEffect(() => {
         if(!!user_level && user_level !== securityLevels.admin && !!group && !group?.is_supervisor) navigate(routes.groups);
     },[user_level,group])
@@ -73,7 +66,7 @@ export const AbsenceTable = () => {
                 </div>
                 <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {table.dates?.map((date,i) => 
-                        <div key={date}  className={`absenceTable_dayContainer`}>
+                        <div key={date+i}  className={`absenceTable_dayContainer`}>
                             <p className="absenceTable_day">{daysShort[date.split(' ')[0]]}</p>
                             <div className="absenceTable_dayNumberContainer">
                                 <p className="absenceTable_dayNumber">1</p>
@@ -134,7 +127,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.teachers.map(teachersSubArray => <>{teachersSubArray.map(teacher => <p className="absenceTable_teacher">{teacher}</p>)}</>)}
+                {table.teachers.map(teachersSubArray => <>{teachersSubArray.map((teacher,i) => <p key={teacher+i} className="absenceTable_teacher">{teacher}</p>)}</>)}
             </div>
         </div>
         <div className="absenceTable_teachersContainer">
@@ -144,7 +137,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.subjects.map(subjectsSubArray => <>{subjectsSubArray.map(subject => <p className="absenceTable_teacher">{subject}</p>)}</>)}
+                {table.subjects.map(subjectsSubArray => <>{subjectsSubArray.map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</>)}
             </div>
         </div>
     </section>

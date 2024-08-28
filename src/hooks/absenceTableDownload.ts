@@ -10,6 +10,7 @@ export const useAbsenceTableDownload = (start:number,end:number,group_name?:stri
     const fetchFile = async () => {
         if(!group_id || !group_name) return;
         setDownloadLoading(true);
+        console.log('2',start,end);
 
         try{
             axiosConfig.post(endpoints.absenceTableFile,{group_id:group_id,start,end},{headers:{Authorization:token},responseType:'arraybuffer'})
