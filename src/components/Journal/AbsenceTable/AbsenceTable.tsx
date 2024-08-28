@@ -23,19 +23,19 @@ import { useAbsenceTableDownload } from "../../../hooks/absenceTableDownload";
 import { useAbsenceTableTeacherSubjectsDragToScroll } from "../../../hooks/absenceTableDragToScroll";
 import { useAbsenceTablePrintForm } from "../../../hooks/absenceTablePrintform";
 import { useGetAbsenceTable } from "../../../hooks/getAbsenceTable";
+import {DoubleRightOutlined} from '@ant-design/icons';
 const {Option} = Select;
 
 
 export const AbsenceTable = () => {
-    const {table,start,end,loading,fillters,onChangeOffset,navigate} = useGetAbsenceTable();
+    const {table,start,end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays} = useGetAbsenceTable();
     const {groups} = useGroupsByTeacher();
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const user_level = useUserStore().user.security_level;
-    console.log(table);
-    console.log('1',start,end);
+
     useEffect(() => {
         if(!!user_level && user_level !== securityLevels.admin && !!group && !group?.is_supervisor) navigate(routes.groups);
     },[user_level,group])
@@ -49,7 +49,7 @@ export const AbsenceTable = () => {
     },[table,group]);
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
-        <AbsenceTableFillters start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
+        <AbsenceTableFillters formatedModaysAndSaturdays={formatedModaysAndSaturdays} start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
         {loading ? <Loader/>
         : !table ? <NoMatch title={`Таблиці за групою не знайдено`}/>
         : (!table.dates?.length || !table.student_list.length || !table.subjects.length) ? <NoMatch isChildren title="Таблиця пуста"/> : <>
@@ -64,7 +64,7 @@ export const AbsenceTable = () => {
                     <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                     <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                 </div>
-                <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
+                <div className='journalColumnsCenter__container' style={{'gap':'21px'}} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {table.dates?.map((date,i) => 
                         <div key={date+i}  className={`absenceTable_dayContainer`}>
                             <p className="absenceTable_day">{daysShort[date.split(' ')[0]]}</p>
@@ -78,13 +78,17 @@ export const AbsenceTable = () => {
                         </div>
                     )}
                 </div>
+                <div className="absenceTable_totalTop">Всього</div>
             </div>
             <div onMouseUp={mouseUpHandler} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
                     {table?.student_list.map((student,i) => 
-                        <div key={student.full_name} id={'student_'+i} className={`journalRowItemLeft__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
-                            <p className='journalRowItemLeft__number'>{i+1}.</p>
-                            <p className='journalRowItemLeft__name'>{student.full_name}</p>
+                        <div style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                            <div key={student.full_name} id={'student_'+i} style={{'height':'30px',padding:'3px 37px',width:'332px',background:'transparent'}} className={`journalRowItemLeft__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                                    <p className='journalRowItemLeft__number'>{i+1}.</p>
+                                    <p className='journalRowItemLeft__name'>{student.full_name}</p>
+                            </div>
+                            <div className="absenceTable_vetricalDivider"></div>
                         </div>
                     )}
                 </div>
@@ -93,14 +97,32 @@ export const AbsenceTable = () => {
                     onMouseMove={onMouseMove}
                     ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {table?.student_list.map((student,i) => 
-                        <div key={student.full_name+i} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
-                            <div className='journalRowItemCenter__container'>
+                        <div key={student.full_name+i} style={{'height':'30px','marginLeft':'1px'}} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                            <div className='journalRowItemCenter__container' style={{'gap':'10px','marginLeft':'65px'}}>
                                 {student.columns.map((dayValues,j) => 
-                                    <Fragment key={j}>{dayValues.map(day => <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text`} style={{cursor:'not-allowed',color:'var(--primary-orange)'}}>{day}</p>)}</Fragment>
+                                    <>
+                                        <div className="absenceTable_dayValues_container" key={j}>
+                                            {dayValues.map(day => 
+                                                <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
+                                                   className={`journalRowItemCenterValue__text`} 
+                                                   style={{cursor:'not-allowed',color:'var(--primary-orange)',
+                                                           width:'24px',height:'24px',margin:'0'}}>
+                                                    {day}
+                                                </p>)}
+                                        </div>
+                                        <div className="absenceTable_vetricalDivider"></div>
+                                        {j === student.columns.length-1 && <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
+                                                   className={`journalRowItemCenterValue__text`} 
+                                                   style={{cursor:'not-allowed',color:'var(--primary-orange)',
+                                                           width:'24px',height:'24px',margin:'0'}}>
+                                                    {student.total}
+                                                </p>}
+                                    </>
                                 )}
                             </div>
                         </div>
                     )}
+                     
                 </div>
             </div>
         </section>
@@ -127,7 +149,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.teachers.map(teachersSubArray => <>{teachersSubArray.map((teacher,i) => <p key={teacher+i} className="absenceTable_teacher">{teacher}</p>)}</>)}
+                {table.teachers.map(teachersSubArray => <div className="absenceTable_teachersSubcontainer">{teachersSubArray.map((teacher,i) => <p key={teacher+i} className="absenceTable_teacher">{teacher}</p>)}</div>)}
             </div>
         </div>
         <div className="absenceTable_teachersContainer">
@@ -137,7 +159,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.subjects.map(subjectsSubArray => <>{subjectsSubArray.map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</>)}
+                {table.subjects.map(subjectsSubArray => <div className="absenceTable_teachersSubcontainer">{subjectsSubArray.map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</div>)}
             </div>
         </div>
     </section>
@@ -150,10 +172,11 @@ type Props = {
     groups:JournalGroupT[],
     table?:AbsenceTableT,
     start:number,
-    end:number
+    end:number,
+    formatedModaysAndSaturdays:(Date | undefined)[]
 }
 
-export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
+export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end,formatedModaysAndSaturdays}) => {
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const {handlePrint,componentRef} = useAbsenceTablePrintForm()
     const {downloadLoading,fetchFile} = useAbsenceTableDownload(start,end,group?.journal_group_full_name,group?.journal_group);
@@ -185,7 +208,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                         <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
                         <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
                         <button className={`absenceTable_fillterArrowButton ${fillters.offset === 0 ? 'disabled' : ''}`}  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
-                        {/* <button  disabled={fillters.offset === 0} onClick={onJumpToEnd}><FastForwardFilled/></button> */}
+                        <button className={`absenceTable_fillterArrowButton_double ${fillters.offset === 0 ? 'disabled' : ''}`} disabled={fillters.offset === 0} onClick={onJumpToEnd}><DoubleRightOutlined/></button>
                     </div>
                 {isAdmin && <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
                         style={{height:'300px !important',overflow:'hidden'}}
@@ -213,7 +236,6 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                     </Select>}
                 </div>}
                 </div>
-               
             </div>
         </section>
     </>

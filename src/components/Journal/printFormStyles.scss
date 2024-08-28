@@ -56,7 +56,6 @@
     border-top:1px solid black;
 }
 
-
 .printFormJournal_top,.printFormAbsence_top_total,.printFormLessons_lessons,.printFormLessons_top,.printFormJournal_top_dates,.printFormJournal__main,.printFormJournal__marks,.printFormJournal__students,.printFormJournal__marks_section,.printFormJournal__marks{
     display: flex;
 }
@@ -131,16 +130,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // position: relative;
 }
-// .printFormJournal_top_left:after{
-//     content:"";
-//     position:absolute;
-//     border-top:1px solid black;
-//     width:58px;
-//     transform: rotate(36deg);
-//     transform-origin: 0% 0%;
-//   }
+
 .printFormJournal_top_student{
     width: 145px;
     height: 35px;

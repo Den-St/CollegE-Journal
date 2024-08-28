@@ -14,7 +14,7 @@ export const useGetAbsenceTable = () => {
     const navigate = useNavigate();
     const [table,setTable] = useState<AbsenceTableT>();
     const [loading,setLoading] = useState(false);
-    const [searchParams,setSearchParams] = useSearchParams();
+    const [searchParams,_] = useSearchParams();
     const group_id = searchParams.get('group_id');
     const offset_param = (Number(searchParams.get('offset')) || 0) > 0 ? 0 : Number(searchParams.get('offset'));
     const [fillters,setFillters] = useState<AbsenceTableFilltersT>({
@@ -29,8 +29,9 @@ export const useGetAbsenceTable = () => {
     const fetch = async (_fillters?:AbsenceTableFilltersT) => {
         if(!fillters.group_id) return;
         setLoading(true);
+        const {start,end} = getStartAndEnd(_fillters?.offset ?? fillters.offset,formatedModaysAndSaturdays)
         try{
-            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start:startEnd.start,end:startEnd.end},{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end},{headers:{Authorization:token}});
             setTable(res.data.data);
         }catch(err){
             console.error(err);
@@ -57,5 +58,5 @@ export const useGetAbsenceTable = () => {
         navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
     },[fillters]);
 
-    return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate}
+    return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays}
 }
