@@ -32,7 +32,7 @@ export const useGetAdminGroups = () => {
                     }                    
                 ];
             //@ts-ignore
-            setGroupsByGrage(myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')[1][0]));
+            setGroupsByGrage(myGroupBy(res.data,({group_full_name}) => group_full_name.split('-')?.[1]?.[0]));
         }catch(err){
             console.error(err);
         }finally{
@@ -41,7 +41,7 @@ export const useGetAdminGroups = () => {
     }
     useEffect(() => {
         //@ts-ignore
-        setGroupsByGrage(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')[1][0]));
+        setGroupsByGrage(myGroupBy(groups,({group_full_name}) => group_full_name.split('-')?.[1]?.[0]));
     },[groups]);
     
     useEffect(() => {fetchGroups()},[]);

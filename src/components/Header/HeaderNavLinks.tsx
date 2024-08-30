@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../consts/routes";
 import { sectionIds } from "../../consts/sectionIds";
 import { goToSection } from "../../helpers/goToSection";
@@ -91,6 +91,7 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
         </>
     }
     const user = useUserStore().user;
+
     return <>
         {(!route || !user.full_name) && <>
             <Link to={'https://college.suitt.edu.ua/'} target={'_blank'} className={linksClassName}>

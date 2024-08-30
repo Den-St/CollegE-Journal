@@ -71,7 +71,7 @@
     justify-content: center;
 }
 .printFormJournal__student{
-    width: 145px;
+    width: 183px;
     height: 18px;
 }
 
@@ -103,7 +103,7 @@
     transform-origin: 0% 0%;
 }
 .printFormAbsence_top_total{
-    width: 95px;
+    width: 66px;
     height: 18px;
     display: flex;
     align-items: center;
@@ -118,15 +118,15 @@
     justify-content: center;
 }
 .printFormJournal__studentNumber{
-    width: 47px;
+    width: 30px;
     height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .printFormJournal_top_left{
-    width: 47px;
-    height: 35px;
+    width: 30px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,7 +138,7 @@
     position: relative;
 }
 .printFormAbsence_top_student{
-    width: 145px;
+    width: 183px;
     height: 18px;
     display: flex;
     align-items: center;
@@ -189,7 +189,7 @@
     display: flex;
 }
 .printFormAbsenceTable_teacherHeader_container{
-    width: 192px;
+    width: 213px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -198,9 +198,9 @@
     display: flex;
 }
 .printFormAbsenceTable_teacherName_container{
-    width: 12px;
+    width: 10px;
     height: inherit;
-    min-width: 12px;
+    min-width: 10px;
     writing-mode: vertical-lr;
     transform:rotate(-180deg);
     font-family: "Times New Roman";
@@ -213,5 +213,5 @@
     padding: 2px  0 2px 0;   
 }
 .printFormAbsence_teachers_end{
-    width: 95px;
+    width: 66px;
 }

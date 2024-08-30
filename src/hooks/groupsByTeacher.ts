@@ -38,7 +38,7 @@ export const useGroupsByTeacher = () => {
     useEffect(() => {
         if(!groups.length) return;
         //@ts-ignore
-        setGroupsByGrade(myGroupBy(groups,({journal_group_full_name}) => journal_group_full_name.split('-')[1][0]));
+        setGroupsByGrade(myGroupBy(groups,({journal_group_full_name}) => journal_group_full_name.split('-')?.[1]?.[0]));
     },[groups]);
 
     return {loading,groups,groupesByGrade}

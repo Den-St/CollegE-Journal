@@ -80,11 +80,11 @@ export const AbsenceTable = () => {
                 </div>
                 <div className="absenceTable_totalTop">Всього</div>
             </div>
-            <div onMouseUp={mouseUpHandler} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
+            <div onMouseUp={mouseUpHandler} style={{'maxHeight':'unset'}} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
                     {table?.student_list.map((student,i) => 
-                        <div style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
-                            <div key={student.full_name} id={'student_'+i} style={{'height':'30px',padding:'3px 37px',width:'332px',background:'transparent'}} className={`journalRowItemLeft__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                        <div key={student.full_name} style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                            <div id={'student_'+i} style={{'height':'30px',padding:'3px 37px',width:'332px',background:'transparent'}} className={`journalRowItemLeft__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
                                     <p className='journalRowItemLeft__number'>{i+1}.</p>
                                     <p className='journalRowItemLeft__name'>{student.full_name}</p>
                             </div>
@@ -100,10 +100,10 @@ export const AbsenceTable = () => {
                         <div key={student.full_name+i} style={{'height':'30px','marginLeft':'1px'}} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
                             <div className='journalRowItemCenter__container' style={{'gap':'10px','marginLeft':'65px'}}>
                                 {student.columns.map((dayValues,j) => 
-                                    <>
-                                        <div className="absenceTable_dayValues_container" key={j}>
-                                            {dayValues.map(day => 
-                                                <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
+                                    <Fragment key={student.full_name+i+','+j}>
+                                        <div className="absenceTable_dayValues_container">
+                                            {dayValues.map((day,k) => 
+                                                <p key={day+i+','+j+''+k} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
                                                    className={`journalRowItemCenterValue__text`} 
                                                    style={{cursor:'not-allowed',color:'var(--primary-orange)',
                                                            width:'24px',height:'24px',margin:'0'}}>
@@ -117,12 +117,11 @@ export const AbsenceTable = () => {
                                                            width:'24px',height:'24px',margin:'0'}}>
                                                     {student.total}
                                                 </p>}
-                                    </>
+                                    </Fragment>
                                 )}
                             </div>
                         </div>
                     )}
-                     
                 </div>
             </div>
         </section>
@@ -149,7 +148,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.teachers.map(teachersSubArray => <div className="absenceTable_teachersSubcontainer">{teachersSubArray.map((teacher,i) => <p key={teacher+i} className="absenceTable_teacher">{teacher}</p>)}</div>)}
+                {table.teachers.map((teachersSubArray,i) => <div key={teachersSubArray.join(' ')+i} className="absenceTable_teachersSubcontainer">{teachersSubArray.map((teacher,j) => <p key={teacher+i+','+j} className="absenceTable_teacher">{teacher}</p>)}</div>)}
             </div>
         </div>
         <div className="absenceTable_teachersContainer">
@@ -159,7 +158,7 @@ const AbsenceTableTeachersSubjects:React.FC<TeachersProps> = ({table}) => {
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.subjects.map(subjectsSubArray => <div className="absenceTable_teachersSubcontainer">{subjectsSubArray.map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</div>)}
+                {table.subjects.map((subjectsSubArray,i) => <div key={subjectsSubArray.join(' ')+i} className="absenceTable_teachersSubcontainer">{subjectsSubArray.map((subject,j) => <p key={subject+i+','+j} className="absenceTable_teacher">{subject}</p>)}</div>)}
             </div>
         </div>
     </section>
@@ -193,7 +192,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
 
     return <>
         <section className='journalTop__container'>
-            {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>}
+            {/* {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>} */}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
             <div style={{'width':'100%','justifyContent':'space-between','display':'flex'}}>
                 <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{group?.journal_group_full_name}</p></h1>

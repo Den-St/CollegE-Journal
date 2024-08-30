@@ -253,7 +253,9 @@ img{vertical-align: top;}
     margin-top: 10px;
     height: 79%;
     width: 100%;
-
+    overflow: hidden;
+    white-space:break-spaces;
+    text-overflow: ellipsis;
 }
 .ant-carousel .slick-slider.homePage_slider{
     display: none;

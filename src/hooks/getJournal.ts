@@ -112,7 +112,13 @@ export const useGetTeacherJournal = () => {
     }
 
     useEffect(() => {
-        navigate(routes.journal+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+        const params = new URLSearchParams(window.location.search);
+        params.set('group_id',fillters.group_id); 
+        params.set('subject_id',fillters.subject_id); 
+        params.set('attestations',(+fillters.onlyAtts).toString()); 
+    
+        window.history.replaceState({}, '', routes.absenceTable+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+        // navigate(routes.journal+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
     },[fillters]);
 
     return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,

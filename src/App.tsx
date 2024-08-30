@@ -28,7 +28,6 @@ function App() {
   },[route]);
   
   const user = useUserStore().user;
-  console.log(user);
   return <Layout>
     <AuthProdiver>
       <RoutesSwitch/>

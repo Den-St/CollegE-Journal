@@ -14,7 +14,7 @@ export const useGetAbsenceTable = () => {
     const navigate = useNavigate();
     const [table,setTable] = useState<AbsenceTableT>();
     const [loading,setLoading] = useState(false);
-    const [searchParams,_] = useSearchParams();
+    const [searchParams,setSearchParams] = useSearchParams();
     const group_id = searchParams.get('group_id');
     const offset_param = (Number(searchParams.get('offset')) || 0) > 0 ? 0 : Number(searchParams.get('offset'));
     const [fillters,setFillters] = useState<AbsenceTableFilltersT>({
@@ -47,7 +47,6 @@ export const useGetAbsenceTable = () => {
     const onChangeOffset = (fieldName:'group_id' | 'offset',value:number | string) => {
         if(!group_id) return;
         if(fieldName === 'offset') {
-            console.log('offsetChanged',value);
             setStartEnd(getStartAndEnd(+value,formatedModaysAndSaturdays));
         }
         setFillters(prev => ({ ...prev,[fieldName]:value}));
@@ -55,7 +54,12 @@ export const useGetAbsenceTable = () => {
     }
 
     useEffect(() => {
-        navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
+        const params = new URLSearchParams(window.location.search);
+        params.set('group_id',fillters.group_id); 
+        params.set('offset',fillters.offset.toString()); 
+    
+        window.history.replaceState({}, '', routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
+        // navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
     },[fillters]);
 
     return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays}

@@ -8,7 +8,6 @@ type Props = {
 }
 
 export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,groupName},props) => {
-
     return <div className="printForm_container" ref={props} id={'printForm'}>
             <div className="printForm_page" style={{'gap':'20px'}}>
                 <div>
@@ -38,8 +37,8 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                             <span>ПІБ студента/студентки</span>
                         </div>
                         <div className='printFormJournal_top_dates'>
-                            {table.dates.map(date => 
-                                <div className="printFormJournal_top_days_day" key={date}>
+                            {table.dates.map((date,i) => 
+                                <div className="printFormJournal_top_days_day" key={date} style={{'width':i !== 5 ? '50px' : '65px'}}>
                                     {date}
                                 </div>    
                             )}
@@ -56,14 +55,14 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                                             {i+1}
                                         </div>
                                         <div className={`printFormJournal__student`}>
-                                            <p className="printFormJournal_studentName">{i+1}.{student.full_name}</p>
+                                            <p className="printFormJournal_studentName">{student.full_name}</p>
                                         </div>
-                                    </div>
+                                    </div>  
                                 )}
                         </div>
                         <div className="printFormJournal__marks_section">
                             {table?.student_list.map((studentDays,i) => <div className="printFormJournal__marks">
-                                {studentDays.columns.map(day => day.map(value => <p className="printFormJournal__mark" style={{'height':'18px','width':'12px'}}>{value}</p>))}
+                                {studentDays.columns.map((day,j) => day.map(value => <p className="printFormJournal__mark" style={{'height':'18px','width':j !== 5 ? '10px' : '13px'}}>{value}</p>))}
                             </div>)}
                         </div>
                         <div className="printFormJournal__totals_section">
@@ -79,7 +78,7 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                         ПІБ викладача
                         </div>
                         <div className="printFormAbsenceTable_teacherNames_container">
-                            {table.teachers.map(teachers => <>{teachers.map(teacher => <div className="printFormAbsenceTable_teacherName_container">{teacher}</div>)}</>)}
+                            {table.teachers.map((teachers,i) => <>{teachers.map((teacher,j) => <div className="printFormAbsenceTable_teacherName_container" style={{'width':i !== 5 ? '10px' : '13px'}}>{teacher}</div>)}</>)}
                         </div>
                         <p className="printFormAbsence_teachers_end"></p>
                     </div>
@@ -88,7 +87,7 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                         Дисципліна
                         </div>
                         <div className="printFormAbsenceTable_teacherNames_container">
-                            {table.subjects.map(subjects => <>{subjects.map(subject => <div className="printFormAbsenceTable_teacherName_container">{subject}</div>)}</>)}
+                            {table.subjects.map((subjects,i) => <>{subjects.map((subject,j) => <div className="printFormAbsenceTable_teacherName_container" style={{'width':i !== 5 ? '10px' : '13px'}}>{subject}</div>)}</>)}
                         </div>
                         <p className="printFormAbsence_teachers_end"></p>
                     </div>
