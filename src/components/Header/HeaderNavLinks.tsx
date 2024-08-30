@@ -61,29 +61,20 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.homeTasks
-                '#'
-                } className={linksClassName + isActiveLink(// routes.groups
-                    ' ')}>
+            <Link  to={routes.homeTasks} className={linksClassName + isActiveLink(routes.homeTasks)}>
                 Завдання
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.schedule
-                '#'
-                } className={linksClassName + isActiveLink(// routes.groups
-                ' ')}>
+            <Link to={routes.schedule} className={linksClassName + isActiveLink(routes.schedule)}>
                 Розклад
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.studyMaterials
-                '#'
-                } className={linksClassName + isActiveLink(// routes.groups
-                ' ')}>
-                Матеріал
+            <Link  to={routes.studyMaterials} className={linksClassName + isActiveLink(routes.studyMaterials)}>
+                Осв. матеріали
                 <svg className="underline_mButton headerSvg" xmlns="http://www.w3.org/2000/svg" width="52" height="2" viewBox="0 0 52 2" fill="none">
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>

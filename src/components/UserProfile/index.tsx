@@ -11,6 +11,7 @@ import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
 import { useGetUserProfile } from "../../hooks/getUserProfile";
+import { useGroupsByTeacher } from "../../hooks/groupsByTeacher";
 import { useThemeStore } from "../../store/themeStore";
 import { useUserStore } from "../../store/userStore";
 import { UserProfileT } from "../../types/userProfile";
@@ -55,6 +56,8 @@ export const UserProfile = () => {
     const navigate = useNavigate();
     const {user_id,user,loading} = useGetUserProfile();
     const {onToggleEditLG,isOnEditingLG,onChangeLG,lg,onConfirmLGChange} = useEditLessonGroups(user);
+    const {groups} = useGroupsByTeacher();
+    const isSupervisor = groups.find(group => group.journal_group === user?.user_group?.group_id)?.is_supervisor;
 
     if(loading) return <Loader/>
     return <div className={`studentProfile__container ${theme}`} style={{'alignItems':'flex-start',paddingLeft:mySecurityLevel !== securityLevels.admin ? '200px' : '7%'}}>
@@ -94,13 +97,12 @@ export const UserProfile = () => {
                                 <p className='studentProfile__bio'>
                                     {user?.interests}
                                 </p>
-                              
                             </div>
                         </div>
                     </div>
                     </div>
                     {
-                    (mySecurityLevel === securityLevels.admin || mySecurityLevel === securityLevels.teacher)
+                    mySecurityLevel === securityLevels.admin
                     && <div style={{'display':'flex','flexDirection':'column','gap':'60px','maxWidth':'500px',width:'50%'}}>
                         <div style={{'display':'flex','gap':'30px',alignItems:'center'}}>
                             <h2 className="header">Додаткова інформація</h2>
@@ -171,8 +173,7 @@ export const UserProfile = () => {
                 </div>
             </div>
         </section>
-        {
-        (mySecurityLevel === securityLevels.admin || mySecurityLevel === securityLevels.teacher) &&
+        {(mySecurityLevel === securityLevels.admin || isSupervisor) &&
         <section className='profile_detailedInfo_section'>
             <div className='profile_detailedInfo_dir_container'>
                 <h1 className='profile_detailedInfo_dir_header'>Інформація про студента</h1>
