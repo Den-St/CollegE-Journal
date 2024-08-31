@@ -36,12 +36,12 @@ export const useChangeGroupInfo = (group?:GroupT) => {
             setErrorCode(-1);
             return;
         }
-        const oneLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1] === '-' && !isNaN(+group_full_name[2]) && !isNaN(+group_full_name[3]) && +group_full_name[2] > 0 && +group_full_name[2] < 5 && +group_full_name[3] > 0 && +group_full_name[3] < 5 && validGroupPrefixes.includes(group_full_name[0]);
+        const oneLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1] === '-' && !isNaN(+group_full_name[2]) && !isNaN(+group_full_name[3]) && +group_full_name[2] > 0 && +group_full_name[2] < 10 && +group_full_name[3] > 0 && +group_full_name[3] < 10 && validGroupPrefixes.includes(group_full_name[0]);
         if(group_full_name.length === 4 && !oneLetterNameCondition){
             setErrorCode(-1);
             return;
         }
-        const doubleLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1].match(/^[а-я]/u) && group_full_name[2] === '-' && !isNaN(+group_full_name[3]) && !isNaN(+group_full_name[4]) && +group_full_name[3] > 0 && +group_full_name[3] < 5 && +group_full_name[4] > 0 && +group_full_name[4] < 5 && validGroupPrefixes.includes(group_full_name[0] + group_full_name[1]);
+        const doubleLetterNameCondition = group_full_name[0].match(/^[А-Я]/u) && group_full_name[1].match(/^[а-я]/u) && group_full_name[2] === '-' && !isNaN(+group_full_name[3]) && !isNaN(+group_full_name[4]) && +group_full_name[3] > 0 && +group_full_name[3] < 9 && +group_full_name[4] > 0 && +group_full_name[4] < 9 && validGroupPrefixes.includes(group_full_name[0] + group_full_name[1]);
         if(group_full_name.length === 5 && !doubleLetterNameCondition){
             setErrorCode(-1);
             return;

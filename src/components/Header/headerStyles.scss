@@ -53,6 +53,12 @@ header{
         justify-content: space-between;
     }
 }
+@media screen and (max-width:440px) {
+    .header_container{
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+}
 @media screen and (min-width:1441px) {
     .header_container{
         padding: 0 221px;
