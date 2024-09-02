@@ -22,6 +22,7 @@ import {EyeOutlined} from "@ant-design/icons";
 import { scheduleTimings } from '../../consts/scheduleTimings';
 import { StarSvg } from '../../assets/svgs/starSvg';
 import { useGetGroup } from '../../hooks/getGroup';
+import { RobotSvg } from '../../assets/svgs/robotSvg';
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -121,7 +122,7 @@ export const MyProfile = () => {
                         ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
                         : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.groups} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
                         }
-                        <p className='studentProfile__bio'>{user.interests || `Інтереси можуть бути розписані у декілька строк. Нехай займаються чим хотять`}</p>
+                        <p className='studentProfile__bio'>{user.interests || ``}</p>
                     </div>
                 </div>
                 <div className='studentProfileTabs__container'>
@@ -135,20 +136,7 @@ export const MyProfile = () => {
                         </Link>)}
                 </div>
             </div>
-            {user.security_level === securityLevels.student ? <div className='studentProfileStatistic__container'>
-                    <h3 className='studentProfileStatistic__header'>
-                        Середня Оцінка
-                    </h3>
-                    <p className='studentProfileStatistic__value na'>45 н/а</p>
-                    <h3 className='studentProfileStatistic__header'>
-                        Пропущено годин
-                    </h3>
-                    <p className='studentProfileStatistic__value good'>6</p>
-                    <h3 className='studentProfileStatistic__header'>
-                        Рейтинг
-                    </h3>
-                    <p className='studentProfileStatistic__value medium'>143/316</p>
-                </div> 
+            {user.security_level === securityLevels.student ? <></>
                 :   <div className='lessonsScheduleDayLessons__container'>
                     <h1 className='header' style={{'marginBottom':'10px'}}>Час проведення пар</h1>
                     <div className="lessonsScheduleDayLessonItem__container">
@@ -247,22 +235,22 @@ export const MyProfile = () => {
                 </div>
             </div>
         </section>}
-        <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} className={'editProfileModal'}>
+        <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} rootClassName={'tryEditProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">{user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>
                 <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
                     <div style={{display:'flex',gap:'20px',width:'100%'}}>
-                        <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Ви не ввели пароль!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
+                        <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
                         <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                     </div>
                     {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
                     {status === 0 && <p className="signIn_errorMessage">Невірний пароль</p>}
                     <div className="editFormButtons_container">
-                        <input autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
+                        <input style={{'width':'271px'}} autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
                         <span className="forgotPassword">Забули пароль?</span>
                     </div>
                 </form>
-                <button className="primary_button" onClick={onTryEditClose}>Повернутися</button>
+                <button className="primary_button" style={{'width':'271px'}} onClick={onTryEditClose}>Повернутися</button>
             </div>
         </Modal>
     </div>

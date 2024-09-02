@@ -553,7 +553,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .rightArrowSvg:hover{
 	fill: var(--primary-orange);
 }
-
+.notReady_container{
+	border: 10px 5px;
+	opacity: 5%;
+	display: flex;
+	flex-direction: column;
+	padding: 87px 118px 169px;
+	align-items: center;
+	background-color: #FFFFFF;
+}
 
 body{
 	&.dark{

@@ -33,8 +33,7 @@
     display: flex;
     gap:30px;
     align-items: flex-start;
-    width: 660px;
-
+    
 }
 
 .studentProfile_img{
@@ -356,9 +355,7 @@ text-align: left;
     }
 }
 @media screen and (min-width:1441px){
-    .studentProfileInfo__container{
-        width: 660px;
-    }
+   
     .studentProfileLeft__container{
         width: 50%;
     }
