@@ -180,6 +180,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
     const {handlePrint,componentRef} = useAbsenceTablePrintForm()
     const {downloadLoading,fetchFile} = useAbsenceTableDownload(start,end,group?.journal_group_full_name,group?.journal_group);
     const isAdmin = useUserStore().user.security_level === securityLevels.admin;
+    const decrementDisabled = formatedModaysAndSaturdays.findIndex(sat => sat?.toLocaleDateString() === new Date(start*1000).toLocaleDateString()) === 0;
     const onDecrementOffset = () => {
         onChangeFillters('offset',fillters.offset - 1);
     }
@@ -204,7 +205,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
             <div className='journalFillters__container'>
                 <div style={{'display':'flex','gap':'60px','flexWrap':'wrap'}}>
                     <div className="absenceTable_weekFillter">
-                        <button className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
+                        <button disabled={decrementDisabled} className="absenceTable_fillterArrowButton" onClick={onDecrementOffset}><LeftArrowSvg/></button>
                         <p className="absenceTable_datesFillter">{new Date(start*1000).toLocaleDateString()+'-'+new Date(end*1000).toLocaleDateString()}</p>
                         <button className={`absenceTable_fillterArrowButton ${fillters.offset === 0 ? 'disabled' : ''}`}  disabled={fillters.offset === 0} onClick={onIncrementOffset}><RightArrowSvg/></button>
                         <button className={`absenceTable_fillterArrowButton_double ${fillters.offset === 0 ? 'disabled' : ''}`} disabled={fillters.offset === 0} onClick={onJumpToEnd}><DoubleRightOutlined/></button>

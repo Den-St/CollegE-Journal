@@ -174,7 +174,7 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
             <div className="createUserSelect__container" style={{width:'55%'}}>
                 <label className="select_label">Додаткова посада</label>
                 <input autoComplete="off" 
-                {...register('additional_job_title',{required:{value:true,message:'Введіть додаткову посаду викладача'}})}
+                {...register('additional_job_title',{required:{value:false,message:'Введіть додаткову посаду викладача'}})}
                 className="form_input" placeholder='Введіть додаткову посаду викладача'/>
                 {/* <div className="select_wrapper">
                     <Select
