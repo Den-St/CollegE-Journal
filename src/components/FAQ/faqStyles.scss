@@ -114,6 +114,12 @@
     }
 }
 .dark{
+    .faqCollapse{
+        .ant-collapse-content{
+background-color: var(--secondary-blue);
+        }
+    }
+    
     .faqTitle{
         color:white;
     }
@@ -126,7 +132,6 @@
             fill:white !important;
         }
     }
- 
     .ant-collapse-content {
         color:white;
     }

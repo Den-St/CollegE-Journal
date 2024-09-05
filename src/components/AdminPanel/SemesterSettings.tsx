@@ -58,12 +58,12 @@ export const SemesterSettings = () => {
     
     return <>
     <SemesterSettingsPart/>
-    {/* <Modal footer={false} onCancel={() => setOnCheckSettingsModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckSettingsModal}>
+    {/* <Modal centered footer={false} onCancel={() => setOnCheckSettingsModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckSettingsModal}>
         <CheckScheduleSettingsModal 
         onImportFile={onImportFile}
         setCourseNumber={setCourseNumber} courseNumber={1} courseNumbers={courseNumbers}/>
     </Modal>
-    <Modal footer={false} onCancel={() => setOnCheckScheduleModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckScheduleModal}>
+    <Modal centered footer={false} onCancel={() => setOnCheckScheduleModal(false)} rootClassName="semesterSettings_confirm_modal" open={onCheckScheduleModal}>
         <CheckScheduleModal onClose={() => setOnCheckScheduleModal(false)}/>
     </Modal> */}
     </>

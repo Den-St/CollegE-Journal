@@ -113,7 +113,7 @@ type Props = {
     onClose:() => void
 }
 export const TeacherSettingsModal:React.FC<Props> = ({onClose,open}) => {
-    return <Modal rootClassName="teacherSettingsModal" footer={false} open={open} onCancel={onClose}>
+    return <Modal centered rootClassName="teacherSettingsModal" footer={false} open={open} onCancel={onClose}>
         <Collapse className="teacherSettingsModalCollapse" expandIconPosition="end" defaultActiveKey={['add']} ghost items={items} />
         <input type={'submit'} style={{'marginLeft':'15px'}} className={'primary_button'} value={'Зберегти налаштування'}/>
     </Modal>

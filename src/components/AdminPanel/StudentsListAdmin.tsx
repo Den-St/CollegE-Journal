@@ -48,7 +48,7 @@ export const StudentsListAdmin = () => {
                 </div>
             </div>
         </section>
-        <Modal open={createGroupModalOpened} onCancel={onCloseCreateGroupModal} footer={false}>
+        <Modal centered open={createGroupModalOpened} onCancel={onCloseCreateGroupModal} footer={false}>
             <form className="createGroup_form" onSubmit={handleSubmit(onCreateGroup)}>
                 <div className="createUserFormSelects__container createGroupFormSelects__container">
                     <div className="createUserSelect__container createGroupSelect__container">

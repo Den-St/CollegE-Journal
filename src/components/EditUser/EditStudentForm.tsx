@@ -294,6 +294,6 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             </span>
         </div>
     </form>
-    <Modal rootClassName="expelStudentModal" footer={false} open={isExpelModal} onCancel={() => setIsExpelModal(false)}><ExpelStudentModal onClose={() => setIsExpelModal(false)} user={user}/></Modal>
+    <Modal centered rootClassName="expelStudentModal" footer={false} open={isExpelModal} onCancel={() => setIsExpelModal(false)}><ExpelStudentModal onClose={() => setIsExpelModal(false)} user={user}/></Modal>
     </>
 }

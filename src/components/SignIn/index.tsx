@@ -80,7 +80,7 @@ export const SignIn = () => {
                 <span className='noAccount__text'>Будь ласка, отримайте дані входу у куратора, для підтвердження облікового запису.</span>
             </div>
         </div>
-        <Modal open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
+        <Modal centered open={onForgotPasswordModal} footer={false} onCancel={() => setOnForgotPasswordModal(false)} rootClassName="forgotPassword_modal" >
             <ForgotPasswordModal onClose={() => setOnForgotPasswordModal(false)}/>
         </Modal>
     </div>

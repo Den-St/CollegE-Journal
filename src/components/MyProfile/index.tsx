@@ -235,19 +235,19 @@ export const MyProfile = () => {
                 </div>
             </div>
         </section>}
-        <Modal open={onTryEditing} onCancel={onTryEditClose} footer={false} rootClassName={'tryEditProfileModal'}>
+        <Modal centered open={onTryEditing} onCancel={onTryEditClose} footer={false} rootClassName={'tryEditProfileModal'}>
             <div className="editProfileModal_container">
                 <h1 className="editProfileModal_header">{user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>
                 <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
                     <div style={{display:'flex',gap:'20px',width:'100%'}}>
-                        <input style={{width:"80%"}} {...register('user_password',{required:{value:true,message:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
+                        <input style={{width:"88%"}} {...register('user_password',{required:{value:true,message:'Нажаль дані введені не корректно, перевірте їх та спробуйте ще раз!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
                         <span onClick={onTogglePassword} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
                     </div>
                     {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
-                    {status === 0 && <p className="signIn_errorMessage">Невірний пароль</p>}
+                    {status === 0 && <p className="signIn_errorMessage">'Нажаль дані введені не корректно або ця пошта не прив’язана до журналу, перевірте їх та спробуйте ще раз!'</p>}
                     <div className="editFormButtons_container">
                         <input style={{'width':'271px'}} autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
-                        <span className="forgotPassword">Забули пароль?</span>
+                        <span style={{'width':'272px'}} className="forgotPassword">Забув пароль</span>
                     </div>
                 </form>
                 <button className="primary_button" style={{'width':'271px'}} onClick={onTryEditClose}>Повернутися</button>
