@@ -1,12 +1,20 @@
 FROM node:14-alpine as build
 
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
+
+ENV GENERATE_SOURCEMAP=false
 COPY . .
 
-ENV REACT_APP_API_URL=http://localhost:3000
-EXPOSE 3000
-CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+ENV REACT_APP_API_URL=http://localhost:80
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
