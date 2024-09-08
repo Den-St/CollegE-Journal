@@ -110,6 +110,7 @@ export const EditProfile = () => {
 
     return <div className={`editProfileMain_container ${theme}`}>
         {user.is_active && <LinkBack title="Профіль" route={routes.myProfile}/>}
+        <h1 className="header" style={{'marginTop':'-20px'}}>Редагування профілю</h1>
         {/* {user.is_active && <h1 className="editProfile_header">Для того щоб активувати особовий запис потрібно змінити пароль.</h1>} */}
         <div className='studentProfileInfo__container editProfileUserInfo'>
             <div className="editProfileChangePhoto_container">

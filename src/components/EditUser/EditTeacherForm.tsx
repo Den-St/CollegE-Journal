@@ -66,7 +66,8 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
     return <>
     <section className='studentProfileMain__container'>
         <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
-            {!!userId && <LinkBack title="Профіль" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}
+            {!!userId && <LinkBack title="Профіль викладача" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}
+            <h1 className="header">Редагування профілю</h1>
             <div className='studentProfileLeft__container'>
                 <div className='studentProfileInfo__container'>
                     <div style={{'display':'flex','flexDirection':'column',gap:'15px','alignItems':'center'}}>

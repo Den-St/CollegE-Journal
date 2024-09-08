@@ -171,7 +171,7 @@ export const MyProfile = () => {
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата народження</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{new Date(user.birth_date).toLocaleString()}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.birth_date?.toLocaleString().split(',')[0] || ''}</h2>
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Місце знаходження</h2>
@@ -191,7 +191,7 @@ export const MyProfile = () => {
                 </div>
                 <div className='profile_detailedInfo_itemContainer'>
                     <h2 className='profile_detailedInfo_item_header'>Дата вступу</h2>
-                    <h2 className='profile_detailedInfo_item_text'>{new Date(user.admission_date).toLocaleString()}</h2>
+                    <h2 className='profile_detailedInfo_item_text'>{user?.admission_date?.toLocaleString().split(',')[0] || ''}</h2>
                 </div>
                 </div>
                 </div>

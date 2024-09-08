@@ -6,7 +6,7 @@
     flex-direction: column;
     padding: 191px 7% 0;
     justify-content: center;
-    gap:120px;
+    gap:60px;
     font-family: Montserrat;
     background-image: url('../../assets/images/signInBackground.png');
 }
@@ -362,9 +362,9 @@ text-align: left;
 }
 @media screen and (min-width:1441px){
    
-    .studentProfileLeft__container{
-        width: 50%;
-    }
+    // .studentProfileLeft__container{
+    //     width: 50%;
+    // }
     .studentProfileTabs__container{
         margin-left: 151px;
     }

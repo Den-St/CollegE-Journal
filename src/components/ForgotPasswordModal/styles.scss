@@ -6,12 +6,12 @@
     text-align: left;
     font-family: Montserrat;
 }
-.forgotPassword_modal{
-    .ant-modal{
-        transform: translate(0, -50%) !important;  
-        top:50% !important;
-    }
-}
+// .forgotPassword_modal{
+//     .ant-modal{
+//         transform: translate(0, -50%) !important;  
+//         top:50% !important;
+//     }
+// }
 @media screen and (min-width:'1440px') {
     .forgotPassword_modal{
         .ant-modal{

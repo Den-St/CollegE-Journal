@@ -22,8 +22,11 @@ export const useAuth = () => {
         onUserLoading();
         setLoading(true);
         try{
-            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:cookieToken || localToken}});
-            signIn({...res.data.data,token:localToken || cookieToken || ''},);
+            const res = await axiosConfig.get(endpoints.auth,{headers:{Authorization:cookieToken || localToken}});
+            const data = res.data.data;
+            signIn({...data,token:localToken || cookieToken || '',
+                birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
+                admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null,},);
             if(!res.data.data.is_active){
                 setChangeProfileCookie();
                 navigate(routes.editProfile);
