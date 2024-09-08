@@ -117,7 +117,7 @@ export const useGetTeacherJournal = () => {
         params.set('subject_id',fillters.subject_id); 
         params.set('attestations',(+fillters.onlyAtts).toString()); 
     
-        window.history.replaceState({}, '', routes.absenceTable+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+        window.history.replaceState({}, '', routes.journal+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
         // navigate(routes.journal+`?group_id=${fillters.group_id}&subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
     },[fillters]);
 
