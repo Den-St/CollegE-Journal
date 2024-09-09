@@ -28,13 +28,13 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="select_label">Ім’я (ПІБ)</label>
                     <input autoComplete="off"  
-                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:namePattern,message:'Некорректне ПІБ!'}})} 
+                    {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ викладача занадто коротке!'},maxLength:{value:40,message:'ПІБ викладача занадто велике!'},pattern:{value:namePattern,message:'Некоректне ПІБ!'}})} 
                     className="form_input" placeholder='Введіть ПІБ викладача'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Пошта викладача</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} 
+                    {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не коректний email!'}})} type={'email'} 
                     className="form_input" placeholder='Введіть пошту викладача'/>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export const CreateTeacher = () => {
                 <div className="createUserNameInput__container">
                     <label className="select_label">Номер викладача</label>
                     <input autoComplete="off" 
-                    {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер викладача!'},minLength:{value:10,message:'Некорректний номер викладача!'},})}
+                    {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер викладача!'},minLength:{value:10,message:'Некоректний номер викладача!'},})}
                     className="form_input" placeholder='Введіть номер викладача'/>
                 </div>
                 <div className="createUserSelect__container" style={{width:'50%'}}>

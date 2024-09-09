@@ -25,11 +25,11 @@ export const useCreateTeacher = (onAddTeacherLocally:(teacher:TeacherT) => void)
 
     const onCreateUser = async (data:CreateUserT) => {
         if(!data.full_name.includes(' ')){
-            setErrorMessage('Некорректно введене ПІБ!')
+            setErrorMessage('Некоректно введене ПІБ!')
             return;
         }
         if(data.phone_number?.[0] !== '+'){
-            setErrorMessage('Некорректно введений номер студента!')
+            setErrorMessage('Некоректно введений номер студента!')
             return;
         }
         try{

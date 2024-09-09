@@ -8,7 +8,7 @@ import "./styles.scss";
 
 const errorCodesToMessages:Record<string,string> = {
     // 'User not found.':'Користувача з таким email не знайдено',
-    'User mail isn\'t valid.':'Email не корректний'
+    'User mail isn\'t valid.':'Email не коректний'
 }
 const useForgotPassword = (onClose:() => void) => {
     const {
@@ -46,7 +46,7 @@ export const ForgotPasswordModal:React.FC<{onClose:() => void}> = ({onClose}) =>
             <h1 className="header">Забули пароль?</h1>
             <div className="forgotPassword_input_container">
                 <h2 className="forgotPassword_subheader">Введіть свою пошту, яка прив’язана до акаунту</h2>
-                <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Нажаль дані введені не корректно або ця пошта не прив’язана до журналу, перевірте їх та спробуйте ще раз!'},required:{value:true,message:'Введіть поштову адресу!'}})} className="input" placeholder="Введіть свою пошту"/>
+                <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Нажаль дані введені не коректно або ця пошта не прив’язана до журналу, перевірте їх та спробуйте ще раз!'},required:{value:true,message:'Введіть поштову адресу!'}})} className="input" placeholder="Введіть свою пошту"/>
             </div>
             {!!errors.mailbox_address?.message && <p className='signIn_errorMessage'>{errors.mailbox_address?.message}</p>}
             {formError && <p className='signIn_errorMessage'>{errorCodesToMessages[formError]}</p>}

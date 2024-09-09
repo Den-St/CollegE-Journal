@@ -47,7 +47,7 @@ export const SignIn = () => {
             <h1 className="signIn__header">Вхід</h1>
             <form onSubmit={handleSubmit(onLogin)} className="signIn__form">
                 <div className="signInInput__container">
-                    <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некорректний email!'}})} defaultValue={autoLoginMailData.mailbox_address || ''} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
+                    <input {...register('mailbox_address',{pattern:{value:emailPattern,message:'Некоректний email!'}})} defaultValue={autoLoginMailData.mailbox_address || ''} type={'email'}  placeholder={"Username@gmail.com"} className={'email__input'}/>
                 </div>
                 <div className="signInInput__container">
                     <input {...register('user_password')} type={passwordInputType} defaultValue={autoLoginMailData.user_password || ''} placeholder={"Password"} className={'password__input'} autoComplete={"off"}/>

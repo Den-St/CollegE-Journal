@@ -37,23 +37,23 @@ export const useCreateUser = (group?:GroupT) => {
             return;
         }
         if(!data.full_name.includes(' ')){
-            setErrorMessage('Некорректно введене ПІБ!')
+            setErrorMessage('Некоректно введене ПІБ!')
             return;
         }
         // if(data.phone_number?.[0] !== '+'){
-        //     setErrorMessage('Некорректно введений номер студента!')
+        //     setErrorMessage('Некоректно введений номер студента!')
         //     return;
         // }
         // if(data.parents_phone_number?.[0] !== '+'){
-        //     setErrorMessage('Некорректно введений номер батьків!')
+        //     setErrorMessage('Некоректно введений номер батьків!')
         //     return;
         // }
         if(!data.phone_number?.includes('+')){
-            setErrorMessage('Некорректно введений номер студента!')
+            setErrorMessage('Некоректно введений номер студента!')
             return;
         }
         if(!data.parents_phone_number?.includes('+')){
-            setErrorMessage('Некорректно введений номер батьків!')
+            setErrorMessage('Некоректно введений номер батьків!')
             return;
         }
         try{

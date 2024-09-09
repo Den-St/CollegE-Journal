@@ -18,10 +18,10 @@ const {Option} = Select;
 
 const userErrorCodesToMessages:Record<number,string> = {
     409:'Користувач з такою поштовою адресою вже існує!',
-    422:'Некорректно введені дан!',
+    422:'Некоректно введені дан!',
 }
 const changeErrorCodesToMessages:Record<number,string> = {
-    [-1]:'Некорректна назва групи!',
+    [-1]:'Некоректна назва групи!',
     1:'Інформацію о групі змінено'
 }
 
@@ -77,11 +77,11 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                 <div className="createUserNameInput__container">
                     <label className="select_label">Ім’я (ПІБ)</label>
-                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некорректне ПІБ!'}})} className="form_input" placeholder='Введіть ПІБ студента'/>
+                    <input autoComplete="off"  {...createUserRegister('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некоректне ПІБ!'}})} className="form_input" placeholder='Введіть ПІБ студента'/>
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Пошта студента</label>
-                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} type={'email'} className="form_input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не коректний email!'}})} type={'email'} className="form_input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormInputs__container">
@@ -130,7 +130,7 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата народження</label>
                     {/* <input autoComplete="off" 
-                    {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некорректна!'}})}
+                    {...createUserRegister('birth_date',{required:{value:true,message:'Оберіть дату народження!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата народження некоректна!'}})}
                     className="form_input" placeholder='Оберіть дату народження'/> */}
                      <DatePicker
                         placeholder="Оберіть дату народження"
@@ -147,7 +147,7 @@ export const EditGroup = () => {
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Дата вступу</label>
                     {/* <input autoComplete="off" 
-                    {...createUserRegister('admission_date',{required:{value:true,message:'Оберіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некорректна!'}})}
+                    {...createUserRegister('admission_date',{required:{value:true,message:'Оберіть дату вступу!'},pattern:{value:/\d{1,2}\.\d{1,2}\.\d{2,4}/,message:'Дата вступу некоректна!'}})}
                     className="form_input" placeholder='Оберіть дату вступу'/> */}
                     <DatePicker
                         placeholder="Оберіть дату вступу"
@@ -228,11 +228,11 @@ export const EditGroup = () => {
             <div className="createUserFormInputs__container">
                     <div className="createUserNameInput__container">
                         <label className="select_label">Номер студента</label>
-                        <input autoComplete="off" type={'tel'}  {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер студента!'},minLength:{value:10,message:'Некорректний номер студента!'},})} className="form_input" placeholder='Введіть номер студента'/>
+                        <input autoComplete="off" type={'tel'}  {...createUserRegister('phone_number',{required:{value:true,message:'Введіть номер студента!'},minLength:{value:10,message:'Некоректний номер студента!'},})} className="form_input" placeholder='Введіть номер студента'/>
                     </div>
                     <div className="createUserNameInput__container">
                         <label className="select_label">Номер батьків</label>
-                        <input autoComplete="off" type={'tel'} {...createUserRegister('parents_phone_number',{required:{value:true,message:'Введіть номер батьків!'},minLength:{value:10,message:'Некорректний номер батьків!'},})} className="form_input" placeholder='Введіть номер батьків'/>
+                        <input autoComplete="off" type={'tel'} {...createUserRegister('parents_phone_number',{required:{value:true,message:'Введіть номер батьків!'},minLength:{value:10,message:'Некоректний номер батьків!'},})} className="form_input" placeholder='Введіть номер батьків'/>
                     </div>
                 </div>
             {/* <div className="createUserFormSelects__container"> */}

@@ -85,7 +85,7 @@ export const RecoveryPassword = () => {
             <div style={{display:'flex',gap:'20px'}}>
                 <input
                     style={{'width':'100%'}}
-                    {...register('user_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/_])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*+-/_]{8,30}$/,message:'Пароль некорректний'},required:{value:true,message:'Введіть новий пароль'}})}
+                    {...register('user_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/_])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*+-/_]{8,30}$/,message:'Пароль некоректний'},required:{value:true,message:'Введіть новий пароль'}})}
                     className="input" placeholder="Введіть новий пароль"
                     type={passwordInputType[1]}
                     />

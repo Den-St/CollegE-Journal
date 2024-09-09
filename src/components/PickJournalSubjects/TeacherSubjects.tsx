@@ -49,7 +49,7 @@ export const TeacherSubjects = () => {
             )}
         </Carousel>
         {(group?.is_supervisor || (userSecurityLevel === securityLevels.admin)) && <>
-            <h2 className="subjectsMainTitle">Сводні таблиці</h2>
+            <h2 className="subjectsMainTitle">Зведені таблиці</h2>
             <div className="subjectsContainer">
                 <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Список відсутніх за тиждень

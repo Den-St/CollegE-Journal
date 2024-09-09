@@ -114,13 +114,13 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
             <div className="createUserNameInput__container">
                 <label className="select_label">Ім’я (ПІБ)</label>
                 <input autoComplete="off"  
-                {...register('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некорректне ПІБ!'}})} 
+                {...register('full_name',{required:{value:true,message:'Введіть ПІБ викладача!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некоректне ПІБ!'}})} 
                 className="form_input" placeholder='Введіть ПІБ студента'/>
             </div>
             <div className="createUserEmailInput__container">
                 <label className="select_label">Пошта викладача</label>
                 <input autoComplete="off" 
-                {...register('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не корректний email!'}})} 
+                {...register('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не коректний email!'}})} 
                 type={'email'} className="form_input" placeholder='Введіть пошту викладача'/>
             </div>
         </div>
