@@ -22,8 +22,11 @@ export const useGoogleAuthRequest = (setErrorStatus:(statusNumber:number) => voi
         if(!token) return;
         onUserLoading();
         try{
-            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
-            signIn({...res.data.data,token:token || ''},);
+            const res = await axiosConfig.get(endpoints.auth,{headers:{Authorization:token}});
+            const data = res.data.data;
+            signIn({...data,token:token || '',
+            birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
+            admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null,});
             if(res.data.data.security_level === securityLevels.admin) {
                 navigate(routes.adminPanel + '?section=schedule');
                 return;

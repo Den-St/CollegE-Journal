@@ -37,7 +37,7 @@ export const useCreateUser = (group?:GroupT) => {
             return;
         }
         if(!data.full_name.includes(' ')){
-            setErrorMessage('Некоректно введене ПІБ!')
+            setErrorMessage('Некоректне ПІБ!')
             return;
         }
         // if(data.phone_number?.[0] !== '+'){

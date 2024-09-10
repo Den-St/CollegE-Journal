@@ -99,7 +99,6 @@ export const MyProfile = () => {
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
     const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status} = useTryEditProfile();
-    
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);

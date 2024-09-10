@@ -27,6 +27,7 @@ export const useAuth = () => {
             signIn({...data,token:localToken || cookieToken || '',
                 birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
                 admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null,},);
+              
             if(!res.data.data.is_active){
                 setChangeProfileCookie();
                 navigate(routes.editProfile);

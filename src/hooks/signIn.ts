@@ -18,8 +18,11 @@ export const useSignIn = () => {
     const navigate = useNavigate();
     const auth = async (token:string,active:boolean) => {
         try{
-            const res = await axiosConfig.get<{data:UserT}>(endpoints.auth,{headers:{Authorization:token}});
-            signIn(res.data.data);
+            const res = await axiosConfig.get(endpoints.auth,{headers:{Authorization:token}});
+            const data = res.data.data;
+            signIn({...data,token:token || '',
+                birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
+                admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null,},);
             if(res.data.data.security_level === securityLevels.admin) {
                 navigate(routes.adminPanel + '?section=schedule');
                 return;
@@ -45,11 +48,14 @@ export const useSignIn = () => {
             ));
             if(res?.data.status === 1){
                 if(remember) setToken(res.data.data.token);
+                const data = res.data.data;
                 signIn({
-                    token:res.data.data.token,
-                    ...res.data.data
+                    token:data.token,
+                    ...data,
+                    birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
+                    admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null
                 });
-                await auth(res.data.data.token,res.data.data.active);
+                await auth(data.token,data.active);
             }
             
             // setStatus(res?.data.status);
