@@ -128,7 +128,9 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
             <div className="createUserNameInput__container">
                 <label className="select_label">Ім’я (ПІБ)</label>
                 <input autoComplete="off"
-                {...register('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},pattern:{value:namePattern,message:'Некоректне ПІБ!'}})} 
+                {...register('full_name',{required:{value:true,message:'Введіть ПІБ студента!'},minLength:{value:10,message:'ПІБ студента занадто коротке!'},maxLength:{value:40,message:'ПІБ студента занадто велике!'},
+                // pattern:{value:namePattern,message:'Некоректне ПІБ!'}
+            })} 
                 className="form_input" placeholder='Введіть ПІБ студента'/>
             </div>
             <div className="createUserEmailInput__container">

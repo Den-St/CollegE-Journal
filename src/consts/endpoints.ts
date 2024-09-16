@@ -31,5 +31,7 @@ export const endpoints = {
     googleAuthGetUrl:'google/request',
     googleLogin:'google/login',
     absenceTable:'admin/summary-tables/absence_table/data',
-    absenceTableFile:'admin/summary-tables/absence_table/file'
+    absenceTableFile:'admin/summary-tables/absence_table/file',
+    getSemesterConfig:'admin/semester-config/get',
+    addSemesterConfig:'admin/semester-config/add'
 }

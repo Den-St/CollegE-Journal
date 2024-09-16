@@ -121,6 +121,6 @@ export const TeacherSchedule = () => {
                 </div>)}
         </Carousel>
         </>
-        : <NoMatch isChildren title="Нажаль, розклад ще не завантажен" description="Зазвичай розклад генерується у 10-тих числах місяця"/>}
+        : <NoMatch isChildren title="На жаль, розклад ще не завантажен" description="Зазвичай розклад генерується у 10-тих числах місяця"/>}
     </section>
 }

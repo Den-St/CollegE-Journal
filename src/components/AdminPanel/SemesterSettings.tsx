@@ -2,6 +2,8 @@ import { Checkbox, DatePicker, Modal, Select, Steps } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import axiosConfig from "../../axiosConfig";
+import { endpoints } from "../../consts/endpoints";
 import { customDateFormat } from "../../helpers/dateFormat";
 import { CheckScheduleSettingsModal } from "../CheckScheduleSettingsModal";
 import { CheckScheduleModal } from "./CheckScheduleModal";
@@ -24,15 +26,138 @@ const stepsItems = [
     {
         title:'4 Курс',
     },
-
 ]
-type SemesterSettingsT = {
-    semester_start:Date | null,
-    semester_end:Date | null,
-    temporary:boolean
+type SemesterSettingsFormT = {
+    semester_start_first:Date | null,
+    semester_end_first:Date | null,
+    weeks_n_first:number,
+    semester_start_second:Date | null,
+    semester_end_second:Date | null,
+    weeks_n_second:number,
+    temporary:boolean,
+    eduYear:string | null,
+    semesterNumber:number | null
 }
+type SemesterSettingsT = {
+    "core_groups": {
+        1: {
+            "З": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кб": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кн": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "То": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Тр": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            }
+        },
+        2: {
+            "З": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кб": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кн": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "То": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Тр": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            }
+        },
+        3: {
+            "З": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кб": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кн": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "То": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Тр": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            }
+        },
+        4: {
+            "З": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кб": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Кн": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "То": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            },
+            "Тр": {
+                "end_date": number,
+                "start_date": number,
+                "weeks_n": number
+            }
+        }
+    },
+    "even": boolean,
+    "record_id": string,
+    "semester_date": string
+};
+
 const useSemesterSettings = () => {
     const [courseNumber,setCourseNumber] = useState<number>(1);
+    const [semesterSettingsLoading,setSemestetSettingsLoading] = useState(false);
+    const [semesterSettings,setSemesterSettings] = useState<SemesterSettingsT>();
     const [onCheckSettingsModal,setOnCheckSettingsModal] = useState(false);
     const [onCheckScheduleModal,setOnCheckScheduleModal] = useState(false);
     const {
@@ -42,16 +167,116 @@ const useSemesterSettings = () => {
         watch,
         reset,
         formState:{errors}
-    } = useForm<SemesterSettingsT>();
+    } = useForm<SemesterSettingsFormT>();
+
+    const fetch = async () => {
+        const eduYear = watch('eduYear');
+        const semesterNumber = watch('semesterNumber');
+        if(!eduYear || !semesterNumber) return;
+        try{    
+            setSemestetSettingsLoading(true);
+            const res = await axiosConfig.post(endpoints.getSemesterConfig,{semester_date:eduYear+'.'+semesterNumber});
+            setSemesterSettings(res.data)
+            return res.data;
+            console.log('sem',res.data);
+        }catch(err){
+            console.error(err);
+        }finally{
+            setSemestetSettingsLoading(false);
+        }
+    }
+    
+    const onRefetch = async () => {
+        const config = await fetch();
+        onChangeCourseNumber(courseNumber,config);
+    }
+    const onChangeCourseNumber = (number:number,config?:SemesterSettingsT) => {
+        // setCourseNumber(number)
+        // console.log(courseNumber,config)
+        // const typedNumber = number as 1 | 2 | 3 | 4;
+        // if(!number) return;
+        // if(config){
+        //     setValue('semester_end_first',new Date((config?.core_groups[typedNumber]["З"].end_date || 0) * 1000));
+        //     setValue('semester_start_first',new Date((config?.core_groups[typedNumber]["З"].start_date || 0) * 1000));
+        //     setValue('weeks_n_first',(config)?.core_groups[typedNumber]["З"].weeks_n || 0);
+        //     setValue('semester_end_second',new Date((config?.core_groups[typedNumber]["То"].end_date || 0) * 1000));
+        //     setValue('semester_start_second',new Date((config?.core_groups[typedNumber]["То"].start_date || 0) * 1000));
+        //     setValue('weeks_n_second',(config)?.core_groups[typedNumber]["То"].weeks_n || 0);
+        //     setSemesterSettings(prev => ({...prev, 
+        //         'core_groups':{
+        //             ...prev[typedNumber]:{
+        //             ...prev[typedNumber],
+        //         }]
+        //         }
+        //     }))
+        //     return;
+        // }
+        // if(semesterSettings){
+        //     if(!!semesterSettings?.core_groups[typedNumber]["З"].end_date){
+        //         setValue('semester_end_first',new Date((semesterSettings?.core_groups[typedNumber]["З"].end_date || 0) * 1000));
+        //         setValue('semester_start_first',new Date((semesterSettings?.core_groups[typedNumber]["З"].start_date || 0) * 1000));
+        //         setValue('weeks_n_first',(semesterSettings)?.core_groups[typedNumber]["З"].weeks_n || 0);
+        //         setValue('semester_end_second',new Date((semesterSettings?.core_groups[typedNumber]["То"].end_date || 0) * 1000));
+        //         setValue('semester_start_second',new Date((semesterSettings?.core_groups[typedNumber]["То"].start_date || 0) * 1000));
+        //         setValue('weeks_n_second',(semesterSettings)?.core_groups[typedNumber]["То"].weeks_n || 0);
+        //         fetch();
+        //     }else{
+        //         reset({'eduYear':watch('eduYear'),semesterNumber:watch('semesterNumber')});
+        //     }
+        // }
+    }
     const onImportFile = () => {
         setOnCheckScheduleModal(true);
 
         setOnCheckSettingsModal(false);
     }
-    const onSaveSettings = (data:SemesterSettingsT) => {
+    const onSaveSettings = async (data:SemesterSettingsFormT) => {
+        try{
+            const semester_end_first = Math.round((data.semester_end_first?.getTime() || 0)/1000);
+            const semester_start_first = Math.round((data.semester_start_first?.getTime() || 0)/1000);
+            const semester_end_second = Math.round((data.semester_end_second?.getTime() || 0)/1000);
+            const semester_start_second = Math.round((data.semester_start_second?.getTime() || 0)/1000);
 
+            const res = await axiosConfig.post(endpoints.addSemesterConfig,{
+                "config": {
+                    "З": {
+                      "end_date": semester_end_first,
+                      "start_date": semester_start_first,
+                      "weeks_n": data.weeks_n_first
+                    },
+                    "Кб": {
+                        "end_date": semester_end_first,
+                        "start_date": semester_start_first,
+                        "weeks_n": data.weeks_n_first
+                    },
+                    "Кн": {
+                        "end_date": semester_end_first,
+                        "start_date": semester_start_first,
+                        "weeks_n": data.weeks_n_first
+                    },
+                    "То": {
+                        "end_date": semester_end_second,
+                        "start_date": semester_start_second,
+                        "weeks_n": data.weeks_n_second
+                    },
+                    "Тр": {
+                        "end_date": semester_end_second,
+                        "start_date": semester_start_second,
+                        "weeks_n": data.weeks_n_second
+                    }
+                  },
+                "course":courseNumber,
+                "record_id": semesterSettings?.record_id
+            });
+            if(courseNumber !== 4){
+                setCourseNumber(prev => prev + 1);
+                onChangeCourseNumber(courseNumber + 1);
+            }
+        }catch(err){
+            console.error(err);
+        }
     }
-    return {onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal};
+    return {semesterSettings,onChangeCourseNumber,onRefetch,onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal};
 }
 
 export const SemesterSettings = () => {
@@ -71,7 +296,7 @@ export const SemesterSettings = () => {
 
 
 const SemesterSettingsPart = () =>{
-    const {onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal} = useSemesterSettings();
+    const {onCheckScheduleModal,onRefetch,onChangeCourseNumber,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal} = useSemesterSettings();
 
     return <form className="scheduleSettingsForm" onSubmit={handleSubmit(onSaveSettings)}>
         <div style={{width:'100%'}}><h1 className="header">Налаштування семестру</h1></div>
@@ -82,7 +307,7 @@ const SemesterSettingsPart = () =>{
                     className="createUserSelect"
                     placeholder={'Оберіть курс навчання'}
                     optionLabelProp="label"
-                    onChange={setCourseNumber}
+                    onChange={(number) => onChangeCourseNumber(number)}
                     value={courseNumber}
                     // {...createUserRegister('department',{required:true})}
                     // onChange={(e) => createUserSetValue('department',e)}
@@ -99,9 +324,9 @@ const SemesterSettingsPart = () =>{
                     className="createUserSelect"
                     placeholder={'Оберіть рік навчання'}
                     optionLabelProp="label"
-                    // {...createUserRegister('department',{required:true})}
-                    // onChange={(e) => createUserSetValue('department',e)}
-                    // value={createUserWatch('department')}
+                    {...register('eduYear',{required:true})}
+                    onChange={(e) => {setValue('eduYear',e);onRefetch();}}
+                    value={watch('eduYear')}
                     >  
                     <Option value={(currYear-1)+'-'+(currYear)} label={(currYear-1)+'-'+(currYear)}>{(currYear-1)+'-'+(currYear)}</Option>
                     <Option value={(currYear)+'-'+(currYear+1)} label={(currYear)+'-'+(currYear+1)}>{(currYear)+'-'+(currYear+1)}</Option>
@@ -115,9 +340,9 @@ const SemesterSettingsPart = () =>{
                     className="createUserSelect"
                     placeholder={'Оберіть семестр навчання'}
                     optionLabelProp="label"
-                    // {...createUserRegister('department',{required:true})}
-                    // onChange={(e) => createUserSetValue('department',e)}
-                    // value={createUserWatch('department')}
+                    {...register('semesterNumber',{required:true})}
+                    onChange={(e) => {setValue('semesterNumber',e);onRefetch();}}
+                    value={watch('semesterNumber')}
                     >  
                     <Option value={1} label={1}>{1}</Option>
                     <Option value={2} label={2}>{2}</Option>
@@ -137,10 +362,10 @@ const SemesterSettingsPart = () =>{
                 className="form_input"
                 format={customDateFormat}
                 style={{'visibility':'visible'}}
-                // value={dayjs(watch('semester_start'))}
-                {...register('semester_start',{required:{value:true,message:'Оберіть дату народження'},
+                value={dayjs(watch('semester_start_first'))}
+                {...register('semester_start_first',{required:{value:true,message:'Оберіть дату початку семестру у З, Кн, Кб'},
                 })}
-                onChange={(e) => setValue('semester_start',e?.toDate() || null)} />
+                onChange={(e) => setValue('semester_start_first',e?.toDate() || null)} />
         </div>
         <div className="createUserEmailInput__container" style={{width:'30%'}}>
             <label className="select_label">Дата закінчення семестру</label>
@@ -150,10 +375,10 @@ const SemesterSettingsPart = () =>{
                 className="form_input"
                 format={customDateFormat}
                 style={{'visibility':'visible'}}
-                // value={dayjs(watch('semester_end'))}
-                {...register('semester_end',{required:{value:true,message:'Оберіть дату закінчення семестру'},
+                value={dayjs(watch('semester_end_first'))}
+                {...register('semester_end_first',{required:{value:true,message:'Оберіть дату кінця семестру у З, Кн, Кб'},
                 })}
-                onChange={(e) => setValue('semester_end',e?.toDate() || null)} />
+                onChange={(e) => setValue('semester_end_first',e?.toDate() || null)} />
         </div>
         <div className="createUserSelect__container" style={{width:'30%'}}>
             <label className="select_label">К-сть тижнів для відпрацювання</label>
@@ -162,9 +387,10 @@ const SemesterSettingsPart = () =>{
                     className="createUserSelect"
                     placeholder={'Оберіть кількість тижнів'}
                     optionLabelProp="label"
-                    // {...createUserRegister('department',{required:true})}
-                    // onChange={(e) => createUserSetValue('department',e)}
-                    // value={createUserWatch('department')}
+                    value={watch('weeks_n_first')}
+                    {...register('weeks_n_first',{required:{value:true,message:'Оберіть кількість тижнів відпрацювання у З, Кн, Кб'},
+                    })}
+                    onChange={(e) => setValue('weeks_n_first',e)} 
                     >  
                     <Option value={1} label={1}>{1}</Option>
                     <Option value={2} label={2}>{2}</Option>
@@ -181,10 +407,10 @@ const SemesterSettingsPart = () =>{
                 className="form_input"
                 format={customDateFormat}
                 style={{'visibility':'visible'}}
-                // value={dayjs(watch('semester_start'))}
-                {...register('semester_start',{required:{value:true,message:'Оберіть дату народження'},
+                value={dayjs(watch('semester_start_second'))}
+                {...register('semester_start_second',{required:{value:true,message:'Оберіть дату початку семестру у То, Тр'},
                 })}
-                onChange={(e) => setValue('semester_start',e?.toDate() || null)} />
+                onChange={(e) => setValue('semester_start_second',e?.toDate() || null)}/>
         </div>
         <div className="createUserEmailInput__container" style={{width:'30%'}}>
             <label className="select_label">Дата закінчення семестру</label>
@@ -194,10 +420,10 @@ const SemesterSettingsPart = () =>{
                 className="form_input"
                 format={customDateFormat}
                 style={{'visibility':'visible'}}
-                // value={dayjs(watch('semester_end'))}
-                {...register('semester_end',{required:{value:true,message:'Оберіть дату закінчення семестру'},
+                value={dayjs(watch('semester_end_second'))}
+                {...register('semester_end_second',{required:{value:true,message:'Оберіть дату початку семестру у То, Тр'},
                 })}
-                onChange={(e) => setValue('semester_end',e?.toDate() || null)} />
+                onChange={(e) => setValue('semester_end_second',e?.toDate() || null)}/>
         </div>
         <div className="createUserSelect__container" style={{width:'30%'}}>
             <label className="select_label">К-сть тижнів для відпрацювання</label>
@@ -206,9 +432,10 @@ const SemesterSettingsPart = () =>{
                     className="createUserSelect"
                     placeholder={'Оберіть кількість тижнів'}
                     optionLabelProp="label"
-                    // {...createUserRegister('department',{required:true})}
-                    // onChange={(e) => createUserSetValue('department',e)}
-                    // value={createUserWatch('department')}
+                    value={watch('weeks_n_second')}
+                    {...register('weeks_n_second',{required:{value:true,message:'Оберіть кількість тижнів відпрацювання у То, Тр'},
+                    })}
+                    onChange={(e) => setValue('weeks_n_second',e)}
                     >  
                     <Option value={1} label={1}>{1}</Option>
                     <Option value={2} label={2}>{2}</Option>
@@ -218,10 +445,10 @@ const SemesterSettingsPart = () =>{
         </div>
         <div style={{width:'100%',display:'flex',gap:'30px',alignItems:'center',}}>
             <input type={'submit'} value={'Зберегти налаштування'} style={{'width':'unset',padding:'10px 15px'}} className={"primary_button"}/>
-            <Checkbox onChange={(value) => setValue('temporary',value.target.value)}>Тимчасовий розклад</Checkbox>
+            {/* <Checkbox onChange={(value) => setValue('temporary',value.target.value)}>Тимчасовий розклад</Checkbox> */}
         </div>
-        <div style={{'display':'flex',gap:'30px'}}>
+        {/* <div style={{'display':'flex',gap:'30px'}}>
             <span onClick={() => setOnCheckSettingsModal(true)} style={{width:'unset',padding:'0 20px'}} className={"primary_button"}>Завантажити розклад</span>
-        </div>
+        </div> */}
     </form>
 }
