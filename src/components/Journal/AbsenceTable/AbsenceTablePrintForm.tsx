@@ -11,11 +11,8 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
     return <div className="printForm_container" ref={props} id={'printForm'}>
             <div className="printForm_page" style={{'gap':'20px'}}>
                 <div>
-                    <h1 className="printForm_header">ДЕРЖАВНИЙ УНІВЕРСИТЕТ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І</h1>
-                    <h1 className="printForm_header">ЗВ’ЯЗКУ</h1>
-                    <h1 className="printForm_subheader">ВІДОКРЕМЛЕНИЙ СТРУКТУРНИЙ  ПІДРОЗДІЛ</h1>
-                    <h1 className="printForm_subheader">«ФАХОВИЙ КОЛЕДЖ ЗВ’ЯЗКУ ТА ІНФОРМАТИЗАЦІЇ</h1>
-                    <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
+                    <h1 className="printForm_header">ВСП "ФАХОВИЙ КОЛЕДЖ ЗВ'ЯЗКУ ТА ІНФОРМАТИЗАЦІЇ</h1>
+                    <h1 className="printForm_header">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ"</h1>
                 </div>
                 <div style={{'width':'100%','display':'flex',gap:'130px'}}>
                     <div style={{'width':'160px','display':'flex','flexDirection':'column','gap':'5px'}}>

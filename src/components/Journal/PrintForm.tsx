@@ -53,7 +53,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                 </div>
                 <section className='printFormJournal__container'>
                     <div className='printFormJournal_top'>
-                        <div className='printFormJournal_top_left'>
+                        <div className='printFormJournal_top_left' style={{'width':'47px','height':'35px'}}>
                             <span>№ за ПП</span>
                         </div>
                         <div className='printFormJournal_top_student'>
@@ -84,10 +84,10 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         <div className={`printFormJournal__students`}>
                                 {journal?.students.map(student =>
                                     <div style={{'display':'flex'}} key={student.student_id}>
-                                        <div className={`printFormJournal__studentNumber`}>
-                                            {student.index}
+                                        <div className={`printFormJournal__studentNumber`} style={{width:'47px','height':'18px'}}>
+                                            {student.index} 
                                         </div>
-                                        <div className={`printFormJournal__student`}>
+                                        <div className={`printFormJournal__student`}  style={{'width':'145px','height':'18px'}}>
                                             <p className="printFormJournal_studentName">{student.index}.{student.full_name}</p>
                                         </div>
                                     </div>
