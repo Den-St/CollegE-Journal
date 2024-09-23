@@ -17,13 +17,13 @@ import { NoMatch } from "../../NoMatch";
 import _debounce from 'lodash/debounce';
 import './absenceTableStyles.scss'; 
 import { securityLevels } from "../../../consts/securityLevels";
-import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
 import { AbsenceTableFilltersT, AbsenceTableT } from "../../../types/absenceTable";
 import { useAbsenceTableDownload } from "../../../hooks/absenceTableDownload";
 import { useAbsenceTableTeacherSubjectsDragToScroll } from "../../../hooks/absenceTableDragToScroll";
 import { useAbsenceTablePrintForm } from "../../../hooks/absenceTablePrintform";
 import { useGetAbsenceTable } from "../../../hooks/getAbsenceTable";
 import {DoubleRightOutlined} from '@ant-design/icons';
+import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
 const {Option} = Select;
 
 
@@ -193,7 +193,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
 
     return <>
         <section className='journalTop__container'>
-            {/* {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>} */}
+            {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
             <div style={{'width':'100%','justifyContent':'space-between','display':'flex'}}>
                 <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{group?.journal_group_full_name}</p></h1>

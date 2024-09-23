@@ -229,6 +229,6 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
             </div>
         </div>
     </section>
-    <TeacherSettingsModal open={isOnTeacherSettings} onClose={onCloseTeacherSettings}/>
+    {!!journal?.journal_id && <TeacherSettingsModal open={isOnTeacherSettings} onClose={onCloseTeacherSettings} journalId={journal?.journal_id}/>}
     </>
 }

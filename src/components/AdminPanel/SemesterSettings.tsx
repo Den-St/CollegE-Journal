@@ -28,11 +28,11 @@ const stepsItems = [
     },
 ]
 type SemesterSettingsFormT = {
-    semester_start_first:Date | null,
-    semester_end_first:Date | null,
+    semester_start_first:Date | null | undefined,
+    semester_end_first:Date | null | undefined,
     weeks_n_first:number,
-    semester_start_second:Date | null,
-    semester_end_second:Date | null,
+    semester_start_second:Date | null | undefined,
+    semester_end_second:Date | null | undefined,
     weeks_n_second:number,
     temporary:boolean,
     eduYear:string | null,
@@ -156,6 +156,7 @@ type SemesterSettingsT = {
 
 const useSemesterSettings = () => {
     const [courseNumber,setCourseNumber] = useState<number>(1);
+    const [maxCourseNumber,setMaxCourseNumber] = useState<number>(1);
     const [semesterSettingsLoading,setSemestetSettingsLoading] = useState(false);
     const [semesterSettings,setSemesterSettings] = useState<SemesterSettingsT>();
     const [onCheckSettingsModal,setOnCheckSettingsModal] = useState(false);
@@ -187,43 +188,44 @@ const useSemesterSettings = () => {
     }
     
     const onRefetch = async () => {
-        const config = await fetch();
+        const config = await fetch() as SemesterSettingsT;
+        if(!config) return;
+        for(let i = 1;i <= 4;i++){
+            if(config.core_groups[i as 1 | 2 | 3 | 4].З.end_date) setMaxCourseNumber(prev => ++prev);
+        }
         onChangeCourseNumber(courseNumber,config);
     }
     const onChangeCourseNumber = (number:number,config?:SemesterSettingsT) => {
-        // setCourseNumber(number)
-        // console.log(courseNumber,config)
-        // const typedNumber = number as 1 | 2 | 3 | 4;
-        // if(!number) return;
-        // if(config){
-        //     setValue('semester_end_first',new Date((config?.core_groups[typedNumber]["З"].end_date || 0) * 1000));
-        //     setValue('semester_start_first',new Date((config?.core_groups[typedNumber]["З"].start_date || 0) * 1000));
-        //     setValue('weeks_n_first',(config)?.core_groups[typedNumber]["З"].weeks_n || 0);
-        //     setValue('semester_end_second',new Date((config?.core_groups[typedNumber]["То"].end_date || 0) * 1000));
-        //     setValue('semester_start_second',new Date((config?.core_groups[typedNumber]["То"].start_date || 0) * 1000));
-        //     setValue('weeks_n_second',(config)?.core_groups[typedNumber]["То"].weeks_n || 0);
-        //     setSemesterSettings(prev => ({...prev, 
-        //         'core_groups':{
-        //             ...prev[typedNumber]:{
-        //             ...prev[typedNumber],
-        //         }]
-        //         }
-        //     }))
-        //     return;
-        // }
-        // if(semesterSettings){
-        //     if(!!semesterSettings?.core_groups[typedNumber]["З"].end_date){
-        //         setValue('semester_end_first',new Date((semesterSettings?.core_groups[typedNumber]["З"].end_date || 0) * 1000));
-        //         setValue('semester_start_first',new Date((semesterSettings?.core_groups[typedNumber]["З"].start_date || 0) * 1000));
-        //         setValue('weeks_n_first',(semesterSettings)?.core_groups[typedNumber]["З"].weeks_n || 0);
-        //         setValue('semester_end_second',new Date((semesterSettings?.core_groups[typedNumber]["То"].end_date || 0) * 1000));
-        //         setValue('semester_start_second',new Date((semesterSettings?.core_groups[typedNumber]["То"].start_date || 0) * 1000));
-        //         setValue('weeks_n_second',(semesterSettings)?.core_groups[typedNumber]["То"].weeks_n || 0);
-        //         fetch();
-        //     }else{
-        //         reset({'eduYear':watch('eduYear'),semesterNumber:watch('semesterNumber')});
-        //     }
-        // }
+        setCourseNumber(number)
+        console.log(courseNumber,config)
+        const typedNumber = number as 1 | 2 | 3 | 4;
+        
+        if(!number) return;
+        if(config){
+            const semester_end_first = config?.core_groups[typedNumber]["З"].end_date ? new Date(config.core_groups[typedNumber]["З"].end_date * 1000) : undefined
+            setValue('semester_end_first',config?.core_groups[typedNumber]["З"].end_date ? new Date((config?.core_groups[typedNumber]["З"].end_date || 0) * 1000) : undefined);
+            setValue('semester_start_first',config?.core_groups[typedNumber]["З"].start_date ? new Date((config?.core_groups[typedNumber]["З"].start_date || 0) * 1000) : undefined);
+            setValue('weeks_n_first',(config)?.core_groups[typedNumber]["З"].weeks_n || 0);
+            setValue('semester_end_second',config?.core_groups[typedNumber]["То"].end_date ? new Date((config?.core_groups[typedNumber]["То"].end_date || 0) * 1000) : undefined);
+            setValue('semester_start_second',config?.core_groups[typedNumber]["То"].start_date ? new Date((config?.core_groups[typedNumber]["То"].start_date || 0) * 1000) : undefined);
+            setValue('weeks_n_second',(config)?.core_groups[typedNumber]["То"].weeks_n || 0);
+            fetch();
+            return;
+        }else if(semesterSettings){
+            console.log('a')
+            if(!!semesterSettings?.core_groups[typedNumber]["З"].end_date){
+                console.log('f')
+                setValue('semester_end_first',semesterSettings?.core_groups[typedNumber]["З"].end_date ? new Date((semesterSettings?.core_groups[typedNumber]["З"].end_date || 0) * 1000) : undefined);
+                setValue('semester_start_first',semesterSettings?.core_groups[typedNumber]["З"].start_date ? new Date((semesterSettings?.core_groups[typedNumber]["З"].start_date || 0) * 1000) : undefined);
+                setValue('weeks_n_first',(semesterSettings)?.core_groups[typedNumber]["З"].weeks_n || 0);
+                setValue('semester_end_second',semesterSettings?.core_groups[typedNumber]["То"].end_date ? new Date((semesterSettings?.core_groups[typedNumber]["То"].end_date || 0) * 1000) : undefined);
+                setValue('semester_start_second',semesterSettings?.core_groups[typedNumber]["То"].start_date ? new Date((semesterSettings?.core_groups[typedNumber]["То"].start_date || 0) * 1000) : undefined);
+                setValue('weeks_n_second',(semesterSettings)?.core_groups[typedNumber]["То"].weeks_n || 0);
+                fetch();
+            }else{
+                reset({'eduYear':watch('eduYear'),semesterNumber:watch('semesterNumber')});
+            }
+        }
     }
     const onImportFile = () => {
         setOnCheckScheduleModal(true);
@@ -268,15 +270,47 @@ const useSemesterSettings = () => {
                 "course":courseNumber,
                 "record_id": semesterSettings?.record_id
             });
-            if(courseNumber !== 4){
+            setSemesterSettings(prev => prev && ({...prev,"core_groups":{
+                ...prev?.core_groups,
+                [courseNumber]:{
+                    "З": {
+                        "end_date": semester_end_first,
+                        "start_date": semester_start_first,
+                        "weeks_n": data.weeks_n_first
+                      },
+                      "Кб": {
+                          "end_date": semester_end_first,
+                          "start_date": semester_start_first,
+                          "weeks_n": data.weeks_n_first
+                      },
+                      "Кн": {
+                          "end_date": semester_end_first,
+                          "start_date": semester_start_first,
+                          "weeks_n": data.weeks_n_first
+                      },
+                      "То": {
+                          "end_date": semester_end_second,
+                          "start_date": semester_start_second,
+                          "weeks_n": data.weeks_n_second
+                      },
+                      "Тр": {
+                          "end_date": semester_end_second,
+                          "start_date": semester_start_second,
+                          "weeks_n": data.weeks_n_second
+                      }
+                },
+            }}))
+            fetch();
+            if(courseNumber !== 4 ){
                 setCourseNumber(prev => prev + 1);
+                courseNumber === maxCourseNumber && setMaxCourseNumber(prev => prev + 1);
                 onChangeCourseNumber(courseNumber + 1);
             }
         }catch(err){
             console.error(err);
         }
     }
-    return {semesterSettings,onChangeCourseNumber,onRefetch,onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal};
+    return {semesterSettings,onChangeCourseNumber,maxCourseNumber,onRefetch,onCheckScheduleModal,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal};
 }
 
 export const SemesterSettings = () => {
@@ -296,7 +330,7 @@ export const SemesterSettings = () => {
 
 
 const SemesterSettingsPart = () =>{
-    const {onCheckScheduleModal,onRefetch,onChangeCourseNumber,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal} = useSemesterSettings();
+    const {onCheckScheduleModal,onRefetch,maxCourseNumber,onChangeCourseNumber,onImportFile,setOnCheckScheduleModal,onSaveSettings,register,watch,handleSubmit,setValue,courseNumber,setCourseNumber,onCheckSettingsModal,setOnCheckSettingsModal} = useSemesterSettings();
 
     return <form className="scheduleSettingsForm" onSubmit={handleSubmit(onSaveSettings)}>
         <div style={{width:'100%'}}><h1 className="header">Налаштування семестру</h1></div>
@@ -313,7 +347,7 @@ const SemesterSettingsPart = () =>{
                     // onChange={(e) => createUserSetValue('department',e)}
                     // value={createUserWatch('department')}
                     >  
-                    {courseNumbers.map(course => <Option value={course} label={course}>{course}</Option>)} 
+                    {courseNumbers.map(course => course <= maxCourseNumber && <Option value={course} label={course}>{course}</Option>)} 
                 </Select>
             </div>
         </div>

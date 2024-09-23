@@ -90,7 +90,10 @@ export const TeacherSchedule = () => {
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
                                 <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
-                                    {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string) ? <Link to={routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as string)}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_id as string)}&attestations=0`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string)}</Link> :<p className='teacherTimetable_groupName'>-</p>}
+                                    {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string) ? <Link to={
+                                        // routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as string)}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_id as string)}&attestations=0`
+                                        '#'
+                                        } className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string)}</Link> :<p className='teacherTimetable_groupName'>-</p>}
                                 </div>
                             </div>
                         )}

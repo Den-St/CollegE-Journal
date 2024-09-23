@@ -33,5 +33,8 @@ export const endpoints = {
     absenceTable:'admin/summary-tables/absence_table/data',
     absenceTableFile:'admin/summary-tables/absence_table/file',
     getSemesterConfig:'admin/semester-config/get',
-    addSemesterConfig:'admin/semester-config/add'
+    addSemesterConfig:'admin/semester-config/add',
+    getJournalTeachers:'admin/journals/teachers-list',
+    addTeacherToJournal:'admin/journals/add-teacher',
+    shiftTeacherJournal:'admin/journals/shift-teacher'
 }
