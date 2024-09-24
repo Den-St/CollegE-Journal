@@ -27,8 +27,8 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.homeTasks
-                '#'
+            <Link  to={routes.homeTasks
+                // '#'
                 } className={linksClassName + isActiveLink(// routes.groups
                     ' ')}>
                 Завдання
@@ -36,8 +36,8 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.schedule
-                '#'
+            <Link  to={routes.schedule
+                // '#'
                 } className={linksClassName + isActiveLink(// routes.groups
                 ' ')}>
                 Розклад
@@ -45,8 +45,8 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
                     <path d="M1 1H51" strokeLinecap="round"/>
                 </svg>
             </Link>
-            <Link  to={// routes.studyMaterials
-                '#'
+            <Link  to={routes.studyMaterials
+                // '#'
                 } className={linksClassName + isActiveLink(// routes.groups
                 ' ')}>
                 Осв. матеріали
