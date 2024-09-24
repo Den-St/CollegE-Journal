@@ -1,14 +1,17 @@
 import { Select } from 'antd';
 import { Link } from 'react-router-dom';
+import { NotReadyPage } from '../../assets/components/NotReadyPage';
 import { FilterIconSvg } from '../../assets/svgs/filterIconSvg';
 import { defaultAvatar } from '../../consts/defaultAvatar';
 import { useThemeStore } from '../../store/themeStore';
+import { NoMatch } from '../NoMatch';
 import './studentsStyle.scss';
 const {Option} = Select;
 
 export const Students = () => {
     const theme = useThemeStore().theme;
 
+    return <NotReadyPage/>
     return <div className={`main__container ${theme}`}>
             <section className="studentTitle__container">
                 <h1 className="studentTitle">Список студентів</h1>

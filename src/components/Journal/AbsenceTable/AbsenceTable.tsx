@@ -77,8 +77,8 @@ export const AbsenceTable = () => {
                             </div>
                         </div>
                     )}
-                </div>
                 <div className="absenceTable_totalTop">Всього</div>
+                </div>
             </div>
             <div onMouseUp={mouseUpHandler} style={{'maxHeight':'unset'}} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>

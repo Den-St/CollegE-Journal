@@ -36,6 +36,7 @@ export type UserT = {
         subject_id:string | SplitedLessonT,
         group_full_name?:string | SplitedLessonT,
         group_id?:string | SplitedLessonT,
+        journal_id?:string | SplitedLessonT
     }[][] | null
     // TimetableT | null,
     user_group:{

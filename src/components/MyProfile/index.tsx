@@ -1,4 +1,4 @@
-    import { Modal } from 'antd';
+import { Modal } from 'antd';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,9 +20,6 @@ import './studentProfile.scss';
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import { scheduleTimings } from '../../consts/scheduleTimings';
-import { StarSvg } from '../../assets/svgs/starSvg';
-import { useGetGroup } from '../../hooks/getGroup';
-import { RobotSvg } from '../../assets/svgs/robotSvg';
 
 const useTryEditProfile = () => {
     const navigate = useNavigate();
@@ -69,7 +66,6 @@ const useTryEditProfile = () => {
     return {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status}
 }
 
-
 export const MyProfile = () => {
     const [passwordInputType,setPasswordInputType] = useState<"password" | "text">("password");
     const onTogglePassword = () => {
@@ -98,8 +94,8 @@ export const MyProfile = () => {
     ];
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
-    console.log('-')
     const {onTryEditing,onTryEdit,onSubmitTryEditing,register,handleSubmit,onTryEditClose,errors,status} = useTryEditProfile();
+
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);

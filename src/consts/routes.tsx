@@ -17,6 +17,7 @@ import { RecoveryPassword } from "../components/RecoveryPassword";
 import { PrintForm } from "../components/Journal/PrintForm";
 import { GoogleLogin } from "../components/GoogleLogin";
 import { AbsenceTable } from "../components/Journal/AbsenceTable/AbsenceTable";
+import { NotReadyPage } from "../assets/components/NotReadyPage";
 
 export const navRoutes = {
 }
@@ -85,19 +86,19 @@ export const PublicRoutes = [
     <Route key={routes.userProfile} element={<SecurityLevelGuard securityLevel={securityLevels.student}><UserProfile/></SecurityLevelGuard>} path={routes.userProfile}/>,  
     // <Route key={routes.homeTasks} element={<HomeTasks/>} path={routes.homeTasks}/>,
     // <Route key={routes.homeTask} element={<HomeTask/>} path={routes.homeTask}/>,
-    <Route key={routes.students} element={<Students/>} path={routes.students}/>,
+    <Route key={routes.students} element={<NotReadyPage/>} path={routes.students}/>,
     <Route key={routes.teacherProfile} element={<TeacherProfile/>} path={routes.teacherProfile}/>,
     // <Route key={routes.schedule} element={<Schedule/>} path={routes.schedule}/>,
     // <Route key={routes.missedClasses} element={<MissedClasses/>} path={routes.missedClasses}/>,
     // <Route key={routes.rating} element={<Rating/>} path={routes.rating}/>,
     <Route key={routes.groups} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.teacher}><Groups/></SecurityLevelGuard>} path={routes.groups}/>,    
     <Route key={routes.journal} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><Journal/></SecurityLevelGuard>} path={routes.journal}/>,
-    <Route key={routes.createHomeTask} element={<CreateHomeTask/>} path={routes.createHomeTask}/>,
-    <Route key={routes.sendHomeTask} element={<SendHomeTask/>} path={routes.sendHomeTask}/>,
-    <Route key={routes.createStudyMaterials} element={<CreateStudyMaterials/>} path={routes.createStudyMaterials}/>,
+    <Route key={routes.createHomeTask} element={<NotReadyPage/>} path={routes.createHomeTask}/>,
+    <Route key={routes.sendHomeTask} element={<NotReadyPage/>} path={routes.sendHomeTask}/>,
+    <Route key={routes.createStudyMaterials} element={<NotReadyPage/>} path={routes.createStudyMaterials}/>,
     <Route key={routes.adminPanel} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.admin}><AdminPanel/></SecurityLevelGuard>} path={routes.adminPanel}/>,
-    <Route key={routes.studyMaterials} element={<StudyMaterials/>} path={routes.studyMaterials}/>,
-    <Route key={routes.studyMaterialsCheckTeacher} element={<StudyMaterialsCheckTeacher/>} path={routes.studyMaterialsCheckTeacher}/>,
+    <Route key={routes.studyMaterials} element={<NotReadyPage/>} path={routes.studyMaterials}/>,
+    <Route key={routes.studyMaterialsCheckTeacher} element={<NotReadyPage/>} path={routes.studyMaterialsCheckTeacher}/>,
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
     <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     <Route key={routes.teachers} element={<Teachers/>} path={routes.teachers}/>,
@@ -109,9 +110,9 @@ export const PublicRoutes = [
     <Route key={routes.recovery} element={<RecoveryPassword/>} path={routes.recovery}/>,
     <Route key={routes.googleLogin} element={<GoogleLogin/>} path={routes.googleLogin}/>,
     <Route key={routes.absenceTable} element={<AbsenceTable/>} path={routes.absenceTable}/>,
-    <Route key={routes.studyMaterials} element={<NoMatch title="Ця сторінка ще в розробці" is404/>} path={routes.studyMaterials}/>,
-    <Route key={routes.homeTasks} element={<NoMatch title="Ця сторінка ще в розробці" is404/>} path={routes.homeTasks}/>,
-    <Route key={routes.schedule} element={<NoMatch title="Ця сторінка ще в розробці" is404/>} path={routes.schedule}/>,
+    <Route key={routes.studyMaterials} element={<NotReadyPage/>} path={routes.studyMaterials}/>,
+    <Route key={routes.homeTasks} element={<NotReadyPage/>} path={routes.homeTasks}/>,
+    <Route key={routes.schedule} element={<NotReadyPage/>} path={routes.schedule}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

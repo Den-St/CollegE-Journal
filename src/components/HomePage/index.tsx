@@ -6,7 +6,7 @@ import { useThemeStore } from '../../store/themeStore';
 import './homePageStyles.scss';
 import directorAndBack from '../../assets/images/directorAndBack.png';
 import laptopPng from '../../assets/images/laptop.png';
-import supPng from '../../assets/images/sup.png';
+import directorPng from '../../assets/images/director.png';
 import { sectionIds, sectionsKeys } from '../../consts/sectionIds';
 import { DownArrow } from '../../assets/svgs/downArrow';
 import _debounce from 'lodash/debounce';
@@ -213,8 +213,8 @@ export const HomePage = () => {
         </div>
         <div className="about__content">
             <div className="about__img__mobile">
-                {/* <div className="sup__back"></div> */}
-                <img className="sup__img" src={directorAndBack} alt="sup"/>
+                {/* <div className="director_back"></div> */}
+                <img className="director_img" src={directorAndBack} alt="director"/>
             </div>
             <div className="about__block">
                 <h1 className="about__h1">
@@ -226,10 +226,10 @@ export const HomePage = () => {
                 </p>
             </div>
             <div className="about__img">
-                <div className="sup__back"></div>
-                <img className="sup__img" src={supPng} alt="sup"/>
+                <div className="director_back"></div>
+                <img className="director_img" src={directorPng} alt="director"/>
             </div>
-            <div className="sup__circle"></div>
+            <div className="director_circle"></div>
         </div>
     </section>
     </div>
