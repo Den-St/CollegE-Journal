@@ -48,7 +48,7 @@ export const getColorByValue = (value:string,system:number) => {
     }else{
         if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
     }
-    if(value?.toLowerCase() === "н" || value?.toLowerCase() === "н/a") return "#EFB42D";
+    if(value?.toLowerCase() === "н" || value?.toLowerCase() === "н/a") return "#ED3434";
     if(!value) return "white";
     return "white";
 }
