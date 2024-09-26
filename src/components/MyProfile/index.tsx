@@ -251,3 +251,28 @@ export const MyProfile = () => {
         </Modal>
     </div>
 }
+
+// type Props = {
+//     onTryEditClose:() => void
+// }
+// const ChangePasswordModal:React.FC<Props> = ({onTryEditClose}) => {
+
+//     return <Modal centered open={onTryEditing} onCancel={onTryEditClose} footer={false} rootClassName={'tryEditProfileModal'}>
+//         <div className="editProfileModal_container">
+//             <h1 className="editProfileModal_header">{user.is_active ? `Для редагування профілю треба ввести пароль` : 'Для активації особового запису потрібно змінити пароль'}</h1>
+//             <form autoComplete={"off"} onSubmit={handleSubmit(onSubmitTryEditing)} className="editProfileModal_form">
+//                 <div style={{display:'flex',gap:'20px',width:'100%',position:'relative'}}>
+//                     <input style={{width:"100%"}} {...register('user_password',{required:{value:true,message:'На жаль дані введені не коректно, перевірте їх та спробуйте ще раз!'}})} placeholder="Введіть теперішній пароль" className="input" type={passwordInputType}/>
+//                     <span onClick={onTogglePassword} style={{'position':'absolute','right':'25px','top':'22px','width':'unset'}} className='passwordEye__button'>{passwordInputType === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{fontSize:'17px'}} />}</span>
+//                 </div>
+//                 {!!errors.user_password?.message && <p className="signIn_errorMessage">{errors.user_password?.message}</p>}
+//                 {status === 0 && <p className="signIn_errorMessage">На жаль дані введені не корректно, перевірте їх та спробуйте ще раз!</p>}
+//                 <div className="editFormButtons_container">
+//                     <input style={{'width':'271px'}} autoComplete={"off"} type={'submit'} value={'Далі'} className="primary_button"/>
+//                     <span style={{'width':'149px','marginRight':'28px'}} className="forgotPassword">Забули пароль?</span>
+//                 </div>
+//             </form>
+//             <button className="primary_button" style={{'width':'271px'}} onClick={onTryEditClose}>Повернутися</button>
+//         </div>
+//     </Modal>
+// }

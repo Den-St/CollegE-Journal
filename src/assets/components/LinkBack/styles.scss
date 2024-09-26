@@ -20,6 +20,7 @@
     line-height: 24px;
     letter-spacing: 0.1em;
     color:var(--primary-gray);
+    transition: 0.2s;
 }
 
 @media screen and (width < 780px) {
@@ -30,9 +31,9 @@
 
 .linkBackContainer:hover{
     .linkBackTitle{
-        color:white;
+        color:var(--primary-orange);
     }
     svg{
-        fill:white;
+        fill:var(--primary-orange);
     }
 }
