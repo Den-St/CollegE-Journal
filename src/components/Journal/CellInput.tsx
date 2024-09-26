@@ -21,10 +21,12 @@ type Props = {
     studentIndex:number
 }
 const isValid = (value:string) => {
+    console.log('value',value)
     if(value === "") return true;
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
+        console.log('nan')
         if(value.length === 1 && value[0]?.toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2]?.toLowerCase() === 'а') {
             value = value.toUpperCase();
             return true;

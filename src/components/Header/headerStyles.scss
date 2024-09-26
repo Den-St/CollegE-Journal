@@ -4,8 +4,17 @@
     display: flex;
     justify-content: center;
     // margin: 0 auto;
+    background-color: green;
     transition: 0.2s;
-    background: linear-gradient(180deg, rgba(11, 29, 38, 0.7) 0%, rgba(11, 29, 38, 0.01) 100%);
+    // background: linear-gradient(180deg, rgba(11, 29, 38, 0.7) 0%, rgba(11, 29, 38, 0.01) 100%);
+}
+.header_hover_trigger{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    z-index: 10;
 }
 header{
     display: block;
@@ -196,7 +205,7 @@ a:focus,a:active{outline: none;}
 .ant-switch-handle{
     background-color: white;
     border-radius: 50%;
-    z-index: 20;
+    z-index: -10;
     content:unset !important;
 }
 .ant-switch .ant-switch-handle{

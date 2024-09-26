@@ -24,6 +24,10 @@ const useHeaderVisibility = () => {
     const onTouchShowHeader = () => {
         setHeaderVisibilityClass('visible_on_touch');
     }
+    const onMouseOutBlur = () => {
+        console.log('out')
+        setHeaderVisibilityClass('hidden');
+    }
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
         const distanceFromTop = window.scrollY;
@@ -38,20 +42,21 @@ const useHeaderVisibility = () => {
         window.addEventListener('scroll',debounceHandleScroll);
     },[]);
 
-    return {headerVisibilityClass,onTouchShowHeader}
+    return {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur}
 }
 
 export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
-    const {headerVisibilityClass,onTouchShowHeader} = useHeaderVisibility();
+    const {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur} = useHeaderVisibility();
     const {sideMenuOpened,onToggleSideMenu} = useSideMenuStore();
 
-    return <header onMouseOver={onTouchShowHeader} className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
+    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
+            <div onMouseOver={onTouchShowHeader} className='header_hover_trigger'></div>
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
             <div className={`header_container ${headerVisibilityClass}`}>
-                <div className="header__wrapper">
+                <div onMouseLeave={onMouseOutBlur} className="header__wrapper">
                     <div className='headerLeft_mobile'>
                         <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
                             <FilterIconSvg/>
