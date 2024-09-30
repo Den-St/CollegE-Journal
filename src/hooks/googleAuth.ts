@@ -31,14 +31,14 @@ export const useGoogleAuthRequest = (setErrorStatus:(statusNumber:number) => voi
                 navigate(routes.adminPanel + '?section=schedule');
                 return;
             }
-            if(res.data.data.is_active){
+            // if(res.data.data.is_active){
                 navigate(routes.myProfile);
                 return;
-            }
-            if(!res.data.data.is_active) {
-                setChangeProfileCookie();
-                navigate(routes.editProfile);
-            }
+            // }
+            // if(!res.data.data.is_active) {
+            //     setChangeProfileCookie();
+            //     navigate(routes.editProfile);
+            // }
         }catch(err){
             console.error(err);
         }finally{
