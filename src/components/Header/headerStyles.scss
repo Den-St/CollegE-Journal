@@ -4,9 +4,8 @@
     display: flex;
     justify-content: center;
     // margin: 0 auto;
-    background-color: green;
     transition: 0.2s;
-    // background: linear-gradient(180deg, rgba(11, 29, 38, 0.7) 0%, rgba(11, 29, 38, 0.01) 100%);
+    background: linear-gradient(180deg, rgba(11, 29, 38, 0.7) 0%, rgba(11, 29, 38, 0.01) 100%);
 }
 .header_hover_trigger{
     position: absolute;

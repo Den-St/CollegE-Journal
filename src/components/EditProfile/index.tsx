@@ -20,6 +20,7 @@ import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import AntdImgCrop from "antd-img-crop";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
+import { passwordPattern } from "../../helpers/passwordPattern";
 
 const useEditProfile = () => {
     const {user,setToken,setAvatar,setActive} = useUserStore();
@@ -143,7 +144,7 @@ export const EditProfile = () => {
                     <Popover open={!!errors.new_password?.message} rootClassName="passwordInfo_popover" placement={'top'} content={<PasswordInfo/>}><div style={{width:'20px',height:'20px'}} className={`questionMark_container ${!!errors.new_password?.message ? 'active' : ''}`}><QuestionMarkSvg/></div></Popover>
                 </div>
                 <div style={{display:'flex',gap:'20px',width:'100%'}}>
-                    <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:/^(?=.*[0-9])(?=.*[!@#$%^&*+-/_])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*+-/_]{8,30}$/,message:'Пароль некоректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
+                    <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:passwordPattern,message:'Пароль некоректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
                     <span onClick={() => onTogglePassword(1)} className='passwordEye__button'>{passwordInputType[1] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
                 </div>
                 <div style={{display:'flex',gap:'20px',width:'100%'}}>

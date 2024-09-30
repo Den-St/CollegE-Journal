@@ -179,7 +179,6 @@ const useSemesterSettings = () => {
             const res = await axiosConfig.post(endpoints.getSemesterConfig,{semester_date:eduYear+'.'+semesterNumber});
             setSemesterSettings(res.data)
             return res.data;
-            console.log('sem',res.data);
         }catch(err){
             console.error(err);
         }finally{
@@ -197,7 +196,6 @@ const useSemesterSettings = () => {
     }
     const onChangeCourseNumber = (number:number,config?:SemesterSettingsT) => {
         setCourseNumber(number)
-        console.log(courseNumber,config)
         const typedNumber = number as 1 | 2 | 3 | 4;
         
         if(!number) return;
@@ -212,9 +210,7 @@ const useSemesterSettings = () => {
             fetch();
             return;
         }else if(semesterSettings){
-            console.log('a')
             if(!!semesterSettings?.core_groups[typedNumber]["З"].end_date){
-                console.log('f')
                 setValue('semester_end_first',semesterSettings?.core_groups[typedNumber]["З"].end_date ? new Date((semesterSettings?.core_groups[typedNumber]["З"].end_date || 0) * 1000) : undefined);
                 setValue('semester_start_first',semesterSettings?.core_groups[typedNumber]["З"].start_date ? new Date((semesterSettings?.core_groups[typedNumber]["З"].start_date || 0) * 1000) : undefined);
                 setValue('weeks_n_first',(semesterSettings)?.core_groups[typedNumber]["З"].weeks_n || 0);

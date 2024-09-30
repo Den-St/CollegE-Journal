@@ -37,6 +37,13 @@ const useEditUserTeacher = (user:UserProfileT) => {
             console.error(err);
         }
     }
+    const onSendLetter = async () => {
+        try{
+            const res = await axiosConfig.put(endpoints.sendLetter,{user_id},{headers:{Authorization:token}});
+        }catch(err){
+            console.error(err);
+        }
+    }
     const fetch = async () => {
         Object.keys(user).forEach((key) => {
             if(Object.keys(watch()).includes(key)) {
@@ -50,24 +57,25 @@ const useEditUserTeacher = (user:UserProfileT) => {
         fetch();
     }, [user])
   
-    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user};
+    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter};
 }
 type Props = {
     user:UserProfileT
 }
 
 export const EditTeacherForm:React.FC<Props> = ({user}) => {
-    const {onEdit,register,handleSubmit,setValue,watch,reset,errors} = useEditUserTeacher(user);
+    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter} = useEditUserTeacher(user);
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
     const userId = useParams().id;
     const from = useSearchParams()[0].get('from');
     
     return <>
-    <section className='studentProfileMain__container'>
-        <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
+    <section className='studentProfileMain__container' style={{'width':'100%'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:'30px','width':'100%'}}>
             {!!userId && <LinkBack title="Профіль викладача" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}
             <h1 className="header">Редагування профілю</h1>
+            <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
             <div className='studentProfileLeft__container'>
                 <div className='studentProfileInfo__container'>
                     <div style={{'display':'flex','flexDirection':'column',gap:'15px','alignItems':'center'}}>
@@ -75,7 +83,7 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
                         watch('avatar') || 
                         defaultAvatar
                     }/>
-                    <button onClick={() => setValue('avatar',null)} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Видалити</button>
+                    <button onClick={() => setValue('avatar',null)} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Видалити фото</button>
                     </div>
                     <div className='studentProfileTextInfo__container'>
                         <p className='studentProfile__name'>
@@ -97,10 +105,10 @@ export const EditTeacherForm:React.FC<Props> = ({user}) => {
                             } className='studentProfile__group'>
                             {user?.user_group?.group_full_name || `Група-00`}
                         </Link>}
-                        <p className='studentProfile__bio'>{user?.interests}</p>
-                        <button onClick={() => setValue('interests','')} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Стерти інтереси</button>
                     </div>
                 </div>
+            </div>
+            <button className="primary_button" onClick={onSendLetter} style={{'width':'320px','height':'68px'}}>Запит зміни паролю</button>
             </div>
         </div>
     </section>

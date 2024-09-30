@@ -42,7 +42,13 @@ const useEditUserStudent = (user:UserProfileT) => {
             console.error(err);
         }
     }
-
+    const onSendLetter = async () => {
+        try{
+            const res = await axiosConfig.put(endpoints.sendLetter,{user_id},{headers:{Authorization:token}});
+        }catch(err){
+            console.error(err);
+        }
+    }
     const fetch = async () => {
         const datesKeys = ['admission_date','birth_date']
         Object.keys(user).forEach((key) => {
@@ -57,7 +63,7 @@ const useEditUserStudent = (user:UserProfileT) => {
         fetch();
     }, [user])
   
-    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,};
+    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter};
 }
 
 
@@ -66,7 +72,7 @@ type Props = {
 }
 
 export const EditStudentForm:React.FC<Props> = ({user}) => {
-    const {onEdit,register,handleSubmit,setValue,watch,reset,errors} = useEditUserStudent(user);
+    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter} = useEditUserStudent(user);
     const [isExpelModal,setIsExpelModal] = useState(false);
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
@@ -74,42 +80,43 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
     const from = useSearchParams()[0].get('from');
     
     return <>
-    <section className='studentProfileMain__container'>
-        <div style={{display:'flex',flexDirection:'column',gap:'30px'}}>
+    <section className='studentProfileMain__container' style={{'width':'100%'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:'30px','width':'100%'}}>
             {!!userId && <LinkBack title="Профіль" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}
-            <div className='studentProfileLeft__container'>
-                <div className='studentProfileInfo__container'>
-                    <div style={{'display':'flex','flexDirection':'column',gap:'15px','alignItems':'center'}}>
-                    <img className='studentProfile_img' src={
-                        watch('avatar') || 
-                        defaultAvatar
-                    }/>
-                    <button onClick={() => setValue('avatar',null)} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Видалити</button>
-                    </div>
-                    <div className='studentProfileTextInfo__container'>
-                        <p className='studentProfile__name'>
-                            {user?.full_name}
-                            {/* {user?.security_level !== securityLevels.admin &&  <StarSvg/>} */}
-                        </p>
-                        {/* <p className='studentProfile__email'>{
-                        user?.mailbox_address || 
-                        `mail@gmail.com`}</p> */}
-                        {
-                        !!user?.user_group?.group_full_name && 
-                        mySecurityLevel !== securityLevels.admin 
-                        ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>
-                            {user?.user_group?.group_full_name || `Група-00`}
-                            </Link> 
-                        : <Link to={routes.pickJournalSubject 
-                            + 
-                            `?group_id=${user?.user_group?.group_id}`
-                            } className='studentProfile__group'>
-                            {user?.user_group?.group_full_name || `Група-00`}
-                        </Link>}
-                        <p className='studentProfile__bio'>{user?.interests}</p>
-                        <button onClick={() => setValue('interests','')} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Стерти інтереси</button>
+            <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
+                <div className='studentProfileLeft__container'>
+                    <div className='studentProfileInfo__container'>
+                        <div style={{'display':'flex','flexDirection':'column',gap:'15px','alignItems':'center'}}>
+                        <img className='studentProfile_img' src={
+                            watch('avatar') || 
+                            defaultAvatar
+                        }/>
+                        <button onClick={() => setValue('avatar',null)} className="primary_button" style={{'fontFamily':'Alegreya Sans'}}>Видалити фото</button>
+                        </div>
+                        <div className='studentProfileTextInfo__container'>
+                            <p className='studentProfile__name'>
+                                {user?.full_name}
+                                {/* {user?.security_level !== securityLevels.admin &&  <StarSvg/>} */}
+                            </p>
+                            {/* <p className='studentProfile__email'>{
+                            user?.mailbox_address || 
+                            `mail@gmail.com`}</p> */}
+                            {
+                            !!user?.user_group?.group_full_name && 
+                            mySecurityLevel !== securityLevels.admin 
+                            ? <Link to={routes.pickJournalSubject} className='studentProfile__group'>
+                                {user?.user_group?.group_full_name || `Група-00`}
+                                </Link> 
+                            : <Link to={routes.pickJournalSubject 
+                                + 
+                                `?group_id=${user?.user_group?.group_id}`
+                                } className='studentProfile__group'>
+                                {user?.user_group?.group_full_name || `Група-00`}
+                            </Link>}
+                        </div>
                     </div>
                 </div>
+                <button className="primary_button" onClick={onSendLetter} style={{'width':'320px','height':'68px'}}>Запит зміни паролю</button>
             </div>
         </div>
     </section>
