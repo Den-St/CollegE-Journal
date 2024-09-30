@@ -26,7 +26,7 @@ header{
     height: 0;
     // background: linear-gradient(180deg, rgba(11, 29, 38, 0.7) 0%, rgba(11, 29, 38, 0.01) 100%);
 }
-header .header_container:not(.visible_on_touch):not(.visible_on_scroll), header .header_container.hidden{
+header .header_container.hidden{
     height: 0;
 }
 header.visible_on_scroll{
@@ -50,7 +50,7 @@ header.visible_on_touch{
         height: 141px;
     }
     
-    .header_container:not(.visible_on_touch){
+    .header_container.visible_on_touch{
         transform: translateY(-141px);
     }
     .header_container.visible_on_touch{
