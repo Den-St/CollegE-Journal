@@ -100,7 +100,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterials} element={<NotReadyPage/>} path={routes.studyMaterials}/>,
     <Route key={routes.studyMaterialsCheckTeacher} element={<NotReadyPage/>} path={routes.studyMaterialsCheckTeacher}/>,
     <Route key={routes.pickJournalSubject} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><PickJournalSubjects/></SecurityLevelGuard>} path={routes.pickJournalSubject}/>,
-    <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
+    // <Route key={routes.editProfile} element={<SecurityLevelGuard blockedForAdmin securityLevel={securityLevels.student}><EditProfile/></SecurityLevelGuard>} path={routes.editProfile}/>,
     <Route key={routes.teachers} element={<Teachers/>} path={routes.teachers}/>,
     <Route key={routes.myGroup} element={<SecurityLevelGuard isActiveRequired securityLevel={securityLevels.student}><MyGroup/></SecurityLevelGuard>} path={routes.myGroup}/>,
     <Route key={routes.faq} element={<FAQ/>} path={routes.faq}/>,

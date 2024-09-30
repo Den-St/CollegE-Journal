@@ -27,15 +27,10 @@ export const useSignIn = () => {
                 navigate(routes.adminPanel + '?section=schedule');
                 return;
             }
-            if(res.data.data.is_active){
+            // if(res.data.data.is_active){
                 navigate(routes.myProfile);
                 return;
-            }
-            if(!res.data.data.is_active) {
-                setChangeProfileCookie();
-                navigate(routes.editProfile);
-                setStatus(2);
-            }
+            // }
         }catch(err){
             console.error(err);
         }
