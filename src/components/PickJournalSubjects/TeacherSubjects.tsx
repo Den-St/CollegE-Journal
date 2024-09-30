@@ -37,6 +37,7 @@ export const TeacherSubjects = () => {
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
                 <Link key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
+                    <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}
         {/* {subjects.map((subject,i) => <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject}&month=${lastMonth}`} className={`homeTasks_subject ${!subject.isActive && 'inactive'}`}>{subject.name}{i === 2 && <div className="newTask"/>}</Link>)} */}
@@ -45,6 +46,7 @@ export const TeacherSubjects = () => {
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
                 <Link  key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
                     {subject.subject_full_name}
+                    <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}
         </Carousel>
