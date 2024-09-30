@@ -30,7 +30,7 @@ export const useChangePassword = (onTryEditClose:() => void) => {
             return;
         }
         try{
-            const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword,old_user_password:oldPassword},{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword,old_user_password:oldPassword || ''},{headers:{Authorization:token}});
             setToken(res.data.token);
             setActive();
             onTryEditClose();
