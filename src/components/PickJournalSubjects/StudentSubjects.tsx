@@ -26,6 +26,7 @@ export const StudentSubjects = () => {
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
                     {subject.subject_full_name}
+                    <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}
         </div>
@@ -36,6 +37,7 @@ export const StudentSubjects = () => {
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
                     {subject.subject_full_name}
+                    <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}
         </Carousel>

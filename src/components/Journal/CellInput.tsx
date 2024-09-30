@@ -41,16 +41,17 @@ const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     }
 };
 export const getColorByValue = (value:string,system:number) => {
+    if(!value) return "white";
     if(system === 100){
-        if(value !== "" && +value < 60) return "#ED3434";
+        if(+value < 60) return "#ED3434";
         if(+value >= 74) return "#2DEF40";
         if(+value >= 60 && +value <= 73) return "white";
     }else{
-        if(value !== "" && +value <= 12 && +value > 6) return "#2DEF40";
+        if(+value <= 12 && +value > 6) return "#2DEF40";
+        if(+value < 6) return "#ED3434";
     }
-    if(value?.toLowerCase() === "н") return "#EFB42D"
+    if(value?.toLowerCase() === "н") return "#EFB42D";
     if(value?.toLowerCase() === "н/a") return "#ED3434";
-    if(!value) return "white";
     return "white";
 }
 

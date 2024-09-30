@@ -13,6 +13,7 @@ import { useUserStore } from '../../store/userStore';
 import { TeacherSchedule } from './LessonsSchedule';
 import { LessonsScheduleStudents } from './LessonsSchedule/studentSchedule';
 import './studentProfile.scss';
+import "./../EditProfile/editProfileStyles.scss";
 import { ToggleHidePasswordEye } from '../../assets/svgs/toogleHidePasswordEye';
 import {EyeOutlined} from "@ant-design/icons";
 import { scheduleTimings } from '../../consts/scheduleTimings';
