@@ -25,7 +25,9 @@ const useHeaderVisibility = () => {
         setHeaderVisibilityClass('visible_on_touch');
     }
     const onMouseOutBlur = () => {
-        setHeaderVisibilityClass('hidden');
+        const distanceFromTop = window.scrollY;
+
+        distanceFromTop > 30 && setHeaderVisibilityClass('hidden');
     }
     const lastScrollPos = useRef(window.scrollY);
     const handleScroll = () => {
