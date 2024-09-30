@@ -67,7 +67,7 @@ export const AbsenceTable = () => {
                 <div className='journalColumnsCenter__container' style={{'gap':'21px'}} onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {table.dates?.map((date,i) => 
                         <div key={date+i}  className={`absenceTable_dayContainer`}>
-                            <p className="absenceTable_day">{daysShort[date.split(' ')[0]]}</p>
+                            <p className="absenceTable_day">{daysShort[date.split(' ')[0]]} <br/> {date.split(' ')[1]}</p>
                             <div className="absenceTable_dayNumberContainer">
                                 <p className="absenceTable_dayNumber">1</p>
                                 <p className="absenceTable_dayNumber">2</p>
