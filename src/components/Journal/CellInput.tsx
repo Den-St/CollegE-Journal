@@ -93,11 +93,11 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     const columnDate = document.getElementById('columnDate_'+(columnIndex+1).toString());
     const student = document.getElementById('student_'+studentIndex);
     // console.log('4',columnDate, student,columnSelect,columnIndex,studentIndex)
-    // if(!columnDate || !student || !columnSelect) return;
-    // columnSelect.style.border = "1px solid transparent";
-    // columnDate.style.border = "1px solid transparent";
-    // student.style.border = "1px solid transparent";
-    
+    if(columnDate && student && columnSelect) {
+        columnSelect.style.border = "1px solid transparent";
+        columnDate.style.border = "1px solid transparent";
+        student.style.border = "1px solid transparent";
+    }
     if(!isValid(e.target.value)) return;
     console.log('2',onBlurData);
 
