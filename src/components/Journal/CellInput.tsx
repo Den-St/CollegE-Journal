@@ -21,6 +21,7 @@ type Props = {
     studentIndex:number
 }
 const isValid = (value:string) => {
+    
     if(value === "") return true;
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
@@ -86,15 +87,20 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         columnIndex:number,
         subject_system:number
     },token:string,) => {
+        // console.log('1',onBlurData);
+        // console.log('3',isValid(e.target.value))
     const columnSelect = document.getElementById('columnSelect_'+(columnIndex+1).toString());
     const columnDate = document.getElementById('columnDate_'+(columnIndex+1).toString());
     const student = document.getElementById('student_'+studentIndex);
-    if(!columnDate || !student || !columnSelect) return;
-    columnSelect.style.border = "1px solid transparent";
-    columnDate.style.border = "1px solid transparent";
-    student.style.border = "1px solid transparent";
+    // console.log('4',columnDate, student,columnSelect,columnIndex,studentIndex)
+    // if(!columnDate || !student || !columnSelect) return;
+    // columnSelect.style.border = "1px solid transparent";
+    // columnDate.style.border = "1px solid transparent";
+    // student.style.border = "1px solid transparent";
     
     if(!isValid(e.target.value)) return;
+    console.log('2',onBlurData);
+
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
         const input = document.getElementById(onBlurData.rowIndex + ',' + onBlurData.columnIndex);
