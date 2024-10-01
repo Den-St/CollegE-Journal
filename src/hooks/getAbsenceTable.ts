@@ -30,8 +30,9 @@ export const useGetAbsenceTable = () => {
         if(!fillters.group_id) return;
         setLoading(true);
         const {start,end} = getStartAndEnd(_fillters?.offset ?? fillters.offset,formatedModaysAndSaturdays)
+        const endPlusOneDay = new Date(end+60*60*24);
         try{
-            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end},{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end:end+60*60*24},{headers:{Authorization:token}});
             setTable(res.data.data);
         }catch(err){
             console.error(err);
