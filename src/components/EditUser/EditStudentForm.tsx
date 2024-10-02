@@ -240,7 +240,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                         placeholder={'Оберіть тип навчання'}
                         optionLabelProp="label"
                         {...register('education_type',{required:{value:true,message:'Оберіть тип навчання'}})}
-                        onChange={(e) => setValue('education_type',e)}
+                        onChange={(e) => {setValue('education_type',e);e === "Контракт" && setValue('is_on_scholarships', "Ні")}}
                         value={watch('education_type')}
                         >   
                         <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
@@ -259,8 +259,8 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                         onChange={(e) => setValue('is_on_scholarships',e)}
                         value={watch('is_on_scholarships')}
                         >
-                        <Option value={1} label={"Так"}>Так</Option>
-                        <Option value={0} label={"Ні"}>Ні</Option>
+                        {watch('education_type') !== "Контракт" && <Option value={"Так"} label={"Так"}>Так</Option>}
+                        <Option value={"Ні"} label={"Ні"}>Ні</Option>
                     </Select>
                 </div>
             </div>

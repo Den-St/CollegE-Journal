@@ -202,7 +202,7 @@ export const EditGroup = () => {
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
                             {...createUserRegister('education_type',{required:true})}
-                            onChange={(e) => createUserSetValue('education_type',e)}
+                            onChange={(e) => {createUserSetValue('education_type',e);e === "Контракт" && createUserSetValue('is_on_scholarships', "Ні")}}
                             value={createUserWatch('education_type')}
                             >   
                             <Option value={"Бюджет"} label={"Бюджет"}>Бюджет</Option>
@@ -221,7 +221,7 @@ export const EditGroup = () => {
                             onChange={(e) => createUserSetValue('is_on_scholarships',e)}
                             value={createUserWatch('is_on_scholarships') || null}
                             >   
-                            <Option value={"Так"} label={"Так"}>Так</Option>
+                            {createUserWatch('education_type') === "Бюджет" && <Option value={"Так"} label={"Так"}>Так</Option>}
                             <Option value={"Ні"} label={"Ні"}>Ні</Option>
                         </Select>
                     </div>
