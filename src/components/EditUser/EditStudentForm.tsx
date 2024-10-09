@@ -1,6 +1,6 @@
-import { Select, DatePicker, DatePickerProps, Modal } from "antd";
+import { Select, DatePicker, DatePickerProps, Modal, notification } from "antd";
 import dayjs from "dayjs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
@@ -27,6 +27,20 @@ const useEditUserStudent = (user:UserProfileT) => {
         reset,
         formState:{errors},
     } = useForm<EditUserStudentT>();
+    const [api, contextHolder] = notification.useNotification({});
+
+    const openNotification = () => {
+        api.open({
+        message: `Повідомлення надісланно`,
+        description: "Запит на зміну пароля надісланно користувачу",
+        placement:'topRight',
+        'className':'letterSentNotification',
+        'icon':false,
+        'duration':4
+        });
+    };
+
+    const contextValue = useMemo(() => ({ name: 'letter' }), []);
     const token = useUserStore().user.token;
     const user_id = useParams().id;
     const navigate = useNavigate();
@@ -45,6 +59,7 @@ const useEditUserStudent = (user:UserProfileT) => {
     const onSendLetter = async () => {
         try{
             const res = await axiosConfig.put(endpoints.sendLetter,{user_id},{headers:{Authorization:token}});
+            openNotification();
         }catch(err){
             console.error(err);
         }
@@ -63,7 +78,7 @@ const useEditUserStudent = (user:UserProfileT) => {
         fetch();
     }, [user])
   
-    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter};
+    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter,contextHolder};
 }
 
 
@@ -72,7 +87,7 @@ type Props = {
 }
 
 export const EditStudentForm:React.FC<Props> = ({user}) => {
-    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter} = useEditUserStudent(user);
+    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter,contextHolder} = useEditUserStudent(user);
     const [isExpelModal,setIsExpelModal] = useState(false);
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
@@ -80,6 +95,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
     const from = useSearchParams()[0].get('from');
     
     return <>
+    {contextHolder}
     <section className='studentProfileMain__container' style={{'width':'100%'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'30px','width':'100%'}}>
             {!!userId && <LinkBack title="Профіль" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}

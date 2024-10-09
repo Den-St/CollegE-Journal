@@ -563,6 +563,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	align-items: center;
 	background-color: #FFFFFF;
 }
+.letterSentNotification{
+	background-color: var(--secondary-blue) !important;
+	.ant-notification-notice-message{
+		color: var(--primary-orange) !important;
+		font-family: Montserrat;
+		font-size: 18px  !important;
+		font-weight: 400;
+		line-height: 21.94px;
+		letter-spacing: 0.1em;
+	}
+	.ant-notification-notice-description{
+		font-family: Alegreya Sans;
+		font-size: 20px !important;
+		font-weight: 400  !important;
+		line-height: 24px  !important;
+		color: var(--primary-gray)  !important;
+	}
+	.ant-notification-notice-close{
+		color: var(--primary-gray) !important;
+		font-size: 20px;
+	}
+}
 
 body{
 	&.dark{
