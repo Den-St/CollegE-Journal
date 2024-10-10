@@ -80,7 +80,7 @@ export const TeacherSchedule = () => {
                                 <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*'] 
-                                        ? <Link to={routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['*']}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as SplitedLessonT)['*']}`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*']}
+                                        ? <Link to={routes.pickJournalSubject+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['*']}}`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*']}
                                         </Link> :<p className='teacherTimetable_groupName'>-</p>}
                                 </div>
                             </div>

@@ -108,7 +108,7 @@ export const MyProfile = () => {
                         {!!user?.user_group?.group_full_name && 
                         user.security_level === securityLevels.student
                         ? <Link to={routes.myGroup} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link>
-                        : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.groups} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
+                        : (user.security_level === securityLevels.teacher || user.security_level === securityLevels.admin) && <Link to={routes.pickJournalSubject+`?group_id=${user?.user_group?.group_id}`} className='studentProfile__group'>{user?.user_group?.group_full_name}</Link> 
                         }
                     </div>
                 </div>
