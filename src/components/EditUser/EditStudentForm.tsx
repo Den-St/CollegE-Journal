@@ -180,6 +180,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
                         {...register('job_title',{required:{value:true,message:'Введіть посаду студента'}})}
                         onChange={(e) => setValue('job_title',e)}
                         value={watch('job_title')}
+                        defaultValue={"Студент"}
                         >   
                         <Option value={"Студент"} label={"Студент"}>Студент</Option>
                         <Option value={"Староста"} label={"Староста"}>Староста</Option>

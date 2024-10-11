@@ -93,7 +93,7 @@ export const MyProfile = () => {
             <div className='studentProfileLeft__container'>
                 <div className='studentProfileInfo__container'>
                     <AntdImgCrop showReset  resetText="Відмінити зміни" rotationSlider showGrid modalTitle="Обробка фото" modalOk="Підтвердити" modalCancel="Відмінити">
-                        <Upload beforeUpload={beforeUpload}  accept="image/png, image/jpeg">
+                        <Upload  beforeUpload={beforeUpload}  accept="image/png, image/jpeg">
                             <div className='avatarEdit_container'>
                                 <img className='studentProfile_img profileAvatar_edit' src={user.avatar || defaultAvatar}/>
                                 <div className='avatarEdit'><EditProfileSvg/></div>

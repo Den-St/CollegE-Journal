@@ -151,6 +151,15 @@
     padding-top: 15px;
     line-height: 24px;
     width: fit-content;
+    transition: 0.2s;
+    color:var(--primary-gray);
+}
+.studentProfile__group:hover{
+    color: var(--primary-orange);
+}
+.studentProfile__group:active{
+    color: var(--primary-orange);
+    opacity: 0.9;
 }
 
 .studentProfileTabs__container{
@@ -327,9 +336,7 @@ text-align: left;
     .studentProfile__email{
         color:var(--primary-gray);
     }
-    .studentProfile__group{
-        color:var(--primary-gray);
-    }
+
     .studentProfileTab__button{
         color:var(--primary-gray);;
         .diagonalArrowSvg {

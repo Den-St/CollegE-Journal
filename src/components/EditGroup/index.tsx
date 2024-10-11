@@ -83,7 +83,7 @@ export const EditGroup = () => {
                 </div>
                 <div className="createUserEmailInput__container">
                     <label className="select_label">Пошта студента</label>
-                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:true,pattern:{value:emailPattern,message:'Не коректний email!'}})} type={'email'} className="form_input" placeholder='Введіть пошту студента'/>
+                    <input autoComplete="off" {...createUserRegister('mailbox_address',{required:{value:true,message:"Введіть email"},pattern:{value:emailPattern,message:'Не коректний email!'}})} type={'email'} className="form_input" placeholder='Введіть пошту студента'/>
                 </div>
             </div>
             <div className="createUserFormInputs__container">
@@ -168,7 +168,7 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть 1 варіант'}
                             optionLabelProp="label"
-                            {...createUserRegister('location',{required:true})}
+                            {...createUserRegister('location',{required:{value:true,message:"Оберіть місцезнаходження"}})}
                             onChange={(e) => createUserSetValue('location',e)}
                             value={createUserWatch('location')}
                             >   
@@ -186,8 +186,9 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть форму навчання'}
                             optionLabelProp="label"
+                            {...createUserRegister('education_form',{required:{value:true,message:"Оберіть форму навчання"}})}
                             onChange={(e) => createUserSetValue('education_form',e)}
-                            value={createUserWatch('education_form')}
+                            value={createUserWatch('education_form',)}
                             >   
                             <Option value={"Очно"} label={"Очно"}>Очно</Option>
                             <Option value={"Дистанційно"} label={"Дистанційно"}>Дистанційно</Option>
@@ -201,7 +202,7 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть тип'}
                             optionLabelProp="label"
-                            {...createUserRegister('education_type',{required:true})}
+                            {...createUserRegister('education_type',{required:{value:true,message:"Оберіть тип навчання"}})}
                             onChange={(e) => {createUserSetValue('education_type',e);e === "Контракт" && createUserSetValue('is_on_scholarships', "Ні")}}
                             value={createUserWatch('education_type')}
                             >   
@@ -217,7 +218,7 @@ export const EditGroup = () => {
                             className="createUserSelect"
                             placeholder={'Оберіть 1 варіант'}
                             optionLabelProp="label"
-                            {...createUserRegister('is_on_scholarships',{required:true})}
+                            {...createUserRegister('is_on_scholarships',{required:{value:true,message:"Оберіть чи отимує студент стипендію"}})}
                             onChange={(e) => createUserSetValue('is_on_scholarships',e)}
                             value={createUserWatch('is_on_scholarships') || null}
                             >   

@@ -70,6 +70,7 @@ export const TeacherSettingsModal:React.FC<Props> = ({onClose,open,journalId}) =
           key: 'temporary',
           label: <h1 className="header">Тимчасова викладача</h1>,
           children: 
+          <div style={{'display':'flex','flexDirection':'column',gap:'20px'}}>  
           <div style={{'display':'flex','gap':'30px',}}>
             <div className="createUserSelect__container" style={{'width':'30%'}}>
                 <label className="select_label">Викладач</label>
@@ -116,6 +117,9 @@ export const TeacherSettingsModal:React.FC<Props> = ({onClose,open,journalId}) =
                     // onChange={(e) => setValue('semester_start',e?.toDate() || null)} 
                     />
             </div>
+        </div>
+        <button onClick={onAddTeacher} disabled={loading} className={'primary_button'}>Зберегти зміни</button>
+
         </div>,
         },
       ];

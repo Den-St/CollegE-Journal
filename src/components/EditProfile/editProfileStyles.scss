@@ -159,6 +159,72 @@ margin-bottom: 50px;
         background-color: var(--secondary-blue);
         box-shadow:0 0 0 2px var(--primary-orange);
     }
+    .ant-modal-footer .ant-btn-default{
+        color: var(--primary-gray) !important;
+        border: none;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21.94px;
+        letter-spacing: 0.1em;
+        text-align: center;
+        width: 150px !important;
+        height: 42px;
+        border-radius: 10px 5px;
+        background-color: var(--secondary-blue) !important;
+    }
+    .ant-modal-footer .ant-btn-primary{
+        color: white !important;
+        border: none;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21.94px;
+        letter-spacing: 0.1em;
+        text-align: center;
+        width: 178px !important;
+        height: 42px;
+        border-radius: 10px 5px;
+        background-color: var(--primary-orange) !important;
+    }
+    .ant-modal-body .ant-btn{
+        color: var(--primary-gray) !important;
+        border: none;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21.94px;
+        letter-spacing: 0.1em;
+        text-align: center;
+        width: 150px !important;
+        height: 42px;
+        border-radius: 10px 5px;
+        background-color: var(--secondary-blue) !important;
+        bottom: 32px !important;
+        width: 218px !important;
+        height: 42px;
+    }
+    .ant-modal-footer .ant-btn-default:hover,.ant-modal-body .ant-btn:hover{
+        color: var(--primary-orange) !important;
+    }
+    .ant-modal-footer .ant-btn-default:active,.ant-modal-body .ant-btn:active{
+        color: var(--primary-orange) !important;
+        background: linear-gradient(0deg, rgba(16, 16, 16, 0.2), rgba(16, 16, 16, 0.2)),
+        linear-gradient(0deg, #102936, #102936) !important;
+
+    }
+    .ant-modal-footer .ant-btn-default:disabled,.ant-modal-body .ant-btn:disabled{
+        opacity: 0.2 !important;
+    }
+
+    
+    .ant-modal-footer .ant-btn-primary:active,.ant-modal-footer .ant-btn-primary:active{
+        background: linear-gradient(0deg, var(--Primary-Yellow, #EFB42D), var(--Primary-Yellow, #EFB42D)),
+        linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)) !important;
+    }
+    .ant-modal-footer .ant-btn-primary:disabled,.ant-modal-footer .ant-btn-primary:disabled{
+        opacity: 0.2 !important;
+    }
     button:nth-child(7){
         span{
             color:white !important;
