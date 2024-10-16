@@ -53,10 +53,10 @@ export const useCreateUser = (group?:GroupT) => {
             setErrorMessage('Некоректно введений номер студента!')
             return;
         }
-        if(!data.parents_phone_number?.includes('+')){
-            setErrorMessage('Некоректно введений номер батьків!')
-            return;
-        }
+        // if(!data.parents_phone_number?.includes('+')){
+        //     setErrorMessage('Некоректно введений номер батьків!')
+        //     return;
+        // }
         try{
             setCreateUserLoading(true);
             const admission_date = !!data.admission_date?.getTime ? Math.round((data.admission_date?.getTime() || 0)/1000) : null;

@@ -126,13 +126,13 @@ width: 200px;
 .img-crop-modal{
     .ant-modal-title{
         //styleName: H/H2;
-font-family: Montserrat;
-font-size: 28px;
-font-weight: 500;
-line-height: 34.13px;
-letter-spacing: 0.1em;
-text-align: left;
-margin-bottom: 50px;
+        font-family: Montserrat;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 34.13px;
+        letter-spacing: 0.1em;
+        text-align: left;
+        margin-bottom: 50px;
     }
     .ant-modal{
         width: 700px !important;
@@ -216,8 +216,6 @@ margin-bottom: 50px;
     .ant-modal-footer .ant-btn-default:disabled,.ant-modal-body .ant-btn:disabled{
         opacity: 0.2 !important;
     }
-
-    
     .ant-modal-footer .ant-btn-primary:active,.ant-modal-footer .ant-btn-primary:active{
         background: linear-gradient(0deg, var(--Primary-Yellow, #EFB42D), var(--Primary-Yellow, #EFB42D)),
         linear-gradient(0deg, rgba(11, 29, 38, 0.2), rgba(11, 29, 38, 0.2)) !important;

@@ -67,7 +67,9 @@ export const TeacherJournal = () => {
                 <div className='journalColumnsCenter__container' onScroll={handleHorizontalScrollLessonTypes} ref={lessonTypesRef}>
                     {journal?.columns.map((column,i) => 
                         <div key={column.column_id}  className={`journalColumnsCenterItem__container ${!column.date.includes('\n') && !!i && journal.columns[i-1]?.date !== column.date ? `specialLessonType` : ``} ${!column.date.includes('\n') && !!i && journal.columns[i+1]?.date !== column.date ? `specialLessonType_last` : ``}`}>
-                                <div id={'columnSelect_'+column.column_index}
+                                <div id={'columnSelect_'+i
+                                // column.column_index
+                                }
                                     className='journal_lessonTypeSelect_wrapper' 
                                     >{
                                     journal.can_edit === 1  && column.date.includes('.') ?
@@ -92,7 +94,9 @@ export const TeacherJournal = () => {
                                     </Tooltip>
                                 }</div>
                             <div className='journalColumnsCenterItemDate__container'
-                                id={'columnDate_'+column.column_index}
+                                id={'columnDate_' + i
+                                // column.column_index
+                                }
                             >
                                 <p className='journalColumnsCenterItemDateDay'>{column.date.split('\n')[0]}</p>
                                 <p className='journalColumnsCenterItemDate'>{column.date.split('\n')[1]}</p>
