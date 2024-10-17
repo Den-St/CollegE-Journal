@@ -412,7 +412,8 @@ scrollbar-width: none;  /* Firefox */
     margin-left: 40px;
 }
 .specialLessonType_last{
-    margin-right: 40px;
+    // margin-right: 40px;
+    margin-right: 30px;
 }
 
 .specialLessonType_cell:not(.specialLessonType_last_cell+.specialLessonType_cell){
@@ -508,6 +509,25 @@ scrollbar-width: none;  /* Firefox */
 //     .journalRight__container{
 //         height: 600px;
 //     }
+// }
+
+// .journalColumnsCenterItemDateDay{
+//     //styleName: H/H7;
+// font-family: Alegreya Sans;
+// font-size: 16px;
+// font-weight: 400;
+// line-height: 19.2px;
+// text-align: center;
+
+// }
+// .journalColumnsCenterItemDate{
+//     //styleName: H/H5 text;
+// font-family: Alegreya Sans;
+// font-size: 20px;
+// font-weight: 500;
+// line-height: 24px;
+// text-align: center;
+
 // }
 .journalLessonThemeItem__container .journalLessonThemeItem__input__text:focus::before{
     content: 'asdf';
