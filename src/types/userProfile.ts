@@ -20,5 +20,7 @@ export type UserProfileT = {
         group_full_name: string | null,
         group_id: string | null
     } | null,
-    user_type:'student' | 'teacher'
+    user_type:'student' | 'teacher',
+    job_title:string,
+    additional_job_title:string,
 }
