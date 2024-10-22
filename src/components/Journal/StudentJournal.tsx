@@ -79,7 +79,7 @@ export const StudentJournal = () => {
                         </div>
                     </div>}
                 <div className='journalRightRowsContainer' 
-                style={{position:'unset',width:!attestations?.some(att => att.active) ? '100%' : 'calc(100% - 332px)'}} 
+                style={{position:'unset',width:!attestations?.some(att => att.active) ? '100%' : 'calc(100% - 332px)','overflowY':'scroll'}} 
                 onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler} onMouseMove={onMouseMove}
                 ref={cellsRef} onScroll={handleHorizontalScroll}>
                     {!attestations?.some(att => att.active) ? columnByMonth?.map((columns,i) => 

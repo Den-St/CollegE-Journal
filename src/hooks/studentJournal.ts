@@ -77,12 +77,12 @@ export const useStudentJournal = () => {
         fetch();
     },[]);
     useEffect(() => {
-        // const params = new URLSearchParams(window.location.search);
-        // params.set('subject_id',fillters.subject_id); 
-        // params.set('attestations',(+fillters.onlyAtts).toString()); 
+        const params = new URLSearchParams(window.location.search);
+        params.set('subject_id',fillters.subject_id); 
+        params.set('attestations',(+fillters.onlyAtts).toString()); 
     
-        // window.history.replaceState({}, '', routes.journal+`?subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
-        navigate(routes.journal+`?subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+        window.history.replaceState({}, '', routes.journal+`?subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
+        // navigate(routes.journal+`?subject_id=${fillters.subject_id}&attestations=${+fillters.onlyAtts}`);
     },[fillters]);
 
     const onChangeFillters = (fieldName:'subject_id' | 'month' | 'onlyAtts',value:string | boolean | undefined) => {
