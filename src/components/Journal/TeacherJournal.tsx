@@ -81,6 +81,7 @@ export const TeacherJournal = () => {
                                         className='journal_lessonTypeSelect' 
                                         rootClassName='journal_lessonTypeSelect'
                                         placeholder={'Тип'}
+                                        popupMatchSelectWidth={false}
                                         onChange={(value) => onChangeLessonType(column.column_id,value,column.column_index)}>
                                             <Option label={"Лк"} value={"Лекція"}>Лекція</Option>
                                             <Option label={"Практика"} value={"Практика"}>Практика</Option>
@@ -203,6 +204,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                 {!unique_subjects.find(sub => sub.journal_id === fillters.subject_id)?.journal_id 
                 ? <div style={{width:'100px',height:'50px'}}><Loader/></div>
                 : <Select 
+                popupMatchSelectWidth={false}
                     placeholder={
                         <div className="fillterPlaceholder_container">
                             <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>

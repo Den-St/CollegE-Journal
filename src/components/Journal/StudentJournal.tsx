@@ -144,9 +144,10 @@ const StudentJournalFillters:React.FC<Props> = ({attestations,onChangeFillters,f
     return <section className='journalTop__container'>
         <LinkBack title={"Список предметів"} route={routes.pickJournalSubject}/>
         <h1 className='journal__title'>Журнал</h1>
-        <div className='journalFillters__container'>
+        <div className='journalFillters__container' style={{'justifyContent':'unset'}}>
             <div className="adminPanelStudentList_fillterContainer fillter_container">
                 <Select 
+                popupMatchSelectWidth={false}
                 placeholder={<div className="fillterPlaceholder_container">
                     <p className="fillter_placeholder">Місяць</p>
                 </div>}
@@ -163,6 +164,7 @@ const StudentJournalFillters:React.FC<Props> = ({attestations,onChangeFillters,f
             </div>
             <div className="adminPanelStudentList_fillterContainer fillter_container">
                 <Select 
+                popupMatchSelectWidth={false}
                     placeholder={
                         <div className="fillterPlaceholder_container">
                             <p className="fillter_placeholder">Предмет</p><FilterIconSvg/>
