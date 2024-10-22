@@ -230,7 +230,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
             </div>
             </div>
             <div style={{'display':'flex','gap':'30px'}}>
-                {isAdmin && <button onClick={onOpenTeacherSettings} className='primary_button' style={{padding:'0 41px'}}>Налаштування викладачів</button>}
+                {isAdmin && <button onClick={onOpenTeacherSettings} className='primary_button' style={{padding:'0 46px'}}>Налаштування викладачів</button>}
                 {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button'>{!printLoading ? `Друк` : <Spin/>}</button>}
             </div>
         </div>
