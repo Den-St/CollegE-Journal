@@ -150,24 +150,28 @@ const AbsenceTableTeachersSubjects = forwardRef<HTMLDivElement,TeachersProps>(({
     return  <section 
             onMouseUp={dragScroll.onMouseUp}
             className="absenceTable_teacherSection">
-        <div className="absenceTable_teachersContainer">
+        <div className="absenceTable_teachersContainer" style={{'gap':'0'}}>
             <p className="absenceTable_teachersSection_header">ПІБ Викладача</p>
             <div 
+            style={{'paddingLeft':'68px'}}
             onScroll={() => dragScroll.onScroll("teachers")} ref={refs.teachersRef}
             onMouseDown={dragScroll.onMouseDown} onMouseUp={dragScroll.onMouseUp}
             onMouseMove={dragScroll.onMouseMove}
             className="absenceTable_teachersContainer">
                 {table.teachers.map((teachersSubArray,i) => <div key={teachersSubArray.join(' ')+i} className="absenceTable_teachersSubcontainer">{teachersSubArray.map((teacher,j) => <p key={teacher+i+','+j} className="absenceTable_teacher">{teacher}</p>)}</div>)}
+                <div style={{'opacity':'0'}} className="absenceTable_teachersSubcontainer"><p className="absenceTable_teacher"></p></div>
             </div>
         </div>
-        <div className="absenceTable_teachersContainer">
+        <div className="absenceTable_teachersContainer" style={{'gap':'0'}}>
             <p className="absenceTable_teachersSection_header">Дисципліна</p>
             <div 
+            style={{'paddingLeft':'68px'}}
             onScroll={() => dragScroll.onScroll("subjects")} ref={refs.subjectsRef} 
             onMouseDown={dragScroll.onMouseDown} onMouseUp={dragScroll.onMouseUp}
             onMouseMove={dragScroll.onMouseMove}
             className="absenceTable_teachersContainer">
                 {table.subjects.map((subjectsSubArray,i) => <div key={subjectsSubArray.join(' ')+i} className="absenceTable_teachersSubcontainer">{subjectsSubArray.map((subject,j) => <p key={subject+i+','+j} className="absenceTable_teacher">{subject}</p>)}</div>)}
+                <div style={{'opacity':'0'}} className="absenceTable_teachersSubcontainer"><p className="absenceTable_teacher"></p></div>
             </div>
         </div>
     </section>
