@@ -19,11 +19,12 @@ type Props = {
     date:string,
     onMouseUp:() => void,
     onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
-    studentIndex:number
+    studentIndex:number,
+    is_att?:boolean
 }
-const isValid = (value:string,pe_education?:boolean) => {
+const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
     // console.log('v',value)
-    if(pe_education){
+    if(is_att && pe_education){
         if((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'а' || value.length === 3 && value[2]?.toLowerCase() === 'р') || ((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'в'))){
             value = value.toUpperCase();
             return true;
@@ -42,8 +43,8 @@ const isValid = (value:string,pe_education?:boolean) => {
     // console.log('ddd2')
     return false;
 }
-const onChange = (e:React.ChangeEvent<HTMLInputElement>,pe_education?:boolean) => {
-    if(!isValid(e.target.value,pe_education)){
+const onChange = (e:React.ChangeEvent<HTMLInputElement>,pe_education?:boolean,is_att?:boolean) => {
+    if(!isValid(e.target.value,pe_education,is_att)){
         // console.log('ddd3',e.target.value)
         e.preventDefault();
         e.stopPropagation();
@@ -71,7 +72,8 @@ export const getColorByValue = (value:string,system:number) => {
 
 
 
-export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex,pe_education}) => {
+export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,
+                                           onMouseUp,onMouseMove,studentIndex,pe_education,is_att}) => {
     const keysToMoves:Record<string,() => void> = {
         'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
         'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
@@ -99,7 +101,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         rowIndex:number,
         columnIndex:number,
         subject_system:number
-    },token:string,pe_education?:boolean) => {
+    },token:string,pe_education?:boolean,is_att?:boolean) => {
     const columnSelect = document.getElementById('columnSelect_'+(columnIndex).toString());
     const columnDate = document.getElementById('columnDate_'+(columnIndex).toString());
     const student = document.getElementById('student_'+studentIndex);
@@ -108,7 +110,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         columnDate.style.border = "1px solid transparent";
         student.style.border = "1px solid transparent";
     }
-    if(!isValid(e.target.value,pe_education)) return;
+    if(!isValid(e.target.value,pe_education,is_att)) return;
 
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value?.toUpperCase()},{headers:{Authorization:token}});
@@ -124,6 +126,6 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
     id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
     style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
-    onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education)} 
-    onChange={(e) => onChange(e,pe_education)} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
+    onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
+    onChange={(e) => onChange(e,pe_education,is_att)} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
 }
