@@ -64,8 +64,8 @@ export const getColorByValue = (value:string,system:number) => {
     }
     if(value?.toLowerCase() === "н") return "#EFB42D";
     if(value?.toLowerCase() === "н/а") return "#ED3434";
-    if(value?.toLowerCase() === "зар") return "#EFB42D";
-    if(value?.toLowerCase() === "зв") return "#EFB42D";
+    if(value?.toLowerCase() === "зар") return "#2DEF40";
+    if(value?.toLowerCase() === "зв") return "#2DEF40";
     return "white";
 }
 
@@ -111,7 +111,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     if(!isValid(e.target.value,pe_education)) return;
 
     try{
-        await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
+        await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value?.toUpperCase()},{headers:{Authorization:token}});
         const input = document.getElementById(onBlurData.rowIndex + ',' + onBlurData.columnIndex);
         if(input) {
             input.style.color = getColorByValue(e.target.value,onBlurData.subject_system);
