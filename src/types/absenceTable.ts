@@ -15,7 +15,7 @@ export type AbsenceTableT = {
         full_name:string
         total: number
     }[],
-    group_name:string
+    group_name:string,
 }
 
 export type AbsenceTableFilltersT = {

@@ -14,13 +14,13 @@ export const AbsenceTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,gr
                     <h1 className="printForm_header">ВСП "ФАХОВИЙ КОЛЕДЖ ЗВ'ЯЗКУ ТА ІНФОРМАТИЗАЦІЇ</h1>
                     <h1 className="printForm_header">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ"</h1>
                 </div>
-                <div style={{'width':'100%','display':'flex',gap:'130px'}}>
-                    <div style={{'width':'160px','display':'flex','flexDirection':'column','gap':'5px'}}>
-                        <span className="printForm_subsubheader">Староста</span>
+                <div style={{'width':'100%','display':'flex',gap:'33px'}}>
+                    <div style={{'display':'flex','flexDirection':'column','gap':'5px'}}>
+                        <span className="printForm_subsubheader">Староста <span style={{'marginLeft':'10px'}}>{table.group_leader_data.full_name}</span></span>
                         <span className="printForm_subsubheader">{table.group_leader_data.phone_number}</span>
                     </div>
-                    <div style={{'width':'160px','display':'flex','flexDirection':'column','gap':'5px'}}>
-                        <span className="printForm_subsubheader">Кл. керівник</span>
+                    <div style={{'display':'flex','flexDirection':'column','gap':'5px'}}>
+                        <span className="printForm_subsubheader">Кл. керівник <span style={{'marginLeft':'10px'}}>{table.supervisor_data.full_name}</span></span>
                         <span className="printForm_subsubheader">{table.supervisor_data.phone_number}</span>
                     </div>
                 </div>
