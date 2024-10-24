@@ -12,6 +12,7 @@ type Props = {
         student_id:string,
         subject_system:number
     },
+    pe_education?:boolean,
     token:string,
     rowIndex:number,
     columnIndex:number,
@@ -20,24 +21,34 @@ type Props = {
     onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
     studentIndex:number
 }
-const isValid = (value:string) => {
-    
+const isValid = (value:string,pe_education?:boolean) => {
+    // console.log('v',value)
+    if(pe_education){
+        if((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'а' || value.length === 3 && value[2]?.toLowerCase() === 'р') || ((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'в'))){
+            value = value.toUpperCase();
+            return true;
+        }
+    }
     if(value === "") return true;
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
+        // console.log('ddd1')
         if(value.length === 1 && value[0]?.toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2]?.toLowerCase() === 'а') {
             value = value.toUpperCase();
             return true;
         }
     }
+    // console.log('ddd2')
     return false;
 }
-const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    if(!isValid(e.target.value)){
+const onChange = (e:React.ChangeEvent<HTMLInputElement>,pe_education?:boolean) => {
+    if(!isValid(e.target.value,pe_education)){
+        // console.log('ddd3',e.target.value)
         e.preventDefault();
         e.stopPropagation();
         e.target.value = e.target.value.slice(0,e.target.value.length - 1);
+        // console.log('ddd4',e.target.value)
         return;
     }
 };
@@ -53,12 +64,14 @@ export const getColorByValue = (value:string,system:number) => {
     }
     if(value?.toLowerCase() === "н") return "#EFB42D";
     if(value?.toLowerCase() === "н/а") return "#ED3434";
+    if(value?.toLowerCase() === "зар") return "#EFB42D";
+    if(value?.toLowerCase() === "зв") return "#EFB42D";
     return "white";
 }
 
 
 
-export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex}) => {
+export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,onMouseUp,onMouseMove,studentIndex,pe_education}) => {
     const keysToMoves:Record<string,() => void> = {
         'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
         'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
@@ -86,7 +99,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         rowIndex:number,
         columnIndex:number,
         subject_system:number
-    },token:string,) => {
+    },token:string,pe_education?:boolean) => {
     const columnSelect = document.getElementById('columnSelect_'+(columnIndex).toString());
     const columnDate = document.getElementById('columnDate_'+(columnIndex).toString());
     const student = document.getElementById('student_'+studentIndex);
@@ -95,7 +108,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         columnDate.style.border = "1px solid transparent";
         student.style.border = "1px solid transparent";
     }
-    if(!isValid(e.target.value)) return;
+    if(!isValid(e.target.value,pe_education)) return;
 
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value},{headers:{Authorization:token}});
@@ -108,5 +121,9 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         console.error(err);
     }
 }
-    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp} id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}} onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,)} onChange={onChange} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
+    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
+    id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
+    style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
+    onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education)} 
+    onChange={(e) => onChange(e,pe_education)} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
 }

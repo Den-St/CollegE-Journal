@@ -19,5 +19,6 @@ export type TeacherJournalT = {
     }[],
     subject_id:string,
     subject_system:number,
-    journal_owner:string
+    journal_owner:string,
+    pe_education:boolean | undefined
 }
