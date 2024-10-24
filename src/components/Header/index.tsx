@@ -52,11 +52,11 @@ export const Header = () => {
     const user = useUserStore().user;
     const {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur} = useHeaderVisibility();
     const {sideMenuOpened,onToggleSideMenu} = useSideMenuStore();
-
-    return <header className={`header ${theme} ${route+'home'} ${headerVisibilityClass} ${'sideMenu' + sideMenuOpened}`}>
-            <div onMouseOver={onTouchShowHeader} className='header_hover_trigger'></div>
+//${headerVisibilityClass}
+    return <header className={`header ${theme} ${route+'home'} ${'sideMenu' + sideMenuOpened}`}>
+            {/* <div onMouseOver={onTouchShowHeader} className='header_hover_trigger'></div> */}
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
-            <div className={`header_container ${headerVisibilityClass}`}>
+            <div className={`header_container `}>
                 <div onMouseLeave={onMouseOutBlur} className="header__wrapper">
                     <div className='headerLeft_mobile'>
                         <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
