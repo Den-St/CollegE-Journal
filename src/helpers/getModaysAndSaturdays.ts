@@ -11,7 +11,7 @@ export const getMondaysAndSaturdays = () => {
         if(format(el, 'EEEE') !== "Monday" &&  format(el, 'EEEE') !== 'Saturday') return;
 
         const date = new Date(el);
-        date.setHours(6);
+        date.setHours(21);
         return date;
     }).filter(date => !!date);
 

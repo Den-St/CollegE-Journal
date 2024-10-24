@@ -81,7 +81,7 @@ export const AbsenceTable = () => {
                 <div className="absenceTable_totalTop">Всього</div>
                 </div>
             </div>
-            <div onMouseUp={mouseUpHandler} style={{'maxHeight':'unset'}} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
+            <div onMouseUp={mouseUpHandler} style={{'maxHeight':'unset','overflowY':'hidden'}} className='journalRight__container' ref={mainContainerRef} onScroll={handleVerticalScroll}>
                 <div className={`journalRightColumns__container`}>
                     {table?.student_list.map((student,i) => 
                         <div key={student.full_name} style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
