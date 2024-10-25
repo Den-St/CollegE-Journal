@@ -6,12 +6,15 @@ export const getMondaysAndSaturdays = () => {
     const days = eachDayOfInterval({
         start: new Date(today.getFullYear(), 0, 1,6),
         end: nextSaturday(today)
-    })
+    });
+
     const formatedModaysAndSaturdays = days.map(el => { 
         if(format(el, 'EEEE') !== "Monday" &&  format(el, 'EEEE') !== 'Saturday') return;
 
         const date = new Date(el);
-        date.setHours(21);
+        if(format(el, 'EEEE') === "Monday") date.setHours(2);
+        if(format(el, 'EEEE') === "Saturday") date.setHours(22);
+        console.log(date.toLocaleString());
         return date;
     }).filter(date => !!date);
 
