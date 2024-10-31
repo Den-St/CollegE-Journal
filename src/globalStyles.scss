@@ -167,7 +167,7 @@ input::placeholder{
 .journalSubject_fillter_container{
 	.fillter_select{
 		max-width: 400px;
-		overflow: hidden;
+		// overflow: hidden;
 	}
 
 }
@@ -209,7 +209,7 @@ input::placeholder{
 	.fillter_select{
 		display: flex !important;
 		align-items: center !important;
-		width: fit-content !important;
+		// width: fit-content !important;
 	}
 }
 .fillterPlaceholder_container{
@@ -786,7 +786,7 @@ body{
 
 @media screen and (min-width:1441px) {
 	.fillter_container{
-		margin-left: -11px;
+		// margin-left: -11px;
 	}
 }
 
