@@ -146,7 +146,7 @@ const AbsenceTableTeachersSubjects = forwardRef<HTMLDivElement,TeachersProps>(({
             onMouseDown={dragScroll.onMouseDown} onMouseUp={dragScroll.onMouseUp}
             onMouseMove={dragScroll.onMouseMove}
             className="absenceTable_teachersContainer">
-                {table.columns.map((column,i) => <p className="monthAttestationsTableSubject">{column.subject_teacher}</p>)}
+                {table.columns.map((column,i) => <p className="monthAttestationsTableSubject" style={{"minHeight":"250px"}}>{column.subject_teacher}</p>)}
             </div>  
         </div>
     </section>
@@ -196,7 +196,6 @@ export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,f
                         </div>}
                         className="fillter_select"
                         defaultValue={attestations?.find(att => att.active)?.month}
-                        allowClear
                         value={attestations?.find(att => att.active)?.month}
                         onChange={(value) => onChangeFillters(value)}
                         >
