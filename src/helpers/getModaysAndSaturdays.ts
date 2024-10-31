@@ -14,7 +14,6 @@ export const getMondaysAndSaturdays = () => {
         const date = new Date(el);
         if(format(el, 'EEEE') === "Monday") date.setHours(6);
         if(format(el, 'EEEE') === "Saturday") date.setHours(10);
-        console.log(date.toLocaleString());
         return date;
     }).filter(date => !!date);
 

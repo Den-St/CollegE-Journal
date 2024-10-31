@@ -10,8 +10,9 @@ import { useAbsenceTablePrintForm } from "../../../hooks/absenceTablePrintform";
 import { useUserStore } from "../../../store/userStore";
 import { AbsenceTableFilltersT, AbsenceTableT } from "../../../types/absenceTable";
 import { JournalGroupT } from "../../../types/journalGroup";
+import { MonthAttestationsTableT } from "../../../types/mothAttestationTable";
 import { Loader } from "../../Loader/Loader";
-import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
+import { MonthAttestationsTablePrintForm } from "./MonthAttestationsTablePrintForm";
 const {Option} = Select;
 
 type Props = {
@@ -19,12 +20,12 @@ type Props = {
     loading:boolean,
     onChangeFillters:(fieldName:'group_id' | 'offset',value:number | string) => void,
     groups:JournalGroupT[],
-    table?:AbsenceTableT,
+    table?:MonthAttestationsTableT,
     start:number,
     end:number
 }
 
-export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
+export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end}) => {
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const {handlePrint,componentRef} = useAbsenceTablePrintForm()
     const {downloadLoading,fetchFile} = useAbsenceTableDownload(start,end,group?.journal_group_full_name,group?.journal_group);
@@ -41,7 +42,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
 
     return <>
         <section className='journalTop__container'>
-            {!!group?.journal_group_full_name && !!table && <AbsenceTablePrintForm ref={componentRef} table={table} groupName={group.journal_group_full_name}/>}
+            {!!group?.journal_group_full_name && !!table && <MonthAttestationsTablePrintForm ref={componentRef} table={table} />}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
             <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name}</p></h1>
             <div className='journalFillters__container'>

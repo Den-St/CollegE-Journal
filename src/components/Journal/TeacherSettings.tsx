@@ -68,7 +68,7 @@ export const TeacherSettingsModal:React.FC<Props> = ({onClose,open,journalId}) =
         },
         {
           key: 'temporary',
-          label: <h1 className="header">Тимчасова викладача</h1>,
+          label: <h1 className="header">Тимчасова заміна</h1>,
           children: 
           <div style={{'display':'flex','flexDirection':'column',gap:'20px'}}>  
           <div style={{'display':'flex','gap':'30px',}}>
@@ -119,11 +119,11 @@ export const TeacherSettingsModal:React.FC<Props> = ({onClose,open,journalId}) =
             </div>
         </div>
         <button onClick={onAddTeacher} disabled={loading} className={'primary_button'}>Зберегти зміни</button>
-
         </div>,
         },
       ];
     return <Modal centered rootClassName="teacherSettingsModal" footer={false} open={open} onCancel={onClose}>
+        <h1 className="header">Налаштування викладачів</h1>
         <Collapse className="teacherSettingsModalCollapse" expandIconPosition="end" defaultActiveKey={['add']} ghost items={items} />
     </Modal>
 }

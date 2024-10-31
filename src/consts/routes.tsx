@@ -18,6 +18,7 @@ import { PrintForm } from "../components/Journal/PrintForm";
 import { GoogleLogin } from "../components/GoogleLogin";
 import { AbsenceTable } from "../components/Journal/AbsenceTable/AbsenceTable";
 import { NotReadyPage } from "../assets/components/NotReadyPage";
+import { MonthAttesationsTable } from "../components/Journal/MonthAttestations/MonthAttestationsTable";
 
 export const navRoutes = {
 }
@@ -55,7 +56,8 @@ export const routes = {
     myGroup:'/my-group',
     recovery:'/recovery-password',
     googleLogin:'/google/login',
-    absenceTable:'/absence-table'
+    absenceTable:'/absence-table',
+    monthAttestations:"/month-attestations"
 } as const;
 
 export const headerRoutes = {
@@ -113,6 +115,7 @@ export const PublicRoutes = [
     <Route key={routes.studyMaterials} element={<NotReadyPage/>} path={routes.studyMaterials}/>,
     <Route key={routes.homeTasks} element={<NotReadyPage/>} path={routes.homeTasks}/>,
     <Route key={routes.schedule} element={<NotReadyPage/>} path={routes.schedule}/>,
+    <Route key={routes.monthAttestations} element={<MonthAttesationsTable/>} path={routes.monthAttestations}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

@@ -212,7 +212,7 @@ export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,on
                 <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{group?.journal_group_full_name}</p></h1>
                 <div style={{'display':'flex','gap':'30px'}}>
                     {!loading && !!table && <button disabled={downloadLoading} className='primary_button' onClick={fetchFile}>{!downloadLoading ? `Завантажити` : <Spin/>}</button>}
-                    {!loading && !!table && <button className='primary_button' onClick={handlePrint}>Друк</button>}
+                    {!loading && !!table && <button className='primary_button' style={{width:'177px'}} onClick={handlePrint}>Друк</button>}
                 </div>
             </div>
             <div className='journalFillters__container'>

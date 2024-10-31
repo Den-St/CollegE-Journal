@@ -37,5 +37,6 @@ export const endpoints = {
     getJournalTeachers:'admin/journals/teachers-list',
     addTeacherToJournal:'admin/journals/add-teacher',
     shiftTeacherJournal:'admin/journals/shift-teacher',
-    sendLetter:'admin/user/change-send-password'
+    sendLetter:'admin/user/change-send-password',
+    monthAttestations:"admin/summary-tables/attestation_table/data"
 }
