@@ -29,6 +29,7 @@ import { MonthAttestationsFilltersT, MonthAttestationsTableT } from "../../../ty
 import { JournalAttestationT } from "../../../types/journalAttestation";
 import { useMonthAttestationsTableDownload } from "../../../hooks/monthAttestationsDownload";
 import { useMonthAttestationDragScroll } from "../../../hooks/mothAttestationsDragScroll";
+import { getColorByValue } from "../CellInput";
 const {Option} = Select;
 
 
@@ -102,7 +103,7 @@ export const MonthAttesationsTable = () => {
                                 {table.columns.map((column,j) => 
                                     <p key={column.subject_name+student.student_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
                                     className={`journalRowItemCenterValue__text`} 
-                                    style={{cursor:'not-allowed',color:'var(--primary-orange)',
+                                    style={{cursor:'not-allowed',color:getColorByValue((column?.students?.find(_student => _student.student_id === student.student_id)?.grade || "0"),column.subject_system),
                                             width:'32px',height:'32px',margin:'0'}}>
                                      {column.students.find(_student => _student.student_id === student.student_id)?.grade}
                                     </p>)}

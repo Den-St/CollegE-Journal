@@ -11,7 +11,7 @@ export type MonthAttestationsTableT = {
         {
           "students": [
             {
-              "grade": number,
+              "grade": string,
               "student_id": string
             }
           ],
