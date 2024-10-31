@@ -182,12 +182,12 @@ export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,f
             </div>
             <div className='journalFillters__container'>
                 <div style={{'display':'flex','gap':'60px','flexWrap':'wrap'}}>
-                    {isAdmin && <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
+                    <div className="adminPanelStudentList_fillterContainer fillter_container journalSubject_fillter_container"
                         style={{height:'300px !important',
                         // overflow:'hidden'
                     }}
                         >
-                    {loading || !groups.length
+                    {loading
                     ? <div style={{width:'100px',height:'50px'}}><Loader/></div>
                     : <div className="adminPanelStudentList_fillterContainer fillter_container">
                         <Select 
@@ -206,7 +206,7 @@ export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,f
                         </Select>
                     </div>
                     }
-                </div>}
+                </div>
                 </div>
             </div>
         </section>
