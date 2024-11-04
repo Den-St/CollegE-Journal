@@ -24,8 +24,8 @@ import {DoubleRightOutlined} from '@ant-design/icons';
 import { MonthAttestationsTablePrintForm } from "./MonthAttestationsTablePrintForm";
 import React from "react";
 import { useAbsenceTableDragScroll } from "../../../hooks/absenceTableDragScroll";
-import { MonthAttesationsTableAttestationsT, useGetMonthAttesationsTable } from "../../../hooks/getMothAttestationsTable";
-import { MonthAttestationsFilltersT, MonthAttestationsTableT } from "../../../types/mothAttestationTable";
+import { useGetMonthAttesationsTable } from "../../../hooks/getMothAttestationsTable";
+import { MonthAttesationsTableAttestationsT, MonthAttestationsFilltersT, MonthAttestationsTableT } from "../../../types/mothAttestationTable";
 import { JournalAttestationT } from "../../../types/journalAttestation";
 import { useMonthAttestationsTableDownload } from "../../../hooks/monthAttestationsDownload";
 import { useMonthAttestationDragScroll } from "../../../hooks/mothAttestationsDragScroll";
@@ -105,7 +105,7 @@ export const MonthAttesationsTable = () => {
                                     className={`journalRowItemCenterValue__text`} 
                                     style={{cursor:'not-allowed',color:getColorByValue((column?.students?.find(_student => _student.student_id === student.student_id)?.grade || "0"),column.subject_system),
                                             width:'32px',height:'32px',margin:'0'}}>
-                                     {column.students.find(_student => _student.student_id === student.student_id)?.grade}
+                                     {column.students.find(_student => _student.student_id === student.student_id)?.grade.toLocaleLowerCase()}
                                     </p>)}
                             </div>
                         </div>
@@ -171,7 +171,7 @@ export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,f
 
     return <>
         <section className='journalTop__container'>
-            {!!table && <MonthAttestationsTablePrintForm ref={componentRef} table={table} />}
+            {!!table && !!attestations?.length && <MonthAttestationsTablePrintForm attestations={attestations} ref={componentRef} table={table} />}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
             <div style={{'width':'100%','justifyContent':'space-between','display':'flex'}}>
                 <h1 className='journal__title'>Атестаційна відомість </h1>

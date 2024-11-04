@@ -42,7 +42,7 @@ export const MonthAttestationsTableFillters:React.FC<Props> = ({groups,loading,f
 
     return <>
         <section className='journalTop__container'>
-            {!!group?.journal_group_full_name && !!table && <MonthAttestationsTablePrintForm ref={componentRef} table={table} />}
+            {/* {!!group?.journal_group_full_name && !!table && <MonthAttestationsTablePrintForm  ref={componentRef} table={table} />} */}
             <LinkBack title={"Список групи"} route={routes.pickJournalSubject + `?group_id=${fillters.group_id}`}/>
             <h1 className='journal__title'>Список відсутніх <p className='journalGroup_groupName'>{groups.find(group => group.journal_group === fillters.group_id)?.journal_group_full_name}</p></h1>
             <div className='journalFillters__container'>

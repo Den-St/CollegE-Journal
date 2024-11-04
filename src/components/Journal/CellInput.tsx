@@ -23,10 +23,9 @@ type Props = {
     is_att?:boolean
 }
 const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
-    // console.log('v',value)
     if(is_att && pe_education){
         if((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'а' || value.length === 3 && value[2]?.toLowerCase() === 'р') || ((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'в'))){
-            value = value.toUpperCase();
+            value = value.toLocaleLowerCase();
             return true;
         }
     }
@@ -34,22 +33,18 @@ const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
     if(value === ".") return true;
     if(!isNaN(+value) && +value > 0 && +value <= 100) return true;
     if(isNaN(+value)){
-        // console.log('ddd1')
         if(value.length === 1 && value[0]?.toLowerCase() === 'н' || value.length === 2 && value[1] === '/' || value.length === 3 && value[2]?.toLowerCase() === 'а') {
-            value = value.toUpperCase();
+            value = value.toLocaleLowerCase();
             return true;
         }
     }
-    // console.log('ddd2')
     return false;
 }
 const onChange = (e:React.ChangeEvent<HTMLInputElement>,pe_education?:boolean,is_att?:boolean) => {
     if(!isValid(e.target.value,pe_education,is_att)){
-        // console.log('ddd3',e.target.value)
         e.preventDefault();
         e.stopPropagation();
         e.target.value = e.target.value.slice(0,e.target.value.length - 1);
-        // console.log('ddd4',e.target.value)
         return;
     }
 };
@@ -67,6 +62,7 @@ export const getColorByValue = (value:string,system:number) => {
     if(value?.toLowerCase() === "н/а") return "#ED3434";
     if(value?.toLowerCase() === "зар") return "#2DEF40";
     if(value?.toLowerCase() === "зв") return "#2DEF40";
+    if(value?.toLowerCase() === "н/в") return "#2DEF40";
     return "white";
 }
 

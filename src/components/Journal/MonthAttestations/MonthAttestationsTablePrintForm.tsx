@@ -1,13 +1,14 @@
 import { forwardRef } from "react";
 import { AbsenceTableT } from "../../../types/absenceTable";
-import { MonthAttestationsTableT } from "../../../types/mothAttestationTable";
+import { MonthAttesationsTableAttestationsT, MonthAttestationsTableT } from "../../../types/mothAttestationTable";
 import "./../printFormStyles.scss"
 
 type Props = {
     table:MonthAttestationsTableT,
+    attestations:MonthAttesationsTableAttestationsT[]
 }
 
-export const MonthAttestationsTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,},props) => {
+export const MonthAttestationsTablePrintForm = forwardRef<HTMLDivElement,Props>(({table,attestations},props) => {
     const currYear = new Date().getFullYear();
 
     return <div className="printForm_container" ref={props} id={'printForm'}>
@@ -20,7 +21,7 @@ export const MonthAttestationsTablePrintForm = forwardRef<HTMLDivElement,Props>(
                     <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
                 </div>
                 <div style={{'width':'100%','display':'flex','flexDirection':'column','gap':'8px',"alignItems":"center"}}>
-                    <span className="printForm_subsubheader"><b>{table.attestation_list?.find(att => att.active)?.month.toLocaleUpperCase()} АТЕСТАЦІЙНА відомість {currYear-1}-{currYear} н. р.</b></span>
+                    <span className="printForm_subsubheader"><b>{attestations.find(att => att.active)?.month.toLocaleUpperCase()} АТЕСТАЦІЙНА відомість {currYear-1}-{currYear} н. р.</b></span>
                     <span className="printForm_subsubheader"><b>група {table.group_name}</b></span>
                 </div>
                 <section className='printFormJournal__container'>

@@ -33,3 +33,10 @@ export type MonthAttestationsFilltersT = {
   group_id:string,
   month:string
 }
+
+export type MonthAttesationsTableAttestationsT = {
+  active: boolean;
+  end_date: number;
+  start_date: number | string;
+  month: string;
+}

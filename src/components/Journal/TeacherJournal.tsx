@@ -130,9 +130,15 @@ export const TeacherJournal = () => {
                                             ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} 
                                             onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} studentIndex={student.index} columnIndex={j} key={`${column.column_id}_${i}`} 
                                             token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} 
-                                            defaultValue={column.cells.find(cell => cell.index === student.index)?.value} pe_education={journal.pe_education} is_att={!column.date.includes('.')}/>
+                                            defaultValue={column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()} pe_education={journal.pe_education} is_att={!column.date.includes('.')}/>
                                             
-                                        : <p key={column.column_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>{column.cells.find(cell => cell.index === student.index)?.value}</p>
+                                        : <p key={column.column_id} onMouseMove={() => {}} 
+                                            onMouseDown={mouseUpHandler} 
+                                            className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} 
+                                                ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} 
+                                            style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>
+                                                {column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()}
+                                            </p>
                                     )}
                                 </div>
                             </div>

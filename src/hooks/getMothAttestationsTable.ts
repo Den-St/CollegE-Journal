@@ -1,6 +1,6 @@
 import { MonthAttesationsTable } from './../components/Journal/MonthAttestations/MonthAttestationsTable';
 import { JournalAttestationT } from './../types/journalAttestation';
-import { MonthAttestationsFilltersT, MonthAttestationsTableT } from './../types/mothAttestationTable';
+import { MonthAttesationsTableAttestationsT, MonthAttestationsFilltersT, MonthAttestationsTableT } from './../types/mothAttestationTable';
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axiosConfig from "../axiosConfig";
@@ -13,12 +13,7 @@ import { useUserStore } from "../store/userStore";
 import { AbsenceTableT, AbsenceTableFilltersT } from "../types/absenceTable";
 import _debounce from 'lodash/debounce';
 
-export type MonthAttesationsTableAttestationsT = {
-    active: boolean;
-    end_date: number;
-    start_date: number | string;
-    month: string;
-}
+
 
 export const useGetMonthAttesationsTable = () => {
     const navigate = useNavigate();
