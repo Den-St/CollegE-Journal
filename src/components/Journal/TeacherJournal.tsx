@@ -190,14 +190,14 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
     return <>
     <section className='journalTop__container'>
         {!!subjectName && <PrintForm ref={componentRef} journal={journal} subjectName={subjectName}/>}
-        <LinkBack title={"Обрати предмет"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
+        <LinkBack title={"Список предметів"} route={routes.pickJournalSubject + `?group_id=${groupJournal?.journal_group}`}/>
         <h1 className='journal__title'>Журнал <p className='journalGroup_groupName'>{groupJournal?.journal_group_full_name}</p></h1>
         <div className='journalFillters__container'>
             <div style={{'display':'flex','gap':'60px','flexWrap':'wrap'}}>
             <div className="adminPanelStudentList_fillterContainer fillter_container">
                 <Select 
                 placeholder={<div className="fillterPlaceholder_container">
-                    <p className="fillter_placeholder">Місяць</p>
+                    <p className="fillter_placeholder">Місяць</p><FilterIconSvg/>
                 </div>}
                 className="fillter_select"
                 defaultValue={attestations?.find(att => att.active)?.name}

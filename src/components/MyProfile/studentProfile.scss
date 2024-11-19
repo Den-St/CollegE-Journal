@@ -83,13 +83,13 @@
     border-radius:50%;
 }
 @media screen and (min-width:1441px) {
-    .studentProfile_img{
+    .studentProfile_img,.avatarEdit{
         width: 121px;
         height: 121px;
     }
 }
 @media screen and (max-width:1440px) {
-    .studentProfile_img{
+    .studentProfile_img,.avatarEdit{
         width: 81px;
         height: 81px;
     }

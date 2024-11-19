@@ -150,6 +150,8 @@
     width: 1px;
     height:30px;
     background-color: #797979;
+    position: relative;
+    z-index: 100;
 }
 .absenceTable_totalTop{
     font-family: Montserrat;

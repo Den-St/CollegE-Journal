@@ -222,7 +222,7 @@ export const UserProfile = () => {
                 </div>
             </div>
         </section>
-        :<section className='profile_detailedInfo_section'>
+        : mySecurityLevel === securityLevels.admin && user?.user_type === "teacher" && <section className='profile_detailedInfo_section'>
         <div className='profile_detailedInfo_dir_container'>
             <div style={{'display':'flex','flexDirection':'column','gap':'20px'}}>
                 <h1 className='profile_detailedInfo_dir_header'>Інформація про викладача</h1>
