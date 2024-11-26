@@ -56,9 +56,13 @@ export const TeacherSubjects = () => {
                 <Link to={routes.monthAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Атестації за місяць
                 </Link>
+                <Link to={routes.semesterAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                    Атестації за поточний семестр
+                </Link>
                 <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Список відсутніх за тиждень
                 </Link>
+                
             </div>
             <Carousel className='subjects_carousel' dots slidesToShow={1}>
                 <Link to={routes.monthAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>

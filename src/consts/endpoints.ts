@@ -38,5 +38,7 @@ export const endpoints = {
     addTeacherToJournal:'admin/journals/add-teacher',
     shiftTeacherJournal:'admin/journals/shift-teacher',
     sendLetter:'admin/user/change-send-password',
-    monthAttestations:"admin/summary-tables/attestation_table/data"
+    monthAttestations:"admin/summary-tables/attestation_table/data",
+    semesterAttestationsAdmin:"admin/summary-tables/final_grades_table/data",
+    studentMonthAttestations:"summary-tables/student_attestation_table/data"
 }
