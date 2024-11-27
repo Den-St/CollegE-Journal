@@ -57,7 +57,7 @@ export const getColorByValue = (value:string,system:number) => {
     }else{
         if(+value <= 12 && +value > 6) return "#2DEF40";
         if(+value < 6 && +value > 3) return "white";
-        if(+value < 3) return "#ED3434";
+        if(+value <= 3) return "#ED3434";
     }
     if(value?.toLowerCase() === "н") return "#EFB42D";
     if(value?.toLowerCase() === "н/а") return "#ED3434";
