@@ -33,7 +33,8 @@ export type SemesterAttestationsT = {
             "full_name": string,
             "student_id": string
         }
-      ]
+      ],
+      year:string
 }
 
 export type SemesterAttestationsFilltersT = {

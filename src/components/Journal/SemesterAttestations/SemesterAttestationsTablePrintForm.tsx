@@ -20,6 +20,7 @@ export const SemesterAttestationsTablePrintForm = forwardRef<HTMLDivElement,Prop
                     <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
                 </div>
                 <div style={{'width':'100%','display':'flex','flexDirection':'column','gap':'8px',"alignItems":"center"}}>
+                <span className="printForm_subsubheader"><b>ЗАЛІКОВО - ЕКЗАМІНАЦІЙНА ВІДОМІСТЬ ІІ семестр {table.year} н. р. (заліки)</b></span>
                     <span className="printForm_subsubheader"><b>група {table.group_name}</b></span>
                 </div>
                 <section className='printFormJournal__container'>
@@ -30,11 +31,35 @@ export const SemesterAttestationsTablePrintForm = forwardRef<HTMLDivElement,Prop
                         </div>
                         <div className='printFormJournal_top_dates'>
                             {table.columns.map((column,i) => 
-                                <div className="printFormAbsenceTable_teacherName_container" style={{'height':'86px',"width":"25px"}}><i>({column.subject_teacher})</i><br></br>{column.subject_name}</div>
+                                <div className="printFormAbsenceTable_teacherName_container" style={{'height':'86px',"width":"25px"}}><i>({column.subject_teacher})</i><br></br><b>{column.subject_name}</b></div>
                             )}
                         </div>
                     </div>
-                    <div className='printFormJournal__main'>
+                    <div className='printFormJournal_top' style={{"fontSize":"13px"}}>
+                        <div className='printFormJournal_top_left' style={{'height':'20px',"width":"16px"}}>
+                        </div>
+                        <div className='printFormAbsence_top_student' style={{'height':'20px',"width":"132px","justifyContent":"center"}}>
+                        № відомості
+                        </div>
+                        <div className='printFormJournal_top_dates'>
+                            {table.columns.map((column,i) => 
+                                <div className="printFormJournal__studentNumber" style={{'height':'20px',"width":"25px",}}>000</div>
+                            )}
+                        </div>
+                    </div>
+                    <div className='printFormJournal_top' style={{"fontSize":"13px"}}>
+                        <div className='printFormJournal_top_left' style={{'height':'37px',"width":"16px"}}>
+                        </div>
+                        <div className='printFormAbsence_top_student' style={{'height':'37px',"width":"132px","justifyContent":"center","alignItems":"flex-end"}}>
+                        дата
+                        </div>
+                        <div className='printFormJournal_top_dates'>
+                            {table.columns.map((column,i) => 
+                                <div className="printFormJournal__studentNumber" style={{'height':'37px',"width":"25px",}}>00.<br/>00</div>
+                            )}
+                        </div>
+                    </div>
+                    <div className='printFormJournal__main' style={{"fontSize":"13px"}}>
                         <div className={`printFormJournal__students`}>
                                 {table?.student_list.map((student,i) =>
                                     <div style={{'display':'flex'}} key={student.full_name+i}>
