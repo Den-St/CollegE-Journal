@@ -26,6 +26,20 @@ import { securityLevels } from '../../consts/securityLevels';
 import { TeacherSettingsModal, useTeacherSettingsModal } from './TeacherSettings';
 const {Option} = Select;
 
+const monthNamesToNumber:Record<string,number> = {
+    "Січень": 1,
+    "Лютий": 2,
+    "Березень": 3,
+    "Квітень": 4,
+    "Травень": 5,
+    "Червень": 6,
+    "Липень": 7,
+    "Серпень": 8,
+    "Вересень": 9,
+    "Жовтень": 10,
+    "Листопад": 11,
+    "Грудень": 12
+  }
 export const TeacherJournal = () => {
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
            onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
@@ -121,11 +135,13 @@ export const TeacherJournal = () => {
                     ref={cellsRef} onScroll={handleHorizontalScroll}>
                         {journal?.students.map((student,i) => 
                             <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
-                                <div className='journalRowItemCenter__container'>
+                                <div className='journalRowItemCenter__container' id={`row_${i}`}>
                                     {journal.columns.map((column,j) => 
                                         (journal.can_edit === 1 &&
                                         (!isDisabledByDate(column.date) || !column.date.includes('\n')))
                                         ? !!token && <CellInput 
+                                            lessonType={column.lesson_type}
+                                            month={column.date.includes('\n') ? +column.date.split("\n")[1].split(".")[1] : monthNamesToNumber[column.date]}
                                             className={`${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``}
                                             ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} 
                                             onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} studentIndex={student.index} columnIndex={j} key={`${column.column_id}_${i}`} 

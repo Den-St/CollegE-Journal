@@ -40,5 +40,6 @@ export const endpoints = {
     sendLetter:'admin/user/change-send-password',
     monthAttestations:"admin/summary-tables/attestation_table/data",
     semesterAttestationsAdmin:"admin/summary-tables/final_grades_table/data",
-    studentMonthAttestations:"summary-tables/student_attestation_table/data"
+    studentMonthAttestations:"summary-tables/student_attestation_table/data",
+    studentSemesterAttestations:"summary-tables/student_final_grades_table/data",
 }

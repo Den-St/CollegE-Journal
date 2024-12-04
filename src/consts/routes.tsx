@@ -20,6 +20,8 @@ import { AbsenceTable } from "../components/Journal/AbsenceTable/AbsenceTable";
 import { NotReadyPage } from "../assets/components/NotReadyPage";
 import { MonthAttesationsTable } from "../components/Journal/MonthAttestations/MonthAttestationsTable";
 import { SemesterAttesationsTable } from "../components/Journal/SemesterAttestations/SemesterAttestationsTable";
+import { StudentSemesterAttesationsTable } from "../components/Journal/StudentSemesterAttestations/StudentSemesterAttestationsTable";
+import { StudentMonthAttesationsTable } from "../components/Journal/StudentMonthAttestations/StudentMonthAttestationsTable";
 
 export const navRoutes = {
 }
@@ -60,6 +62,8 @@ export const routes = {
     absenceTable:'/absence-table',
     monthAttestations:"/month-attestations",
     semesterAttestations:"/semester-attestations",
+    semesterAttestationsStudent:"/semester-attestations-student",
+    studentMonthAttestations:"/student-month-attestations",
 } as const;
 
 export const headerRoutes = {
@@ -119,6 +123,8 @@ export const PublicRoutes = [
     <Route key={routes.schedule} element={<NotReadyPage/>} path={routes.schedule}/>,
     <Route key={routes.monthAttestations} element={<MonthAttesationsTable/>} path={routes.monthAttestations}/>,
     <Route key={routes.semesterAttestations} element={<SemesterAttesationsTable/>} path={routes.semesterAttestations}/>,
+    <Route key={routes.semesterAttestationsStudent} element={<StudentSemesterAttesationsTable/>} path={routes.semesterAttestationsStudent}/>,
+    <Route key={routes.studentMonthAttestations} element={<StudentMonthAttesationsTable/>} path={routes.studentMonthAttestations}/>,
     <Route key={'*'} element={<NoMatch title="Не вдалося знайти сторінку" description="Спробуйте перезайти на сайт або повторіть спробу пізніше." is404/>} path={'*'}/>,
 ]
 

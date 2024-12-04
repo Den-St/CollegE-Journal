@@ -51,7 +51,7 @@ export const TeacherSubjects = () => {
             )}
         </Carousel>
         {(group?.is_supervisor || (userSecurityLevel === securityLevels.admin)) && <>
-            <h2 className="subjectsMainTitle">Зведені таблиці</h2>
+            <h2 className="header">Зведені таблиці</h2>
             <div className="subjectsContainer">
                 <Link to={routes.monthAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Атестації за місяць
@@ -67,6 +67,9 @@ export const TeacherSubjects = () => {
             <Carousel className='subjects_carousel' dots slidesToShow={1}>
                 <Link to={routes.monthAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Атестації за місяць
+                </Link>
+                <Link to={routes.semesterAttestations + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
+                    Атестації за поточний семестр
                 </Link>
                 <Link to={routes.absenceTable + `?group_id=${pickedGroupId}`} className={`homeTasks_subject`}>
                     Список відсутніх за тиждень

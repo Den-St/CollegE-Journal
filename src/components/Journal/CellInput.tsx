@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import axiosConfig from "../../axiosConfig"
 import { endpoints } from "../../consts/endpoints"
+import { formatNumber } from "../../helpers/formatNumber"
 
 type Props = {
     defaultValue?:string,
@@ -20,7 +21,9 @@ type Props = {
     onMouseUp:() => void,
     onMouseMove:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
     studentIndex:number,
-    is_att?:boolean
+    is_att?:boolean,
+    month:number,
+    lessonType?:string
 }
 const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
     if(is_att && pe_education){
@@ -70,7 +73,7 @@ export const getColorByValue = (value:string,system:number) => {
 
 
 export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,
-                                           onMouseUp,onMouseMove,studentIndex,pe_education,is_att}) => {
+                                           onMouseUp,onMouseMove,studentIndex,pe_education,is_att,month,lessonType}) => {
     const keysToMoves:Record<string,() => void> = {
         'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
         'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
@@ -112,17 +115,73 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value?.toUpperCase()},{headers:{Authorization:token}});
         const input = document.getElementById(onBlurData.rowIndex + ',' + onBlurData.columnIndex);
+        const row = document.getElementById(`row_${rowIndex}`) as HTMLInputElement;
+        if(!row) return;
+        const inputs = Array.from(row.querySelectorAll("*")) as HTMLInputElement[];
+        let summ = 0;
+        let n = 0;
+        inputs.map((input) => {
+            const _lessonType = input.getAttribute("data-lesson-type");
+            const _month = Number(input?.getAttribute("data-month"));
+            // if(_month !== month) return;
+
+            if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
+                n++;
+                summ += !isNaN(+input.value) ? +input.value : 0
+            }
+            if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
+                // input.placeholder = `${summ/n}`;
+                input.placeholder = `${formatNumber(summ/n)}`;
+
+                summ = 0;
+                n = 0;
+            }
+        })
+            
         if(input) {
             input.style.color = getColorByValue(e.target.value,onBlurData.subject_system);
             input.style.caretColor = "white";
         }
     }catch(err){
         console.error(err);
+    }   
     }
-}
+    const onCalculateAvg = () => {
+        if(lessonType !== "Атестаційна") return;
+        const row = document.getElementById(`row_${rowIndex}`) as HTMLInputElement;
+        if(!row) return;
+        const inputs = Array.from(row.querySelectorAll("*")) as HTMLInputElement[];
+        let summ = 0;
+        let n = 0;
+        
+        inputs.map((input) => {
+            const _lessonType = input.getAttribute("data-lesson-type");
+            const _month = Number(input?.getAttribute("data-month"));
+            // if(_month !== month) return;
+
+            if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
+                n++;
+                summ += !isNaN(+input.value) ? +input.value : 0
+            }
+            if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
+                if(+formatNumber(summ/n) === Number(input.placeholder || 0)) return;
+                // input.placeholder = `${(summ/n)}`;
+                input.placeholder = `${formatNumber(summ/n)}`;
+                summ = 0;
+                n = 0;
+            }
+        })
+    }
+
+    useEffect(() => onCalculateAvg(),[]);
+    
     return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
+    data-month={month}
+    data-lesson-type={lessonType}
     id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
     style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
     onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
-    onChange={(e) => onChange(e,pe_education,is_att)} className={`journalRowItemCenterValue__input__text ${className}`} defaultValue={defaultValue}/>
+    onChange={(e) => onChange(e,pe_education,is_att)} 
+    className={`journalRowItemCenterValue__input__text ${className}`} 
+    defaultValue={defaultValue}/>
 }
