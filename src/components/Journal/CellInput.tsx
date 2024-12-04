@@ -126,7 +126,10 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             // if(_month !== month) return;
 
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
-                n++;
+                console.log("11",input.value)
+                if(_lessonType === "Зошит") {
+                    n++
+                }else if(!isNaN(+input.value) && !!input.value) n++;
                 summ += !isNaN(+input.value) ? +input.value : 0
             }
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
@@ -158,9 +161,12 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             const _lessonType = input.getAttribute("data-lesson-type");
             const _month = Number(input?.getAttribute("data-month"));
             // if(_month !== month) return;
-
+            
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
-                n++;
+                if(_lessonType === "Зошит") {
+                    n++
+                }else if(!isNaN(+input.value) && !!input.value) n++;
+                
                 summ += !isNaN(+input.value) ? +input.value : 0
             }
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
