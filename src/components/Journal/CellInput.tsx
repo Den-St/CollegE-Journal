@@ -149,7 +149,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         console.error(err);
     }   
     }
-    const onCalculateAvg = () => {
+    const onCalculateAvgAtts = () => {
         if(lessonType !== "Атестаційна") return;
         const row = document.getElementById(`row_${rowIndex}`) as HTMLInputElement;
         if(!row) return;
@@ -178,8 +178,44 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             }
         })
     }
+    const onCalculateAvgSemester = () => {
+        if(lessonType !== "Підсумкова") return;
+        const row = document.getElementById(`row_${rowIndex}`) as HTMLInputElement;
+        if(!row) return;
+        const inputs = Array.from(row.querySelectorAll("*")) as HTMLInputElement[];
+        let summ = 0;
+        let n = 0;
+        let lastAtt = 0;
+        inputs.map((input) => {
+            const _lessonType = input.getAttribute("data-lesson-type");
+            const _month = Number(input?.getAttribute("data-month"));
+            // if(_month !== month) return;
+            
+            if(_lessonType === "Атестаційна" || _lessonType === "Коригуюча") {
+                console.log(_lessonType,+input.value)
+                if(!isNaN(+input.value) && !!input.value) n++;
+                if(_lessonType === "Атестаційна") {
+                    lastAtt = !isNaN(+input.value) ? +input.value : 0;
+                }else if(!isNaN(+input.value) && !!input.value){
+                    summ -= lastAtt;
+                    !!lastAtt && n--
+                }
+                summ += !isNaN(+input.value) ? +input.value : 0
+            }
+            if(_lessonType  === "Підсумкова" && !Number.isNaN(summ/n)){
+                if(+formatNumber(summ/n) === Number(input.placeholder || 0)) return;
+                // input.placeholder = `${(summ/n)}`;
+                input.placeholder = `${Math.round(summ/n)}`;
+                summ = 0;
+                n = 0;
+            }
+        })
+    }
 
-    useEffect(() => onCalculateAvg(),[]);
+    useEffect(() => {
+        onCalculateAvgAtts();
+        onCalculateAvgSemester();
+    },[]);
     
     return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
     data-month={month}
