@@ -134,7 +134,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             }
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
                 // input.placeholder = `${summ/n}`;
-                input.placeholder = `${formatNumber(summ/n)}`;
+                input.placeholder = `${Math.round(summ/n)}`;
 
                 summ = 0;
                 n = 0;
@@ -172,7 +172,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
                 if(+formatNumber(summ/n) === Number(input.placeholder || 0)) return;
                 // input.placeholder = `${(summ/n)}`;
-                input.placeholder = `${formatNumber(summ/n)}`;
+                input.placeholder = `${Math.round(summ/n)}`;
                 summ = 0;
                 n = 0;
             }

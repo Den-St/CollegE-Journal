@@ -24,19 +24,19 @@ export const MonthAttestationsTablePrintForm = forwardRef<HTMLDivElement,Props>(
                     <span className="printForm_subsubheader"><b>{attestations.find(att => att.active)?.month.toLocaleUpperCase()} АТЕСТАЦІЙНА відомість {currYear-1}-{currYear} н. р.</b></span>
                     <span className="printForm_subsubheader"><b>група {table.group_name}</b></span>
                 </div>
-                <section className='printFormJournal__container'>
+                <section className='printFormJournal__container' style={{"width":"100%"}}>
                     <div className='printFormJournal_top'>
-                        <div className='printFormJournal_top_left' style={{'height':'86px',"width":"16px"}}>
+                        <div className='printFormJournal_top_left' style={{'height':'86px',"width":"16px","minWidth":"16px"}}>
                         </div>
-                        <div className='printFormAbsence_top_student' style={{'height':'86px',"width":"132px"}}>
+                        <div className='printFormAbsence_top_student' style={{'height':'86px',"width":"132px","minWidth":"132px"}}>
                         </div>
-                        <div className='printFormJournal_top_dates'>
+                        <div className='printFormJournal_top_dates'  style={{"width":"100%"}}>
                             {table.columns.map((column,i) => 
-                                <div className="printFormAbsenceTable_teacherName_container" style={{'height':'86px',"width":"25px"}}><i>({column.subject_teacher})</i><br></br>{column.subject_name}</div>
+                                <div className="printFormAbsenceTable_teacherName_container" style={{'height':'86px',"width":"25px","flex":"1"}}><i>({column.subject_teacher})</i><br></br>{column.subject_name}</div>
                             )}
                         </div>
                     </div>
-                    <div className='printFormJournal__main'>
+                    <div className='printFormJournal__main' style={{"width":"100%"}}>
                         <div className={`printFormJournal__students`}>
                                 {table?.student_list.map((student,i) =>
                                     <div style={{'display':'flex'}} key={student.full_name+i}>
@@ -49,9 +49,9 @@ export const MonthAttestationsTablePrintForm = forwardRef<HTMLDivElement,Props>(
                                     </div>  
                                 )}
                         </div>
-                        <div className="printFormJournal__marks_section">
+                        <div className="printFormJournal__marks_section" style={{"width":"100%"}}>
                             {table?.student_list.map((student,i) => <div className="printFormJournal__marks">
-                                {table.columns.map((column,j) => <p className="printFormJournal__mark" style={{'height':'18px',width:'25px'}}>{column.students?.find(_stundent => student.student_id === _stundent.student_id)?.grade}</p>)}
+                                {table.columns.map((column,j) => <p className="printFormJournal__mark" style={{'height':'18px',width:'25px',"flex":"1"}}>{column.students?.find(_stundent => student.student_id === _stundent.student_id)?.grade}</p>)}
                             </div>)}
                         </div>
                     </div>
