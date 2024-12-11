@@ -50,7 +50,7 @@ export const StudentSemesterAttesationsTable = () => {
                     {table.columns?.map((column) => 
                         <div style={{"display":"flex",gap:"10px","flexDirection":"column"}}>
                             <p key={column.subject_name} className="monthAttestationsTableSubject">{column.subject_name}</p>
-                            <p key={column.subject_name} className="monthAttestationsDate" >24.12</p>
+                            <p key={column.subject_name} className="monthAttestationsDate">24.12</p>
                         </div>
                     )}
                 </div>

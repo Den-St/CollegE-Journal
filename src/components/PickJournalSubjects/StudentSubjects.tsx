@@ -43,20 +43,20 @@ export const StudentSubjects = () => {
         </Carousel>
         <h2 className="header">Зведені таблиці</h2>
         <div className="subjectsContainer">
-            {/* <Link to={routes.semesterAttestationsStudent} className={`homeTasks_subject`}>
-                Атестації за поточний семестр
-            </Link> */}
-            <Link to={routes.studentMonthAttestations} className={`homeTasks_subject`}>
+            <Link to={routes.semesterAttestationsStudent} className={`homeTasks_subject`}>
                 Атестації за поточний семестр
             </Link>
+            {/* <Link to={routes.studentMonthAttestations} className={`homeTasks_subject`}>
+                Атестації за поточний семестр
+            </Link> */}
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
-            {/* <Link to={routes.semesterAttestationsStudent} className={`homeTasks_subject`}>
-                Атестації за поточний семестр
-            </Link> */}
-            <Link to={routes.studentMonthAttestations} className={`homeTasks_subject`}>
+            <Link to={routes.semesterAttestationsStudent} className={`homeTasks_subject`}>
                 Атестації за поточний семестр
             </Link>
+            {/* <Link to={routes.studentMonthAttestations} className={`homeTasks_subject`}>
+                Атестації за поточний семестр
+            </Link> */}
         </Carousel>
     </section>
 }

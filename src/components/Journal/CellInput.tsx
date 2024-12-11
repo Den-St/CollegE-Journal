@@ -120,27 +120,42 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         const inputs = Array.from(row.querySelectorAll("*")) as HTMLInputElement[];
         let summ = 0;
         let n = 0;
+
+        let nAtts = 0;
+        let summAtts = 0;
+        let lastAtt = 0;
         inputs.map((input) => {
             const _lessonType = input.getAttribute("data-lesson-type");
-            const _month = Number(input?.getAttribute("data-month"));
-            // if(_month !== month) return;
 
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
-                console.log("11",input.value)
                 if(_lessonType === "Зошит") {
                     n++
                 }else if(!isNaN(+input.value) && !!input.value) n++;
                 summ += !isNaN(+input.value) ? +input.value : 0
             }
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
-                // input.placeholder = `${summ/n}`;
                 input.placeholder = `${Math.round(summ/n)}`;
 
                 summ = 0;
                 n = 0;
             }
+            if(_lessonType === "Атестаційна" || _lessonType === "Коригуюча") {
+                if(!isNaN(+input.value) && !!input.value) nAtts++;
+                if(_lessonType === "Атестаційна") {
+                    lastAtt = !isNaN(+input.value) ? +input.value : 0;
+                }else if(!isNaN(+input.value) && !!input.value){
+                    summAtts -= lastAtt;
+                    !!lastAtt && nAtts--
+                }
+                summAtts += !isNaN(+input.value) ? +input.value : 0
+            }
+            if(_lessonType  === "Підсумкова" && !Number.isNaN(summAtts/nAtts)){
+                if(+formatNumber(summAtts/nAtts) === Number(input.placeholder || 0)) return;
+                input.placeholder = `${Math.round(summAtts/nAtts)}`;
+                summAtts = 0;
+                nAtts = 0;
+            }
         })
-            
         if(input) {
             input.style.color = getColorByValue(e.target.value,onBlurData.subject_system);
             input.style.caretColor = "white";
@@ -159,8 +174,6 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         
         inputs.map((input) => {
             const _lessonType = input.getAttribute("data-lesson-type");
-            const _month = Number(input?.getAttribute("data-month"));
-            // if(_month !== month) return;
             
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
                 if(_lessonType === "Зошит") {
@@ -171,7 +184,6 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             }
             if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
                 if(+formatNumber(summ/n) === Number(input.placeholder || 0)) return;
-                // input.placeholder = `${(summ/n)}`;
                 input.placeholder = `${Math.round(summ/n)}`;
                 summ = 0;
                 n = 0;
@@ -183,31 +195,27 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         const row = document.getElementById(`row_${rowIndex}`) as HTMLInputElement;
         if(!row) return;
         const inputs = Array.from(row.querySelectorAll("*")) as HTMLInputElement[];
-        let summ = 0;
-        let n = 0;
+        let summAtts = 0;
+        let nAtts = 0;
         let lastAtt = 0;
         inputs.map((input) => {
             const _lessonType = input.getAttribute("data-lesson-type");
-            const _month = Number(input?.getAttribute("data-month"));
-            // if(_month !== month) return;
             
             if(_lessonType === "Атестаційна" || _lessonType === "Коригуюча") {
-                console.log(_lessonType,+input.value)
-                if(!isNaN(+input.value) && !!input.value) n++;
+                if(!isNaN(+input.value) && !!input.value) nAtts++;
                 if(_lessonType === "Атестаційна") {
                     lastAtt = !isNaN(+input.value) ? +input.value : 0;
                 }else if(!isNaN(+input.value) && !!input.value){
-                    summ -= lastAtt;
-                    !!lastAtt && n--
+                    summAtts -= lastAtt;
+                    !!lastAtt && nAtts--
                 }
-                summ += !isNaN(+input.value) ? +input.value : 0
+                summAtts += !isNaN(+input.value) ? +input.value : 0
             }
-            if(_lessonType  === "Підсумкова" && !Number.isNaN(summ/n)){
-                if(+formatNumber(summ/n) === Number(input.placeholder || 0)) return;
-                // input.placeholder = `${(summ/n)}`;
-                input.placeholder = `${Math.round(summ/n)}`;
-                summ = 0;
-                n = 0;
+            if(_lessonType  === "Підсумкова" && !Number.isNaN(summAtts/nAtts)){
+                if(+formatNumber(summAtts/nAtts) === Number(input.placeholder || 0)) return;
+                input.placeholder = `${Math.round(summAtts/nAtts)}`;
+                summAtts = 0;
+                nAtts = 0;
             }
         })
     }
