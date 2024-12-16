@@ -16,10 +16,10 @@ import _debounce from 'lodash/debounce';
 export type StudentSemesterAttestationsT = {
     "columns": [
         {
-          "students": [
+          "attestations": [
             {
               "grade": string,
-              "student_id": string
+              "name": string
             }
           ],
           "subject_name": string,
@@ -28,12 +28,6 @@ export type StudentSemesterAttestationsT = {
         }
       ],
       "group_name": string,
-      "student_list": [
-        {
-            "full_name": string,
-            "student_id": string
-        }
-      ],
       year:string
 }
 
@@ -44,7 +38,6 @@ export const useGetStudentSemesterAttesationsTable = () => {
 
     const fetch = async () => {
         setLoading(true);
-        console.log("sdfsdsa")
         try{
             const res = await axiosConfig.post(endpoints.studentSemesterAttestations,{headers:{Authorization:token}})
 

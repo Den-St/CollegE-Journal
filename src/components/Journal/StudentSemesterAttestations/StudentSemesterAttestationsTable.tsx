@@ -12,7 +12,7 @@ import React from "react";
 import { useMonthAttestationDragScroll } from "../../../hooks/mothAttestationsDragScroll";
 import { getColorByValue } from "../CellInput";
 import { SemesterAttestationsT, } from "../../../hooks/getSemesterAttestationsTable";
-import { useGetStudentSemesterAttesationsTable } from "../../../hooks/getStudentSemesterAttestationsTable";
+import { StudentSemesterAttestationsT, useGetStudentSemesterAttesationsTable } from "../../../hooks/getStudentSemesterAttestationsTable";
 
 export const StudentSemesterAttesationsTable = () => {
     const {table,loading,} = useGetStudentSemesterAttesationsTable();
@@ -20,7 +20,6 @@ export const StudentSemesterAttesationsTable = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScroll,
            handleVerticalScroll,teachersRef,} = useMonthAttestationDragScroll();
-    const group = useUserStore().user.group_fullname;
 
     useEffect(() => {
         document.title = `Aтестації за семестр`;
@@ -30,7 +29,7 @@ export const StudentSemesterAttesationsTable = () => {
         <SemesterAttestationsTableFillters/>
         {loading ? <Loader/>
         : !table ? <NoMatch title={`Таблиці за групою не знайдено`}/>
-        : (!table?.student_list.length || !table?.columns.length) ? <NoMatch isChildren title="Таблиця пуста"/> : <>
+        : (!table?.columns.length) ? <NoMatch isChildren title="Таблиця пуста"/> : <>
         <section className='journal_portraitModeWarning'>
                 <JournalPortraitModeWarning/>
                 <p className='journal_portraitModeWarning_header'>Халепа, треба перевернути телефон</p>
@@ -43,25 +42,23 @@ export const StudentSemesterAttesationsTable = () => {
                         <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
                         <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                     </div>
-                    <p className="header">{group}</p>
+                    <p className="header">{table?.group_name}</p>
                     <p className="absenceTable_teachersSection_header" style={{"width":"329px","minHeight":"94px"}}>Дата</p>
                 </div>
                 <div className='journalColumnsCenter__container' style={{'gap':'15px','paddingLeft':'56px'}}  onScroll={() => handleHorizontalScroll("lessonTypes")} ref={lessonTypesRef}>
                     {table.columns?.map((column) => 
                         <div style={{"display":"flex",gap:"10px","flexDirection":"column"}}>
                             <p key={column.subject_name} className="monthAttestationsTableSubject">{column.subject_name}</p>
-                            <p key={column.subject_name} className="monthAttestationsDate">24.12</p>
                         </div>
                     )}
                 </div>
             </div>
             <div onMouseUp={mouseUpHandler} style={{'maxHeight':'unset','overflowY':'hidden'}} className='journalRight__container' ref={mainContainerRef} >
                 <div className={`journalRightColumns__container`} style={{'marginBottom':'5px'}}>
-                    {table?.student_list.map((student,i) => 
-                        <div key={student.student_id} style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                    {table.columns[0].attestations.map((att,i) => 
+                        <div key={att.name} style={{'display':'flex'}} className={`absenceTable_studentContainer ${(i+1)%2 === 0 ? 'even' : ''}`}>
                             <div id={'student_'+i} style={{'height':'40px',padding:'3px 37px',width:'332px',background:'transparent'}} className={`journalRowItemLeft__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
-                                    <p className='journalRowItemLeft__number'>{i+1}.</p>
-                                    <p className='journalRowItemLeft__name'>{student.full_name}</p>
+                                    <p className='journalRowItemLeft__name'>{att.name}</p>
                             </div>
                             <div style={{height:'40px'}} className="absenceTable_vetricalDivider"></div>
                         </div>
@@ -71,15 +68,15 @@ export const StudentSemesterAttesationsTable = () => {
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
                     onMouseMove={onMouseMove}
                     ref={cellsRef} onScroll={() => handleHorizontalScroll("cells")}>
-                    {table?.student_list.map((student,i) => 
-                        <div key={student.student_id} style={{'height':'40px','marginLeft':'1px'}} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
+                    {table?.columns[0].attestations.map((att,i) => 
+                        <div key={att.name} style={{'height':'40px','marginLeft':'1px'}} className={`journalRowItem__container ${(i+1)%2 === 0 ? 'even' : ''}`}>
                             <div className='journalRowItemCenter__container' style={{'gap':'23px','marginLeft':'59px',"paddingRight":"5px"}}>
                                 {table.columns.map((column,j) => 
-                                    <p key={column.subject_name+student.student_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
+                                    <p key={column.subject_name} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
                                     className={`journalRowItemCenterValue__text`} 
-                                    style={{cursor:'not-allowed',color:getColorByValue((column?.students?.find(_student => _student.student_id === student.student_id)?.grade || "0"),column.subject_system),
+                                    style={{cursor:'not-allowed',color:getColorByValue((column.attestations[i]?.grade.toLocaleLowerCase() || "0"),column.subject_system),
                                             width:'32px',height:'32px',margin:'0'}}>
-                                     {column.students.find(_student => _student.student_id === student.student_id)?.grade.toLocaleLowerCase()}
+                                     {column.attestations[i]?.grade.toLocaleLowerCase()}
                                     </p>)}
                             </div>
                         </div>
@@ -93,7 +90,7 @@ export const StudentSemesterAttesationsTable = () => {
 }
 
 type TeachersProps = {
-    table:SemesterAttestationsT,
+    table:StudentSemesterAttestationsT,
     dragScroll:{
         onMouseDown:(e:React.MouseEvent<HTMLDivElement,MouseEvent>) => void,
         onMouseUp:() => void,
