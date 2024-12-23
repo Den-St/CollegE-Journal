@@ -52,7 +52,7 @@ export const useGetSemesterAttesationsTable = () => {
         group_id:group_id || '',
     });
 
-    const token = useUserStore().user.token || getToken();
+    const token = useUserStore().user.token;
     const fetch = async (_fillters?:MonthAttestationsFilltersT) => {
         if(!fillters.group_id) return;
         setLoading(true);

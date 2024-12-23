@@ -48,7 +48,7 @@ export const useGetStudentMonthAttesationsTable = () => {
     const [table,setTable] = useState<StudentMonthAttestationTableT>();
     const [loading,setLoading] = useState(false);
 
-    const token = useUserStore().user.token || getToken();
+    const token = useUserStore().user.token;
     const fetch = async () => {
         setLoading(true);
         try{

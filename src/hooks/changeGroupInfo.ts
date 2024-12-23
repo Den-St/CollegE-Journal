@@ -11,6 +11,7 @@ import { CreateUserT } from "../types/user";
 import axiosConfig from '../axiosConfig';
 import { useUserStore } from '../store/userStore';
 import { validGroupPrefixes } from '../consts/validGroupPrefixes';
+import { useNotification } from './notification';
 
 export const useChangeGroupInfo = (group?:GroupT) => {
     const {
@@ -24,7 +25,13 @@ export const useChangeGroupInfo = (group?:GroupT) => {
     const [incorrectGroupName,setIncorrectGroupName] = useState(false);
     const [changeErrorCode,setErrorCode] = useState<number>();
     const clearJournalGroups = useTeachersGroupsStore().clear; //to clear journal groups after inverting them, so they will be updated
-    
+
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Повідомлення про успішне редагування даних про групу`,
+        `Ви змінили дані групи ${group?.group_full_name}`,
+        `Повідомлення про помилку редагування даних про групу`,
+        `Помилка зміни даних про групу ${group?.group_full_name}`);
+        
     useEffect(() => {
         if(group?.group_supervisor?.user_id){
             setChosenSupervisorId(group.group_supervisor.user_id);
@@ -68,8 +75,10 @@ export const useChangeGroupInfo = (group?:GroupT) => {
 
         try{
             const res = await axiosConfig.post(endpoints.changeGroup,{group_full_name:data.group_full_name,group_id:group?.group_id,group_supervisor:chosenSupervisorId || ''},{headers:{Authorization:localToken}});
+            openSuccessNotification();
             setErrorCode(1);
         }catch(err){
+            openErrorNotification();
             console.error(err);
         }
     }
@@ -86,5 +95,7 @@ export const useChangeGroupInfo = (group?:GroupT) => {
         }
     }
 
-    return {validateGroupName,incorrectGroupName,changeErrorCode,onChangeGroupInfo,changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,onChooseSupervisor,chosenSupervisorId,onInvertEngGroups};
+    return {validateGroupName,incorrectGroupName,changeErrorCode,onChangeGroupInfo,
+            changeGroupRegister:register,changeGroupHangeSubmit:handleSubmit,changeGroupSetValue:setValue,
+            onChooseSupervisor,chosenSupervisorId,onInvertEngGroups,changeGroupInfoNotification:contextHolder};
 }

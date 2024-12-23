@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axiosConfig from "../../axiosConfig";
 import { emailPattern } from "../../consts/emailPattern";
 import { endpoints } from "../../consts/endpoints";
+import { useNotification } from "../../hooks/notification";
 import "./styles.scss";
 
 const errorCodesToMessages:Record<string,string> = {
@@ -20,13 +21,21 @@ const useForgotPassword = (onClose:() => void) => {
     } = useForm<{mailbox_address:string}>();
     const [formError,setFormError] = useState('');
     const [submitBlocked,setSubmitBlocked] = useState(false);
+    
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Запит на зміну пароля було відправлено`,
+        ``,
+        `Запит на зміну пароля не було відправлено`,
+        ``);
 
     const onSubmit = async (data:{mailbox_address:string}) => {
         setSubmitBlocked(true);
         try{
             const res = await axiosConfig.post(endpoints.sendRecovery,data);
+            openSuccessNotification();
             onClose();
         }catch(err){
+            openErrorNotification();
             if(axios.isAxiosError(err)){
                 err?.response?.data.error !== 'User not found.' && setFormError(err?.response?.data.error);
             }
@@ -35,13 +44,14 @@ const useForgotPassword = (onClose:() => void) => {
         }
     }
 
-    return {register,handleSubmit,errors,onSubmit,formError,submitBlocked}
+    return {register,handleSubmit,errors,onSubmit,formError,submitBlocked,contextHolder}
 }
 
 export const ForgotPasswordModal:React.FC<{onClose:() => void}> = ({onClose}) => {
-    const {handleSubmit,register,errors,onSubmit,formError,submitBlocked} = useForgotPassword(onClose);
+    const {handleSubmit,register,errors,onSubmit,formError,submitBlocked,contextHolder} = useForgotPassword(onClose);
     
     return <div className="forgotPassword_container">
+        {contextHolder}
         <form onSubmit={handleSubmit(onSubmit)} className="forgotPassword_form">
             <h1 className="header">Забули пароль?</h1>
             <div className="forgotPassword_input_container">

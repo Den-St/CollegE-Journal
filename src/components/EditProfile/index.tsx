@@ -21,6 +21,7 @@ import {EyeOutlined} from "@ant-design/icons";
 import AntdImgCrop from "antd-img-crop";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import { passwordPattern } from "../../helpers/passwordPattern";
+import { useNotification } from "../../hooks/notification";
 
 const useEditProfile = () => {
     const {user,setToken,setAvatar,setActive} = useUserStore();
@@ -43,6 +44,12 @@ const useEditProfile = () => {
         setValue('avatar','google');
         
     }
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Повідомлення про успішну зміну даних`,
+        `Ви змінили дані свого акаунту`,
+        `Повідомлення про помилку зміни даних`,
+        `Помилка зміни даних свого акаунту`);
+        
     const onSubmit = async () => {
         const newPassword = watch('new_password');
         const newPasswordConfirmation = watch('new_password_confimation');
@@ -80,9 +87,11 @@ const useEditProfile = () => {
                 });
             }
             await Promise.all(queries.map(q => q()));
+            openSuccessNotification()
             Cookies.remove('comfirmedPassword');
             onEditClose();
         }catch(err){
+            openErrorNotification();
             console.error(err);
         }
     }
@@ -98,18 +107,20 @@ const useEditProfile = () => {
         setNewAvatarUrl(URL.createObjectURL(file));
     };
     return {onEditClose,beforeUpload,onSubmit,register,handleSubmit,
-            newAvatarUrl,formError,user,errors,onChangeToGoogleAvatar}
+            newAvatarUrl,formError,user,errors,onChangeToGoogleAvatar,
+            contextHolder}
 }
 
 export const EditProfile = () => {
     const theme = useThemeStore().theme;
-    const {onEditClose,onChangeToGoogleAvatar,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors} = useEditProfile();
+    const {onEditClose,onChangeToGoogleAvatar,beforeUpload,onSubmit,register,handleSubmit,newAvatarUrl,formError,user,errors,contextHolder} = useEditProfile();
     const [passwordInputType,setPasswordInputType] = useState<Record<number,"password" | "text">>({1:'password',2:'password'});
     const onTogglePassword = (index:number) => {
         setPasswordInputType(prev => ({...prev,[index]:prev[index] === "password" ? "text" : "password"}));
     }
 
     return <div className={`editProfileMain_container ${theme}`}>
+        {contextHolder}
         {user.is_active && <LinkBack title="Профіль" route={routes.myProfile}/>}
         <h1 className="header" style={{'marginTop':'-20px'}}>Редагування профілю</h1>
         {/* {user.is_active && <h1 className="editProfile_header">Для того щоб активувати особовий запис потрібно змінити пароль.</h1>} */}

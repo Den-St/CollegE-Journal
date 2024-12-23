@@ -18,9 +18,10 @@ const userErrorCodesToMessages:Record<number,string> = {
 export const CreateTeacher = () => {
     const theme = useThemeStore().theme;
     const {teachersByDepartment,loading,onAddTeacherLocally} = useGetTeachers();
-    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading,} = useCreateTeacher(onAddTeacherLocally);
+    const {handleSubmit,onCreateUser,createUserErrorCode,createUserFormErrors,createUserRegister,createUserSetValue,createUserWatch,createUserLoading,contextHolder} = useCreateTeacher(onAddTeacherLocally);
 
     return <div className={`editGroupMain_container ${theme}`}>
+        {contextHolder}
         <LinkBack title=""/>
         {/* <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Створення викладача</h1> */}
         <form className="createUserForm" onSubmit={handleSubmit(onCreateUser)}>

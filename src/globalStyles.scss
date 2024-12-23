@@ -565,6 +565,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .letterSentNotification{
 	background-color: var(--secondary-blue) !important;
+	border-bottom: 3px solid var(--primary-orange);
+	border-radius: 10px 5px;
 	.ant-notification-notice-message{
 		color: var(--primary-orange) !important;
 		font-family: Montserrat;

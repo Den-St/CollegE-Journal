@@ -28,13 +28,15 @@ const changeErrorCodesToMessages:Record<number,string> = {
 export const EditGroup = () => {
     const theme = useThemeStore().theme;
     const {group,groupLoading} = useGetGroup();
-    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading,watch,register,setValue} = useCreateUser(group);
-    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName,onInvertEngGroups} = useChangeGroupInfo(group);
+    const {handleSubmit,createUserRegister,onCreateUser,createUserSetValue,createUserErrorCode,createUserWatch,createUserFormErrors,createUserFormErrorMessage,createUserLoading,watch,register,setValue,contextHolder} = useCreateUser(group);
+    const {onChangeGroupInfo,changeGroupRegister,changeGroupHangeSubmit,changeGroupSetValue,onChooseSupervisor,chosenSupervisorId,incorrectGroupName,changeErrorCode,validateGroupName,onInvertEngGroups,changeGroupInfoNotification} = useChangeGroupInfo(group);
     const {supervisors,supervisorsLoading} = useGetSupervisors();
 
     if(!groupLoading && !group) return <NoMatch is404={false} title={'Такої групи не було знайдено.'}/>
 
     return <div className={`editGroupMain_container ${theme}`}>
+        {contextHolder}
+        {changeGroupInfoNotification}
         <LinkBack title="Список груп" route={routes.adminPanel+'?section=groups'}/>
         {/* <h1 className="editGroupHeader"><Link className="editProfile_leaveButton"  to={routes.adminPanel + '?section=groups'}><LeftArrowSvg/></Link>Змінення групи</h1> */}
         <form className="createGroup_form"

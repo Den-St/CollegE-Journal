@@ -9,6 +9,7 @@ import { getToken } from "../helpers/auth";
 import { useUserStore } from "../store/userStore";
 import { CreateUserT, UserT } from "../types/user";
 import { useGetAdminGroups } from "./getGroups";
+import { useNotification } from './notification';
 
 export const useCreateUser = (group?:GroupT) => {
     // const {groups} = useGetGroups();
@@ -26,7 +27,12 @@ export const useCreateUser = (group?:GroupT) => {
         reset,
         formState:{errors}
     } = useForm<CreateUserT>();
-
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Повідомлення про успішне додання користувача`,
+        `Ви надали користувачу ${watch("full_name")} доступ до журналу ${group?.group_full_name}!`,
+        `Повідомлення про помилку додання користувача`,
+        `Помилка надання користувачу ${watch("full_name")} доступу до журналу ${group?.group_full_name}!`);
+        
     const onCreateUser = async (data:CreateUserT) => {
         if(!data.education_form) {
             setErrorMessage('Оберіть форму навчання!')
@@ -62,6 +68,7 @@ export const useCreateUser = (group?:GroupT) => {
             const admission_date = !!data.admission_date?.getTime ? Math.round((data.admission_date?.getTime() || 0)/1000) : null;
             const birth_date = !!data.birth_date?.getTime ? Math.round((data.birth_date?.getTime() || 0)/1000) : null;
             const res = await axiosConfig.post(endpoints.addUser,{...data,birth_date,admission_date,user_type:'student',group_id:groupId,full_name:data.full_name.trim(),security_level:1,is_active:false,avatar:'',is_on_scholarships:data.is_on_scholarships === 'Так'},{headers:{Authorization:localToken}});
+            openSuccessNotification()
             group?.group_students?.push({full_name:data.full_name,avatar:'',mailbox_address:data.mailbox_address,student_id:res.data?.user_id});
             setCreateUserErrorCode(undefined);
             reset();
@@ -72,6 +79,7 @@ export const useCreateUser = (group?:GroupT) => {
             setValue('additional_job_title',null);
             setErrorMessage('');
         }catch(err){
+            openErrorNotification()
             //@ts-ignore
             const errorStatus = (err as AxiosError).response?.data?.internal_error_code;
             setCreateUserErrorCode(errorStatus);
@@ -83,5 +91,6 @@ export const useCreateUser = (group?:GroupT) => {
 
     return {createUserLoading,onCreateUser,createUserRegister:register,handleSubmit,
             createUserSetValue:setValue,createUserErrorCode,createUserWatch:watch,
-            createUserFormErrors:errors,createUserFormErrorMessage,watch,register,setValue};
+            createUserFormErrors:errors,createUserFormErrorMessage,watch,register,setValue,
+            contextHolder};
 }

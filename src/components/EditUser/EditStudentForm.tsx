@@ -1,6 +1,6 @@
-import { Select, DatePicker, DatePickerProps, Modal, notification } from "antd";
+import { Select, DatePicker, Modal,} from "antd";
 import dayjs from "dayjs";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect,  } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
@@ -11,7 +11,8 @@ import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
 import { customDateFormat } from "../../helpers/dateFormat";
-import { namePattern } from "../../helpers/namePattern";
+import { useNotification } from "../../hooks/notification";
+import { useSendPassword } from "../../hooks/sendPasswordLetter";
 import { useUserStore } from "../../store/userStore";
 import { EditUserStudentT } from "../../types/user";
 import { UserProfileT } from "../../types/userProfile";
@@ -27,20 +28,12 @@ const useEditUserStudent = (user:UserProfileT) => {
         reset,
         formState:{errors},
     } = useForm<EditUserStudentT>();
-    const [api, contextHolder] = notification.useNotification({});
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Дані користувача ${user.full_name} змінено`,
+        `Дані користувача ${user.full_name} змінено`,
+        `Дані користувача ${user.full_name} не змінено`,
+        `Дані користувача ${user.full_name} не змінено`);
 
-    const openNotification = () => {
-        api.open({
-        message: `Повідомлення надісланно`,
-        description: "Запит на зміну пароля надісланно користувачу",
-        placement:'topRight',
-        'className':'letterSentNotification',
-        'icon':false,
-        'duration':4
-        });
-    };
-
-    const contextValue = useMemo(() => ({ name: 'letter' }), []);
     const token = useUserStore().user.token;
     const user_id = useParams().id;
     const navigate = useNavigate();
@@ -51,19 +44,14 @@ const useEditUserStudent = (user:UserProfileT) => {
         const birth_date = !!data.birth_date?.getTime ? Math.round((data.birth_date?.getTime() || 0)/1000) : null;
         try{
             const res = await axiosConfig.put(endpoints.editUser,{...clearData,user_id,admission_date,birth_date, avatar:data.avatar || null},{headers:{Authorization:token}})
+            openSuccessNotification();
             navigate(routes.userProfile.replace(':id',user_id));
         }catch(err){
+            openErrorNotification();
             console.error(err);
         }
     }
-    const onSendLetter = async () => {
-        try{
-            const res = await axiosConfig.put(endpoints.sendLetter,{user_id},{headers:{Authorization:token}});
-            openNotification();
-        }catch(err){
-            console.error(err);
-        }
-    }
+   
     const fetch = async () => {
         const datesKeys = ['admission_date','birth_date']
         Object.keys(user).forEach((key) => {
@@ -78,7 +66,7 @@ const useEditUserStudent = (user:UserProfileT) => {
         fetch();
     }, [user])
   
-    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter,contextHolder};
+    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,changeUserNotification:contextHolder};
 }
 
 
@@ -87,7 +75,8 @@ type Props = {
 }
 
 export const EditStudentForm:React.FC<Props> = ({user}) => {
-    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter,contextHolder} = useEditUserStudent(user);
+    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,changeUserNotification} = useEditUserStudent(user);
+    const {onSendLetter,contextHolder} = useSendPassword();
     const [isExpelModal,setIsExpelModal] = useState(false);
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
@@ -96,6 +85,7 @@ export const EditStudentForm:React.FC<Props> = ({user}) => {
     
     return <>
     {contextHolder}
+    {changeUserNotification}
     <section className='studentProfileMain__container' style={{'width':'100%'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'30px','width':'100%'}}>
             {!!userId && <LinkBack title="Профіль" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}

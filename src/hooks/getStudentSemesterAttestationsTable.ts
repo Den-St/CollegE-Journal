@@ -34,8 +34,8 @@ export type StudentSemesterAttestationsT = {
 export const useGetStudentSemesterAttesationsTable = () => {
     const [table,setTable] = useState<StudentSemesterAttestationsT>();
     const [loading,setLoading] = useState(false);
-    const token = useUserStore().user.token || getToken();
-
+    const token = useUserStore().user.token;
+  console.log("g",token)
     const fetch = async () => {
         setLoading(true);
         try{

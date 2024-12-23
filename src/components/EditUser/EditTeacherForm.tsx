@@ -10,6 +10,8 @@ import { endpoints } from "../../consts/endpoints";
 import { routes } from "../../consts/routes";
 import { securityLevels } from "../../consts/securityLevels";
 import { namePattern } from "../../helpers/namePattern";
+import { useNotification } from "../../hooks/notification";
+import { useSendPassword } from "../../hooks/sendPasswordLetter";
 import { useUserStore } from "../../store/userStore";
 import { EditUserTeacherT } from "../../types/user";
 import { UserProfileT } from "../../types/userProfile";
@@ -27,6 +29,13 @@ const useEditUserTeacher = (user:UserProfileT) => {
     const token = useUserStore().user.token;
     const user_id = useParams().id;
     const navigate = useNavigate();
+
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+        `Дані користувача ${user.full_name} змінено`,
+        `Дані користувача ${user.full_name} змінено`,
+        `Дані користувача ${user.full_name} не змінено`,
+        `Дані користувача ${user.full_name} не змінено`);
+
     const onEdit = async (data:EditUserTeacherT) => {
         if(!user_id) return;
         const {user_type,...clearData} = data;
@@ -37,13 +46,7 @@ const useEditUserTeacher = (user:UserProfileT) => {
             console.error(err);
         }
     }
-    const onSendLetter = async () => {
-        try{
-            const res = await axiosConfig.put(endpoints.sendLetter,{user_id},{headers:{Authorization:token}});
-        }catch(err){
-            console.error(err);
-        }
-    }
+ 
     const fetch = async () => {
         Object.keys(user).forEach((key) => {
             if(Object.keys(watch()).includes(key)) {
@@ -57,20 +60,23 @@ const useEditUserTeacher = (user:UserProfileT) => {
         fetch();
     }, [user])
   
-    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,onSendLetter};
+    return {onEdit,register,handleSubmit,setValue,watch,reset,errors,user,changeTeacherNotification:contextHolder};
 }
 type Props = {
     user:UserProfileT
 }
 
 export const EditTeacherForm:React.FC<Props> = ({user}) => {
-    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,onSendLetter} = useEditUserTeacher(user);
+    const {onEdit,register,handleSubmit,setValue,watch,reset,errors,changeTeacherNotification} = useEditUserTeacher(user);
+    const {onSendLetter,contextHolder} = useSendPassword();
     const mySecurityLevel = useUserStore().user.security_level;
     const navigate = useNavigate();
     const userId = useParams().id;
     const from = useSearchParams()[0].get('from');
     
     return <>
+    {changeTeacherNotification}
+    {contextHolder}
     <section className='studentProfileMain__container' style={{'width':'100%'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'30px','width':'100%'}}>
             {!!userId && <LinkBack title="Профіль викладача" route={!from ? routes.userProfile.replace(':id',userId) : routes.userProfile.replace(':id',userId) + '?from=' + from}/>}

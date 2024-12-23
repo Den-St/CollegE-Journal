@@ -28,7 +28,7 @@ export const useGetMonthAttesationsTable = () => {
         month:""
     });
 
-    const token = useUserStore().user.token || getToken();
+    const token = useUserStore().user.token;
     const fetch = async (_fillters?:MonthAttestationsFilltersT) => {
         if(!fillters.group_id) return;
         setLoading(true);

@@ -24,7 +24,7 @@ export const useGetAbsenceTable = () => {
     const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
     const [startEnd,setStartEnd] = useState(getStartAndEnd(fillters.offset,formatedModaysAndSaturdays));
 
-    const token = useUserStore().user.token || getToken();
+    const token = useUserStore().user.token;
     
     const fetch = async (_fillters?:AbsenceTableFilltersT) => {
         if(!fillters.group_id) return;
