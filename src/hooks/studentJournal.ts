@@ -64,8 +64,8 @@ export const useStudentJournal = () => {
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
-            if(_fillters?.month === '') {
-                getColumnsByDate(res,_fillters.onlyAtts !== undefined ? _fillters.onlyAtts : fillters.onlyAtts);
+            if(_fillters?.month === '' || _fillters?.month === undefined) {
+                getColumnsByDate(res,_fillters?.onlyAtts !== undefined ? _fillters.onlyAtts : fillters.onlyAtts);
             }
         }catch(err){
             console.error(err);

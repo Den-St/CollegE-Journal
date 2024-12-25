@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import axiosConfig from "../../axiosConfig"
 import { endpoints } from "../../consts/endpoints"
 import { formatNumber } from "../../helpers/formatNumber"
+import { useUserStore } from "../../store/userStore"
 
 type Props = {
     defaultValue?:string,

@@ -45,7 +45,8 @@ export const StudentJournal = () => {
                 <p className='journal_portraitModeWarning_description'>Переверніть телефон у альбомний режим, тільки так можливо передивитися журнал</p>
         </section>
         <section className='journal__container'>
-            {attestations?.some(att => att.active) && <div className='journalLeft__container'
+            {attestations?.some(att => att.active) && 
+            <div className='journalLeft__container'
             onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
             onMouseMove={onMouseMove}>
                 <div className='journalColumnsLeft__container'>

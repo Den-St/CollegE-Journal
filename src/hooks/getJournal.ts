@@ -9,6 +9,7 @@ import { useUserStore } from '../store/userStore';
 import { TeacherJournalT } from '../types/teacherJournal';
 import { JournalAttestationT } from '../types/journalAttestation';
 import { TeacherJournalFilltersT } from '../types/teacherJournalFillters';
+import { closestIndexTo, parse } from 'date-fns';
 
 export const useGetTeacherJournal = () => {
     const navigate = useNavigate();
@@ -31,8 +32,24 @@ export const useGetTeacherJournal = () => {
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
 
-    console.log(attestations);
-    console.log("dff",fillters);
+    const focusNearestInputCell = () => {
+        if(!journal) return;
+        const datesElements = journal?.columns.map(col => ({date:col.date.split("\n")[1],index:col.column_index})).filter(date => !!date.date);
+        const dates = datesElements.map(date => new Date(new Date().getFullYear(),(+date.date.split(".")[1] - 1),(+date.date.split(".")[0])));
+        const nearestDateIndex = closestIndexTo(new Date(),dates);
+
+        if(nearestDateIndex === undefined) return;
+        const nearestDate = datesElements[nearestDateIndex];
+
+        const container = document.getElementById('journalRightRowsContainer');
+        const cell = document.getElementById(`0,${nearestDate.index - 1}`); 
+
+        if(cell?.tagName === "input"){
+            cell?.focus();
+        }else if(container && cell){
+            container.scrollLeft = cell.offsetLeft - container.offsetLeft;
+        }
+    }
     const fetch = async (_fillters?:{group_id:string,subject_id:string,month:string | undefined,onlyAtts:boolean}) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
@@ -41,7 +58,6 @@ export const useGetTeacherJournal = () => {
             const res = (!!_fillters?.subject_id && _fillters?.subject_id !== fillters.subject_id) 
             ? await axiosConfig.post(endpoints.journal,{end:-1,journal_id:_fillters?.subject_id || fillters?.subject_id,start:-1,attestations:onlyAtts },{headers:{Authorization:token}}) 
             : await axiosConfig.post(endpoints.journal,{end:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.end || -1),journal_id:_fillters?.subject_id || fillters?.subject_id,start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),attestations:onlyAtts},{headers:{Authorization:token}});
-            
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
@@ -50,6 +66,11 @@ export const useGetTeacherJournal = () => {
         }
         setLoading(false);
     }
+
+   useEffect(() => {
+    if(journal && fillters.month === "") focusNearestInputCell();
+   },[journal])
+
     const refetch = async (_fillters?:TeacherJournalFilltersT) => {
         if(!fillters.subject_id && !_fillters?.subject_id) return;
         setLoading(true);
@@ -62,7 +83,6 @@ export const useGetTeacherJournal = () => {
                 start:(_fillters && !_fillters?.month) ? 0 : (attestations?.find(att => att.name === _fillters?.month)?.start || -1),
                 attestations:+(_fillters?.onlyAtts || fillters?.onlyAtts) ? 1 : 0
             },{headers:{Authorization:token}});
-            
             if(_fillters?.subject_id !== fillters.subject_id) setAttestations(res.data.attestations);
             if(!!res.data.attestations?.length && !_fillters) setAttestations(res.data.attestations);
             setJournal(res.data);
@@ -72,6 +92,7 @@ export const useGetTeacherJournal = () => {
         setLoading(false);
     }
 
+  
     useEffect(() => {
         fetch();
     },[])

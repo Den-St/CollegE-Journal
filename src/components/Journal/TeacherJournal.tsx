@@ -130,6 +130,7 @@ export const TeacherJournal = () => {
                     )}
                 </div>
                 <div className='journalRightRowsContainer'
+                id='journalRightRowsContainer'
                     onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}
                     onMouseMove={onMouseMove}
                     ref={cellsRef} onScroll={handleHorizontalScroll}>
@@ -149,12 +150,11 @@ export const TeacherJournal = () => {
                                             defaultValue={column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()} pe_education={journal.pe_education} is_att={!column.date.includes('.')}/>
                                             
                                         : <p key={column.column_id} onMouseMove={() => {}} 
-                                            onMouseDown={mouseUpHandler} 
-                                            className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} 
-                                                ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`} 
+                                            onMouseDown={mouseUpHandler} id={i + ',' + j} 
+                                            className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`}
                                             style={{cursor:'not-allowed',color:getColorByValue(column.cells.find(cell => cell.index === student.index)?.value || "",journal.subject_system),}}>
-                                                {column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()}
-                                            </p>
+                                            {column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()}
+                                        </p>
                                     )}
                                 </div>
                             </div>

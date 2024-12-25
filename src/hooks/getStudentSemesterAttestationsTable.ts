@@ -35,8 +35,8 @@ export const useGetStudentSemesterAttesationsTable = () => {
     const [table,setTable] = useState<StudentSemesterAttestationsT>();
     const [loading,setLoading] = useState(false);
     const token = useUserStore().user.token;
-  console.log("g",token)
     const fetch = async () => {
+      if(!token) return
         setLoading(true);
         try{
             const res = await axiosConfig.post(endpoints.studentSemesterAttestations,{headers:{Authorization:token}})
@@ -51,7 +51,7 @@ export const useGetStudentSemesterAttesationsTable = () => {
 
     useEffect(() => {
         fetch();
-    },[])
+    },[token])
 
     return {table,loading}
 }
