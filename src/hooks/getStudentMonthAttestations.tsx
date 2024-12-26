@@ -47,13 +47,14 @@ export type StudentMonthAttestationTableT = {
 export const useGetStudentMonthAttesationsTable = () => {
     const [table,setTable] = useState<StudentMonthAttestationTableT>();
     const [loading,setLoading] = useState(false);
-
     const token = useUserStore().user.token;
+    const id = useUserStore().user.user_id;
+
     const fetch = async () => {
       if(!token) return;
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.studentMonthAttestations,{headers:{Authorization:token}});
+            const res = await axiosConfig.post(endpoints.studentMonthAttestations,{user_id:id},{headers:{Authorization:token}});
 
             setTable(res.data.data);
         }catch(err){

@@ -39,7 +39,7 @@ export const useGetStudentSemesterAttesationsTable = () => {
       if(!token) return
         setLoading(true);
         try{
-            const res = await axiosConfig.post(endpoints.studentSemesterAttestations,{headers:{Authorization:token}})
+            const res = await axiosConfig.get(endpoints.studentSemesterAttestations,{headers:{Authorization:token}})
 
             setTable(res.data.data);
         }catch(err){
