@@ -14,7 +14,7 @@ import { JournalGroupT } from "../../../types/journalGroup";
 import { Loader } from "../../Loader/Loader";
 import { NoMatch } from "../../NoMatch";
 import _debounce from 'lodash/debounce';
-import './absenceTableStyles.scss'; 
+import './absenceTableStyles.scss';
 import { securityLevels } from "../../../consts/securityLevels";
 import { AbsenceTableFilltersT, AbsenceTableT } from "../../../types/absenceTable";
 import { useAbsenceTableDownload } from "../../../hooks/absenceTableDownload";
@@ -25,7 +25,6 @@ import { AbsenceTablePrintForm } from "./AbsenceTablePrintForm";
 import React from "react";
 import { useAbsenceTableDragScroll } from "../../../hooks/absenceTableDragScroll";
 const {Option} = Select;
-
 
 export const AbsenceTable = () => {
     const {table,start,end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays} = useGetAbsenceTable();

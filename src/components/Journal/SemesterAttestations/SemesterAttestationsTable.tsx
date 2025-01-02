@@ -36,10 +36,10 @@ export const SemesterAttesationsTable = () => {
 
     useEffect(() => {
         if(!group?.journal_group_full_name){
-            document.title = `Таблиця відсутніх`;
+            document.title = `Атестаційна відомість`;
             return;
         }
-        document.title = `Таблиця відсутніх - ${group?.journal_group_full_name}`;
+        document.title = `${group?.journal_group_full_name} - Атестаційна відомість`;
     },[table,group]);
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>

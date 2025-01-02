@@ -49,10 +49,10 @@ export const MonthAttesationsTable = () => {
 
     useEffect(() => {
         if(!group?.journal_group_full_name){
-            document.title = `Таблиця відсутніх`;
+            document.title = `Атестаційна відомість`;
             return;
         }
-        document.title = `Таблиця відсутніх - ${group?.journal_group_full_name}`;
+        document.title = `Атестаційна відомість - ${group?.journal_group_full_name}`;
     },[table,group]);
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>

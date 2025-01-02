@@ -5,6 +5,42 @@
     z-index: -1000;
     display: none;
 }
+@media print and (orientation:landscape) {
+    .printForm_page{
+        padding: 2.5cm 76px 76px 2.5cm;
+        gap:5px !important;
+        width: 1128px !important;
+        height: 797px !important;
+        border-top: 1px solid black;
+        .printForm_header,.printForm_subheader{
+            display: none;
+        }
+        .printForm_header_horisontal{
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        .printFormJournal__student,.printFormAbsence_top_student{
+            width: 159px !important;
+            min-width: 159px !important;
+        }
+        .printForm_subsubheader{
+            line-height: unset;
+        }
+        .printForm__subsubheader_container{
+            padding: 5px;
+        }
+        .printFormAbsenceTable_teacherName_container{
+            width: 37px;
+            border-top: 1px solid black;
+        }
+        .printFormJournal__mark{
+            width: 37px;
+            min-width: 37px;
+        }
+    }
+}
+
 .printForm_page{
     width: 797px;
     height: 297mm;
@@ -14,7 +50,6 @@
     background-color: white;
     font-family: 'Times New Roman' !important;
     color:black !important;
-    gap:1.25cm;
 }
 
 .printForm_header{
@@ -23,7 +58,11 @@
     font-size: 14px;
     line-height: 20.7px;
 }
-
+.printForm_header_horisontal{
+    display: none;
+    text-align: center;
+    margin: 0;
+}
 .printForm_subheader{
     text-align: center;
     font-weight: 700;
@@ -31,12 +70,23 @@
     line-height: 18.4px;
 }
 
+.printForm__subsubheader_container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    align-items:center;
+}
 .printForm_subsubheader{
     font-size: 14px;
     font-weight: 400;
     line-height: 20.7px;
 }
-
+.printFormAbsence_top_student_att{
+    height:86px !important;
+    width:132px !important;
+    min-width:132px !important;
+}
 .printFormJournal_top_left,.printFormAbsenceTable_teacherHeader_container,.printFormAbsence_top_total,.printFormAbsence_teachers_end,.printFormAbsence_top_student,.printFormJournal_top_days_day,.printFormJournal_top_dates_specialDate,.printFormJournal_top_student,.printFormJournal__studentNumber,.printFormLessons_top_task,.printFormLessons_top_type,.printFormLessons_top_date,.printFormLessons_top_theme,.printFormLessons_top_task.printFormJournal_top_dates_date,.printFormJournal_top_dates_date,.printFormJournal__student,.printFormJournal__mark{
     border-right: 1px solid black;
     border-bottom: 1px solid black;
@@ -214,7 +264,9 @@
 }
 .printFormAbsenceTable_teacherName_container b{
     writing-mode: vertical-rl;
-
+}
+.printFormAbsenceTable_teacherName_container i{
+    writing-mode: vertical-rl;
 }
 .printFormAbsence_teachers_end{
     width: 66px;
