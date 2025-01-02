@@ -60,13 +60,13 @@ export const SemesterAttesationsTable = () => {
                         <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
                     </div>
                     <p className="header">{group?.journal_group_full_name}</p>
-                    <p className="absenceTable_teachersSection_header" style={{"width":"329px","minHeight":"94px"}}>Дата</p>
+                    {/* <p className="absenceTable_teachersSection_header" style={{"width":"329px","minHeight":"94px"}}>Дата</p> */}
                 </div>
                 <div className='journalColumnsCenter__container' style={{'gap':'15px','paddingLeft':'56px'}}  onScroll={() => handleHorizontalScroll("lessonTypes")} ref={lessonTypesRef}>
                     {table.columns?.map((column) => 
                         <div style={{"display":"flex",gap:"10px","flexDirection":"column"}}>
                             <p key={column.subject_name} className="monthAttestationsTableSubject">{column.subject_name}</p>
-                            <p key={column.subject_name} className="monthAttestationsDate" >24.12</p>
+                            {/* <p key={column.subject_name} className="monthAttestationsDate" >24.12</p> */}
                         </div>
                     )}
                 </div>

@@ -111,12 +111,13 @@ export const useGetTeacherJournal = () => {
     }
 
     const isDisabledByDate = (dateString:string) => {
-        if(!+dateString.includes('\n') || +dateString.split('\n')?.[1].split('.')[1] > currentMonth) {
-            return true;
-        }
-        if(+dateString.split('\n')?.[1].split('.')[1] === currentMonth && +dateString.split('\n')[1].split('.')[0] > currentDate){
-            return true;
-        }
+        // console.log(dateString,currentMonth,currentDate)
+        // if(!+dateString.includes('\n') || +dateString.split('\n')?.[1].split('.')[1] > currentMonth) {
+        //     return true;
+        // }
+        // if(+dateString.split('\n')?.[1].split('.')[1] === currentMonth && +dateString.split('\n')[1].split('.')[0] > currentDate){
+        //     return true;
+        // }
         return false;
     }
     const onChangeLessonType = async (column_id:string,lesson_type:string,column_index:number) => {

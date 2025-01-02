@@ -17,6 +17,7 @@ export const useAuth = () => {
     const onUserLoading = useUserStore().startLoading;
     const onStopUserLoading = useUserStore().stopLoading;
     const navigate = useNavigate();
+
     const auth = async () => {
         if(!cookieToken && !localToken) return;
         onUserLoading();
@@ -24,10 +25,9 @@ export const useAuth = () => {
         try{
             const res = await axiosConfig.get(endpoints.auth,{headers:{Authorization:cookieToken || localToken}});
             const data = res.data.data;
-            signIn({...data,token:localToken || cookieToken || '',
+            signIn({...data,token:cookieToken || localToken || '',
                 birth_date:data.birth_date ? new Date(data.birth_date * 1000) : null,
                 admission_date:data.admission_date ? new Date(data.admission_date * 1000) : null,},);
-              
            
         }catch(err){
             console.error(err);

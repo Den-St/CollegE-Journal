@@ -20,7 +20,7 @@ export const SemesterAttestationsTablePrintForm = forwardRef<HTMLDivElement,Prop
                     <h1 className="printForm_subheader">ДЕРЖАВНОГО УНІВЕРСИТЕТУ ІНТЕЛЕКТУАЛЬНИХ ТЕХНОЛОГІЙ І ЗВ’ЯЗКУ»</h1>
                 </div>
                 <div style={{'width':'100%','display':'flex','flexDirection':'column','gap':'8px',"alignItems":"center"}}>
-                <span className="printForm_subsubheader"><b>ЗАЛІКОВО - ЕКЗАМІНАЦІЙНА ВІДОМІСТЬ І семестр {table.year} н. р. (заліки)</b></span>
+                <span className="printForm_subsubheader"><b>ЗАЛІКОВО - ЕКЗАМЕНАЦІЙНА ВІДОМІСТЬ І семестр {table.year} н. р. (заліки)</b></span>
                     <span className="printForm_subsubheader"><b>група {table.group_name}</b></span>
                 </div>
                 <section className='printFormJournal__container' style={{"width":"100%"}}>

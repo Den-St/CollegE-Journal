@@ -15,7 +15,7 @@ export const useAbsenceTablePrintForm = () => {
           const printForm = document.getElementById('printForm');
           if(!printForm) return;
           printForm.style.display = 'none';
-        },
+        }
       });
 
 
