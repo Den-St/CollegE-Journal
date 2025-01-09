@@ -140,7 +140,7 @@ export const TeacherJournal = () => {
                                     {journal.columns.map((column,j) => 
                                         (journal.can_edit === 1 &&
                                         (!isDisabledByDate(column.date) || !column.date.includes('\n')))
-                                        ? !!token && <CellInput 
+                                        ? <CellInput 
                                             lessonType={column.lesson_type}
                                             month={column.date.includes('\n') ? +column.date.split("\n")[1].split(".")[1] : monthNamesToNumber[column.date]}
                                             className={`${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``}
@@ -259,7 +259,7 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
             </div>
             <div style={{'display':'flex','gap':'30px'}}>
                 {isAdmin && <button onClick={onOpenTeacherSettings} className='primary_button' style={{padding:'0 46px'}}>Налаштування викладачів</button>}
-                {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button' style={{width:'177px'}}>{!printLoading ? `Друк` : <Spin/>}</button>}
+                {!loading && !(!journal?.students.length || !journal.columns.length) && <button disabled={printLoading} onClick={handlePrintAndRefetch} className='primary_button' style={{width:'177px',minWidth:"177px"}}>{!printLoading ? `Друк` : <Spin/>}</button>}
             </div>
         </div>
     </section>

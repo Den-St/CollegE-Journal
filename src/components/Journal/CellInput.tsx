@@ -26,7 +26,9 @@ type Props = {
     month:number,
     lessonType?:string
 }
-const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
+const isValid = (value:string,subject_system:number,pe_education?:boolean,is_att?:boolean,) => {
+    if(+value > subject_system) return false;
+
     if(is_att && pe_education){
         if((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'а' || value.length === 3 && value[2]?.toLowerCase() === 'р') || ((value.length === 1 && value[0]?.toLowerCase() === 'з' || value.length === 2 && value[1] === 'в'))){
             value = value.toLocaleLowerCase();
@@ -44,8 +46,8 @@ const isValid = (value:string,pe_education?:boolean,is_att?:boolean) => {
     }
     return false;
 }
-const onChange = (e:React.ChangeEvent<HTMLInputElement>,pe_education?:boolean,is_att?:boolean) => {
-    if(!isValid(e.target.value,pe_education,is_att)){
+const onChange = (e:React.ChangeEvent<HTMLInputElement>,subject_system:number,pe_education?:boolean,is_att?:boolean,) => {
+    if(!isValid(e.target.value,subject_system,pe_education,is_att,)){
         e.preventDefault();
         e.stopPropagation();
         e.target.value = e.target.value.slice(0,e.target.value.length - 1);
@@ -111,7 +113,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         columnDate.style.border = "1px solid transparent";
         student.style.border = "1px solid transparent";
     }
-    if(!isValid(e.target.value,pe_education,is_att)) return;
+    if(!isValid(e.target.value,onBlurData.subject_system,pe_education,is_att,)) return;
 
     try{
         await axiosConfig.post(endpoints.journalEditCell,{...onBlurData,value:e.target.value?.toUpperCase()},{headers:{Authorization:token}});
@@ -232,7 +234,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
     style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
     onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
-    onChange={(e) => onChange(e,pe_education,is_att)} 
+    onChange={(e) => onChange(e,onBlurData.subject_system,pe_education,is_att,)} 
     className={`journalRowItemCenterValue__input__text ${className}`} 
     defaultValue={defaultValue}/>
 }
