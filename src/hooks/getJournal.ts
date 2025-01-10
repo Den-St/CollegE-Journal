@@ -1,3 +1,4 @@
+import { LegacyRef, MutableRefObject, useRef } from 'react';
 import { routes } from './../consts/routes';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { endpoints } from './../consts/endpoints';
@@ -17,6 +18,7 @@ export const useGetTeacherJournal = () => {
     const [loading,setLoading] = useState(false);
     const [attestations,setAttestations] = useState<JournalAttestationT[]>();
     const [searchParams,setSearchParams] = useSearchParams();
+    const lessonThemesContainerRef = useRef<HTMLDivElement>(null);
     const groupId_param = searchParams.get('group_id');
     const subject_id_param = searchParams.get('subject_id');
     const attestationsParam = searchParams.get('attestations');
@@ -31,7 +33,26 @@ export const useGetTeacherJournal = () => {
     const token = useUserStore().user.token;
     const currentMonth = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
+    const onFocusHoverLessonThemes = (_i:number) => {
+        if(!lessonThemesContainerRef.current) return;
+        const lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
 
+        for(let i = 0;i < lessonThemes?.length;i++){
+            if(i !== _i) lessonThemes[i].classList.add("lesson_theme_disable_hover")
+        }
+        lessonThemes[_i].style.borderLeft = "5px solid var(--primary-orange) !important"
+    }
+    const onBlurHoverLessonThemes = (_i:number) => {
+        if(!lessonThemesContainerRef.current) return;
+        const lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
+
+
+        for(let i = 0;i < lessonThemes?.length;i++){
+            lessonThemes[i].classList.remove("lesson_theme_disable_hover")
+        }
+        lessonThemes[_i].style.borderLeft = "0px solid var(--primary-orange) !important"
+
+    }
     const focusNearestInputCell = () => {
         if(!journal) return;
         const datesElements = journal?.columns.map(col => ({date:col.date.split("\n")[1],index:col.column_index})).filter(date => !!date.date);
@@ -46,6 +67,7 @@ export const useGetTeacherJournal = () => {
 
         if(cell?.tagName === "input"){
             cell?.focus();
+            
         }else if(container && cell){
             container.scrollLeft = cell.offsetLeft - container.offsetLeft;
         }
@@ -131,8 +153,9 @@ export const useGetTeacherJournal = () => {
             console.error(err);
         }
     }
-    const onBlurChangeLessonTopic = async (column_id:string,lesson_topic:string) => {
+    const onBlurChangeLessonTopic = async (column_id:string,lesson_topic:string,_i:number) => {
         try{
+            onBlurHoverLessonThemes(_i);
             await axiosConfig.post(endpoints.journalEditCellTopic,{column_id,lesson_topic,subject_id:fillters.subject_id,journal_id:journal?.journal_id},{headers:{Authorization:token}});
         }catch(err){
             console.error(err);
@@ -151,5 +174,5 @@ export const useGetTeacherJournal = () => {
 
     return {loading,journal,fillters,onChangeFillters,token,isDisabledByDate,
             onChangeLessonType,onBlurChangeLessonTopic,currentMonth,attestations,
-            refetch,};
+            refetch,onFocusHoverLessonThemes,onBlurHoverLessonThemes,lessonThemesContainerRef};
 }

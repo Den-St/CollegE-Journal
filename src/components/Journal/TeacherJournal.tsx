@@ -41,8 +41,8 @@ const monthNamesToNumber:Record<string,number> = {
     "Грудень": 12
   }
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
-           onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,lessonThemesContainerRef,
+           onChangeLessonType,currentMonth,token,attestations,refetch,onFocusHoverLessonThemes,onBlurHoverLessonThemes} = useGetTeacherJournal();
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -148,7 +148,7 @@ export const TeacherJournal = () => {
                                             onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} rowIndex={i} studentIndex={student.index} columnIndex={j} key={`${column.column_id}_${i}`} 
                                             token={token} date={column.date} onBlurData={{'column_id':column.column_id,'journal_id':journal.journal_id,subject_id:fillters.subject_id,'student_id':student.student_id,subject_system:journal.subject_system}} 
                                             defaultValue={column.cells.find(cell => cell.index === student.index)?.value.toLocaleLowerCase()} pe_education={journal.pe_education} is_att={!column.date.includes('.')}/>
-                                            
+
                                         : <p key={column.column_id} onMouseMove={() => {}} 
                                             onMouseDown={mouseUpHandler} id={i + ',' + j} 
                                             className={`journalRowItemCenterValue__text ${!column.date.includes('\n') && !!j && journal.columns[j-1]?.date !== column.date ? `specialLessonType_cell` : ``} ${!column.date.includes('\n') && !!j && journal.columns[j+1]?.date !== column.date ? `specialLessonType_last_cell` : ``}`}
@@ -164,8 +164,8 @@ export const TeacherJournal = () => {
         </section>
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
-            <div className='journalLessonsThemes__container'>
-                {journal?.columns.map(column => column.date.includes('.') &&
+            <div className='journalLessonsThemes__container' id='journalLessonThemes' ref={lessonThemesContainerRef}>
+                {journal?.columns.map((column,i) => column.date.includes('.') &&
                     <div className='journalLessonThemeItem__container' key={column.column_id}>
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
@@ -176,7 +176,8 @@ export const TeacherJournal = () => {
                         disabled={
                             journal.can_edit === 0
                         }
-                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value)} 
+                        onFocus={() => onFocusHoverLessonThemes(i)}
+                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value,i)} 
                         placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} 
                         className='journalLessonThemeItem__input__text'/>
                     </div>
