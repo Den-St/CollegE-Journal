@@ -19,6 +19,7 @@ export const useGetTeacherJournal = () => {
     const [attestations,setAttestations] = useState<JournalAttestationT[]>();
     const [searchParams,setSearchParams] = useSearchParams();
     const lessonThemesContainerRef = useRef<HTMLDivElement>(null);
+    const [lessonThemesElements,setLessonThemesElements] = useState<NodeListOf<HTMLElement>>();
     const groupId_param = searchParams.get('group_id');
     const subject_id_param = searchParams.get('subject_id');
     const attestationsParam = searchParams.get('attestations');
@@ -35,22 +36,29 @@ export const useGetTeacherJournal = () => {
     const currentDate = new Date().getDate();
     const onFocusHoverLessonThemes = (_i:number) => {
         if(!lessonThemesContainerRef.current) return;
-        const lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
-
-        for(let i = 0;i < lessonThemes?.length;i++){
-            if(i !== _i) lessonThemes[i].classList.add("lesson_theme_disable_hover")
+        let _lessonThemes = lessonThemesElements;
+        if(!_lessonThemes?.length){
+            _lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
+            setLessonThemesElements(_lessonThemes)
         }
-        lessonThemes[_i].style.borderLeft = "5px solid var(--primary-orange) !important"
+
+        for(let i = 0;i < _lessonThemes?.length;i++){
+            if(i !== _i) _lessonThemes[i].classList.add("lesson_theme_disable_hover")
+        }
+        _lessonThemes[_i].style.borderLeft = "5px solid var(--primary-orange) !important"
     }
     const onBlurHoverLessonThemes = (_i:number) => {
         if(!lessonThemesContainerRef.current) return;
-        const lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
-
-
-        for(let i = 0;i < lessonThemes?.length;i++){
-            lessonThemes[i].classList.remove("lesson_theme_disable_hover")
+        let _lessonThemes = lessonThemesElements;
+        if(!_lessonThemes?.length){
+            _lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
+            setLessonThemesElements(_lessonThemes)
         }
-        lessonThemes[_i].style.borderLeft = "0px solid var(--primary-orange) !important"
+
+        for(let i = 0;i < _lessonThemes?.length;i++){
+            _lessonThemes[i].classList.remove("lesson_theme_disable_hover")
+        }
+        _lessonThemes[_i].style.borderLeft = "0px solid var(--primary-orange) !important"
 
     }
     const focusNearestInputCell = () => {
