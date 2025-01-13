@@ -37,16 +37,19 @@ export const useGetTeacherJournal = () => {
     const onFocusHoverLessonThemes = (_i:number) => {
         if(!lessonThemesContainerRef.current) return;
         let _lessonThemes = lessonThemesElements;
+        
         if(!_lessonThemes?.length){
             _lessonThemes = lessonThemesContainerRef.current.querySelectorAll<HTMLElement>(".journalLessonThemeItem__container");
             setLessonThemesElements(_lessonThemes)
         }
-
+        
         for(let i = 0;i < _lessonThemes?.length;i++){
             if(i !== _i) _lessonThemes[i].classList.add("lesson_theme_disable_hover")
         }
         _lessonThemes[_i].style.borderLeft = "5px solid var(--primary-orange) !important"
+        console.log(_i,_lessonThemes[_i],_lessonThemes);
     }
+
     const onBlurHoverLessonThemes = (_i:number) => {
         if(!lessonThemesContainerRef.current) return;
         let _lessonThemes = lessonThemesElements;
@@ -59,8 +62,8 @@ export const useGetTeacherJournal = () => {
             _lessonThemes[i].classList.remove("lesson_theme_disable_hover")
         }
         _lessonThemes[_i].style.borderLeft = "0px solid var(--primary-orange) !important"
-
     }
+
     const focusNearestInputCell = () => {
         if(!journal) return;
         const datesElements = journal?.columns.map(col => ({date:col.date.split("\n")[1],index:col.column_index})).filter(date => !!date.date);
