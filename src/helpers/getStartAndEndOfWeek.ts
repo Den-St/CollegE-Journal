@@ -12,7 +12,6 @@ export const getStartAndEnd = (offset:number,
     closestMonday.setHours(6);
     closestSaturday.setHours(6);
 
-    console.log("dayes",closestMonday,closestSaturday);
 
     return {start:Math.round((closestMonday?.getTime() || 0)/1000),end:Math.round((closestSaturday?.getTime() || 0)/1000)};
 }

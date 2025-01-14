@@ -24,6 +24,7 @@ import { TeacherJournalT } from '../../types/teacherJournal';
 import { useUserStore } from '../../store/userStore';
 import { securityLevels } from '../../consts/securityLevels';
 import { TeacherSettingsModal, useTeacherSettingsModal } from './TeacherSettings';
+import { useLessonThemes } from '../../hooks/lessonThemes';
 const {Option} = Select;
 
 const monthNamesToNumber:Record<string,number> = {
@@ -41,8 +42,10 @@ const monthNamesToNumber:Record<string,number> = {
     "Грудень": 12
   }
 export const TeacherJournal = () => {
-    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,lessonThemesContainerRef,
-           onChangeLessonType,currentMonth,token,attestations,refetch,onFocusHoverLessonThemes,onBlurHoverLessonThemes} = useGetTeacherJournal();
+    const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
+           onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
+    const {onBlurHoverLessonThemes,onChangeLessonTheme,onFocusHoverLessonThemes} = useLessonThemes();
+
     const {groups} = useGroupsByTeacher();
     const groupJournal = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -164,9 +167,9 @@ export const TeacherJournal = () => {
         </section>
         <section className='journalLessonsThemes__section'>
             <h1 className='journalLessonsThemes__title'>Теми занять</h1>
-            <div className='journalLessonsThemes__container' id='journalLessonThemes' ref={lessonThemesContainerRef}>
-                {journal?.columns.filter(column => column.date.includes('.')).map((column,i) => column.date.includes('.') &&
-                    <div className='journalLessonThemeItem__container' key={column.column_id}>
+            <div className='journalLessonsThemes__container' id='journalLessonThemes'>
+                {journal?.columns.filter(column => column.date.includes('.')).map((column,i) => 
+                    <div className='journalLessonThemeItem__container' key={column.column_id} id={`ltc_${i}`}>
                         <div className='journalLessonThemeItemDate__container'>
                             <p className='journalLessonThemeItemDate__day'>{column.date.split('\n')[0]}</p>
                             <p className='journalLessonThemeItemDate__date'>{column.date.split('\n')[1]}</p>
@@ -176,8 +179,13 @@ export const TeacherJournal = () => {
                         disabled={
                             journal.can_edit === 0
                         }
+                        id={`lti_${i}`}
                         onFocus={() => onFocusHoverLessonThemes(i)}
-                        onBlur={(e) => onBlurChangeLessonTopic(column.column_id,e.target.value,i)} 
+                        onBlur={(e) => {
+                            onBlurChangeLessonTopic(column.column_id,e.target.value,i)
+                            onBlurHoverLessonThemes(i)
+                        }} 
+                        onKeyDown={(e) => onChangeLessonTheme(e,i)}
                         placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} 
                         className='journalLessonThemeItem__input__text'/>
                     </div>
