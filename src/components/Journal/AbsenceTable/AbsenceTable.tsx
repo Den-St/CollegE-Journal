@@ -62,9 +62,12 @@ export const AbsenceTable = () => {
         </section>
         <section className='journal__container'>
             <div className='journalLeft__container' onMouseMove={onMouseMove} onMouseDown={mouseDownHandler}  onMouseUp={mouseUpHandler}>
-                <div className='journalColumnsLeft__container'>
-                    <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
-                    <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
+                <div style={{display: "flex", flexDirection: "column", gap: "30px", alignItems: "center"}}>
+                    <div className='journalColumnsLeft__container'>
+                        <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
+                        <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
+                    </div>
+                    <p className="header">{group?.journal_group_full_name}</p>
                 </div>
                 <div className='journalColumnsCenter__container' style={{'gap':'21px'}} onScroll={() => handleHorizontalScroll("lessonTypes")} ref={lessonTypesRef}>
                     {table.dates?.map((date,i) => 
@@ -77,6 +80,7 @@ export const AbsenceTable = () => {
                                 <p className="absenceTable_dayNumber">4</p>
                                 <p className="absenceTable_dayNumber">5</p>
                             </div>
+                            <div key={table.subjects.join(' ')+i} className="absenceTable_teachersSubcontainer">{table.subjects[i].map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</div>
                         </div>
                     )}
                 <div className="absenceTable_totalTop">Всього</div>
