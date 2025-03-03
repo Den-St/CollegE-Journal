@@ -35,16 +35,16 @@ export const useGetTeacherJournal = () => {
 
     const focusNearestInputCell = () => {
         if(!journal) return;
-        const datesElements = journal?.columns.map(col => ({date:col.date.split("\n")[1],index:col.column_index})).filter(date => !!date.date);
+        const datesElements = journal?.columns.map(col =>  ({date:col.date.includes(".") ? col.date.split("\n")[1] : "",index:col.column_index})).filter(date => !!date.date);
         const dates = datesElements.map(date => new Date(new Date().getFullYear(),(+date.date.split(".")[1] - 1),(+date.date.split(".")[0])));
         const nearestDateIndex = closestIndexTo(new Date(),dates);
 
         if(nearestDateIndex === undefined) return;
         const nearestDate = datesElements[nearestDateIndex];
-
+        // console.log(datesElements,dates,nearestDate,nearestDateIndex)
         const container = document.getElementById('journalRightRowsContainer');
-        const cell = document.getElementById(`0,${nearestDate.index - 1}`); 
-
+        const cell = document.getElementById(`0,${nearestDate?.index - 1}`); 
+        
         if(cell?.tagName === "input"){
             cell?.focus();
             
