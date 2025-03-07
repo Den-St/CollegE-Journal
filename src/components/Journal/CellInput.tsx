@@ -127,7 +127,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         let nAtts = 0;
         let summAtts = 0;
         let lastAtt = 0;
-        inputs.map((input) => {
+        inputs.map((input) => { 
             const _lessonType = input.getAttribute("data-lesson-type");
 
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
@@ -136,7 +136,12 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
                 }else if(!isNaN(+input.value) && !!input.value) n++;
                 summ += !isNaN(+input.value) ? +input.value : 0
             }
-            if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
+            if(_lessonType  === "Атестаційна"){
+                if(n === 0) {
+                    input.placeholder = "";
+                    return;
+                }
+                
                 input.placeholder = `${Math.round(summ/n)}`;
 
                 summ = 0;
@@ -229,7 +234,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     },[]);
     
     return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
-    data-month={month}
+    data-month={month} autoComplete={"off"}
     data-lesson-type={lessonType}
     id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
     style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
