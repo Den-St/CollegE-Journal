@@ -160,6 +160,11 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
                 summAtts += !isNaN(+input.value) ? +input.value : 0
             }
             if(_lessonType  === "Підсумкова" && !Number.isNaN(summAtts/nAtts)){
+                console.log("a",summAtts,nAtts,)
+                if(nAtts === 0) {
+                    input.placeholder = "";
+                    return;
+                }
                 if(+formatNumber(summAtts/nAtts) === Number(input.placeholder || 0)) return;
                 input.placeholder = `${Math.round(summAtts/nAtts)}`;
                 summAtts = 0;
