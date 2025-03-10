@@ -102,7 +102,7 @@ export const MonthAttesationsTable = () => {
                             <div className='journalRowItemCenter__container' style={{'gap':'23px','marginLeft':'59px'}}>
                                 {table.columns.map((column,j) => 
                                     <p key={column.subject_name+student.student_id} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
-                                    className={`journalRowItemCenterValue__text`} 
+                                    className={`journalRowItemCenterValue__text attesationTableCell`} 
                                     style={{cursor:'not-allowed',color:getColorByValue((column?.students?.find(_student => _student.student_id === student.student_id)?.grade || "0"),column.subject_system),
                                             width:'32px',height:'32px',margin:'0'}}>
                                      {column.students.find(_student => _student.student_id === student.student_id)?.grade.toLocaleLowerCase()}
