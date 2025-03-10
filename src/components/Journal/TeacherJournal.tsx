@@ -250,14 +250,21 @@ export const TeacherJournalFillters:React.FC<Props> = ({loading,groupJournal,sub
                     className="fillter_select"
                     style={{width:'300px !important'}}
                     // allowClear
+                    
                     loading={loading}
                     value={unique_subjects.find(sub => sub.journal_id === fillters.subject_id)?.journal_id || ''}
                     onChange={(value) => onChangeFillters('subject_id',value)}
+                    optionLabelProp="label"
                 >
                     {!!groupJournal && 
                     setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view])
                     .map(subject => 
-                        <Option key={subject.journal_id} value={subject.journal_id} label={subject.subject_full_name}>{subject.subject_full_name}</Option>
+                        <Option key={subject.journal_id} value={subject.journal_id} label={
+                            <div className="fillterPlaceholder_container">
+                                <p className="fillter_placeholder">{subject.subject_full_name}</p><FilterIconSvg/>
+                            </div>
+                        }>
+                            {subject.subject_full_name}</Option>
                     )}
                 </Select>}
             </div>
