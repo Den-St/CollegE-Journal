@@ -10,6 +10,7 @@ import { useGetTeachers } from "../../hooks/getTeachers";
 import { useThemeStore } from "../../store/themeStore";
 import "../EditGroup/editGroupStyles.scss";
 import "../Teachers/teachersStyles.scss";
+import buttonStyles from "../../uikit/components/Buttons.module.css";
 
 const {Option} = Select;
 const userErrorCodesToMessages:Record<number,string> = {
@@ -117,7 +118,7 @@ export const CreateTeacher = () => {
             <div className="createUserButtons__container">
                 <input 
                 // disabled={createUserDisabled} 
-                autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Зареєструвати"} disabled={createUserLoading}/>
+                autoComplete="off" type={"submit"} className={`createUser__button ${buttonStyles.primary_button}`} value={"Зареєструвати"} disabled={createUserLoading}/>
             </div>
         </form>
         <div className="teachersSections_container">

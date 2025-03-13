@@ -1,7 +1,7 @@
 import { isMonday, isSaturday, nextSaturday, previousMonday, sub } from "date-fns";
 
 export const getStartAndEnd = (offset:number,
-    // formatedModaysAndSaturdays:(Date | undefined)[]x
+    formatedModaysAndSaturdays:(Date | undefined)[]
     ) => {
     // const currentMonday = formatedModaysAndSaturdays?.[formatedModaysAndSaturdays.length-1+(offset*2 - 1)];
     // const currentSaturday = formatedModaysAndSaturdays?.[formatedModaysAndSaturdays.length-1+(offset*2)];
@@ -12,6 +12,7 @@ export const getStartAndEnd = (offset:number,
     closestMonday.setHours(6);
     closestSaturday.setHours(6);
 
+    console.log("dayes",closestMonday,closestSaturday);
 
     return {start:Math.round((closestMonday?.getTime() || 0)/1000),end:Math.round((closestSaturday?.getTime() || 0)/1000)};
 }

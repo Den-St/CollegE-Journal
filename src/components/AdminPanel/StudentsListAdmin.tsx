@@ -9,6 +9,7 @@ import { useThemeController } from "../../hooks/themeController"
 import { CreateGroupT, GroupT } from "../../types/group";
 import { Loader } from "../Loader/Loader";
 const {Option,} = Select;
+import buttonStyles from "../../uikit/components/Buttons.module.css";
 
 const errorCodes:Record<number,string> = {
     [-1]:'Некоректна назва групи',
@@ -41,9 +42,9 @@ export const StudentsListAdmin = () => {
                     </Select>
                 </div> */}
                 <div className="adminPanelStudentList_conrollersContainer">
-                    <button className="adminPanelStudentList_add primary_button" onClick={onOpenCreateGroupModal}>Додати групу</button>
+                    <button className={`adminPanelStudentList_add ${buttonStyles.primary_button}`} onClick={onOpenCreateGroupModal}>Додати групу</button>
                     {/* <Link to={routes.teachers} className={'adminPanelStudentList_teachers_link'}>Викладачі</Link> */}
-                    <Link to={routes.createTeacher} className="adminPanelStudentList_add primary_button">Додати викладача</Link>
+                    <Link to={routes.createTeacher} className={`adminPanelStudentList_add ${buttonStyles.primary_button}`}>Додати викладача</Link>
                     {/* <button className="adminPanelStudentList_save">Зберити</button> */}
                 </div>
             </div>
@@ -82,7 +83,7 @@ export const StudentsListAdmin = () => {
                         </div>
                     </div> */}
                 </div>
-                <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Зареєструвати'}/>
+                <input autoComplete="off"  type={'submit'} className={`createUser__button ${buttonStyles.primary_button}`} value={'Зареєструвати'}/>
             </form>
         </Modal>
         <section className="groupsCourses__container">

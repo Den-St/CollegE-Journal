@@ -27,9 +27,7 @@ import { useAbsenceTableDragScroll } from "../../../hooks/absenceTableDragScroll
 const {Option} = Select;
 
 export const AbsenceTable = () => {
-    const {table,start,end,loading,fillters,onChangeOffset,navigate,
-        // formatedModaysAndSaturdays
-    } = useGetAbsenceTable();
+    const {table,start,end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays} = useGetAbsenceTable();
     const {groups} = useGroupsByTeacher();
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const theme = useThemeStore().theme;
@@ -51,7 +49,7 @@ export const AbsenceTable = () => {
     },[table,group]);
 
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme}`}>
-        <AbsenceTableFillters start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
+        <AbsenceTableFillters formatedModaysAndSaturdays={formatedModaysAndSaturdays} start={start} end={end} table={table} groups={groups} onChangeFillters={onChangeOffset} loading={loading} fillters={fillters}/>
         {loading ? <Loader/>
         : !table ? <NoMatch title={`Таблиці за групою не знайдено`}/>
         : (!table.dates?.length || !table.student_list.length || !table.subjects.length) ? <NoMatch isChildren title="Таблиця пуста"/> : <>
@@ -63,11 +61,11 @@ export const AbsenceTable = () => {
         <section className='journal__container'>
             <div className='journalLeft__container' onMouseMove={onMouseMove} onMouseDown={mouseDownHandler}  onMouseUp={mouseUpHandler}>
                 <div style={{display: "flex", flexDirection: "column", gap: "30px", alignItems: "center"}}>
-                    <div className='journalColumnsLeft__container'>
-                        <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
-                        <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
-                    </div>
-                    <p className="header">{group?.journal_group_full_name}</p>
+                     <div className='journalColumnsLeft__container'>
+                         <h1 className='journalColumnsLeft__title'>Цитати на кожен день</h1>
+                         <p className='journalColumnsLeft__text'>У жовтні кожного року проходить акція «відрахуй випускника»</p>
+                     </div>
+                     <p className="header">{group?.journal_group_full_name}</p>
                 </div>
                 <div className='journalColumnsCenter__container' style={{'gap':'21px'}} onScroll={() => handleHorizontalScroll("lessonTypes")} ref={lessonTypesRef}>
                     {table.dates?.map((date,i) => 
@@ -80,7 +78,6 @@ export const AbsenceTable = () => {
                                 <p className="absenceTable_dayNumber">4</p>
                                 <p className="absenceTable_dayNumber">5</p>
                             </div>
-                            <div key={table.subjects.join(' ')+i} className="absenceTable_teachersSubcontainer">{table.subjects[i].map((subject,i) => <p key={subject+i} className="absenceTable_teacher">{subject}</p>)}</div>
                         </div>
                     )}
                 <div className="absenceTable_totalTop">Всього</div>
@@ -190,17 +187,15 @@ type Props = {
     table?:AbsenceTableT,
     start:number,
     end:number,
-    // formatedModaysAndSaturdays:(Date | undefined)[]
+    formatedModaysAndSaturdays:(Date | undefined)[]
 }
 
-export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end,
-    // formatedModaysAndSaturdays
-    }) => {
+export const AbsenceTableFillters:React.FC<Props> = ({groups,loading,fillters,onChangeFillters,table,start,end,formatedModaysAndSaturdays}) => {
     const group = groups.find(group => group.journal_group === fillters.group_id);
     const {handlePrint,componentRef} = useAbsenceTablePrintForm()
     const {downloadLoading,fetchFile} = useAbsenceTableDownload(start,end,group?.journal_group_full_name,group?.journal_group);
     const isAdmin = useUserStore().user.security_level === securityLevels.admin;
-    // const decrementDisabled = formatedModaysAndSaturdays.findIndex(sat => sat?.toLocaleDateString() === new Date(start*1000).toLocaleDateString()) === 0;
+    const decrementDisabled = formatedModaysAndSaturdays.findIndex(sat => sat?.toLocaleDateString() === new Date(start*1000).toLocaleDateString()) === 0;
     const onDecrementOffset = () => {
         onChangeFillters('offset',fillters.offset - 1);
     }

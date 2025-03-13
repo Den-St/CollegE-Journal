@@ -1,0 +1,24 @@
+.header{
+	font-family: Montserrat !important;
+	font-size: 28px;
+	font-weight: 500;
+	line-height: 34.13px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}
+.subHeader{
+	font-family: Montserrat;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 24.38px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}
+.subSubHeader{
+	font-family: Montserrat;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 21.94px;
+	letter-spacing: 0.1em;
+	text-align: left;
+}

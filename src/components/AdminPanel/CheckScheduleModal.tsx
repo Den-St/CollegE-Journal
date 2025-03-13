@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { LinkBack } from "../../assets/components/LinkBack/LinkBack";
 import "./checkScheduleModal.scss";
-
+import styles from "../../uikit/components/Buttons.module.css";
 type Props = {
     onClose:() => void
 }
@@ -85,7 +85,7 @@ export const CheckScheduleModal:React.FC<Props> = ({onClose}) => {
                 <LinkBack goTo={onClose} title="Налаштування розкладу"/>
             </div>
             <p className="checkScheduleModal_errorMessage">Отримані дані для розкладу некоректні. Перевірте файл та спробуйте знову.</p>
-            <button className="primary_button" style={{'width':'312px'}}>Підтвердити розклад</button>
+            <button className={styles.primary_button} style={{'width':'312px'}}>Підтвердити розклад</button>
         </div>
         <div className="checkScheduleModal_main">
             <div className="checkScheduleModal_top" onMouseMove={onMouseMove} onMouseDown={mouseDownHandler}  onMouseUp={mouseUpHandler} >

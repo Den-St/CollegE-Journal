@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import './headerStyles.scss';
 import {CollegeLogoSvg} from '../../assets/svgs/college_logo';
 import { Modal, Popover, Switch } from 'antd';
 import { themes } from '../../consts/themes';
@@ -47,44 +46,14 @@ const useHeaderVisibility = () => {
 }
 
 export const Header = () => {
-    const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
-    const {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur} = useHeaderVisibility();
-    const {sideMenuOpened,onToggleSideMenu} = useSideMenuStore();
+
 //${headerVisibilityClass}
-    return <header className={`header ${theme} ${route+'home'} ${'sideMenu' + sideMenuOpened}`}>
-            {/* <div onMouseOver={onTouchShowHeader} className='header_hover_trigger'></div> */}
-            <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
-            <div className={`header_container `}>
-                <div onMouseLeave={onMouseOutBlur} className="header__wrapper">
-                    <div className='headerLeft_mobile'>
-                        <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
-                            <FilterIconSvg/>
-                        </button>
-                        <div className="logo__block">
-                            <Link  to={routes.homePage} className="header__logo">
-                                <CollegeLogoSvg/>
-                            </Link>
-                        </div>
-                    </div>
-                    <nav className="nav">
-                        <HeaderNavLinks linksClassName='menu__button'/>
-                    </nav>
-                    <div className='headerRightButtons__container'>
-                        {/* <Switch defaultChecked={true} onChange={onToggleThemeSwitch} checked={theme === themes.dark}/> */}
-                        <div style={{'width':'50px'}}></div>
-                        {!user.full_name 
-                        ? <div className="signIn">
-                            <Link to="/sign-in" className="signBtn">Вхід</Link>
-                        </div> 
-                        : <Popover rootClassName='userPopup' arrow={false} content={<UserPopup/>} placement={'bottomRight'}>
-                            <Link to={user.security_level === securityLevels.admin ? routes.adminPanel + '?section=schedule' : routes.myProfile}>
-                                <img className='header_avatar' src={user.avatar || defaultAvatar}/>
-                            </Link>
-                        </Popover>}
-                    </div>
-                </div>
+    return <header className={`w-full bg-thirdDark flex pl-[30px] pr-[30px] fixed z-50`}>
+            <div className='flex items-center flex-grow h-[70px]'>
+                <h1>Qrwfdsa fasdfasd fsadfa sd</h1>
             </div>
+            <div className='w-[300px]'>s</div>
         </header>
 }

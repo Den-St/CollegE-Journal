@@ -182,8 +182,8 @@ export const TeacherJournal = () => {
                         id={`lti_${i}`}
                         onFocus={() => onFocusHoverLessonThemes(i)}
                         onBlur={(e) => {
-                            onBlurHoverLessonThemes(i)
                             onBlurChangeLessonTopic(column.column_id,e.target.value,i)
+                            onBlurHoverLessonThemes(i)
                         }} 
                         onKeyDown={(e) => onChangeLessonTheme(e,i)}
                         placeholder='Заповніть тему заняття' defaultValue={column.lesson_topic} 
