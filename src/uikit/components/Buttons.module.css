@@ -1,0 +1,31 @@
+button{
+    cursor: pointer;
+	transition: 0.2s;
+}
+
+.primary_button{
+	width: fit-content;
+	min-width: 191px;
+    height: 40px;	
+    border-radius: 10px 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding: 10px 5px;
+	font-family: Montserrat;
+	font-size: 18px;
+	letter-spacing: 10%;
+}
+.textButton{
+	color:var(--primary-orange);
+    background-color: transparent;
+    cursor: pointer;
+	transition: 0.2s;
+}
+.textButton:hover{
+	color: white;
+}
+.textButton:active{
+	color: rgb(187,151,66);
+}

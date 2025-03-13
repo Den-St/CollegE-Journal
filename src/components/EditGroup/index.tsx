@@ -15,6 +15,7 @@ import { namePattern } from "../../helpers/namePattern";
 import dayjs from "dayjs";
 import { customDateFormat } from "../../helpers/dateFormat";
 const {Option} = Select;
+import buttonStyles from "../../uikit/components/Buttons.module.css";
 
 const userErrorCodesToMessages:Record<number,string> = {
     409:'Користувач з такою поштовою адресою вже існує!',
@@ -70,8 +71,8 @@ export const EditGroup = () => {
             </div>
             {!!changeErrorCode && <p className={`signIn_errorMessage ${changeErrorCode === 1 && 'success_message'}`}>{changeErrorCodesToMessages[changeErrorCode]}</p>}
             <div style={{'display':'flex',gap:'30px'}}>
-                <input autoComplete="off"  type={'submit'} className="createUser__button primary_button" value={'Змінити'}/>
-                <span onClick={onInvertEngGroups} className="createUser__button primary_button"  style={{'padding':'10px 30px'}}>Інвертувати під-групи Англійської</span>
+                <input autoComplete="off"  type={'submit'} className={`createUser__button ${buttonStyles.primary_button}`} value={'Змінити'}/>
+                <span onClick={onInvertEngGroups} className={`createUser__button ${buttonStyles.primary_button}`}  style={{'padding':'10px 30px'}}>Інвертувати під-групи Англійської</span>
             </div>
         </form>
         <h1 className="createUserTitle">Створення акаунту</h1>
@@ -254,7 +255,7 @@ export const EditGroup = () => {
             <div className="createUserButtons__container">
                 <input 
                 // disabled={createUserDisabled} 
-                autoComplete="off" type={"submit"} className="createUser__button primary_button" value={"Зареєструвати"} disabled={createUserLoading}/>
+                autoComplete="off" type={"submit"} className={`createUser__button ${buttonStyles.primary_button}`} value={"Зареєструвати"} disabled={createUserLoading}/>
             </div>
         </form>
         <section className="studentList__container">

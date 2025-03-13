@@ -17,7 +17,7 @@ export const useLessonThemes = () => {
         for(let i = 0;i < allLessonThemesContainers?.length;i++){
             allLessonThemesContainers[i].classList.remove("lesson_theme_disable_hover")
         }
-        lessonThemeContainer.style.borderLeft = ""
+        lessonThemeContainer.style.borderLeft = "0px solid var(--primary-orange) !important"
     }
     const keysToMoves:Record<string,(i:number) => void> = {
         'Enter':(i:number) => document.getElementById(`lti_${i+1}`)?.focus(),

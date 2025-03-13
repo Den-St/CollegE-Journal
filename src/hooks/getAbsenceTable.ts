@@ -21,19 +21,15 @@ export const useGetAbsenceTable = () => {
         group_id:group_id || '',
         offset:Number(offset_param) || 0
     });
-    // const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
-    const [startEnd,setStartEnd] = useState(getStartAndEnd(fillters.offset,
-        // formatedModaysAndSaturdays
-        ));
+    const formatedModaysAndSaturdays = useMemo(getMondaysAndSaturdays,[])
+    const [startEnd,setStartEnd] = useState(getStartAndEnd(fillters.offset,formatedModaysAndSaturdays));
 
     const token = useUserStore().user.token;
     
     const fetch = async (_fillters?:AbsenceTableFilltersT) => {
         if(!fillters.group_id) return;
         setLoading(true);
-        const {start,end} = getStartAndEnd(_fillters?.offset ?? fillters.offset,
-            // formatedModaysAndSaturdays
-            )
+        const {start,end} = getStartAndEnd(_fillters?.offset ?? fillters.offset,formatedModaysAndSaturdays)
         const endPlusOneDay = new Date(end+60*60*24);
         try{
             const res = await axiosConfig.post(endpoints.absenceTable,{group_id:_fillters?.group_id,start,end:end+60*60*24},{headers:{Authorization:token}});
@@ -52,9 +48,7 @@ export const useGetAbsenceTable = () => {
     const onChangeOffset = (fieldName:'group_id' | 'offset',value:number | string) => {
         if(!group_id) return;
         if(fieldName === 'offset') {
-            setStartEnd(getStartAndEnd(+value
-                // ,formatedModaysAndSaturdays
-                ));
+            setStartEnd(getStartAndEnd(+value,formatedModaysAndSaturdays));
         }
         setFillters(prev => ({ ...prev,[fieldName]:value}));
         debounceOnIncrementOffset({...fillters,[fieldName]:value});
@@ -69,7 +63,5 @@ export const useGetAbsenceTable = () => {
         // navigate(routes.absenceTable+`?group_id=${fillters.group_id}&offset=${fillters.offset}`);
     },[fillters]);
 
-    return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate,
-        // formatedModaysAndSaturdays
-    }
+    return {table,start:startEnd.start,end:startEnd.end,loading,fillters,onChangeOffset,navigate,formatedModaysAndSaturdays}
 }

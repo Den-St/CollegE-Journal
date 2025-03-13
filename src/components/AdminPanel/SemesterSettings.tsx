@@ -8,6 +8,7 @@ import { customDateFormat } from "../../helpers/dateFormat";
 import { CheckScheduleSettingsModal } from "../CheckScheduleSettingsModal";
 import { CheckScheduleModal } from "./CheckScheduleModal";
 import "./semesterSettingsStyles.scss";
+import buttonStyles from "../../uikit/components/Buttons.module.css";
         
 const {Option} = Select;
 
@@ -466,7 +467,7 @@ const SemesterSettingsPart = () =>{
                     {...register('weeks_n_second',{required:{value:true,message:'Оберіть кількість тижнів відпрацювання у То, Тр'},
                     })}
                     onChange={(e) => setValue('weeks_n_second',e)}
-                    >  
+                    >
                     <Option value={1} label={1}>{1}</Option>
                     <Option value={2} label={2}>{2}</Option>
                     <Option value={3} label={3}>{3}</Option>
@@ -474,7 +475,7 @@ const SemesterSettingsPart = () =>{
             </div>
         </div>
         <div style={{width:'100%',display:'flex',gap:'30px',alignItems:'center',}}>
-            <input type={'submit'} value={'Зберегти налаштування'} style={{'width':'unset',padding:'10px 15px'}} className={"primary_button"}/>
+            <input type={'submit'} value={'Зберегти налаштування'} style={{'width':'unset',padding:'10px 15px'}} className={buttonStyles.primary_button}/>
             {/* <Checkbox onChange={(value) => setValue('temporary',value.target.value)}>Тимчасовий розклад</Checkbox> */}
         </div>
         {/* <div style={{'display':'flex',gap:'30px'}}>
