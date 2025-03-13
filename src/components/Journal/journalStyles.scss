@@ -130,9 +130,12 @@ scrollbar-width: none;  /* Firefox */
     display: flex;
     flex-direction: column;
     gap:14px;
+    width: 70px !important;
 }
 .journalColumnsCenterItemType{
-    width: 68px;
+    width: 68px !important;
+    max-width: 68px !important;
+    min-width: 68px !important;
     height: 40px;
     display: flex;
     align-items: center;
@@ -142,7 +145,9 @@ scrollbar-width: none;  /* Firefox */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    
 }
+
 .journalColumnsCenterItemType:empty{
     cursor: not-allowed;
 }
@@ -177,7 +182,9 @@ scrollbar-width: none;  /* Firefox */
     gap:5px;
     border-radius: 10px 5px;
     height: 70px;
-    width: 70px;
+    min-width:70px !important;
+    max-width:70px !important;
+    width: 70px !important;
     border: 1px solid transparent;
     transition: 0.2s;
 }
@@ -291,17 +298,32 @@ scrollbar-width: none;  /* Firefox */
 .journalRowItemCenterValue__text{
     border-radius: 10px 5px;
     height: 40px;
-    width: 40px;
+    width: 40px !important;
+    max-width: 40px !important;
+    min-width: 40px !important;
     margin: 0 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 7px 0px rgba(159, 158, 158, 0.083);
+    &.absenceTableCell{
+        width: 24px !important;
+        max-width: 24px !important;
+        min-width: 24px !important;
+    }
+    &.attesationTableCell{
+        width: 32px !important;
+        max-width: 32px !important;
+        min-width: 32px !important;
+    }
+   
 }
 .journalRowItemCenterValue__input__text{
     border-radius: 10px 5px;
     height: 40px;
-    width: 40px;
+    width: 40px !important;
+    max-width: 40px !important;
+    min-width: 40px !important;
     margin: 0 15px;
     padding: 7px;
     text-align: center;

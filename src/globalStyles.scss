@@ -70,7 +70,34 @@ body.scrollOn{
 	}
 }
 
-
+.ant-select-selection-placeholder{
+	// font-size: 28px !important;
+	// font-weight: 500 !important;
+	// line-height: 34px !important;
+	// letter-spacing: 0.1em !important;
+	// //styleName: H/H4;
+	font-family: Montserrat !important;
+	font-size: 18px !important;
+	font-weight: 400 !important;
+	line-height: 22px !important;
+	letter-spacing: 0.1em !important;
+}
+input[type=submit]{
+	cursor: pointer;
+}
+input::placeholder{
+	font-family: Montserrat !important;
+	font-size: 18px !important;
+	font-weight: 400 !important;
+	line-height: 22px !important;
+	letter-spacing: 0.1em !important;
+}
+.journalSubject_fillter_container{
+	.fillter_select{
+		//max-width: 400px;
+		// overflow: hidden;
+	}
+}
 
 
 .form_input{

@@ -107,7 +107,7 @@ export const AbsenceTable = () => {
                                         <div className="absenceTable_dayValues_container">
                                             {dayValues.map((day,k) => 
                                                 <p key={day+i+','+j+''+k} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
-                                                   className={`journalRowItemCenterValue__text`} 
+                                                   className={`journalRowItemCenterValue__text absenceTableCell`} 
                                                    style={{cursor:'not-allowed',color:'var(--primary-orange)',
                                                            width:'24px',height:'24px',margin:'0'}}>
                                                     {day}
@@ -115,7 +115,7 @@ export const AbsenceTable = () => {
                                         </div>
                                         <div className="absenceTable_vetricalDivider"></div>
                                         {j === student.columns.length-1 && <p key={j} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
-                                                   className={`journalRowItemCenterValue__text`} 
+                                                   className={`journalRowItemCenterValue__text absenceTableCell`} 
                                                    style={{cursor:'not-allowed',color:'var(--primary-orange)',
                                                            width:'24px',height:'24px',margin:'0'}}>
                                                     {student.total}

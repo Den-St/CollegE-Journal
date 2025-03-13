@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import axiosConfig from "../../axiosConfig"
 import { endpoints } from "../../consts/endpoints"
 import { formatNumber } from "../../helpers/formatNumber"
@@ -46,11 +46,10 @@ const isValid = (value:string,subject_system:number,pe_education?:boolean,is_att
     }
     return false;
 }
-const onChange = (e:React.ChangeEvent<HTMLInputElement>,subject_system:number,pe_education?:boolean,is_att?:boolean,) => {
+const onChange = (e:React.ChangeEvent<HTMLInputElement>,subject_system:number, cellValue: string, pe_education?:boolean, is_att?:boolean) => {
     if(!isValid(e.target.value,subject_system,pe_education,is_att,)){
-        e.preventDefault();
-        e.stopPropagation();
-        e.target.value = e.target.value.slice(0,e.target.value.length - 1);
+        //e.target.value = e.target.value.slice(0,e.target.value.length - 1);
+        e.target.value = cellValue;
         return;
     }
 };
@@ -77,6 +76,7 @@ export const getColorByValue = (value:string,system:number) => {
 
 export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,token,rowIndex,columnIndex,date,
                                            onMouseUp,onMouseMove,studentIndex,pe_education,is_att,month,lessonType}) => {
+    const [cellValue, setCellValue] = useState("");
     const keysToMoves:Record<string,() => void> = {
         'Enter':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
         'ArrowDown':() => document.getElementById((rowIndex + 1) + ',' + columnIndex)?.focus(),
@@ -86,8 +86,9 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
     }
     const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
         keysToMoves[e.key]?.();
+        //e.target.
     }
-    const onFocus = () => {
+    const onFocus = (value: string) => {
         const columnSelect = document.getElementById('columnSelect_'+(columnIndex).toString());
         const columnDate = document.getElementById('columnDate_'+(columnIndex).toString());
         const student = document.getElementById('student_'+studentIndex);
@@ -95,6 +96,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         columnDate.style.border = "1px solid #EFB42D";
         columnSelect.style.border = "1px solid #EFB42D";
         student.style.border = "1px solid #EFB42D";
+        setCellValue(value);
     }
     const onBlur = async (e:React.FocusEvent<HTMLInputElement>,onBlurData:{
         journal_id: string,
@@ -127,7 +129,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         let nAtts = 0;
         let summAtts = 0;
         let lastAtt = 0;
-        inputs.map((input) => {
+        inputs.map((input) => { 
             const _lessonType = input.getAttribute("data-lesson-type");
 
             if(_lessonType !== "Атестаційна" && _lessonType !== "Коригуюча") {
@@ -136,7 +138,12 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
                 }else if(!isNaN(+input.value) && !!input.value) n++;
                 summ += !isNaN(+input.value) ? +input.value : 0
             }
-            if(_lessonType  === "Атестаційна" && !Number.isNaN(summ/n)){
+            if(_lessonType  === "Атестаційна"){
+                if(n === 0) {
+                    input.placeholder = "";
+                    return;
+                }
+                
                 input.placeholder = `${Math.round(summ/n)}`;
 
                 summ = 0;
@@ -152,7 +159,14 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
                 }
                 summAtts += !isNaN(+input.value) ? +input.value : 0
             }
-            if(_lessonType  === "Підсумкова" && !Number.isNaN(summAtts/nAtts)){
+            if(_lessonType  === "Підсумкова"){
+                console.log("a",summAtts,nAtts,)
+                if(nAtts === 0) {
+                    input.placeholder = "";
+                    return;
+                }
+                if(Number.isNaN(summAtts/nAtts)) return;
+                
                 if(+formatNumber(summAtts/nAtts) === Number(input.placeholder || 0)) return;
                 input.placeholder = `${Math.round(summAtts/nAtts)}`;
                 summAtts = 0;
@@ -228,13 +242,13 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         onCalculateAvgSemester();
     },[]);
     
-    return <input onFocus={onFocus} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
-    data-month={month}
+    return <input onFocus={(e) => onFocus(e.target.value)} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
+    data-month={month} autoComplete={"off"}
     data-lesson-type={lessonType}
     id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
     style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
     onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
-    onChange={(e) => onChange(e,onBlurData.subject_system,pe_education,is_att,)} 
+    onChange={(e) => onChange(e,onBlurData.subject_system, cellValue, pe_education,is_att,)} 
     className={`journalRowItemCenterValue__input__text ${className}`} 
     defaultValue={defaultValue}/>
 }

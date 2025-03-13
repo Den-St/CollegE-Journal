@@ -73,7 +73,7 @@ export const StudentSemesterAttesationsTable = () => {
                             <div className='journalRowItemCenter__container' style={{'gap':'23px','marginLeft':'59px',"paddingRight":"5px"}}>
                                 {table.columns.map((column,j) => 
                                     <p key={column.subject_name} onMouseMove={() => {}} onMouseDown={mouseUpHandler} 
-                                    className={`journalRowItemCenterValue__text`} 
+                                    className={`journalRowItemCenterValue__text attesationTableCell`} 
                                     style={{cursor:'not-allowed',color:getColorByValue((column.attestations[i]?.grade.toLocaleLowerCase() || "0"),column.subject_system),
                                             width:'32px',height:'32px',margin:'0'}}>
                                      {column.attestations[i]?.grade.toLocaleLowerCase()}
