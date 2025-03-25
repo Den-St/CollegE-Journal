@@ -317,6 +317,19 @@ text-align: left;
         margin-bottom: 30px;
     }
 }
+
+.activateProfileModal {
+    .ant-modal{
+        width: 44% !important;
+    }
+    .ant-modal-body{
+        margin: 0;     
+    }
+    .ant-modal-footer{
+        margin: 0;
+    }
+}
+
 .dark{
     .profile_detailedInfo_item_text{
         color: white;

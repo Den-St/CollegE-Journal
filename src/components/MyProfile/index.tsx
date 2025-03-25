@@ -1,6 +1,6 @@
 import { Button, Modal, Popover, Upload } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DiagonalArrowSvg } from '../../assets/svgs/diagonalArrowSvg';
 import { EditProfileSvg } from '../../assets/svgs/editProfileSvg';
 import axiosConfig from '../../axiosConfig';
@@ -22,6 +22,10 @@ import { PasswordInfo } from '../PasswordInfo';
 import { QuestionMarkSvg } from '../../assets/svgs/questionMarkSvg';
 import { passwordPattern } from '../../helpers/passwordPattern';
 import AntdImgCrop from 'antd-img-crop';
+import { useForm } from 'react-hook-form';
+import { useNotification } from "../../hooks/notification";
+import Cookies from "js-cookie";
+import { getToken } from '../../helpers/auth';
 
 
 const useChangeAvatar = () => {
@@ -55,6 +59,68 @@ const useChangeAvatar = () => {
     return {setIsOnAvatarChange,isOnAvatarChange,beforeUpload}
 }
 
+const useActivateUser = () => {
+    const {user, setActive, setToken} = useUserStore();
+    const token = user.token;
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        reset,
+        formState:{errors}
+    } = useForm<{new_password:string,new_password_confimation:string,avatar:File | string}>();
+    const [passwordInputType,setPasswordInputType] = useState<Record<number,"password" | "text">>({1:'password',2:'password'});
+    const onTogglePassword = (index:number) => {
+        setPasswordInputType(prev => ({...prev,[index]:prev[index] === "password" ? "text" : "password"}));
+    }
+    const [formError,setFormError] = useState('');
+    const {openErrorNotification,openSuccessNotification,contextHolder} = useNotification(
+            `Повідомлення про успішну зміну даних`,
+            `Ви змінили дані свого акаунту`,
+            `Повідомлення про помилку зміни даних`,
+            `Помилка зміни даних свого акаунту`);
+    const navigate = useNavigate();    
+    const onSubmit = async () => {
+        const newPassword = watch('new_password');
+        const newPasswordConfirmation = watch('new_password_confimation');
+        const avatar = watch('avatar');
+        if(newPassword && newPassword !== newPasswordConfirmation) {
+            setFormError('Паролі не співпадають!');
+            return;
+        }
+        if(!newPassword){
+            setFormError('Ви не змінили дані!');
+            return;
+        }
+        try{
+            const queries = [];
+            if(newPassword){
+                queries.push(async () => {
+                    const res = await axiosConfig.post(endpoints.changePassword,{user_password:newPassword},{headers:{Authorization:token}});
+                    setToken(res.data.token);
+                    setActive();
+                    if(getToken()){
+                        Cookies.set('token',res.data.token);
+                    }
+                });
+            }
+            await Promise.all(queries.map(q => q()));
+            openSuccessNotification()
+            Cookies.remove('comfirmedPassword');
+            
+            const onEditClose = () => {
+                navigate(routes.myProfile);
+            };
+            onEditClose();
+        }catch(err){
+            openErrorNotification();
+            console.error(err);
+        }
+    }
+    return {user, setActive, handleSubmit, onSubmit, errors, passwordInputType, register, onTogglePassword}
+} 
+
 export const MyProfile = () => {
     const studentLinks = [
         {
@@ -82,13 +148,14 @@ export const MyProfile = () => {
     const [avatarHovered,setIsAvatarHovered] = useState(false);
     const theme = useThemeStore().theme;
     const user = useUserStore().user;
-    
-    
+
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);
     
-    return <div className={`studentProfile__container ${theme}`}>
+    return (<>
+        <CheckActiveModal/>
+    <div className={`studentProfile__container ${theme}`}>
         <section className='studentProfileMain__container'>
             <div className='studentProfileLeft__container'>
                 <div className='studentProfileInfo__container'>
@@ -224,6 +291,7 @@ export const MyProfile = () => {
         </section>}
         {onTryEditing && <ChangePasswordModal onTryEditClose={() => setOnTryEditing(false)}/>}
     </div>
+    </>)
 }
 
 type Props = {
@@ -273,4 +341,32 @@ const ChangePasswordModal:React.FC<Props> = ({onTryEditClose}) => {
             <button className="primary_button" style={{'width':'271px'}} onClick={onTryEditClose}>Повернутися</button>
         </div>
     </Modal>
+}
+
+const CheckActiveModal = () => {
+    const {user, setActive, handleSubmit, onSubmit, errors, passwordInputType, register, onTogglePassword} = useActivateUser();
+    return <>
+        {!user.is_active &&
+        <Modal centered open footer={false} rootClassName={'activateProfileModal'}>
+            <form  onSubmit={handleSubmit(onSubmit)} className="editProfileModal_container" autoComplete={"off"}>
+                <h2 className="editProfile_section_header">Зміна паролю </h2>
+                <p className="description">Ваш обліковий запис не активовано. Для активації, будь ласка, змініть пароль.</p>
+                {!!errors.new_password?.message && <p className="signIn_errorMessage">{errors.new_password?.message}</p>}
+                <div style={{'display':'flex','flexDirection':'column','gap':'20px'}}>
+                    <h2 className='subHeader'>Введіть новий пароль</h2>
+                    <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                        <input type={passwordInputType[1]} {...register('new_password',{minLength:{value:8,message:'Пароль має бути не меншим за 8 символів!'},maxLength:{value:30,message:'Пароль має бути не більшим за 30 символів!'},pattern:{value:passwordPattern,message:'Пароль некоректний'}})} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"} />
+                        <span onClick={() => onTogglePassword(1)} className='passwordEye__button'>{passwordInputType[1] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
+                    </div>
+                    <h2 className='subHeader'>Повторіть новий пароль</h2>
+                    <div style={{display:'flex',gap:'20px',width:'100%'}}>
+                        <input {...register('new_password_confimation',)} type={passwordInputType[2]} className="input editProfile_input" placeholder="Введіть новий пароль" autoComplete={"off"}/>
+                        <span onClick={() => onTogglePassword(2)} className='passwordEye__button'>{passwordInputType[2] === "password" ? <ToggleHidePasswordEye /> : <EyeOutlined style={{color:'white',fontSize:'17px'}} />}</span>
+                    </div>
+                </div>
+                <input type={'submit'} className="primary_button" style={{'width': '36%', 'marginTop': '10px'}} value={'Змінити пароль'}/>
+            </form>
+        </Modal>
+    }
+    </>
 }

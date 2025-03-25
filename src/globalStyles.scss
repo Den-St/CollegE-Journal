@@ -588,6 +588,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	}
 }
 
+.description{
+	font-family: Montserrat;
+	font-size: 18px;
+	font-weight: 400;
+	color: var(--primary-gray);
+	letter-spacing: 0.1em;
+	line-height: 22px;
+}
+
 body{
 	&.dark{
 		.ant-picker-dropdown .ant-picker-panel-container{
