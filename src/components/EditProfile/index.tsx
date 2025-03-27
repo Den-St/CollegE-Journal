@@ -49,7 +49,7 @@ const useEditProfile = () => {
         `Ви змінили дані свого акаунту`,
         `Повідомлення про помилку зміни даних`,
         `Помилка зміни даних свого акаунту`);
-        
+        //
     const onSubmit = async () => {
         const newPassword = watch('new_password');
         const newPasswordConfirmation = watch('new_password_confimation');
