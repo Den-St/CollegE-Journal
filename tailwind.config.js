@@ -5,11 +5,18 @@ export default {
   content: ["./src/**/*.{tsx,jsx}"],
   theme: {
     colors:{
-      "primaryDark":"rgb(14,14,22)",
-      "secondaryDark":"rgb(24,23,34)",
-      "thirdDark":"rgb(19,19,28)",
-      "gray":"rgb(22,21,31)",
+      "primaryDark":"#1A222D",
+      "secondaryDark":"#21283A",
+      "blue":"#3D63DD",
+      "gray":"#797979",
+      "middleGray":"#A5A5A5",
+      "lightGray":"#D0D0D0",
+      "whiteGray":"#F2F2F2",
       white
+    },
+    screens:{
+      xl:"1440px",
+      '2xl':"1920px",
     },
     extend: {},
   },

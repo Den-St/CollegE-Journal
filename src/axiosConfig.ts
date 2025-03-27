@@ -10,7 +10,6 @@ export const getConfig = () => {
 };
 
 const instance = axios.create({
-    //@ts-ignore
     baseURL:import.meta.env.VITE_BACKEND_URL,
     ...getConfig(),
 });
