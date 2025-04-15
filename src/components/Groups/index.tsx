@@ -16,7 +16,7 @@ const {Option} = Select;
 
 export const Groups = () => {
     const theme = useThemeStore().theme;
-    const {loading,groups,groupesByGrade} = useGroupsByTeacher();
+    const {loading,groups,groupesByGrade, semester, onChangeSemester} = useGroupsByTeacher();
     useEffect(() => {
         document.title = "Групи";
     },[]);
@@ -26,6 +26,22 @@ export const Groups = () => {
     return <div className={`groupsMain__container ${theme}`}>
         <section className="groupsTop__container">
             <h1 className="header">Список груп</h1>
+            <div className='journalFillters__container' >
+                <div className="adminPanelStudentList_fillterContainer fillter_container"> 
+                    <Select 
+                        placeholder={<div className="fillterPlaceholder_container">
+                            <p className="fillter_placeholder">Семестр</p><FilterIconSvg/>
+                        </div>}
+                        className="fillter_select"
+                        defaultValue={2}
+                        value={semester}
+                        onChange={(value) => onChangeSemester(value)}
+                        >
+                        <Option value={1} label={1}>1 семестр</Option>
+                        <Option value={2} label={2}>2 семестр </Option>
+                    </Select>
+                </div>
+            </div>
             {/* <div className="groupsFillters__container">
                 <div className="adminPanelStudentList_fillterContainer fillter_container">
                     <Select 
