@@ -82,6 +82,7 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["*"]}</p>
                             </div>
                             <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
@@ -94,6 +95,7 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["**"]}</p>
                             </div>
                             </>
                             : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
@@ -107,6 +109,7 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience as string}</p>
                             </div>
                         )}
                     </div>

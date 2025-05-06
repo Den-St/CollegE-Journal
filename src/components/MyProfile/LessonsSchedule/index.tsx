@@ -81,8 +81,10 @@ export const TeacherSchedule = () => {
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*'] 
                                         ? <Link to={routes.pickJournalSubject+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['*']}}`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*']}
-                                        </Link> :<p className='teacherTimetable_groupName'>-</p>}
+                                        </Link> 
+                                        : <p className='teacherTimetable_groupName'>-</p>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["*"]}</p>
                             </div>
                             <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
@@ -93,6 +95,7 @@ export const TeacherSchedule = () => {
                                             {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['**']}
                                         </Link> :<p className='teacherTimetable_groupName'>-</p>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["**"]}</p>
                             </div>
                             </>
                             : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
