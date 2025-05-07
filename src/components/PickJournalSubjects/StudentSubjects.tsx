@@ -25,7 +25,7 @@ export const StudentSubjects = () => {
                 to={routes.journal + `?&subject_id=${subject.journal_id}`}
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
-                    {subject.subject_full_name}
+                    {subject.subject_short_name}
                     <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}
@@ -36,7 +36,7 @@ export const StudentSubjects = () => {
                 to={routes.journal + `?&subject_id=${subject.journal_id}`}
                 key={subject.journal_id}
                 className={`homeTasks_subject`}>
-                    {subject.subject_full_name}
+                    {subject.subject_short_name}
                     <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}

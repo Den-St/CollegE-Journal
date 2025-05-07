@@ -1,4 +1,4 @@
-import { Carousel, Spin } from "antd";
+import { Carousel, Spin, Tooltip } from "antd";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -35,17 +35,19 @@ export const TeacherSubjects = () => {
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Link key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
-                    {subject.subject_full_name}
-                    <p className="subjectTeacherName">{subject.teacher}</p>
-                </Link>
+                <Tooltip className="subjectHint" title={subject.subject_full_name} key={subject.journal_id} arrow={true} open>
+                    <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
+                        {subject.subject_short_name}
+                        <p className="subjectTeacherName">{subject.teacher}</p>
+                    </Link>
+                </Tooltip>
             )}
         {/* {subjects.map((subject,i) => <Link to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject}&month=${lastMonth}`} className={`homeTasks_subject ${!subject.isActive && 'inactive'}`}>{subject.name}{i === 2 && <div className="newTask"/>}</Link>)} */}
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
                 <Link  key={subject.journal_id} to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
-                    {subject.subject_full_name}
+                    {subject.subject_short_name}
                     <p className="subjectTeacherName">{subject.teacher}</p>
                 </Link>
             )}

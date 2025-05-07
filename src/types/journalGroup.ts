@@ -3,11 +3,13 @@ export type JournalGroupT = {
     can_edit:{
         journal_id: string,
         subject_full_name: string,
+        subject_short_name: string,
         teacher:string
     }[],
     can_view:{
         journal_id: string,
         subject_full_name: string,
+        subject_short_name: string,
         teacher:string
     }[],
     journal_group: string,
