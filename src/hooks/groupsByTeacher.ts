@@ -22,7 +22,6 @@ export const useGroupsByTeacher = () => {
     const security_level = useUserStore().user.security_level;
     const localToken = useUserStore().user.token;
     const [groupesByGrade,setGroupsByGrade] = useState<Record<string,JournalGroupT[]>>();
-    console.log(prevSemester)
     const fetch = async (_semester?: number) => {
         setLoading(true);
         setPrevSemester(_semester || semester);
@@ -53,7 +52,7 @@ export const useGroupsByTeacher = () => {
     useEffect(() => {
         if(!localToken || !security_level || security_level < securityLevels.teacher) return;
         if(prevSemester === null) {fetch()}
-        else{
+        else if(!groups.length) {
             cashed_fetch();
         }
     },[]);
