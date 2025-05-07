@@ -399,14 +399,20 @@ bottom: 14px;
     
 }
 
+.ant-tooltip{
+    max-width: 400px;
+}
+
 .ant-tooltip-content{
     
-    width: 287px;
+    width: fit-content;
 }
+
 .ant-tooltip-inner{
     font-size: 16px;
     font-weight: 400;
-    text-align: center;
+    text-align: center !important;
+    padding: 10px !important;
 }
 .subjectsContainer{
     display: flex;
