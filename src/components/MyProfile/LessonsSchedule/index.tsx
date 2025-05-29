@@ -164,7 +164,7 @@ export const TeacherSchedule = () => {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> 
                 )}
         </Carousel>
         </>
