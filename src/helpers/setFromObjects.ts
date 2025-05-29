@@ -1,11 +1,13 @@
 export const setFromSubjects = (subjects:{
     journal_id: string;
     subject_full_name: string;
+    subject_short_name: string;
     teacher:string
 }[]) => {
     const set:{
         journal_id: string;
         subject_full_name: string;
+        subject_short_name: string;
         teacher:string
     }[] = [];
     subjects.forEach((subject) => {

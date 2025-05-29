@@ -1,4 +1,4 @@
-import { Carousel } from 'antd';
+import { Carousel, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import { FileSvg } from '../../../assets/svgs/fileSvg';
 import { LinkSvg } from '../../../assets/svgs/linkSvg';
@@ -24,37 +24,42 @@ export const LessonsScheduleStudents = () => {
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
-                subject_id:''
+                subject_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
-                subject_id:''
+                subject_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
-                subject_id:''
+                subject_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
-                subject_id:''
+                subject_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
-                subject_id:''
+                subject_id:'',
+                subject_full_name: '',
             },
         ];
     }
@@ -71,9 +76,11 @@ export const LessonsScheduleStudents = () => {
                         {lessonNumbers.map(lessonNumber =>
                             user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
                             <>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
+                                <Tooltip className="subjectHint" title={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as SplitedLessonT)["*"] || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["*"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
@@ -82,10 +89,13 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["*"]}</p>
                             </div>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
-                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <Tooltip className="subjectHint" title={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as SplitedLessonT)["**"] || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["**"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
@@ -94,11 +104,14 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["**"]}</p>
                             </div>
                             </>
-                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <Tooltip className="subjectHint" title={user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as string || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string ? <Link to={user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
@@ -107,6 +120,7 @@ export const LessonsScheduleStudents = () => {
                                         <LinkSvg/>
                                     </div>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience as string}</p>
                             </div>
                         )}
                     </div>
@@ -121,9 +135,9 @@ export const LessonsScheduleStudents = () => {
                         {lessonNumbers.map(lessonNumber =>
                             user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
                             <>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
+                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["*"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
@@ -133,9 +147,9 @@ export const LessonsScheduleStudents = () => {
                                     </div>}
                                 </div>
                             </div>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
-                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link ? <Link to={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as SplitedLessonT)["**"] || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>
@@ -146,9 +160,9 @@ export const LessonsScheduleStudents = () => {
                                 </div>
                             </div>
                             </>
-                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string ? <Link to={user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.link as string || '#'} target={"_blank"} className='lessonsScheduleLink__button'>
                                         <LinkSvg/>

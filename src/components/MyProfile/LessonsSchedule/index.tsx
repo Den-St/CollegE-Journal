@@ -1,4 +1,4 @@
-import { Carousel } from 'antd';
+import { Carousel, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import { LinkSvg } from '../../../assets/svgs/linkSvg';
 import { dayNamesToNumbers } from '../../../consts/dayNamesToNumbers';
@@ -23,42 +23,47 @@ export const TeacherSchedule = () => {
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
                 subject_id:'',
-                journal_id:''
+                journal_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
                 subject_id:'',
-                journal_id:''
+                journal_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
                 subject_id:'',
-                journal_id:''
+                journal_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
                 subject_id:'',
-                journal_id:''
+                journal_id:'',
+                subject_full_name: '',
             },
             {
                 audience:"0",
                 link:'',
-                subject_name:'',
+                subject_short_name:'',
                 split:false,
                 subject_id:'',
-                journal_id:''
+                journal_id:'',
+                subject_full_name: '',
             },
         ];
     }
@@ -75,29 +80,38 @@ export const TeacherSchedule = () => {
                         {lessonNumbers.map(lessonNumber =>
                             user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
                             <>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
+                                <Tooltip className="subjectHint" title={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as SplitedLessonT)["*"] || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*'] 
                                         ? <Link to={routes.pickJournalSubject+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['*']}}`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*']}
-                                        </Link> :<p className='teacherTimetable_groupName'>-</p>}
+                                        </Link> 
+                                        : <p className='teacherTimetable_groupName'>-</p>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["*"]}</p>
                             </div>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
-                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <Tooltip className="subjectHint" title={(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as SplitedLessonT)["**"] || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['**'] 
                                         ? <Link to={routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['**']}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as SplitedLessonT)['**']}`} className='teacherTimetable_groupName'>
                                             {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['**']}
                                         </Link> :<p className='teacherTimetable_groupName'>-</p>}
                                 </div>
+                                <p className="lessonsScheduleLessonNumber">{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.audience  as SplitedLessonT)["**"]}</p>
                             </div>
                             </>
-                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <Tooltip className="subjectHint" title={user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_full_name as string || '-'} arrow={true}>
+                                    <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string || '-'}</p>
+                                </Tooltip>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string) ? <Link to={
                                         routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as string)}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as string)}&attestations=0`
@@ -118,18 +132,18 @@ export const TeacherSchedule = () => {
                         {lessonNumbers.map(lessonNumber =>
                             user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.split ? 
                             <>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["*"] || '-'}</p>
+                                <p className="lessonsScheduleLessonName">*{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["*"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*'] 
                                         ? <Link to={routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['*']}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as SplitedLessonT)['*']}`} className='teacherTimetable_groupName'>{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['*']}
                                         </Link> :<p className='teacherTimetable_groupName'>-</p>}
                                 </div>
                             </div>
-                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            <div key={dayKey + (user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber"></p>
-                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as SplitedLessonT)["**"] || '-'}</p>
+                                <p className="lessonsScheduleLessonName">**{(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as SplitedLessonT)["**"] || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as SplitedLessonT)['**'] 
                                         ? <Link to={routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as SplitedLessonT)['**']}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as SplitedLessonT)['**']}`} className='teacherTimetable_groupName'>
@@ -138,9 +152,9 @@ export const TeacherSchedule = () => {
                                 </div>
                             </div>
                             </>
-                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
+                            : <div key={dayKey + user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string + lessonNumber} className="lessonsScheduleDayLessonItem__container">
                                 <p className="lessonsScheduleLessonNumber">{lessonNumber + 1}</p>
-                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_name as string || '-'}</p>
+                                <p className="lessonsScheduleLessonName">{user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.subject_short_name as string || '-'}</p>
                                 <div className="lessonsScheduleLessonGroup">
                                     {(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_full_name as string) ? <Link to={
                                         routes.journal+`?group_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.group_id as string)}&subject_id=${(user?.timetable?.[dayKey as DaysNumbersT][lessonNumber]?.journal_id as string)}&attestations=0`
@@ -150,7 +164,7 @@ export const TeacherSchedule = () => {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> 
                 )}
         </Carousel>
         </>

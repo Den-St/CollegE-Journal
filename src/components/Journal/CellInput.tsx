@@ -141,26 +141,28 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             if(_lessonType  === "Атестаційна"){
                 if(n === 0) {
                     input.placeholder = "";
-                    return;
+                    // return;
+                }else{
+                    input.placeholder = `${Math.round(summ/n)}`;
+
+                    summ = 0;
+                    n = 0;
                 }
                 
-                input.placeholder = `${Math.round(summ/n)}`;
-
-                summ = 0;
-                n = 0;
+                
             }
+
             if(_lessonType === "Атестаційна" || _lessonType === "Коригуюча") {
-                if(!isNaN(+input.value) && !!input.value) nAtts++;
                 if(_lessonType === "Атестаційна") {
+                    nAtts++;
                     lastAtt = !isNaN(+input.value) ? +input.value : 0;
                 }else if(!isNaN(+input.value) && !!input.value){
                     summAtts -= lastAtt;
-                    !!lastAtt && nAtts--
                 }
                 summAtts += !isNaN(+input.value) ? +input.value : 0
+
             }
             if(_lessonType  === "Підсумкова"){
-                console.log("a",summAtts,nAtts,)
                 if(nAtts === 0) {
                     input.placeholder = "";
                     return;
@@ -170,7 +172,7 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
                 if(+formatNumber(summAtts/nAtts) === Number(input.placeholder || 0)) return;
                 input.placeholder = `${Math.round(summAtts/nAtts)}`;
                 summAtts = 0;
-                nAtts = 0;
+                nAtts = 0;  
             }
         })
         if(input) {
@@ -219,12 +221,11 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
             const _lessonType = input.getAttribute("data-lesson-type");
             
             if(_lessonType === "Атестаційна" || _lessonType === "Коригуюча") {
-                if(!isNaN(+input.value) && !!input.value) nAtts++;
                 if(_lessonType === "Атестаційна") {
+                    nAtts++;
                     lastAtt = !isNaN(+input.value) ? +input.value : 0;
                 }else if(!isNaN(+input.value) && !!input.value){
                     summAtts -= lastAtt;
-                    !!lastAtt && nAtts--
                 }
                 summAtts += !isNaN(+input.value) ? +input.value : 0
             }
@@ -241,14 +242,14 @@ export const CellInput:React.FC<Props> = ({defaultValue,className,onBlurData,tok
         onCalculateAvgAtts();
         onCalculateAvgSemester();
     },[]);
-    
+    // console.log("lessonType",lessonType,onBlurData.column_id)
     return <input onFocus={(e) => onFocus(e.target.value)} onMouseMove={onMouseMove} onMouseDown={onMouseUp}
-    data-month={month} autoComplete={"off"}
-    data-lesson-type={lessonType}
-    id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
-    style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
-    onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
-    onChange={(e) => onChange(e,onBlurData.subject_system, cellValue, pe_education,is_att,)} 
-    className={`journalRowItemCenterValue__input__text ${className}`} 
-    defaultValue={defaultValue}/>
+        data-month={month} autoComplete={"off"}
+        data-lesson-type={lessonType}
+        id={rowIndex + ',' + columnIndex} onKeyDown={onKeyDown} 
+        style={{caretColor:'white',color:getColorByValue(defaultValue || "",onBlurData.subject_system),}}
+        onBlur={(e) => onBlur(e,{...onBlurData,rowIndex,columnIndex},token,pe_education,is_att)} 
+        onChange={(e) => onChange(e,onBlurData.subject_system, cellValue, pe_education,is_att,)} 
+        className={`journalRowItemCenterValue__input__text ${className}`} 
+        defaultValue={defaultValue}/>
 }

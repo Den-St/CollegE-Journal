@@ -1,4 +1,4 @@
-import { Carousel, Select, Spin, Steps } from "antd";
+import { Carousel, Select, Spin, Steps, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FilterIconSvg } from "../../assets/svgs/filterIconSvg";
