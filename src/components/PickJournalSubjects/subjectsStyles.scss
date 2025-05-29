@@ -396,6 +396,23 @@ bottom: 14px;
     display: flex;
     align-items: center;
     gap:30px;
+    
+}
+
+.ant-tooltip{
+    max-width: 400px;
+}
+
+.ant-tooltip-content{
+    
+    width: fit-content;
+}
+
+.ant-tooltip-inner{
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center !important;
+    padding: 10px !important;
 }
 .subjectsContainer{
     display: flex;
@@ -403,6 +420,7 @@ bottom: 14px;
     row-gap: 48px;
     flex-wrap: wrap;
 }
+
 .dark{
     .subjectsMainTitle{
         color:white;
