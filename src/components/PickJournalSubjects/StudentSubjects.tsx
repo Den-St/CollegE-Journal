@@ -1,4 +1,4 @@
-import { Carousel, Spin } from "antd";
+import { Carousel, Spin, Tooltip } from "antd";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../../consts/routes";
@@ -21,13 +21,15 @@ export const StudentSubjects = () => {
         <h2 className="header">Предмети</h2>
         <div className="subjectsContainer">
             {journalSubjects?.subjects.map((subject,i) => 
-                <Link  
-                to={routes.journal + `?&subject_id=${subject.journal_id}`}
-                key={subject.journal_id}
-                className={`homeTasks_subject`}>
-                    {subject.subject_short_name}
-                    <p className="subjectTeacherName">{subject.teacher}</p>
-                </Link>
+                <Tooltip className="subjectHint" title={subject.subject_full_name} key={subject.journal_id} arrow={true} >
+                    <Link  
+                    to={routes.journal + `?&subject_id=${subject.journal_id}`}
+                    key={subject.journal_id}
+                    className={`homeTasks_subject`}>
+                        {subject.subject_short_name}
+                        <p className="subjectTeacherName">{subject.teacher}</p>
+                    </Link>
+                </Tooltip>
             )}
         </div>
         <Carousel className='subjects_carousel' dots slidesToShow={1}>

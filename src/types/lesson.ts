@@ -10,4 +10,5 @@ export type LessonT = {
     audience:string | SplitedLessonT,
     link:string | SplitedLessonT,
     subject_name:string | SplitedLessonT 
+    subject_full_name:string,
 }
