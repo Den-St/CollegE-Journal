@@ -143,7 +143,6 @@ export const HeaderNavLinks:React.FC<Props> = ({linksClassName,onGoToSection,}) 
         </>
     }
     const user = useUserStore().user;
-    console.log("securty",user.security_level)
 
     return <>
         {(!route || !user.full_name) && <>

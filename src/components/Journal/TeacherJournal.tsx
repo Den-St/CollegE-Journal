@@ -42,6 +42,7 @@ const monthNamesToNumber:Record<string,number> = {
     "Грудень": 12
   }
 export const TeacherJournal = () => {
+    
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
            onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
     const {onBlurHoverLessonThemes,onChangeLessonTheme,onFocusHoverLessonThemes} = useLessonThemes();
@@ -63,7 +64,7 @@ export const TeacherJournal = () => {
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
 
-
+    console.log(journal)
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
         <TeacherJournalFillters onChangeFillters={onChangeFillters} loading={loading} journal={journal} attestations={attestations} fillters={fillters} groupJournal={groupJournal} subjectName={subjectName} refetch={refetch} 
         />
