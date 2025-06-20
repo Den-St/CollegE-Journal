@@ -44,7 +44,7 @@ const monthNamesToNumber:Record<string,number> = {
 export const TeacherJournal = () => {
     
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
-           onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
+           onChangeLessonType,currentMonth,token,attestations,refetch, } = useGetTeacherJournal();
     const {onBlurHoverLessonThemes,onChangeLessonTheme,onFocusHoverLessonThemes} = useLessonThemes();
 
     const {groups} = useGroupsByTeacher();
@@ -53,6 +53,8 @@ export const TeacherJournal = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const subjectName = !!groupJournal ? setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || null : null;
+
+    
 
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
