@@ -62,7 +62,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         </div>
                         <div className='printFormJournal_top_dates'>
                             {limitColumns.map(columnNumber => !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.column_id &&
-                                journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.date.includes('.')
+                                !journal.columns[columnNumber +(limitColumnsNumber*pageNumber)]?.special_type
                                 ? <div className="printFormJournal_top_dates_date" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)].column_id}>
                                     <p style={{position:'absolute',top:'2px',left:'2px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[0]}</p>
                                     <p style={{position:'absolute',top:'22px',left:'13px'}}>{journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1].split('.')[1]}</p>
@@ -70,7 +70,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                                 : !!journal?.columns[columnNumber + (limitColumnsNumber*pageNumber)] 
                                 && <div className="printFormJournal_top_dates_specialDate" key={journal.columns[columnNumber+(limitColumnsNumber*pageNumber)]?.column_id}>
                                         <p>{lessonTypesNamesAbbreviations[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.lesson_type]}</p>
-                                        <p>{!!journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date && shortMonthNames[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date]}</p>
+                                        <p>{!!journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date && shortMonthNames[journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date] || journal.columns[columnNumber + (limitColumnsNumber*pageNumber)]?.date.split('\n')[1]}</p>
                                     </div>
                             )}
                         </div>
@@ -104,7 +104,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                     <span className="printForm_subsubheader">Підпис<span> _______________</span></span>
                 </div>
             </div>
-        {limitLessons.some(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('.')) &&
+        {limitLessons.some(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.special_type) &&
 
             <div className="printForm_page" key={pageNumber}>
                 <div style={{'width':'100%','display':'flex','justifyContent':'space-between'}}>
@@ -119,7 +119,7 @@ export const PrintForm = forwardRef<HTMLDivElement,Props>(({journal,subjectName}
                         <div className="printFormLessons_top_task">Завдання</div>
                     </div>
                     <div className="printFormLessons_lessons">
-                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.date?.includes('.') &&
+                        {limitLessons.map(columnNumber => !!journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)]?.special_type &&
                             <div key={journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].column_id} className="printFormLessons_lesson">
                                 <div className="printFormLessons_top_type">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].lesson_type}</div>
                                 <div className="printFormLessons_top_date">{journal?.columns[columnNumber + (limitLessonsNumber*pageNumber)].date.split('\n')[1]}</div>

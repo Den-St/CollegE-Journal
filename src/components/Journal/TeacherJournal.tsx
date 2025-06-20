@@ -42,8 +42,9 @@ const monthNamesToNumber:Record<string,number> = {
     "Грудень": 12
   }
 export const TeacherJournal = () => {
+    
     const {fillters,loading,journal,onChangeFillters,isDisabledByDate,onBlurChangeLessonTopic,
-           onChangeLessonType,currentMonth,token,attestations,refetch,} = useGetTeacherJournal();
+           onChangeLessonType,currentMonth,token,attestations,refetch, } = useGetTeacherJournal();
     const {onBlurHoverLessonThemes,onChangeLessonTheme,onFocusHoverLessonThemes} = useLessonThemes();
 
     const {groups} = useGroupsByTeacher();
@@ -52,6 +53,8 @@ export const TeacherJournal = () => {
     const {cellsRef,lessonTypesRef,mainContainerRef,onMouseMove,mouseUpHandler,
            mouseDownHandler,handleHorizontalScrollLessonTypes,handleHorizontalScroll,handleVerticalScroll} = useJournalDragScroll();
     const subjectName = !!groupJournal ? setFromSubjects([...groupJournal?.can_edit,...groupJournal.can_view]).find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || null : null;
+
+    
 
     useEffect(() => {
         const subjectName = groupJournal?.can_edit.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name || groupJournal?.can_view.find(subject => subject.journal_id === fillters.subject_id)?.subject_full_name;
@@ -63,7 +66,7 @@ export const TeacherJournal = () => {
         document.title = `${groupJournal?.journal_group_full_name} - ${subjectName}${month ? ` - ${month}` : ``}`;
     },[fillters.subject_id,journal,groupJournal]);
 
-
+    console.log(journal)
     return <div onMouseMove={onMouseMove} onMouseUp={mouseUpHandler} className={`journalMain__container ${theme} ${attestations?.find(att => att.active)?.start === 'attestations' ? `onlyAtts` : `notOnlyAtts`} `}>
         <TeacherJournalFillters onChangeFillters={onChangeFillters} loading={loading} journal={journal} attestations={attestations} fillters={fillters} groupJournal={groupJournal} subjectName={subjectName} refetch={refetch} 
         />

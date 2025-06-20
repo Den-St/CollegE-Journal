@@ -63,7 +63,7 @@ export const LessonsScheduleStudents = () => {
             },
         ];
     }
-
+    console.log(user)
     return <section className={`lessonsSchedule__container ${theme}`}>
         <h1 className='studentProfileTab__title'>Розклад</h1>
         {Object.keys(user?.timetable || {}).length ? 
