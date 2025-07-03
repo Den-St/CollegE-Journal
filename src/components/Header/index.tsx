@@ -50,14 +50,14 @@ export const Header = () => {
     const {theme,onToggleThemeSwitch} = useThemeController();
     const route = useLocation().pathname.replace('/','');
     const user = useUserStore().user;
-    const {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur} = useHeaderVisibility();
+    // const {headerVisibilityClass,onTouchShowHeader,onMouseOutBlur} = useHeaderVisibility();
     const {sideMenuOpened,onToggleSideMenu} = useSideMenuStore();
 //${headerVisibilityClass}
     return <header className={`header ${theme} ${route+'home'} ${'sideMenu' + sideMenuOpened}`}>
             {/* <div onMouseOver={onTouchShowHeader} className='header_hover_trigger'></div> */}
             <SideMenu openedClass={sideMenuOpened} goToSection={goToSection} onToggleSideMenu={onToggleSideMenu}/>
             <div className={`header_container `}>
-                <div onMouseLeave={onMouseOutBlur} className="header__wrapper">
+                <div className="header__wrapper">
                     <div className='headerLeft_mobile'>
                         <button onClick={onToggleSideMenu} className={`header_toggleMenu ${sideMenuOpened}`}>
                             <FilterIconSvg/>

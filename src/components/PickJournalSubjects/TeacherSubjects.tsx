@@ -35,7 +35,7 @@ export const TeacherSubjects = () => {
         <h2 className="subjectsMainTitle">Предмети</h2>
         <div className="subjectsContainer">
             {setFromSubjects([...group.can_edit,...group.can_view]).map((subject,i) => 
-                <Tooltip className="subjectHint" title={subject.subject_full_name} key={subject.journal_id} arrow={true} open>
+                <Tooltip className="subjectHint" title={subject.subject_full_name} key={subject.journal_id} arrow={true} >
                     <Link  to={routes.journal + `?group_id=${pickedGroupId}&subject_id=${subject.journal_id}`} className={`homeTasks_subject`}>
                         {subject.subject_short_name}
                         <p className="subjectTeacherName">{subject.teacher}</p>
