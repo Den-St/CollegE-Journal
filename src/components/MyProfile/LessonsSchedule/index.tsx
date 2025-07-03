@@ -16,8 +16,6 @@ export const TeacherSchedule = () => {
     const now = new Date();
     const dayNumber = now.getDay();
     const {user} = useUserStore();
-    //http://localhost:3000/journal?group_id=65ab8eaa232ce2e6fb13cbdc&subject_id=65cf75264d50d4ed0442632e&attestations=0
-    //http://localhost:3000/journal?group_id=65ab8eaa232ce2e6fb13cbdc&subject_id=65cf71d809dbc365902073e3&attestations=0
     if(Object.keys(user.timetable || {}).length && !user.timetable?.[5] && !!user.timetable){
         user.timetable[5] = [
             {
@@ -67,7 +65,7 @@ export const TeacherSchedule = () => {
             },
         ];
     }
-
+    
     return <section className={`lessonsSchedule__container ${theme}`}>
         <div style={{width:'100%',display:'flex',justifyContent:'space-between','paddingLeft':'60px'}}><h1 className='studentProfileTab__title'>Розклад пар</h1><button className='primary_button' style={{'width':'180px'}}>Посилання</button></div>
         {Object.keys(user?.timetable || {}).length ? 

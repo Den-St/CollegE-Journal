@@ -92,10 +92,10 @@ export const TeacherJournal = () => {
                                 }
                                     className='journal_lessonTypeSelect_wrapper' 
                                     >{
-                                    journal.can_edit === 1  && column.date.includes('.') ?
+                                    journal.can_edit === 1  && !column.special_type ?
                                         <Select 
                                         disabled={
-                                            journal.can_edit !== 1 || !column.date.includes('.')
+                                            journal.can_edit !== 1 || column.special_type
                                         }
                                         defaultValue={column.lesson_type || null} 
                                         className='journal_lessonTypeSelect' 
