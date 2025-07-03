@@ -152,7 +152,7 @@ export const MyProfile = () => {
     useEffect(() => {
         document.title = 'Мій профіль';
     },[]);
-    
+    console.log(user);
     return (<>
         <CheckActiveModal/>
     <div className={`studentProfile__container ${theme}`}>

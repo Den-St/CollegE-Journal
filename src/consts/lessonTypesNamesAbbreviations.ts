@@ -9,4 +9,6 @@ export const lessonTypesNamesAbbreviations:Record<string,string> = {
     "Підсумкова":"Підс",
     "Річна":"Річна",
     "Зошит":"Зош",
+    "Курсова":"Курс",
+    "Іспит":"Іспит",
 }
