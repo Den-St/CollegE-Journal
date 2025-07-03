@@ -144,8 +144,8 @@ export const TeacherJournal = () => {
                             <div key={student.student_id} className={`journalRowItem__container ${student.index%2 === 0 ? 'even' : ''}`}>
                                 <div className='journalRowItemCenter__container' id={`row_${i}`}>
                                     {journal.columns.map((column,j) => 
-                                        (journal.can_edit === 1 &&
-                                        (!isDisabledByDate(column.date) || !column.date.includes('\n')))
+                                        ((journal.can_edit === 1 &&
+                                        (!isDisabledByDate(column.date) || !column.date.includes('\n'))) && column.cells.find(cell => cell.index === student.index)?.value !== '×')
                                         ? <CellInput 
                                             lessonType={column.lesson_type}
                                             month={column.date.includes('\n') ? +column.date.split("\n")[1].split(".")[1] : monthNamesToNumber[column.date]}
